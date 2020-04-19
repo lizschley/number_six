@@ -1,3 +1,4 @@
+# dev environment variables
 .env
 
 # Editors
@@ -103,7 +104,6 @@ celerybeat-schedule
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
