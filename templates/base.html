@@ -10,11 +10,12 @@
     {% load static %}
     <!-- A grey horizontal navbar that becomes vertical on small screens -->
     <nav class="navbar navbar-expand-sm bg-light">
+      <a class="navbar-brand" href="/">
+        {% load static %}
+         <img src='{%static "home/img/mac.png" %}' alt='logo' height='42' width='64'>
+      </a>
       <!-- Links -->
       <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="/"><img src='{%static "home/img/mac.png" %}' alt='logo' height='48' width='48'></a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
