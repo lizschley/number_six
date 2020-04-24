@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+{% load compress %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Portfolio</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% compress css %}
+        <link type="text/x-scss" href="{% static 'bootstrap/bootstrap.scss' %}" rel="stylesheet" media="screen">
+    {% endcompress %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    {% load static %}
     <!-- A grey horizontal navbar that becomes vertical on small screens -->
     <nav class="navbar navbar-expand-sm bg-light">
       <a class="navbar-brand" href="/">
-        {% load static %}
-         <img src='{%static "home/img/mac.png" %}' alt='logo' height='42' width='64'>
+          <img src='{%static "home/img/mac.png" %}' alt='logo' height='42' width='64'>
       </a>
       <!-- Links -->
       <ul class="navbar-nav">
