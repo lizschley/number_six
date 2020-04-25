@@ -1,9 +1,10 @@
 @import 'bootstrap/bootstrap';
 
 /* Define standard variables and values for website */
-$bgcolor: #FFF3E0;
+
+$bgcolor: #FEF9E7;
 $textcolor: #006600;
-$navbar_color: #FFF3E0;
+$navbar_color: #FEF9E7;
 
 /* Use the variables */
 body {
@@ -13,4 +14,3 @@ body {
     background-color: $navbar_color;
   }
 }
-
