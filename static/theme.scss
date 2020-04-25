@@ -1,0 +1,15 @@
+@import 'bootstrap/bootstrap';
+
+/* Define standard variables and values for website */
+$bgcolor: #F5DEB3;
+$textcolor: #075c53;
+$fontsize: 14px;
+$card-border-color: #800000;
+
+/* Use the variables */
+body {
+  background-color: $bgcolor;
+  color: $textcolor;
+  font-size: $fontsize;
+}
+
