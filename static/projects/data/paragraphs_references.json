@@ -7,39 +7,33 @@
   "create_db_records": "no",
   "references": [
      {
-       "id": "1",
        "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
        "url": "https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf"
      },
      {
-       "id": "2",
        "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
        "url": "https://thoughtbot.com/blog/back-to-basics-solid"
      },
      {
-       "id": "3",
        "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
        "url": "http://cleancoder.com/products"
      },
      {
-       "id": "4",
        "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
        "url": "https://www.youtube.com/watch?v=TMuno5RZNeE"
      },
      {
-       "id": "5",
        "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
        "url": "https://itnext.io/solid-principles-explanation-and-examples-715b975dcad4"
      },
      {
-       "id": "6",
        "link_text": "20200430_Wikipedia_SOLID",
        "url": "https://en.wikipedia.org/wiki/SOLID"
      }
   ],
   "paragraphs": [
     {
-      "id": "1",
+      "temp_id": "first",
       "subtitle": "Software Architecture",
       "html_tag": "b",
       "direct_quote": "yes",
@@ -54,7 +48,7 @@
        ]
     },
     {
-      "id": "2",
+      "temp_id": "second",
       "subtitle": "SOLID Principles",
       "html_tag": "b",
       "direct_quote": "no",
@@ -77,42 +71,42 @@
   ],
   "ref_link_paragraph": [
     {
-      "ref_link": "1",
-      "paragraph_id": "1"
+      "ref_link": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "temp_paragraph_id": "first"
     },
     {
-      "ref_link": "1",
-      "paragraph_id": "2"
+      "ref_link": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "2",
-      "paragraph_id": "2"
+      "ref_link": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
+      "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "3",
-      "paragraph_id": "2"
+      "ref_link": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
+      "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "4",
-      "paragraph_id": "2"
+      "ref_link": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
+      "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "5",
-      "paragraph_id": "2"
+      "ref_link": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
+      "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "6",
-      "paragraph_id": "2"
+      "ref_link": "20200430_Wikipedia_SOLID",
+      "temp_paragraph_id": "second"
     }
   ],
   "group_paragraph": [
     {
       "group_id": "1",
-      "paragraph_id": "1"
+      "temp_paragraph_id": "first"
     },
     {
       "group_id": "1",
-      "paragraph_id": "2"
+      "temp_paragraph_id": "second"
     }
   ]
 }
