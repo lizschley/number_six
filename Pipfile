@@ -12,6 +12,9 @@ psycopg2 = "*"
 requests = "*"
 django-compressor = "*"
 django-libsass = "*"
+pytest = "*"
+asgiref = "*"
+attrs = "*"
 
 [requires]
 python_version = "3.7"
