@@ -71,31 +71,31 @@
   ],
   "ref_link_paragraph": [
     {
-      "ref_link": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
       "temp_paragraph_id": "first"
     },
     {
-      "ref_link": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
       "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
+      "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
       "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
+      "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
       "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
+      "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
       "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
+      "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
       "temp_paragraph_id": "second"
     },
     {
-      "ref_link": "20200430_Wikipedia_SOLID",
+      "link_text": "20200430_Wikipedia_SOLID",
       "temp_paragraph_id": "second"
     }
   ],
