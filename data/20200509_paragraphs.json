@@ -1,10 +1,11 @@
 {
   "group": {
-    "title": "Definitions"
+    "title": "Definitions",
+    "note": "",
+    "ordered": "no",
+    "stand_alone": "yes"
   },
-  "group_id": "1",
-  "private": "no",
-  "create_db_records": "no",
+  "group_id": "will be used programmatically to create group_paragraph records in db.",
   "references": [
      {
        "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
@@ -33,80 +34,65 @@
   ],
   "paragraphs": [
     {
-      "temp_id": "first",
+      "id": "first",
       "subtitle": "Software Architecture",
-      "html_tag": "b",
-      "direct_quote": "yes",
-      "note": "See reference for original references",
+      "note": "",
       "text": [
-         "The answer is multitiered.",
-         "At the highest level,",
+         "The answer is multitiered. At the highest level,",
          "there are the architecture patterns that define the overall shape and structure of software applications.",
          "Down a level is the architecture that is specifically related to the purpose of the software application.",
          "Yet another level down resides the architecture of the modules and their interconnections.",
-         "This is the domain of design patterns."
+         "This is the domain of design patterns. Directly quoted from Robert C. Martin (2000)."
        ]
     },
     {
-      "temp_id": "second",
+      "id": "second",
       "subtitle": "SOLID Principles",
-      "html_tag": "b",
-      "direct_quote": "no",
       "note": "",
       "text": [
          "SOLID Principles are a fundamental building block of Object Oriented Programming.",
-         "|||a|||Robert C. Martin|||https://en.wikipedia.org/wiki/Robert_C._Martin |||end a|||",
+         "<a href='https://en.wikipedia.org/wiki/Robert_C._Martin'>Robert C. Martin</a>",
          "introduced the five concepts and",
-         "|||a|||Michael Feathers|||https://twitter.com/mfeathers|||end a||| introduced the Acronym.",
-         "|||ul|||",
-         "|||li|||S - Single Responsibility Principle|||end li|||",
-         "|||li|||O - Open/Closed Principle|||end li|||",
-         "|||li|||L - Liskov Substitution Principle|||end li|||",
-         "|||li|||I - Interface Segregation Principle|||end li|||",
-         "|||li|||D - Dependency Inversion Principle|||end li|||",
-         "|||end ul|||",
-         "The main purposes are interrelated: maintainability, understandability and flexibility"
+         "<a href='https://twitter.com/mfeathers'>Michael Feathers</a>introduced the Acronym.</b>",
+         "<ul>",
+         "<li>S - Single Responsibility Principle</li>",
+         "<li>O - Open/Closed Principle</li>",
+         "<li>L - Liskov Substitution Principle</li>",
+         "<li>I - Interface Segregation Principle</li>",
+         "<li>D - Dependency Inversion Principle</li>",
+         "</ul>",
+         "<b>The main purposes are interrelated: maintainability, understandability and flexibility"
       ]
     }
   ],
   "ref_link_paragraph": [
     {
       "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
-      "temp_paragraph_id": "first"
+      "paragraph_id": "first"
     },
     {
       "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     },
     {
       "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     },
     {
       "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     },
     {
       "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     },
     {
       "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     },
     {
       "link_text": "20200430_Wikipedia_SOLID",
-      "temp_paragraph_id": "second"
-    }
-  ],
-  "group_paragraph": [
-    {
-      "group_id": "1",
-      "temp_paragraph_id": "first"
-    },
-    {
-      "group_id": "1",
-      "temp_paragraph_id": "second"
+      "paragraph_id": "second"
     }
   ]
 }

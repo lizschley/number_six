@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # other apps
     'compressor',
+    'django_extensions',
     # portfolio apps
     'projects',
     'home',
@@ -137,4 +138,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# data file input
+JSON_DATA_ROOT = os.path.join(BASE_DIR, "data")
 

@@ -15,6 +15,7 @@ django-libsass = "*"
 pytest = "*"
 asgiref = "*"
 attrs = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"
