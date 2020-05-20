@@ -16,6 +16,7 @@ pytest = "*"
 asgiref = "*"
 attrs = "*"
 django-extensions = "*"
+django-autoslug = "*"
 
 [requires]
 python_version = "3.7"
