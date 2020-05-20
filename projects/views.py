@@ -13,9 +13,3 @@ def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
     return render(request, 'projects/detail.html', {'project': project})
 
-
-# is there a reason for having this?
-# it may be leftover garbage
-# Todo When everything is working, push and then delete below view and test everything again
-def home(request):
-    return render(request, 'projects/home.html')
