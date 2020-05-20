@@ -13,4 +13,19 @@ body {
   .navbar_color {
     background-color: $navbar_color;
   }
+
+  .navbar {
+     .nav-link {
+         a:hover {
+            color: $textcolor;
+            text-decoration: none;
+          };
+         .dropdown-menu {
+           left: 163px;
+           top: 38px;
+           background-color: $bgcolor;
+           min-width: 0;
+         }
+     }
+  }
 }
