@@ -1,0 +1,98 @@
+{
+  "group": {
+    "title": "Definitions",
+    "note": "",
+    "ordered": "no",
+    "stand_alone": "yes"
+  },
+  "group_id": "will be used programmatically to create group_paragraph records in db.",
+  "references": [
+     {
+       "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
+       "url": "https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf"
+     },
+     {
+       "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
+       "url": "https://thoughtbot.com/blog/back-to-basics-solid"
+     },
+     {
+       "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
+       "url": "http://cleancoder.com/products"
+     },
+     {
+       "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
+       "url": "https://www.youtube.com/watch?v=TMuno5RZNeE"
+     },
+     {
+       "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
+       "url": "https://itnext.io/solid-principles-explanation-and-examples-715b975dcad4"
+     },
+     {
+       "link_text": "20200430_Wikipedia_SOLID",
+       "url": "https://en.wikipedia.org/wiki/SOLID"
+     }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "Software Architecture",
+      "note": "",
+      "text": [
+         "The answer is multitiered. At the highest level,",
+         "there are the architecture patterns that define the overall shape and structure of software applications.",
+         "Down a level is the architecture that is specifically related to the purpose of the software application.",
+         "Yet another level down resides the architecture of the modules and their interconnections.",
+         "This is the domain of design patterns. Directly quoted from Robert C. Martin (2000)."
+       ]
+    },
+    {
+      "id": "second",
+      "subtitle": "SOLID Principles",
+      "note": "",
+      "text": [
+         "SOLID Principles are a fundamental building block of Object Oriented Programming.",
+         "<a href='https://en.wikipedia.org/wiki/Robert_C._Martin'>Robert C. Martin</a>",
+         "introduced the five concepts and",
+         "<a href='https://twitter.com/mfeathers'>Michael Feathers</a>introduced the Acronym.</b>",
+         "<ul>",
+         "<li>S - Single Responsibility Principle</li>",
+         "<li>O - Open/Closed Principle</li>",
+         "<li>L - Liskov Substitution Principle</li>",
+         "<li>I - Interface Segregation Principle</li>",
+         "<li>D - Dependency Inversion Principle</li>",
+         "</ul>",
+         "<b>The main purposes are interrelated: maintainability, understandability and flexibility"
+      ]
+    }
+  ],
+  "ref_link_paragraph": [
+    {
+      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "paragraph_id": "second"
+    },
+    {
+      "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
+      "paragraph_id": "second"
+    },
+    {
+      "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
+      "paragraph_id": "second"
+    },
+    {
+      "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
+      "paragraph_id": "second"
+    },
+    {
+      "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
+      "paragraph_id": "second"
+    },
+    {
+      "link_text": "20200430_Wikipedia_SOLID",
+      "paragraph_id": "second"
+    }
+  ]
+}

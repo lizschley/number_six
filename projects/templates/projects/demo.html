@@ -4,6 +4,63 @@
 
 {% block content %}
 
-<h1>{{ slug|title }} Landing Page</h1>
+<h1>{{ project.title }}</h1>
+<div class="demo">
+  <h3>Paragraph Display from JSON file</h3>
+  <p>
+   Display a list of paragraphs from JSON.  This particular JSON format is used to both load the database records that
+    later can be used for paragraph display or to directly display paragraphs on this site.  This shows two things:
+  </p>
+  <ol>
+    <li>
+      Gives insights into how this site loads the data, since the first step is creating a JSON file that can also be
+      used as input for the display process.
+    </li>
+    <li>
+      Illustrates that the display process is flexible, thus usable with different inputs.
+    </li>
+  </ol>
+  <div class="btn-toolbar text-center well">
+    <a class="btn btn-primary" href="#" role="button">Go to Paragraph display</a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseJsonInput"
+            aria-expanded="false" aria-controls="collapseJsonInput">
+      Expand to see original input
+    </button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDisplayInput"
+            aria-expanded="false" aria-controls="collapseJsonInput">
+      Expand to see intermediate input
+    </button>
 
+  </div>
+  <div class="collapse" id="collapseJsonInput">
+    <div class="card card-body">
+      <p class="font-weight-bold">
+        Original JSON file format
+      </p>
+      <p>
+        This is the JSON file used before it is downloaded into a Python dictonary form.  The same file format is used to
+        upload data from the database.  The next step will be to transform it into the exact format that can be used to
+        display the information.
+      </p>
+      <pre><code><p>
+        will be json
+      </p></code></pre>
+
+    </div>
+  </div>
+  <div class="collapse" id="collapseDisplayInput">
+    <div class="card card-body">
+      <p class="font-weight-bold">
+        Intermediate Python Dictionary format
+      </p>
+      <p>
+        This is an example of a Python dictionary used in the display template.  Whether the original input is from the
+        database or a JSON, the data will be formatted like this before it is displayed.
+      </p>
+      <pre><code><p>
+        will be dictionary
+      </p></code></pre>
+    </div>
+  </div>
+</div>
 {% endblock %}
