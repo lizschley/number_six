@@ -1,7 +1,7 @@
 {
   "group": {
     "title": "Definitions",
-    "note": "",
+    "note": "*Note - how does the title note display?",
     "ordered": "no",
     "stand_alone": "yes"
   },
@@ -48,7 +48,7 @@
     {
       "id": "second",
       "subtitle": "SOLID Principles",
-      "note": "",
+      "note": "*Note - how does the subtitle note display?",,
       "text": [
          "SOLID Principles are a fundamental building block of Object Oriented Programming.",
          "<a href='https://en.wikipedia.org/wiki/Robert_C._Martin'>Robert C. Martin</a>",

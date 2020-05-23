@@ -11,14 +11,18 @@ class ParagraphsForDisplay(object):
         self.stand_alone = True
         self.group_id = 0
 
-    def json_to_paragraph_list(self, input_data):
+    def db_params_to_paragraph_list(self, *kwargs):
+        return self.dict_to_paragraph_list(self.input_data_from_db(kwargs))
+
+    def input_data_from_db(self, args):
+        print(f'kw args == {args}')
+        return {}
+
+    def dict_to_paragraph_list(self, input_data):
         self.assign_group_data(input_data)
         self.create_links_from_references(input_data)
         self.assign_paragraphs(input_data)
         return self.output_for_display()
-
-    def db_params_to_paragraph_list(self, *kwargs):
-        pass
 
     def assign_group_data(self, input_data):
         group = input_data['group']

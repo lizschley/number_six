@@ -27,7 +27,7 @@ def run(*args):
     data = json.load(f)
     print(data)
     paragraphs = ParagraphsForDisplay()
-    paragraph_list = paragraphs.json_to_paragraph_list(data)
+    paragraph_list = paragraphs.dict_to_paragraph_list(data)
     pprint(paragraph_list)
     # Closing file
     f.close()
