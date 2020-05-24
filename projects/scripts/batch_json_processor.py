@@ -1,13 +1,14 @@
 import os
 import sys
-import json
 from pprint import pprint
-
 from portfolio.settings import BASE_DIR
 import constants.common as cc
-from common_classes.paragraphs_for_display import ParagraphsForDisplay
+import utilities.paragraph_helpers as ph
 
-JSON_DATA_ROOT = os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
+print(f'base dir == {BASE_DIR}')
+print(f'json data == {os.getenv("JSON_DATA")}')
+JSON_DATA_ROOT= os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
+print(f'json data root == {JSON_DATA_ROOT}')
 
 
 # usage as follows:
@@ -20,18 +21,8 @@ def run(*args):
     print(f'args == {args}')
     filename = filename_checker(args)
     print(f'filename == {filename}')
-    # Opening JSON file
-    f = open(filename, 'r')
-    # returns JSON object as
-    # a dictionary
-    data = json.load(f)
-    print(data)
-    paragraphs = ParagraphsForDisplay()
-    paragraph_list = paragraphs.dict_to_paragraph_list(data)
-    pprint(paragraph_list)
-    # Closing file
-    f.close()
-    # after creating db records, we should move the file to the loaded directory
+    paragraphs = ph.paragraph_list_from_json(filename)
+    pprint(paragraphs)
 
 
 def filename_checker(filename):
