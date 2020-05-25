@@ -4,8 +4,27 @@
 
 {% block content %}
 
-<h1> Paragraph Display </h1>
+  <div class="row">
+        <div class="col-md-8">
+            <h1>{{title}}</h1>
+            <p>{{title_note}}</p>
+        </div>
+        <div class="col-md-4">
+            <h1>References</h1>
+        </div>
+    </div>
 
-<p> temp display for basic paragraphs </p>
-<p> path to json file == {{ json_filepath }} </p>
+
+   {% for para in paragraphs %}
+       <div class="row">
+            <div class="col-md-8">
+                <h3> {{ para.subtitle | safe }} </h3>
+                <p> {{ para.subtitle_note | safe }} </p>
+                {{ para.text | safe }}
+            </div>
+            <div class="col-md-4">
+               {{ para.references | safe }}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

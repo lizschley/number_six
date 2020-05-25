@@ -45,9 +45,10 @@ class ParagraphsForDisplay(object):
             para['references'] = self.paragraph_links_from_associations(associations)
 
     def paragraph_links_from_associations(self, associations):
-        para_links = []
+        para_links = ''
         for assoc in associations:
-            para_links.append(self.reference_links[assoc['link_text']])
+            para_links += self.reference_links[assoc['link_text']] + '<br>'
+
         return para_links
 
     def paragraph(self, para):
@@ -57,7 +58,7 @@ class ParagraphsForDisplay(object):
             'subtitle_note': para['note'],
             'text': para['text'],
             'stand_alone': self.stand_alone,
-            'references': [],
+            'references': '',
         }
         return para
 

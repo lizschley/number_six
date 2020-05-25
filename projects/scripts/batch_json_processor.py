@@ -5,10 +5,7 @@ from portfolio.settings import BASE_DIR
 import constants.common as cc
 import utilities.paragraph_helpers as ph
 
-print(f'base dir == {BASE_DIR}')
-print(f'json data == {os.getenv("JSON_DATA")}')
 JSON_DATA_ROOT= os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
-print(f'json data root == {JSON_DATA_ROOT}')
 
 
 # usage as follows:

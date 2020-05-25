@@ -1,4 +1,7 @@
 from django.views.generic import TemplateView
+import utilities.paragraph_helpers as ph
+
+DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
 
 
 class ProjectDemoParagraphView(TemplateView):
@@ -11,6 +14,8 @@ class ProjectDemoParagraphView(TemplateView):
         return context
 
     def _add_to_context(self, context):
-        context['json_filepath'] = 'data/demo/urban_coyotes.json'
-        print(f'In view context=={context}')
+        paragraphs = ph.paragraph_list_from_json(DEMO_PARAGRAPH_JSON)
+        context['title'] = paragraphs['title']
+        context['title_note'] = paragraphs['title_note']
+        context['paragraphs'] = paragraphs['paragraphs']
         return context
