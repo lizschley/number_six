@@ -28,6 +28,20 @@ def format_json_text(text):
     return text
 
 
+def ensure_unique_slug(sender, instance, slug):
+    new_slug = slug
+    while True:
+        if not_unique(sender, new_slug):
+            new_slug = f'{slug}-{instance.id}'
+        else:
+            break
+    return new_slug
+
+
+def not_unique(sender, slug):
+    return sender.objects.filter(slug=slug).exists()
+
+
 
 
 

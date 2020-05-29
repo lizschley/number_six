@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from projects.models.project import Project
+from projects.models.projects import Project
 from django.views.generic import TemplateView
 
 
