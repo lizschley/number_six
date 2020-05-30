@@ -1,5 +1,6 @@
 import json
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
 
 def create_link(url, link_text):
@@ -18,7 +19,13 @@ def json_to_dict(json_path):
 def paragraph_list_from_json(json_path):
     dict_data = json_to_dict(json_path)
     paragraphs = ParagraphsForDisplay()
-    return paragraphs.dict_to_paragraph_list(dict_data)
+    return paragraphs.dictionary_to_paragraph_list(dict_data)
+
+
+def paragraph_json_to_db(json_path):
+    dict_data = json_to_dict(json_path)
+    paragraphs = ParagraphsToDatabase()
+    paragraphs.dictionary_to_db(dict_data)
 
 
 def format_json_text(text):

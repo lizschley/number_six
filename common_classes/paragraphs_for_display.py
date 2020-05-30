@@ -6,12 +6,11 @@ class ParagraphsForDisplay(object):
         self.title = ''
         self.title_note = ''
         self.reference_links = {}
-        self.paragraph_reference_links = {}
         self.paragraphs = []
         self.stand_alone = True
         self.group_id = 0
 
-    def dict_to_paragraph_list(self, input_data):
+    def dictionary_to_paragraph_list(self, input_data):
         self.assign_group_data(input_data)
         self.create_links_from_references(input_data)
         self.assign_paragraphs(input_data)

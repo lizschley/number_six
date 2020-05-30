@@ -17,6 +17,7 @@ asgiref = "*"
 attrs = "*"
 django-extensions = "*"
 django-autoslug = "*"
+django-contrib-postgres = "*"
 
 [requires]
 python_version = "3.7"

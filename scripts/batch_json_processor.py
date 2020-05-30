@@ -1,29 +1,32 @@
 import os
-import sys
 from pprint import pprint
 from portfolio.settings import BASE_DIR
-import constants.common as cc
 import utilities.paragraph_helpers as ph
 
 JSON_DATA_ROOT= os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
+SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', 'test_run': 'test_run:',}
+DB_UPDATE = 'db_update'
+OK_PROCESSES = ['para_display', 'para_to_db',]
 
 
 # usage as follows:
 # > python manage.py runscript -v3  batch_json_processor --script-args  /Users/liz/development/number_six/test/test.json
 # or > python manage.py runscript -v3  batch_json_processor
 def run(*args):
-    # this gives you runscript
-    print(f'args == {sys.argv[1]}')
-    # this gives you filename
-    print(f'args == {args}')
-    filename = filename_checker(args)
+    filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
     print(f'filename == {filename}')
-    paragraphs = ph.paragraph_list_from_json(filename)
-    pprint(paragraphs)
+
+    process = process_checker(args, SCRIPT_PARAM_SUBSTR['process'])
+    if process == DB_UPDATE:
+        print('Running the db update process.')
+        ph.paragraph_json_to_db(filename)
+    else:
+        paragraphs = ph.paragraph_list_from_json(filename)
+        pprint(paragraphs)
 
 
-def filename_checker(filename):
-    filenames = check_extension(filename)
+def filename_checker(args, subs):
+    filenames = check_for_args(args, subs)
     if len(filenames) > 1:
         # if passing > 1 argument that passes extension test
         print('Have not implemented passing in > one specific filename and path.')
@@ -32,7 +35,7 @@ def filename_checker(filename):
         # if no arguments, get first filename that passes extension test in correct directory
         # could do in a loop, but extra work unless reason presents itself
         print('Taking first file with a json extension from the default data directory')
-        filenames = check_extension(os.listdir(JSON_DATA_ROOT))
+        filenames = check_for_args(os.listdir(JSON_DATA_ROOT), subs)
         if len(filenames) < 1:
             print('No json files in default directory and no json file as input parameter')
             exit(0)
@@ -42,6 +45,16 @@ def filename_checker(filename):
         return filenames[0]
 
 
-def check_extension(filenames):
-    subs = cc.SCRIPT_PARAM_SUBSTR['filename']
-    return [i for i in filenames if subs in i]
+def process_checker(args, subs):
+    possibilities = check_for_args(args, subs)
+    if len(possibilities) != 1:
+        return []
+    possibility = possibilities[0]
+    process_array = possibility.split('=')
+    return process_array[1] if len(process_array) == 2 else []
+
+
+def check_for_args(args, subs):
+    return [i for i in args if subs in i]
+
+

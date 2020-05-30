@@ -7,6 +7,9 @@ class Group(models.Model):
     slug = AutoSlugField(unique=True, populate_from='title')
     note = models.TextField(blank=True)
 
+    def __repr__(self):
+        return f'<Group id: {self.id}, title: {self.title}>'
+
     class Meta:
         get_latest_by = 'updated_at'
 
@@ -20,6 +23,10 @@ class Paragraph(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(Group, through='GroupParagraph')
+
+    # TODO display first 20 characters of text field
+    def __repr__(self):
+        return f'<Paragraph {self.subtitle}>'
 
     class Meta:
         get_latest_by = 'updated_at'
@@ -40,6 +47,9 @@ class Reference(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     paragraphs = models.ManyToManyField(Paragraph)
+
+    def __repr__(self):
+        return f'<Reference {self.link_text}>'
 
     class Meta:
         verbose_name = 'reference'
