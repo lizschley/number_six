@@ -3,7 +3,7 @@
     "title": "Definitions",
     "note": "*Note - how does the title note display?",
     "ordered": "no",
-    "stand_alone": "yes"
+    "standalone": "yes"
   },
   "group_id": "will be used programmatically to create group_paragraph records in db.",
   "references": [

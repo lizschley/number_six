@@ -3,36 +3,40 @@ from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
 from projects.models.paragraphs import GroupParagraph
 from projects.models.paragraphs import Reference
+import utilities.paragraph_helpers as ph
 
 
-VALID_STAND_ALONE = ('yes', 'no', 'depend_on_para')
+VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
 class ParagraphsToDatabase(object):
     def __init__(self):
         self.title = ''
         self.title_note = ''
-        # 'link_text': 'ref_id'
-        self.reference_links = {}
         # 'fake_para_id': 'para_id'
         self.fake_to_real_para_id = {}
-        self.para_id_to_reference = {}
-        self.stand_alone = 'yes'
+        self.standalone = None
         self.group = None
         self.ordered = False
+        self.current_order_num = 0
 
     def dictionary_to_db(self, input_data):
         self.assign_group_data(input_data)
-        self.find_or_create_group()
-        # self.find_or_create_references(input_data)
+        res = self.find_or_create_group()
+        if not res == 'ok':
+            exit(1)
+        self.find_or_create_references(input_data)
         self.create_paragraphs(input_data)
-        self.associate_data(input_data)
+        paragraphs = Paragraph.objects.all()
+        for para in paragraphs:
+            self.add_association_with_group(para)
+        self.associate_paragraphs_with_references(input_data)
 
     def assign_group_data(self, input_data):
         group_dict = input_data['group']
         self.title = group_dict['title']
         self.title_note = group_dict['note']
-        self.stand_alone = group_dict['stand_alone']
+        self.standalone = group_dict['standalone']
 
     def find_or_create_group(self):
         try:
@@ -42,16 +46,14 @@ class ParagraphsToDatabase(object):
             )
             group.save()
         except IntegrityError as e:
-            return print(e.message)
-        print(f'group title {group.title}')
-        print(f'group id {group.id}')
-        print(group)
+            print(e.message)
+            return e.message
         self.group = group
+        return 'ok'
 
     def find_or_create_references(self, input_data):
         references = input_data['references']
         for ref in references:
-            self.reference_links[ref['link_text']] = ref['url']
             reference, created = Reference.objects.get_or_create(
                 link_text=ref['link_text'],
                 url=ref['url'],
@@ -59,34 +61,42 @@ class ParagraphsToDatabase(object):
             reference.save()
 
     def create_paragraphs(self, input_data):
-        pass
-        # para_list = input_data['paragraphs']
-        # self.paragraphs = []
-        # for para in para_list:
-        #     para['text'] = ph.format_json_text(para['text'])
-        #     self.paragraphs.append(self.paragraph(para))
-        #     self.add_links_to_paragraphs(input_data)
+        para_list = input_data['paragraphs']
+        for para in para_list:
+            if self.ordered:
+                self.current_order_num += 1
+            para['standalone'] = self.decide_standalone(para)
+            paragraph = self.create_paragraph_record(para)
+            self.fake_to_real_para_id[para['id']] = paragraph.id
+            self.add_association_with_group(paragraph)
 
-    def associate_data(self, input_data):
-        self.associate_refs_to_para(input_data)
-        self.associate_group_to_para(input_data)
+    def decide_standalone(self, para):
+        if self.standalone == 'yes':
+            return True
+        elif self.standalone == 'no':
+            return False
+        if para['standalone'] == 'yes':
+            return True
+        return False
 
-    def associate_refs_to_para(self, input_data):
-        pass
-        # ref_para = input_data['ref_link_paragraph']
-        # for para in self.paragraphs:
-        #     associations = list(filter(lambda ref_par: para['id'] == ref_par['paragraph_id'], ref_para))
-        #     para['references'] = self.paragraph_links_from_associations(associations)
+    def associate_paragraphs_with_references(self, input_data):
+        ref_link_paras = input_data['ref_link_paragraph']
+        for ref_para in ref_link_paras:
+            ref = Reference.objects.get(link_text=ref_para['link_text'])
+            para = Paragraph.objects.get(pk=self.fake_to_real_para_id[ref_para['paragraph_id']])
+            ref.paragraphs.add(para)
 
-    def associate_group_to_para(self, input_data):
-        pass
+    def create_paragraph_record(self, para):
+        paragraph = Paragraph.objects.create(
+            subtitle=para['subtitle'],
+            standalone=para['standalone'],
+            note=para['note'],
+            text=ph.format_json_text(para['text'])
+        )
+        paragraph.save()
+        return paragraph
 
-    def paragraph(self, para):
-        stand_alone = para['stand_alone'] if self.stand_alone == 'depend_on_para' else self.stand_alone
-        para = {
-            'subtitle': para['subtitle'],
-            'subtitle_note': para['note'],
-            'text': para['text'],
-            'stand_alone': stand_alone,
-        }
-        return para
+    def add_association_with_group(self, paragraph):
+        group_para = GroupParagraph.objects.create(group=self.group, paragraph=paragraph,
+                                                   order=self.current_order_num)
+        group_para.save()
