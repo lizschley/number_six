@@ -7,8 +7,6 @@ class ParagraphsForDisplay(object):
         self.title_note = ''
         self.reference_links = {}
         self.paragraphs = []
-        self.standalone = True
-        self.group_id = 0
 
     def dictionary_to_paragraph_list(self, input_data):
         self.assign_group_data(input_data)
@@ -20,7 +18,6 @@ class ParagraphsForDisplay(object):
         group = input_data['group']
         self.title = group['title']
         self.title_note = group['note']
-        self.standalone = True if group['standalone'] == 'yes' else False
 
     def create_links_from_references(self, input_data):
         references = input_data['references']
@@ -56,7 +53,6 @@ class ParagraphsForDisplay(object):
             'subtitle': para['subtitle'],
             'subtitle_note': para['note'],
             'text': para['text'],
-            'standalone': self.standalone,
             'references': '',
         }
         return para

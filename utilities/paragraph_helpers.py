@@ -49,6 +49,11 @@ def not_unique(sender, slug):
     return sender.objects.filter(slug=slug).exists()
 
 
+def context_for_paragraphs(context, paragraphs):
+    context['title'] = paragraphs['title']
+    context['title_note'] = paragraphs['title_note']
+    context['paragraphs'] = paragraphs['paragraphs']
+    return context
 
 
 

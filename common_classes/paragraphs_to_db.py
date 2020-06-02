@@ -27,9 +27,6 @@ class ParagraphsToDatabase(object):
             exit(1)
         self.find_or_create_references(input_data)
         self.create_paragraphs(input_data)
-        paragraphs = Paragraph.objects.all()
-        for para in paragraphs:
-            self.add_association_with_group(para)
         self.associate_paragraphs_with_references(input_data)
 
     def assign_group_data(self, input_data):

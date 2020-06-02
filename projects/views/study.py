@@ -4,7 +4,7 @@ import utilities.paragraph_helpers as ph
 DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
 
 
-class DemoParagraphView(TemplateView):
+class StudyParagraphView(TemplateView):
     template_name = 'projects/paragraphs.html'
 
     def get_context_data(self, **kwargs):

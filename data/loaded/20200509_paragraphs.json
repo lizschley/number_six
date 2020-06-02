@@ -5,7 +5,6 @@
     "ordered": "no",
     "standalone": "yes"
   },
-  "group_id": "will be used programmatically to create group_paragraph records in db.",
   "references": [
      {
        "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",

@@ -12,4 +12,5 @@ urlpatterns = [
     path('study', ProjectDetailView.as_view(), name='study_landing_page'),
     path('exercise', ProjectDetailView.as_view(), name='exercise_landing_page'),
     path('demo/paragraphs', DemoParagraphView.as_view(), name='demo_paragraphs'),
+    path('study/paragraphs', DemoParagraphView.as_view(), name='study_paragraphs'),
 ]
