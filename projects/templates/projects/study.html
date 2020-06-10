@@ -3,5 +3,20 @@
 {% load static %}
 
 {% block content %}
-      <h1>{{ project.title }} Landing Page</h1>
+      <h1>Look up Information</h1>
+<div class="demo">
+  <p>
+   Display a list of paragraphs from a database lookup.
+  </p>
+  <ul>
+    <li>
+        Choose the information type.  From there you can look at everything created with that type.
+    </li>
+    <li>
+        Narrow down the data based on tags or text searches - not yet implemented
+    </li>
+  </ul>
+  <div class="btn-toolbar text-center well">
+    <a class="btn btn-primary" href="{% url 'projects:study_lookup' %}" role="button">Go to Lookup</a>
+   </div>
 {% endblock %}

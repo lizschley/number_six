@@ -40,4 +40,13 @@ body {
         }
     }
   }
+
+  .study_lookup {
+    .card-body {
+        background-color: $bgcolor;
+        .asteriskField {
+            display: none;
+        }
+    }
+  }
 }

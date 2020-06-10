@@ -9,5 +9,5 @@ INFORMATION_TYPES = (
 
 
 class ParagraphLookupForm(forms.Form):
-    information_type = forms.ChoiceField(label='Information Type', choices=INFORMATION_TYPES)
+    information_type = forms.ChoiceField(label='Information Type:', choices=INFORMATION_TYPES)
 
