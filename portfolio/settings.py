@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     # other apps
     'compressor',
     'django_extensions',
+    'crispy_forms',
     # portfolio apps
     'projects',
     'home',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
