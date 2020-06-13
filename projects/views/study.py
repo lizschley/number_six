@@ -1,9 +1,11 @@
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-import utilities.paragraph_helpers as ph
 from projects.forms.paragraphs import ParagraphLookupForm
+import helpers.paragraph_helpers as ph
+
 
 DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
+INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 
 class StudyParagraphView(TemplateView):
@@ -22,9 +24,12 @@ class StudyParagraphView(TemplateView):
 class StudyLookupView(FormView):
     template_name = 'projects/study_lookup.html'
     form_class = ParagraphLookupForm
-    success_url = 'study/paragraphs'
+    success_url = 'projects/study/paragraphs'
 
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        return super().form_valid(form)
+    def get(self, request, *args, **kwargs):
+        print('in get')
+        print(f'args=={args}')
+        print(f'kwargs=={kwargs}')
+        print(f'request params == {request.GET.get("classification", "0")}')
+        return super().get(request, *args, **kwargs)
+

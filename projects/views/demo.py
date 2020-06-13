@@ -1,5 +1,5 @@
 from django.views.generic import TemplateView
-import utilities.paragraph_helpers as ph
+import helpers.paragraph_helpers as ph
 
 DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
 

@@ -56,4 +56,9 @@ def context_for_paragraphs(context, paragraphs):
     return context
 
 
+def extract_ids_from_information_type(information_type):
+    temp = information_type.split('_')
+    if len(temp) != 2:
+        return { 'error': 'Can we display this error message?'}
+    return {temp[0]: temp[1]}
 

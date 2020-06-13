@@ -1,0 +1,64 @@
+{
+  "group": {
+    "title": "Tech How-tos - personal cheat sheets",
+    "note": "",
+    "ordered": "no",
+    "standalone": "yes"
+  },
+  "references": [
+     {
+       "link_text": "manjeet_04_GeekforGeeks_FindingStringsSubstringList",
+       "url": "https://www.geeksforgeeks.org/python-finding-strings-with-given-substring-in-list/"
+     },
+     {
+       "link_text": "RoodtGreg_20190730_Coderwall_Postgres_GROUP_CONCAT",
+       "url": "https://coderwall.com/p/eyknwa/postgres-group_concat"
+     }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "Find the string in tuple from a substring",
+      "note": "",
+      "text": [
+                "<p>Find the Janes:</p>",
+                "<pre>",
+                "test_tuple =('Jane Austen', 'Anne Sullivan', 'Ada Lovelace', 'Jane Goodall', 'Marie Curie')",
+                "substr= 'Jane'",
+                "janes = [i for i in test_tuple if substr  in i]",
+                "print(janes)",
+                "</pre>",
+                "<p>Gives you: ['Jane Austen', 'Jane Goodall']</p>"
+              ]
+    },
+    {
+      "id": "second",
+      "subtitle": "Comma delimited list of ids from column to use in other queries",
+      "note": "<p><strong>* Note</strong> - MySQL code was from my notes, references lost</p>",
+      "text": [
+                "<p style='text-decoration: underline;'>MySQL</p>",
+                "<pre>",
+                "select group_concat(distinct ac.animal_id, SEPARATOR ',')",
+                "from animal_caretaker ac",
+                "where ac.caretaker_id = 15",
+                "</pre>",
+                "<p style='text-decoration: underline;'>Postgres</p>",
+                "<pre>",
+                "select string_agg(distinct cast (ac.animal_id as varchar), ',') as animal_ids",
+                "from animal_caretaker ac",
+                "where ac.caretaker_id = 15",
+                "</pre>"
+      ]
+    }
+  ],
+  "ref_link_paragraph": [
+    {
+      "link_text": "manjeet_04_GeekforGeeks_FindingStringsSubstringList",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "RoodtGreg_20190730_Coderwall_PostgresGROUP_CONCAT",
+      "paragraph_id": "second"
+    }
+  ]
+}

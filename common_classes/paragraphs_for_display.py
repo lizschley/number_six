@@ -1,4 +1,4 @@
-import utilities.paragraph_helpers as ph
+import helpers.paragraph_helpers as ph
 
 
 class ParagraphsForDisplay(object):

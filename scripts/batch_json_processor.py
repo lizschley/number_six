@@ -1,7 +1,7 @@
 import os
 from pprint import pprint
 from portfolio.settings import BASE_DIR
-import utilities.paragraph_helpers as ph
+import helpers.paragraph_helpers as ph
 
 JSON_DATA_ROOT= os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
 SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', 'test_run': 'test_run:',}

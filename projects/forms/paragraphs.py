@@ -1,13 +1,9 @@
 from django import forms
+import data.db_retrieval_methods.lookup_form_helpers as from_db
 
 
-INFORMATION_TYPES = (
-    ('', 'Choose Information Type'),
-    ('1', 'First'),
-    ('2', 'Second')
-)
+CLASSIFICATION_CHOICES = from_db.get_initial_classifications()
 
 
 class ParagraphLookupForm(forms.Form):
-    information_type = forms.ChoiceField(label='Information Type:', choices=INFORMATION_TYPES)
-
+    classification = forms.ChoiceField(label='Classification:', choices=CLASSIFICATION_CHOICES)

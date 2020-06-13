@@ -3,7 +3,7 @@ from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
 from projects.models.paragraphs import GroupParagraph
 from projects.models.paragraphs import Reference
-import utilities.paragraph_helpers as ph
+import helpers.paragraph_helpers as ph
 
 
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
@@ -24,6 +24,7 @@ class ParagraphsToDatabase(object):
         self.assign_group_data(input_data)
         res = self.find_or_create_group()
         if not res == 'ok':
+            print(f'group not saved: group input == {input_data["group"]}, result returned {res} ')
             exit(1)
         self.find_or_create_references(input_data)
         self.create_paragraphs(input_data)
