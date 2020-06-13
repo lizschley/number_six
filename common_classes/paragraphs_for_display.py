@@ -14,6 +14,15 @@ class ParagraphsForDisplay(object):
         self.assign_paragraphs(input_data)
         return self.output_for_display()
 
+    def db_to_paragraph_list(self, input_data):
+        # 1. get all the data
+        # 2. everything will already be associated with each other
+        # 3. Assign title and title_note
+        # 4. Loop through paragraphs and assign the para_data, within the outer loop, do the following:
+        #### 4a. create empty array for references
+        #### 4b. Loop through references and create links
+        pass
+
     def assign_group_data(self, input_data):
         group = input_data['group']
         self.title = group['title']

@@ -27,9 +27,8 @@ class StudyLookupView(FormView):
     success_url = 'projects/study/paragraphs'
 
     def get(self, request, *args, **kwargs):
-        print('in get')
-        print(f'args=={args}')
-        print(f'kwargs=={kwargs}')
         print(f'request params == {request.GET.get("classification", "0")}')
+        input = ph.extract_ids_from_classification(request.GET.get("classification", "0"))
+        print(f'input=={input}')
         return super().get(request, *args, **kwargs)
 

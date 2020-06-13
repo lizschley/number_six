@@ -6,4 +6,4 @@ CLASSIFICATION_CHOICES = from_db.get_initial_classifications()
 
 
 class ParagraphLookupForm(forms.Form):
-    classification = forms.ChoiceField(label='Classification:', choices=CLASSIFICATION_CHOICES)
+    classification = forms.ChoiceField(label='Classification:', choices=CLASSIFICATION_CHOICES, required = False,)
