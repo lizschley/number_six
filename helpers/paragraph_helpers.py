@@ -56,7 +56,7 @@ def context_for_paragraphs(context, paragraphs):
     return context
 
 
-def extract_ids_from_classification(classification):
+def extract_data_from_form(classification):
     temp = classification.split('_')
     if len(temp) != 2:
         return {}
