@@ -1,5 +1,5 @@
 from django import forms
-import data.db_retrieval_methods.lookup_form_helpers as from_db
+import helpers.classes_or_scripts.lookup_form_helpers as from_db
 
 
 CLASSIFICATION_CHOICES = from_db.get_initial_classifications()

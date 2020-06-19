@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
-import helpers.paragraph_helpers as ph
 import os
 import portfolio.settings as ps
+import helpers.scripts_or_views.non_class_helpers as nch
 
 DEMO_PARAGRAPH_JSON = os.path.join(ps.JSON_DATA_ROOT, 'demo/urban_coyotes.json')
 
@@ -14,7 +14,6 @@ class DemoParagraphView(TemplateView):
         return context
 
     def _add_to_context(self, context):
-        print(f'context=={context}')
-        paragraphs = ph.paragraph_list_from_json(DEMO_PARAGRAPH_JSON)
-        context = ph.context_for_paragraphs(context, paragraphs)
+        context['path_to_json'] = DEMO_PARAGRAPH_JSON
+        context = nch.paragraph_view_input(context)
         return context

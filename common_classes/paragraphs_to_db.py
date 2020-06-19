@@ -3,7 +3,6 @@ from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
 from projects.models.paragraphs import GroupParagraph
 from projects.models.paragraphs import Reference
-import helpers.paragraph_helpers as ph
 
 
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')

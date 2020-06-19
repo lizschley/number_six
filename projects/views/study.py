@@ -2,8 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from projects.forms.paragraphs import ParagraphLookupForm
-import helpers.paragraph_helpers as ph
-import data.db_retrieval_methods.paragraph_finder as pf
+import helpers.scripts_or_views.non_class_helpers as nch
 from django.urls import reverse
 
 
@@ -19,13 +18,7 @@ class StudyParagraphView(TemplateView):
         return context
 
     def _add_to_context(self, context):
-        print(f'add to context: context=={context}')
-        if context['group_id']:
-            pf.context_to_paragraphs(context)
-            paragraphs = ph.paragraph_list_from_json(DEMO_PARAGRAPH_JSON)
-        else:
-            paragraphs = ph.paragraph_list_from_json(DEMO_PARAGRAPH_JSON)
-        context = ph.context_for_paragraphs(context, paragraphs)
+        context = nch.paragraph_view_input(context)
         return context
 
 
