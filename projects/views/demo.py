@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView
 import os
 import portfolio.settings as ps
-import helpers.scripts_or_views.non_class_helpers as nch
+import helpers.import_common_class.paragraph_helpers as nch
 
 DEMO_PARAGRAPH_JSON = os.path.join(ps.JSON_DATA_ROOT, 'demo/urban_coyotes.json')
 

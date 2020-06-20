@@ -46,7 +46,7 @@ class Group(models.Model):
     paragraphs = models.ManyToManyField(Paragraph, through='GroupParagraph')
 
     def __repr__(self):
-        return f'<Group id: {self.id}, title: {self.title}>'
+        return f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, slug: {self.slug}>'
 
     def __str__(self):
         return f'<Group id: {self.id}, title: {self.title}>'

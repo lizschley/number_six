@@ -1,5 +1,6 @@
-import helpers.classes_or_scripts.paragraph_helpers as ph
 from common_classes.paragraph_retriever import ParagraphRetriever
+import helpers.no_import_common_class.paragraph_helpers as ph
+import os
 
 
 class ParagraphsForDisplay(object):
@@ -18,7 +19,7 @@ class ParagraphsForDisplay(object):
 
         if type(self.input_data) == str:
             print(f'exiting because self.input_data is a string: {self.input_data}')
-            exit(0)
+            os._exit(1)
         return self.format_data_for_display()
 
     def format_data_for_display(self):
@@ -31,26 +32,17 @@ class ParagraphsForDisplay(object):
     def sort_paragraphs(self):
         pass
 
-    def db_to_paragraph_list(self):
-        # 1. get all the data
-        # 2. everything will already be associated with each other
-        # 3. Assign title and title_note
-        # 4. Loop through paragraphs and assign the para_data, within the outer loop, do the following:
-        #### 4a. create empty array for references
-        #### 4b. Loop through references and create links
-        pass
-
     def assign_group_data(self):
         group = self.input_data['group']
-        self.title = group['title']
-        self.title_note = group['note']
+        self.title = group['title'].strip()
+        self.title_note = group['note'].strip()
 
     def create_links_from_references(self):
         references = self.input_data['references']
         for ref in references:
-            link_text = ref['link_text']
+            link_text = ref['link_text'].strip()
             link = ph.create_link(ref['url'], link_text)
-            self.reference_links[link_text] = link
+            self.reference_links[link_text] = link.strip()
 
     def assign_paragraphs(self):
         input_list = self.input_data['paragraphs']
@@ -65,7 +57,6 @@ class ParagraphsForDisplay(object):
     def paragraph_links(self, link_text_list):
         para_links = ''
         for link_text in link_text_list:
-            print(link_text)
             para_links += self.reference_links[link_text] + '<br>'
         return para_links
 
