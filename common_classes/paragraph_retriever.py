@@ -5,6 +5,7 @@ VALID_KW_ARGS = ['group_id', 'search_str', 'path_to_json']
 
 
 class ParagraphRetriever(object):
+    ''' This class creates the proper input to create paragraphs for display'''
     def __init__(self):
         # for processing db retrieval, not needed for demo (JSON to display)
         self.ordered = False
@@ -17,6 +18,7 @@ class ParagraphRetriever(object):
         self.references = []
 
     def retrieve_input_data(self, **kwargs):
+        ''' this is a generic function that allows kwargs to be automatically assigned '''
         for key, value in kwargs.items():
             if value is not None:
                 setattr(self, key, value)
@@ -25,7 +27,8 @@ class ParagraphRetriever(object):
         return self.data_retrieval()
 
     def data_retrieval(self):
-        if hasattr(self, 'group_id') and not(hasattr(self, 'search_str')):
+        ''' This will probably go away after refactoring '''
+        if hasattr(self, 'group_id') and not hasattr(self, 'search_str'):
             return self.group_id_only()
         elif hasattr(self, 'group_id') and hasattr(self, 'search_str'):
             return 'not implemented'
@@ -68,8 +71,9 @@ class ParagraphRetriever(object):
         self.loop_through_queryset(raw_queryset)
         return self.output_data()
 
-    def loop_through_queryset(self, qs):
-        for row in qs:
+    def loop_through_queryset(self, query_set):
+        ''' turn the queryset into a dictionary used for a paragraph display '''
+        for row in query_set:
             if not self.group:
                 self.first_row_assignments(row)
             self.add_ref_to_paragraph_link_txt_dictionary(row.paragraph_id, row.link_text)
@@ -83,13 +87,14 @@ class ParagraphRetriever(object):
             'note': row.note,
         }
 
+
     def append_unique_reference(self, row):
         if row.reference_id not in self.ref_ids:
             self.references.append({'link_text': row.link_text, 'url': row.url})
             self.ref_ids.append(row.reference_id)
 
+
     def append_unique_paragraph(self, row):
-        print(f'para ids should be strings: {self.para_ids}')
         if row.paragraph_id not in self.para_ids:
             self.paragraphs.append(self.paragraph_dictionary(row))
             self.para_ids.append(row.paragraph_id)
@@ -107,11 +112,13 @@ class ParagraphRetriever(object):
             para = self.format_paragraph(orig_para)
             self.paragraphs.append(para)
 
+
     def format_paragraph(self, orig_para):
         para = orig_para
         para['text'] = ph.format_json_text(orig_para['text'])
         para['order'] = self.get_paragraph_order(orig_para['subtitle'], 0)
         return para
+
 
     def paragraph_dictionary(self, row):
         return {
@@ -140,9 +147,7 @@ class ParagraphRetriever(object):
         # print(f'group is {self.group}')
         # print(f'references are {self.references}')
         # print(f'paragraphs are {self.paragraphs}')
-        print(f'para to link_text is {self.para_id_to_link_text}')
         return {'group': self.group,
                 'references': self.references,
                 'paragraphs': self.paragraphs,
                 'para_id_to_link_text': self.para_id_to_link_text,}
-
