@@ -1,9 +1,10 @@
-from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from common_classes.paragraph_retriever import ParagraphRetriever
-from common_classes.paragraphs_to_db import ParagraphsToDatabase
-import helpers.no_import_common_class.paragraph_helpers as ph
 import os
+
+import helpers.no_import_common_class.paragraph_helpers as ph
 import portfolio.settings as ps
+from common_classes.paragraph_retriever import ParagraphRetriever
+from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
 DEMO_PARAGRAPH_JSON = os.path.join(ps.JSON_DATA_ROOT, 'demo/urban_coyotes.json')
 
@@ -53,4 +54,3 @@ def add_paragraphs_to_context(context, paragraphs):
     context['title_note'] = paragraphs['title_note']
     context['paragraphs'] = paragraphs['paragraphs']
     return context
-

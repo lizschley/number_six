@@ -1,9 +1,7 @@
 from django.db import IntegrityError
-from projects.models.paragraphs import Group
-from projects.models.paragraphs import Paragraph
-from projects.models.paragraphs import GroupParagraph
-from projects.models.paragraphs import Reference
 
+from projects.models.paragraphs import (Group, GroupParagraph, Paragraph,
+                                        Reference)
 
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 

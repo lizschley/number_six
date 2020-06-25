@@ -1,7 +1,7 @@
 import os
 from pprint import pprint
 from portfolio.settings import BASE_DIR
-import helpers.scripts_only.db_update_helpers as dbh
+import helpers.import_common_class.paragraph_helpers as ph
 
 JSON_DATA_ROOT = os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
 SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', 'test_run': 'test_run:',}
@@ -19,9 +19,9 @@ def run(*args):
     process = process_checker(args, SCRIPT_PARAM_SUBSTR['process'])
     if process == DB_UPDATE:
         print('Running the db update process.')
-        dbh.paragraph_json_to_db(filename)
+        ph.paragraph_json_to_db(filename)
     else:
-        paragraphs = dbh.paragraph_list_from_json(filename)
+        paragraphs = ph.paragraph_list_from_json(filename)
         pprint(paragraphs)
 
 
@@ -56,5 +56,3 @@ def process_checker(args, subs):
 
 def check_for_args(args, subs):
     return [i for i in args if subs in i]
-
-
