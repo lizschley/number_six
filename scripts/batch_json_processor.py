@@ -56,5 +56,3 @@ def process_checker(args, subs):
 
 def check_for_args(args, subs):
     return [i for i in args if subs in i]
-
-
