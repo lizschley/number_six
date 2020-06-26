@@ -4,8 +4,9 @@ import helpers.no_import_common_class.paragraph_helpers as ph
 VALID_KW_ARGS = ['group_id', 'search_str', 'path_to_json']
 
 
+''' The ParagraphRetriever class retrieves the information to use to output paragraphs.'''
 class ParagraphRetriever(object):
-    ''' This class creates the proper input to create paragraphs for display'''
+
     def __init__(self):
         # for processing db retrieval, not needed for demo (JSON to display)
         self.ordered = False

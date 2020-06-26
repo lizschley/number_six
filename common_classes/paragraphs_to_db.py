@@ -6,7 +6,15 @@ from projects.models.paragraphs import (Group, GroupParagraph, Paragraph,
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
-class ParagraphsToDatabase(object):
+class ParagraphsToDatabase:
+    '''
+    ParagraphsToDatabase is a class to display paragraphs.
+
+    This web app uses paragraph display for most informational pages. This class  is the basic functionality.
+
+    :param object: [description]
+    :type object: [type]
+    '''
     def __init__(self):
         self.title = ''
         self.title_note = ''
