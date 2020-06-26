@@ -1,3 +1,11 @@
+'''
+    [summary]
+
+[extended_summary]
+
+:return: [description]
+:rtype: [type]
+'''
 import os
 from pprint import pprint
 from portfolio.settings import BASE_DIR
@@ -26,6 +34,18 @@ def run(*args):
 
 
 def filename_checker(args, subs):
+    '''
+    filename_checker [summary]
+
+    [extended_summary]
+
+    :param args: [description]
+    :type args: [type]
+    :param subs: [description]
+    :type subs: [type]
+    :return: [description]
+    :rtype: [type]
+    '''
     filenames = check_for_args(args, subs)
     if len(filenames) > 1:
         # if passing > 1 argument that passes extension test
