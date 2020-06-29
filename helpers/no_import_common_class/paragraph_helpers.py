@@ -1,16 +1,39 @@
+'''
+    Any file within the no_import_common_class is for methods that can be
+    imported safely (without circular dependencies) into the classes in
+    the common class folder. '''
+
 import json
 
 
 def create_link(url, link_text):
+    '''
+    create_link: takes the input and creates a link to be used in displaying text
+
+    :param url: will be a url to link to
+    :type url: String
+    :param link_text: will be the link text in the link taht will be created
+    :type link_text: String
+    :return: Link that will be used as a reference to its associated paragraph
+    :rtype: String
+    '''
     return f'<a href="{url}" target="_blank">{link_text}</a>'
 
 
 def json_to_dict(json_path):
+    '''
+    This takes a json file path, reads the content and uses it to create a dictionary.
+
+    :param json_path: Path to a file on the project directory structure
+    :type json_path: String
+    :return: dictionary based on the contents of the JSON file
+    :rtype: dictionary
+    '''
     # Opening JSON file
-    f = open(json_path, 'r')
+    file = open(json_path, 'r')
     # load and return JSON object as a dictionary
-    data = json.load(f)
-    f.close()
+    data = json.load(file)
+    file.close()
     return data
 
 

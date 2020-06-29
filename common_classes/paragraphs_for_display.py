@@ -52,7 +52,8 @@ class ParagraphsForDisplay(object):
 
     def add_links_to_paragraphs(self):
         for para in self.paragraphs:
-            para['references'] = self.paragraph_links(self.input_data['para_id_to_link_text'][para['id']])
+            para['references'] = self.paragraph_links(
+                self.input_data['para_id_to_link_text'][para['id']])
 
     def paragraph_links(self, link_text_list):
         para_links = ''

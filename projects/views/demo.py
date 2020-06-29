@@ -1,9 +1,10 @@
 from django.views.generic import TemplateView
 import os
-import portfolio.settings as ps
+import portfolio.settings as settings
 import helpers.import_common_class.paragraph_helpers as nch
 
-DEMO_PARAGRAPH_JSON = os.path.join(ps.JSON_DATA_ROOT, 'demo/urban_coyotes.json')
+DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR,
+                                   'data/demo/urban_coyotes.json')
 
 
 class DemoParagraphView(TemplateView):
