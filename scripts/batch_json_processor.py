@@ -11,16 +11,20 @@ from pprint import pprint
 from portfolio.settings import BASE_DIR
 import helpers.import_common_class.paragraph_helpers as ph
 
-JSON_DATA_ROOT = os.path.join(BASE_DIR, os.getenv('JSON_DATA'))
-SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', 'test_run': 'test_run:',}
+JSON_DATA_ROOT = os.path.join(BASE_DIR, 'data')
+SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=',
+                       'test_run': 'test_run:', }
 DB_UPDATE = 'db_update'
-OK_PROCESSES = ['para_display', 'para_to_db',]
+OK_PROCESSES = ['para_display', 'para_to_db', ]
 
 
-# usage as follows:
-# > python manage.py runscript -v3  batch_json_processor --script-args  /Users/liz/development/number_six/test/test.json
-# or > python manage.py runscript -v3  batch_json_processor
 def run(*args):
+    '''
+        usage as follows:
+        > python manage.py runscript -v3  batch_json_processor --script-args
+                /Users/liz/development/number_six/test/test.json
+        or > python manage.py runscript -v3  batch_json_processor
+    '''
     filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
     print(f'filename == {filename}')
 
