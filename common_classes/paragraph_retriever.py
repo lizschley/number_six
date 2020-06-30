@@ -4,8 +4,8 @@ import helpers.no_import_common_class.paragraph_helpers as ph
 VALID_KW_ARGS = ['group_id', 'search_str', 'path_to_json']
 
 
-''' The ParagraphRetriever class retrieves the information to use to output paragraphs.'''
-class ParagraphRetriever(object):
+class ParagraphRetriever():
+    ''' The ParagraphRetriever class retrieves the information to use to output paragraphs.'''
 
     def __init__(self):
         # for processing db retrieval, not needed for demo (JSON to display)
@@ -88,12 +88,10 @@ class ParagraphRetriever(object):
             'note': row.note,
         }
 
-
     def append_unique_reference(self, row):
         if row.reference_id not in self.ref_ids:
             self.references.append({'link_text': row.link_text, 'url': row.url})
             self.ref_ids.append(row.reference_id)
-
 
     def append_unique_paragraph(self, row):
         if row.paragraph_id not in self.para_ids:
@@ -113,13 +111,11 @@ class ParagraphRetriever(object):
             para = self.format_paragraph(orig_para)
             self.paragraphs.append(para)
 
-
     def format_paragraph(self, orig_para):
         para = orig_para
         para['text'] = ph.format_json_text(orig_para['text'])
         para['order'] = self.get_paragraph_order(orig_para['subtitle'], 0)
         return para
-
 
     def paragraph_dictionary(self, row):
         return {
@@ -151,4 +147,4 @@ class ParagraphRetriever(object):
         return {'group': self.group,
                 'references': self.references,
                 'paragraphs': self.paragraphs,
-                'para_id_to_link_text': self.para_id_to_link_text,}
+                'para_id_to_link_text': self.para_id_to_link_text, }
