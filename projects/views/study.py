@@ -1,10 +1,11 @@
+''' Study View classes '''
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from projects.forms.paragraphs import ParagraphLookupForm
-import helpers.no_import_common_class.paragraph_helpers as niph
-import helpers.import_common_class.paragraph_helpers as iph
 from django.urls import reverse
+from projects.forms.paragraphs import ParagraphLookupForm
+import helpers.no_import_common_class.paragraph_helpers as no_import_para_helper
+import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
 DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
@@ -19,7 +20,7 @@ class StudyParagraphView(TemplateView):
         return context
 
     def _add_to_context(self, context):
-        context = iph.paragraph_view_input(context)
+        context = import_para_helper.paragraph_view_input(context)
         return context
 
 
@@ -29,7 +30,9 @@ class StudyLookupView(FormView):
 
     def get(self, request, *args, **kwargs):
         # TODO turn extract data from form into whatever makes this code the cleanest
-        in_data = niph.extract_data_from_form(request.GET.get("classification", "0"))
+        form_data = request.GET.get("classification", "0")
+        print(f'data before calling extract_data_from_form: {form_data}')
+        in_data = no_import_para_helper.extract_data_from_form(form_data)
         print(f'in study lookup get ---> in_data=={in_data}')
         if in_data:
             return HttpResponseRedirect(reverse('projects:study_paragraphs_with_group',

@@ -8,6 +8,7 @@ import json
 
 def create_link(url, link_text):
     '''
+    [Summary]
     create_link: takes the input and creates a link to be used in displaying text
 
     :param url: will be a url to link to
@@ -22,7 +23,8 @@ def create_link(url, link_text):
 
 def json_to_dict(json_path):
     '''
-    This takes a json file path, reads the content and uses it to create a dictionary.
+    [Summary]
+    json_to_dict takes a json file path, reads the content and uses it to create a dictionary.
 
     :param json_path: Path to a file on the project directory structure
     :type json_path: String
@@ -38,27 +40,43 @@ def json_to_dict(json_path):
 
 
 def format_json_text(text):
+    '''
+    [Summary]
+     format_json_text takes a List of strings and concatenates them
+       together with a space
+
+    [extended_summary]
+    If there is no html tag (just checks for < in the first character),
+       it adds a paragraph tag
+
+    :param text: List of strings
+    :type text: List
+    :return: html formated text
+    :rtype: str
+    '''
     text = ' '.join(text)
     if text[0] != '<':
         text = '<p>' + text + '</p>'
     return text
 
 
-def ensure_unique_slug(sender, instance, slug):
-    new_slug = slug
-    while True:
-        if not_unique(sender, new_slug):
-            new_slug = f'{slug}-{instance.id}'
-        else:
-            break
-    return new_slug
-
-
-def not_unique(sender, slug):
-    return sender.objects.filter(slug=slug).exists()
-
-
 def extract_data_from_form(classification):
+    '''
+    [Summary]
+    extract_data_from_form formats the Study lookup form return to be usable for
+    queries
+
+    [extended_summary]
+    This takes data that is sent directly from the Study lookup form and
+    transforms it in a way that can be used for view paramaters.  This is so the
+    correct queries can be performed in the view.
+
+    :param classification: string that has the fieldname and the value separated
+        by an underscore
+    :type classification: str
+    :return: dictionary with key and value parsed from the input data
+    :rtype: dictionary
+    '''
     temp = classification.split('_')
     if len(temp) != 2:
         return {}

@@ -1,16 +1,10 @@
-'''This is location for session level fixtures.'''
+'''These fixtures are designed to be reused throughout tests.'''
 # pylint: disable=missing-function-docstring
 import pytest
-import testing.constants.common as common
+import testing.helpers.testing_helpers as helpers
 
 
 @pytest.fixture(scope='session')
-def basic_paragraph_dict_file():
-    '''Returns path to the basic paragraph json used for testing correct data.'''
-    return common.BASIC_PARAGRAPH_TEST_JSON
-
-
-@pytest.fixture
-def basic_paragraph_dict_data(request):
-    para_data = request.config.cache.get('basic_paragraph_input_dict/value', None)
+def basic_para_dict_data(request):
+    para_data = helpers.get_set_dict_from_json_cache(request)
     return para_data
