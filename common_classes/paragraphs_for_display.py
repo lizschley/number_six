@@ -1,6 +1,7 @@
-from common_classes.paragraph_retriever import ParagraphRetriever
-import helpers.no_import_common_class.paragraph_helpers as ph
 import os
+
+import helpers.no_import_common_class.paragraph_helpers as ph
+from common_classes.paragraph_retriever import ParagraphRetriever
 
 
 class ParagraphsForDisplay(object):
