@@ -1,5 +1,5 @@
-from projects.models.paragraphs import Group
 import helpers.no_import_common_class.paragraph_helpers as ph
+from projects.models.paragraphs import Group
 
 VALID_KW_ARGS = ['group_id', 'search_str', 'path_to_json']
 

@@ -15,5 +15,6 @@ urlpatterns = [
     path('exercise', ProjectDetailView.as_view(), name='about_exercise'),
     path('study/lookup', StudyLookupView.as_view(), name='study_lookup'),
     path('demo/paragraphs', DemoParagraphView.as_view(), name='demo_paragraphs'),
-    path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(), name='study_paragraphs_with_group'),
+    path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(),
+         name='study_paragraphs_with_group'),
 ]
