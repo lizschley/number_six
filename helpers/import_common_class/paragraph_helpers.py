@@ -40,6 +40,7 @@ def paragraph_json_to_db(json_path):
     paragraphs.dictionary_to_db(dict_data)
 
 
+# Review: - will replace this with db tests after retriev paragraph refactoring
 # to run in >> python manage.py shell
 # import helpers.import_common_class.paragraph_helpers as para_helper
 # paragraphs = para_helper.retrieve_paragraphs_manual_testing()
@@ -53,6 +54,7 @@ def retrieve_paragraphs_manual_testing():
     return paragraphs
 
 
+# Review: as part of the retrieve paragraph refactoring
 def paragraph_view_input(context):
     '''
     paragraph_view_input extracts arguments for paragraph retrieval from context
@@ -71,28 +73,12 @@ def paragraph_view_input(context):
 
     # retrieve data
     paragraphs = ParagraphsForDisplay()
-    paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json, group_id=group_id,
+    paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json,
+                                                group_id=group_id,
                                                 search_str=search_str)
 
     # print output
     # print(f'after calling retrieve paragraphs returned data == {paragraphs}')
-    context = add_paragraphs_to_context(context, paragraphs)
+    context = para_helper.add_paragraphs_to_context(context, paragraphs)
     # print(f'after adding paragraphs to context, context=={context}')
-    return context
-
-
-def add_paragraphs_to_context(context, paragraphs):
-    '''
-    add_paragraphs_to_context reformats data to save work in the template
-
-    :param context: original context, minus what was needed for para retrieval
-    :type context: dict
-    :param paragraphs: paragraph dictionary before adding to context
-    :type paragraphs: dict
-    :return: context - will be used in paragraph template
-    :rtype: dict
-    '''
-    context['title'] = paragraphs['title']
-    context['title_note'] = paragraphs['title_note']
-    context['paragraphs'] = paragraphs['paragraphs']
     return context

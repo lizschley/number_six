@@ -14,4 +14,3 @@ def get_initial_classifications():
 
 def format_group_id(group_id):
     return 'group_' + str(group_id)
-

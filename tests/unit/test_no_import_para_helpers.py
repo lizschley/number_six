@@ -1,7 +1,19 @@
 '''Tests for methods in helpers/no_import_common_class/paragraph_helpers.py'''
 # pylint: disable=missing-function-docstring
+# pylint: disable=redefined-outer-name
+import pytest
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import testing.data.list_constants as list_data
+
+
+@pytest.fixture()
+def add_para_to_context_input():
+    return {
+        'context': {'whatever': 'it is'},
+        'paragraphs': {'title': 'title',
+                       'title_note': 'note',
+                       'paragraphs': ['para1', 'para2', 'para3']}
+    }
 
 
 def test_create_link():
@@ -30,6 +42,19 @@ def test_extract_data_from_form():
     output = para_helper.extract_data_from_form(classification)
     assert isinstance(output, dict)
     assert output == {'group': 2}
+
+
+def test_add_paragraphs_to_context(add_para_to_context_input):
+    res = para_helper.add_paragraphs_to_context(add_para_to_context_input['context'],
+                                                add_para_to_context_input['paragraphs'])
+    return_keys = set(res.keys())
+    set_data = set(list_data.KEYS_FOR_PARA_DISPLAY_CONTEXT)
+    assert set_data == set_data & return_keys
+
+
+# Todo: create this unit test soon, doesn't require class or db: lookup form helper
+def test_format_group_id():
+    pass
 
 
 def check_text_para_assertions(text, check_for='<p>', pos=0):

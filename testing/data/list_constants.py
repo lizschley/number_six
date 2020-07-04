@@ -21,3 +21,5 @@ TEXT_LIST_WITHOUT_PARA_TAGS = [
     '<a href="https://homeguides.sfgate.com/blackberry-vs-dewberry-fruit-85014.html"',
     'target="_blank">SealJann_20200520_SFGate_BlackberryVsDewberry</a>'
 ]
+
+KEYS_FOR_PARA_DISPLAY_CONTEXT = ['title', 'title_note', 'paragraphs']
