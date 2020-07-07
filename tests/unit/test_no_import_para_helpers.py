@@ -2,6 +2,7 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=redefined-outer-name
 import pytest
+import helpers.no_import_common_class.lookup_form_helpers as form_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import testing.data.list_constants as list_data
 
@@ -16,6 +17,11 @@ def add_para_to_context_input():
     }
 
 
+@pytest.fixture()
+def group_id():
+    return 23
+
+
 def test_create_link():
     url: str = 'http://www.math.com/'
     link_text: str = 'Math'
@@ -23,8 +29,8 @@ def test_create_link():
     assert link == '<a href="http://www.math.com/" target="_blank">Math</a>'
 
 
-def test_json_to_dict(basic_para_dict_data):
-    assert isinstance(basic_para_dict_data, dict)
+def test_json_to_dict(orig_para_dict_data):
+    assert isinstance(orig_para_dict_data, dict)
 
 
 def test_format_json_text_without_para_tags():
@@ -52,9 +58,8 @@ def test_add_paragraphs_to_context(add_para_to_context_input):
     assert set_data == set_data & return_keys
 
 
-# Todo: create this unit test soon, doesn't require class or db: lookup form helper
-def test_format_group_id():
-    pass
+def test_format_group_id(group_id):
+    assert form_helper.format_group_id(group_id) == 'group_23'
 
 
 def check_text_para_assertions(text, check_for='<p>', pos=0):
