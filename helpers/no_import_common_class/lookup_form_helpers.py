@@ -1,3 +1,4 @@
+''' These methods help display the form used in the study form '''
 from projects.models.paragraphs import Group
 
 
@@ -5,6 +6,16 @@ INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 
 def get_initial_classifications():
+    '''
+    get_initial_classifications help with displaying data in a simple, but flexible
+    way in the study lookup form
+
+    This gets all of the groups for the study dropdown.  Later that dropdown will
+    include some categories, so this will get more complex.
+
+    :return: group_idx or (later) category_idx - where idx == the db id
+    :rtype: str
+    '''
     classification_list = INITIAL_CLASSIFICATION
     groups = Group.objects.all().order_by('id')
     for group in groups:
@@ -13,4 +24,12 @@ def get_initial_classifications():
 
 
 def format_group_id(group_id):
+    '''
+    format_group_id makes it so the study dropdown id field can display ids for different tables
+
+    :param group_id: int
+    :type group_id: str
+    :return: used as the id in the study dropdown
+    :rtype: str
+    '''
     return 'group_' + str(group_id)

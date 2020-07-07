@@ -1,5 +1,7 @@
 ''' This is for list data that is stored in constants and used for Testing'''
 
+KEYS_FOR_PARA_DISPLAY_CONTEXT = ['title', 'title_note', 'paragraphs']
+
 TEXT_LIST_WITH_PARA_TAGS = [
     '<p>If the stem on your ground-trailing vine is reddish in color with',
     'red-tinted hairs and thin, fine thorns, it\'s a dewberry. Blackberries,',
@@ -21,5 +23,3 @@ TEXT_LIST_WITHOUT_PARA_TAGS = [
     '<a href="https://homeguides.sfgate.com/blackberry-vs-dewberry-fruit-85014.html"',
     'target="_blank">SealJann_20200520_SFGate_BlackberryVsDewberry</a>'
 ]
-
-KEYS_FOR_PARA_DISPLAY_CONTEXT = ['title', 'title_note', 'paragraphs']

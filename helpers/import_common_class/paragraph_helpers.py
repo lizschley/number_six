@@ -40,7 +40,7 @@ def paragraph_json_to_db(json_path):
     paragraphs.dictionary_to_db(dict_data)
 
 
-# Review: - will replace this with db tests after retriev paragraph refactoring
+# Review: - will replace this with db tests after retrieve paragraph refactoring
 # to run in >> python manage.py shell
 # import helpers.import_common_class.paragraph_helpers as para_helper
 # paragraphs = para_helper.retrieve_paragraphs_manual_testing()
