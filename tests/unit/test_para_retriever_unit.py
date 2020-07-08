@@ -1,4 +1,4 @@
-from common_classes.paragraph_retriever import ParagraphRetriever
+from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 
 
 def test_constructor():

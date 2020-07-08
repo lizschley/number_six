@@ -56,7 +56,6 @@ def test_create_links_from_references(para_for_display_object, para_display_inpu
     assert 'href="https://gymcastic.com/"' in ref_links['JessicaSpencerKensley']
 
 
-# Fixme: after sorting is implemented
 def test_assign_paragraphs(para_for_display_object, para_display_input_data):
     '''this also tests add_links_to_paragraphs and paragraph_links'''
     para_for_display_object.input_data = para_display_input_data
@@ -66,8 +65,8 @@ def test_assign_paragraphs(para_for_display_object, para_display_input_data):
     assert len(paras) == 2
     assert isinstance(paras[0]['references'], str)
     assert 'href=' in paras[0]['references']
-    assert paras[0]['id'] == 'first'
-    assert paras[0]['subtitle'] == 'Fiction'
+    assert paras[1]['id'] == 'first'
+    assert paras[1]['subtitle'] == 'Fiction'
 
 
 def test_paragraph(para_display_input_data):

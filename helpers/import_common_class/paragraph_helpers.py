@@ -3,7 +3,6 @@
 import os
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import portfolio.settings as settings
-from common_classes.paragraph_retriever import ParagraphRetriever
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
@@ -40,22 +39,7 @@ def paragraph_json_to_db(json_path):
     paragraphs.dictionary_to_db(dict_data)
 
 
-# Review: - will replace this with db tests after retrieve paragraph refactoring
-# to run in >> python manage.py shell
-# import helpers.import_common_class.paragraph_helpers as para_helper
-# paragraphs = para_helper.retrieve_paragraphs_manual_testing()
-def retrieve_paragraphs_manual_testing():
-    '''Maybe should delete this and replace it with automated testing.
-       It was used for manual testing '''
-    paragraphs = ParagraphRetriever()
-    res = paragraphs.retrieve_input_data(group_id=None, search_str=None,
-                                         path_to_json=DEMO_PARAGRAPH_JSON)
-    print(res)
-    return paragraphs
-
-
-# Review: as part of the retrieve paragraph refactoring
-def paragraph_view_input(context):
+def paragraph_view_input(context, from_demo=False):
     '''
     paragraph_view_input extracts arguments for paragraph retrieval from context
     and then uses them to retrieve paragraphs, references, etc
@@ -65,18 +49,17 @@ def paragraph_view_input(context):
     :return: context with the paragraphs added
     :rtype: dict
     '''
-    # print(f'in paragraph_helpers.context_to_paragraphs, context=={context}')
-    path_to_json = context.pop('path_to_json', None)
-    group_id = context.pop('group_id', None)
-    search_str = context.pop('search_str', None)
-    # print(f'after popping, context=={context}')
-
     # retrieve data
     paragraphs = ParagraphsForDisplay()
-    paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json,
-                                                group_id=group_id,
-                                                search_str=search_str)
 
+    # print(f'in paragraph_helpers.context_to_paragraphs, context=={context}')
+    if from_demo:
+        path_to_json = context.pop('path_to_json', None)
+        paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json)
+    else:
+        group_id = context.pop('group_id', None)
+        paragraphs = paragraphs.retrieve_paragraphs(group_id=group_id)
+    # print(f'after popping, context=={context}')
     # print output
     # print(f'after calling retrieve paragraphs returned data == {paragraphs}')
     context = para_helper.add_paragraphs_to_context(context, paragraphs)
