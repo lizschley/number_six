@@ -29,7 +29,7 @@ class StudyLookupView(FormView):
     form_class = ParagraphLookupForm
 
     def get(self, request, *args, **kwargs):
-        # TODO turn extract data from form into whatever makes this code the cleanest
+        # Todo: turn extract data from form into whatever makes this code the cleanest
         form_data = request.GET.get("classification", "0")
         print(f'data before calling extract_data_from_form: {form_data}')
         in_data = no_import_para_helper.extract_data_from_form(form_data)

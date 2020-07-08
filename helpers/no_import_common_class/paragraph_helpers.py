@@ -84,3 +84,20 @@ def extract_data_from_form(classification):
         return {temp[0]: int(temp[1])}
     except ValueError:
         return {}
+
+
+def add_paragraphs_to_context(context, paragraphs):
+    '''
+    add_paragraphs_to_context reformats data to save work in the template
+
+    :param context: original context, minus what was needed for para retrieval
+    :type context: dict
+    :param paragraphs: paragraph dictionary before adding to context
+    :type paragraphs: dict
+    :return: context - will be used in paragraph template
+    :rtype: dict
+    '''
+    context['title'] = paragraphs['title']
+    context['title_note'] = paragraphs['title_note']
+    context['paragraphs'] = paragraphs['paragraphs']
+    return context

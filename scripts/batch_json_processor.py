@@ -22,7 +22,7 @@ def run(*args):
     '''
         usage as follows:
         > python manage.py runscript -v3  batch_json_processor --script-args
-                /Users/liz/development/number_six/test/test.json
+                filename=/Users/liz/development/number_six/test/test.json
         or > python manage.py runscript -v3  batch_json_processor
     '''
     filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
@@ -65,8 +65,15 @@ def filename_checker(args, subs):
             exit(0)
         return os.path.join(JSON_DATA_ROOT, filenames[0])
     else:
-        print(f'Using json file passed in as a parameter: {filenames[0]}')
-        return filenames[0]
+        temp_filenames = filenames[0]
+        temp_filenames = temp_filenames.split('=')
+        if len(temp_filenames) != 2:
+            print('Need one and only one filename= to pass in a filename')
+            exit(0)
+        filename = temp_filenames[1]
+
+        print(f'Using json file passed in as a parameter: {filename}')
+        return filename
 
 
 def process_checker(args, subs):

@@ -1,6 +1,6 @@
 '''This view displays the paragraphs in a basic fashion.'''
-from django.views.generic import TemplateView
 import os
+from django.views.generic import TemplateView
 import portfolio.settings as settings
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
@@ -17,5 +17,5 @@ class DemoParagraphView(TemplateView):
 
     def _add_to_context(self, context):
         context['path_to_json'] = DEMO_PARAGRAPH_JSON
-        context = import_para_helper.paragraph_view_input(context)
+        context = import_para_helper.paragraph_view_input(context, True)
         return context
