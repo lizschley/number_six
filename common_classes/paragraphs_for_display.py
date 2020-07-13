@@ -120,6 +120,7 @@ class ParagraphsForDisplay(object):
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
 
+
     def sort_paragraphs(self, list_to_be_sorted):
         '''
         sort_paragraphs sorts paragraphs
