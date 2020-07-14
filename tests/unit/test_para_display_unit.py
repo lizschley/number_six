@@ -7,6 +7,7 @@ from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.db_paragraph_retriever import DbParagraphRetriever
 from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 import testing.data.dict_constants as constants
+import testing.helpers.testing_helpers as helper
 
 
 @pytest.fixture()
@@ -33,17 +34,18 @@ def test_retrieve_paragraphs_group_id(mocker, para_for_display_object):
     assert para_for_display_object.retrieve_paragraphs(group_id=1) == {'test': 'test'}
 
 
-def test_para_display_init(para_for_display_object):
-    assert isinstance(para_for_display_object.title, str)
-    assert isinstance(para_for_display_object.title_note, str)
-    assert isinstance(para_for_display_object.reference_links, dict)
-    assert isinstance(para_for_display_object.paragraphs, list)
-    assert isinstance(para_for_display_object.input_data, dict)
+@pytest.mark.parametrize('var_name, var_type', [('title', str),
+                                                ('title_note', str),
+                                                ('reference_links', dict),
+                                                ('paragraphs', list),
+                                                ('input_data', dict)])
+def test_para_display_init(para_for_display_object, var_name, var_type):
+    helper.assert_instance_variable(para_for_display_object, var_name, var_type)
 
 
 @pytest.mark.parametrize("key,expected", [('path_to_json', JsonParagraphRetriever),
                                           ('group_id', DbParagraphRetriever)])
-def test_instantiate_class(key, expected):
+def test_instantiate_para_for_display(key, expected):
     paragraphs = ParagraphsForDisplay()
     obj = paragraphs.instantiate_class(key)
     assert isinstance(obj, expected)

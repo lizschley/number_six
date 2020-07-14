@@ -21,3 +21,7 @@ def get_set_display_para_from_json_cache(request, path=common.BASIC_PARA_TEST_JS
         return_dict = import_class_para_helper.paragraph_list_from_json(path)
         request.config.cache.set(key, return_dict)
     return return_dict
+
+
+def assert_instance_variable(obj, var_name, var_type):
+    assert isinstance(getattr(obj, var_name), var_type)

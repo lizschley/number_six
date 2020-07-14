@@ -5,6 +5,7 @@ import testing.helpers.testing_helpers as helpers
 import testing.constants.common as common
 import testing.data.dict_constants as constants
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from common_classes.db_paragraph_retriever import DbParagraphRetriever
 
 
 @pytest.fixture(scope='session')
@@ -28,3 +29,9 @@ def json_path(request):
 def para_for_display_object():
     paragraphs = ParagraphsForDisplay()
     return paragraphs
+
+
+@pytest.fixture()
+def db_para_retriever():
+    retriever = DbParagraphRetriever()
+    return retriever

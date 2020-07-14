@@ -2,7 +2,7 @@
 from common_classes.base_paragraph_retriever import BaseParagraphRetriever
 from projects.models.paragraphs import Group
 
-VALID_KW_ARGS = ['group_id', 'search_str', 'path_to_json']
+VALID_KW_ARGS = ['group_id', 'search_str']
 
 
 class DbParagraphRetriever(BaseParagraphRetriever):

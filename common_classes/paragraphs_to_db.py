@@ -38,7 +38,7 @@ class ParagraphsToDatabase:
         '''
         self.assign_group_data(input_data)
         res = self.find_or_create_group()
-       # Review: when it comes time to figure out error handling strategy
+        # Review: when it comes time to figure out error handling strategy
         if res != 'ok':
             print(f'group not saved: group input == {input_data["group"]}, result returned {res} ')
             exit(1)
@@ -119,10 +119,11 @@ class ParagraphsToDatabase:
         responsible to saying whether the paragraph stands alone.  (For flashcards, the questions
         will not standalone, but the answers probably will)
 
-        The standalone field in the paragraph record will be used eliminate non-standalone paragraphs
-        when doing a search string or tag search when there is no group or catagory chosen.  In that case, the
-        rule is that only standalone records will be retrieved.  This field is in the paragraph
-        because a given group can have some standalone and some not-standalone records
+        The standalone field in the paragraph record will be used eliminate non-standalone
+        paragraphs when doing a search string or tag search when no group or catagory is chosen.
+        In that case, the rule is that only standalone records will be retrieved.  This field
+        is in the paragraph because a given group can have some standalone and
+        some not-standalone records
 
         :param para: paragraph record from the input
         :type para: dict
@@ -131,7 +132,7 @@ class ParagraphsToDatabase:
         '''
         if self.standalone == 'yes':
             return True
-        elif self.standalone == 'no':
+        if self.standalone == 'no':
             return False
         if para['standalone'] == 'yes':
             return True
