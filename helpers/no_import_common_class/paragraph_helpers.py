@@ -4,6 +4,7 @@
     the common class folder. '''
 
 import json
+from operator import itemgetter
 
 
 def create_link(url, link_text):
@@ -101,3 +102,13 @@ def add_paragraphs_to_context(context, paragraphs):
     context['title_note'] = paragraphs['title_note']
     context['paragraphs'] = paragraphs['paragraphs']
     return context
+
+
+def sort_paragraphs(list_to_be_sorted, key_to_sort):
+    '''
+    sort_paragraphs sorts paragraphs
+
+    :param list_to_be_sorted: paragraph list from paragraph retriever (has order field)
+    :type list_to_be_sorted: sorted list of hashes
+    '''
+    return sorted(list_to_be_sorted, key=itemgetter(key_to_sort))

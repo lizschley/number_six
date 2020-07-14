@@ -53,11 +53,6 @@ def test_instantiate_class_with_something_wrong(para_for_display_object):
     assert para_for_display_object.instantiate_class('something_wrong') is None
 
 
-# Todo: make test_format_data_for_display a unit tests using mocks
-def test_format_data_for_display():
-    pass
-
-
 def test_assign_group_data(para_for_display_object, para_display_input_data):
     para_for_display_object.group = para_display_input_data['group']
     assert para_for_display_object.group['title'].strip() == 'Listening'
