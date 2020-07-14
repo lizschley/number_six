@@ -31,3 +31,5 @@ Steps to test it out
 6. Run the server
 
 `>> python manage.py runserver`
+
+7. URL is localhost: http://127.0.0.1:8000/
