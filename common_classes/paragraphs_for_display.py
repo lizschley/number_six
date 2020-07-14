@@ -1,7 +1,6 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-
-import os
+import sys
 from operator import itemgetter
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
@@ -39,8 +38,7 @@ class ParagraphsForDisplay(object):
         '''
         self.input_data = self.retrieve_input_data(kwargs)
         if self.input_data is None:
-            print(f'did not retrieve data with these args: {kwargs}')
-            os._exit(1)
+            sys.exit(f'did not retrieve data with these args: {kwargs}')
         return self.format_data_for_display()
 
     def retrieve_input_data(self, kwargs):
@@ -121,6 +119,7 @@ class ParagraphsForDisplay(object):
         for para in input_para_list:
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
+
 
     def sort_paragraphs(self, list_to_be_sorted):
         '''
