@@ -4,13 +4,9 @@
 
 import pytest
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from common_classes.db_paragraph_retriever import DbParagraphRetriever
+from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 import testing.data.dict_constants as constants
-
-
-@pytest.fixture()
-def para_for_display_object():
-    paragraphs = ParagraphsForDisplay()
-    return paragraphs
 
 
 @pytest.fixture()
@@ -18,9 +14,23 @@ def para_display_input_data():
     return constants.PARA_DISPLAY_INPUT_DATA_FOR_TESTING
 
 
-# Todo: after refacoring make test_retrieve_paragraphs an integration test and/or unit test(s)
-def test_retrieve_paragraphs():
-    pass
+def test_retrieve_paragraphs_bad_input(mocker, para_for_display_object):
+    path = 'common_classes.paragraphs_for_display.ParagraphsForDisplay.'
+    mock1 = mocker.patch(path + 'retrieve_input_data')
+    mock2 = mocker.patch(path + 'format_data_for_display')
+    mock1.return_value = None
+    mock2.return_value = {'test': 'test'}
+    with pytest.raises(BaseException):
+        assert para_for_display_object.retrieve_paragraphs(group_id=1)
+
+
+def test_retrieve_paragraphs_group_id(mocker, para_for_display_object):
+    path = 'common_classes.paragraphs_for_display.ParagraphsForDisplay.'
+    mock1 = mocker.patch(path + 'retrieve_input_data')
+    mock2 = mocker.patch(path + 'format_data_for_display')
+    mock1.return_value = {'test': 'test'}
+    mock2.return_value = {'test': 'test'}
+    assert para_for_display_object.retrieve_paragraphs(group_id=1) == {'test': 'test'}
 
 
 def test_para_display_init(para_for_display_object):
@@ -31,13 +41,20 @@ def test_para_display_init(para_for_display_object):
     assert isinstance(para_for_display_object.input_data, dict)
 
 
+@pytest.mark.parametrize("key,expected", [('path_to_json', JsonParagraphRetriever),
+                                          ('group_id', DbParagraphRetriever)])
+def test_instantiate_class(key, expected):
+    paragraphs = ParagraphsForDisplay()
+    obj = paragraphs.instantiate_class(key)
+    assert isinstance(obj, expected)
+
+
+def test_instantiate_class_with_something_wrong(para_for_display_object):
+    assert para_for_display_object.instantiate_class('something_wrong') is None
+
+
 # Todo: make test_format_data_for_display a unit tests using mocks
 def test_format_data_for_display():
-    pass
-
-
-# Todo: implement sort -> paragraphs list, sorted by the sort field(sort_num or subtitle)
-def test_sort_paragraphs():
     pass
 
 

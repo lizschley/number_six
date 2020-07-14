@@ -36,6 +36,12 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         return query
 
     def basic_sql(self):
+        '''
+        basic_sql creates the sql code to retrieve paragraphs and their related records
+
+        :return: sql with the necessary elements and without where statements
+        :rtype: str
+        '''
         return ('select 1 as id, g.id as group_id, title as title, g.note as title_note, '
                 'gp.order, p.id as paragraph_id, subtitle, p.note as subtitle_note, text, '
                 'r.id as reference_id, link_text, url '

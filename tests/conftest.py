@@ -4,6 +4,7 @@ import pytest
 import testing.helpers.testing_helpers as helpers
 import testing.constants.common as common
 import testing.data.dict_constants as constants
+from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
 @pytest.fixture(scope='session')
@@ -21,3 +22,9 @@ def display_text_from_json(request):
 @pytest.fixture(scope='session')
 def json_path(request):
     return common.BASIC_PARA_TEST_JSON
+
+
+@pytest.fixture()
+def para_for_display_object():
+    paragraphs = ParagraphsForDisplay()
+    return paragraphs
