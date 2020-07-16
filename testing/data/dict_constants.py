@@ -56,3 +56,27 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
         'second': ['JessicaSpencerKensley']
     }
 }
+
+PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
+    'title': 'Listening',
+    'note': '*Note - subjects I listen to',
+    'paragraphs': [{
+        'paragraph_id': 'first',
+        'subtitle': 'Fiction',
+        'subtitle_note': '* Note - only public domain for listening to fall asleep.',
+        'text': '<p>Fiction is my number one non-domestic animal  love.  My favorite animal is Rick.  He shares my love of fiction.</p>',
+        'order': 'fiction',
+        'reference_id': 'books',
+        'link_text': 'Literature',
+        'url': 'https://literature.org/'
+    }, {
+        'paragraph_id': 'second',
+        'subtitle': 'A sometimes wonderful, but often annoying podcast',
+        'subtitle_note': '',
+        'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica and Spencer can be annoying, but Kensley rarely is. But like the way I feel about my cats,  I  like them all equally in spite of their natures.</p>',
+        'order': 'a sometimes wonderful, but often annoying podcast',
+        'reference_id': 'gym',
+        'link_text': 'JessicaSpencerKensley',
+        'url': 'https://gymcastic.com/'
+    }],
+}
