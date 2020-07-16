@@ -9,12 +9,12 @@ PARA_DISPLAY_OUTPUT_DATA_FOR_TESTING = {
             'subtitle': 'Fiction',
             'subtitle_note': '* Note - only public domain for listening to fall asleep.',
             'text': '<p>Fiction is my number one non-domestic animal  love.  My '
-            'favorite animal is Rick.  He shares my love of fiction.</p>'
+                    'favorite animal is Rick.  He shares my love of fiction.</p>',
         },
         {
             'id': 'second',
             'references': '<a href="https://gymcastic.com/" '
-            'target="_blank">JessicaSpencerKensley</a><br>',
+                          'target="_blank">JessicaSpencerKensley</a><br>',
             'subtitle': 'A sometimes wonderful, but often annoying podcast',
             'subtitle_note': '',
             'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica '
@@ -42,13 +42,17 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
         'id': 'first',
         'subtitle': 'Fiction',
         'note': '* Note - only public domain for listening to fall asleep.',
-        'text': '<p>Fiction is my number one non-domestic animal  love.  My favorite animal is Rick.  He shares my love of fiction.</p>',
+        'text': '<p>Fiction is my number one non-domestic animal love.  My favorite animal is '
+                'Rick. He shares my love of fiction.</p>',
         'order': 'fiction'
     }, {
         'id': 'second',
         'subtitle': 'A sometimes wonderful, but often annoying podcast',
         'note': '',
-        'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica and Spencer can be annoying, but Kensley rarely is. But like the way I feel about my cats,  I  like them all equally in spite of their natures.</p>',
+        'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica '
+                'and Spencer can be annoying, but Kensley rarely is. But like '
+                'the way I feel about my cats,  I like them all equally in '
+                'spite of their natures.</p>',
         'order': 'a sometimes wonderful, but often annoying podcast'
     }],
     'para_id_to_link_text': {
@@ -64,7 +68,8 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'paragraph_id': 'first',
         'subtitle': 'Fiction',
         'subtitle_note': '* Note - only public domain for listening to fall asleep.',
-        'text': '<p>Fiction is my number one non-domestic animal  love.  My favorite animal is Rick.  He shares my love of fiction.</p>',
+        'text': '<p>Fiction is my number one non-domestic animal  love.  My '
+                'favorite animal is Rick.  He shares my love of fiction.</p>',
         'order': 'fiction',
         'reference_id': 'books',
         'link_text': 'Literature',
@@ -73,7 +78,9 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'paragraph_id': 'second',
         'subtitle': 'A sometimes wonderful, but often annoying podcast',
         'subtitle_note': '',
-        'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica and Spencer can be annoying, but Kensley rarely is. But like the way I feel about my cats,  I  like them all equally in spite of their natures.</p>',
+        'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica and Spencer can be '
+                'annoying, but Kensley rarely is. But like the way I feel about my cats, '
+                'I  like them all equally in spite of their natures.</p>',
         'order': 'a sometimes wonderful, but often annoying podcast',
         'reference_id': 'gym',
         'link_text': 'JessicaSpencerKensley',

@@ -1,5 +1,6 @@
 '''These fixtures are designed to be reused throughout tests.'''
 # pylint: disable=missing-function-docstring
+# pylint: disable=redefined-outer-name
 import pytest
 import testing.helpers.testing_helpers as helper
 import testing.constants.common as common
@@ -38,3 +39,8 @@ def para_for_display_object():
 def db_para_retriever():
     retriever = DbParagraphRetriever()
     return retriever
+
+
+@pytest.fixture()
+def retriever_db_output(db_para_retriever, db_para_list_input):
+    return db_para_retriever.db_output_to_display_input(db_para_list_input)

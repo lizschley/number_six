@@ -44,16 +44,47 @@ def test_write_sql(db_para_retriever, substring):
     helper.assert_in_string(fullstring, substring)
 
 
-def test_db_output_to_display_input(db_para_retriever, db_para_list_input):
-    output_para = db_para_retriever.db_output_to_display_input(db_para_list_input)
-    assert isinstance(output_para, dict)
+def test_db_output_to_display_input(retriever_db_output):
+    assert isinstance(retriever_db_output, dict)
 
 
 @pytest.mark.parametrize('var_name, var_type', [('group', dict),
                                                 ('paragraphs', list),
                                                 ('references', list),
                                                 ('para_id_to_link_text', dict)])
-def test_db_output_keys(db_para_retriever, db_para_list_input, var_name, var_type):
+def test_db_output_keys(retriever_db_output, var_name, var_type):
+    assert isinstance(retriever_db_output[var_name], var_type)
 
-    output_para = db_para_retriever.db_output_to_display_input(db_para_list_input)
-    assert isinstance(output_para[var_name], var_type)
+
+@pytest.mark.parametrize('var_name, var_length', [('group', 2),
+                                                  ('paragraphs', 2),
+                                                  ('references', 2),
+                                                  ('para_id_to_link_text', 2)])
+def test_db_output_length_correct(retriever_db_output, var_name, var_length):
+    assert len(retriever_db_output[var_name]) == var_length
+
+
+@pytest.mark.parametrize('outer, idx, inner, substring', [('paragraphs', 0, 'order', 'iction'),
+                                                          ('paragraphs', 0, 'subtitle', 'iction'),
+                                                          ('paragraphs', 0, 'text', 'non-domestic'),
+                                                          ('references', 0, 'link_text', 'Lit'),
+                                                          ('references', 0, 'url', 'lit'),
+                                                          ('paragraphs', 1, 'order', 'annoying'),
+                                                          ('paragraphs', 1, 'subtitle', 'annoying'),
+                                                          ('paragraphs', 1, 'text', 'my cats'),
+                                                          ('references', 1, 'link_text', 'Spencer'),
+                                                          ('references', 1, 'url', 'gymcastic')])
+def test_db_output_list_data_values_correct(retriever_db_output, outer, idx, inner, substring):
+    helper.assert_in_string(retriever_db_output[outer][idx][inner], substring)
+
+
+@pytest.mark.parametrize('outer, key, substring', [('group', 'title', 'Listen'),
+                                                   ('group', 'note', 'subjects')])
+def test_db_output_dict_data_values_correct(retriever_db_output, outer, key, substring):
+    helper.assert_in_string(retriever_db_output[outer][key], substring)
+
+
+@pytest.mark.parametrize('outer, key, substring', [('para_id_to_link_text', 'first', 'itera'),
+                                                   ('para_id_to_link_text', 'second', 'Spencer')])
+def test_db_output_list_first_data_value_correct(retriever_db_output, outer, key, substring):
+    helper.assert_in_string(retriever_db_output[outer][key][0], substring)
