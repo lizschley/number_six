@@ -1,7 +1,6 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
 import sys
-from operator import itemgetter
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
 from common_classes.db_paragraph_retriever import DbParagraphRetriever
@@ -75,7 +74,7 @@ class ParagraphsForDisplay(object):
             return DbParagraphRetriever()
         return None
 
-    # Todo: use mock for this unit test
+    # Todo: make sure this is already tested.  I think it is, through an integration test
     def format_data_for_display(self):
         '''
         format_data_for_display Once we know what class to use for retrieving the input data
@@ -115,20 +114,11 @@ class ParagraphsForDisplay(object):
         2. append the paragraph values needed with the keys that are expected
         3. add the reference links that are associated with the given paragraph
         '''
-        input_para_list = self.sort_paragraphs(self.input_data['paragraphs'])
+        input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
+                                                       constants.ORDER_FIELD_FOR_PARAS)
         for para in input_para_list:
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
-
-
-    def sort_paragraphs(self, list_to_be_sorted):
-        '''
-        sort_paragraphs sorts paragraphs
-
-        :param list_to_be_sorted: paragraph list from paragraph retriever (has order field)
-        :type list_to_be_sorted: sorted list of hashes
-        '''
-        return sorted(list_to_be_sorted, key=itemgetter('order'))
 
     def add_links_to_paragraphs(self):
         '''
