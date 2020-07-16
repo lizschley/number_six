@@ -15,8 +15,12 @@ def orig_para_dict_data(request):
 
 @pytest.fixture(scope='session')
 def display_text_from_json(request):
-    display_data = helper.get_set_display_para_from_json_cache(request)
-    return display_data
+    return helper.get_set_display_para_from_json_cache(request)
+
+
+@pytest.fixture(scope='session')
+def db_para_list_input():
+    return helper.create_basic_para_raw_queryset_data()
 
 
 @pytest.fixture(scope='session')
@@ -34,9 +38,3 @@ def para_for_display_object():
 def db_para_retriever():
     retriever = DbParagraphRetriever()
     return retriever
-
-
-@pytest.fixture()
-def db_para_list_input():
-    db_data_list = helper.get_set_display_para_from_db_pickle()
-    return db_data_list

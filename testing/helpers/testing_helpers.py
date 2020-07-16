@@ -1,7 +1,5 @@
 '''Common code for tests'''
 # pylint: disable=missing-function-docstring
-import os
-import pickle
 import helpers.import_common_class.paragraph_helpers as import_class_para_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import testing.constants.common as common
@@ -25,17 +23,6 @@ def get_set_display_para_from_json_cache(request, path=common.BASIC_PARA_TEST_JS
         return_dict = import_class_para_helper.paragraph_list_from_json(path)
         request.config.cache.set(key, return_dict)
     return return_dict
-
-
-def get_set_display_para_from_db_pickle():
-    filename = common.DB_DISPLAY_PARA_INPUT_PICKLE
-    return_list = None
-    if os.path.isfile(filename):
-        return_list = pickle.load(open(filename, "rb"))
-    else:
-        return_list = create_basic_para_raw_queryset_data()
-        pickle.dump(return_list, open(filename, 'wb'))
-    return return_list
 
 
 def assert_instance_variable(obj, var_name, var_type):
