@@ -8,7 +8,7 @@
 <div class="demo">
   <h3>Paragraph Display from JSON file</h3>
   <p>
-   Display a list of paragraphs from JSON.  This particular JSON format is used to both load the database records that
+    Display a list of paragraphs from JSON.  This particular JSON format is used to both load the database records that
     later can be used for paragraph display or to directly display paragraphs on this site.  This shows two things:
   </p>
   <ol>
@@ -17,20 +17,25 @@
       used as input for the display process.
     </li>
     <li>
-      Illustrates that the display process is flexible, thus usable with different inputs.
+      Illustrates that the display process is usable with different inputs.
     </li>
   </ol>
-  <div class="btn-toolbar text-center well">
+  <div class="btn-toolbar text-center well justify-content-center mr-5">
     <a class="btn btn-primary" href="{% url 'projects:demo_paragraphs' %}" role="button">Go to Paragraph display</a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseJsonInput"
-            aria-expanded="false" aria-controls="collapseJsonInput">
-      Expand to see original input
+  </div>
+  <div class="container text-center well" id="input_output_examples">
+    <button class="btn btn-primary mr-5 ml-5" type="button" data-toggle="collapse" data-target="#collapseJsonInput"
+            data-parent="#input_output_examples" aria-expanded="false" aria-controls="collapseJsonInput">
+      Expand for Input
     </button>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseDisplayInput"
-            aria-expanded="false" aria-controls="collapseJsonInput">
-      Expand to see intermediate input
+    <button class="btn btn-primary mr-5 ml-5" type="button" data-toggle="collapse" data-target="#collapseDisplayInput"
+            data-parent="#input_output_examples" aria-expanded="false" aria-controls="collapseJsonInput">
+      Expand for Intermediate
     </button>
-
+    <button class="btn btn-primary mr-5 ml-5" type="button" data-toggle="collapse" data-target="#collapseDisplayOutput"
+            data-parent="#input_output_examples" aria-expanded="false" aria-controls="collapseJsonInput">
+      Expand for Final
+    </button>
   </div>
   <div class="collapse" id="collapseJsonInput">
     <div class="card card-body">
@@ -43,7 +48,112 @@
         display the information.
       </p>
       <pre><code><p>
-        will be json
+        {
+          "group": {
+            "title": "Urban Coyotes, a Personal Perspective",
+            "note": "",
+            "ordered": "yes",
+            "standalone": "no"
+          },
+          "references": [
+             {
+               "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
+               "url": "https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/"
+             },
+             {
+               "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+               "url": "https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf"
+             },
+             {
+               "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+               "url": "https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/"
+             },
+             {
+               "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+               "url": "https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/"
+             },
+             {
+               "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+               "url": "https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html"
+             },
+             {
+               "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
+               "url": "https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores"
+             },
+             {
+               "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
+               "url": "https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena"
+             }
+          ],
+          "paragraphs": [
+            {
+              "id": "first",
+              "subtitle": "",
+              "note": "",
+              "text": ["<p>A long time ago I read an article about coyotes living successfully in urban ",
+                "Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because ",
+                "I love mammals, even rats in theory.</p> <p>Like rats, coyotes are highly adaptable and ",
+                "successful.  They have spread over most, if not all of North America and to every county ",
+                "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
+                "up a habitat vacuum. But people’s efforts to do the same to coyotes have not been ",
+                "effective, because they breed quickly and there are new coyotes to take over vacated ",
+                "territories</p>"]
+            },
+            {
+              "id": "second",
+              "subtitle": "",
+              "note": "",
+              "text": ["<p> But it is also because coyotes change according to the situation. </p> <p>In ",
+                "urban situations they become bolder; one coyote actually crawled into a refrigerated case ",
+                "one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There ",
+                "are instances of coyotes going after pets or humans, but it is rarer than instances of ",
+                "coyotes playing with domestic dogs.</p><p> More often coyotes try to avoid humans and are ",
+                "scared by banging pots, swinging sticks or ",
+                "even a barking dog.</p> <p>Obviously I am biased in favor of learning to coexist with ",
+                "coyotes rather than trying to defeat them.</p><p>It makes sense to educate people, but ",
+                "coyotes will learn as well.  If a community has established coyote territories with ",
+                "parents that teach their pups acceptable behaviors, coexistence can be peaceful.</p>"]
+            }
+          ],
+          "ref_link_paragraph": [
+            {
+              "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+              "paragraph_id": "first"
+            },
+            {
+              "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
+              "paragraph_id": "second"
+            },
+            {
+              "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+              "paragraph_id": "second"
+            },
+            {
+              "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+              "paragraph_id": "first"
+            },
+            {
+              "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+              "paragraph_id": "first"
+            },
+            {
+              "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+              "paragraph_id": "first"
+            },
+            {
+              "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+              "paragraph_id": "second"
+            },
+            {
+              "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
+              "paragraph_id": "second"
+            },
+            {
+              "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
+              "paragraph_id": "second"
+            }
+          ]
+        }
       </p></code></pre>
 
     </div>
@@ -54,13 +164,92 @@
         Intermediate Python Dictionary format
       </p>
       <p>
-        This is an example of a Python dictionary used in the display template.  Whether the original input is from the
-        database or a JSON, the data will be formatted like this before it is displayed.
+        This is an example of a Python dictionary produced by the BaseParagraphRetriever class.  It is
+        is an abstract class, where the output is always the same.  In this case is instantiated as a
+        JsonParagraphRetriever object, based on the type of input data.  In this case the input
+        data is a path to a JSON file.
       </p>
       <pre><code><p>
-        will be dictionary
+        {
+          'group': {
+              'title': 'Urban Coyotes, a Personal Perspective',
+              'note': '',
+              'ordered': 'yes',
+              'standalone': 'no'
+          },
+          'references': [{
+              'link_text': 'HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts',
+              'url': 'https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/'
+          }, {
+              'link_text': 'USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs',
+              'url': 'https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf'
+          }, {
+              'link_text': 'FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves',
+              'url': 'https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/'
+          }, {
+              'link_text': 'DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange',
+              'url': 'https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/'
+          }, {
+              'link_text': 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes',
+              'url': 'https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html'
+          }, {
+              'link_text': 'KrulwichRobert_20101208_NPR_60WildCoyotes',
+              'url': 'https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores'
+          }, {
+              'link_text': 'BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes',
+              'url': 'https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena'
+          }],
+          'paragraphs': [{
+              'id': 'first',
+              'subtitle': '',
+              'note': '',
+              'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because  I love mammals, even rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories</p>',
+              'order': ''
+          }, {
+              'id': 'second',
+              'subtitle': '',
+              'note': '',
+              'text': '<p> But it is also because coyotes change according to the situation. </p> <p>In  urban situations they become bolder; one coyote actually crawled into a refrigerated case  one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There  are instances of coyotes going after pets or humans, but it is rarer than instances of  coyotes playing with domestic dogs.</p><p> More often coyotes try to avoid humans and are  scared by banging pots, swinging sticks or  even a barking dog.</p> <p>Obviously I am biased in favor of learning to coexist with  coyotes rather than trying to defeat them.</p><p>It makes sense to educate people, but  coyotes will learn as well.  If a community has established coyote territories with  parents that teach their pups acceptable behaviors, coexistence can be peaceful.</p>',
+              'order': ''
+          }],
+          'para_id_to_link_text': {
+              'first': ['USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs', 'FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves', 'DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange', 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes'],
+              'second': ['HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts', 'USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs', 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes', 'BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes', 'KrulwichRobert_20101208_NPR_60WildCoyotes']
+          }
+      }
       </p></code></pre>
     </div>
   </div>
+  <div class="collapse" id="collapseDisplayOutput">
+    <div class="card card-body">
+      <p class="font-weight-bold">
+        Final Python Dictionary format
+      </p>
+      <p>
+        This is an example of a Python dictionary produced by the ParagraphsForDisplay class and used in the basic
+        paragraph template.
+      </p>
+      <pre><code><p>
+        {
+          'title': 'Urban Coyotes, a Personal Perspective',
+          'title_note': '',
+          'paragraphs': [{
+              'id': 'first',
+              'subtitle': '',
+              'subtitle_note': '',
+              'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because  I love mammals, even rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories</p>',
+              'references': '<a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br><a href="https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/" target="_blank">FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves</a><br><a href="https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/" target="_blank">DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange</a><br><a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br>'
+          }, {
+              'id': 'second',
+              'subtitle': '',
+              'subtitle_note': '',
+              'text': '<p> But it is also because coyotes change according to the situation. </p> <p>In  urban situations they become bolder; one coyote actually crawled into a refrigerated case  one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There  are instances of coyotes going after pets or humans, but it is rarer than instances of  coyotes playing with domestic dogs.</p><p> More often coyotes try to avoid humans and are  scared by banging pots, swinging sticks or  even a barking dog.</p> <p>Obviously I am biased in favor of learning to coexist with  coyotes rather than trying to defeat them.</p><p>It makes sense to educate people, but  coyotes will learn as well.  If a community has established coyote territories with  parents that teach their pups acceptable behaviors, coexistence can be peaceful.</p>',
+              'references': '<a href="https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/" target="_blank">HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts</a><br><a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br><a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br><a href="https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena" target="_blank">BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes</a><br><a href="https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores" target="_blank">KrulwichRobert_20101208_NPR_60WildCoyotes</a><br>'
+          }]
+      }
+      </p></code></pre>
+    </div>
+  </div>
+
 </div>
 {% endblock %}

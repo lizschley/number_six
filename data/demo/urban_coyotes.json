@@ -1,95 +1,105 @@
 {
   "group": {
-    "title": "Definitions",
-    "note": "*Note - how does the title note display?",
-    "ordered": "no",
-    "standalone": "yes"
+    "title": "Urban Coyotes, a Personal Perspective",
+    "note": "",
+    "ordered": "yes",
+    "standalone": "no"
   },
   "references": [
      {
-       "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
-       "url": "https://web.archive.org/web/20150906155800/http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf"
+       "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
+       "url": "https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/"
      },
      {
-       "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
-       "url": "https://thoughtbot.com/blog/back-to-basics-solid"
+       "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+       "url": "https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf"
      },
      {
-       "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
-       "url": "http://cleancoder.com/products"
+       "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+       "url": "https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/"
      },
      {
-       "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
-       "url": "https://www.youtube.com/watch?v=TMuno5RZNeE"
+       "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+       "url": "https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/"
      },
      {
-       "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
-       "url": "https://itnext.io/solid-principles-explanation-and-examples-715b975dcad4"
+       "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+       "url": "https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html"
      },
      {
-       "link_text": "20200430_Wikipedia_SOLID",
-       "url": "https://en.wikipedia.org/wiki/SOLID"
+       "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
+       "url": "https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores"
+     },
+     {
+       "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
+       "url": "https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena"
      }
   ],
   "paragraphs": [
     {
       "id": "first",
-      "subtitle": "Software Architecture",
-      "note": "<strong>*Note</strong> - This is how subtitle looks.",
-      "text": [
-         "The answer is multitiered. At the highest level,",
-         "there are the architecture patterns that define the overall shape and structure of software applications.",
-         "Down a level is the architecture that is specifically related to the purpose of the software application.",
-         "Yet another level down resides the architecture of the modules and their interconnections.",
-         "This is the domain of design patterns. Directly quoted from Robert C. Martin (2000)."
-       ]
+      "subtitle": "",
+      "note": "",
+      "text": ["<p>A long time ago I read an article about coyotes living successfully in urban ",
+        "Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because ",
+        "I love mammals, even rats in theory.</p> <p>Like rats, coyotes are highly adaptable and ",
+        "successful.  They have spread over most, if not all of North America and to every county ",
+        "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
+        "up a habitat vacuum. But people’s efforts to do the same to coyotes have not been ",
+        "effective, because they breed quickly and there are new coyotes to take over vacated ",
+        "territories</p>"]
     },
     {
       "id": "second",
-      "subtitle": "SOLID Principles",
-      "note": "<strong>*Note</strong> - how does the subtitle note display?",
-      "text": [
-         "SOLID Principles are a fundamental building block of Object Oriented Programming.",
-         "<a href='https://en.wikipedia.org/wiki/Robert_C._Martin'>Robert C. Martin</a>",
-         "introduced the five concepts and",
-         "<a href='https://twitter.com/mfeathers'>Michael Feathers</a> introduced the Acronym.",
-         "<br><strong>S</strong> - Single Responsibility Principle",
-         "<br><strong>O</strong> - Open/Closed Principle",
-         "<br><strong>L</strong> - Liskov Substitution Principle",
-         "<br><strong>I</strong> - Interface Segregation Principle",
-         "<br><strong>D</strong> - Dependency Inversion Principle",
-         "<br>",
-         "<p>The main purposes are interrelated: maintainability, understandability and flexibility"
-      ]
+      "subtitle": "",
+      "note": "",
+      "text": ["<p> But it is also because coyotes change according to the situation. </p> <p>In ",
+        "urban situations they become bolder; one coyote actually crawled into a refrigerated case ",
+        "one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There ",
+        "are instances of coyotes going after pets or humans, but it is rarer than instances of ",
+        "coyotes playing with domestic dogs.</p><p> More often coyotes try to avoid humans and are ",
+        "scared by banging pots, swinging sticks or ",
+        "even a barking dog.</p> <p>Obviously I am biased in favor of learning to coexist with ",
+        "coyotes rather than trying to defeat them.</p><p>It makes sense to educate people, but ",
+        "coyotes will learn as well.  If a community has established coyote territories with ",
+        "parents that teach their pups acceptable behaviors, coexistence can be peaceful.</p>"]
     }
   ],
   "ref_link_paragraph": [
     {
-      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
       "paragraph_id": "first"
     },
     {
-      "link_text": "MartinRobertC_2000_DesignPrinciplesPatterns",
+      "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
       "paragraph_id": "second"
     },
     {
-      "link_text": "BallardBritt_20161101_Thoughtbot_BackBasicsSolid",
+      "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
       "paragraph_id": "second"
     },
     {
-      "link_text": "UncleBobMartinCleanCodeProgrammerSpeakerTeacher",
+      "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
       "paragraph_id": "second"
     },
     {
-      "link_text": "MartinBob_20150523_YouTube_SOLIDPrinciplesObject",
+      "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
       "paragraph_id": "second"
     },
     {
-      "link_text": "LHSimon_20190101_ITNEXT_SOLIDPrinciplesExplanation",
-      "paragraph_id": "second"
-    },
-    {
-      "link_text": "20200430_Wikipedia_SOLID",
+      "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
       "paragraph_id": "second"
     }
   ]
