@@ -149,7 +149,7 @@ class ParagraphsToDatabase:
         for ref_para in ref_link_paras:
             ref = Reference.objects.get(link_text=ref_para['link_text'])
             para = Paragraph.objects.get(pk=self.fake_to_real_para_id[ref_para['paragraph_id']])
-            ref.paragraphs.add(para)
+            para.references.add(ref)
 
     def create_paragraph_record(self, para):
         '''

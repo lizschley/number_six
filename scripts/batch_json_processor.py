@@ -1,28 +1,25 @@
 '''
-    [summary]
+    Reads a json file and either displays how it looks after basic paragraph processing
+    or creates new paragraphs
 
-[extended_summary]
-
-:return: [description]
-:rtype: [type]
+:returns: nothing
 '''
 import os
 from pprint import pprint
 from portfolio.settings import BASE_DIR
-import helpers.import_common_class.paragraph_helpers as ph
+import helpers.import_common_class.paragraph_helpers as import_helper
+import helpers.no_import_common_class.paragraph_helpers as no_import_helper
 
 JSON_DATA_ROOT = os.path.join(BASE_DIR, 'data')
-SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=',
-                       'test_run': 'test_run:', }
+SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=',}
 DB_UPDATE = 'db_update'
-OK_PROCESSES = ['para_display', 'para_to_db', ]
 
 
 def run(*args):
     '''
         usage as follows:
         > python manage.py runscript -v3  batch_json_processor --script-args
-                filename=/Users/liz/development/number_six/test/test.json
+                filename=/Users/liz/development/number_six/data/input_2020-07-21T19:02:13.json
         or > python manage.py runscript -v3  batch_json_processor
     '''
     filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
@@ -31,26 +28,26 @@ def run(*args):
     process = process_checker(args, SCRIPT_PARAM_SUBSTR['process'])
     if process == DB_UPDATE:
         print('Running the db update process.')
-        ph.paragraph_json_to_db(filename)
+        import_helper.paragraph_json_to_db(filename)
     else:
-        paragraphs = ph.paragraph_list_from_json(filename)
+        paragraphs = import_helper.paragraph_list_from_json(filename)
         pprint(paragraphs)
 
 
 def filename_checker(args, subs):
     '''
-    filename_checker [summary]
+    filename_checker looks for filename (& path) for json file, if there are none, will check
+    normal directory for the filename (& path)
 
-    [extended_summary]
-
-    :param args: [description]
-    :type args: [type]
-    :param subs: [description]
-    :type subs: [type]
-    :return: [description]
-    :rtype: [type]
+    :param args: args to batch program
+    :type args: dictionary
+    :param subs: substr to look for (filename & path in this case)
+    :type subs: str
+    :return: filename & path
+    :rtype: str
     '''
-    filenames = check_for_args(args, subs)
+    print(f'args type is {type(args)}')
+    filenames = no_import_helper.check_for_batch_args(args, subs)
     if len(filenames) > 1:
         # if passing > 1 argument that passes extension test
         print('Have not implemented passing in > one specific filename and path.')
@@ -59,7 +56,7 @@ def filename_checker(args, subs):
         # if no arguments, get first filename that passes extension test in correct directory
         # could do in a loop, but extra work unless reason presents itself
         print('Taking first file with a json extension from the default data directory')
-        filenames = check_for_args(os.listdir(JSON_DATA_ROOT), subs)
+        filenames = no_import_helper.check_for_batch_args(os.listdir(JSON_DATA_ROOT), subs)
         if len(filenames) < 1:
             print('No json files in default directory and no json file as input parameter')
             exit(0)
@@ -77,13 +74,19 @@ def filename_checker(args, subs):
 
 
 def process_checker(args, subs):
-    possibilities = check_for_args(args, subs)
+    '''
+    process_checker will check if the process.
+
+    :param args: tuple of arguments sent in
+    :type args: tuple
+    :param subs: no_import_helper.check_for_batch_args(args, subs) searches for subs in args (a tuple)
+    :type subs: str
+    :return: empty string or the name of the process.
+    :rtype: str
+    '''
+    possibilities = no_import_helper.check_for_batch_args(args, subs)
     if len(possibilities) != 1:
-        return []
+        return ''
     possibility = possibilities[0]
     process_array = possibility.split('=')
-    return process_array[1] if len(process_array) == 2 else []
-
-
-def check_for_args(args, subs):
-    return [i for i in args if subs in i]
+    return process_array[1] if len(process_array) == 2 else ''
