@@ -112,3 +112,15 @@ def sort_paragraphs(list_to_be_sorted, key_to_sort):
     :type list_to_be_sorted: sorted list of hashes
     '''
     return sorted(list_to_be_sorted, key=itemgetter(key_to_sort))
+
+
+def check_for_batch_args(args, subs):
+    '''
+    This is for batch processing
+
+    args is a tuple
+
+    :param list_to_be_sorted: finds if substr is in args
+    :type list_to_be_sorted: str
+    '''
+    return [i for i in args if subs in i]
