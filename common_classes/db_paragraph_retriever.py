@@ -21,18 +21,22 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         '''
         if 'group_id' not in kwargs.keys():
             return None
-        query = self.write_sql()
+        query = self.write_group_standalone_para_sql()
+        print(f'group_id == {kwargs["group_id"]}')
+        print(f'query == {query}')
         return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
 
-    def write_sql(self):
+    def write_group_standalone_para_sql(self):
         '''
-        write_sql generates the SQL used to retrieve data
+        write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
+        using a group and the paragraphs are standalone
 
         :return: the query to be used, minus the actual group_id
         :rtype: str
         '''
         query = self.basic_sql()
         query += 'where g.id = %s'
+        query += ' and p.standalone = TRUE'
         return query
 
     def basic_sql(self):

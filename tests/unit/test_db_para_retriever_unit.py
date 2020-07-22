@@ -24,7 +24,7 @@ def test_para_retriever_init(db_para_retriever, var_name, var_type):
 
 def test_data_retrieval(mocker, db_para_retriever):
     path = 'common_classes.db_paragraph_retriever.DbParagraphRetriever.'
-    mocker.patch(path + 'write_sql')
+    mocker.patch(path + 'write_group_standalone_para_sql')
     mock = mocker.patch(path + 'db_output_to_display_input')
     mock.return_value = {'test': 'test'}
     assert db_para_retriever.data_retrieval({'group_id': 1}) == {'test': 'test'}
@@ -39,8 +39,8 @@ def test_data_retrieval(mocker, db_para_retriever):
                                        ('projects_paragraph'),
                                        ('reference'),
                                        ('projects_paragraphreference')])
-def test_write_sql(db_para_retriever, substring):
-    fullstring = db_para_retriever.write_sql()
+def test_write_group_standalone_para_sql(db_para_retriever, substring):
+    fullstring = db_para_retriever.write_group_standalone_para_sql()
     helper.assert_in_string(fullstring, substring)
 
 
