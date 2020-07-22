@@ -1,0 +1,51 @@
+{
+  "group": {
+    "title": "Tech How-tos - personal cheat sheets",
+    "note": "",
+    "ordered": "no",
+    "standalone": "yes"
+  },
+  "references": [
+     {
+       "link_text": "user2761895_20180709_stackoverflow_HowGetIntgrity",
+       "url": "https://stackoverflow.com/questions/51254596/how-to-get-the-integrity-value-for-a-jquery-version-for-script"
+     },
+     {
+      "link_text": "SRI_HashGenerator",
+      "url": "https://www.srihash.org/"
+    },
+    {
+      "link_text": "20200528_MDN_SubresourceIntegrity",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "only_one",
+      "subtitle": "How to Get Integrity Value for a web-site",
+      "note": "",
+      "text": ["Taking off the slim from a Bootstrap 4 jquery link caused a bug.  I was able to fix ",
+               "it, without losing the integrity, by putting the new url into the Hash generator. ",
+               "<br>Here are some details: ",
+               "You use the Subresource Integrity feature by specifying a base64-encoded cryptographic hash of a ",
+               "resource (file) you’re telling the browser to fetch, in the value of the integrity attribute of any ",
+               "<script> or <link> element. directly quoted from ",
+               "<a href='https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity' target='_blank'>MDN</a>"
+       ]
+    }
+  ],
+  "ref_link_paragraph": [
+    {
+      "link_text": "user2761895_20180709_stackoverflow_HowGetIntgrity",
+      "paragraph_id": "only_one"
+    },
+    {
+      "link_text": "SRI_HashGenerator",
+      "paragraph_id": "only_one"
+    },
+    {
+      "link_text": "20200528_MDN_SubresourceIntegrity",
+      "paragraph_id": "only_one"
+    }
+  ]
+}

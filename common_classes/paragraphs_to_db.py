@@ -47,6 +47,12 @@ class ParagraphsToDatabase:
         self.associate_paragraphs_with_references(input_data)
 
     def assign_group_data(self, input_data):
+        '''
+        assign_group_data to instance variables
+
+        :param input_data: the input data read from a json file or created in batch
+        :type input_data: dict
+        '''
         group_dict = input_data['group']
         self.title = group_dict['title']
         self.title_note = group_dict['note']
@@ -62,11 +68,16 @@ class ParagraphsToDatabase:
         :rtype: [type]
         '''
         try:
-            group, created = Group.objects.get_or_create(
-                title=self.title,
-                note=self.title_note,
-            )
-            group.save()
+            group = Group.objects.get(title=self.title)
+            if group:
+                print('Have group, id=={group.pk}')
+                self.group = group
+            else:
+                group = Group.objects.get_or_create(
+                    title=self.title,
+                    note=self.title_note,
+                )
+                group.save()
         except IntegrityError:
             print('Integrity error while creating group.')
             return 'Integrity error while creating group.'
@@ -82,7 +93,7 @@ class ParagraphsToDatabase:
         '''
         references = input_data['references']
         for ref in references:
-            reference, created = Reference.objects.get_or_create(
+            reference = Reference.objects.get_or_create(
                 link_text=ref['link_text'],
                 url=ref['url'],
             )

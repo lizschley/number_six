@@ -9,7 +9,7 @@ DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR,
 
 
 class DemoParagraphView(TemplateView):
-    template_name = 'projects/paragraphs.html'
+    template_name = 'projects/demo_paragraphs.html'
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
