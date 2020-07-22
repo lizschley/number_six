@@ -4,26 +4,31 @@
 
 {% block content %}
 
-  <div class="row">
-        <div class="col-md-8">
-            <h1>{{title}}</h1>
-            <p>{{title_note}}</p>
-        </div>
-        <div class="col-md-4">
-            <h1>References</h1>
-        </div>
+    <div class="row">
+        <h1>{{title}}</h1>
+        <p>{{title_note}}</p>
     </div>
 
-
    {% for para in paragraphs %}
-       <div class="row">
-            <div class="col-md-8">
-                <h3> {{ para.subtitle | safe }} </h3>
-                <p> {{ para.subtitle_note | safe }} </p>
-                {{ para.text | safe }}
-            </div>
-            <div class="col-md-4">
-               {{ para.references | safe }}
+        <div id="accordion">
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" href={{para.href_collapse}}>
+                        {{ para.subtitle | safe }}
+                    </a>
+                </div>
+                <div id={{para.collapse_id}} class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="col-md-12">
+                             <p> {{ para.subtitle_note | safe }} </p>
+                            {{ para.text | safe }}
+                        </div>
+                        <div class="col-md-12">
+                            <h5>References</h5>
+                            {{ para.references | safe }}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     {% endfor %}

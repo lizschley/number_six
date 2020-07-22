@@ -59,9 +59,14 @@ def paragraph_view_input(context, from_demo=False):
     else:
         group_id = context.pop('group_id', None)
         paragraphs = paragraphs.retrieve_paragraphs(group_id=group_id)
-    # print(f'after popping, context=={context}')
-    # print output
-    # print(f'after calling retrieve paragraphs returned data == {paragraphs}')
+        paragraphs = add_collapse_variables(paragraphs)
+
     context = para_helper.add_paragraphs_to_context(context, paragraphs)
-    # print(f'after adding paragraphs to context, context=={context}')
     return context
+
+
+def add_collapse_variables(paragraphs):
+    for para in paragraphs['paragraphs']:
+        para['href_collapse'] = '#collapse_' + str(para['id'])
+        para['collapse_id'] = 'collapse_' + str(para['id'])
+    return paragraphs
