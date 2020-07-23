@@ -1,8 +1,10 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
 from common_classes.base_paragraph_retriever import BaseParagraphRetriever
 from projects.models.paragraphs import Group
+from projects.models.paragraphs import Paragraph
+import constants.common as constants
 
-VALID_KW_ARGS = ['group_id', 'search_str']
+VALID_KW_ARGS = ['group_id', 'search_str', 'para_id']
 
 
 class DbParagraphRetriever(BaseParagraphRetriever):
@@ -19,10 +21,14 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :return: a dictionary in the format that works with the standard ParagraphsToDB
         :rtype: dict
         '''
-        if 'group_id' not in kwargs.keys():
-            return None
-        query = self.write_group_standalone_para_sql()
-        return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
+        if 'group_id' in kwargs.keys():
+            query = self.write_group_standalone_para_sql()
+            return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
+        if 'para_id' in kwargs.keys():
+            self.group = {'title': f'para_id={str(kwargs["para_id"])}', 'note': ''}
+            query = self.write_one_standalone_para_sql()
+            return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['para_id']]))
+        return None
 
     def write_group_standalone_para_sql(self):
         '''
@@ -32,26 +38,47 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :return: the query to be used, minus the actual group_id
         :rtype: str
         '''
-        query = self.basic_sql()
+        query = self.build_basic_sql('group_id_only')
         query += 'where g.id = %s'
         query += ' and p.standalone = TRUE'
         return query
 
-    def basic_sql(self):
+    def write_one_standalone_para_sql(self):
+        '''
+        write_one_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
+        using a paragraph_id
+
+        :return: the query to be used, minus the actual para_id
+        :rtype: str
+        '''
+        query = self.build_basic_sql('para_id')
+        query += 'where p.id = %s'
+        query += ' and p.standalone = TRUE'
+        return query
+
+    def build_basic_sql(self, sql_type):
         '''
         basic_sql creates the sql code to retrieve paragraphs and their related records
 
         :return: sql with the necessary elements and without where statements
         :rtype: str
         '''
-        return ('select 1 as id, g.id as group_id, title as title, g.note as title_note, '
-                'gp.order, p.id as paragraph_id, subtitle, p.note as subtitle_note, text, '
-                'r.id as reference_id, link_text, url '
-                'from projects_group g '
-                'join projects_groupparagraph gp on g.id = gp.group_id '
-                'join projects_paragraph p on p.id = gp.paragraph_id '
-                'join projects_paragraphreference pr on p.id = pr.paragraph_id '
-                'join projects_reference r on r.id = pr.reference_id ')
+        return self.get_tables(self.get_select(sql_type), sql_type)
+
+    def get_select(self, sql_type):
+        sql = constants.BEGIN_SELECT
+        if sql_type == 'group_id_only':
+            sql += ', ' + constants.SELECT_GROUP
+        sql += ', ' + constants.SELECT_PARAGRAPHS + ', ' + constants.SELECT_REFERENCES + ' '
+        return sql
+
+    def get_tables(self, sql, sql_type):
+        if sql_type == 'group_id_only':
+            sql += constants.FROM_GROUP_JOIN_PARA + ' '
+        else:
+            sql += constants.FROM_PARA + ' '
+        sql += constants.JOIN_REFERENCES_TO_PARA
+        return sql
 
     def db_output_to_display_input(self, raw_queryset):
         '''

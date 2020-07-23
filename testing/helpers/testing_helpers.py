@@ -33,6 +33,10 @@ def assert_in_string(fullstring, substring):
     assert substring in fullstring
 
 
+def assert_not_in_string(fullstring, substring):
+    assert substring not in fullstring
+
+
 def assert_key_in_dictionary(test_dictionary, key):
     assert key in test_dictionary
 
