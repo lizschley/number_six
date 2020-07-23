@@ -3,3 +3,16 @@ EXCLUDE_GROUP_FROM_STUDY = ['Chronological Resume', 'Functional Resume', 'Native
                             'Web Application Blog']
 VALID_DATA_RETRIEVAL_ARGS = ['group_id', 'path_to_json']
 ORDER_FIELD_FOR_PARAS = 'order'
+
+BEGIN_SELECT = 'select 1 as id'
+SELECT_GROUP = 'g.id as group_id, title as title, g.note as title_note, gp.order'
+SELECT_PARAGRAPHS = 'p.id as paragraph_id, subtitle, p.note as subtitle_note, text'
+SELECT_REFERENCES = 'r.id as reference_id, link_text, url'
+
+FROM_GROUP_JOIN_PARA = ('from projects_group g '
+                        'join projects_groupparagraph gp on g.id = gp.group_id '
+                        'join projects_paragraph p on p.id = gp.paragraph_id ')
+FROM_PARA = 'from projects_paragraph p'
+
+JOIN_REFERENCES_TO_PARA = ('join projects_paragraphreference pr on p.id = pr.paragraph_id '
+                           'join projects_reference r on r.id = pr.reference_id ')

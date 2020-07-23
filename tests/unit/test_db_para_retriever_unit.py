@@ -32,6 +32,8 @@ def test_data_retrieval(mocker, db_para_retriever):
 
 
 @pytest.mark.parametrize('substring', [('where g.id ='),
+                                       ('title'),
+                                       ('title_note'),
                                        ('paragraph_id'),
                                        ('link_text'),
                                        ('projects_group g'),
@@ -42,6 +44,26 @@ def test_data_retrieval(mocker, db_para_retriever):
 def test_write_group_standalone_para_sql(db_para_retriever, substring):
     fullstring = db_para_retriever.write_group_standalone_para_sql()
     helper.assert_in_string(fullstring, substring)
+
+@pytest.mark.parametrize('substring', [('where p.id ='),
+                                       ('paragraph_id'),
+                                       ('link_text'),
+                                       ('projects_paragraph'),
+                                       ('reference'),
+                                       ('projects_paragraphreference')])
+def test_write_one_standalone_para_sql(db_para_retriever, substring):
+    fullstring = db_para_retriever.write_one_standalone_para_sql()
+    helper.assert_in_string(fullstring, substring)
+
+
+@pytest.mark.parametrize('substring', [('where g.id ='),
+                                       ('projects_group g'),
+                                       ('projects_groupparagraph'),
+                                       ('title'),
+                                       ('title_note')])
+def test_no_group_in_only_standalone_para_sql(db_para_retriever, substring):
+    fullstring = db_para_retriever.write_one_standalone_para_sql()
+    helper.assert_not_in_string(fullstring, substring)
 
 
 def test_db_output_to_display_input(retriever_db_output):
