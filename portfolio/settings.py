@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
+# pylint: disable=missing-function-docstring
 
 import os
 
@@ -79,9 +80,9 @@ TEMPLATES = [
 ]
 
 STATICFILES_FINDERS = (
-     'compressor.finders.CompressorFinder',
-     'django.contrib.staticfiles.finders.FileSystemFinder',
-     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
 COMPRESS_PRECOMPILERS = (

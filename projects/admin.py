@@ -1,3 +1,6 @@
+'''
+    projects/admin: register models here (so far all models are in projects)
+'''
 from django.contrib import admin
 from projects.models.projects import Project
 from projects.models.paragraphs import Paragraph
