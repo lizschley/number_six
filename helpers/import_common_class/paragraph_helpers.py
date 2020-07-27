@@ -57,15 +57,47 @@ def paragraph_view_input(context, from_demo=False):
         path_to_json = context.pop('path_to_json', None)
         paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json)
     else:
-        group_id = context.pop('group_id', None)
-        paragraphs = paragraphs.retrieve_paragraphs(group_id=group_id)
+        paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
         paragraphs = add_collapse_variables(paragraphs)
 
     context = para_helper.add_paragraphs_to_context(context, paragraphs)
     return context
 
 
+# Todo: fill comment out correctly
+def retrieve_paragraphs_based_on_context(paras, context):
+    '''
+    retrieve_paragraphs_based_on_context [summary]
+
+    [extended_summary]
+
+    :param paras: [description]
+    :type paras: [type]
+    :param context: [description]
+    :type context: [type]
+    :return: [description]
+    :rtype: [type]
+    '''
+    group_id = context.pop('group_id', None)
+    if group_id is not None:
+        return paras.retrieve_paragraphs(group_id=group_id)
+    subtitle = context.pop('subtitle', None)
+    if subtitle is not None:
+        return paras.retrieve_paragraphs(subtitle=subtitle)
+
+
+# Todo: fill comment out correctly
 def add_collapse_variables(paragraphs):
+    '''
+    add_collapse_variables [summary]
+
+    [extended_summary]
+
+    :param paragraphs: [description]
+    :type paragraphs: [type]
+    :return: [description]
+    :rtype: [type]
+    '''
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])

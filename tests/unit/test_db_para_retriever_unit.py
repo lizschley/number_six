@@ -45,12 +45,15 @@ def test_write_group_standalone_para_sql(db_para_retriever, substring):
     fullstring = db_para_retriever.write_group_standalone_para_sql()
     helper.assert_in_string(fullstring, substring)
 
-@pytest.mark.parametrize('substring', [('where p.id ='),
+
+@pytest.mark.parametrize('substring', [('where p.subtitle ='),
                                        ('paragraph_id'),
                                        ('link_text'),
                                        ('projects_paragraph'),
                                        ('reference'),
-                                       ('projects_paragraphreference')])
+                                       ('projects_paragraphreference'),
+                                       ('title'),
+                                       ('title_note')])
 def test_write_one_standalone_para_sql(db_para_retriever, substring):
     fullstring = db_para_retriever.write_one_standalone_para_sql()
     helper.assert_in_string(fullstring, substring)
@@ -58,9 +61,7 @@ def test_write_one_standalone_para_sql(db_para_retriever, substring):
 
 @pytest.mark.parametrize('substring', [('where g.id ='),
                                        ('projects_group g'),
-                                       ('projects_groupparagraph'),
-                                       ('title'),
-                                       ('title_note')])
+                                       ('projects_groupparagraph')])
 def test_no_group_in_only_standalone_para_sql(db_para_retriever, substring):
     fullstring = db_para_retriever.write_one_standalone_para_sql()
     helper.assert_not_in_string(fullstring, substring)

@@ -70,7 +70,7 @@ class ParagraphsForDisplay(object):
         '''
         if key == 'path_to_json':
             return JsonParagraphRetriever()
-        if key == 'group_id':
+        if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
             return DbParagraphRetriever()
         return None
 

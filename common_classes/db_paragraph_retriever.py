@@ -4,7 +4,7 @@ from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
 import constants.common as constants
 
-VALID_KW_ARGS = ['group_id', 'search_str', 'para_id']
+VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 
 
 class DbParagraphRetriever(BaseParagraphRetriever):
@@ -24,10 +24,10 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         if 'group_id' in kwargs.keys():
             query = self.write_group_standalone_para_sql()
             return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
-        if 'para_id' in kwargs.keys():
-            self.group = {'title': f'para_id={str(kwargs["para_id"])}', 'note': ''}
+        if 'subtitle' in kwargs.keys():
+            self.group = {'title': kwargs['subtitle'], 'note': ''}
             query = self.write_one_standalone_para_sql()
-            return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['para_id']]))
+            return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['subtitle']]))
         return None
 
     def write_group_standalone_para_sql(self):
@@ -51,8 +51,8 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :return: the query to be used, minus the actual para_id
         :rtype: str
         '''
-        query = self.build_basic_sql('para_id')
-        query += 'where p.id = %s'
+        query = self.build_basic_sql('subtitle')
+        query += 'where p.subtitle = %s'
         query += ' and p.standalone = TRUE'
         return query
 
@@ -66,6 +66,15 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         return self.get_tables(self.get_select(sql_type), sql_type)
 
     def get_select(self, sql_type):
+        '''
+        get_select builds the select for the given sql type (depends on how paragraphs are used)
+        Sql type is set based key word args
+
+        :param sql_type: Select part of query will be different based on value.
+        :type sql_type: str
+        :return: select part of the sql query
+        :rtype: str
+        '''
         sql = constants.BEGIN_SELECT
         if sql_type == 'group_id_only':
             sql += ', ' + constants.SELECT_GROUP
@@ -73,6 +82,17 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         return sql
 
     def get_tables(self, sql, sql_type):
+        '''
+        get_tables builds the tables and joins for the given sql type (depends on how paragraphs are
+        used) Sql type is set based key word args
+
+        :param sql: the sql query built so far
+        :type sql: str
+        :param sql_type: Tables part of query will be different based on value.
+        :type sql_type: str
+        :return: Partial query
+        :rtype: str
+        '''
         if sql_type == 'group_id_only':
             sql += constants.FROM_GROUP_JOIN_PARA + ' '
         else:
@@ -117,11 +137,18 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :param row: All the data needed for a given paragraph, plus some repeated data
         :type row: queryset row
         '''
-        self.ordered = row.order != 0
-        self.group = {
-            'title': row.title,
-            'note': row.note,
-        }
+        try:
+            self.ordered = row.order != 0
+            self.group = {
+                'title': row.title,
+                'note': row.note,
+            }
+        except AttributeError: # Be explicit with catching exceptions.
+            self.ordered = False
+            self.group = {
+                'title': 'standalone para',
+                'note': '',
+            }
 
     def append_unique_reference(self, row):
         '''
@@ -157,10 +184,15 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :return: dictionary for one paragraph formatted in a way that works for ParagraphsForDisplay
         :rtype: dict
         '''
+        order = 0
+        try:
+            order = row.order
+        except AttributeError:  # Be explicit with catching exceptions.
+            print('No row.order, expected when para is only one')
         return {
             'id': row.paragraph_id,
             'subtitle': row.subtitle,
             'note': row.subtitle_note,
             'text': row.text,
-            'order': self.get_paragraph_order(row.subtitle, row.order),
+            'order': self.get_paragraph_order(row.subtitle, order),
         }
