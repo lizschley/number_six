@@ -3,11 +3,9 @@
 
  **This is a work in progress in the early stages**
 
-Steps to test it out
-* tested on Mac commandline, only
-* To really test it, you need a database
-* Projects were added manually (including images) through the Django db interface
-* The paragraph data can be added programmatically by creating json and running scripts
+The following steps are not complete, for example you need to have Python and a database
+set up.  Later on, in a later stage of development, there will be more complete instructions.
+
 
 1. change directory to the common directory for development
 
