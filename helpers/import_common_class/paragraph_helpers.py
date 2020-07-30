@@ -3,6 +3,7 @@
 import os
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import portfolio.settings as settings
+from common_classes.one_para_display import OneParaDisplay
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
@@ -81,10 +82,6 @@ def retrieve_paragraphs_based_on_context(paras, context):
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
-    subtitle = context.pop('subtitle', None)
-    if subtitle is not None:
-        return paras.retrieve_paragraphs(subtitle=subtitle)
-
 
 # Todo: fill comment out correctly
 def add_collapse_variables(paragraphs):
@@ -113,5 +110,5 @@ def single_para_by_subtitle(subtitle):
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
-    paragraphs = ParagraphsForDisplay()
-    return paragraphs.retrieve_paragraphs(subtitle=subtitle)
+    para = OneParaDisplay()
+    return para.retrieve_paragraphs(subtitle=subtitle)

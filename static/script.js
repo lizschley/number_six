@@ -1,20 +1,20 @@
 $(document).ready(function() {
     $('.para_by_subtitle').click(function(e) {
-        var subtitle = this.getAttribute('data-subtitle');
         // preventing from page reload and default actions
         e.preventDefault();
-        // make GET ajax call
+        var subtitle = this.getAttribute('data-subtitle');
         $.ajax({
             type: 'GET',
-            //url: "{% url 'para_by_subtitle' %}",
             url: 'para_by_subtitle',
             data: {'subtitle' : subtitle},
             success: function (response) {
                  var paragraph = response['paragraph'];
                  var subtitle  = paragraph['subtitle']
                  var subtitle_note = paragraph['subtitle_note']
-                 var text = paragraph['text']
-                 var para = subtitle_note + ' ' + text
+                 var para = paragraph['text']
+                 if (subtitle_note) {
+                    para = subtitle_note + ' ' + para
+                 }
                  if (paragraph['references']) {
                     para = para + '<h5>References</h5>' + paragraph['references']
                  }
