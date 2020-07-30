@@ -52,7 +52,7 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :rtype: str
         '''
         query = self.build_basic_sql('subtitle')
-        query += 'where p.subtitle = %s'
+        query += 'where lower(p.subtitle) = lower(%s)'
         query += ' and p.standalone = TRUE'
         return query
 
