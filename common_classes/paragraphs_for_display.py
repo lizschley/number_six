@@ -7,6 +7,7 @@ from common_classes.db_paragraph_retriever import DbParagraphRetriever
 from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 
 
+# Todo: extend this to make SingleParaDisplay
 class ParagraphsForDisplay(object):
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views
@@ -27,6 +28,7 @@ class ParagraphsForDisplay(object):
         self.reference_links = {}
         self.paragraphs = []
         self.input_data = {}
+        self.single_para = False
 
     def retrieve_paragraphs(self, **kwargs):
         '''
@@ -71,8 +73,13 @@ class ParagraphsForDisplay(object):
         if key == 'path_to_json':
             return JsonParagraphRetriever()
         if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
+            self.set_single_para(key)
             return DbParagraphRetriever()
         return None
+
+    def set_single_para(self, key):
+        if key == constants.SUBTITLE:
+            self.single_para = True
 
     # Todo: make sure this is already tested.  I think it is, through an integration test
     def format_data_for_display(self):
@@ -168,8 +175,22 @@ class ParagraphsForDisplay(object):
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
+        if self.single_para:
+            return self.single_para_output()
         out = {'title': self.title,
                'title_note': self.title_note,
                'paragraphs': self.paragraphs,
                }
         return out
+
+    def single_para_output(self):
+        if len(self.paragraphs) < 1:
+            return {'subtitle': 'no results.',
+                    'subtitle_note': '',
+                    'text': '<p>Have not loaded data</p>',
+                    'references': 'NA'
+                    }
+        para = self.paragraphs[0]
+        orig_subtitle = para['subtitle']
+        para['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
+        return para

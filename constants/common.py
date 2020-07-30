@@ -4,6 +4,7 @@ EXCLUDE_GROUP_FROM_STUDY = ['Chronological Resume', 'Functional Resume', 'Native
 ORDER_FIELD_FOR_PARAS = 'order'
 VALID_DATA_RETRIEVAL_ARGS = ('group_id', 'path_to_json', 'subtitle')
 VALID_DB_RETRIEVER_KW_ARGS = ('group_id', 'search_str', 'subtitle')
+SUBTITLE = 'subtitle'
 
 BEGIN_SELECT = 'select 1 as id'
 SELECT_GROUP = 'g.id as group_id, title as title, g.note as title_note, gp.order'

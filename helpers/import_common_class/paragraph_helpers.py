@@ -102,3 +102,16 @@ def add_collapse_variables(paragraphs):
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])
     return paragraphs
+
+
+def single_para_by_subtitle(subtitle):
+    '''
+    single_para_by_subtitle gets a single para with references by subtitle
+
+    :param subtitle: subtitle
+    :type subtitle: str
+    :return: one paragraph object (includes reference(s))
+    :rtype: dict
+    '''
+    paragraphs = ParagraphsForDisplay()
+    return paragraphs.retrieve_paragraphs(subtitle=subtitle)

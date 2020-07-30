@@ -5,6 +5,7 @@
 
 import json
 from operator import itemgetter
+import constants.subtitle_lookup as lookup
 
 
 def create_link(url, link_text):
@@ -124,3 +125,16 @@ def check_for_batch_args(args, subs):
     :type list_to_be_sorted: str
     '''
     return [i for i in args if subs in i]
+
+
+def subtitle_lookup(orig):
+    '''
+    This is used to have ajax links for single paragraphs with long subtitles without
+    using the whole subtitle as link text
+
+    :param orig: orig is the link text that is used for the ajax lookup link
+    :type: str
+    :return: returns the actual subtitle.  May be from lookup table or may be passed in
+    :rtype: str
+    '''
+    return lookup.SUBTITLE_LOOKUP[orig] if orig in lookup.SUBTITLE_LOOKUP.keys() else orig

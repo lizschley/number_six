@@ -1,23 +1,32 @@
 $(document).ready(function() {
-    $('.para_by_subtitle').click(function() {
-        // var attribute = this.getAttribute('data-subtitle');
-        var data = 'subtitle'
-        var subtitle = get_subtitle(data)
-        $('#subtitle_modal_title').html(subtitle);
-        var new_data = '<p> I am a paragraph</p> <h5>References</h5><p>I am a reference</p>'
-        var para = get_para(new_data)
-        $('#subtitle_modal_para').html(para);
-
-        // Display Modal
-        $('#standalone_para_modal').modal('show');
+    $('.para_by_subtitle').click(function(e) {
+        var subtitle = this.getAttribute('data-subtitle');
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // make GET ajax call
+        $.ajax({
+            type: 'GET',
+            //url: "{% url 'para_by_subtitle' %}",
+            url: 'para_by_subtitle',
+            data: {'subtitle' : subtitle},
+            success: function (response) {
+                 var paragraph = response['paragraph'];
+                 var subtitle  = paragraph['subtitle']
+                 var subtitle_note = paragraph['subtitle_note']
+                 var text = paragraph['text']
+                 var para = subtitle_note + ' ' + text
+                 if (paragraph['references']) {
+                    para = para + '<h5>References</h5>' + paragraph['references']
+                 }
+                 $('#subtitle_modal_title').html(subtitle);
+                 $('#subtitle_modal_para').html(para);
+                 // Display Modal
+                 $('#standalone_para_modal').modal('show');
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                alert(response["responseJSON"]["error"]);
+            }
+        })
     })
 })
-
-function get_subtitle(data) {
-    return data;
-}
-
-function get_para(data) {
-    return data;
-}
-
