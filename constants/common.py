@@ -1,8 +1,10 @@
 '''These are constants that will be used either for validation, processing or both'''
 EXCLUDE_GROUP_FROM_STUDY = ['Chronological Resume', 'Functional Resume', 'Native Plant Blog',
                             'Web Application Blog']
-VALID_DATA_RETRIEVAL_ARGS = ['group_id', 'path_to_json']
 ORDER_FIELD_FOR_PARAS = 'order'
+VALID_DATA_RETRIEVAL_ARGS = ('group_id', 'path_to_json', 'subtitle')
+VALID_DB_RETRIEVER_KW_ARGS = ('group_id', 'search_str', 'subtitle')
+SUBTITLE = 'subtitle'
 
 BEGIN_SELECT = 'select 1 as id'
 SELECT_GROUP = 'g.id as group_id, title as title, g.note as title_note, gp.order'

@@ -3,6 +3,7 @@
 import os
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import portfolio.settings as settings
+from common_classes.one_para_display import OneParaDisplay
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
@@ -57,16 +58,54 @@ def paragraph_view_input(context, from_demo=False):
         path_to_json = context.pop('path_to_json', None)
         paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json)
     else:
-        group_id = context.pop('group_id', None)
-        paragraphs = paragraphs.retrieve_paragraphs(group_id=group_id)
+        paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
         paragraphs = add_collapse_variables(paragraphs)
 
     context = para_helper.add_paragraphs_to_context(context, paragraphs)
     return context
 
 
+def retrieve_paragraphs_based_on_context(paras, context):
+    '''
+    retrieve_paragraphs_based_on_context if someone chose a group in the lookup form
+    use the group_id and id itself as kwargs
+
+    :param paras: From .../projects/study/lookup to view (context) to then parameters to retrieve paras
+    :type paras: ParagraphForDisplay object
+    :param context: started with form output and then transform and add data as needed
+    :type context: dict
+    :return: input needed to display paragraphs
+    :rtype: dict
+    '''
+    group_id = context.pop('group_id', None)
+    if group_id is not None:
+        return paras.retrieve_paragraphs(group_id=group_id)
+
+
 def add_collapse_variables(paragraphs):
+    '''
+    add_collapse_variables adds the variables needed to collapse and expand paragraphs
+    used for standalone paragraph display
+
+    :param paragraphs: dictionary paragraphs - list of paragraphs
+    :type paragraphs: dict containing list of individual paragraphs
+    :return: list of paragraphs that have collapse variables for display
+    :rtype:  dict containing list of individual paragraphs complete with collapse variables
+    '''
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])
     return paragraphs
+
+
+def single_para_by_subtitle(subtitle):
+    '''
+    single_para_by_subtitle gets a single para with references by subtitle
+
+    :param subtitle: from ajax link_text or from lookup table { 'link_text': 'real subtitle' }
+    :type subtitle: str
+    :return: one paragraph object (includes reference(s))
+    :rtype: dict
+    '''
+    para = OneParaDisplay()
+    return para.retrieve_paragraphs(subtitle=subtitle)

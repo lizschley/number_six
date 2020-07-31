@@ -87,3 +87,25 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'url': 'https://gymcastic.com/'
     }],
 }
+
+
+PARA_DISPLAY_ONE_PARA_INPUT = {
+    'group': {
+        'title': 'glabrous',
+        'note': ''
+    },
+    'references': [{
+        'link_text': 'YourDictionary_glabrous',
+        'url': 'https://www.yourdictionary.com/glabrous'
+    }],
+    'paragraphs': [{
+        'id': 68,
+        'subtitle': 'glabrous',
+        'note': '',
+        'text': '<p>Having no hairs or pubescence; smooth: glabrous leaves.</p>',
+        'order': 'glabrous'
+    }],
+    'para_id_to_link_text': {
+        68: ['YourDictionary_glabrous']
+    }
+}

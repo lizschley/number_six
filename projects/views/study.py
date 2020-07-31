@@ -1,5 +1,5 @@
 ''' Study View classes '''
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse

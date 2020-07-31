@@ -10,19 +10,27 @@
             <p>{{title_note}}</p>
         </div>
         <div class="col-md-4">
-            <h1>References</h1>
+            {% if para.references %}
+                <h1>References</h1>
+            {% endif %}
         </div>
     </div>
 
    {% for para in paragraphs %}
        <div class="row">
             <div class="col-md-8">
-                <h3> {{ para.subtitle | safe }} </h3>
-                <p> {{ para.subtitle_note | safe }} </p>
+                {% if para.subtitle %}
+                    <h3> {{ para.subtitle | safe }} </h3>
+                {% endif %}
+                {% if para.subtitle %}
+                    <p> {{ para.subtitle_note | safe }} </p>
+                {% endif %}
                 {{ para.text | safe }}
             </div>
             <div class="col-md-4">
-               {{ para.references | safe }}
+                {% if para.references %}
+                    {{ para.references | safe }}
+                {% endif %}
             </div>
         </div>
     {% endfor %}

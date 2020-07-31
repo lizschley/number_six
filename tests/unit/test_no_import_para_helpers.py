@@ -5,6 +5,7 @@ import pytest
 import helpers.no_import_common_class.lookup_form_helpers as form_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import testing.data.list_constants as list_data
+import testing.helpers.testing_helpers as helper
 
 
 @pytest.fixture()
@@ -20,6 +21,11 @@ def add_para_to_context_input():
 @pytest.fixture()
 def group_id():
     return 23
+
+
+@pytest.fixture()
+def para_with_indicators():
+    return 'preceding |beg|sub_1|end| inbetween text |beg|sub_2|end| |beg|sub_3|end| following text'
 
 
 def test_create_link():
@@ -62,6 +68,35 @@ def test_format_group_id(group_id):
     assert form_helper.format_group_id(group_id) == 'group_23'
 
 
+@pytest.mark.parametrize('from_ajax', [(True), (False)])
+def test_replace_ajax_link_indicators(para_with_indicators, from_ajax):
+    return_para = para_helper.replace_ajax_link_indicators(para_with_indicators, from_ajax)
+    assert return_para_correct(return_para, from_ajax)
+
+
+@pytest.mark.parametrize('substring', [('data-subtitle="longer text that is the actual subtitle"'),
+                                       ('>short link text</a>'),
+                                       ('data-subtitle="sub_2"'),
+                                       ('>sub_2</a>')])
+def test_substitute_real_subtitle_ajax_link(substring):
+    start_para = 'preceding |beg|short link text|end| inbetween text |beg|sub_2|end| following text'
+    fullstring = para_helper.replace_ajax_link_indicators(start_para, False)
+    helper.assert_in_string(fullstring, substring)
+
+
 def check_text_para_assertions(text, check_for='<p>', pos=0):
     assert isinstance(text, str)
     assert text.find(check_for) == pos
+
+
+def return_para_correct(ret_text, from_ajax):
+    if from_ajax:
+        expected_text = 'preceding sub_1 inbetween text sub_2 sub_3 following text'
+    else:
+        expected_text = ('preceding '
+                         '<a href="#" data-subtitle="sub_1" class="para_by_subtitle">sub_1</a> '
+                         'inbetween text '
+                         '<a href="#" data-subtitle="sub_2" class="para_by_subtitle">sub_2</a> '
+                         '<a href="#" data-subtitle="sub_3" class="para_by_subtitle">sub_3</a> '
+                         'following text')
+    return ret_text == expected_text

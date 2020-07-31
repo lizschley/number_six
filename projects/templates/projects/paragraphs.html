@@ -20,12 +20,14 @@
                 <div id={{para.collapse_id}} class="collapse" data-parent="#accordion">
                     <div class="card-body">
                         <div class="col-md-12">
-                             <p> {{ para.subtitle_note | safe }} </p>
-                            {{ para.text | safe }}
-                        </div>
-                        <div class="col-md-12">
-                            <h5>References</h5>
-                            {{ para.references | safe }}
+                            {% if para.subtitle_note %}
+                                <p> {{ para.subtitle_note | safe }} </p>
+                            {% endif %}
+                            {{ para.text | safe  }}
+                            {% if para.references %}
+                                <h5>References</h5>
+                                {{ para.references | safe }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
