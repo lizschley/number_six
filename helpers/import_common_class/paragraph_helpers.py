@@ -65,35 +65,32 @@ def paragraph_view_input(context, from_demo=False):
     return context
 
 
-# Todo: fill comment out correctly
 def retrieve_paragraphs_based_on_context(paras, context):
     '''
-    retrieve_paragraphs_based_on_context [summary]
+    retrieve_paragraphs_based_on_context if someone chose a group in the lookup form
+    use the group_id and id itself as kwargs
 
-    [extended_summary]
-
-    :param paras: [description]
-    :type paras: [type]
-    :param context: [description]
-    :type context: [type]
-    :return: [description]
-    :rtype: [type]
+    :param paras: From .../projects/study/lookup to view (context) to then parameters to retrieve paras
+    :type paras: ParagraphForDisplay object
+    :param context: started with form output and then transform and add data as needed
+    :type context: dict
+    :return: input needed to display paragraphs
+    :rtype: dict
     '''
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
 
-# Todo: fill comment out correctly
+
 def add_collapse_variables(paragraphs):
     '''
-    add_collapse_variables [summary]
+    add_collapse_variables adds the variables needed to collapse and expand paragraphs
+    used for standalone paragraph display
 
-    [extended_summary]
-
-    :param paragraphs: [description]
-    :type paragraphs: [type]
-    :return: [description]
-    :rtype: [type]
+    :param paragraphs: dictionary paragraphs - list of paragraphs
+    :type paragraphs: dict containing list of individual paragraphs
+    :return: list of paragraphs that have collapse variables for display
+    :rtype:  dict containing list of individual paragraphs complete with collapse variables
     '''
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
@@ -105,7 +102,7 @@ def single_para_by_subtitle(subtitle):
     '''
     single_para_by_subtitle gets a single para with references by subtitle
 
-    :param subtitle: subtitle
+    :param subtitle: from ajax link_text or from lookup table { 'link_text': 'real subtitle' }
     :type subtitle: str
     :return: one paragraph object (includes reference(s))
     :rtype: dict

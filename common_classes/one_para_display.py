@@ -2,9 +2,9 @@
     for any page that either has only one group or that does not display by group.'''
 from common_classes.db_paragraph_retriever import DbParagraphRetriever
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+import helpers.no_import_common_class.paragraph_helpers as para_helpers
 
 
-# Todo: extend this to make SingleParaDisplay
 class OneParaDisplay(ParagraphsForDisplay):
     '''
     OneParaDisplay is used for Ajax calls to display a definition or whatever
@@ -37,7 +37,6 @@ class OneParaDisplay(ParagraphsForDisplay):
             return OneParaDisplay.error_output(message)
         return self.format_single_para_display(kwargs['subtitle'])
 
-    # Todo: make sure this is already tested.  I think it is, through an integration test
     def format_single_para_display(self, subtitle):
         '''
         format_data_for_display Once we know what class to use for retrieving the input data
@@ -47,8 +46,22 @@ class OneParaDisplay(ParagraphsForDisplay):
         :rtype: dict
         '''
         self.create_links_from_references()
-        self.assign_paragraphs(True)
+        self.assign_paragraphs()
         return self.output_single_para_display(subtitle)
+
+    def assign_paragraphs(self, from_ajax=True):
+        '''
+        assign_paragraphs - steps to create paragraph list:
+
+        * unlike when there is a list of paragraphs, no need to sort
+        1. append the paragraph values needed with the keys that are expected
+        2. add the reference links that are associated with the given paragraph
+        '''
+
+        for para in self.input_data['paragraphs']:
+            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
+            self.paragraphs.append(self.paragraph(para))
+        self.add_links_to_paragraphs()
 
     def output_single_para_display(self, subtitle):
         '''
