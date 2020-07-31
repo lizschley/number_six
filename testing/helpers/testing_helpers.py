@@ -41,6 +41,10 @@ def assert_key_in_dictionary(test_dictionary, key):
     assert key in test_dictionary
 
 
+def assert_key_not_in_dictionary(test_dictionary, key):
+    assert key not in test_dictionary
+
+
 def create_basic_para_raw_queryset_data():
     out_list = []
     start_data = data.PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING

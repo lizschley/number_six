@@ -7,6 +7,7 @@ from common_classes.db_paragraph_retriever import DbParagraphRetriever
 from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 
 
+# Todo: extend this to make SingleParaDisplay
 class ParagraphsForDisplay(object):
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views
@@ -70,7 +71,7 @@ class ParagraphsForDisplay(object):
         '''
         if key == 'path_to_json':
             return JsonParagraphRetriever()
-        if key == 'group_id':
+        if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
             return DbParagraphRetriever()
         return None
 
@@ -106,7 +107,7 @@ class ParagraphsForDisplay(object):
             link = para_helpers.create_link(ref['url'], link_text)
             self.reference_links[link_text] = link.strip()
 
-    def assign_paragraphs(self):
+    def assign_paragraphs(self, from_ajax=False):
         '''
         assign_paragraphs - steps to create paragraph list:
 
@@ -117,6 +118,7 @@ class ParagraphsForDisplay(object):
         input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
                                                        constants.ORDER_FIELD_FOR_PARAS)
         for para in input_para_list:
+            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
 
@@ -168,8 +170,6 @@ class ParagraphsForDisplay(object):
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
-        out = {'title': self.title,
-               'title_note': self.title_note,
-               'paragraphs': self.paragraphs,
-               }
-        return out
+        return {'title': self.title,
+                'title_note': self.title_note,
+                'paragraphs': self.paragraphs}
