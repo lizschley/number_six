@@ -7,6 +7,9 @@ import json
 from operator import itemgetter
 import constants.subtitle_lookup as lookup
 
+BEG_LINK_TEXT = '|beg|'
+END_LINK_TEXT = '|end|'
+
 
 def create_link(url, link_text):
     '''
@@ -138,3 +141,67 @@ def subtitle_lookup(orig):
     :rtype: str
     '''
     return lookup.SUBTITLE_LOOKUP[orig] if orig in lookup.SUBTITLE_LOOKUP.keys() else orig
+
+
+def replace_ajax_link_indicators(para_text, from_ajax):
+    '''
+    replace_ajax_link_indicators -> contains indicators to say where I want links to definitions
+    or other related standalone paragraphs that are in the database.  The look up is always
+    by subtitle, though if the subtitle is too long, the link_text may be shorter.
+    In that case the code finds the subtitle using a lookup table.
+
+    :param para_text: paragraph['text']
+    :type para_text: str
+    :param from_ajax: If the para_text is from a ajax modal, just strip the indicators.
+    :type from_ajax: bool
+    :return: new para_text with the ajax modal link or the link indicators stripped
+    :rtype: dict
+    '''
+    para_text = loop_through_text(para_text, from_ajax)
+    return para_text
+
+
+def loop_through_text(para_text, from_ajax):
+    '''
+    loop_through_text by splitting it using the indators: |beg| and |end|
+
+    :param para_text: paragraph['text']
+    :type para_text: str
+    :param from_ajax: if the call is from ajax, then just strip the indicators
+    :type from_ajax: bool
+    :return: para_text with the links or para_text with the indicators stripped
+    :rtype: str
+    '''
+    pieces = para_text.split(BEG_LINK_TEXT)
+    para_piece_list = []
+    for piece in pieces:
+        if END_LINK_TEXT not in piece:
+            para_piece_list.append(piece)
+        else:
+            sub_pieces = piece.split(END_LINK_TEXT)
+            para_piece_list.append(ajax_link(sub_pieces[0], from_ajax))
+            if len(sub_pieces) > 1:
+                para_piece_list.append(sub_pieces[1])
+    return ''.join(para_piece_list)
+
+
+def ajax_link(orig_subtitle, from_ajax):
+    '''
+    ajax_link This creates an ajax link: looks up single para by subtitle and displays result in modal
+
+    :param orig_subtitle: This will be the link text, though it may not be the actual subtitle
+    :type orig_subtitle: str
+    :param from_ajax: True if displaying text that has link indicators - avoiding links with modals
+    :type from_ajax: bool
+    :return: paragraph with link indicators turned into modal link or has link indicators stripped out
+    :rtype: dict
+    '''
+    if from_ajax:
+        return orig_subtitle
+    substitute = lookup.SUBTITLE_LOOKUP
+    beg_link = '<a href="#" data-subtitle="'
+    mid_link = '" class="para_by_subtitle">'
+    link_text = orig_subtitle
+    end_link = '</a>'
+    subtitle = orig_subtitle if orig_subtitle not in substitute.keys() else substitute[orig_subtitle]
+    return beg_link + subtitle + mid_link + link_text + end_link

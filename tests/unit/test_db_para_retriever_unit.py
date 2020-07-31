@@ -46,7 +46,7 @@ def test_write_group_standalone_para_sql(db_para_retriever, substring):
     helper.assert_in_string(fullstring, substring)
 
 
-@pytest.mark.parametrize('substring', [('where p.subtitle ='),
+@pytest.mark.parametrize('substring', [('where lower(p.subtitle) ='),
                                        ('paragraph_id'),
                                        ('link_text'),
                                        ('projects_paragraph'),

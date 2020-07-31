@@ -20,5 +20,5 @@ urlpatterns = [
     path('demo/paragraphs', DemoParagraphView.as_view(), name='demo_paragraphs'),
     path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(),
          name='study_paragraphs_with_group'),
-    path('demo/para_by_subtitle', para_by_subtitle, name='para_by_subtitle'),
+    path('study/paragraphs/para_by_subtitle', para_by_subtitle, name='study_para_by_subtitle'),
 ]

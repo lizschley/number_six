@@ -107,7 +107,7 @@ class ParagraphsForDisplay(object):
             link = para_helpers.create_link(ref['url'], link_text)
             self.reference_links[link_text] = link.strip()
 
-    def assign_paragraphs(self):
+    def assign_paragraphs(self, from_ajax=False):
         '''
         assign_paragraphs - steps to create paragraph list:
 
@@ -118,6 +118,7 @@ class ParagraphsForDisplay(object):
         input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
                                                        constants.ORDER_FIELD_FOR_PARAS)
         for para in input_para_list:
+            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
 
