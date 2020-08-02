@@ -54,7 +54,6 @@ def test_paragraph(one_para_display_object):
     assert return_para['references'] == ''
 
 
-
 @pytest.mark.parametrize('key', [('title'),
                                  ('title_note')])
 def test_output_for_display_not_keys(one_para_display_object, key):
@@ -64,7 +63,7 @@ def test_output_for_display_not_keys(one_para_display_object, key):
     assert isinstance(out, dict)
     helper.assert_key_not_in_dictionary(out, key)
 
-# {'references': 'N/A', 'subtitle': 'Data not yet loaded ...==glabrous', 'subtitle_note': '', 'text': '<p>Either error or s...d yet.</p>'}
+
 @pytest.mark.parametrize('key', [('references'),
                                  ('subtitle'),
                                  ('subtitle_note'),
@@ -73,9 +72,9 @@ def test_output_for_display_keys(one_para_display_object, key):
     one_para_display_object.title = one_para_display_object.input_data['group']['title']
     one_para_display_object.title_note = one_para_display_object.input_data['group']['note']
     out = one_para_display_object.output_single_para_display('glabrous')
-    print(f'out == {out}')
     assert isinstance(out, dict)
     helper.assert_key_in_dictionary(out, key)
+
 
 @pytest.mark.parametrize('key, substring', [('references', 'YourDictionary_glabrous'),
                                             ('subtitle', 'Glabrous'),
