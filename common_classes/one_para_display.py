@@ -60,8 +60,10 @@ class OneParaDisplay(ParagraphsForDisplay):
 
         for para in self.input_data['paragraphs']:
             para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
+            para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
+
 
     def output_single_para_display(self, subtitle):
         '''

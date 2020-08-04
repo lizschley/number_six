@@ -1,8 +1,7 @@
 '''Used in batch process to create db records from JSON data.  JSON data in same format can be used
    to display the paragraph without creating a db record'''
 from django.db import IntegrityError
-from projects.models.paragraphs import (Group, GroupParagraph, Paragraph,
-                                        Reference)
+from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 # Todo: validate input json data --- this is one validation
@@ -68,21 +67,30 @@ class ParagraphsToDatabase:
         :rtype: [type]
         '''
         try:
-            group = Group.objects.get(title=self.title)
-            if group:
-                print('Have group, id=={group.pk}')
-                self.group = group
-            else:
-                group = Group.objects.get_or_create(
-                    title=self.title,
-                    note=self.title_note,
-                )
-                group.save()
-        except IntegrityError:
-            print('Integrity error while creating group.')
-            return 'Integrity error while creating group.'
-        self.group = group
+            group = Group.objects.get(
+                title=self.title,
+                note=self.title_note
+            )
+        except Group.DoesNotExist:
+            group = Group(
+                title=self.title,
+                note=self.title_note
+            )
+            group.save()
+        self.group = self.get_newly_created_group()
         return 'ok'
+
+    def get_newly_created_group(self):
+        '''
+        assign_group_to_self ensure that self.group has group
+
+        :return: Group record
+        :rtype: Group
+        '''
+        group = Group.objects.get(title=self.title)
+        return group
+
+
 
     def find_or_create_references(self, input_data):
         '''
@@ -93,11 +101,17 @@ class ParagraphsToDatabase:
         '''
         references = input_data['references']
         for ref in references:
-            reference = Reference.objects.get_or_create(
-                link_text=ref['link_text'],
-                url=ref['url'],
-            )
-            reference.save()
+            try:
+                reference = Reference.objects.get(
+                                link_text=ref['link_text'],
+                                url=ref['url']
+                            )
+            except Reference.DoesNotExist:
+                reference = Reference(
+                                link_text=ref['link_text'],
+                                url=ref['url']
+                            )
+                reference.save()
 
     # Todo: add some validation, for example the decide_standalone only has three valid possiblities
     def create_paragraphs(self, input_data):
@@ -176,11 +190,11 @@ class ParagraphsToDatabase:
         paragraph = Paragraph.objects.create(
             subtitle=para['subtitle'],
             standalone=para['standalone'],
-
             note=para['note'],
+            image_path=para['image_path'],
+            image_info_key=para['image_info_key'],
             text=para_helper.format_json_text(para['text'])
         )
-        paragraph.save()
         return paragraph
 
     def add_association_with_group(self, paragraph):
@@ -190,6 +204,5 @@ class ParagraphsToDatabase:
         :param paragraph: paragraph that was just created
         :type paragraph: db record
         '''
-        group_para = GroupParagraph.objects.create(group=self.group, paragraph=paragraph,
-                                                   order=self.current_order_num)
-        group_para.save()
+        GroupParagraph.objects.create(group=self.group, paragraph=paragraph,
+                                      order=self.current_order_num)

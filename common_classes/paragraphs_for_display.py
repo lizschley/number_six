@@ -119,6 +119,7 @@ class ParagraphsForDisplay(object):
                                                        constants.ORDER_FIELD_FOR_PARAS)
         for para in input_para_list:
             para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
+            para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
 
@@ -159,6 +160,9 @@ class ParagraphsForDisplay(object):
             'subtitle': para['subtitle'],
             'subtitle_note': para['note'],
             'text': para['text'],
+            'image_path': para['image_path'],
+            'image_classes': para['image_classes'],
+            'image_alt': para['image_alt'],
             'references': '',
         }
         return para

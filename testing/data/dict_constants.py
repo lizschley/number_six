@@ -8,6 +8,8 @@ PARA_DISPLAY_OUTPUT_DATA_FOR_TESTING = {
             'references': '<a href="https://literature.org/" target="_blank">literature</a><br>',
             'subtitle': 'Fiction',
             'subtitle_note': '* Note - only public domain for listening to fall asleep.',
+            'image_path': '',
+            'image_info_key': 'default',
             'text': '<p>Fiction is my number one non-domestic animal  love.  My '
                     'favorite animal is Rick.  He shares my love of fiction.</p>',
         },
@@ -17,6 +19,8 @@ PARA_DISPLAY_OUTPUT_DATA_FOR_TESTING = {
                           'target="_blank">JessicaSpencerKensley</a><br>',
             'subtitle': 'A sometimes wonderful, but often annoying podcast',
             'subtitle_note': '',
+            'image_path': '',
+            'image_info_key': 'default',
             'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica '
                     'and Spencer can be annoying, but Kensley rarely is. But like '
                     'the way I feel about my cats,  I  like them all equally in spite '
@@ -42,6 +46,8 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
         'id': 'first',
         'subtitle': 'Fiction',
         'note': '* Note - only public domain for listening to fall asleep.',
+        'image_path': '',
+        'image_info_key': 'default',
         'text': '<p>Fiction is my number one non-domestic animal love.  My favorite animal is '
                 'Rick. He shares my love of fiction.</p>',
         'order': 'fiction'
@@ -49,6 +55,8 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
         'id': 'second',
         'subtitle': 'A sometimes wonderful, but often annoying podcast',
         'note': '',
+        'image_path': '',
+        'image_info_key': 'default',
         'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica '
                 'and Spencer can be annoying, but Kensley rarely is. But like '
                 'the way I feel about my cats,  I like them all equally in '
@@ -68,6 +76,8 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'paragraph_id': 'first',
         'subtitle': 'Fiction',
         'subtitle_note': '* Note - only public domain for listening to fall asleep.',
+        'image_path': '',
+        'image_info_key': 'default',
         'text': '<p>Fiction is my number one non-domestic animal  love.  My '
                 'favorite animal is Rick.  He shares my love of fiction.</p>',
         'order': 'fiction',
@@ -78,6 +88,8 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'paragraph_id': 'second',
         'subtitle': 'A sometimes wonderful, but often annoying podcast',
         'subtitle_note': '',
+        'image_path': '',
+        'image_info_key': 'default',
         'text': '<p>Jessica, Spencer and Kensley are fun to listen to. Jessica and Spencer can be '
                 'annoying, but Kensley rarely is. But like the way I feel about my cats, '
                 'I  like them all equally in spite of their natures.</p>',
@@ -102,6 +114,8 @@ PARA_DISPLAY_ONE_PARA_INPUT = {
         'id': 68,
         'subtitle': 'glabrous',
         'note': '',
+        'image_path': '',
+        'image_info_key': 'default',
         'text': '<p>Having no hairs or pubescence; smooth: glabrous leaves.</p>',
         'order': 'glabrous'
     }],

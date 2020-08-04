@@ -1,3 +1,6 @@
+''' These are the models for almost all the functionality on this web-site.'''
+
+# pylint: disable=missing-function-docstring
 from django.db import models
 from autoslug import AutoSlugField
 
@@ -28,6 +31,8 @@ class Paragraph(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     references = models.ManyToManyField(Reference, through='ParagraphReference')
+    image_path = models.CharField(max_length=100, blank=True)
+    image_info_key = models.CharField(max_length=20, default='default')
 
     def __repr__(self):
         return f'<Paragraph id: {self.id}, standalone: {self.standalone}, subtitle== {self.subtitle}>'

@@ -4,8 +4,9 @@
     the common class folder. '''
 
 import json
+import os
 from operator import itemgetter
-import constants.subtitle_lookup as lookup
+import constants.para_lookup as lookup
 
 BEG_LINK_TEXT = '|beg|'
 END_LINK_TEXT = '|end|'
@@ -205,3 +206,27 @@ def ajax_link(orig_subtitle, from_ajax):
     end_link = '</a>'
     subtitle = orig_subtitle if orig_subtitle not in substitute.keys() else substitute[orig_subtitle]
     return beg_link + subtitle + mid_link + link_text + end_link
+
+
+def add_image_information(para):
+    '''
+    add_image_information returns the information to display an image correctly or an unchanged para
+
+    1. Path is in format to be used by template (originally from db or json input)
+    2. Alt is based on the filename
+    3. Classes are based on the image_info_key (from db or json input) to image_info lookup dictionary.
+
+    :param para: para that is originally retrieved from JSON or db
+    :type para: dict
+    :return: para that has image information added, if there is an image path
+    :rtype: dict
+    '''
+
+    if len(para['image_path']) == 0:
+        para['image_alt'] = ''
+        para['image_classes'] = ''
+        return para
+    para['image_alt'] = os.path.splitext(para['image_path'])[0]
+    info = lookup.IMAGE_INFO_LOOKUP[para['image_info_key']]
+    para['image_classes'] = info['classes']
+    return para

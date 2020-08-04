@@ -20,6 +20,8 @@
       "id": "first",
       "subtitle": "Fiction",
       "note": "* Note - only public domain for listening to fall asleep.",
+      "image_path": "",
+      "image_info_key": "default",
       "text": [
          "Fiction is my number one non-domestic animal love. ",
          "My favorite animal is Rick. ",
@@ -30,6 +32,8 @@
       "id": "second",
       "subtitle": "A wonderful, but occasionally annoying podcast",
       "note": "",
+      "image_path": "",
+      "image_info_key": "default",
       "text": [
          "Jessica, Spencer and Kensley are fun to listen too",
          "Jessica and Spencer can be annoying, but Kensley rarely is.",
