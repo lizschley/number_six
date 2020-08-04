@@ -194,5 +194,7 @@ class DbParagraphRetriever(BaseParagraphRetriever):
             'subtitle': row.subtitle,
             'note': row.subtitle_note,
             'text': row.text,
+            'image_path': row.image_path,
+            'image_info_key': row.image_info_key,
             'order': self.get_paragraph_order(row.subtitle, order),
         }

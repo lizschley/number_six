@@ -63,6 +63,8 @@ def create_row(title, note, para):
                order=para['order'],
                subtitle=para['subtitle'],
                subtitle_note=para['subtitle_note'],
+               image_path='',
+               image_info_key=para['image_info_key'],
                text=para['text'],
                reference_id=para['reference_id'],
                link_text=para['link_text'],

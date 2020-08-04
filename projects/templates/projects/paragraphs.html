@@ -23,6 +23,11 @@
                             {% if para.subtitle_note %}
                                 <p> {{ para.subtitle_note | safe }} </p>
                             {% endif %}
+                            {% if para.image_path %}
+                                <img class="{{ para.image_classes }}"
+                                     src="{% static para.image_path %}"
+                                     alt="{{ para.image_alt }}">
+                            {% endif %}
                             {{ para.text | safe  }}
                             {% if para.references %}
                                 <h5>References</h5>

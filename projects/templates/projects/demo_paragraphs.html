@@ -25,10 +25,10 @@
                 {% if para.subtitle_note %}
                     <p> {{ para.subtitle_note | safe }} </p>
                 {% endif %}
-                {% if para.id == 'first' %}
-                    <img class="img-fluid  float-sm-left"
-                         src={% static 'projects/img/jaymi-heimbuch_coyote_on_street_with_lights.jpg' %}
-                         alt="jaymi-heimbuch_coyote_on_street_with_lights">
+                {% if para.image_path %}
+                    <img class="{{ para.image_classes }}"
+                         src="{% static para.image_path %}"
+                         alt="{{ para.image_alt }}">
                 {% endif %}
                 {{ para.text | safe }}
             </div>

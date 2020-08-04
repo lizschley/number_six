@@ -8,7 +8,8 @@ SUBTITLE = 'subtitle'
 
 BEGIN_SELECT = 'select 1 as id'
 SELECT_GROUP = 'g.id as group_id, title as title, g.note as title_note, gp.order'
-SELECT_PARAGRAPHS = 'p.id as paragraph_id, subtitle, p.note as subtitle_note, text'
+SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
+                     'image_info_key, text')
 SELECT_REFERENCES = 'r.id as reference_id, link_text, url'
 
 FROM_GROUP_JOIN_PARA = ('from projects_group g '
