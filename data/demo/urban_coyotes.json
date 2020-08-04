@@ -11,6 +11,11 @@
        "url": "https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/"
      },
      {
+      "link_text": "HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights",
+      "url": "https://urbancoyoteinitiative.com/"
+    },
+
+     {
        "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
        "url": "https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf"
      },
@@ -41,7 +46,7 @@
       "subtitle": "",
       "note": "",
       "text": ["<p>A long time ago I read an article about coyotes living successfully in urban ",
-        "Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because ",
+        "Chicago, even crossing busy highways on a regular basis. It remained in my mind, because ",
         "I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and ",
         "successful.  They have spread over most, if not all of North America and to every county ",
         "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
@@ -69,6 +74,10 @@
   "ref_link_paragraph": [
     {
       "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+      "paragraph_id": "first"
+    },
+    {
+      "link_text": "HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights",
       "paragraph_id": "first"
     },
     {

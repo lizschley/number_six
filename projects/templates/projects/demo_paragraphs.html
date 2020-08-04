@@ -22,8 +22,13 @@
                 {% if para.subtitle %}
                     <h3> {{ para.subtitle | safe }} </h3>
                 {% endif %}
-                {% if para.subtitle %}
+                {% if para.subtitle_note %}
                     <p> {{ para.subtitle_note | safe }} </p>
+                {% endif %}
+                {% if para.id == 'first' %}
+                    <img class="img-fluid  float-sm-left"
+                         src={% static 'projects/img/jaymi-heimbuch_coyote_on_street_with_lights.jpg' %}
+                         alt="jaymi-heimbuch_coyote_on_street_with_lights">
                 {% endif %}
                 {{ para.text | safe }}
             </div>
