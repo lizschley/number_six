@@ -95,6 +95,7 @@ def add_collapse_variables(paragraphs):
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])
+        para['collapse_selector_id'] = '#collapse_' + str(para['id'])
     return paragraphs
 
 

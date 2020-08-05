@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1>About {{ project.title }}</h1>
+<h1>{{ project.title }}</h1>
 <div class="demo">
   <h3>Paragraph Display from JSON file</h3>
   <p>
@@ -22,10 +22,11 @@
   </ol>
   <div id="accordion">
     <div class="card">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#collapseOne">
-          Expand or collapse to show/hide JSON input to the class to display paragraphs
-        </a>
+      <div class="card-header collapsed card-link"
+           data-toggle="collapse"
+           data-target="#collapseOne"
+      >
+        <h6> Expand or collapse to show/hide JSON input to the class to display paragraphs </h6>
       </div>
       <div id="collapseOne" class="collapse" data-parent="#accordion">
         <div class="card-body">
@@ -38,123 +39,140 @@
             display the information.
           </p>
           <pre><code><p>
-            {
-              "group": {
-                "title": "Urban Coyotes, a Personal Perspective",
-                "note": "",
-                "ordered": "yes",
-                "standalone": "no"
+          {
+            "group": {
+              "title": "Urban Coyotes, a Personal Perspective",
+              "note": "",
+              "ordered": "yes",
+              "standalone": "no"
+            },
+            "references": [
+              {
+                "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
+                "url": "https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/"
               },
-              "references": [
-                 {
-                   "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
-                   "url": "https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/"
-                 },
-                 {
-                   "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
-                   "url": "https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf"
-                 },
-                 {
-                   "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
-                   "url": "https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/"
-                 },
-                 {
-                   "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
-                   "url": "https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/"
-                 },
-                 {
-                   "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
-                   "url": "https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html"
-                 },
-                 {
-                   "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
-                   "url": "https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores"
-                 },
-                 {
-                   "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
-                   "url": "https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena"
-                 }
-              ],
-              "paragraphs": [
-                {
-                  "id": "first",
-                  "subtitle": "",
-                  "note": "",
-                  "text": ["<p>A long time ago I read an article about coyotes living successfully in urban ",
-                    "Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because ",
-                    "I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and ",
-                    "successful.  They have spread over most, if not all of North America and to every county ",
-                    "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
-                    "up a habitat vacuum. But people’s efforts to do the same to coyotes have not been ",
-                    "effective, because they breed quickly and there are new coyotes to take over vacated ",
-                    "territories</p>"]
-                },
-                {
-                  "id": "second",
-                  "subtitle": "",
-                  "note": "",
-                  "text": ["<p>Coyotes are also successful because coyotes adapt to a given situation. </p> <p>In ",
-                    "urban situations they become bolder; one coyote actually crawled into a refrigerated case ",
-                    "one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There ",
-                    "are instances of coyotes going after pets or humans, but it is rare.  There are many more ",
-                    "examples of peaceful incidences, such as coyotes playing with domestic dogs. More often coyotes try to avoid ",
-                    "humans and will run away if a person bangs pots or swings a stick.  </p> ",
-                    "<p>Obviously I am biased in favor of learning to coexist with coyotes rather than trying to defeat them. ",
-                    "But studies support this point of view.</p> ",
-                    "<p>It makes sense to educate people, for example, not to leave out food, but coyotes will learn as well. ",
-                    "If a community has established coyote territories with parents that teach their pups acceptable behaviors, ",
-                    "coexistence can be peaceful.</p>"]
-                }
-              ],
-              "ref_link_paragraph": [
-                {
-                  "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
-                  "paragraph_id": "first"
-                },
-                {
-                  "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
-                  "paragraph_id": "second"
-                },
-                {
-                  "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
-                  "paragraph_id": "second"
-                },
-                {
-                  "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
-                  "paragraph_id": "first"
-                },
-                {
-                  "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
-                  "paragraph_id": "first"
-                },
-                {
-                  "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
-                  "paragraph_id": "first"
-                },
-                {
-                  "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
-                  "paragraph_id": "second"
-                },
-                {
-                  "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
-                  "paragraph_id": "second"
-                },
-                {
-                  "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
-                  "paragraph_id": "second"
-                }
-              ]
-            }
+              {
+                "link_text": "HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights",
+                "url": "https://urbancoyoteinitiative.com/"
+              },
+              {
+                "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+                "url": "https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf"
+              },
+              {
+                "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+                "url": "https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/"
+              },
+              {
+                "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+                "url": "https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/"
+              },
+              {
+                "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+                "url": "https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html"
+              },
+              {
+                "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
+                "url": "https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores"
+              },
+              {
+                "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
+                "url": "https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena"
+              }
+            ],
+            "paragraphs": [
+              {
+                "id": "first",
+                "subtitle": "",
+                "note": "",
+                "image_path": "projects/img/jaymi-heimbuch_coyote_on_street_with_lights.jpg",
+                "image_info_key": "default",
+                "text": [
+                  "<p>A long time ago I read an article about coyotes living successfully in urban ",
+                  "Chicago, even crossing busy highways on a regular basis. It remained in my mind, because ",
+                  "I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and ",
+                  "successful.  They have spread over most, if not all of North America and to every county ",
+                  "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
+                  "up a habitat vacuum. But people’s efforts to do the same to coyotes have not been ",
+                  "effective, because they breed quickly and there are new coyotes to take over vacated ",
+                  "territories.</p>"
+                ]
+              },
+              {
+                "id": "second",
+                "subtitle": "",
+                "note": "",
+                "image_path": "",
+                "image_info_key": "default",
+                "text": [
+                  "<p>Coyotes are also successful because coyotes adapt to a given situation. </p> <p>In ",
+                  "urban situations they become bolder; one coyote actually crawled into a refrigerated case ",
+                  "one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There ",
+                  "are instances of coyotes going after pets or humans, but it is rare.  There are many more ",
+                  "examples of peaceful incidences, such as coyotes playing with domestic dogs. More often coyotes try to avoid ",
+                  "humans and will run away if a person bangs pots or swings a stick.  </p> ",
+                  "<p>Obviously I am biased in favor of learning to coexist with coyotes rather than trying to defeat them. ",
+                  "But studies support this point of view.</p> ",
+                  "<p>It makes sense to educate people, for example, not to leave out food, but coyotes will learn as well. ",
+                  "If a community has established coyote territories with parents that teach their pups acceptable behaviors, ",
+                  "coexistence can be peaceful.</p>"
+                ]
+              }
+            ],
+            "ref_link_paragraph": [
+              {
+                "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+                "paragraph_id": "first"
+              },
+              {
+                "link_text": "HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights",
+                "paragraph_id": "first"
+              },
+              {
+                "link_text": "HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts",
+                "paragraph_id": "second"
+              },
+              {
+                "link_text": "USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs",
+                "paragraph_id": "second"
+              },
+              {
+                "link_text": "FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves",
+                "paragraph_id": "first"
+              },
+              {
+                "link_text": "DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange",
+                "paragraph_id": "first"
+              },
+              {
+                "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+                "paragraph_id": "first"
+              },
+              {
+                "link_text": "CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes",
+                "paragraph_id": "second"
+              },
+              {
+                "link_text": "BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes",
+                "paragraph_id": "second"
+              },
+              {
+                "link_text": "KrulwichRobert_20101208_NPR_60WildCoyotes",
+                "paragraph_id": "second"
+              }
+            ]
+          }
           </p></code></pre>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-          Expand or collapse to show/hide intermediate result: a Python dictionary from the JsonParagraphRetriever
-        </a>
+      <div class="card-header collapsed card-link"
+           data-toggle="collapse"
+           data-target="#collapseTwo"
+      >
+        <h6> Expand or collapse to show/hide intermediate result: a Python dictionary from the JsonParagraphRetriever </h6>
       </div>
       <div id="collapseTwo" class="collapse" data-parent="#accordion">
         <div class="card-body">
@@ -179,6 +197,9 @@
                   'link_text': 'HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts',
                   'url': 'https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/'
               }, {
+                  'link_text': 'HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights',
+                  'url': 'https://urbancoyoteinitiative.com/'
+              }, {
                   'link_text': 'USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs',
                   'url': 'https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf'
               }, {
@@ -201,30 +222,37 @@
                   'id': 'first',
                   'subtitle': '',
                   'note': '',
-                  'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because  I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories</p>',
+                  'image_path': 'projects/img/jaymi-heimbuch_coyote_on_street_with_lights.jpg',
+                  'image_info_key': 'default',
+                  'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis. It remained in my mind, because  I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories.</p>',
                   'order': ''
               }, {
                   'id': 'second',
                   'subtitle': '',
                   'note': '',
+                  'image_path': '',
+                  'image_info_key': 'default',
                   'text': '<p>Coyotes are also successful because coyotes adapt to a given situation. </p> <p>In  urban situations they become bolder; one coyote actually crawled into a refrigerated case  one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There  are instances of coyotes going after pets or humans, but it is rare.  There are many more  examples of peaceful incidences, such as coyotes playing with domestic dogs. More often coyotes try to avoid  humans and will run away if a person bangs pots or swings a stick.  </p>  <p>Obviously I am biased in favor of learning to coexist with coyotes rather than trying to defeat them.  But studies support this point of view.</p>  <p>It makes sense to educate people, for example, not to leave out food, but coyotes will learn as well.  If a community has established coyote territories with parents that teach their pups acceptable behaviors,  coexistence can be peaceful.</p>',
                   'order': ''
               }],
               'para_id_to_link_text': {
-                  'first': ['USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs', 'FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves', 'DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange', 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes'],
+                  'first': ['USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs', 'HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights', 'FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves', 'DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange', 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes'],
                   'second': ['HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts', 'USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs', 'CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes', 'BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes', 'KrulwichRobert_20101208_NPR_60WildCoyotes']
               }
-          }          </p></code></pre>
+          }
+          </p></code></pre>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-header">
-        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
-          Expand or collapse to show/hide the final input to the html template for this demo
-        </a>
+      <div class="card-header collapsed card-link"
+           data-toggle="collapse"
+           data-target="#collapseThree"
+      >
+        <h6> Expand or collapse to show/hide the final input to the html template for this demo </h6>
       </div>
+
       <div id="collapseThree" class="collapse" data-parent="#accordion">
         <div class="card-body">
           <p class="font-weight-bold">
@@ -237,20 +265,35 @@
           </p>
           <pre><code><p>
             {
+              'view': < projects.views.demo.DemoParagraphView object at 0x107613ad0 > ,
               'title': 'Urban Coyotes, a Personal Perspective',
               'title_note': '',
               'paragraphs': [{
                   'id': 'first',
                   'subtitle': '',
                   'subtitle_note': '',
-                  'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis.  It remained in my mind, because  I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories</p>',
-                  'references': '<a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br><a href="https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/" target="_blank">FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves</a><br><a href="https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/" target="_blank">DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange</a><br><a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br>'
+                  'text': '<p>A long time ago I read an article about coyotes living successfully in urban  Chicago, even crossing busy highways on a regular basis. It remained in my mind, because  I love mammals, even city rats in theory.</p> <p>Like rats, coyotes are highly adaptable and  successful.  They have spread over most, if not all of North America and to every county  in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening  up a habitat vacuum. But people’s efforts to do the same to coyotes have not been  effective, because they breed quickly and there are new coyotes to take over vacated  territories.</p>',
+                  'image_path': 'projects/img/jaymi-heimbuch_coyote_on_street_with_lights.jpg',
+                  'image_classes': 'img-fluid  float-sm-left px-2',
+                  'image_alt': 'projects/img/jaymi-heimbuch_coyote_on_street_with_lights',
+                  'references': '<a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br>
+                  <a href="https://urbancoyoteinitiative.com/" target="_blank">HeimbuchJaymi_photo_Urban_Coyote_Initiative_Coyote_street_lights</a><br>
+                  <a href="https://www.washingtonpost.com/climate-environment/2019/06/03/killing-wolves-was-supposed-solve-problem-created-one-that-will-last-forever/" target="_blank">FearsDarryl_20190603_WashingtonPost_RelentlessSlaughterWolves</a><br>
+                  <a href="https://www.nationalgeographic.com/animals/2019/11/coyotes-expansion-north-america-wildlife-nation/" target="_blank">DellAmore_2019_11_29_NationalGeographic_CoyotesExpandedRange</a><br>
+                  <a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br>'
               }, {
                   'id': 'second',
                   'subtitle': '',
                   'subtitle_note': '',
                   'text': '<p>Coyotes are also successful because coyotes adapt to a given situation. </p> <p>In  urban situations they become bolder; one coyote actually crawled into a refrigerated case  one hot Chicago day.  They hunt when they can and scavenge when they need to. </p><p>There  are instances of coyotes going after pets or humans, but it is rare.  There are many more  examples of peaceful incidences, such as coyotes playing with domestic dogs. More often coyotes try to avoid  humans and will run away if a person bangs pots or swings a stick.  </p>  <p>Obviously I am biased in favor of learning to coexist with coyotes rather than trying to defeat them.  But studies support this point of view.</p>  <p>It makes sense to educate people, for example, not to leave out food, but coyotes will learn as well.  If a community has established coyote territories with parents that teach their pups acceptable behaviors,  coexistence can be peaceful.</p>',
-                  'references': '<a href="https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/" target="_blank">HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts</a><br><a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br><a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br><a href="https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena" target="_blank">BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes</a><br><a href="https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores" target="_blank">KrulwichRobert_20101208_NPR_60WildCoyotes</a><br>'
+                  'image_path': '',
+                  'image_classes': '',
+                  'image_alt': '',
+                  'references': '<a href="https://urbancoyoteinitiative.com/10-fascinating-facts-about-urban-coyotes/" target="_blank">HeimbuchJaymi_Urban_Coyote_Initiative_10FascinatingFacts</a><br>
+                  <a href="https://www.aphis.usda.gov/publications/wildlife_damage/content/printable_version/coyote_Dec2011.pdf" target="_blank">USDA_201112_WildlifeServices_CoyotesInTownsAndSuburbs</a><br>
+                  <a href="https://roanoke.com/news/local/woym-wily-profilic-coyotes-are-here-to-stay-in-virginia/article_49ed6268-6bda-5214-92d6-52bde8bf72b5.html" target="_blank">CoxRay_20190318_RoanokeTimes_WilyProlificCoyotes</a><br>
+                  <a href="https://animalstudiesrepository.org/cgi/viewcontent.cgi?referer=http://scholar.google.com/&httpsredir=1&article=1055&context=acwp_ena" target="_blank">BekoffMarcandWellsMichaelC_2018_HumaneSociety_SocialEcologyCoyotes</a><br>
+                  <a href="https://www.npr.org/sections/krulwich/2010/12/08/131876027/60-wild-coyotes-patrol-chicago-and-occasionally-stop-at-convenience-stores" target="_blank">KrulwichRobert_20101208_NPR_60WildCoyotes</a><br>'
               }]
           }
           </p></code></pre>

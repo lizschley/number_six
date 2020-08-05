@@ -12,10 +12,11 @@
    {% for para in paragraphs %}
         <div id="accordion">
             <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link  stretched-link" data-toggle="collapse" href={{para.href_collapse}}>
-                        {{ para.subtitle | safe }}
-                    </a>
+                <div class="card-header collapsed card-link"
+                    data-toggle="collapse"
+                    data-target={{para.collapse_selector_id}}
+                >
+                    <h6> {{ para.subtitle | safe }} </h6>
                 </div>
                 <div id={{para.collapse_id}} class="collapse" data-parent="#accordion">
                     <div class="card-body">
