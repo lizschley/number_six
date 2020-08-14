@@ -7,7 +7,6 @@ from common_classes.db_paragraph_retriever import DbParagraphRetriever
 from common_classes.json_paragraph_retriever import JsonParagraphRetriever
 
 
-# Todo: extend this to make SingleParaDisplay
 class ParagraphsForDisplay(object):
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views

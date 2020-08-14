@@ -1,8 +1,37 @@
 ''' These are the models for almost all the functionality on this web-site.'''
 import uuid
+from django.core.exceptions import ValidationError
 from django.db import models
 from autoslug import AutoSlugField
-from django.core.exceptions import ValidationError
+
+
+class Category(models.Model):
+    ''' one to many with groups '''
+    BLOG = 'blog'
+    RESUME = 'resume'
+    FLASH_CARD = 'flash_card'
+    CATEGORY_TYPE_CHOICES = [
+        (BLOG, 'Blog'),
+        (RESUME, 'Resume'),
+        (FLASH_CARD, 'Flash Card'),
+    ]
+    title = models.CharField(max_length=120, blank=False, unique=True)
+    slug = AutoSlugField(unique=True, populate_from='title')
+    category_type = models.CharField(max_length=20, choices=CATEGORY_TYPE_CHOICES,
+                                     default=FLASH_CARD)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __repr__(self):
+        return (f'<Category id: {self.id}, title: {self.title}, category_type: {self.category_type}, '
+                f'slug: {self.slug}>')
+
+    def __str__(self):
+        return (f'<Category id: {self.id}, title: {self.title}, category_type: {self.category_type}, '
+                f'slug: {self.slug}>')
+
+    class Meta:
+        get_latest_by = 'updated_at'
 
 
 class Reference(models.Model):
@@ -61,10 +90,14 @@ class Group(models.Model):
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(unique=True, populate_from='title')
     note = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     paragraphs = models.ManyToManyField(Paragraph, through='GroupParagraph')
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, default=None, null=True)
 
     def __repr__(self):
-        return f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, slug: {self.slug}>'
+        return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
+                f'category_id: {self.category_id}, slug: {self.slug}>')
 
     def __str__(self):
         return f'<Group id: {self.id}, title: {self.title}>'
