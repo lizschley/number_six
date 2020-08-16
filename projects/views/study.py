@@ -31,9 +31,7 @@ class StudyLookupView(FormView):
     def get(self, request, *args, **kwargs):
         # Todo: turn extract data from form into whatever makes this code the cleanest
         form_data = request.GET.get("classification", "0")
-        print(f'data before calling extract_data_from_form: {form_data}')
         in_data = no_import_para_helper.extract_data_from_form(form_data)
-        print(f'in study lookup get ---> in_data=={in_data}')
         if in_data:
             return HttpResponseRedirect(reverse('projects:study_paragraphs_with_group',
                                         kwargs={'group_id': in_data['group']}))

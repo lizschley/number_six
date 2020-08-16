@@ -14,7 +14,7 @@ class DemoParagraphView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
-        print(f'from view: {context}')
+        # print(f'from view: {context}')
         return context
 
     def _add_to_context(self, context):
