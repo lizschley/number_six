@@ -8,7 +8,6 @@ import helpers.no_import_common_class.paragraph_helpers as no_import_para_helper
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
-DEMO_PARAGRAPH_JSON = 'data/demo/urban_coyotes.json'
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 

@@ -11,8 +11,8 @@
 import os
 from portfolio.settings import BASE_DIR
 
-INPUT_TO_UPDATE_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input')
-INPUT_TO_UPDATE_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_json')
+INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input')
+INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_json')
 MANUAL_UPDATE_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
 DEV_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
@@ -29,14 +29,14 @@ def run(*args):
         usage as follows:
         Step 1 - development only, no parameters, exits if prod
         >>> python manage.py runscript -v3  batch_json_db_updater
-            * reads python data from INPUT_TO_UPDATE_STEP_ONE (Python dictionaries)
+            * reads python data from <INPUT_TO_UPDATER_STEP_ONE> (Python dictionaries)
             * no production version of this, since production data comes from development
-            * writes json file to MANUAL_UPDATE_JSON
+            * writes json file to <MANUAL_UPDATE_JSON>
 
         Step 2 - development only, manual step to make the changes you want
-            * edit json file in MANUAL_UPDATE_JSON
-            * after editing, manually move json file to INPUT_TO_UPDATE_STEP_THREE
-            * note - need to change name to include PROD_PROCESS_IND if using run_as_prod option
+            * edit json file in <MANUAL_UPDATE_JSON>
+            * after editing, manually move json file to <INPUT_TO_UPDATER_STEP_THREE>
+            * note - need to change name to include <PROD_PROCESS_IND> if using run_as_prod option
 
         Step 3 - production or development, this is where db updates happen (can run without updates)
 
@@ -50,12 +50,12 @@ def run(*args):
         ***  make the id really high, & be careful to use the same id in associations
         ** for updates: high ids or use the same one; be careful about associations always
         ***   make desired changes
-        ***   remember to include PROD_PROCESS_IND (value of) in the json file name after editing
+        ***   remember to include <PROD_PROCESS_IND> (value of) in the json file name after editing
 
         >>> python manage.py runscript -v3  batch_json_db_updater --script-args run_as_prod
             * does not run anything without the do_update or test_update switch
-            * reads python data from INPUT_TO_UPDATE_STEP_THREE
-            *** (checks filename for PROD_PROCESS_IND)
+            * reads python data from <INPUT_TO_UPDATER_STEP_THREE>
+            *** (checks filename for <PROD_PROCESS_IND>)
             * plan to log any error messages
 
         * arguments: do_update or test_update
@@ -69,18 +69,17 @@ def run(*args):
         >>> python manage.py runscript -v3  batch_json_db_updater test_update
         or
         >>> python manage.py runscript -v3  batch_json_db_updater test_update run_as_prod
-            * reads python data from INPUT_TO_UPDATE_STEP_THREE
-            *** (ensures filename does not have PROD_PROCESS_IND)
+            * reads python data from <INPUT_TO_UPDATER_STEP_THREE>
+            *** (ensures filename does not have <PROD_PROCESS_IND>)
             * test process & data ahead of update
             * won't do db updates without the do_update switch
             * plan to log any error messages
 
-        * do update argument - does the db updates, other than that is just like
+        * do update argument - does the db updates, other than that is similar to
         **  test_update & run_as_prod or just test_update
         >>> python manage.py runscript -v3  batch_json_db_updater do_update
         or
         >>> python manage.py runscript -v3  batch_json_db_updater do_update run_as_prod
-
 
     '''
     process_data = init_process_data(args)
@@ -142,7 +141,7 @@ def switches_from_args(is_prod, do_update, test_update):
 def establish_process_and_files(process_data):
     if (not process_data.get('db_update') and not process_data.get('is_prod') and
         not process_data.get('is_prod')):
-        process_data['input_directory'] = INPUT_TO_UPDATE_STEP_ONE
+        process_data['input_directory'] = INPUT_TO_UPDATER_STEP_ONE
         process_data['output_directory'] = MANUAL_UPDATE_JSON
         process_data['process'] = 'step_one'
         return process_data

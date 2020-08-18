@@ -2,11 +2,9 @@
 import os
 from django.http import JsonResponse
 from django.views.generic import TemplateView
+import constants.file_paths as file_paths
 import portfolio.settings as settings
 import helpers.import_common_class.paragraph_helpers as import_para_helper
-
-DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR,
-                                   'data/demo/urban_coyotes.json')
 
 
 class DemoParagraphView(TemplateView):
@@ -18,7 +16,7 @@ class DemoParagraphView(TemplateView):
         return context
 
     def _add_to_context(self, context):
-        context['path_to_json'] = DEMO_PARAGRAPH_JSON
+        context['path_to_json'] = file_paths.DEMO_PARAGRAPH_JSON
         context = import_para_helper.paragraph_view_input(context, True)
         return context
 

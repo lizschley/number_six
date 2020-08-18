@@ -127,3 +127,6 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# private stuff
+complete_reverse_resume_private.json

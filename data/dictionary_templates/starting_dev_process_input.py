@@ -12,14 +12,14 @@ import portfolio.settings as settings
 INPUT_TO_DEV_UPDATER = {
     'updated_at': None,
     'group_ids': [],
-    'new_categories': [{'title': 'Reverse Chronological Resume', 'type': 'resume'}],
+    'new_categories': [{'title': 'Reverse Chronological Resume', 'type': 'resume', 'groups': []}],
     'category_ids': [],
     'para_ids': [],
     'subtitle': [],
     'guid': [],
     'delete_associations': [],
     'add_associations': [],
-    'output_directory': os.path.join(settings.BASE_DIR, 'data/update_json/dev_input/original_data/'),
+    'output_directory': os.path.join(settings.BASE_DIR, 'data/data_for_updates/dev_manual_json/'),
 }
 
 UPDATER_FILE_INPUT = {

@@ -36,6 +36,7 @@ class ParagraphsForDisplay(object):
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
+        # print(f'input_data == {self.input_data}')
         if self.input_data is None:
             sys.exit(f'did not retrieve data with these args: {kwargs}')
         return self.format_data_for_display()
@@ -120,13 +121,16 @@ class ParagraphsForDisplay(object):
             para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
             para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
-        self.add_links_to_paragraphs()
+        if self.input_data['para_id_to_link_text']:
+            self.add_links_to_paragraphs()
 
     def add_links_to_paragraphs(self):
         '''
         add_links_to_paragraphs adds a reference string to each paragraph
         '''
         for para in self.paragraphs:
+            if self.input_data['para_id_to_link_text'].get(para['id']) is None:
+                continue
             para['references'] = self.paragraph_links(
                 self.input_data['para_id_to_link_text'][para['id']])
 

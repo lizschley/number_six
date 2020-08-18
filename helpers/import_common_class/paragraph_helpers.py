@@ -1,14 +1,9 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
-import os
 import helpers.no_import_common_class.paragraph_helpers as para_helper
-import portfolio.settings as settings
 from common_classes.one_para_display import OneParaDisplay
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.paragraphs_to_db import ParagraphsToDatabase
-
-
-DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, '/data/basic_paragraph.json')
 
 
 def paragraph_list_from_json(json_path):
