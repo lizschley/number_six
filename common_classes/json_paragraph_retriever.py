@@ -54,11 +54,13 @@ class JsonParagraphRetriever(BaseParagraphRetriever):
         :param orig_paragraphs: dictionary: list of paragraphs, each one a list of strings
         :type orig_paragraphs: dict
         '''
+        order = 0
         for orig_para in orig_paragraphs:
-            para = self.format_paragraph(orig_para)
+            order += 1
+            para = self.format_paragraph(orig_para, order)
             self.paragraphs.append(para)
 
-    def format_paragraph(self, orig_para):
+    def format_paragraph(self, orig_para, order):
         '''
         format_paragraph formats the individual paragraph (called by process_json_paragraphs)
 
@@ -71,14 +73,9 @@ class JsonParagraphRetriever(BaseParagraphRetriever):
         :return: paragraph formatted in the way that is used by ParagraphsForDisplay
         :rtype: dict
         '''
-        try:
-            int_order = int(orig_para['id'])
-            self.ordered = True
-        except ValueError:
-            int_order = 0
-            self.ordered = False
+        self.ordered = True
 
         para = orig_para
         para['text'] = para_helper.format_json_text(orig_para['text'])
-        para['order'] = self.get_paragraph_order(orig_para['subtitle'], int_order)
+        para['order'] = self.get_paragraph_order(orig_para['subtitle'], order)
         return para
