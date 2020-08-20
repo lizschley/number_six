@@ -1,5 +1,5 @@
 ''' Study View classes '''
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse
@@ -28,11 +28,9 @@ class StudyLookupView(FormView):
     form_class = ParagraphLookupForm
 
     def get(self, request, *args, **kwargs):
-        # Todo: turn extract data from form into whatever makes this code the cleanest
         form_data = request.GET.get("classification", "0")
         in_data = no_import_para_helper.extract_data_from_form(form_data)
         if in_data:
             return HttpResponseRedirect(reverse('projects:study_paragraphs_with_group',
-                                        kwargs={'group_id': in_data['group']}))
-        else:
-            return super().get(request, *args, **kwargs)
+                                                kwargs={'group_id': in_data['group']}))
+        return super().get(request, *args, **kwargs)

@@ -129,4 +129,4 @@ venv.bak/
 dmypy.json
 
 # private stuff
-complete_reverse_resume_private.json
+reverse_resume_private.json

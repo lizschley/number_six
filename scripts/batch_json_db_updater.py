@@ -14,8 +14,10 @@ from portfolio.settings import BASE_DIR
 INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input')
 INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_json')
 MANUAL_UPDATE_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
-PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
 DEV_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
+# Todo: decide if move to PROD_INPUT_JSON data can be automated
+# whether by udated_at or whenever filename includes likeprod... experimentation needed
+PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
 DO_UPDATE = 'do_update'
 TEST_UPDATE = 'test_update'
 RUN_AS_PROD = 'run_as_prod'
@@ -94,12 +96,14 @@ def run(*args):
     if res != 'ok':
         print(f'Error! {res}')
 
+
 def init_process_data(args):
     ''' Gather information to do one of the following:
-        * report setup errors
-        * gather data necessary to start the update process
-        * test input data and update process as much as possible without doint any db updates
-        * do the db update process
+        * Step 1 - gather data necessary to start the update process
+                   do_update, test_update and is_prod are always False in Step 1
+        * Step 3 - test input data and update process as much as possible without doing any db updates
+                   or
+        * Step 3 - do the db update process
     '''
     do_update = False
     test_update = False
@@ -119,12 +123,13 @@ def init_process_data(args):
 
 
 def test_for_errors(args, is_prod, do_update, test_update):
+    'Ensures the correct number and combinations of parameters.'
     message = f'Error! To many args, args == {args}'
     if len(args) > 2:
         return message
     if not is_prod and len(args) > 1:
         return message
-    elif is_prod and len(args) == 1:
+    if is_prod and len(args) == 1:
         return f'For production run you need either do_update or test update, args == {args} '
     if do_update and test_update:
         return f'Error! do_update and test_update conflict, args == {args}'
@@ -132,21 +137,26 @@ def test_for_errors(args, is_prod, do_update, test_update):
 
 
 def switches_from_args(is_prod, do_update, test_update):
+    ''' Return from init process data '''
     return {
         'is_prod': is_prod,
         'do_update': do_update,
         'test_update': test_update,
     }
 
+
 def establish_process_and_files(process_data):
+    ''' Can be Step 1 or Step 3: The process and files depend on the process data '''
     if (not process_data.get('db_update') and not process_data.get('is_prod') and
-        not process_data.get('is_prod')):
+            not process_data.get('is_prod')):
         process_data['input_directory'] = INPUT_TO_UPDATER_STEP_ONE
         process_data['output_directory'] = MANUAL_UPDATE_JSON
         process_data['process'] = 'step_one'
         return process_data
 
+
 def call_process(process_data):
+    ''' Right now only works for Step 1, which always has same input and output directories '''
     if process_data.get('process') and process_data['process'] == 'step_one':
         files_processed = step_one_process(process_data)
         if files_processed == 0:
@@ -155,7 +165,9 @@ def call_process(process_data):
         return 'ok'
     return 'ok'
 
+
 def step_one_process(process_data):
+    ''' Loops through files in directory and processes each individually '''
     directory = process_data['input_directory']
     num_processed = 0
     for filename in os.listdir(directory):
