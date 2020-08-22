@@ -1,5 +1,5 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
-from common_classes.base_paragraph_retriever import BaseParagraphRetriever
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
 import constants.common as constants
@@ -7,8 +7,8 @@ import constants.common as constants
 VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 
 
-class DbParagraphRetriever(BaseParagraphRetriever):
-    ''' The DbParagraphRetriever class retrieves the information to use to output paragraphs.  Later
+class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
+    ''' The ParaDisplayRetrieverDb class retrieves the information to use to output paragraphs.  Later
         there may be other flavors, such as a blog or flash cards'''
 
     def data_retrieval(self, kwargs):

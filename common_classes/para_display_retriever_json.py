@@ -1,15 +1,15 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
-from common_classes.base_paragraph_retriever import BaseParagraphRetriever
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 
-class JsonParagraphRetriever(BaseParagraphRetriever):
+class ParaDisplayRetrieverJson(ParaDisplayRetrieverBase):
     '''
-    JsonParagraphRetriever retrieves a json file and outputs it in a dictionary with the elements
+    ParaDisplayRetrieverJson retrieves a json file and outputs it in a dictionary with the elements
     used by the ParagraphsForDisplay class
 
-    :param BaseParagraphRetriever: Class extending Pythons Abstract Base Class
-    :type BaseParagraphRetriever: Class of type BaseParagraphRetriever
+    :param ParaDisplayRetrieverBase: Class extending Pythons Abstract Base Class
+    :type ParaDisplayRetrieverBase: Class of type ParaDisplayRetrieverBase
     '''
 
     def data_retrieval(self, kwargs):

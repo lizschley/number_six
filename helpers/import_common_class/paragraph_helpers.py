@@ -1,7 +1,7 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
 import helpers.no_import_common_class.paragraph_helpers as para_helper
-from common_classes.one_para_display import OneParaDisplay
+from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.paragraphs_to_db import ParagraphsToDatabase
 
@@ -103,5 +103,5 @@ def single_para_by_subtitle(subtitle):
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
-    para = OneParaDisplay()
+    para = ParagraphsForDisplayOne()
     return para.retrieve_paragraphs(subtitle=subtitle)

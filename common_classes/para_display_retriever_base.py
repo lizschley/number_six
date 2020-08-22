@@ -2,9 +2,9 @@
 from abc import ABC, abstractmethod
 
 
-class BaseParagraphRetriever(ABC):
+class ParaDisplayRetrieverBase(ABC):
     '''
-    BaseParagraphRetriever is an abstract class used to create input data for ParagraphsForDisplay
+    ParaDisplayRetrieverBase is an abstract class used to create input data for ParagraphsForDisplay
     This ensures that even if the datasource varies, the paragraphs will still display correctly.
 
     :param ABC: Pythons Abstract Base Class

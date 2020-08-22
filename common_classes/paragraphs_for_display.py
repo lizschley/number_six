@@ -3,8 +3,8 @@
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
-from common_classes.db_paragraph_retriever import DbParagraphRetriever
-from common_classes.json_paragraph_retriever import JsonParagraphRetriever
+from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
+from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
 
 
 class ParagraphsForDisplay(object):
@@ -70,9 +70,9 @@ class ParagraphsForDisplay(object):
         :rtype: object of type BaseParagraphRetriver
         '''
         if key == 'path_to_json':
-            return JsonParagraphRetriever()
+            return ParaDisplayRetrieverJson()
         if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
-            return DbParagraphRetriever()
+            return ParaDisplayRetrieverDb()
         return None
 
     # Todo: make sure this is already tested.  I think it is, through an integration test

@@ -5,7 +5,7 @@ import pytest
 import testing.helpers.testing_helpers as helper
 import testing.constants.common as common
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from common_classes.db_paragraph_retriever import DbParagraphRetriever
+from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 
 
 @pytest.fixture(scope='session')
@@ -37,7 +37,7 @@ def para_for_display_object():
 
 @pytest.fixture()
 def db_para_retriever():
-    retriever = DbParagraphRetriever()
+    retriever = ParaDisplayRetrieverDb()
     return retriever
 
 

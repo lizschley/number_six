@@ -3,15 +3,15 @@
 # pylint: disable=redefined-outer-name
 
 import pytest
-from common_classes.one_para_display import OneParaDisplay
+from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 import testing.data.dict_constants as constants
 import testing.helpers.testing_helpers as helper
 
 
 @pytest.fixture()
-def one_para_display_object():
-    paragraph = OneParaDisplay()
+def paragraphs_for_display_one_object():
+    paragraph = ParagraphsForDisplayOne()
     paragraph.input_data = constants.PARA_DISPLAY_ONE_PARA_INPUT
     return paragraph
 
@@ -21,22 +21,22 @@ def one_para_display_object():
                                                 ('reference_links', dict),
                                                 ('paragraphs', list),
                                                 ('input_data', dict)])
-def test_one_para_display_init(one_para_display_object, var_name, var_type):
-    helper.assert_instance_variable(one_para_display_object, var_name, var_type)
+def test_paragraphs_for_display_one_init(paragraphs_for_display_one_object, var_name, var_type):
+    helper.assert_instance_variable(paragraphs_for_display_one_object, var_name, var_type)
 
 
-def test_create_links_from_references(one_para_display_object):
-    one_para_display_object.create_links_from_references()
-    ref_links = one_para_display_object.reference_links
-    assert len(one_para_display_object.reference_links) == 1
+def test_create_links_from_references(paragraphs_for_display_one_object):
+    paragraphs_for_display_one_object.create_links_from_references()
+    ref_links = paragraphs_for_display_one_object.reference_links
+    assert len(paragraphs_for_display_one_object.reference_links) == 1
     assert 'https://www.yourdictionary.com/glabrous' in ref_links['YourDictionary_glabrous']
 
 
-def test_assign_paragraphs(one_para_display_object):
+def test_assign_paragraphs(paragraphs_for_display_one_object):
     '''this also tests add_links_to_paragraphs and paragraph_links'''
-    one_para_display_object.create_links_from_references()
-    one_para_display_object.assign_paragraphs()
-    paras = one_para_display_object.paragraphs
+    paragraphs_for_display_one_object.create_links_from_references()
+    paragraphs_for_display_one_object.assign_paragraphs()
+    paras = paragraphs_for_display_one_object.paragraphs
     assert len(paras) == 1
     assert isinstance(paras[0]['references'], str)
     assert 'href=' in paras[0]['references']
@@ -44,8 +44,8 @@ def test_assign_paragraphs(one_para_display_object):
     assert paras[0]['subtitle'] == 'glabrous'
 
 
-def test_paragraph(one_para_display_object):
-    para = one_para_display_object.input_data['paragraphs'][0]
+def test_paragraph(paragraphs_for_display_one_object):
+    para = paragraphs_for_display_one_object.input_data['paragraphs'][0]
     return_para = ParagraphsForDisplay.paragraph(para)
     assert isinstance(return_para, dict)
     assert return_para['id'] == para['id']
@@ -56,10 +56,10 @@ def test_paragraph(one_para_display_object):
 
 @pytest.mark.parametrize('key', [('title'),
                                  ('title_note')])
-def test_output_for_display_not_keys(one_para_display_object, key):
-    one_para_display_object.title = one_para_display_object.input_data['group']['title']
-    one_para_display_object.title_note = one_para_display_object.input_data['group']['note']
-    out = one_para_display_object.output_single_para_display('glabrous')
+def test_output_for_display_not_keys(paragraphs_for_display_one_object, key):
+    paragraphs_for_display_one_object.title = paragraphs_for_display_one_object.input_data['group']['title']
+    paragraphs_for_display_one_object.title_note = paragraphs_for_display_one_object.input_data['group']['note']
+    out = paragraphs_for_display_one_object.output_single_para_display('glabrous')
     assert isinstance(out, dict)
     helper.assert_key_not_in_dictionary(out, key)
 
@@ -68,10 +68,10 @@ def test_output_for_display_not_keys(one_para_display_object, key):
                                  ('subtitle'),
                                  ('subtitle_note'),
                                  ('text')])
-def test_output_for_display_keys(one_para_display_object, key):
-    one_para_display_object.title = one_para_display_object.input_data['group']['title']
-    one_para_display_object.title_note = one_para_display_object.input_data['group']['note']
-    out = one_para_display_object.output_single_para_display('glabrous')
+def test_output_for_display_keys(paragraphs_for_display_one_object, key):
+    paragraphs_for_display_one_object.title = paragraphs_for_display_one_object.input_data['group']['title']
+    paragraphs_for_display_one_object.title_note = paragraphs_for_display_one_object.input_data['group']['note']
+    out = paragraphs_for_display_one_object.output_single_para_display('glabrous')
     assert isinstance(out, dict)
     helper.assert_key_in_dictionary(out, key)
 
@@ -79,7 +79,7 @@ def test_output_for_display_keys(one_para_display_object, key):
 @pytest.mark.parametrize('key, substring', [('references', 'YourDictionary_glabrous'),
                                             ('subtitle', 'Glabrous'),
                                             ('text', 'no hairs or pubescence')])
-def test_output_for_display_values(one_para_display_object, key, substring):
-    out = one_para_display_object.format_single_para_display('glabrous')
+def test_output_for_display_values(paragraphs_for_display_one_object, key, substring):
+    out = paragraphs_for_display_one_object.format_single_para_display('glabrous')
     assert isinstance(out, dict)
     helper.assert_in_string(out[key], substring)
