@@ -8,44 +8,32 @@
 '''
 import os
 import portfolio.settings as settings
+from projects.models.paragraphs import Category
+
+
+BLOG = Category.CATEGORY_TYPE_CHOICES[0][0]
+RESUME = Category.CATEGORY_TYPE_CHOICES[1][0]
+FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
+
 
 INPUT_TO_DEV_UPDATER = {
-    'updated_at': None,
-    'group_ids': [],
-    'new_categories': [{'title': 'Reverse Chronological Resume', 'type': 'resume', 'groups': []}],
-    'category_ids': [],
     'para_ids': [],
-    'subtitle': [],
-    'guid': [],
-    'delete_associations': [],
-    'add_associations': [],
+    'add_categories': [{'title': 'Reverse Chronological Resume', 'type': RESUME},
+                       {'title': 'Functional Resume', 'type': RESUME}],
+    'add_groups': [{'title': 'QA Automation', 'note': '', 'category_id': None,
+                    'category_title': 'Functional Resume'}, ],
     'output_directory': os.path.join(settings.BASE_DIR, 'data/data_for_updates/dev_manual_json/'),
 }
 
-UPDATER_FILE_INPUT = {
-    'is_prod': False,
-    'categories': [],
-    'groups': [],
-    'references': [],
-    'paragraphs': [],
-    'associations': {
-        'delete': [
-            {
-                'group_category': [{'group': '', 'category': ''}, ],
-                'group_paragraph': [{'group': '', 'para': ''}, ],
-                'paragraph_reference': [{'para': '', 'ref': ''}, ],
-            },
-        ],
-        'add': [
-            {
-                'group_category': [{'group': '', 'category': ''}, ],
-                'group_paragraph': [{'group': '', 'para': ''}, ],
-                'paragraph_reference': [{'para': '', 'ref': ''}, ],
-            },
-        ],
-    },
-    'cat_id_to_title': {},
-    'group_id_to_title': {},
-    'ref_id_to_link_text': {},
-    'para_id_to_guid': {},
+# the following is only for convenience, so I can cut and paste original format and then update
+EXPECTED_FORMATS = {
+    'add_categories': [{'title': '', 'type': ''},
+                       {'title': 'Functional Resume', 'type': ''}],
+    'add_references': [{'link_text': '', 'url': ''}],
+    'add_groups': [{'title': '', 'note': '', 'category_id': None, 'category_title': ''},
+                   {'title': 'Functional Resume', 'type': ''}],
+    'delete_associations': [{'ref_para': {'para_id': 0, 'ref_id': 0, 'guid': '', 'link_text': ''}},
+                            {'group_para': {'para_id': 0, 'group_id': 0, 'guid': '', 'slug': ''}}],
+    'add_associations': [{'ref_para': {'para_id': 0, 'ref_id': 0, 'guid': '', 'link_text': ''}},
+                         {'group_para': {'para_id': 0, 'group_id': 0, 'guid': '', 'slug': ''}}],
 }

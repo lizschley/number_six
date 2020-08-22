@@ -230,3 +230,5 @@ def add_image_information(para):
     info = lookup.IMAGE_INFO_LOOKUP[para['image_info_key']]
     para['image_classes'] = info['classes']
     return para
+
+

@@ -1,26 +1,39 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
 import json
 import constants.common as constants
+from common_classes.paragraph_record_crud import ParagraphRecordCrud
+from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
+                                        ParagraphReference)
+
+BLOG = Category.CATEGORY_TYPE_CHOICES[0][0]
+RESUME = Category.CATEGORY_TYPE_CHOICES[1][0]
+FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
 
 
-class DbUpdateParagraphRetriever():
-    ''' The DbUpdateParagraphRetriever class retrieves the information used to update paragraphs.
+class DbUpdateRetrieveOrCreate():
+    ''' The DbUpdateRetrieveOrCreate class retrieves the information used to update paragraphs.
         It should ONLY be instantiated by scripts.batch_json_db_updater unless the process
         changes.  It is designed to run in both development and production.  See comments in
         scripts.batch_json_db_updater for more information '''
 
     def __init__(self, input_data):
         ''' Based on the input data, we collect information to be edited in order to update the
-            database.  These variables will eventually be written to JSON to be manually updated '''
+            database.  These variables will eventually be written to JSON to be manually updated
+        '''
+        # https://stackoverflow.com/questions/8653516/python-list-of-dictionaries-search
         self.input_data = input_data
-        self.categories = []
-        self.references = []
-        self.paragraphs = []
-        self.groups = []
+        self.categories = {'created': [], 'retrieved': []}
+        self.references = {'created': [], 'retrieved': []}
+        self.paragraphs = {'retrieved': []}
+        self.groups = {'created': [], 'retrieved': []}
         self.existing_group_paragraph = []
         self.existing_paragraph_reference = []
-        self.add_associations = []
         self.delete_associations = []
+        self.add_associations = []
+        # process data
+        self.title_to_group_id = {}
+        self.title_to_category_id = {}
+        self.link_text_to_reference_id = {}
 
     def collect_data_and_write_json(self):
         '''
@@ -40,25 +53,21 @@ class DbUpdateParagraphRetriever():
 
     def retrieve_data_for_updating(self):
         '''
-        data_retrieval will retrieve the input paramaters (input_data) and will format it in such a way
-        that you can do any of the following:
-            1. update categories, references (complicated), paragraphs and groups
-               * note - category_id in group will be done as part of group update
-            2. Add or delete associations between the following:
-               * note - can NOT create paragraphs in this way
-               a. groups and paragraphs - may need to create group
-               b. paragraphs and references - may need to create the reference
-            3. create categories:
-               a. only way to create a category
-               b. can not create an association with a group in the same process
+        The most update data_retrieval input paramaters are documented by the template used to create
+        the input data. It will be kept up-to-date because it is used to format the input data.
+        Here is the path: data/dictionary_templates/starting_dev_process_input.py
 
-        No input, since we have self.input_data (dictionary)
+        self.input_data will be the input throughout the retrieval process
 
         :return: a dictionary in the format necessary for updating the database
         :rtype: dict
         '''
-
+        self.input_data = self.initial_updates(self.input_data)
+        self.retrieve_existing_data()
         return self.dictionary_for_update()
+
+    def retrieve_existing_data(self):
+        pass
 
     def dictionary_for_update(self):
         '''
