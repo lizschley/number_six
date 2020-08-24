@@ -3,7 +3,7 @@
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from common_classes.paragraphs_to_db import ParagraphsToDatabase
+from common_classes.para_db_create_process import ParaDbCreateProcess
 
 
 def paragraph_list_from_json(json_path):
@@ -31,7 +31,7 @@ def paragraph_json_to_db(json_path):
     :type json_path: string
     '''
     dict_data = para_helper.json_to_dict(json_path)
-    paragraphs = ParagraphsToDatabase()
+    paragraphs = ParaDbCreateProcess()
     paragraphs.dictionary_to_db(dict_data)
 
 

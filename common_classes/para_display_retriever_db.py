@@ -2,7 +2,7 @@
 from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 from projects.models.paragraphs import Group
 from projects.models.paragraphs import Paragraph
-import constants.common as constants
+import constants.sql_substrings as sql_sub
 
 VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 
@@ -30,6 +30,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['subtitle']]))
         return None
 
+    # Todo: idea: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
     def write_group_standalone_para_sql(self):
         '''
         write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
@@ -75,10 +76,10 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: select part of the sql query
         :rtype: str
         '''
-        sql = constants.BEGIN_SELECT
+        sql = sql_sub.BEGIN_SELECT
         if sql_type == 'group_id_only':
-            sql += ', ' + constants.SELECT_GROUP
-        sql += ', ' + constants.SELECT_PARAGRAPHS + ', ' + constants.SELECT_REFERENCES + ' '
+            sql += ', ' + sql_sub.SELECT_GROUP
+        sql += ', ' + sql_sub.SELECT_PARAGRAPHS + ', ' + sql_sub.SELECT_REFERENCES + ' '
         return sql
 
     def get_tables(self, sql, sql_type):
@@ -94,10 +95,10 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: str
         '''
         if sql_type == 'group_id_only':
-            sql += constants.FROM_GROUP_JOIN_PARA + ' '
+            sql += sql_sub.FROM_GROUP_JOIN_PARA + ' '
         else:
-            sql += constants.FROM_PARA + ' '
-        sql += constants.JOIN_REFERENCES_TO_PARA
+            sql += sql_sub.FROM_PARA + ' '
+        sql += sql_sub.JOIN_REFERENCES_TO_PARA
         return sql
 
     def db_output_to_display_input(self, raw_queryset):

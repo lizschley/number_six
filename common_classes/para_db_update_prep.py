@@ -1,7 +1,7 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
 import json
 import constants.common as constants
-from common_classes.paragraph_record_crud import ParagraphRecordCrud
+from common_classes.para_db_crud import ParaDbCrud
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
                                         ParagraphReference)
 
@@ -10,8 +10,8 @@ RESUME = Category.CATEGORY_TYPE_CHOICES[1][0]
 FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
 
 
-class DbUpdateRetrieveOrCreate():
-    ''' The DbUpdateRetrieveOrCreate class retrieves the information used to update paragraphs.
+class ParaDbUpdatePrep():
+    ''' The ParaDbUpdatePrep class retrieves the information used to update paragraphs.
         It should ONLY be instantiated by scripts.batch_json_db_updater unless the process
         changes.  It is designed to run in both development and production.  See comments in
         scripts.batch_json_db_updater for more information '''

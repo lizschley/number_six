@@ -1,130 +1,94 @@
-'''These will be static resusable methods to create &/or update records'''
-from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
-                                        ParagraphReference)
+'''Used in batch process to create db records from JSON data.  JSON data in same format can be used
+   to display the paragraph without creating a db record'''
+from django.db import IntegrityError
+from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
+import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 # Todo: validate input json data --- this is one validation
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
-class ParagraphRecordCrud:
+class ParaDbCreateProcess:
     '''
-    ParagraphsRecordCreateOrUpdate is a class of static methods to retrieve, update or create
-    paragraph associated records.
+    ParaDbCreateProcess is a class to display paragraphs.
+
+    This web app uses paragraph display for most informational pages. This class
+    is the basic functionality.
 
     :param object: inherits from object
     :type object: Object object
     '''
+    def __init__(self):
+        self.title = ''
+        self.title_note = ''
+        # 'fake_para_id': 'para_id'
+        self.fake_to_real_para_id = {}
+        self.standalone = None
+        self.group = None
+        self.ordered = False
+        self.current_order_num = 0
 
-    @staticmethod
-    def find_or_create_category(category_in):
+    def dictionary_to_db(self, input_data):
         '''
-        find_or_create_category retrieve or create category
+        dictionary_to_db drives the db create (or update) process
 
-        :param category_data: data necessary to create a new category
-        :type category_data: dict
+        :param input_data: JSON data formatted into dictionary
+        :type input_data: dict
         '''
-        try:
-            category = Category.objects.get(
-                title=category_in['title']
-            )
-        except category.DoesNotExist:
-            category = ParagraphRecordCrud.create_category(category_in)
-        return category
+        self.assign_group_data(input_data)
+        res = self.find_or_create_group()
+        # Review: when it comes time to figure out error handling strategy
+        if res != 'ok':
+            print(f'group not saved: group input == {input_data["group"]}, result returned {res} ')
+            exit(1)
+        self.find_or_create_references(input_data)
+        self.create_paragraphs(input_data)
+        self.associate_paragraphs_with_references(input_data)
 
-    @staticmethod
-    def create_category(category_in):
+    def assign_group_data(self, input_data):
         '''
-        create_category creates a category record
+        assign_group_data to instance variables
 
-        :param category_in: [description]
-        :type category_in: [type]
-        :return: [description]
+        :param input_data: the input data read from a json file or created in batch
+        :type input_data: dict
+        '''
+        group_dict = input_data['group']
+        self.title = group_dict['title']
+        self.title_note = group_dict['note']
+        self.standalone = group_dict['standalone']
+
+    # Review: when it comes time to figure out error handling strategy
+    def find_or_create_group(self):
+        '''
+        find_or_create_group will look for a group using the title, which must be unique.  It it
+        does not exist, it will be created
+
+        :return: string that says ok or an error message (may change later)
         :rtype: [type]
-        '''
-
-        category = Category(
-            title=category_in['title'],
-            category_type=category_in['type']
-        )
-        category.save()
-        return category.objects.get(category_in['title'])
-
-    @staticmethod
-    def retrieve_category(category_in):
-        '''
-        retrieve_category retrieves a category or returns None if it does not exist
-
-       :param category_data: data necessary to create a new category
-        :type category_data: dict
-        :return: category record or None
-        :rtype: category
-        '''
-        try:
-            category = Category.objects.get(
-                title=category_in['title'],
-                note=category_in['note']
-            )
-        except category.DoesNotExist:
-            category = None
-        return category
-
-
-
-
-    @staticmethod
-    def find_or_create_group(group_in):
-        '''
-        find_or_create_group retrieve or create groups
-
-        :param group_data: data necessary to create a new group
-        :type group_data: dict
         '''
         try:
             group = Group.objects.get(
-                title=group_in['title']
+                title=self.title,
+                note=self.title_note
             )
         except Group.DoesNotExist:
-            group = ParagraphRecordCrud.create_group(group_in)
-        return group
+            group = Group(
+                title=self.title,
+                note=self.title_note
+            )
+            group.save()
+        self.group = self.get_newly_created_group()
+        return 'ok'
 
-    @staticmethod
-    def create_group(group_in):
+    def get_newly_created_group(self):
         '''
-        create_group creates a group record
+        assign_group_to_self ensure that self.group has group
 
-        :param group_in: [description]
-        :type group_in: [type]
-        :return: [description]
-        :rtype: [type]
-        '''
-
-        group = Group(
-            title=group_in['title'],
-            note=group_in['note']
-        )
-        group.save()
-        return Group.objects.get(group_in['title'])
-
-    @staticmethod
-    def retrieve_group(group_in):
-        '''
-        retrieve_group retrieves a group or returns None if it does not exist
-
-       :param group_data: data necessary to create a new group
-        :type group_data: dict
-        :return: Group record or None
+        :return: Group record
         :rtype: Group
         '''
-        try:
-            group = Group.objects.get(
-                title=group_in['title'],
-                note=group_in['note']
-            )
-        except Group.DoesNotExist:
-            group = None
+        group = Group.objects.get(title=self.title)
         return group
-
-#####################################################################################
 
     def find_or_create_references(self, input_data):
         '''
@@ -146,13 +110,6 @@ class ParagraphRecordCrud:
                                 url=ref['url']
                             )
                 reference.save()
-
-
-
-
-###############################################
-
-
 
     # Todo: add some validation, for example the decide_standalone only has three valid possiblities
     def create_paragraphs(self, input_data):

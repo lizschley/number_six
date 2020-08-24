@@ -1,7 +1,7 @@
 ''' writes JSON file that can be used to update the the paragraph
     structure that can be used by the ParagraphsForDisplay class db structure
 
-    Can also create the db structure directly by creating ParagraphsToDatabase and
+    Can also create the db structure directly by creating ParaDbCreateProcess and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
 '''
 from datetime import datetime
@@ -13,12 +13,12 @@ from portfolio.settings import BASE_DIR
 OUT_JSON_PATH = os.path.join(BASE_DIR, 'data')
 
 
-class ParagraphDbInputCreator():
+class ParaDbUpdateProcess():
     '''
-    ParagraphDbInputCreator creates JSON file of the format necessary to create
+    ParaDbUpdateProcess creates JSON file of the format necessary to create
     db structure for paragraphs
 
-    Can also create the db structure directly by creating ParagraphsToDatabase and
+    Can also create the db structure directly by creating ParaDbCreateProcess and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
    '''
 
