@@ -6,7 +6,7 @@ from projects.models.paragraphs import (Category, Reference, Paragraph, Group, G
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
-class ParaDbCrud:
+class ParaDbAllCrud:
     '''
     ParagraphsRecordCreateOrUpdate is a class of static methods to retrieve, update or create
     paragraph associated records.

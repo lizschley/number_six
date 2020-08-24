@@ -1,7 +1,7 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
 import json
 import constants.common as constants
-from common_classes.para_db_crud import ParaDbCrud
+from common_classes.para_db_all_crud import ParaDbCrud
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
                                         ParagraphReference)
 
