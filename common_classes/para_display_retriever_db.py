@@ -144,7 +144,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
                 'title': row.title,
                 'note': row.note,
             }
-        except AttributeError: # Be explicit with catching exceptions.
+        except AttributeError:  # Be explicit with catching exceptions.
             self.ordered = False
             self.group = {
                 'title': 'standalone para',

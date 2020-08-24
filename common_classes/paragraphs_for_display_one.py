@@ -27,13 +27,15 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :rtype: dict
         '''
         if not kwargs['subtitle']:
-            message = f'ParagraphsForDisplayOne only works with subtitle as key word arg, kwargs=={kwargs}'
+            message = ('ParagraphsForDisplayOne only works with subtitle as key word arg, '
+                       f'kwargs=={kwargs}')
             return ParagraphsForDisplayOne.error_output(message)
 
         retriever = ParaDisplayRetrieverDb()
         self.input_data = retriever.data_retrieval(kwargs)
         if self.input_data is None:
-            message = f'ParagraphsForDisplayOne retrieved no data with this subtitile=={kwargs["subtitle"]}'
+            message = ('ParagraphsForDisplayOne retrieved no data with this '
+                       f'subtitle=={kwargs["subtitle"]}')
             return ParagraphsForDisplayOne.error_output(message)
         return self.format_single_para_display(kwargs['subtitle'])
 
@@ -63,7 +65,6 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
             para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
-
 
     def output_single_para_display(self, subtitle):
         '''

@@ -1,6 +1,5 @@
 '''Used in batch process to create db records from JSON data.  JSON data in same format can be used
    to display the paragraph without creating a db record'''
-from django.db import IntegrityError
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 
@@ -100,15 +99,13 @@ class ParaDbCreateProcess:
         references = input_data['references']
         for ref in references:
             try:
-                reference = Reference.objects.get(
-                                link_text=ref['link_text'],
-                                url=ref['url']
-                            )
+                reference = Reference.objects.get(link_text=ref['link_text'],
+                                                  url=ref['url']
+                                                  )
             except Reference.DoesNotExist:
-                reference = Reference(
-                                link_text=ref['link_text'],
-                                url=ref['url']
-                            )
+                reference = Reference(link_text=ref['link_text'],
+                                      url=ref['url']
+                                      )
                 reference.save()
 
     # Todo: add some validation, for example the decide_standalone only has three valid possiblities
