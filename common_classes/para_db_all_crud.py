@@ -2,6 +2,7 @@
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
                                         ParagraphReference)
 
+
 # Todo: validate input json data --- this is one validation
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
@@ -28,7 +29,7 @@ class ParaDbAllCrud:
                 title=category_in['title']
             )
         except category.DoesNotExist:
-            category = ParaDbCrud.create_category(category_in)
+            category = ParaDbAllCrud.create_category(category_in)
         return category
 
     @staticmethod
@@ -68,9 +69,6 @@ class ParaDbAllCrud:
             category = None
         return category
 
-
-
-
     @staticmethod
     def find_or_create_group(group_in):
         '''
@@ -84,7 +82,7 @@ class ParaDbAllCrud:
                 title=group_in['title']
             )
         except Group.DoesNotExist:
-            group = ParaDbCrud.create_group(group_in)
+            group = ParaDbAllCrud.create_group(group_in)
         return group
 
     @staticmethod
@@ -124,6 +122,21 @@ class ParaDbAllCrud:
             group = None
         return group
 
+    @staticmethod
+    def class_based_rawsql_retrieval(sql, class_, *args):
+        '''
+        class_based_rawsql_retrieval highly reusable retrieval query
+
+        :param sql: arguments with the key matching the key in the query
+        :type sql: str
+        :param class_: class to start with
+        :type class_: model class
+        :return: result from query
+        :rtype: rawsql queryset
+        '''
+        return class_.objects.raw(sql, [args])
+
+
 #####################################################################################
 
     def find_or_create_references(self, input_data):
@@ -136,15 +149,11 @@ class ParaDbAllCrud:
         references = input_data['references']
         for ref in references:
             try:
-                reference = Reference.objects.get(
-                                link_text=ref['link_text'],
-                                url=ref['url']
-                            )
+                reference = Reference.objects.get(link_text=ref['link_text'],
+                                                  url=ref['url'])
             except Reference.DoesNotExist:
-                reference = Reference(
-                                link_text=ref['link_text'],
-                                url=ref['url']
-                            )
+                reference = Reference(link_text=ref['link_text'],
+                                      url=ref['url'])
                 reference.save()
 
 

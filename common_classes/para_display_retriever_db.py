@@ -1,8 +1,9 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
-from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
-from projects.models.paragraphs import Group
-from projects.models.paragraphs import Paragraph
 import constants.sql_substrings as sql_sub
+from common_classes.para_db_all_crud import ParaDbAllCrud
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
+from projects.models.paragraphs import (Group, Paragraph)
+
 
 VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 
@@ -23,11 +24,14 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         '''
         if 'group_id' in kwargs.keys():
             query = self.write_group_standalone_para_sql()
-            return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
+            raw_queryset = ParaDbAllCrud.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
+            return self.db_output_to_display_input(raw_queryset)
         if 'subtitle' in kwargs.keys():
             self.group = {'title': kwargs['subtitle'], 'note': ''}
             query = self.write_one_standalone_para_sql()
-            return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['subtitle']]))
+            raw_queryset = ParaDbAllCrud.class_based_rawsql_retrieval(query, Paragraph,
+                                                                      kwargs['subtitle'])
+            return self.db_output_to_display_input(raw_queryset)
         return None
 
     # Todo: idea: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
