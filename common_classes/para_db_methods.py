@@ -4,7 +4,7 @@ from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 
 
-class ParaDbAllCrud:
+class ParaDbMethods:
     '''
     ParagraphsRecordCreateOrUpdate is a class of static methods to retrieve, update or create
     paragraph associated records.

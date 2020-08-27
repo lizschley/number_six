@@ -1,7 +1,7 @@
 '''Used in batch process to create db records from JSON data.  JSON data in same format can be used
    to display the paragraph without creating a db record'''
 import sys
-from common_classes.para_db_all_crud import ParaDbAllCrud
+from common_classes.para_db_methods import ParaDbMethods
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
@@ -9,7 +9,7 @@ from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Refere
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
-class ParaDbCreateProcess(ParaDbAllCrud):
+class ParaDbCreateProcess(ParaDbMethods):
     '''
     ParaDbCreateProcess is a class to display paragraphs.
 
