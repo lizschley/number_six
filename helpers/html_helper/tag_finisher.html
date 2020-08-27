@@ -1,16 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>HTML Writing Helper</title>
 </head>
 <body>
 
 <h1>Hello World</h1>
-<p>Hi and bye.</p>
-<ul>
-    <li> la la alo</li>
-    <li> lo ho ho</li>
-</ul>
+<p>GeekForGeeks as is often the case, provides an excellent definition of decorators, for example when
+    you write @staticmethod over a method in Python.  Basically decorators are used to add extra functionality
+    to a function without changing the functionality itself.  For example, before the function you could check the
+    begin time and afterwards check the end time.
+</p>
+<p>Here is an example showing how to send in variables and how to return values.  The readthedocs site has a great
+example showing the order of when things are called.  The following code snippet combines the examples, to show
+both the order and how to return values from the function that is being decorated.
+</p>
+<pre>
+def decorator_function_with_arguments(func):
+    print('#1 - inside decorator')
+    def wrapped_f(*args, **kwargs):
+        print('#4 & 9 - Inside wrapped_f()')
+        rint('#5 & 10 - Decorator arguments:', args, kwargs)
+        returned_value = func(*args)
+        print('#7 & 12 - After f(*args)')
+        return returned_value
+    return wrapped_f
+
+
+@decorator_function_with_arguments
+def sayHello(a1, a2, a3, a4):
+    print('#6 & 11 - sayHello arguments:', a1, a2, a3, a4)
+    return 'done printing'
+
+print('#2 - After decoration')
+print('#3 Preparing to call sayHello()')
+
+ret = sayHello('say', 'hello', 'argument', 'list')
+
+print(f'#8 - after first sayHello() call, returned_value == {ret}')
+
+sayHello('a', 'different', 'set of', 'arguments')
+
+print('#13 - after second sayHello() call')
+
+
+</pre>
+<p>This puts out the following data:</p>
+<pre>
+#1 - inside decorator
+#2 - After decoration
+#3 Preparing to call sayHello()
+#4 & 9 - Inside wrapped_f()
+#5 & 10 - Decorator arguments: ('say', 'hello', 'argument', 'list') {}
+#6 & 11 - sayHello arguments: say hello argument list
+#7 & 12 - After f(*args)
+#8 - after first sayHello() call, returned_value == done printing
+#4 & 9 - Inside wrapped_f()
+#5 & 10 - Decorator arguments: ('a', 'different', 'set of', 'arguments') {}
+#6 & 11 - sayHello arguments: a different set of arguments
+#7 & 12 - After f(*args)
+#13 - after second sayHello() call
+</pre>
 </body>
 </html>

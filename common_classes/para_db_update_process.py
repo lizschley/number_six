@@ -37,6 +37,8 @@ class ParaDbUpdateProcess():
                               'input_' + datetime.now().isoformat(timespec='seconds')) + '.json'
         self.output = self.starting_dictionary(title, note, ordered, standalone)
         self.path_to_json = OUT_JSON_PATH + '/' + filename
+        updating = kwargs.get('updating')
+        self.updating = updating
 
     @staticmethod
     def reference_dictionary(link_text, url):

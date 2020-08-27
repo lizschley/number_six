@@ -16,7 +16,7 @@ class ParaDbUpdatePrep():
         changes.  It is designed to run in both development and production.  See comments in
         scripts.batch_json_db_updater for more information '''
 
-    def __init__(self, input_data):
+    def __init__(self, input_data, updating=False):
         ''' Based on the input data, we collect information to be edited in order to update the
             database.  These variables will eventually be written to JSON to be manually updated
         '''
@@ -34,6 +34,7 @@ class ParaDbUpdatePrep():
         self.title_to_group_id = {}
         self.title_to_category_id = {}
         self.link_text_to_reference_id = {}
+        self.updating = updating
 
     def collect_data_and_write_json(self):
         '''

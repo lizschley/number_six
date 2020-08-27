@@ -21,11 +21,13 @@ def run(*args):
         > python manage.py runscript -v3  batch_json_processor --script-args
                 filename=/Users/liz/development/number_six/data/input_2020-07-21T19:02:13.json
         or > python manage.py runscript -v3  batch_json_processor
+        or > python manage.py runscript -v3  batch_json_processor --script-args process=db_update
     '''
     filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
     print(f'filename == {filename}')
 
     process = process_checker(args, SCRIPT_PARAM_SUBSTR['process'])
+    print(f'process=={process}')
     if process == DB_UPDATE:
         print('Running the db update process.')
         import_helper.paragraph_json_to_db(filename)
@@ -46,7 +48,7 @@ def filename_checker(args, subs):
     :return: filename & path
     :rtype: str
     '''
-    print(f'args type is {type(args)}')
+    print(f'args type is {type(args)} args=={args}')
     filenames = no_import_helper.check_for_batch_args(args, subs)
     if len(filenames) > 1:
         # if passing > 1 argument that passes extension test

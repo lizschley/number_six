@@ -1,5 +1,7 @@
 '''Used in batch process to create db records from JSON data.  JSON data in same format can be used
    to display the paragraph without creating a db record'''
+import sys
+from common_classes.para_db_all_crud import ParaDbAllCrud
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 
@@ -7,7 +9,7 @@ import helpers.no_import_common_class.paragraph_helpers as para_helper
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
 
 
-class ParaDbCreateProcess:
+class ParaDbCreateProcess(ParaDbAllCrud):
     '''
     ParaDbCreateProcess is a class to display paragraphs.
 
@@ -17,7 +19,8 @@ class ParaDbCreateProcess:
     :param object: inherits from object
     :type object: Object object
     '''
-    def __init__(self):
+    def __init__(self, updating=False):
+        super(ParaDbCreateProcess, self).__init__(updating)
         self.title = ''
         self.title_note = ''
         # 'fake_para_id': 'para_id'
@@ -34,15 +37,29 @@ class ParaDbCreateProcess:
         :param input_data: JSON data formatted into dictionary
         :type input_data: dict
         '''
-        self.assign_group_data(input_data)
-        res = self.find_or_create_group()
-        # Review: when it comes time to figure out error handling strategy
-        if res != 'ok':
-            print(f'group not saved: group input == {input_data["group"]}, result returned {res} ')
-            exit(1)
+        self.process_group(input_data)
         self.find_or_create_references(input_data)
+        if not self.updating:
+            sys.exit(1)
         self.create_paragraphs(input_data)
         self.associate_paragraphs_with_references(input_data)
+
+    def process_group(self, input_data):
+        '''
+        find_or_create_group will look for a group using the title, which must be unique.  It it
+        does not exist, it will be created
+
+        :return: string that says ok or an error message (may change later)
+        :rtype: [type]
+        '''
+        self.assign_group_data(input_data)
+        create_dict = {'title': self.title, 'note': self.title_note}
+        find_dict = {'title': self.title}
+
+        group = self.find_or_create_record(Group, find_dict, create_dict)
+        print(f'in calling find or create, group == {group}')
+        if self.updating:
+            self.group = group
 
     def assign_group_data(self, input_data):
         '''
@@ -56,64 +73,23 @@ class ParaDbCreateProcess:
         self.title_note = group_dict['note']
         self.standalone = group_dict['standalone']
 
-    # Review: when it comes time to figure out error handling strategy
-    def find_or_create_group(self):
-        '''
-        find_or_create_group will look for a group using the title, which must be unique.  It it
-        does not exist, it will be created
-
-        :return: string that says ok or an error message (may change later)
-        :rtype: [type]
-        '''
-        try:
-            group = Group.objects.get(
-                title=self.title,
-                note=self.title_note
-            )
-        except Group.DoesNotExist:
-            group = Group(
-                title=self.title,
-                note=self.title_note
-            )
-            group.save()
-        self.group = self.get_newly_created_group()
-        return 'ok'
-
-    def get_newly_created_group(self):
-        '''
-        assign_group_to_self ensure that self.group has group
-
-        :return: Group record
-        :rtype: Group
-        '''
-        group = Group.objects.get(title=self.title)
-        return group
-
     def find_or_create_references(self, input_data):
         '''
         find_or_create_references will find based on link_text which must be unique.
-
         :param input_data: references contain link_text & url. Multiple paras can have same reference
         :type input_data: dict
         '''
         references = input_data['references']
         for ref in references:
-            try:
-                reference = Reference.objects.get(link_text=ref['link_text'],
-                                                  url=ref['url']
-                                                  )
-            except Reference.DoesNotExist:
-                reference = Reference(link_text=ref['link_text'],
-                                      url=ref['url']
-                                      )
-                reference.save()
+            create_dict = {'link_text': ref['link_text'], 'url': ref['url']}
+            find_dict = {'link_text': ref['link_text']}
+            ref = self.find_or_create_record(Reference, find_dict, create_dict)
 
     # Todo: add some validation, for example the decide_standalone only has three valid possiblities
     def create_paragraphs(self, input_data):
         '''
         create_paragraphs takes the input_data from the JSON file input (just like display JSON), but
         this time actually creates the database records
-
         :param input_data: dictionary from JSON file to dictionary transformation
         :type input_data: dict
         '''
@@ -131,20 +107,16 @@ class ParaDbCreateProcess:
         '''
         Decide_standalone says whether to make the  standalone field in the paragraph record
         True or False.
-
         If all the paragraphs in a given JSON file are True or False, then the data in the
         group record is sufficient ('yes' is True and 'no' is False).
-
         BUT if the group record says 'depend_on_para' then that means that the JSON file is
         responsible to saying whether the paragraph stands alone.  (For flashcards, the questions
         will not standalone, but the answers probably will)
-
         The standalone field in the paragraph record will be used eliminate non-standalone
         paragraphs when doing a search string or tag search when no group or catagory is chosen.
         In that case, the rule is that only standalone records will be retrieved.  This field
         is in the paragraph because a given group can have some standalone and
         some not-standalone records
-
         :param para: paragraph record from the input
         :type para: dict
         :return: True or False based on whether the paragraph stands alone
@@ -161,7 +133,6 @@ class ParaDbCreateProcess:
     def associate_paragraphs_with_references(self, input_data):
         '''
         associate_paragraphs_with_references creates the paragraph to reference association
-
         :param input_data: dictionary created from reading the JSON file used to create the paragraphs
         :type input_data: dict
         '''
@@ -176,7 +147,6 @@ class ParaDbCreateProcess:
         create_paragraph_record creates paragraph records.  This does not do a uniqueness check!
         This calls format_json_text which takes the paragraph text as formatted in the JSON file and
         transforms it to a str as needed to store in atabase and use in ParagraphsForDisplay
-
         :param para: JSON file to dictionary format
         :type para: dict
         :return: paragraph record
@@ -195,7 +165,6 @@ class ParaDbCreateProcess:
     def add_association_with_group(self, paragraph):
         '''
         add_association_with_group associates a paragraph with a group record
-
         :param paragraph: paragraph that was just created
         :type paragraph: db record
         '''

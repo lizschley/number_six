@@ -31,7 +31,7 @@ def paragraph_json_to_db(json_path):
     :type json_path: string
     '''
     dict_data = para_helper.json_to_dict(json_path)
-    paragraphs = ParaDbCreateProcess()
+    paragraphs = ParaDbCreateProcess(True)
     paragraphs.dictionary_to_db(dict_data)
 
 
