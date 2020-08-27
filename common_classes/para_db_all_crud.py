@@ -35,13 +35,14 @@ class ParaDbAllCrud:
             record = class_.objects.get(**find_dict)
         return record
 
-    def create_record(self, class_, find_dict, create_dict):
+    def create_record(self, class_, create_dict):
         record = class_(**create_dict)
         if self.updating:
             record.save()
         else:
             return create_dict
-        return class_.objects.get(**find_dict)
+        print(f'created record {record}')
+        return record
 
     def find_record(self, class_, find_dict):
         return class_.objects.get(**find_dict)

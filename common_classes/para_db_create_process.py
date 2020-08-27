@@ -2,8 +2,8 @@
    to display the paragraph without creating a db record'''
 import sys
 from common_classes.para_db_all_crud import ParaDbAllCrud
-from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
 # Todo: validate input json data --- this is one validation
 VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
@@ -152,15 +152,10 @@ class ParaDbCreateProcess(ParaDbAllCrud):
         :return: paragraph record
         :rtype: db record
         '''
-        paragraph = Paragraph.objects.create(
-            subtitle=para['subtitle'],
-            standalone=para['standalone'],
-            note=para['note'],
-            image_path=para['image_path'],
-            image_info_key=para['image_info_key'],
-            text=para_helper.format_json_text(para['text'])
-        )
-        return paragraph
+        create_dict = para.copy()
+        del create_dict['id']
+        create_dict['text'] = para_helper.format_json_text(para['text'])
+        return self.create_record(Paragraph, create_dict)
 
     def add_association_with_group(self, paragraph):
         '''
@@ -168,5 +163,6 @@ class ParaDbCreateProcess(ParaDbAllCrud):
         :param paragraph: paragraph that was just created
         :type paragraph: db record
         '''
-        GroupParagraph.objects.create(group=self.group, paragraph=paragraph,
-                                      order=self.current_order_num)
+        create_dict = {'group_id': self.group.id, 'paragraph_id': paragraph.id,
+                       'order': self.current_order_num}
+        return self.create_record(GroupParagraph, create_dict)
