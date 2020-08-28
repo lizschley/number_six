@@ -59,4 +59,3 @@ class ParaDbMethods:
         :rtype: rawsql queryset
         '''
         return class_.objects.raw(sql, [args])
-

@@ -10,8 +10,8 @@ from portfolio.settings import BASE_DIR
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as no_import_helper
 
-JSON_DATA_ROOT = os.path.join(BASE_DIR, 'data')
-SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=',}
+INPUT_CREATE_JSON = os.path.join(BASE_DIR, 'data/data_for_creates')
+SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', }
 DB_UPDATE = 'db_update'
 
 
@@ -58,11 +58,11 @@ def filename_checker(args, subs):
         # if no arguments, get first filename that passes extension test in correct directory
         # could do in a loop, but extra work unless reason presents itself
         print('Taking first file with a json extension from the default data directory')
-        filenames = no_import_helper.check_for_batch_args(os.listdir(JSON_DATA_ROOT), subs)
+        filenames = no_import_helper.check_for_batch_args(os.listdir(INPUT_CREATE_JSON), subs)
         if len(filenames) < 1:
             print('No json files in default directory and no json file as input parameter')
             exit(0)
-        return os.path.join(JSON_DATA_ROOT, filenames[0])
+        return os.path.join(INPUT_CREATE_JSON, filenames[0])
     else:
         temp_filenames = filenames[0]
         temp_filenames = temp_filenames.split('=')
