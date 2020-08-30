@@ -21,7 +21,7 @@ def paragraph_list_from_json(json_path):
     return paragraphs.retrieve_paragraphs(path_to_json=json_path)
 
 
-def paragraph_json_to_db(json_path):
+def paragraph_json_to_db(json_path, updating=False):
     '''
     paragraph_json_to_db
     Run by batch job to read a json file and update the database.  There is
@@ -31,7 +31,7 @@ def paragraph_json_to_db(json_path):
     :type json_path: string
     '''
     dict_data = para_helper.json_to_dict(json_path)
-    paragraphs = ParaDbCreateProcess(True)
+    paragraphs = ParaDbCreateProcess(updating)
     paragraphs.dictionary_to_db(dict_data)
 
 

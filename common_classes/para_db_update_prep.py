@@ -1,7 +1,8 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
 import json
-import constants.common as constants
+import constants.sql_substrings as sql_substrings
 from common_classes.para_db_methods import ParaDbMethods
+from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group, GroupParagraph,
                                         ParagraphReference)
 
@@ -21,20 +22,23 @@ class ParaDbUpdatePrep(ParaDbMethods):
             database.  These variables will eventually be written to JSON to be manually updated
         '''
         # https://stackoverflow.com/questions/8653516/python-list-of-dictionaries-search
+        # this is the output data
+        super(ParaDbUpdatePrep, self).__init__(updating)
         self.input_data = input_data
-        self.categories = {'created': [], 'retrieved': []}
-        self.references = {'created': [], 'retrieved': []}
-        self.paragraphs = {'retrieved': []}
-        self.groups = {'created': [], 'retrieved': []}
-        self.existing_group_paragraph = []
-        self.existing_paragraph_reference = []
-        self.delete_associations = []
-        self.add_associations = []
+        self.output_data = {
+            'categories': {'created': [], 'retrieved': []},
+            'references': {'created': [], 'retrieved': []},
+            'paragraphs': [],
+            'groups': {'created': [], 'retrieved': []},
+            'existing_group_paragraph': [],
+            'existing_paragraph_reference': [],
+            'delete_associations': [],
+            'add_associations': [],
+        }
         # process data
         self.title_to_group_id = {}
         self.title_to_category_id = {}
         self.link_text_to_reference_id = {}
-        self.updating = updating
 
     def collect_data_and_write_json(self):
         '''
@@ -48,49 +52,36 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
         Step 1 will never be run in production, since data is updated only in development
         '''
-        output_data = self.retrieve_data_for_updating()
-        with open(self.input_data['path_to_json'], 'w') as file_path:
-            json.dump(output_data, file_path)
 
-    def retrieve_data_for_updating(self):
-        '''
-        The most update data_retrieval input paramaters are documented by the template used to create
-        the input data. It will be kept up-to-date because it is used to format the input data.
-        Here is the path: data/dictionary_templates/starting_dev_process_input.py
+        self.process_input_and_output()
+        out_dir = self.input_data['output_directory']
 
-        self.input_data will be the input throughout the retrieval process
+        output_file = open(ParagraphDbInputCreator.create_json_file_path(directory_path=out_dir), 'w')
+        # magic happens here to make it pretty-printed
+        output_file.write(json.dumps(json.loads(self.output_data), indent=4, sort_keys=True))
+        output_file.close()
 
-        :return: a dictionary in the format necessary for updating the database
-        :rtype: dict
-        '''
-        self.input_data = self.initial_updates(self.input_data)
-        self.retrieve_existing_data()
-        return self.dictionary_for_update()
 
-    def retrieve_existing_data(self):
+    def process_input_and_output(self):
+        self.create_standalone_records()
+        self.retrieve_and_process_update_input()
+
+
+    def create_standalone_records(self):
         pass
 
-    def dictionary_for_update(self):
-        '''
-        dictionary_for_update is the dictionary to be written to the output JSON for editing
+    def retrieve_and_process_update_input(self):
+        pass
 
-        :return: dictionary used in the format used by the database updater (not yet created)
-        :rtype: dict
-        '''
-        return {
-            'categories':  self.categories,
-            'references': self.references,
-            'paragraphs': self.paragraphs,
-            'groups': self.groups,
-            'existing_group_paragraph': self.existing_group_paragraph,
-            'existing_paragraph_reference': self.existing_paragraph_reference,
-            'add_associations': self.add_associations,
-            'delete_associations': self.delete_associations,
-        }
+
+
+
+
 
 # begin example ideas only (from another class)
 
-    def build_basic_sql(self, sql_type):
+
+    def build_complete_retrieve_sql(self, sql_type):
         '''
         basic_sql creates the sql code to retrieve paragraphs and their related records
 
@@ -109,13 +100,11 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: select part of the sql query
         :rtype: str
         '''
-        sql = constants.BEGIN_SELECT
-        if sql_type == 'group_id_only':
-            sql += ', ' + constants.SELECT_GROUP
-        sql += ', ' + constants.SELECT_PARAGRAPHS + ', ' + constants.SELECT_REFERENCES + ' '
+        sql = sql_substrings.BEGIN_SELECT
+        sql += ', ' + sql_substrings.SELECT_PARAGRAPHS + ', ' + sql_substrings.SELECT_REFERENCES + ' '
         return sql
 
-    def get_tables(self, sql, sql_type):
+    def get_tables(self, sql, get_category=False):
         '''
         get_tables builds the tables and joins for the given sql type (depends on how paragraphs are
         used) Sql type is set based key word args
@@ -127,11 +116,10 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: Partial query
         :rtype: str
         '''
-        if sql_type == 'group_id_only':
-            sql += constants.FROM_GROUP_JOIN_PARA + ' '
-        else:
-            sql += constants.FROM_PARA + ' '
-        sql += constants.JOIN_REFERENCES_TO_PARA
+        sql += sql_substrings.FROM_PARA + ' '
+        sql += sql_substrings.JOIN_REFERENCES_TO_PARA
+        sql += sql_substrings.JOIN_GROUP_TO_PARA
+        sql += sql_substrings.JOIN_CATEGORY_TO_GROUP
         return sql
 
     def db_output_to_display_input(self, raw_queryset):
@@ -154,12 +142,10 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :param query_set: All the paragraphs that were retrieved in queryset form
         :type query_set: django.db.models.query.RawQuerySet instance
         '''
+        existing_ids = { 'group': [], 'category': [], 'reference': []}
         for row in query_set:
-            if not self.group:
-                self.first_row_assignments(row)
-            self.add_ref_to_paragraph_link_txt_dictionary(row.paragraph_id, row.link_text)
-            self.append_unique_reference(row)
-            self.append_unique_paragraph(row)
+            print(f'row=={row}, {existing_ids}')
+
 
     # Todo: eventually validate that if one row.order is zero in set, they all are
     def first_row_assignments(self, row):

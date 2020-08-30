@@ -1,27 +1,29 @@
 '''
     ref: https://django-extensions.readthedocs.io/en/latest/runscript.html
 
-    Three part process:
-    1. read data, write json to be editted
-    2. edit the data manually (only what you want updated, delete the rest)
-    3. do the update by reading the file.
+    Three part process (this is Step 3):
+    1. Run this script to read db data and write json to be edited (run this script)
+       * note - see usage directions in run method, below
+    2. Start with S1 output data and edit what you want updated and delete the rest
+    3. Run batch_json_db_updater_s3 to update the database using the Step 2 file changes
 
 :returns: nothing
 '''
 import os
+import sys
 from portfolio.settings import BASE_DIR
 
 
 INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input')
 INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_json')
 MANUAL_UPDATE_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
-DEV_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
 # Todo: decide if move to PROD_INPUT_JSON data can be automated
 # whether by udated_at or whenever filename includes likeprod... experimentation needed
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
 DO_UPDATE = 'do_update'
 TEST_UPDATE = 'test_update'
 RUN_AS_PROD = 'run_as_prod'
+UPDATING = 'updating'
 JSON_SUB = '.json'
 PY_SUB = '.py'
 PROD_PROCESS_IND = 'likeprod'
@@ -30,10 +32,16 @@ PROD_PROCESS_IND = 'likeprod'
 def run(*args):
     '''
         usage as follows:
-        Step 1 - development only, no parameters, exits if prod
+        Step 1 - development only
+            * exits if prod, Step 1 only happens in development
+            * no parameters means groups, references and categories are not created
+            * The parameter updating means that updating will be true in Step 1
+        >>> python manage.py runscript -v3  batch_json_db_updater updating
+        or
         >>> python manage.py runscript -v3  batch_json_db_updater
             * reads python data from <INPUT_TO_UPDATER_STEP_ONE> (Python dictionaries)
             * no production version of this, since production data comes from development
+            * creates category, group, or refererence records
             * writes json file to <MANUAL_UPDATE_JSON>
 
         Step 2 - development only, manual step to make the changes you want
@@ -43,14 +51,17 @@ def run(*args):
 
         Step 3 - production or development, this is where db updates happen (can run without updates)
 
+        ********* Run as Prod ************
         * Using the run_as_prod as argument - doesn't run anything when its the only argument
         ** will give more create and update possibilities in development as well as in production.
         ** It also allows thorough testing for the production process in development.
+
         * Do the following in manual edits:
         ** for creates: pull in data using the updated_at date/time input
         ***  then create, edit or delete text, etc as needed
         ***  explicitly set the guid or other unique field
         ***  make the id really high, & be careful to use the same id in associations
+
         ** for updates: high ids or use the same one; be careful about associations always
         ***   make desired changes
         ***   remember to include <PROD_PROCESS_IND> (value of) in the json file name after editing
@@ -83,16 +94,15 @@ def run(*args):
         >>> python manage.py runscript -v3  batch_json_db_updater do_update
         or
         >>> python manage.py runscript -v3  batch_json_db_updater do_update run_as_prod
-
     '''
     process_data = init_process_data(args)
     if process_data.get('error'):
         print(process_data['error'])
-        exit(1)
+        sys.exit(process_data['error'])
     process_data = establish_process_and_files(process_data)
     if process_data.get('error'):
         print(process_data['error'])
-        exit(1)
+        sys.exit(process_data['error'])
     res = call_process(process_data)
     if res != 'ok':
         print(f'Error! {res}')
@@ -109,24 +119,29 @@ def init_process_data(args):
     do_update = False
     test_update = False
     is_prod = False
+    updating = False
     if RUN_AS_PROD in args:
         is_prod = True
     if DO_UPDATE in args:
         do_update = True
     if TEST_UPDATE in args:
         test_update = True
-    message = test_for_errors(args, is_prod, do_update, test_update)
+    if UPDATING in args:
+        updating = True
+    message = test_for_errors(args, is_prod, do_update, test_update, updating)
     if message != 'ok':
         return {'error': message}
     if not is_prod:
         is_prod = True if os.getenv('ENVIRONMENT') == 'production' else False
-    return switches_from_args(is_prod, do_update, test_update)
+    return switches_from_args(is_prod, do_update, test_update, updating)
 
 
-def test_for_errors(args, is_prod, do_update, test_update):
+def test_for_errors(args, is_prod, do_update, test_update, updating):
     'Ensures the correct number and combinations of parameters.'
     message = f'Error! To many args, args == {args}'
     if len(args) > 2:
+        return message
+    if updating and len(args) > 1:
         return message
     if not is_prod and len(args) > 1:
         return message
@@ -137,12 +152,13 @@ def test_for_errors(args, is_prod, do_update, test_update):
     return 'ok'
 
 
-def switches_from_args(is_prod, do_update, test_update):
+def switches_from_args(is_prod, do_update, test_update, updating):
     ''' Return from init process data '''
     return {
         'is_prod': is_prod,
         'do_update': do_update,
         'test_update': test_update,
+        'updating': updating,
     }
 
 

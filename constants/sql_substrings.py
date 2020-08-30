@@ -10,10 +10,17 @@ FROM_GROUP_JOIN_PARA = ('from projects_group g '
                         'join projects_paragraph p on p.id = gp.paragraph_id ')
 FROM_PARA = 'from projects_paragraph p'
 
+JOIN_GROUP_TO_PARA = ('join projects_groupparagraph gp on p.id = gp.paragraph_id '
+                      'join projects_group g on g.id = gp.group_id ')
+
+JOIN_CATEGORY_TO_GROUP = ('left outer join projects_category c on c.id = g.category_id ')
+
 JOIN_REFERENCES_TO_PARA = ('join projects_paragraphreference pr on p.id = pr.paragraph_id '
                            'join projects_reference r on r.id = pr.reference_id ')
 
-# the following are for updates, which will be creates in production
+
+
+# the following are for updates, which may be creates in production
 COMPLETE_CATEGORY_SELECT = ('c.id as category_id, c.title as category_title, c.slug as category_slug, '
                             'c.category_type, c.created_at as category_created_at, '
                             'c.updated_at as category_updated_at')

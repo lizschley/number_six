@@ -12,13 +12,9 @@ FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
 
 
 INPUT_TO_DEV_UPDATER = {
-    # One of the following:
-    'updated_at': None,
-    'group_ids': [],
-    'category_ids': [],
-    'para_ids': [],
-
-    # Any or all of the following (see expected formats below, only for convenience):
+    # Any or all of the following:
+    # Note - the following is NOT for updating, but will be processed before any retrievals
+    # For this reason, we need include unique keys for the delete and add associations
     'add_categories': [{'title': 'Reverse Chronological Resume', 'type': RESUME},
                        {'title': 'Functional Resume', 'type': RESUME}],
     'add_references': [],
@@ -26,6 +22,12 @@ INPUT_TO_DEV_UPDATER = {
                     'category_title': 'Functional Resume'}, ],
     'delete_associations': [],
     'add_associations': [],
+
+    # One of the following:
+    'updated_at': None,  # for production, though can be used in develop with is_
+    'group_ids': [],
+    'category_ids': [],
+    'para_ids': [],
 
     # can override if you want
     'output_directory': os.path.join(settings.BASE_DIR, 'data/data_for_updates/dev_manual_json/'),
