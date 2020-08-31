@@ -7,21 +7,16 @@
 import os
 import sys
 from pprint import pprint
-from portfolio.settings import BASE_DIR
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as no_import_helper
-
-INPUT_CREATE_JSON = os.path.join(BASE_DIR, 'data/data_for_creates')
-SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', }
-DB_UPDATE = 'db_update'
-TEST_UPDATE = 'test_update'
+import constants.scripts as constants
 
 
 def run(*args):
     '''
         For simply creating and displaying input, no args, though you can specify filename:
         >>> python manage.py runscript -v3  batch_json_processor --script-args
-            filename=/Users/liz/development/number_six/data/input_2020-07-21T19:02:13.json
+            filename=/Users/liz/development/number_six/data/data_for_creates/loaded/chinese_holly_load.json
         or
         >>> python manage.py runscript -v3  batch_json_processor (picks first json file in directory)
 
@@ -29,18 +24,15 @@ def run(*args):
         >>> python manage.py runscript -v3  batch_json_processor --script-args process=db_update
         >>> python manage.py runscript -v3  batch_json_processor --script-args process=test_update
     '''
-    filename = filename_checker(args, SCRIPT_PARAM_SUBSTR['filename'])
+    filename = filename_checker(args, constants.SCRIPT_PARAM_SUBSTR['filename'])
     print(f'filename == {filename}')
 
-    process = process_checker(args, SCRIPT_PARAM_SUBSTR['process'])
+    process = process_checker(args, constants.SCRIPT_PARAM_SUBSTR['process'])
     print(f'process=={process}')
-    if process in (DB_UPDATE, TEST_UPDATE):
-        updating = process == DB_UPDATE
+    if process in (constants.DB_UPDATE, constants.TEST_UPDATE):
+        updating = process == constants.DB_UPDATE
         print(f'Running paragraph creator with updating == {updating}')
         import_helper.paragraph_json_to_db(filename, updating)
-    elif process == TEST_UPDATE:
-        print('Testing the db update process with updating == False (default).')
-        import_helper.paragraph_json_to_db(filename)
     else:
         paragraphs = import_helper.paragraph_list_from_json(filename)
         pprint(paragraphs)
@@ -62,25 +54,20 @@ def filename_checker(args, subs):
     filenames = no_import_helper.check_for_batch_args(args, subs)
     if len(filenames) > 1:
         # if passing > 1 argument that passes extension test
-        print('Have not implemented passing in > one specific filename and path.')
         sys.exit('Have not implemented passing in > one specific filename and path.')
     elif len(filenames) < 1:
         # if no arguments, get first filename that passes extension test in correct directory
         # could do in a loop, but extra work unless reason presents itself
-        print('Taking first file with a json extension from the default data directory')
-        filenames = no_import_helper.check_for_batch_args(os.listdir(INPUT_CREATE_JSON), subs)
+        filenames = no_import_helper.check_for_batch_args(os.listdir(constants.INPUT_CREATE_JSON), subs)
         if len(filenames) < 1:
-            print('No json files in default directory and no json file as input parameter')
             sys.exit('No json files in default directory and no json file as input parameter')
-        return os.path.join(INPUT_CREATE_JSON, filenames[0])
+        return os.path.join(constants.INPUT_CREATE_JSON, filenames[0])
     else:
         temp_filenames = filenames[0]
         temp_filenames = temp_filenames.split('=')
         if len(temp_filenames) != 2:
-            print('Need one and only one filename= to pass in a filename')
             sys.exit('Need one and only one filename= to pass in a filename')
         filename = temp_filenames[1]
-
         print(f'Using json file passed in as a parameter: {filename}')
         return filename
 
