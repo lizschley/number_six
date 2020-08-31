@@ -2,6 +2,7 @@
     Use this as a template for the dictionary input to the data retrieval before updates
 
     To update development, do this in Step 1:
+       * Copy (don't move) this template to data/data_for_updates/dev_input
        * Fill in or delete the main key and values
        * Can only update existing paragraphs, unless updating production or running as prod (see below)
        * For running as prod (in development), need to experiment a lot to make sure that
@@ -9,6 +10,7 @@
          to do any creates this way if it is more convenient that the normal create
 
     To update development with same method as production (run_as_prod), do this in Step 1 & 2:
+        * Copy (don't move) this template to data/data_for_updates/dev_input
         * Do the following in Step One to find the input data for updating production:
         1. In step one - Pull in data using the updated_at date/time input
            * This will pull in data that you have already created in development
@@ -30,6 +32,7 @@
            This should be added to the create output file in Step One
 
     To update production, do this in Step 1 & 2:
+        * Copy (don't move) this template to data/data_for_updates/dev_input
         * Do the following in Step One to find the input data for updating production:
         1. Pull in data using the updated_at date/time input
            * This is the ONLY input you should ever have for a update production run
