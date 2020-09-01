@@ -7,6 +7,8 @@ import json
 import os
 from operator import itemgetter
 import constants.para_lookup as lookup
+import constants.scripts as constants
+
 
 BEG_LINK_TEXT = '|beg|'
 END_LINK_TEXT = '|end|'
@@ -232,3 +234,17 @@ def add_image_information(para):
     return para
 
 
+def loop_through_files_for_db_updates(method, process_data):
+    ''' Loops through files in directory and processes each individually '''
+    directory = process_data['input_directory']
+    num_processed = 0
+    for filename in os.listdir(directory):
+        if filename.endswith(constants.JSON_SUB):
+            file_path = os.path.join(directory, filename)
+            num_processed += 1
+            print(f'file_path == {file_path}')
+            process_data['input_data'] = json_to_dict(file_path)
+            method(process_data)
+        else:
+            continue
+    return num_processed

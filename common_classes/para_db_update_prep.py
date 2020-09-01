@@ -62,6 +62,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         process_input_and_output is the driver to gather and process data from database
 
         '''
+        print(f'self.updating=={self.updating}')
         print(f'self.input_data == {self.input_data}')
         print(f'self.output_data == {self.output_data}')
 #         self.create_standalone_records()

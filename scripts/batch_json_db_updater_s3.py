@@ -4,8 +4,8 @@
     Make sure you have read and understood process: scripts/documentation/update_process.md
 
     Three part process (this is Step 3):
-    1. Run scripts/batch_json_db_updater_s1.py to read db data and write json to be edited
-    2. Start with S1 output data and edit what you want updated and delete the rest
+    1. copy and edit json to be edited, then run scripts/batch_json_db_updater_s1.py
+    2. Start with Step 1 output data and edit what you want updated and delete the rest
     3. Run this script to update the database using the Step 2 file changes
         (run method has usage information)
 
@@ -14,6 +14,8 @@
 import os
 import sys
 import constants.scripts as constants
+import helpers.import_common_class.paragraph_helpers as import_helper
+import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 
 def run(*args):
@@ -24,11 +26,12 @@ def run(*args):
         1. Make sure you have input created and edited correctly in Steps 1 and 2
             * See scripts/batch_json_db_updater_s1.py
                 and scripts/documentation/update_process.md for details
-            * The edited input must have been moved to one of the following directories:
-            ***  data/data_for_updates/prod_input_json or
-            ***  data/data_for_updates/dev_input_json (for run_as_prod and regular updates)
+            * The edited input must have been moved to one of the following directories (see constants):
+            ***  <PROD_INPUT_JSON > (for production updates) or
+            ***  <INPUT_TO_UPDATER_STEP_THREE> (for run_as_prod and regular updates)
             * if you are updating development with the run_as_prod parameter, the filename
-                must have constants.PROD_PROCESS_IND as a prefix
+                must have constants.PROD_PROCESS_IND as a prefix (happens automatically if using
+                updated_at as an input)
 
         2. Run this script, possible parameters
         >>> python manage.py runscript -v3  batch_json_db_updater_s3
@@ -40,7 +43,7 @@ def run(*args):
         >>> python manage.py runscript -v3  batch_json_db_updater_s3 --script-args run_as_prod updating
 
         Notes on Arguments
-        * No arguments - will process the input data as much as it can without updating, Prints to aid
+        * No arguments - will process the input data as much as it can without updating; prints to aid
                          in testing.
         * updating (only) - will process the input data, doing updates.
         * run_as_prod - will process the input data as much as it can without updating, will give
@@ -115,16 +118,8 @@ def call_process(process_data):
         return f'Step 3, no updatess; 0 Python files in {process_data["input_directory"]}'
     return 'ok'
 
-
 def step_three_process(process_data):
-    ''' Loops through files in directory and processes each individually '''
-    directory = process_data['input_directory']
-    num_processed = 0
-    for filename in os.listdir(directory):
-        if filename.endswith(constants.JSON_SUB):
-            num_processed += 1
-            print((f'calling step_three_process with {os.path.join(directory, filename)}, '
-                   f'Process data added to file input == {process_data}'))
-        else:
-            continue
-    return num_processed
+    ''' passes function with correct calls to common looping through json files function '''
+    num = para_helper.loop_through_files_for_db_updates(import_helper.update_paragraphs_step_three,
+                                                        process_data)
+    return num

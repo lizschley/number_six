@@ -15,9 +15,8 @@
 import os
 import sys
 import constants.scripts as constants
-import helpers.import_common_class.paragraph_helpers as para_class_helper
+import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
-import portfolio.settings as settings
 
 
 def run(*args):
@@ -97,17 +96,7 @@ def call_process(process_data):
 
 
 def step_one_process(process_data):
-    ''' Loops through files in directory and processes each individually '''
-    directory = process_data['input_directory']
-    num_processed = 0
-    for filename in os.listdir(directory):
-        if filename.endswith(constants.JSON_SUB):
-            file_path = os.path.join(directory, filename)
-            num_processed += 1
-            print(f'filename == {file_path}')
-            process_data['params'] = para_helper.json_to_dict(file_path)
-            print(f'params=={process_data["params"]}')
-            para_class_helper.update_paragraphs_step_one(process_data)
-        else:
-            continue
-    return num_processed
+    ''' passes function with correct calls to common looping through json files function '''
+    num = para_helper.loop_through_files_for_db_updates(import_helper.update_paragraphs_step_one,
+                                                        process_data)
+    return num
