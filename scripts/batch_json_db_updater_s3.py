@@ -1,10 +1,13 @@
 '''
     ref: https://django-extensions.readthedocs.io/en/latest/runscript.html
 
+    Make sure you have read and understood process: scripts/documentation/update_process.md
+
     Three part process (this is Step 3):
     1. Run scripts/batch_json_db_updater_s1.py to read db data and write json to be edited
     2. Start with S1 output data and edit what you want updated and delete the rest
     3. Run this script to update the database using the Step 2 file changes
+        (run method has usage information)
 
 :returns: nothing
 '''
@@ -20,7 +23,7 @@ def run(*args):
 
         1. Make sure you have input created and edited correctly in Steps 1 and 2
             * See scripts/batch_json_db_updater_s1.py
-                and data/dictionary_templates/starting_dev_process_input.py for details
+                and scripts/documentation/update_process.md for details
             * The edited input must have been moved to one of the following directories:
             ***  data/data_for_updates/prod_input_json or
             ***  data/data_for_updates/dev_input_json (for run_as_prod and regular updates)

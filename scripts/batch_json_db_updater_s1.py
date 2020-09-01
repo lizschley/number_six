@@ -1,6 +1,8 @@
 '''
     ref: https://django-extensions.readthedocs.io/en/latest/runscript.html
 
+    Make sure you have read and understood process: scripts/documentation/update_process.md
+
     Three part process (this is Step 1):
     1. Run this script to read db data and write json to be edited
        * note - see usage directions in run method, below
@@ -13,6 +15,9 @@
 import os
 import sys
 import constants.scripts as constants
+import helpers.import_common_class.paragraph_helpers as para_class_helper
+import helpers.no_import_common_class.paragraph_helpers as para_helper
+import portfolio.settings as settings
 
 
 def run(*args):
@@ -20,7 +25,7 @@ def run(*args):
         * Note - no production parameters, since production data comes from development
 
         Step One Usage - runs in development only
-            1. Copy data/dictionary_templates/starting_dev_process_input.py
+            1. Copy data/dictionary_templates/updating_dev_input_template.py
             2. Move the copy to <INPUT_TO_UPDATER_STEP_ONE> (see above)
             3. Read the file you just copied to understand what you need as input and then gather
                the necessary information
@@ -30,11 +35,11 @@ def run(*args):
             * Note - If no parameters: groups, references and categories will not be created
 
         >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args updating
-        or
+        or (to just see printed output of retrievals)
         >>> python manage.py runscript -v3  batch_json_db_updater_s1
 
         Step One Process
-            * reads python data from <INPUT_TO_UPDATER_STEP_ONE> (Python dictionary)
+            * reads json data from <INPUT_TO_UPDATER_STEP_ONE>
             * creates category, group, or refererence records (if updating)
             * writes json file to <MANUAL_UPDATE_JSON> that includes all of the data specified by
               the input (<INPUT_TO_UPDATER_STEP_ONE>)
@@ -96,11 +101,13 @@ def step_one_process(process_data):
     directory = process_data['input_directory']
     num_processed = 0
     for filename in os.listdir(directory):
-        if filename.endswith(constants.PY_SUB):
+        if filename.endswith(constants.JSON_SUB):
+            file_path = os.path.join(directory, filename)
             num_processed += 1
-            print((f'calling step_three_process with {os.path.join(directory, filename)}, '
-                   f'Process data added to file input == {process_data}, '
-                   f'Num processed == {num_processed}'))
+            print(f'filename == {file_path}')
+            process_data['params'] = para_helper.json_to_dict(file_path)
+            print(f'params=={process_data["params"]}')
+            para_class_helper.update_paragraphs_step_one(process_data)
         else:
             continue
     return num_processed

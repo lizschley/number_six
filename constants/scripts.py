@@ -15,8 +15,8 @@ SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', }
 
 # directories
 INPUT_CREATE_JSON = os.path.join(BASE_DIR, 'data/data_for_creates')
-INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input')
-INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_json')
+INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_step_one')
+INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_step_three')
 MANUAL_UPDATE_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_json')
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
 

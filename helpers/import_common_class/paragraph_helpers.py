@@ -4,6 +4,7 @@ import helpers.no_import_common_class.paragraph_helpers as para_helper
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.para_db_create_process import ParaDbCreateProcess
+from common_classes.para_db_update_prep import ParaDbUpdatePrep
 
 
 def paragraph_list_from_json(json_path):
@@ -105,3 +106,28 @@ def single_para_by_subtitle(subtitle):
     '''
     para = ParagraphsForDisplayOne()
     return para.retrieve_paragraphs(subtitle=subtitle)
+
+
+def update_paragraphs_step_one(input_data):
+    '''
+    update_paragraphs is called by a batch process created to update data.
+
+    The overall process is designed to work in both development and production.  But the prep
+    happens only in development because the production database is the same as development.
+    Once the manual process works seamlessly, the move data to production process can be
+    automated.  Since the content needs to be created, however, this step will always be
+    manual.
+
+
+    :param input_data: Manually retrieved & updated data or, for production, retrieved by updated_date.
+    :type input_data: dict
+    :return: JSON file that to be manually edited for updates
+    :rtype: JSON file
+    '''
+    updating = input_data.pop('updating')
+    para = ParaDbUpdatePrep(input_data, updating)
+    para.collect_data_and_write_json()
+
+
+def update_paragraphs_step_three(input_data):
+    print(input_data)
