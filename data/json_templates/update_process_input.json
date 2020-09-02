@@ -8,6 +8,5 @@
     "add_associations": [{"paragraph_guid": "", "reference_slug": ""}, {"group_slug": "", "paragraph_guid": ""}],
     "group_ids": [],
     "category_ids": [],
-    "paragraph_ids": [],
-    "output_directory": "data/data_for_updates/dev_manual_json/"
+    "paragraph_ids": []
 }

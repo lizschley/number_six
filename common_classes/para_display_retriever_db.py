@@ -34,7 +34,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             return self.db_output_to_display_input(raw_queryset)
         return None
 
-    # Todo: idea: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
+    # Todo: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
     def write_group_standalone_para_sql(self):
         '''
         write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved

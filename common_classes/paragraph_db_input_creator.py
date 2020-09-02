@@ -6,6 +6,7 @@
 from datetime import datetime
 import json
 import os
+import constants.scripts as constants
 from portfolio.settings import BASE_DIR
 
 
@@ -133,7 +134,7 @@ class ParagraphDbInputCreator():
         :return: file_path
         :rtype: str
         '''
-        prefix = kwargs.get('prefix', 'input_')
+        prefix = kwargs.get('prefix', constants.DEFAULT_PREFIX)
         filename = kwargs.get('filename',
                               prefix + datetime.now().isoformat(timespec='seconds') + '.json')
         directory_path = kwargs.get('directory_path', OUT_JSON_PATH)

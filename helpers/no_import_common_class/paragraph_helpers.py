@@ -243,7 +243,7 @@ def loop_through_files_for_db_updates(method, process_data):
             file_path = os.path.join(directory, filename)
             num_processed += 1
             print(f'file_path == {file_path}')
-            process_data['input_data'] = json_to_dict(file_path)
+            process_data['file_data'] = json_to_dict(file_path)
             method(process_data)
         else:
             continue

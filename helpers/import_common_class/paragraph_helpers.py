@@ -127,7 +127,7 @@ def update_paragraphs_step_one(input_data):
     :return: JSON file that to be manually edited for updates
     :rtype: writes JSON file
     '''
-    updating = input_data.pop('updating')
+    updating = input_data.pop('updating', False)
     para = ParaDbUpdatePrep(input_data, updating)
     para.collect_data_and_write_json()
 
@@ -136,6 +136,6 @@ def update_paragraphs_step_three(input_data):
     '''
     update_paragraphs_step_three is called by a batch process created to update data.
     '''
-    updating = input_data.pop('updating')
+    updating = input_data.pop('updating', False)
     para = ParaDbUpdateProcess(input_data, updating)
     para.process_input_data_update_db()
