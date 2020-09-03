@@ -1,0 +1,60 @@
+{
+    "add_associations": [],
+    "categories": [],
+    "delete_associations": [],
+    "group_paragraph": [
+        {
+            "group_id": 1,
+            "id": 80,
+            "order": 0,
+            "paragraph_id": 85
+        }
+    ],
+    "groups": [
+        {
+            "category_id": null,
+            "id": 1,
+            "note": " ",
+            "slug": "tech-definitions",
+            "title": "Tech Definitions"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 67,
+            "paragraph_id": 85,
+            "reference_id": 55
+        },
+        {
+            "id": 68,
+            "paragraph_id": 85,
+            "reference_id": 56
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "31ea6866-d3b8-462c-9a05-a80a818b4788",
+            "id": 85,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": true,
+            "subtitle": "Kill process from known port",
+            "text": "['<p>To kill the process with pid==40676, you do this:</p>', '<pre>>> kill -9 40676</pre>', '<p>But if you know the port of a process, are not sure of the name ', 'and definitely don\u2019t know the id, then here\u2019s what to do:', '<pre>>> lsof -i :8000</pre>', '<p>Where lsof means list of open files.  The following is directly quoted from ss44:', \"'An open file can be a regular file, a directory, a block special file, a character \", 'special file, an executing text reference, a library, a stream or a network file ', \"(Internet socket, NFS file or UNIX domain socket.)'</p>\", '<p>The -i is a way of specifying an internet address.  The colon says service or port.</p>', '<pre>>> sudo lsof -i :8000</pre>', '<p>The pid (40676 in this example) is displayed along with some other information</p>', '<pre>>> kill -9 40676</pre>', \"<p>And it's done.</p>\"]"
+        }
+    ],
+    "references": [
+        {
+            "id": 55,
+            "link_text": "ghostdog74_20101004_stackoverflow_findKillProcess",
+            "slug": "ghostdog74_20101004_stackoverflow_findkillprocess",
+            "url": "https://stackoverflow.com/questions/3855127/find-and-kill-process-locking-port-3000-on-mac"
+        },
+        {
+            "id": 56,
+            "link_text": "ss64_bash_lsof",
+            "slug": "ss64_bash_lsof",
+            "url": "https://ss64.com/bash/lsof.html"
+        }
+    ]
+}

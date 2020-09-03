@@ -3,7 +3,7 @@
 
     Make sure you have read and understood process: scripts/documentation/update_process.md
 
-    Three part process (this is Step 1):
+    Three part process (this script is Step 1):
     1. Run this script to read db data and write json to be edited
        * note - see usage directions in run method, below
     2. Start with S1 output data and edit what you want updated and delete the rest

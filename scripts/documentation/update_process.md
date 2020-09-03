@@ -5,14 +5,12 @@
 2. Start with Step 1 output data and edit what you want updated and delete the rest
 3. Run batch_json_db_updater_s3 to update the database using the Step 2 file changes
 
-## Definition: run_as_prod
-There is a input parameter called run_as_prod in the Step 3 Script.  This is used to update development
-like production.  You need to know ahead of time when this is the technique you are using, because
-updated_at is the only json input that you can use.  The program will error out if you try to combine
-it with other possibilities. More details below
-
-* important note - it is possible to use run_as_prod to create new data, but if you start with existing data and do not explicitely create new unique fields it would be easy to over-write existing data.  That would be a pain, and if things were automated, could be a pain to make right.
-
+## Distinction between run_as_prod and is_prod
+* important note - it is possible to use run_as_prod to create new data, but if you start with existing data and do not explicitely create new unique fields it would be easy to over-write existing data.  That would be a pain, and if things were automated, could be even a bigger pain to make right.
+- run_as_prod parameter is only development & only step 3 (see details below)
+- is_prod - if run_as_prod is True OR if it's the production environment
+- Input parameter, run_as_prod, used to update development like production.  Used for testing and as an alternate way to make updates
+- Designed to work with updated_at
 
 ## Details
 - Note - exact paths are in constant variables: constants/scripts.py
@@ -20,10 +18,10 @@ it with other possibilities. More details below
 1. Step 1 Json Input process when run_as_prod will be false in Step 3:
     - Copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
     - Delete the "updated_at" key and value
-    - You will need to run some db queries to get ids, guids, etc
+    - You will need to run some preliminary db queries or put in some print statements to get ids, guids, etc
     - Choose one or zero retrieval keys: "group_ids", "category_ids", "reference_ids", "".  The array of ids will be used as a where statement that will pull in all the associated data so it can be edited.
     - Important fact: you will get TypeError unless the ids are strings.  Even though ids are ints on the db, in this process we are converting the data to a query string
-    - It is possible to add zero, one or more references, groups, categories (also can associate the new category with a new group).
+    - It is possible to create zero, one or more references, groups, categories (also can associate the new category with a new group).
       These creates are the only database changes that happen in Step 1.
     - Associations can also be added and deleted, the example json indicates how.
     - Fill in the values or delete the main key and values from the input, don't leave empty keys
@@ -41,7 +39,7 @@ it with other possibilities. More details below
         1. In step one - Pull in data using the updated_at date/time input
            * This will pull in data that you have already created in development
            * There should not be any other create or edit possibilities
-
+           * Not 100% sure of this.  Will need to play around with this process, if I like it.
         2. In step two - edit this data to do an update to existing data or create new records
            * To edit existing data, simply edit the records, in this case the program will do an lookup
              based on the unique keys find it and then do an update as opposed to a create

@@ -103,7 +103,7 @@ def establish_input_directory(process_data):
     ''' The process and files depend on the process data '''
     if os.getenv('ENVIRONMENT') == 'development':
         process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
-    elif process_data['is_prod']:
+    elif os.getenv('ENVIRONMENT') == 'production':
         process_data['input_directory'] = constants.PROD_INPUT_JSON
     else:
         return {'error': (f'Could not select input directory, process data=={process_data}, '
