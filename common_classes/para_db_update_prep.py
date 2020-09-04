@@ -1,4 +1,5 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
+# pylint: pylint: disable=unused-import
 import json
 import sys
 
@@ -6,7 +7,8 @@ import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
-from projects.models.paragraphs import (Category, Group, GroupParagraph,
+import helpers.no_import_common_class.utilities as utils
+from projects.models.paragraphs import (Category, Group, GroupParagraph,  # noqa: F401
                                         Paragraph, ParagraphReference,
                                         Reference)
 from utilities.paragraph_dictionaries import ParagraphDictionaries as para_dict
@@ -15,9 +17,9 @@ BLOG = Category.CATEGORY_TYPE_CHOICES[0][0]
 RESUME = Category.CATEGORY_TYPE_CHOICES[1][0]
 FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
 
-VALID_RETRIVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
 VALID_INPUT_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids', 'add_categories',
                     'add_references', 'add_groups', 'delete_associations', 'add_associations')
+VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
 VALID_CREATE_KEYS = ('add_categories', 'add_references', 'add_groups')
 VALID_ASSOCIATION_KEYS = ('delete_associations', 'add_associations')
 
@@ -80,7 +82,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
     def process_input_and_output(self):
         ''' process_input_and_output is the driver to gather and process data from database'''
-        # 1. validate input (only updated_at and ab2b-8bf1f660ae48 else OR one of list of ids)
+        # 1. validate input (only updated_at OR one of list of ids)
         # 2. Do creates, add records to output data
         # 3. Retrieve data, add records to output data
         # 4. Add associations to output data
@@ -94,28 +96,25 @@ class ParaDbUpdatePrep(ParaDbMethods):
         self.retrieve_existing_data()
         self.prepare_associations()
 
-        # print(f'self.updating=={self.updating}')
-        # print(f'self.para_ids == {self.input_data["file_data"]["paragraph_ids"]}')
-        # print(f'self.output_data == {self.output_data}')
-
     def running_as_prod(self):
-        return self.input_data['file_data'].get('updated_at', 'ab2b-8bf1f660ae48') != 'ab2b-8bf1f660ae48'
+        return utils.key_in_dictionary(self.input_data['file_data'], 'updated_at')
 
     def validate_input_keys(self):
         ''' '''
         if self.invalid_keys():
-            sys.exit(f'Input error: there is at least one invalid key: {self.input_data["file_data"]}')
+            sys.exit((f'Input error: there is at least one invalid key: {self.input_data["file_data"]}; '
+                      f'The valid keys are {VALID_INPUT_KEYS}'))
         if not self.one_or_zero_retrieval_keys():
             sys.exit(f'Input error: too many retrieval keys: {self.input_data["file_data"]}')
         if not self.updated_at_none_or_only():
             sys.exit(f'Input error: updated_at should be the only key: {self.input_data["file_data"]}')
         if not self.valid_input_keys():
-            sys.exit(f'Input error: there must be at least one valid key: {self.input_data["file_data"]}')
+            sys.exit(f'Input error: Must be at least one valid key: {self.input_data["file_data"]}')
 
     def create_new_records(self):
         ''' '''
         for key in VALID_CREATE_KEYS:
-            if self.input_data['file_data'].get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48':
+            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 continue
             if key == 'add_categories':
                 self.add_categories()
@@ -137,11 +136,11 @@ class ParaDbUpdatePrep(ParaDbMethods):
     def prepare_associations(self):
         print('still have not decided exactly how to deal with assoociations')
         for key in VALID_ASSOCIATION_KEYS:
-            if self.input_data['file_data'].get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48':
+            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 continue
             if key == 'delete_associations':
                 self.remove_associations()
-            if key == 'delete_associations':
+            if key == 'add_associations':
                 self.add_associations()
 
     # Validation routines
@@ -153,8 +152,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
     def one_or_zero_retrieval_keys(self):
         num = 0
-        for key in VALID_RETRIVAL_KEYS:
-            if not self.input_data['file_data'].get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48':
+        for key in VALID_RETRIEVAL_KEYS:
+            if not utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 num += 1
         return num < 2
 
@@ -175,7 +174,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
     def valid_input_keys(self):
         num = 0
         for key in VALID_INPUT_KEYS:
-            if not self.input_data['file_data'].get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48':
+            if not utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 num += 1
         return num > 0
 
@@ -215,8 +214,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         return query
 
     def get_where_statement(self):
-        for key in VALID_RETRIVAL_KEYS:
-            if self.input_data['file_data'].get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48':
+        for key in VALID_RETRIEVAL_KEYS:
+            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 continue
             if key in ('group_ids', 'category_ids', 'paragraph_ids'):
                 return 'where ' + key[0] + '.id in (' + self.get_where_ids(key) + ')'

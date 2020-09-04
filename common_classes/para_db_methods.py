@@ -2,6 +2,7 @@
 # pylint: pylint: disable=unused-import
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
+from utilities.paragraph_dictionaries import ParagraphDictionaries
 
 
 class ParaDbMethods:
@@ -19,9 +20,9 @@ class ParaDbMethods:
     # Todo: Check type
     def find_or_create_record(self, class_, find_dict, create_dict):
         '''
-        find_or_create_group will look for a group using the title, which must be unique.  It it
-        does not exist, it will be created
-        :return: string that says ok or an error message (may change later)
+        find_or_create_record will look for the record using the unique field in find_dict. If it
+        does not exist, the record will be created
+        :return: the record created or found
         :rtype: [type]
         '''
         try:
@@ -35,6 +36,31 @@ class ParaDbMethods:
                 return create_dict
             record = class_.objects.get(**find_dict)
         return record
+
+    def find_and_update_record(self, class_, find_dict, update_dict):
+        '''
+        find_or_update_record will look for the record using the unique field in find_dict. If it
+        if found, it will check the id.  If that is not the same, it will pass back an error message,
+        which will be dealt with in the calling program
+
+        :return: string that says ok or an error message (may change later)
+        :rtype: [type]
+        '''
+        try:
+            record = class_.objects.get(**find_dict)
+            # print(f'record == {record}')
+        except class_.DoesNotExist:
+            return {'error': f'{class_.__name__} with unique key {find_dict} does not exist.'}
+        # print(f'record id == {record.id}')
+        if update_dict['id'] == record.id:
+            self.update_record(class_, update_dict)
+        queryset = ParagraphDictionaries.get_content(class_, id_to_use=record.id)
+        return queryset[0]
+
+    def update_record(self, class_, update_dict):
+        if self.updating:
+            pk_id = update_dict.pop('id')
+            class_.objects.filter(pk=pk_id).update(**update_dict)
 
     # Todo: Check type
     def create_record(self, class_, create_dict):
