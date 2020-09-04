@@ -65,10 +65,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         for para in self.input_data['file_data']['paragraphs']:
             find_dict = {'guid': para['guid']}
             new_para = self.find_and_update_record(Paragraph, find_dict, para)
-            
+
             if utils.key_in_dictionary(new_para, 'error'):
                 sys.exit(new_para['error'])
-            print(f'aragraph updated: {new_para}')
 
     def create_or_update_groups(self):
         if utils.key_not_in_dictionary(self.input_data['file_data'], 'groups'):

@@ -1,5 +1,6 @@
 '''These will be static resusable methods to create &/or update records'''
 # pylint: pylint: disable=unused-import
+from datetime import datetime
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 from utilities.paragraph_dictionaries import ParagraphDictionaries
@@ -53,6 +54,7 @@ class ParaDbMethods:
             return {'error': f'{class_.__name__} with unique key {find_dict} does not exist.'}
         # print(f'record id == {record.id}')
         if update_dict['id'] == record.id:
+            update_dict['updated_at'] = datetime.now()
             self.update_record(class_, update_dict)
         queryset = ParagraphDictionaries.get_content(class_, id_to_use=record.id)
         return queryset[0]
@@ -60,6 +62,7 @@ class ParaDbMethods:
     def update_record(self, class_, update_dict):
         if self.updating:
             pk_id = update_dict.pop('id')
+            print('Doing update!')
             class_.objects.filter(pk=pk_id).update(**update_dict)
 
     # Todo: Check type

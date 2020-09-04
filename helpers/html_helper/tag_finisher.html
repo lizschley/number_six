@@ -5,10 +5,28 @@
     <title>HTML Writing Helper</title>
 </head>
 <body>
-
-    <p>To kill the process with pid==40676, you do this:</p>
-    <pre>>> kill -9 40676</pre>
-    <p>But if you know the port of a process, are not sure of the name and definitely don&apos;t know the id, then here&apos;s what to do:</p>
-    <pre>>> lsof -i :8000</pre><p>Where lsof means list of open files.  The following is directly quoted from ss44: &quot;An open file can be a regular file, a directory, a block special file, a character, special file, an executing text reference, a library, a stream or a network file (Internet socket, NFS file or UNIX domain socket.)&quot;</p><p>The -i is a way of specifying an internet address.  The colon says service or port.</p><pre>>> sudo lsof -i :8000</pre><p>The pid (40676 in this example) is displayed along with some other information</p><pre>>> kill -9 40676</pre><p>And it's done.</p>
+<p>Python decorators add functionality to functions and methods at definition time, not decorator design patterns.</p>
+<p>It is when you when you write @staticmethod over a method in Python.  GeekForGeeks (generally an excellent resource) provides an excellent definition of decorators.  Basically decorators are used to add extra functionality to a function without changing the functionality itself.  For example,  before the function you could check the begin time and afterwards check the end time.</p>
+<p>Here is an example showing how to send in variables and how to return values.  The readthedocs site has a great example showing the order of when the wrapper and functions are called.  The  following code snippet combines the examples, to show both the call order and how to return values  from the function that is being decorated.</p>
+<pre>def decorator_function(func):</pre>
+<pre>    print('#1 - inside decorator')</pre>
+<pre>def wrapped_f(*args, **kwargs):</pre>
+<pre>    print('#4 & 9 - Inside wrapped_f()')</pre>
+<pre>    print('#5 & 10 - Decorator arguments:', args, kwargs)</pre>
+<pre>    returned_value = func(*args)</pre>
+<pre>    print('#7 & 12 - After f(*args)')</pre>
+<pre>    return returned_value return wrapped_f @decorator_function </pre>
+<pre>def show_arguments(a1, a2, a3, a4):</pre>
+<pre>    print('#6 & 11 - show_arguments arguments:', a1, a2, a3, a4)</pre>
+<pre>    return 'done printing'</pre>
+<pre>print('#2 - After decoration')</pre>
+<pre>print('#3 Preparing to call show_arguments()')</pre>
+<pre><strong>ret = show_arguments('say', 'hello', 'argument', 'list')</strong></pre>
+<pre>print(f'#8 - after first show_arguments() call, returned_value == {ret}')</pre>
+<pre><strong>show_arguments('a', 'different', 'set of', 'arguments')</strong></pre>
+<pre>print('#13 - after second show_arguments() call')</pre>
+<pre>This puts out the following data: </pre>
+<pre>#1 - inside decorator</pre>
+<pre>#2 - After decoration</pre><pre>#3 Preparing to call show_arguments()</pre><pre>#4 & 9 - Inside wrapped_f()</pre><pre>#5 & 10 - Decorator arguments: ('say', 'hello', 'argument', 'list') {}</pre><pre>#6 & 11 - show_arguments arguments: say hello argument list</pre><pre>#7 & 12 - After f(*args)</pre><pre>#8 - after first show_arguments() call, returned_value == done printing</pre><pre>#4 & 9 - Inside wrapped_f()</pre><pre>#5 & 10 - Decorator arguments: ('a', 'different', 'set of', 'arguments') {}</pre><pre>#6 & 11 - show_arguments arguments: a different set of arguments</pre><pre>#7 & 12 - After f(*args) #13 - after second show_arguments() call</pre>
 </body>
 </html>
