@@ -1,6 +1,8 @@
 '''These will be static resusable methods to create &/or update records'''
 # pylint: pylint: disable=unused-import
-from datetime import datetime
+import pytz
+import sys
+from django.utils import timezone
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 from utilities.paragraph_dictionaries import ParagraphDictionaries
@@ -54,7 +56,7 @@ class ParaDbMethods:
             return {'error': f'{class_.__name__} with unique key {find_dict} does not exist.'}
         # print(f'record id == {record.id}')
         if update_dict['id'] == record.id:
-            update_dict['updated_at'] = datetime.now()
+            update_dict['updated_at'] = timezone.now()
             self.update_record(class_, update_dict)
         queryset = ParagraphDictionaries.get_content(class_, id_to_use=record.id)
         return queryset[0]
@@ -62,7 +64,7 @@ class ParaDbMethods:
     def update_record(self, class_, update_dict):
         if self.updating:
             pk_id = update_dict.pop('id')
-            print('Doing update!')
+            print(f'Doing update of {class_.__name__}!')
             class_.objects.filter(pk=pk_id).update(**update_dict)
 
     # Todo: Check type
@@ -98,6 +100,22 @@ class ParaDbMethods:
         '''
         return class_.objects.get(**find_dict)
 
+    # Todo: Test this manually and later programmatically
+    def delete_record(self, class_, find_dict):
+        '''
+        delete_record deletes the records found using filter
+
+        :param class_: Model for the record you want deleted
+        :type class_: models.Model
+        :param find_dict: dictionary with the unique key
+        :type find_dict: dict
+        '''
+        if class_ not in (GroupParagraph, ParagraphReference):
+            sys.exit(f'Not allowing hard deletes of {class_.__name__}')
+        print(f'deleting {find_dict} in {class_.__name__}')
+        if self.updating:
+            class_.objects.filter(**find_dict).delete()
+
     @staticmethod
     def class_based_rawsql_retrieval(sql, class_, *args):
         '''
@@ -110,3 +128,4 @@ class ParaDbMethods:
         :rtype: rawsql queryset
         '''
         return class_.objects.raw(sql, [args])
+

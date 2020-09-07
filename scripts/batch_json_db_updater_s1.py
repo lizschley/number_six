@@ -21,18 +21,12 @@ import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 def run(*args):
     '''
-        * Note - no production parameters, since production data comes from development
+        Step One Notes
+        * Read, understand and follow directions: scripts/documentation/update_process.md
+        * Step One only runs in development, since production data comes from development
+        * If no parameters: groups, references and categories will not be created
 
-        Step One Usage - runs in development only
-            1. Copy data/dictionary_templates/updating_dev_input_template.py
-            2. Move the copy to <INPUT_TO_UPDATER_STEP_ONE> (see above)
-            3. Read the file you just copied to understand what you need as input and then gather
-               the necessary information
-            4. Following the directions, edit the input file for desired results
-            5. Once the input is correct, run this script.
-
-            * Note - If no parameters: groups, references and categories will not be created
-
+        Step One Usage
         >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args updating
         or (to just see printed output of retrievals)
         >>> python manage.py runscript -v3  batch_json_db_updater_s1

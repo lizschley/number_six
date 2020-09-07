@@ -1,0 +1,35 @@
+{
+    "group_paragraph": [
+        {
+            "group_id": 2,
+            "id": 79
+        }
+    ],
+    "groups": [
+        {
+            "id": 1,
+            "slug": "tech-definitions",
+            "title": "Technical Definitions"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 64,
+            "reference_id": 29
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "aa709eda-cc43-4871-b8bd-7089a261ff71",
+            "id": 81,
+            "subtitle": "Python decorators and how to use them (ha ha ha)"
+        }
+    ],
+    "references": [
+        {
+            "id": 54,
+            "link_text": "AppalarajuSrikar_20111130_StackOverflow_DifferencePythonDecorator_lalala",
+            "slug": "appalarajusrikar_20111130_stackoverflow_difference"
+        }
+    ]
+}

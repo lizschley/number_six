@@ -115,7 +115,7 @@ def call_process(process_data):
     ''' Right now only works for Step 1, which always has same input and output directories '''
     files_processed = step_three_process(process_data)
     if files_processed == 0:
-        return f'Step 3, no updatess; 0 Python files in {process_data["input_directory"]}'
+        return f'Step 3, no updates; 0 Python files in {process_data["input_directory"]}'
     return 'ok'
 
 def step_three_process(process_data):

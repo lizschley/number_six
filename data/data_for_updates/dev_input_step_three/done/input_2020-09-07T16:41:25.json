@@ -1,0 +1,25 @@
+{
+    "add_associations": [],
+    "categories": [],
+    "delete_associations": [],
+    "paragraph_reference": [
+        {
+            "id": 64,
+            "reference_id": 52
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "aa709eda-cc43-4871-b8bd-7089a261ff71",
+            "id": 81,
+            "subtitle": "Python decorators and how to use them"
+        }
+    ],
+    "references": [
+        {
+            "id": 54,
+            "link_text": "AppalarajuSrikar_20111130_StackOverflow_DifferencePythonDecorator",
+            "slug": "appalarajusrikar_20111130_stackoverflow_difference"
+        }
+    ]
+ }

@@ -9,6 +9,22 @@ from projects.models.paragraphs import (Category, Group,  # noqa: F401
                                         GroupParagraph, Paragraph,
                                         ParagraphReference, Reference)
 
+RECORD_KEYS = ('categories', 'references', 'paragraphs', 'groups',
+               'paragraph_reference', 'group_paragraph')
+
+ASSOCIATION_KEYS = ('add_associations', 'delete_associations')
+
+ASSOCIATION_RECORD_KEYS = ('paragraph_reference', 'group_paragraph')
+
+UPDATE_DATA = {
+    'categories': {'unique_field': 'slug', 'class': Category},
+    'references': {'unique_field': 'slug', 'class': Reference},
+    'paragraphs': {'unique_field': 'guid', 'class': Paragraph},
+    'groups': {'unique_field': 'slug', 'class': Group},
+    'paragraph_reference': {'unique_field': 'id', 'class': ParagraphReference},
+    'group_paragraph': {'unique_field': 'id', 'class': GroupParagraph}
+}
+
 
 class ParaDbUpdateProcess(ParaDbMethods):
     '''
@@ -24,24 +40,27 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.input_data = input_data
 
     def process_input_data_update_db(self):
-        print(f'self.input_data=={self.input_data}')
-        print(f'self.updating=={self.updating}')
-        if self.input_data['run_as_prod']:
-            self.prepare_run_as_prod()
-        self.update_paragraph_records()
+        # print(f'self.input_data=={self.input_data}')
+        # print(f'self.updating=={self.updating}')
+        self.update_record_loop()
         self.add_associations()
         self.delete_associations()
 
-    def prepare_run_as_prod(self):
-        pass
+    def update_record_loop(self):
+        for key in RECORD_KEYS:
+            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
+                continue
+            for record in self.input_data['file_data'][key]:
+                self.find_and_update_wrapper(key, record)
 
-    def update_paragraph_records(self):
-        self.create_or_update_categories()
-        self.create_or_update_references()
-        self.create_or_update_paragraphs()
-        self.create_or_update_groups()
-        self.create_or_update_paragraph_reference()
-        self.create_or_update_group_paragraph()
+    def find_and_update_wrapper(self, key, record):
+        unique_field = UPDATE_DATA[key]['unique_field']
+        class_ = UPDATE_DATA[key]['class']
+        find_dict = {unique_field: record[unique_field]}
+        returned_record = self.find_and_update_record(class_, find_dict, record)
+        if utils.key_in_dictionary(returned_record, 'error'):
+            sys.exit(returned_record['error'])
+        print(f'{returned_record.__class__.__name__} updated: {returned_record}')
 
     def add_associations(self):
         if utils.key_not_in_dictionary(self.input_data['file_data'], 'add_associations'):
@@ -50,39 +69,3 @@ class ParaDbUpdateProcess(ParaDbMethods):
     def delete_associations(self):
         if utils.key_not_in_dictionary(self.input_data['file_data'], 'delete_associations'):
             return
-
-    def create_or_update_categories(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'categories'):
-            return
-
-    def create_or_update_references(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'references'):
-            return
-
-    def create_or_update_paragraphs(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'paragraphs'):
-            return
-        for para in self.input_data['file_data']['paragraphs']:
-            find_dict = {'guid': para['guid']}
-            new_para = self.find_and_update_record(Paragraph, find_dict, para)
-
-            if utils.key_in_dictionary(new_para, 'error'):
-                sys.exit(new_para['error'])
-
-    def create_or_update_groups(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'groups'):
-            return
-
-    def create_or_update_paragraph_reference(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'paragraph_reference'):
-            return
-
-    def create_or_update_group_paragraph(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'group_paragraph'):
-            return
-        for group_para in self.input_data['file_data']['group_paragraph']:
-            find_dict = {'id': group_para['id']}
-            new_gp = self.find_and_update_record(GroupParagraph, find_dict, group_para)
-            if utils.key_in_dictionary(new_gp, 'error'):
-                sys.exit(new_gp['error'])
-            print(f'GroupParagraph updated: {new_gp}')
