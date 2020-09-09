@@ -13,15 +13,10 @@ from projects.models.paragraphs import (Category, Group, GroupParagraph,  # noqa
                                         Reference)
 from utilities.paragraph_dictionaries import ParagraphDictionaries as para_dict
 
-BLOG = Category.CATEGORY_TYPE_CHOICES[0][0]
-RESUME = Category.CATEGORY_TYPE_CHOICES[1][0]
-FLASH_CARD = Category.CATEGORY_TYPE_CHOICES[2][0]
 
-VALID_INPUT_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids', 'add_categories',
-                    'add_references', 'add_groups', 'delete_associations', 'add_associations')
 VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
-VALID_CREATE_KEYS = ('add_categories', 'add_references', 'add_groups')
-VALID_ASSOCIATION_KEYS = ('delete_associations', 'add_associations')
+COPY_DIRECTLY_TO_OUTPUT = ('add_categories', 'add_references', 'add_groups', 'add_paragraph_reference',
+                           'add_group_paragraph', 'delete_paragraph_reference', 'delete_group_paragraph')
 
 
 class ParaDbUpdatePrep(ParaDbMethods):
@@ -37,7 +32,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         # https://stackoverflow.com/questions/8653516/python-list-of-dictionaries-search
         # this is the output data
         super(ParaDbUpdatePrep, self).__init__(updating)
+        self.run_as_prod = input_data.pop('run_as_prod', False)
         self.input_data = input_data
+        print(f'input_data keys == {list(input_data.keys())}')
         self.included_ids = {
             'categories': [],
             'references': [],
@@ -53,8 +50,6 @@ class ParaDbUpdatePrep(ParaDbMethods):
             'groups': [],
             'group_paragraph': [],
             'paragraph_reference': [],
-            'delete_associations': [],
-            'add_associations': [],
         }
 
     def collect_data_and_write_json(self):
@@ -72,7 +67,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
         self.process_input_and_output()
         out_dir = self.input_data['output_directory']
-        prefix = constants.PROD_PROCESS_IND if self.running_as_prod() else constants.DEFAULT_PREFIX
+        prefix = constants.PROD_PROCESS_IND if self.run_as_prod else constants.DEFAULT_PREFIX
 
         output_file = open(ParagraphDbInputCreator.create_json_file_path(directory_path=out_dir,
                                                                          prefix=prefix), 'w')
@@ -92,61 +87,56 @@ class ParaDbUpdatePrep(ParaDbMethods):
         # Todo: do exit.sys('error message') in validate_input and make sure that processing stops and
         # the error is printed for now, will revisit later
         self.validate_input_keys()
-        self.create_new_records()
         self.retrieve_existing_data()
-        self.prepare_associations()
-
-    def running_as_prod(self):
-        return utils.key_in_dictionary(self.input_data['file_data'], 'updated_at')
+        self.copy_directly_to_output()
 
     def validate_input_keys(self):
-        ''' '''
+        '''
+        validate_input_keys ensures that the user (me) is doing careful work
+
+        It runs some tests on the input keys and errors with a message, if the tests fail
+        '''
         if self.invalid_keys():
             sys.exit((f'Input error: there is at least one invalid key: {self.input_data["file_data"]}; '
-                      f'The valid keys are {VALID_INPUT_KEYS}'))
+                      f'The valid keys are {VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT}'))
         if not self.one_or_zero_retrieval_keys():
             sys.exit(f'Input error: too many retrieval keys: {self.input_data["file_data"]}')
-        if not self.updated_at_none_or_only():
-            sys.exit(f'Input error: updated_at should be the only key: {self.input_data["file_data"]}')
+        if self.run_as_prod_with_adds():
+            sys.exit(f'Input error: no explicit creates if run_as_prod: {self.input_data["file_data"]}')
         if not self.valid_input_keys():
             sys.exit(f'Input error: Must be at least one valid key: {self.input_data["file_data"]}')
 
-    def create_new_records(self):
-        ''' '''
-        for key in VALID_CREATE_KEYS:
+    def copy_directly_to_output(self):
+        '''
+        copy_directly_to_output is a convenience feature, so you can think about what you want to do
+        upfront.  This class does not do any database creates, updates or deletes, but by retrieving the
+        paragraph structure in record format, it makes it easy to edit for updating.
+        '''
+        for key in COPY_DIRECTLY_TO_OUTPUT:
             if utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 continue
-            if key == 'add_categories':
-                self.add_categories()
-            if key == 'add_references':
-                self.add_references()
-            if key == 'add_groups':
-                self.add_groups()
+            self.output_data[key] = self.input_data['file_data'][key]
 
     def retrieve_existing_data(self):
+        '''
+        retrieve_existing_data [summary]
+
+        [extended_summary]
+
+        :return: [description]
+        :rtype: [type]
+        '''
         query = self.build_sql()
+        if query is None:
+            return None
         # print(f'Retrieval query == {query}')
         raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph)
         return self.add_existing_data_to_manual_json(raw_queryset)
 
-    # if we are doing a updated_at retrieval, then we need to get the unique keys for the given
-    # associations.  Otherwise there is a possibility for data that cannot be accessed
-    # Not really true if it is actually development, but it would be better to do it
-    # consistantly
-    def prepare_associations(self):
-        print('still have not decided exactly how to deal with assoociations')
-        for key in VALID_ASSOCIATION_KEYS:
-            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
-                continue
-            if key == 'delete_associations':
-                self.remove_associations()
-            if key == 'add_associations':
-                self.add_associations()
-
     # Validation routines
     def invalid_keys(self):
         for key in self.input_data['file_data'].keys():
-            if key not in VALID_INPUT_KEYS:
+            if key not in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
                 return True
         return False
 
@@ -157,43 +147,24 @@ class ParaDbUpdatePrep(ParaDbMethods):
                 num += 1
         return num < 2
 
-    def updated_at_none_or_only(self):
+    def run_as_prod_with_adds(self):
         '''
-        updated_at_none_or_only validates that updated_at is only key, if it is an input key
+        run_as_prod_with_adds validates that when we are using the run_as_prod input indicator we are
+        not doing explicit creates on associations, categories, groups or references
 
-        :return: returns False unless updated_at is not a key or if it is the only key
+        :return: returns True when run_as_prod is True and the are input keys like add_*
         :rtype: bool
         '''
-        if not self.running_as_prod():
-            return True
-
-        if len(self.input_data['file_data'].keys()) >= 1:
+        if not self.run_as_prod:
             return False
-        return False
+        return utils.dictionary_key_begins_with_substring(self.input_data['file_data'], 'add_')
 
     def valid_input_keys(self):
         num = 0
-        for key in VALID_INPUT_KEYS:
+        for key in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
             if not utils.key_not_in_dictionary(self.input_data['file_data'], key):
                 num += 1
         return num > 0
-
-    # create routines
-
-    # call self.find_or_create_record(self, class_, find_dict, create_dict)
-    # these are loops
-    def add_categories(self):
-        print('dev error: add categories should not be called yet')
-
-    # call self.find_or_create_record(self, class_, find_dict, create_dict)
-    # these are loops
-    def add_references(self):
-        print('dev error: add references should not be called yet')
-
-    # call self.find_or_create_record(self, class_, find_dict, create_dict)
-    # these are loops
-    def add_groups(self):
-        print('dev error: add groups should not be called yet')
 
     # retrieval routines
     def build_sql(self):
@@ -313,10 +284,3 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para_ref['reference_id'] = row.pr_reference_id
         para_ref['paragraph_id'] = row.pr_para_id
         self.output_data['paragraph_reference'].append(para_ref)
-
-    # add or delete association routines
-    def remove_associations(self):
-        print('dev error: remove associations should not be called yet')
-
-    def add_associations(self):
-        print('dev error: add associations should not be called yet')

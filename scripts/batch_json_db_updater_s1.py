@@ -24,16 +24,20 @@ def run(*args):
         Step One Notes
         * Read, understand and follow directions: scripts/documentation/update_process.md
         * Step One only runs in development, since production data comes from development
-        * If no parameters: groups, references and categories will not be created
+        * Using the run_as_prod parameter does two things:
+          1. it prefixes the output file with <PROD_PROCESS_IND>
+          2. add_* file_data input will throw an error (see update_process.md for more information)
+        * If you only want explicit creates (add_* and delete_* keys) and no updates, you can bypass
+          step 1 entirely
 
         Step One Usage
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args updating
-        or (to just see printed output of retrievals)
         >>> python manage.py runscript -v3  batch_json_db_updater_s1
+        or (to just see printed output of retrievals)
+        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args run_as_prod
 
         Step One Process
             * reads json data from <INPUT_TO_UPDATER_STEP_ONE>
-            * creates category, group, or refererence records (if updating)
+            * copies add_* and delete_* input to the output file without changes
             * writes json file to <MANUAL_UPDATE_JSON> that includes all of the data specified by
               the input (<INPUT_TO_UPDATER_STEP_ONE>)
         Step Two Process
@@ -45,8 +49,6 @@ def run(*args):
     if process_data.get('error'):
         sys.exit(process_data['error'])
     process_data = establish_directories(process_data)
-    if process_data.get('error'):
-        sys.exit(process_data['error'])
     res = call_process(process_data)
     if res != 'ok':
         print(f'Error! {res}')
@@ -54,23 +56,22 @@ def run(*args):
 
 def init_process_data(args):
     ''' Gather input parameters and data from file '''
-    updating = constants.UPDATING in args
-    is_prod = os.getenv('ENVIRONMENT') == 'production'
-    message = test_for_errors(args, updating, is_prod)
+    if os.getenv('ENVIRONMENT') == 'production':
+        return {'error': 'This script should only run in the development environment'}
+    run_as_prod = constants.RUN_AS_PROD in args
+    message = test_for_errors(args, run_as_prod)
     if message != 'ok':
         return {'error': message}
-    return {'updating': updating, 'is_prod': is_prod}
+    return {'run_as_prod': run_as_prod}
 
 
-def test_for_errors(args, updating, is_prod):
+def test_for_errors(args, run_as_prod):
     'Ensures the correct environment and number of parameters.'
-    message = f'Error! To many args, args == {args}'
+    message = f'Error! Too many args, args == {args}'
     if len(args) > 1:
         return message
-    if not updating and len(args) == 1:
+    if not run_as_prod and len(args) == 1:
         return message
-    if is_prod:
-        return f'For production run you need either do_update or test update, args == {args} '
     return 'ok'
 
 

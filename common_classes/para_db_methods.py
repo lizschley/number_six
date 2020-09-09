@@ -1,6 +1,5 @@
 '''These will be static resusable methods to create &/or update records'''
 # pylint: pylint: disable=unused-import
-import pytz
 import sys
 from django.utils import timezone
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
@@ -29,16 +28,14 @@ class ParaDbMethods:
         :rtype: [type]
         '''
         try:
-            # group = Group.objects.get(title=find_dict['title'])
-            record = class_.objects.get(**find_dict)
+           return class_.objects.get(**find_dict)
         except class_.DoesNotExist:
             record = class_(**create_dict)
             if self.updating:
                 record.save()
             else:
                 return create_dict
-            record = class_.objects.get(**find_dict)
-        return record
+        return class_.objects.get(**find_dict)
 
     def find_and_update_record(self, class_, find_dict, update_dict):
         '''
@@ -51,10 +48,8 @@ class ParaDbMethods:
         '''
         try:
             record = class_.objects.get(**find_dict)
-            # print(f'record == {record}')
         except class_.DoesNotExist:
             return {'error': f'{class_.__name__} with unique key {find_dict} does not exist.'}
-        # print(f'record id == {record.id}')
         if update_dict['id'] == record.id:
             update_dict['updated_at'] = timezone.now()
             self.update_record(class_, update_dict)
@@ -64,7 +59,7 @@ class ParaDbMethods:
     def update_record(self, class_, update_dict):
         if self.updating:
             pk_id = update_dict.pop('id')
-            print(f'Doing update of {class_.__name__}!')
+            print(f'Doing {class_.__name__} update!!')
             class_.objects.filter(pk=pk_id).update(**update_dict)
 
     # Todo: Check type
@@ -115,6 +110,8 @@ class ParaDbMethods:
         print(f'deleting {find_dict} in {class_.__name__}')
         if self.updating:
             class_.objects.filter(**find_dict).delete()
+        else:
+            print(f'deleting {class_.objects.filter(**find_dict)}')
 
     @staticmethod
     def class_based_rawsql_retrieval(sql, class_, *args):

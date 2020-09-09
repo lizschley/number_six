@@ -64,3 +64,17 @@ def key_in_dictionary(dict_to_check, key):
     :rtype: bool
     '''
     return not dict_to_check.get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48'
+
+
+def dictionary_key_begins_with_substring(search_dict, subs):
+    '''
+    dictionary_keys_begins_with_substring returns true if any key starts with substring
+    otherwise returns false
+
+    :param search_list: list to be searched
+    :type search_list: list of strings
+    :param subs: substring to search for
+    :type subs: string
+    '''
+
+    return bool([idx for idx in search_dict if idx.lower().startswith(subs.lower())])
