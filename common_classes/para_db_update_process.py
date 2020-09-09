@@ -2,6 +2,7 @@
 # pylint: pylint: disable=unused-import
 
 import sys
+import os
 import helpers.no_import_common_class.utilities as utils
 
 from common_classes.para_db_methods import ParaDbMethods
@@ -9,11 +10,14 @@ from projects.models.paragraphs import (Category, Group,  # noqa: F401
                                         GroupParagraph, Paragraph,
                                         ParagraphReference, Reference)
 
-RECORD_KEYS = ('categories', 'references', 'paragraphs', 'groups',
-               'paragraph_reference', 'group_paragraph')
+FILE_DATA = 'file_data'
 
-ASSOCIATION_KEYS = ('add_paragraph_reference', 'add_group_paragraph', 'delete_paragraph_reference',
-                    'delete_group_paragraph')
+UPDATE_RECORD_KEYS = ('categories', 'references', 'paragraphs', 'groups',
+                      'paragraph_reference', 'group_paragraph')
+
+ADD_ASSOCIATION_KEYS = ('add_paragraphreference', 'add_groupparagraph')
+
+DELETE_ASSOCIATION_KEYS = ('delete_paragraphreference', 'delete_groupparagraph')
 
 CREATE_RECORD_KEYS = ('add_categories', 'add_groups', 'add_references')
 
@@ -33,8 +37,14 @@ UPDATE_DATA = {
 }
 
 ASSOCIATION_DATA = {
-    'paragraph_reference': {'paragraph_id': 'paragraph_guid', 'reference_id': 'reference_slug'},
-    'group_paragraph': {'group_id': 'group_slug', 'reference_id': 'paragraph_guid'},
+    'paragraphreference': {'paragraph': {'unique_field': 'guid', 'class': Paragraph},
+                           'reference': {'unique_field': 'slug', 'class': Reference},
+                           'paragraph_reference': {'unique_fields': ['paragraph_id', 'reference_id']},
+                           'class': ParagraphReference},
+    'groupparagraph': {'group': {'unique_field': 'slug', 'class': Group},
+                       'paragraph': {'unique_field': 'guid', 'class': Paragraph},
+                       'group_paragraph': {'unique_fields': ['group_id', 'paragraph_id']},
+                       'class': GroupParagraph},
 }
 
 
@@ -49,33 +59,56 @@ class ParaDbUpdateProcess(ParaDbMethods):
         __init__ Assign the framework needed to ...
         '''
         super(ParaDbUpdateProcess, self).__init__(updating)
+        self.file_data = input_data.pop('file_data')
         self.input_data = input_data
+        print(f'input_data == {self.input_data}')
         self.process_data = {'categories': [],
                              'groups': [],
                              'references': [],
                              'paragraphs': []}
 
     def process_input_data_update_db(self):
-        # print(f'self.input_data=={self.input_data}')
-        # print(f'self.updating=={self.updating}')
+        self.validate_input_keys()
         self.create_record_loop()
         self.update_record_loop()
-        self.add_associations()
-        self.delete_associations()
+        self.add_or_delete_associations()
         print(f'self.process_data=={self.process_data}')
+
+    def validate_input_keys(self):
+        '''
+        validate_input_keys ensures that the user (me) is doing careful work
+
+        It runs some tests on the input keys and errors with a message, if the tests fail
+        '''
+        if self.explicit_creates_in_prod():
+            sys.exit(f'Input error: no explicit creates if run_as_prod: {self.file_data}')
+
+    def explicit_creates_in_prod(self):
+        '''
+        explicit_creates_in_prod validates both in production or when we are mimicing the production
+        process, we will never allow explicit creates.  All creates will be as if the data was first
+        created in development and will now be created in production with the same unique keys (other
+        than the id, which may or may not be the same)
+
+        :return: returns True when it's a production run and there are input keys like add_*
+        :rtype: bool
+        '''
+        if not os.getenv('ENVIRONMENT') == 'production' and not self.input_data['run_as_prod']:
+            return False
+        return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
     def create_record_loop(self):
         for key in CREATE_RECORD_KEYS:
-            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
+            if utils.key_not_in_dictionary(self.file_data, key):
                 continue
-            for record in self.input_data['file_data'][key]:
+            for record in self.file_data[key]:
                 self.find_or_create_wrapper(key, record)
 
     def update_record_loop(self):
-        for key in RECORD_KEYS:
-            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
+        for key in UPDATE_RECORD_KEYS:
+            if utils.key_not_in_dictionary(self.file_data, key):
                 continue
-            for record in self.input_data['file_data'][key]:
+            for record in self.file_data[key]:
                 self.find_and_update_wrapper(key, record)
 
     def find_or_create_wrapper(self, key, record):
@@ -127,12 +160,25 @@ class ParaDbUpdateProcess(ParaDbMethods):
             group_to_create.pop('category_id', None)
         return group_to_create
 
-    def add_associations(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'add_associations'):
-            return
-        print(self.input_data)
+    def add_or_delete_associations(self):
+        for key in ADD_ASSOCIATION_KEYS + DELETE_ASSOCIATION_KEYS:
+            if utils.key_not_in_dictionary(self.file_data, key):
+                continue
+            temp = key.split('_')
+            if len(temp) != 2:
+                sys.exit(f'Add or delete association key wrongly formatted.  key=={key}')
+            func = temp[0]
+            data_key = temp[1]
+            if func == 'add':
+                self.add_association_wrapper(key, data_key)
+            elif func == 'delete':
+                self.delete_association_wrapper(key, data_key)
 
-    def delete_associations(self):
-        if utils.key_not_in_dictionary(self.input_data['file_data'], 'delete_associations'):
-            return
-        print(self.input_data)
+    def delete_association_wrapper(self, input_key, data_key):
+        print(f'in delete association input == {self.file_data[input_key]}')
+        print(f'in delete association data_key == {ASSOCIATION_DATA[data_key] }')
+
+
+    def add_association_wrapper(self, input_key, data_key):
+        print(f'in add association input == {self.file_data[input_key]}')
+        print(f'in add association data_key == {ASSOCIATION_DATA[data_key] }')

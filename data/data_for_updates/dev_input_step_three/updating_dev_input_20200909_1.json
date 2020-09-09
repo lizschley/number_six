@@ -1,0 +1,7 @@
+{
+    "add_groups": [{"title": "Reverse Chronological Resume", "note": "", "category_id": 1}],
+    "add_paragraphreference": [{"paragraph_guid": "para_guid_r_a", "reference_slug": "ref_slug_a"}],
+    "add_groupparagraph": [{"group_slug": "group_slug_a", "paragraph_guid": "parag_guid_g_a"}],
+    "delete_paragraphreference": [{"paragraph_guid": "para_guid_r_d", "reference_slug": "ref_slug_d"}],
+    "delete_groupparagraph": [{"group_slug": "group_slug_g_d", "paragraph_guid": "para_guid_g_d"}]
+}

@@ -33,8 +33,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         # this is the output data
         super(ParaDbUpdatePrep, self).__init__(updating)
         self.run_as_prod = input_data.pop('run_as_prod', False)
+        self.file_data = input_data.pop('file_data')
         self.input_data = input_data
-        print(f'input_data keys == {list(input_data.keys())}')
         self.included_ids = {
             'categories': [],
             'references': [],
@@ -97,14 +97,14 @@ class ParaDbUpdatePrep(ParaDbMethods):
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
         if self.invalid_keys():
-            sys.exit((f'Input error: there is at least one invalid key: {self.input_data["file_data"]}; '
+            sys.exit((f'Input error: there is at least one invalid key: {self.file_data}; '
                       f'The valid keys are {VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT}'))
         if not self.one_or_zero_retrieval_keys():
-            sys.exit(f'Input error: too many retrieval keys: {self.input_data["file_data"]}')
+            sys.exit(f'Input error: too many retrieval keys: {self.file_data}')
         if self.run_as_prod_with_adds():
-            sys.exit(f'Input error: no explicit creates if run_as_prod: {self.input_data["file_data"]}')
+            sys.exit(f'Input error: no explicit creates if run_as_prod: {self.file_data}')
         if not self.valid_input_keys():
-            sys.exit(f'Input error: Must be at least one valid key: {self.input_data["file_data"]}')
+            sys.exit(f'Input error: Must be at least one valid key: {self.file_data}')
 
     def copy_directly_to_output(self):
         '''
@@ -113,9 +113,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         paragraph structure in record format, it makes it easy to edit for updating.
         '''
         for key in COPY_DIRECTLY_TO_OUTPUT:
-            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
+            if utils.key_not_in_dictionary(self.file_data, key):
                 continue
-            self.output_data[key] = self.input_data['file_data'][key]
+            self.output_data[key] = self.file_data[key]
 
     def retrieve_existing_data(self):
         '''
@@ -135,7 +135,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
     # Validation routines
     def invalid_keys(self):
-        for key in self.input_data['file_data'].keys():
+        for key in self.file_data.keys():
             if key not in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
                 return True
         return False
@@ -143,7 +143,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
     def one_or_zero_retrieval_keys(self):
         num = 0
         for key in VALID_RETRIEVAL_KEYS:
-            if not utils.key_not_in_dictionary(self.input_data['file_data'], key):
+            if not utils.key_not_in_dictionary(self.file_data, key):
                 num += 1
         return num < 2
 
@@ -157,12 +157,12 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         if not self.run_as_prod:
             return False
-        return utils.dictionary_key_begins_with_substring(self.input_data['file_data'], 'add_')
+        return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
     def valid_input_keys(self):
         num = 0
         for key in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
-            if not utils.key_not_in_dictionary(self.input_data['file_data'], key):
+            if not utils.key_not_in_dictionary(self.file_data, key):
                 num += 1
         return num > 0
 
@@ -170,7 +170,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
     def build_sql(self):
         where = self.get_where_statement()
         if where is None:
-            print(f'Not editing existing records {self.input_data["file_data"]}')
+            print(f'Not editing existing records {self.file_data}')
             return
         return ParaDbUpdatePrep.complete_query_from_constants() + ' ' + where
 
@@ -186,16 +186,16 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
     def get_where_statement(self):
         for key in VALID_RETRIEVAL_KEYS:
-            if utils.key_not_in_dictionary(self.input_data['file_data'], key):
+            if utils.key_not_in_dictionary(self.file_data, key):
                 continue
             if key in ('group_ids', 'category_ids', 'paragraph_ids'):
                 return 'where ' + key[0] + '.id in (' + self.get_where_ids(key) + ')'
             if key == 'updated_at':
-                print(f'Have not implemented run_as_prod {self.input_data["file_data"]}')
+                print(f'Have not implemented run_as_prod {self.file_data}')
         return None
 
     def get_where_ids(self, key):
-        return ', '.join(self.input_data['file_data'][key])
+        return ', '.join(self.file_data[key])
 
     def add_existing_data_to_manual_json(self, queryset):
         for row in queryset:
