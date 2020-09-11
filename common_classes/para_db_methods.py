@@ -28,7 +28,7 @@ class ParaDbMethods:
         :rtype: [type]
         '''
         try:
-           return class_.objects.get(**find_dict)
+            return class_.objects.get(**find_dict)
         except class_.DoesNotExist:
             record = class_(**create_dict)
             if self.updating:
@@ -57,6 +57,14 @@ class ParaDbMethods:
         return queryset[0]
 
     def update_record(self, class_, update_dict):
+        '''
+        update_record send in the model class name and the dictionary for updating
+
+        :param class_: model class
+        :type class_: models.Model
+        :param update_dict: Dictionary with the id and the fields to update
+        :type update_dict: dict
+        '''
         if self.updating:
             pk_id = update_dict.pop('id')
             print(f'Doing {class_.__name__} update!!')
@@ -125,4 +133,3 @@ class ParaDbMethods:
         :rtype: rawsql queryset
         '''
         return class_.objects.raw(sql, [args])
-

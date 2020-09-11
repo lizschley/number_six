@@ -73,7 +73,7 @@ def init_process_data(args):
     message = test_for_errors(args, run_as_prod, updating)
     if message != 'ok':
         return {'error': message}
-    if run_as_prod or os.getenv('ENVIRONMENT') == 'production':
+    if os.getenv('ENVIRONMENT') == 'production':
         is_prod = True
     return switches_from_args(is_prod, updating, run_as_prod)
 
@@ -101,10 +101,10 @@ def switches_from_args(is_prod, updating, run_as_prod):
 
 def establish_input_directory(process_data):
     ''' The process and files depend on the process data '''
-    if os.getenv('ENVIRONMENT') == 'development':
-        process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
-    elif os.getenv('ENVIRONMENT') == 'production':
+    if process_data['is_prod']:
         process_data['input_directory'] = constants.PROD_INPUT_JSON
+    elif os.getenv('ENVIRONMENT') == 'development':
+        process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
     else:
         return {'error': (f'Could not select input directory, process data=={process_data}, '
                           f'and enironment = {os.getenv("ENVIRONMENT")}')}
@@ -117,6 +117,7 @@ def call_process(process_data):
     if files_processed == 0:
         return f'Step 3, no updates; 0 Python files in {process_data["input_directory"]}'
     return 'ok'
+
 
 def step_three_process(process_data):
     ''' passes function with correct calls to common looping through json files function '''

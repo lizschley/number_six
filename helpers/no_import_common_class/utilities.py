@@ -78,3 +78,16 @@ def dictionary_key_begins_with_substring(search_dict, subs):
     '''
 
     return bool([idx for idx in search_dict if idx.lower().startswith(subs.lower())])
+
+
+def dict_from_split_string(str_to_split, split_var, field_names):
+    return_dict = {}
+    temp = str_to_split.split(split_var)
+    if len(temp) < len(field_names):
+        return {
+            'error': ('Programming Error!  There are two many field_names for the string to split.'
+                      f'string to split== {str_to_split} & field_names == {field_names}')
+        }
+    for idx, name in enumerate(field_names):
+        return_dict[name] = temp[idx]
+    return return_dict

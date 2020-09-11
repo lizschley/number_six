@@ -1,7 +1,7 @@
 {
-    "add_groups": [{"title": "Reverse Chronological Resume", "note": "", "category_id": 1}],
-    "add_paragraphreference": [{"paragraph_guid": "para_guid_r_a", "reference_slug": "ref_slug_a"}],
-    "add_groupparagraph": [{"group_slug": "group_slug_a", "paragraph_guid": "parag_guid_g_a"}],
-    "delete_paragraphreference": [{"paragraph_guid": "para_guid_r_d", "reference_slug": "ref_slug_d"}],
-    "delete_groupparagraph": [{"group_slug": "group_slug_g_d", "paragraph_guid": "para_guid_g_d"}]
+    "add_groupparagraph": [{"group_slug": "functional-resume", "paragraph_guid": "03dfb633-cbd8-408d-8e1c-03159a107ec0"},
+                           {"group_slug": "functional-resume", "paragraph_guid": "7e8cca99-4db0-4470-9daa-cb40292ad0c4"},
+                           {"group_slug": "functional-resume", "paragraph_guid": "9e8c517e-f48d-4f1a-9fb1-27ad437c95e2"}],
+    "delete_paragraphreference": [{"paragraph_guid": "a3575efb-e443-48da-89d7-20f8c5910229", "reference_slug": "unclebobmartincleancodeprogrammerspeakerteacher"}],
+    "delete_groupparagraph": [{"group_slug": "functional-resume", "paragraph_guid": "21028615-1e01-4444-acc9-e581637e460b"}]
 }
