@@ -8,7 +8,7 @@
 ## Distinction between running in development and running in production
 ### Also running in development as if it were production (run_as_prod)
 * important note - it is possible to use run_as_prod to create new data, but if you start with existing data and do not explicitly create new unique fields it would be easy to over-write existing data.  That would be a pain, and if things were automated, could be even a bigger pain to make right.
-* Any format like <CAPITAL_LETTERS_IN_ANGLE_BRACKETS> indicates a [constant](https://github.com/lizschley/number_six/blob/develop/constants/scripts.py).
+* <CAPITAL_LETTERS_IN_ANGLE_BRACKETS> indicates a [constant](https://github.com/lizschley/number_six/blob/develop/constants/scripts.py).
 - Step 1 will never run in production, because development is the source of truth.
 - In production, the assumption is that the data was already created in development.  For that reason, we pull the data from the development database and move the file to production and write the data to production.  This is an **implicit create**.  Whereas in development, the data that is loaded is new data.  This is an **explicit create**.
 - The script argument, run_as_prod, is used programatically to update development in the same way as production.  It was originally designed for testing before there was a production environment, but has evolved as an alternate way to make updates
