@@ -72,7 +72,7 @@
           - The <PROD_PROCESS_IND> (value of) as a prefix to the json filename will be added to the filename programatically if you use use the run_as_prod runtime argument in Step One.  You will need to move the file to the the <INPUT_TO_UPDATER_STEP_THREE> directory manually.
           - Anytime delete_associations are done in development, the exact same input dictionary will be created in the the <PROD_INPUT_JSON> directory.  This should happen programmatically and the prefix will be decided later.
 4. To update production, do this in Step 1 & 2:
-    - Copy (don't move) this template to data/data_for_updates/dev_input
+    - Same copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
     - The goal is to automate this entire process.  There should be NO manual updates at all!
     - Do the following in Step One to find the input data for updating production:
         1. Retrieve data in the normal way.  The updated_at input key was created for production runs.
