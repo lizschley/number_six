@@ -9,7 +9,7 @@
 ### Also running in development as if it were production (run_as_prod)
 * important note - it is possible to use run_as_prod to create new data, but if you start with existing data and do not explicitly create new unique fields it would be easy to over-write existing data.  That would be a pain, and if things were automated, could be even a bigger pain to make right.
 - Step 1 will never run in production, because development is the source of truth.
-- run_as_prod in Step 1, does not allow the explicit create keys to be copied (begins with add_) and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
+- run_as_prod in Step 1, does not allow the explicit [create keys](https://github.com/lizschley/number_six/blob/update_process/data/json_templates/updating_dev_input_template.json) to be copied (begins with add_) and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
 - run_as_prod and real production in Step 3, will forbid the explicit creates (key begins with add_) and will only read json files that are named correctly.
 - Script argument, run_as_prod, used programatically and manually to update development like production.  Used for testing and as an alternate way to make updates
 - Designed to work with updated_at, though can run with any retrieval where statement
