@@ -2,7 +2,7 @@
 import os
 from portfolio.settings import BASE_DIR
 
-# input parameters
+# script arguments
 RUN_AS_PROD = 'run_as_prod'
 UPDATING = 'updating'
 DB_UPDATE = 'db_update'
