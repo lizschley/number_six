@@ -1,15 +1,15 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
-from common_classes.base_paragraph_retriever import BaseParagraphRetriever
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 
 
-class JsonParagraphRetriever(BaseParagraphRetriever):
+class ParaDisplayRetrieverJson(ParaDisplayRetrieverBase):
     '''
-    JsonParagraphRetriever retrieves a json file and outputs it in a dictionary with the elements
+    ParaDisplayRetrieverJson retrieves a json file and outputs it in a dictionary with the elements
     used by the ParagraphsForDisplay class
 
-    :param BaseParagraphRetriever: Class extending Pythons Abstract Base Class
-    :type BaseParagraphRetriever: Class of type BaseParagraphRetriever
+    :param ParaDisplayRetrieverBase: Class extending Pythons Abstract Base Class
+    :type ParaDisplayRetrieverBase: Class of type ParaDisplayRetrieverBase
     '''
 
     def data_retrieval(self, kwargs):
@@ -54,11 +54,13 @@ class JsonParagraphRetriever(BaseParagraphRetriever):
         :param orig_paragraphs: dictionary: list of paragraphs, each one a list of strings
         :type orig_paragraphs: dict
         '''
+        order = 0
         for orig_para in orig_paragraphs:
-            para = self.format_paragraph(orig_para)
+            order += 1
+            para = self.format_paragraph(orig_para, order)
             self.paragraphs.append(para)
 
-    def format_paragraph(self, orig_para):
+    def format_paragraph(self, orig_para, order):
         '''
         format_paragraph formats the individual paragraph (called by process_json_paragraphs)
 
@@ -71,7 +73,9 @@ class JsonParagraphRetriever(BaseParagraphRetriever):
         :return: paragraph formatted in the way that is used by ParagraphsForDisplay
         :rtype: dict
         '''
+        self.ordered = True
+
         para = orig_para
         para['text'] = para_helper.format_json_text(orig_para['text'])
-        para['order'] = self.get_paragraph_order(orig_para['subtitle'], 0)
+        para['order'] = self.get_paragraph_order(orig_para['subtitle'], order)
         return para

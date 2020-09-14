@@ -1,14 +1,15 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
-from common_classes.base_paragraph_retriever import BaseParagraphRetriever
-from projects.models.paragraphs import Group
-from projects.models.paragraphs import Paragraph
-import constants.common as constants
+import constants.sql_substrings as sql_sub
+from common_classes.para_db_methods import ParaDbMethods
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
+from projects.models.paragraphs import (Group, Paragraph)
+
 
 VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 
 
-class DbParagraphRetriever(BaseParagraphRetriever):
-    ''' The DbParagraphRetriever class retrieves the information to use to output paragraphs.  Later
+class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
+    ''' The ParaDisplayRetrieverDb class retrieves the information to use to output paragraphs.  Later
         there may be other flavors, such as a blog or flash cards'''
 
     def data_retrieval(self, kwargs):
@@ -23,13 +24,17 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         '''
         if 'group_id' in kwargs.keys():
             query = self.write_group_standalone_para_sql()
-            return self.db_output_to_display_input(Group.objects.raw(query, [kwargs['group_id']]))
+            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
+            return self.db_output_to_display_input(raw_queryset)
         if 'subtitle' in kwargs.keys():
             self.group = {'title': kwargs['subtitle'], 'note': ''}
             query = self.write_one_standalone_para_sql()
-            return self.db_output_to_display_input(Paragraph.objects.raw(query, [kwargs['subtitle']]))
+            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph,
+                                                                      kwargs['subtitle'])
+            return self.db_output_to_display_input(raw_queryset)
         return None
 
+    # Todo: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
     def write_group_standalone_para_sql(self):
         '''
         write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
@@ -75,10 +80,10 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :return: select part of the sql query
         :rtype: str
         '''
-        sql = constants.BEGIN_SELECT
+        sql = sql_sub.BEGIN_SELECT
         if sql_type == 'group_id_only':
-            sql += ', ' + constants.SELECT_GROUP
-        sql += ', ' + constants.SELECT_PARAGRAPHS + ', ' + constants.SELECT_REFERENCES + ' '
+            sql += ', ' + sql_sub.SELECT_GROUP
+        sql += ', ' + sql_sub.SELECT_PARAGRAPHS + ', ' + sql_sub.SELECT_REFERENCES + ' '
         return sql
 
     def get_tables(self, sql, sql_type):
@@ -94,10 +99,10 @@ class DbParagraphRetriever(BaseParagraphRetriever):
         :rtype: str
         '''
         if sql_type == 'group_id_only':
-            sql += constants.FROM_GROUP_JOIN_PARA + ' '
+            sql += sql_sub.FROM_GROUP_JOIN_PARA + ' '
         else:
-            sql += constants.FROM_PARA + ' '
-        sql += constants.JOIN_REFERENCES_TO_PARA
+            sql += sql_sub.FROM_PARA + ' '
+        sql += sql_sub.JOIN_REFERENCES_TO_PARA
         return sql
 
     def db_output_to_display_input(self, raw_queryset):
@@ -143,7 +148,7 @@ class DbParagraphRetriever(BaseParagraphRetriever):
                 'title': row.title,
                 'note': row.note,
             }
-        except AttributeError: # Be explicit with catching exceptions.
+        except AttributeError:  # Be explicit with catching exceptions.
             self.ordered = False
             self.group = {
                 'title': 'standalone para',

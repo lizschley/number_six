@@ -4,8 +4,8 @@
 
 import pytest
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from common_classes.db_paragraph_retriever import DbParagraphRetriever
-from common_classes.json_paragraph_retriever import JsonParagraphRetriever
+from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
+from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
 import testing.data.dict_constants as constants
 import testing.helpers.testing_helpers as helper
 
@@ -43,8 +43,8 @@ def test_para_display_init(para_for_display_object, var_name, var_type):
     helper.assert_instance_variable(para_for_display_object, var_name, var_type)
 
 
-@pytest.mark.parametrize("key,expected", [('path_to_json', JsonParagraphRetriever),
-                                          ('group_id', DbParagraphRetriever)])
+@pytest.mark.parametrize("key,expected", [('path_to_json', ParaDisplayRetrieverJson),
+                                          ('group_id', ParaDisplayRetrieverDb)])
 def test_instantiate_para_for_display(key, expected):
     paragraphs = ParagraphsForDisplay()
     obj = paragraphs.instantiate_class(key)

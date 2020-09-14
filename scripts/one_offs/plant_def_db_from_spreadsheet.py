@@ -11,7 +11,7 @@
 # pylint: disable=missing-function-docstring
 import csv
 import os
-from common_classes.paragraphs_to_db import ParagraphsToDatabase
+from common_classes.para_db_create_process import ParaDbCreateProcess
 from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 import helpers.no_import_common_class.paragraph_helpers as no_import_helper
 from portfolio.settings import BASE_DIR
@@ -34,7 +34,8 @@ def run(*args):
     json_creator = ParagraphDbInputCreator(title='Botany Definitions')
     json_creator = process_csv(json_creator)
     if create_para_directly(args):
-        para_to_db = ParagraphsToDatabase()
+        updating = True
+        para_to_db = ParaDbCreateProcess(updating)
         para_to_db.dictionary_to_db(json_creator.output)
     else:
         json_creator.write_json_file()

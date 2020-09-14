@@ -1,0 +1,13 @@
+{
+    "updated_at": "",
+    "group_ids": [],
+    "category_ids": [],
+    "paragraph_ids": [],
+    "add_categories": [{"title": "", "category_type": ""}],
+    "add_references": [{"link_text": "", "url": ""}],
+    "add_groups": [{"title": "", "note": "", "category_id": 0, "category_title": ""}],
+    "add_paragraphreference": [{"paragraph_guid": "", "reference_slug": ""}],
+    "add_groupparagraph": [{"group_slug": "", "paragraph_guid": ""}],
+    "delete_paragraphreference": [{"paragraph_guid": "", "reference_slug": ""}],
+    "delete_groupparagraph": [{"group_slug": "", "paragraph_guid": ""}]
+}

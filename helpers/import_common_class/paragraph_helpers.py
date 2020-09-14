@@ -1,14 +1,13 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
 import os
+import constants.scripts as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helper
-import portfolio.settings as settings
-from common_classes.one_para_display import OneParaDisplay
+from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from common_classes.paragraphs_to_db import ParagraphsToDatabase
-
-
-DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, '/data/basic_paragraph.json')
+from common_classes.para_db_create_process import ParaDbCreateProcess
+from common_classes.para_db_update_prep import ParaDbUpdatePrep
+from common_classes.para_db_update_process import ParaDbUpdateProcess
 
 
 def paragraph_list_from_json(json_path):
@@ -26,7 +25,7 @@ def paragraph_list_from_json(json_path):
     return paragraphs.retrieve_paragraphs(path_to_json=json_path)
 
 
-def paragraph_json_to_db(json_path):
+def paragraph_json_to_db(json_path, updating=False):
     '''
     paragraph_json_to_db
     Run by batch job to read a json file and update the database.  There is
@@ -36,7 +35,7 @@ def paragraph_json_to_db(json_path):
     :type json_path: string
     '''
     dict_data = para_helper.json_to_dict(json_path)
-    paragraphs = ParagraphsToDatabase()
+    paragraphs = ParaDbCreateProcess(updating)
     paragraphs.dictionary_to_db(dict_data)
 
 
@@ -108,5 +107,35 @@ def single_para_by_subtitle(subtitle):
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
-    para = OneParaDisplay()
+    para = ParagraphsForDisplayOne()
     return para.retrieve_paragraphs(subtitle=subtitle)
+
+
+def update_paragraphs_step_one(input_data):
+    '''
+    update_paragraphs_step_one is called by a batch process created to update data.
+
+    The overall process is designed to work in both development and production.  But the prep
+    happens only in development because the production database is the same as development.
+    Once the manual process works seamlessly, the move data to production process can be
+    automated.  Since the content needs to be created, however, this step will always be
+    manual.
+
+
+    :param input_data: Manually retrieved & updated data or, for production, retrieved by updated_date.
+    :type input_data: dict
+    :return: JSON file that to be manually edited for updates
+    :rtype: writes JSON file
+    '''
+    updating = input_data.pop('updating', False)
+    para = ParaDbUpdatePrep(input_data, updating)
+    para.collect_data_and_write_json()
+
+
+def update_paragraphs_step_three(input_data):
+    '''
+    update_paragraphs_step_three is called by a batch process created to update data.
+    '''
+    updating = input_data.pop('updating', False)
+    para = ParaDbUpdateProcess(input_data, updating)
+    para.process_input_data_update_db()

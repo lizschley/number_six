@@ -1,23 +1,22 @@
 ''' writes JSON file that can be used to update the the paragraph
     structure that can be used by the ParagraphsForDisplay class db structure
-
     Can also create the db structure directly by creating ParagraphsToDatabase and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
 '''
 from datetime import datetime
 import json
 import os
+import constants.scripts as constants
 from portfolio.settings import BASE_DIR
 
 
-OUT_JSON_PATH = os.path.join(BASE_DIR, 'data')
+OUT_JSON_PATH = os.path.join(BASE_DIR, 'data/data_for_creates')
 
 
 class ParagraphDbInputCreator():
     '''
     ParagraphDbInputCreator creates JSON file of the format necessary to create
     db structure for paragraphs
-
     Can also create the db structure directly by creating ParagraphsToDatabase and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
    '''
@@ -26,24 +25,20 @@ class ParagraphDbInputCreator():
         '''
         __init__ Assign the framework needed to easily build the dictionary used
         as input to create the paragraph structure in the db
-
         only title is required
         '''
         title = kwargs.get('title')
         note = kwargs.get('note', '')
         ordered = kwargs.get('ordered', 'no')
         standalone = kwargs.get('standalone', 'yes')
-        filename = kwargs.get('filename',
-                              'input_' + datetime.now().isoformat(timespec='seconds')) + '.json'
         self.output = self.starting_dictionary(title, note, ordered, standalone)
-        self.path_to_json = OUT_JSON_PATH + '/' + filename
+        self.path_to_json = ParagraphDbInputCreator.create_json_file_path()
 
     @staticmethod
     def reference_dictionary(link_text, url):
         '''
         reference_dictionary - helper method to create format for reference
         input to create ParagraphToDb input data
-
         :param link_text: text that will be link text in the reference
         :type link_text: string
         :param url: text that will be the url that is linked in the reference
@@ -61,7 +56,6 @@ class ParagraphDbInputCreator():
         '''
         paragraph_dictionary - helper method to create format for paragraph
         input to create ParagraphToDb input data
-
         :param para_id: defaults to ''
         :type para_id: str
         :param subtitle: optional unless paragraph is stand-alone, defaults to ''
@@ -88,7 +82,6 @@ class ParagraphDbInputCreator():
         '''
         ref_link_para_dictionary - helper method to create format for para to reference association
         input to create ParagraphToDb input data
-
         :param para_id: temp_id to associate to reference, defaults to ''
         :type para_id: str
         :param link_text: [description], defaults to ''
@@ -106,7 +99,6 @@ class ParagraphDbInputCreator():
         '''
         starting_dictionary used as a helper method in creating format for input data for
         ParagraphToDb
-
         :param title: used for searches & for paragraph display, defaults to '' as convenience
         :type title: str, required in reality
         :param note: used for display, defaults to ''
@@ -130,13 +122,33 @@ class ParagraphDbInputCreator():
             'ref_link_paragraph': []
         }
 
+    @staticmethod
+    def create_json_file_path(**kwargs):
+        '''
+        create_json_file_name_with_path creates json output file
+
+        :param directory_path: directory to write to.  defaults to OUT_JSON_PATH, which is always wrong
+        :type directory_path: str, optional
+        :param filename: if filename is None will create filename with datetime stamp, defaults to None
+        :type filename: str, optional
+        :return: file_path
+        :rtype: str
+        '''
+        prefix = kwargs.get('prefix', constants.DEFAULT_PREFIX)
+        filename = kwargs.get('filename',
+                              prefix + datetime.now().isoformat(timespec='seconds') + '.json')
+        directory_path = kwargs.get('directory_path', OUT_JSON_PATH)
+
+        if filename is None:
+            filename = prefix + datetime.now().isoformat(timespec='seconds') + '.json'
+
+        return directory_path + '/' + filename
+
     def assign_output(self, ref, para, ref_link_para):
         '''
         assign_output assigns the ref, para and ref_link_para to the outpu
-
         This is designed to be flexible and work with batch program.  We may have references,
         but maybe not if it is a blog or a resume
-
         :param ref: reference dictionary (method in this class)
         :type ref: dictionary
         :param para: paragraph dictionary (method in this class)
@@ -155,7 +167,6 @@ class ParagraphDbInputCreator():
         '''
         write_json_file writes the formatted file necessary to update the paragraph
         structure in the db
-
         This test mainly for testing
         '''
         with open(self.path_to_json, 'w') as file_path:

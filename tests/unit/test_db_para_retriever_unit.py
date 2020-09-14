@@ -3,12 +3,13 @@ hit many methods using dummy data.'''
 # Todo: need to test coverage on the db_retriever methods
 # pylint: disable=missing-function-docstring
 import pytest
+
 import testing.helpers.testing_helpers as helper
-from common_classes.base_paragraph_retriever import BaseParagraphRetriever
+from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 
 
 def test_inheritance(db_para_retriever):
-    assert issubclass(type(db_para_retriever), BaseParagraphRetriever)
+    assert issubclass(type(db_para_retriever), ParaDisplayRetrieverBase)
 
 
 @pytest.mark.parametrize('var_name, var_type', [('ordered', bool),
@@ -23,7 +24,7 @@ def test_para_retriever_init(db_para_retriever, var_name, var_type):
 
 
 def test_data_retrieval(mocker, db_para_retriever):
-    path = 'common_classes.db_paragraph_retriever.DbParagraphRetriever.'
+    path = 'common_classes.para_display_retriever_db.ParaDisplayRetrieverDb.'
     mocker.patch(path + 'write_group_standalone_para_sql')
     mock = mocker.patch(path + 'db_output_to_display_input')
     mock.return_value = {'test': 'test'}

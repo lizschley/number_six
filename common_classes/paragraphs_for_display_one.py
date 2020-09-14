@@ -1,16 +1,16 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-from common_classes.db_paragraph_retriever import DbParagraphRetriever
+from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
 
 
-class OneParaDisplay(ParagraphsForDisplay):
+class ParagraphsForDisplayOne(ParagraphsForDisplay):
     '''
-    OneParaDisplay is used for Ajax calls to display a definition or whatever
+    ParagraphsForDisplayOne is used for Ajax calls to display a definition or whatever
 
     The input_data is a dictionary that is formatted by a paragraph retriever object.
-    Still using the db_paragraph_retriever to get the data, but the output is different
+    Still using the para_display_retriever_db to get the data, but the output is different
 
     :param object: is formatted by a paragraph retriever object
     :type object: dictionary
@@ -27,14 +27,16 @@ class OneParaDisplay(ParagraphsForDisplay):
         :rtype: dict
         '''
         if not kwargs['subtitle']:
-            message = f'OneParaDisplay only works with subtitle as key word arg, kwargs=={kwargs}'
-            return OneParaDisplay.error_output(message)
+            message = ('ParagraphsForDisplayOne only works with subtitle as key word arg, '
+                       f'kwargs=={kwargs}')
+            return ParagraphsForDisplayOne.error_output(message)
 
-        retriever = DbParagraphRetriever()
+        retriever = ParaDisplayRetrieverDb()
         self.input_data = retriever.data_retrieval(kwargs)
         if self.input_data is None:
-            message = f'OneParaDisplay retrieved no data with this subtitile=={kwargs["subtitle"]}'
-            return OneParaDisplay.error_output(message)
+            message = ('ParagraphsForDisplayOne retrieved no data with this '
+                       f'subtitle=={kwargs["subtitle"]}')
+            return ParagraphsForDisplayOne.error_output(message)
         return self.format_single_para_display(kwargs['subtitle'])
 
     def format_single_para_display(self, subtitle):
@@ -64,7 +66,6 @@ class OneParaDisplay(ParagraphsForDisplay):
             self.paragraphs.append(self.paragraph(para))
         self.add_links_to_paragraphs()
 
-
     def output_single_para_display(self, subtitle):
         '''
         output_for_display creates the **kwargs for the display paragraph template
@@ -73,7 +74,7 @@ class OneParaDisplay(ParagraphsForDisplay):
         :rtype: dict
         '''
         if len(self.paragraphs) < 1:
-            return OneParaDisplay.error_output(f'Data not yet loaded for subtitle=={subtitle}')
+            return ParagraphsForDisplayOne.error_output(f'Data not yet loaded for subtitle=={subtitle}')
         para = self.paragraphs[0]
         orig_subtitle = para['subtitle']
         para['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]

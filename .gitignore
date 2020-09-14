@@ -127,3 +127,8 @@ venv.bak/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+# private stuff
+reverse_resume_private.json
+play.py
+tag_finisher.html
