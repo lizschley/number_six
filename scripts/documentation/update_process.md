@@ -11,7 +11,6 @@
 - Step 1 will never run in production, because development is the source of truth.
 - In production, the assumption is that the data was already created in development.  For that reason, we pull the data from the development database and move the file to production and write the data to production.  This is an **implicit create**.  Whereas in development, the data that is loaded is new data.  This is an **explicit create**.
 - The script argument, run_as_prod, is used programatically to update development in the same way as production.  It was originally designed for testing before there was a production environment, but has evolved as an alternate way to make updates
-- The process is designed to work with updated_at data retrieval input (in Step 1), though can run with any retrieval where statement
 - By using run_as_prod as an argument in Step 1, you will not be able to use the wrong input, for example, it forbids using the explicit [create keys](https://github.com/lizschley/number_six/blob/update_process/data/json_templates/updating_dev_input_template.json) (JSON keys beginning with add_) as input and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
 - run_as_prod and real production in Step 3 forbids the explicit creates (key beginning with add_) and will only read json files that are named correctly.
 - Deleting associations work identically in development and production, therefore the input is the same
