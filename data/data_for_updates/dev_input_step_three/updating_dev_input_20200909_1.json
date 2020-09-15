@@ -1,7 +1,0 @@
-{
-    "add_groupparagraph": [{"group_slug": "functional-resume", "paragraph_guid": "03dfb633-cbd8-408d-8e1c-03159a107ec0"},
-                           {"group_slug": "functional-resume", "paragraph_guid": "7e8cca99-4db0-4470-9daa-cb40292ad0c4"},
-                           {"group_slug": "functional-resume", "paragraph_guid": "9e8c517e-f48d-4f1a-9fb1-27ad437c95e2"}],
-    "delete_paragraphreference": [{"paragraph_guid": "a3575efb-e443-48da-89d7-20f8c5910229", "reference_slug": "unclebobmartincleancodeprogrammerspeakerteacher"}],
-    "delete_groupparagraph": [{"group_slug": "functional-resume", "paragraph_guid": "21028615-1e01-4444-acc9-e581637e460b"}]
-}

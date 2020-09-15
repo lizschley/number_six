@@ -121,7 +121,6 @@ def update_paragraphs_step_one(input_data):
     automated.  Since the content needs to be created, however, this step will always be
     manual.
 
-
     :param input_data: Manually retrieved & updated data or, for production, retrieved by updated_date.
     :type input_data: dict
     :return: JSON file that to be manually edited for updates

@@ -23,10 +23,13 @@ class ParagraphDictionaries:
 
     # First group below:
     # empty dictionaries used for creating output in Step 1 & input to Step 2 of batch updater
-    # Todo: do category when there acutally is one
     @staticmethod
     def category_dictionary():
-        return {}
+        return {'id': 0,
+                'title': '',
+                'slug': '',
+                'category_type': '',
+                }
 
     @staticmethod
     def reference_dictionary():

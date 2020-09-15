@@ -7,6 +7,7 @@ import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
+import helpers.no_import_common_class.date_time as dt
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Group, GroupParagraph,  # noqa: F401
                                         Paragraph, ParagraphReference,
@@ -17,6 +18,7 @@ from utilities.paragraph_dictionaries import ParagraphDictionaries as para_dict
 VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
 COPY_DIRECTLY_TO_OUTPUT = ('add_categories', 'add_references', 'add_groups', 'add_paragraph_reference',
                            'add_group_paragraph', 'delete_paragraph_reference', 'delete_group_paragraph')
+TABLE_ABBREV = ('c', 'g', 'p', 'r', 'gp', 'pr')
 
 
 class ParaDbUpdatePrep(ParaDbMethods):
@@ -127,6 +129,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :rtype: [type]
         '''
         query = self.build_sql()
+        # print(query)
         if query is None:
             return None
         # print(f'Retrieval query == {query}')
@@ -191,8 +194,24 @@ class ParaDbUpdatePrep(ParaDbMethods):
             if key in ('group_ids', 'category_ids', 'paragraph_ids'):
                 return 'where ' + key[0] + '.id in (' + self.get_where_ids(key) + ')'
             if key == 'updated_at':
-                print(f'Have not implemented run_as_prod {self.file_data}')
+                return self.get_updated_at_where()
+
         return None
+
+    def get_updated_at_where(self):
+        info = self.file_data['updated_at']
+        oper = info['oper']
+        units = info['units']
+        use_date = f"'{dt.timediff_from_now_for_where(oper, units)}'"
+        return self.upated_at_loop_through_tables(use_date)
+
+    def upated_at_loop_through_tables(self, use_date):
+        logical_op = ''
+        where = 'where'
+        for ind in TABLE_ABBREV:
+            where += f' {logical_op} {ind}.updated_at > {use_date}'
+            logical_op = 'or'
+        return where
 
     def get_where_ids(self, key):
         return ', '.join(self.file_data[key])
@@ -213,7 +232,10 @@ class ParaDbUpdatePrep(ParaDbMethods):
             return
         self.included_ids['categories'].append(row.category_id)
         category = para_dict.category_dictionary()
-        # Todo: field assignment
+        category['id'] = row.category_id
+        category['title'] = row.category_title
+        category['slug'] = row.category_slug
+        category['category_type'] = row.category_type
         self.output_data['categories'].append(category)
 
     def assign_reference(self, row):

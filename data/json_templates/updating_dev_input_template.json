@@ -1,5 +1,5 @@
 {
-    "updated_at": "",
+    "updated_at": {"oper": "-", "units": {"days": 1}},
     "group_ids": [],
     "category_ids": [],
     "paragraph_ids": [],
