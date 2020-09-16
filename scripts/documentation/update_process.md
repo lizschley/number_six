@@ -22,15 +22,15 @@
    2. Add new Associations, keys are as follows: 'add_paragraph_reference', 'add_group_paragraph'
    3. Delete existing Associations, keys are as follows: 'delete_paragraph_reference', 'delete_group_paragraph'
 - The program will automatically copy the add_ dictionaries and the delete_ dictionaries to the output file from Step 1 (read below for further details).
-- If you don't need to do any updates, you can skip Step 1 entirely.  Just copy example from data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_THREE> and delete the following keys: 'updated_at','group_ids','category_ids','paragraph_ids' (those are for updates)
+- If you don't need to do any updates, you can skip Step 1 entirely.  Just copy example from data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_THREE> and delete the following keys: 'updated_at','group_ids','category_ids','paragraph_ids' (those are for the retrievals necessary for updating and can only be done in Step 1)
 
 1. Step 1 Json Input process (run_as_prod == False):
     - Copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
     - Choose one or zero retrieval keys: "group_ids", "category_ids", "paragraph_ids", or "updated_at"
-      1. The array of ids or updated_at will be used as a where statement that will pull in all the associated data so it can be edited.
+      1. The array of ids or updated_at will be used in a where statement that will pull in all the associated data so it can be edited.
       2. It is necessary to do this data retrieval, before doing updates.
-      3. You may need to run some preliminary db queries or put in some print statements to get ids, guids, etc
-      4. Important fact: you will get TypeError unless the ids are strings; although ids are ints on the db, in this process we are converting the data to a query string
+      3. You may need to run some preliminary db queries, run step 1 just to get the information needed or put in some print statements to get ids, guids, etc
+      4. **Important fact:** you will get a TypeError unless the ids are strings; although ids are ints on the db, in this process we are converting the data to a query string
     - Open scripts/batch_json_db_updater_s1.py and use the Step One Usage examples
     - Step One output will be written to the <MANUAL_UPDATE_JSON> directory
     - The add_* keys and the delete_* keys will only be copied over to the output file and you don't need to update if you made it right in the first place
@@ -76,7 +76,7 @@
     - The goal is to automate this entire process.  There should be NO manual updates at all!
     - Do the following in Step One to find the input data for updating production:
         1. Retrieve data in the normal way.  The updated_at input key was created for production runs.
-           * Retrieve the records that were edited on development
+           * Retrieve the records that were edited on development.  Use the run_as_prod script argument (may change)
            * Data with these keys should run, unchanged, on production: 'delete_paragraph_reference', 'delete_group_paragraph'.  This will happen automatically whenever an association is deleted: output will be written to the <PROD_INPUT_JSON>  directory.
            * Real production updates should happen without manual intervention.  The manual steps are only because we are writing new content.
         2. If you are confident, just assume the data is correct and move the file from <MANUAL_UPDATE_JSON>

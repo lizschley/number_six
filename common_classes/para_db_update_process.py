@@ -60,7 +60,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def __init__(self, input_data, updating):
         '''
-        __init__ Assign the framework needed to ...
+        __init__ stores the input data and provides the necessary framework to process the input data
+
+        :param input_data: This is generally a file produced by ParaDBUpdatePrep and then manually
+        updated.  There are a lot of variations, see documentation:
+        :type input_data: [type]
+        :param updating: [description]
+        :type updating: [type]
         '''
         super(ParaDbUpdateProcess, self).__init__(updating)
         self.file_data = input_data.pop('file_data')
@@ -74,6 +80,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
                              'associations_to_delete': [], }
 
     def process_input_data_update_db(self):
+        '''
+        process_input_data_update_db is the main driver of the update process.  You can see the order
+        that we process the data by the method names.
+        '''
         self.validate_input_keys()
         self.create_record_loop(CREATE_RECORD_KEYS, self.file_data)
         self.update_record_loop()
@@ -87,14 +97,15 @@ class ParaDbUpdateProcess(ParaDbMethods):
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
         if self.explicit_creates_in_prod():
-            sys.exit(f'Input error: no explicit creates if production or run_as_prod: {self.file_data}')
+            data = self.file_data
+            sys.exit(f'Input error: explicit creates prohibited in prod or when run_as_prod: {data}')
 
     def explicit_creates_in_prod(self):
         '''
-        explicit_creates_in_prod validates both in production or when we are mimicing the production
-        process, we will never allow explicit creates.  All creates will be as if the data was first
-        created in development and will now be created in production with the same unique keys (other
-        than the id, which may or may not be the same)
+        explicit_creates_in_prod validates ensures that we do not have any add_ keys when we are running
+        production or when we are mimicing the production process.  All production creates will be as if
+        the data was first created in development and will now be created in production with the same
+        unique keys (other than the id, which may or may not be the same)
 
         :return: returns True when it's a production run and there are input keys like add_*
         :rtype: bool
@@ -104,6 +115,16 @@ class ParaDbUpdateProcess(ParaDbMethods):
         return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
     def create_record_loop(self, keys, input_data):
+        '''
+        create_record_loop finds or creates the record, based on the keys in the input data.  It loops
+        through the CREATE_RECORD_KEYS to know which keys to look for and hen calls the find or create
+        wrapper method with the necessary arguments to do the actual find or create CRUD.
+
+        :param keys: constants of the keys we use to do the explicit creates
+        :type keys: tuple of strings
+        :param input_data: the input data, now a dictionary (originally JSON file)
+        :type input_data: dict
+        '''
         for key in keys:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
@@ -111,6 +132,17 @@ class ParaDbUpdateProcess(ParaDbMethods):
                 self.find_or_create_wrapper(key, record)
 
     def update_record_loop(self):
+        '''
+        update_record_loop finds and updates the record, based on the keys in the input data.  It loops
+        through the UPDATE_RECORD_KEYS to know which keys to look for and then calls the
+        find_and_update_wrapper method with the necessary arguments to do the actual find and update
+        CRUD.
+
+        :param keys: constants of the keys we use to do the updates
+        :type keys: tuple of strings
+        :param input_data: the input data, now a dictionary (originally JSON file)
+        :type input_data: dict
+        '''
         for key in UPDATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
@@ -118,6 +150,14 @@ class ParaDbUpdateProcess(ParaDbMethods):
                 self.find_and_update_wrapper(key, record)
 
     def find_or_create_wrapper(self, key, record):
+        '''
+        find_or_create_wrapper prepares the input data to use the generic crud methods
+
+        :param key: input key from input data (now key to dictionary was once JSON key)
+        :type key: string
+        :param record: model.Model class
+        :type record: Model
+        '''
         unique_fields = CREATE_DATA[key]['unique_fields']
         class_ = CREATE_DATA[key]['class']
         find_dict = {}
@@ -132,16 +172,48 @@ class ParaDbUpdateProcess(ParaDbMethods):
         print(f'{returned_record.__class__.__name__} found_or_created: {returned_record}')
 
     def ensure_dictionary(self, class_, record):
+        '''
+        ensure_dictionary creates a dictionary from the returned record if it is not already a dictionary
+
+        :param class_: model class that was found or created
+        :type class_: model.Model
+        :param record: The instance of the model created or found OR the create dict record
+        :type record: model.Model or dictionary
+        :return: dictionary form of the record that was created
+        :rtype: dict
+        '''
         if record.__class__.__name__ == class_.__name__:
             return record.__dict__
         return record
 
     def assign_to_process_data(self, key, record, unique_field):
+        '''
+        assign_to_process_data takes the record created and assigns it to the correct key (say if the
+        input key as add_categories, then categories is the top key, and the assignment is a dictionary
+        that has the unique key value pointing to the record created.  This ensures the we do not try
+        to create duplicate records and that the record created information is available
+
+        :param key: this is the input data key (originally from a JSON file)
+        :type key: string
+        :param record: This is the record created or a dictionary representation of that record
+        :type record: model.Model or dictionary
+        :param unique_field: field name for the unique key (besides id) for the given record
+        :type unique_field: str
+        '''
         info = utils.dict_from_split_string(key, '_', ('nothing', 'top_key'))
         record_key = record[unique_field]
         self.process_data[info['top_key']].append({record_key: record})
 
     def find_and_update_wrapper(self, key, record):
+        '''
+        find_and_update_wrapper finds the record based on the information in the UPDATE_DATA constant
+        with the given key
+
+        :param key: key used to find the UPDATE_DATA information
+        :type key: [str
+        :param record: dictionary representation of the record to be found or created
+        :type record: dict
+        '''
         unique_field = UPDATE_DATA[key]['unique_field']
         class_ = UPDATE_DATA[key]['class']
         find_dict = {unique_field: record[unique_field]}
@@ -150,8 +222,15 @@ class ParaDbUpdateProcess(ParaDbMethods):
             sys.exit(returned_record['error'])
         print(f'{returned_record.__class__.__name__} updated: {returned_record}')
 
-
     def add_category_to_group(self, group_to_create):
+        '''
+        add_category_to_group makes it so you can add a category id to a group before updating the group
+
+        :param group_to_create: dictionary used to create a group
+        :type group_to_create: dict
+        :return: updated group to create (no category_title and category_id equal to  None or int)
+        :rtype: dict
+        '''
         cat_title = group_to_create.pop('category_title', '')
         if not cat_title:
             return self.pop_cat_id_if_zero(group_to_create)
@@ -166,6 +245,15 @@ class ParaDbUpdateProcess(ParaDbMethods):
         return group_to_create
 
     def pop_cat_id_if_zero(self, group_to_create):
+        '''
+        pop_cat_id_if_zero replaces a zero with a None (null category field)  This only gets called
+        when there is no category to associate with the given group
+
+        :param group_to_create: group dictionary (create_dict) with no associated category
+        :type group_to_create: dict
+        :return: dict with None as the category id (postgres null)
+        :rtype: dict
+        '''
         if group_to_create['category_id'] == 0:
             group_to_create.pop('category_id', None)
         return group_to_create
@@ -195,11 +283,34 @@ class ParaDbUpdateProcess(ParaDbMethods):
                 self.add_associations(input_key, input_dictionaries)
 
     def add_associations(self, input_key, create_dict_list):
-        print(f'create_dict_list: {create_dict_list}')
+        '''
+        add_associations makes it possible to create a many to many association between group and
+        paragraph OR paragraph and reference.  This does not get called until the association data
+        is prepared, unique keys are used to look up data and the ids are substituted in the create_dict
+
+        :param input_key: would be add_paragraphreference or add_groupparagraph
+        :type input_key: str
+        :param create_dict_list: list of all the add associations for the given key
+        :type create_dict_list: list
+        '''
+        # print(f'create_dict_list: {create_dict_list}')
         for create_dict in create_dict_list:
             self.find_or_create_wrapper(input_key, create_dict)
 
     def delete_associations(self, input_key, find_dict_list):
+        '''
+        delete_associations makes it possible to delete a many to many association between group and
+        paragraph OR paragraph and reference.  This does not get called until the association data
+        is prepared, unique keys are used to look up data and the ids are substituted in the create_dict
+
+        The same process will be used in production, so after the association is deleted, the
+        delete_association data will be written to a file in the prod input directory
+
+        :param input_key: would be delete_paragraphreference or delete_groupparagraph
+        :type input_key: str
+        :param create_dict_list: list of all the delete associations for the given key
+        :type create_dict_list: list
+        '''
         class_to_delete = DELETE_ASSOCIATIONS[input_key]['class']
         for find_dict in find_dict_list:
             self.delete_record(class_to_delete, find_dict)

@@ -1,7 +1,5 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
-import os
-import constants.scripts as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
@@ -133,8 +131,20 @@ def update_paragraphs_step_one(input_data):
 
 def update_paragraphs_step_three(input_data):
     '''
-    update_paragraphs_step_three is called by a batch process created to update data.
+    update_paragraphs_step_three is called by a batch process created to update data.  There are two
+    possible processes it can call:
+
+    1. ParaDbUpdateProcess or 2. ParaDbUpdateProcessProd
+
+    It will call the first one for the development process and the second one always if it is the
+    production environment, but also if you run in development with the run_as_prod script argument
+
+    :param input_data: data produced by Step one of the script or, if it is only for adding new data and
+    is not run_as_prod or production, sent in directly
+
+    :type input_data: dict
     '''
+
     updating = input_data.pop('updating', False)
     para = ParaDbUpdateProcess(input_data, updating)
     para.process_input_data_update_db()

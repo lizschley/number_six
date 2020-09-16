@@ -1,3 +1,4 @@
+''' home urls (accessed directly from base url) '''
 from django.urls import path
 from home import views
 

@@ -21,4 +21,3 @@ urlpatterns = [
     path('', include('home.urls')),
     path('projects/', include('projects.urls')),
 ]
-

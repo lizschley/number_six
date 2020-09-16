@@ -1,3 +1,6 @@
+''' used to do file introspection and to delete files with specified criteria.
+    USED to work, for sure, but haven't looked at it since working at CoConstruct '''
+
 import os
 
 EXCLUDE_FIRST_LETTER = ['.']
@@ -5,7 +8,7 @@ EXCLUDE_DIR = ['untitled', 'External Libraries', 'include', 'lib', 'bin', 'stati
 EXTENSION_TO_DELETE = '.pyc'
 
 '''
-    For the given path, get the List of all files in the directory tree 
+    For the given path, get the List of all files in the directory tree
 '''
 
 
@@ -16,7 +19,8 @@ def list_of_files(directory_name):
     all_files = list()
     # Iterate over all the entries
     for entry in file_list:
-        # Note-this excludes files and anything under the directories that start with an item in EXCLUDE_FIRST_LETTER
+        # Note-this excludes files and anything under the directories that start with an item in
+        # EXCLUDE_FIRST_LETTER
         if do_exclude(entry):
             continue
         # Create full path
@@ -52,7 +56,7 @@ def exclude_from_directory_with_path(entry):
 
 
 def delete_files_for_extension(file_list):
-    num_deleted=0
+    num_deleted = 0
     for elem in file_list:
         if elem.endswith(EXTENSION_TO_DELETE):
             os.remove(elem)
@@ -68,7 +72,8 @@ def main():
     # Get the list of all files in directory tree at given path
     file_list = list_of_files(directory_name)
 
-    print(f'# 1 file list size - excludes files with excluded criteria and includes deleted files = {len(file_list)}')
+    print(('#1 filelist size, excluding files w/ excluded criteria & including'
+           f'deleted files == {len(file_list)}'))
 
     if len(EXTENSION_TO_DELETE) > 0:
         pickle_num = delete_files_for_extension(file_list)
@@ -78,13 +83,14 @@ def main():
     # This is another example of looping through directories recursively (pickle files should be gone)
     # Note this does NOT exclude files that start with an item in EXCLUDE_FIRST_LETTER
     file_list = list()
-    for (dir_path, dir_names, file_names) in os.walk(directory_name):
+    for (dir_path, file_names) in os.walk(directory_name):
         if exclude_from_directory_with_path(dir_path):
             continue
         file_list += [os.path.join(dir_path, file) for file in file_names]
 
     # Print the files (shouldn't have any of the deleted files)
-    print(f'# 2 list size-includes files (not directories) w/ excl criteria, but not deleted files = {len(file_list)}')
+    print(('#2 list size, including files (not directories) w/ excluded criteria, but not deleted files '
+           f'== {len(file_list)}'))
     for elem in file_list:
         print(elem)
 
