@@ -3,6 +3,7 @@
 import json
 import sys
 
+import constants.crud as crud
 import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
 from common_classes.para_db_methods import ParaDbMethods
@@ -12,13 +13,7 @@ import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Group, GroupParagraph,  # noqa: F401
                                         Paragraph, ParagraphReference,
                                         Reference)
-from utilities.paragraph_dictionaries import ParagraphDictionaries as para_dict
-
-
-VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
-COPY_DIRECTLY_TO_OUTPUT = ('add_categories', 'add_references', 'add_groups', 'add_paragraph_reference',
-                           'add_group_paragraph', 'delete_paragraph_reference', 'delete_group_paragraph')
-TABLE_ABBREV = ('c', 'g', 'p', 'r', 'gp', 'pr')
+from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries as para_dict
 
 
 class ParaDbUpdatePrep(ParaDbMethods):
@@ -103,7 +98,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         if self.invalid_keys():
             sys.exit((f'Input error: there is at least one invalid key: {self.file_data}; '
-                      f'The valid keys are {VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT}'))
+                      f'The valid keys are {crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT}'))
         if not self.one_or_zero_retrieval_keys():
             sys.exit(f'Input error: too many retrieval keys: {self.file_data}')
         if self.run_as_prod_with_adds():
@@ -121,7 +116,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         For COPY_DIRECTLY_TO_OUTPUT data, you can prepare the input and it will carry over to the next
         step by copying it directly to the manual json file.
         '''
-        for key in COPY_DIRECTLY_TO_OUTPUT:
+        for key in crud.COPY_DIRECTLY_TO_OUTPUT:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
             self.output_data[key] = self.file_data[key]
@@ -151,7 +146,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :rtype: bool
         '''
         for key in self.file_data.keys():
-            if key not in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
+            if key not in crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT:
                 return True
         return False
 
@@ -164,7 +159,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :rtype: bool
         '''
         num = 0
-        for key in VALID_RETRIEVAL_KEYS:
+        for key in crud.VALID_RETRIEVAL_KEYS:
             if not utils.key_not_in_dictionary(self.file_data, key):
                 num += 1
         return num < 2
@@ -189,7 +184,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :rtype: bool
         '''
         num = 0
-        for key in VALID_RETRIEVAL_KEYS + COPY_DIRECTLY_TO_OUTPUT:
+        for key in crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT:
             if not utils.key_not_in_dictionary(self.file_data, key):
                 num += 1
         return num > 0
@@ -233,7 +228,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: where clause
         :rtype: str
         '''
-        for key in VALID_RETRIEVAL_KEYS:
+        for key in crud.VALID_RETRIEVAL_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
             if key in ('group_ids', 'category_ids', 'paragraph_ids'):
@@ -268,7 +263,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         logical_op = ''
         where = 'where'
-        for ind in TABLE_ABBREV:
+        for ind in crud.TABLE_ABBREV:
             where += f' {logical_op} {ind}.updated_at >= {use_date}'
             logical_op = 'or'
         return where

@@ -1,9 +1,4 @@
 '''These will be static resusable methods to use in the batch update process'''
-# pylint: pylint: disable=unused-import
-# pylint: disable=missing-function-docstring
-
-from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
-                                        GroupParagraph, ParagraphReference)  # noqa: F401
 
 
 class ParagraphDictionaries:
@@ -11,11 +6,12 @@ class ParagraphDictionaries:
     ParagraphDictionaries is a class of static methods to easily create dictionaries to be used to update
     existing records.
 
+    Returns an empty dictionary to use when in Step 1 & input to Step 2 of batch updater+
+
     See scripts/batch_json_db_updater_s1.py and scripts/batch_json_db_updater_s2.py for more details
 
-    There are two groups of methods:
-       First - empty dictionaries used for creating output in Step 1 & input to Step 2 of batch updater
-       Second (just one method) - content_creator utility, this is to save me time and effort only
+    There is a sister class, utilities.paragraph_dictionary_utility (ParagraphDictionaryUtility) that
+    as a method to save time and effort in creating or updating these classes
 
     :param object: inherits from object
     :type object: Object object
@@ -25,6 +21,7 @@ class ParagraphDictionaries:
     # empty dictionaries used for creating output in Step 1 & input to Step 2 of batch updater
     @staticmethod
     def category_dictionary():
+        ''' returns empty category dictionary '''
         return {'id': 0,
                 'title': '',
                 'slug': '',
@@ -33,6 +30,7 @@ class ParagraphDictionaries:
 
     @staticmethod
     def reference_dictionary():
+        ''' returns empty reference dictionary '''
         return {
             'id': 0,
             'link_text': '',
@@ -42,6 +40,7 @@ class ParagraphDictionaries:
 
     @staticmethod
     def paragraph_dictionary():
+        ''' returns empty paragraph dictionary '''
         return {
             'id': 0,
             'subtitle': '',
@@ -55,6 +54,7 @@ class ParagraphDictionaries:
 
     @staticmethod
     def group_dictionary():
+        ''' returns empty group dictionary '''
         return {
             'id': 0,
             'title': '',
@@ -65,6 +65,7 @@ class ParagraphDictionaries:
 
     @staticmethod
     def groupparagraph_dictionary():
+        ''' returns empty groupparagraph dictionary '''
         return {
             'id': 0,
             'group_id': 0,
@@ -74,14 +75,9 @@ class ParagraphDictionaries:
 
     @staticmethod
     def paragraphreference_dictionary():
+        ''' returns empty paragraphreference dictionary '''
         return {
             'id': 0,
             'reference_id': 0,
             'paragraph_id': 0,
         }
-
-    # Second group only one actually:
-    # Just pass in the model name and id if one is no good
-    @staticmethod
-    def get_content(class_, id_to_use=1):
-        return class_.objects.filter(id=id_to_use).values()

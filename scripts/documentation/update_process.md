@@ -22,7 +22,7 @@
    2. Add new Associations, keys are as follows: 'add_paragraph_reference', 'add_group_paragraph'
    3. Delete existing Associations, keys are as follows: 'delete_paragraph_reference', 'delete_group_paragraph'
 - The program will automatically copy the add_ dictionaries and the delete_ dictionaries to the output file from Step 1 (read below for further details).
-- If you don't need to do any updates, you can skip Step 1 entirely.  Just copy example from data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_THREE> and delete the following keys: 'updated_at','group_ids','category_ids','paragraph_ids' (those are for the retrievals necessary for updating and can only be done in Step 1)
+- If you don't need to update any existing records, you can skip Step 1 entirely.  Just copy example from data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_THREE> and delete the following keys: 'updated_at','group_ids','category_ids','paragraph_ids' (those are for the retrievals necessary for updating and can only be done in Step 1)
 
 1. Step 1 Json Input process (run_as_prod == False):
     - Copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
@@ -33,7 +33,7 @@
       4. **Important fact:** you will get a TypeError unless the ids are strings; although ids are ints on the db, in this process we are converting the data to a query string
     - Open scripts/batch_json_db_updater_s1.py and use the Step One Usage examples
     - Step One output will be written to the <MANUAL_UPDATE_JSON> directory
-    - The add_* keys and the delete_* keys will only be copied over to the output file and you don't need to update if you made it right in the first place
+    - The add_* keys and the delete_* keys will automatically be copied over to the output file and the only reason to change the keys or values would be to make corrections.
  2. Step 2.  Edit the file produced by Step 1 (still with run_as_prod == False).
     - Will be in <MANUAL_UPDATE_JSON> directory
     - For updating records, always leave the unique keys:
@@ -54,22 +54,23 @@
               2. Otherwise it gets too kludgy, because run_as_prod is acting as if the records already exist in development.  Creates are done implicitly in production (& run_as_prod), whereas in the normal development, the creates for categories, groups and references are always explicit and it is impossible to create paragraphs in development using the update process.
            * **You CAN use the delete_association key**  This is exactly the same in production and development
            * Whatever input you use, the program will pull in data that you have already created in development.
-           * For run_as_prod in development, the prefix must be <PROD_PROCESS_IND>
-           * After editing the file in the <MANUAL_UPDATE_JSON> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
-           * If we were really running in production, the files should move to <PROD_INPUT_JSON> automatically, if you ran step 1 with the correct input and everything works as imagined
+           * For run_as_prod in development, the prefix will automatically be <PROD_PROCESS_IND>
         2. In step two - edit the run_as_prod input data
            * Will be in <MANUAL_UPDATE_JSON> directory
            * To do an update to existing data, just update the data as normal like you do for normal development updating
            * To create new records (replacing most of the existing data you pulled), do the following:
-              1. Create unique keys (**slug for groups, categories or references**; and **guid** for paragraphs).
-              2. Edit the ids for all records to be unrealistically high (higher than anything existing)
+              1. Blank out the unique keys (**slug for groups, categories or references**; and **guid** for paragraphs).
+              2. Edit the ids for all new records to be unrealistically high (higher than anything existing)
               3. Be sure to match the corresponding foreign ids in the association records.
            * **Not following through all of the steps:  1, 2 & 3 (directly above) correctly could mess up existing data badly!**
-           * If updating with run_as_prod in development or updating in the production environment,
-             when the data is not found by the unique key, the program will create new data
-             (including paragraphs) and substitute the real id into any relationships
-        3. The files will need to have <PROD_PROCESS_IND> (value of) as a prefix to the json filename
-          - The <PROD_PROCESS_IND> (value of) as a prefix to the json filename will be added to the filename programatically if you use use the run_as_prod runtime argument in Step One.  You will need to move the file to the the <INPUT_TO_UPDATER_STEP_THREE> directory manually.
+           * If creating new records with run_as_prod in development, the program will create unique keys explicitly (so that the update process mimics production, without the work of manually creating the keys)
+           * If in the production environment, blank unique keys will cause the program to error out.
+           * After editing the file in the <MANUAL_UPDATE_JSON> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
+           * Once we have a production environment, it will be a decision to move the file to <PROD_INPUT_JSON>.  Not sure yet how to automate.
+        3. In Step 3 - process to make database updates
+          - The files will need to have <PROD_PROCESS_IND> (value of) as a prefix to the json filename
+          - The <PROD_PROCESS_IND> (value of) as a prefix to the json filename will have been added to the filename programatically if you used the run_as_prod runtime argument in Step One.  You will need to move the file to the the <INPUT_TO_UPDATER_STEP_THREE> directory manually.
+          - When the data is not found by the unique key (won't even look in development, since the unique keys are freshly created), the program will create new data (including paragraphs) and substitute the real id into any relationships
           - Anytime delete_associations are done in development, the exact same input dictionary will be created in the the <PROD_INPUT_JSON> directory.  This should happen programmatically and the prefix will be decided later.
 4. To update production, do this in Step 1 & 2:
     - Same copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>

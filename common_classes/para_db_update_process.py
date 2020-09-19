@@ -2,54 +2,10 @@
 # pylint: pylint: disable=unused-import
 
 import sys
+import constants.crud as crud
 import helpers.no_import_common_class.utilities as utils
 
 from common_classes.para_db_methods import ParaDbMethods
-from projects.models.paragraphs import (Category, Group,  # noqa: F401
-                                        GroupParagraph, Paragraph,
-                                        ParagraphReference, Reference)
-
-FILE_DATA = 'file_data'
-
-UPDATE_RECORD_KEYS = ('categories', 'references', 'paragraphs', 'groups',
-                      'paragraph_reference', 'group_paragraph')
-
-ASSOCIATION_KEYS = ('add_paragraphreference', 'add_groupparagraph',
-                    'delete_paragraphreference', 'delete_groupparagraph')
-
-CREATE_RECORD_KEYS = ('add_categories', 'add_groups', 'add_references')
-
-CREATE_DATA = {
-    'add_categories': {'unique_fields': ['title'], 'class': Category, },
-    'add_references': {'unique_fields': ['link_text'], 'class': Reference, },
-    'add_groups': {'unique_fields': ['title'], 'class': Group, },
-    'add_paragraphs': {'unique_fields': ['guid'], 'class': Paragraph, },
-    'add_groupparagraph': {'unique_fields': ['group_id', 'paragraph_id'],
-                           'class': GroupParagraph, },
-    'add_paragraphreference': {'unique_fields': ['paragraph_id', 'reference_id'],
-                               'class': ParagraphReference, }
-}
-
-DELETE_ASSOCIATIONS = {
-    'delete_groupparagraph': {'class': GroupParagraph, },
-    'delete_paragraphreference': {'class': ParagraphReference, }
-}
-
-UPDATE_DATA = {
-    'categories': {'unique_field': 'slug', 'class': Category},
-    'references': {'unique_field': 'slug', 'class': Reference},
-    'paragraphs': {'unique_field': 'guid', 'class': Paragraph},
-    'groups': {'unique_field': 'slug', 'class': Group},
-    'paragraph_reference': {'unique_field': 'id', 'class': ParagraphReference},
-    'group_paragraph': {'unique_field': 'id', 'class': GroupParagraph}
-}
-
-ASSOCIATION_DATA = {
-    'paragraphreference': {'paragraph': {'unique_fields': ['guid'], 'class': Paragraph},
-                           'reference': {'unique_fields': ['slug'], 'class': Reference}, },
-    'groupparagraph': {'group': {'unique_fields': ['slug'], 'class': Group},
-                       'paragraph': {'unique_fields': ['guid'], 'class': Paragraph}, },
-}
 
 
 class ParaDbUpdateProcess(ParaDbMethods):
@@ -85,7 +41,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         that we process the data by the method names.
         '''
         self.validate_input_keys()
-        self.create_record_loop(CREATE_RECORD_KEYS, self.file_data)
+        self.create_record_loop(crud.CREATE_RECORD_KEYS, self.file_data)
         self.update_record_loop()
         self.add_or_delete_associations()
         # print(f'self.process_data=={self.process_data}')
@@ -143,7 +99,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param input_data: the input data, now a dictionary (originally JSON file)
         :type input_data: dict
         '''
-        for key in UPDATE_RECORD_KEYS:
+        for key in crud.UPDATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
             for record in self.file_data[key]:
@@ -158,14 +114,16 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param record: model.Model class
         :type record: Model
         '''
-        unique_fields = CREATE_DATA[key]['unique_fields']
-        class_ = CREATE_DATA[key]['class']
+        unique_fields = crud.CREATE_DATA[key]['unique_fields']
+        class_ = crud.CREATE_DATA[key]['class']
         find_dict = {}
         for field in unique_fields:
             # print(f'in for, field == {field}, record == {record}')
             find_dict[field] = record[field]
         create_dict = self.add_category_to_group(record) if key == 'add_groups' else record
         returned_record = self.find_or_create_record(class_, find_dict, create_dict)
+        # Todo: find_or_create/in ParaDbMethods: find print output and update return type documentation
+        print(f'Need to update find or create with correct return type: {type(returned_record)} ')
         record_dict = self.ensure_dictionary(class_, returned_record)
         if len(unique_fields) == 1:
             self.assign_to_process_data(key, record_dict, unique_fields[0])
@@ -214,10 +172,12 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param record: dictionary representation of the record to be found or created
         :type record: dict
         '''
-        unique_field = UPDATE_DATA[key]['unique_field']
-        class_ = UPDATE_DATA[key]['class']
+        unique_field = crud.UPDATE_DATA[key]['unique_field']
+        class_ = crud.UPDATE_DATA[key]['class']
         find_dict = {unique_field: record[unique_field]}
+        # Todo: find_and_update/in ParaDbMethods: find print output and update return type documentation
         returned_record = self.find_and_update_record(class_, find_dict, record)
+        print(f'Need to update find & update with correct return type: {type(returned_record)} ')
         if utils.key_in_dictionary(returned_record, 'error'):
             sys.exit(returned_record['error'])
         print(f'{returned_record.__class__.__name__} updated: {returned_record}')
@@ -270,7 +230,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         Throughout much of this process we have constants that drive the input data, directing to
         the correct process
         '''
-        for input_key in ASSOCIATION_KEYS:
+        for input_key in crud.ASSOCIATION_KEYS:
             if utils.key_not_in_dictionary(self.file_data, input_key):
                 continue
             info = utils.dict_from_split_string(input_key, '_', ('function', 'data_key'))
@@ -311,7 +271,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param create_dict_list: list of all the delete associations for the given key
         :type create_dict_list: list
         '''
-        class_to_delete = DELETE_ASSOCIATIONS[input_key]['class']
+        class_to_delete = crud.DELETE_ASSOCIATIONS[input_key]['class']
         for find_dict in find_dict_list:
             self.delete_record(class_to_delete, find_dict)
 
@@ -364,7 +324,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :return: dictionary that is used to create or delete the new association record
         :rtype: dict
         '''
-        association_data = ASSOCIATION_DATA[data_key]
+        association_data = crud.ASSOCIATION_DATA[data_key]
         create_dict = {}
         for rec in foreign_key_records:
             association_key = self.current_association_key(rec)

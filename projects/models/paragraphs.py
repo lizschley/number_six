@@ -85,6 +85,8 @@ class Paragraph(models.Model):
         get_latest_by = 'updated_at'
 
 
+
+
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
     title = models.CharField(max_length=120, blank=False, unique=True)
@@ -93,7 +95,7 @@ class Group(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     paragraphs = models.ManyToManyField(Paragraph, through='GroupParagraph')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, default=None, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
