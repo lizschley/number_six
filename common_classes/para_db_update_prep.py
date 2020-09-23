@@ -86,6 +86,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         COPY_DIRECTLY_TO_OUTPUT
         '''
         self.validate_input_keys()
+        if self.run_as_prod:
+            self.unique_key_lookup_to_output()
         self.retrieve_existing_data()
         self.copy_directly_to_output()
 
@@ -318,6 +320,24 @@ class ParaDbUpdatePrep(ParaDbMethods):
         category['slug'] = row.category_slug
         category['category_type'] = row.category_type
         self.output_data['categories'].append(category)
+        if self.run_as_prod:
+            self.run_as_prod_lookup('categories', row.category_id, row.category_slug)
+
+    def run_as_prod_lookup(self, top_key, key, value):
+        '''
+        run_as_prod_lookup production and running as prod in development will use this.
+
+        Necessary because primary keys may differ between environments and because when we use
+        run_as_prod in development, we use the unique keys to ensure we are not duplicating records
+
+        :param top_key: record type will be the same as the main output data record key
+        :type top_key: str
+        :param key: this is the int version of the primary id for the given record
+        :type key: int
+        :param value: unique key that is different from the primary key
+        :type value: str
+        '''
+        self.output_data['dev_id_to_unique_key'][top_key][key] = value
 
     def assign_reference(self, row):
         '''
@@ -338,6 +358,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         ref['slug'] = row.reference_slug
         ref['url'] = row.reference_url
         self.output_data['references'].append(ref)
+        if self.run_as_prod:
+            self.run_as_prod_lookup('references', row.reference_id, row.reference_slug)
 
     def assign_paragraph(self, row):
         '''
@@ -362,6 +384,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para['image_info_key'] = row.para_image_info_key
         para['guid'] = row.para_guid
         self.output_data['paragraphs'].append(para)
+        if self.run_as_prod:
+            self.run_as_prod_lookup('paragraphs', row.para_id, row.para_guid)
 
     def assign_group(self, row):
         '''
@@ -383,6 +407,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group['note'] = row.group_note
         group['category_id'] = row.group_category_id
         self.output_data['groups'].append(group)
+        if self.run_as_prod:
+            self.run_as_prod_lookup('groups', row.group_id, row.group_slug)
+            self.dev_id_to_unique_key('categories', row.group_category_id, Category)
 
     def assign_groupparagraph(self, row):
         '''
@@ -403,6 +430,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group_para['paragraph_id'] = row.gp_para_id
         group_para['order'] = row.gp_order
         self.output_data['group_paragraph'].append(group_para)
+        if self.run_as_prod:
+            self.dev_id_to_unique_key('groups', row.gp_group_id, Group)
+            self.dev_id_to_unique_key('paragraphs', row.gp_para_id, Paragraph)
 
     def assign_paragraphreference(self, row):
         '''
@@ -422,3 +452,44 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para_ref['reference_id'] = row.pr_reference_id
         para_ref['paragraph_id'] = row.pr_para_id
         self.output_data['paragraph_reference'].append(para_ref)
+        if self.run_as_prod:
+            self.dev_id_to_unique_key('references', row.pr_reference_id, Reference)
+            self.dev_id_to_unique_key('paragraphs', row.pr_para_id, Paragraph)
+
+    def dev_id_to_unique_key(self, top_key, pk_id, class_):
+        '''
+        dev_id_to_unique_key will make sure that there is a way to uniquely identify records
+        that may have a different primary key in production
+
+        :param top_key: top key to lookup table: plural form of the main four paragraph records
+        :type top_key: str
+        :param pk_id: key for lookup: primary key of the record we need to look up
+        :type pk_id: int
+        :param class_: models.Model class for the lookup
+        :type class_: models.Model
+        '''
+        if top_key == 'categories' and pk_id is None:
+            return
+        dict_to_check = self.output_data['dev_id_to_unique_key'][top_key]
+        if utils.key_not_in_dictionary(dict_to_check, pk_id):
+            rec = class_.objects.get(pk=pk_id)
+            if top_key == 'paragraphs':
+                self.run_as_prod_lookup(top_key, rec.id, rec.guid)
+                return
+            self.run_as_prod_lookup(top_key, rec.id, rec.slug)
+
+    def unique_key_lookup_to_output(self):
+        '''
+        unique_key_lookup_to_output needed as an extra step to process creating new association records
+        in production when we have only the dev ids.  The update process will need to find the production
+        primary keys based on the unique field lookup
+
+        :return: the structure of the lookup table, with only the top keys
+        :rtype: dict
+        '''
+        self.output_data['dev_id_to_unique_key'] = {
+            'categories': {},
+            'references': {},
+            'paragraphs': {},
+            'groups': {},
+        }

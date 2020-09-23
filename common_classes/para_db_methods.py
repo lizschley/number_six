@@ -25,17 +25,20 @@ class ParaDbMethods:
         '''
         find_or_create_record will look for the record using the unique field in find_dict. If it
         does not exist, the record will be created
-        :return: the record created or found
-        :rtype: [type]
+        :return: dictionary including the record found or created
+        :rtype: dict or model.Model
         '''
+        found = True
         try:
-            return class_.objects.get(**find_dict)
+            record = class_.objects.get(**find_dict)
+            return {'found': found, 'record': record}
         except class_.DoesNotExist:
+            found = False
             if self.updating:
                 self.create_record(class_, create_dict)
             else:
-                return create_dict
-        return class_.objects.get(**find_dict)
+                return {'found': found, 'record': create_dict}
+        return {'found': found, 'record': class_.objects.get(**find_dict)}
 
     def find_and_update_record(self, class_, find_dict, update_dict):
         '''
@@ -46,8 +49,8 @@ class ParaDbMethods:
         If the record is a paragraph, it will validate it before calling the update method.  If the
         paragraph does not pass the validation, it will return an error message (a dict)
 
-        :return: string that says ok or an error message (may change later)
-        :rtype: [type]
+        :return: is different based on updating.  If False, dict; if True ??? still need debug
+        :rtype: dict or ??
         '''
         try:
             record = class_.objects.get(**find_dict)
@@ -114,7 +117,6 @@ class ParaDbMethods:
         if not self.updating:
             return
         pk_id = update_dict.pop('id')
-        print(f'Doing {class_.__name__} update!!')
         class_.objects.filter(pk=pk_id).update(**update_dict)
 
     # Todo: Check return type, print statements already in
@@ -168,11 +170,8 @@ class ParaDbMethods:
         '''
         if class_ not in (GroupParagraph, ParagraphReference):
             sys.exit(f'Not allowing hard deletes of {class_.__name__}')
-        print(f'deleting {find_dict} in {class_.__name__}')
         if self.updating:
             class_.objects.filter(**find_dict).delete()
-        else:
-            print(f'deleting {class_.objects.filter(**find_dict)}')
 
     @staticmethod
     def class_based_rawsql_retrieval(sql, class_, *args):

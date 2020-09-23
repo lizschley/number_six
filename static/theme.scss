@@ -30,6 +30,12 @@ body {
      }
   }
 
+  .tall-skinny {
+    max-width: 360px;
+    height: 70%;
+    height: auto;
+  }
+
   .demo {
     margin-top: 15px;
     .btn-toolbar {

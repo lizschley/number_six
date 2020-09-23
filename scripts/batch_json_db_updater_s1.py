@@ -24,9 +24,16 @@ def run(*args):
         Step One Notes
         * Read, understand and follow directions: scripts/documentation/update_process.md
         * Step One only runs in development, since production data comes from development
-        * Using the run_as_prod parameter does two things:
+        * Preparing to run in the actual production environment and preparing to run_as_prod in
+          developmment, are the same in in Step One
+        * Using the run_as_prod parameter does three things:
           1. it prefixes the output file with <PROD_PROCESS_IND>
           2. add_* file_data input will throw an error (see update_process.md for more information)
+          3. creates a dev_id to unique_key table.  This is necessary to handle new associations
+             that are not associated with another record update.  For example, say you want to add a
+             paragraph to another group or you reallize that you forgot to associate a reference that
+             you used.  You may not have the unique key necessary to find the correct paragraph, group
+             or reference.
         * If you only want explicit creates (add_* and delete_* keys) and no updates, you can bypass
           step 1 entirely
 

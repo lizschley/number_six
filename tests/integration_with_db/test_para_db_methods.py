@@ -54,7 +54,7 @@ def test_auto_slug_will_create_slug(para_crud_methods) -> None:
     auto_slug_group = para_crud_methods.find_or_create_record(Group,
                                                               data.FIND_GROUP_AUTO_SLUG,
                                                               data.CREATE_GROUP_AUTO_SLUG)
-    assert auto_slug_group.slug == slugify(auto_slug_group.title)
+    assert auto_slug_group['record'].slug == slugify(auto_slug_group['record'].title)
 
 
 @pytest.mark.django_db
@@ -62,7 +62,7 @@ def test_auto_slug_will_not_override_input_data(para_crud_methods) -> None:
     input_slug_group = para_crud_methods.find_or_create_record(Group,
                                                                data.FIND_GROUP_WITH_SLUG,
                                                                data.CREATE_GROUP_WITH_SLUG)
-    assert input_slug_group.slug != slugify(input_slug_group.title)
+    assert input_slug_group['record'].slug != slugify(input_slug_group['record'].title)
 
 
 @pytest.mark.django_db
@@ -84,7 +84,7 @@ def test_input_data_used_as_para_guid(para_crud_methods) -> None:
     new_para = para_crud_methods.find_or_create_record(Paragraph,
                                                        find_dict,
                                                        create_dict)
-    assert new_para.guid == para_guid
+    assert new_para['record'].guid == para_guid
 
 
 @pytest.mark.django_db

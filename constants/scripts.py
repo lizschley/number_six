@@ -21,6 +21,5 @@ MANUAL_UPDATE_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/dev_manual_js
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
 
 # filename prefixes
-PROD_PROCESS_IND = 'likeprod_'
+PROD_PROCESS_IND = 'prod_input_'
 DEFAULT_PREFIX = 'input_'
-PRODUCTION = 'production_'

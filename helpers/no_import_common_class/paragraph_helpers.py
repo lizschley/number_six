@@ -1,7 +1,8 @@
 '''
-    Any file within the no_import_common_class is for methods that can be
+    Any file within the no_import_common_class folder is for methods that can be
     imported safely (without circular dependencies) into the classes in
-    the common class folder. '''
+    the common class folder.
+'''
 
 import json
 import os
@@ -31,7 +32,6 @@ def create_link(url, link_text):
 
 def json_to_dict(json_path):
     '''
-    [Summary]
     json_to_dict takes a json file path, reads the content and uses it to create a dictionary.
 
     :param json_path: Path to a file on the project directory structure
@@ -49,11 +49,9 @@ def json_to_dict(json_path):
 
 def format_json_text(text):
     '''
-    [Summary]
-     format_json_text takes a List of strings and concatenates them
+    format_json_text takes a List of strings and concatenates them
        together with a space
 
-    [extended_summary]
     If there is no html tag (just checks for < in the first character),
        it adds a paragraph tag
 
@@ -70,11 +68,9 @@ def format_json_text(text):
 
 def extract_data_from_form(classification):
     '''
-    [Summary]
     extract_data_from_form formats the Study lookup form return to be usable for
     queries
 
-    [extended_summary]
     This takes data that is sent directly from the Study lookup form and
     transforms it in a way that can be used for view paramaters.  This is so the
     correct queries can be performed in the view.
@@ -230,6 +226,7 @@ def add_image_information(para):
         return para
     para['image_alt'] = os.path.splitext(para['image_path'])[0]
     info = lookup.IMAGE_INFO_LOOKUP[para['image_info_key']]
+    print(f'info=={info}')
     para['image_classes'] = info['classes']
     return para
 
@@ -239,7 +236,7 @@ def loop_through_files_for_db_updates(method, process_data):
     directory = process_data['input_directory']
     num_processed = 0
     for filename in os.listdir(directory):
-        if filename.endswith(constants.JSON_SUB):
+        if use_file(filename, str(method), process_data):
             file_path = os.path.join(directory, filename)
             num_processed += 1
             print(f'file_path == {file_path}')
@@ -248,3 +245,47 @@ def loop_through_files_for_db_updates(method, process_data):
         else:
             continue
     return num_processed
+
+
+def use_file(filename, method, process_data):
+    '''
+    use_file returns false if the extension is not json
+
+    If it is Step One, that is enough for use_file to return True
+
+    If Step Three, need to check if production or running as if it's production:
+
+    if production, use_file returns True if file has production prefix or
+    if not production, use_file returns True if file does not have production prefix
+
+    Otherwise use_file returns False
+
+    :param filename: filename (without path)
+    :type filename: str
+    :param method: string representation of method name (tell whether step 1 or 3)
+    :type method: str
+    :param process_data: passed in: environment (from environment variable) or run_as_prod, script arg
+    :type process_data: dictionary
+    :return: Depending on factors mentioned above, pass back True if file is correct oe False, elsewise
+    :rtype: bool
+    '''
+    if not filename.endswith(constants.JSON_SUB):
+        return False
+    if 'step_three' not in method:
+        return True
+    if treat_like_production(process_data):
+        return filename.startswith(constants.PROD_PROCESS_IND)
+    return not filename.startswith(constants.PROD_PROCESS_IND)
+
+
+def treat_like_production(process_data):
+    '''
+    treat_like_production returns true if it is the production environment (is_prod is True) or
+    if we are running as prod
+
+    :param process_data: dictionary that contains is_prod and run_as_prod information
+    :type process_data: dict
+    :return: whether or not we should treat it like production
+    :rtype: bool
+    '''
+    return process_data['is_prod'] or process_data['run_as_prod']

@@ -6,6 +6,7 @@ from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.para_db_create_process import ParaDbCreateProcess
 from common_classes.para_db_update_prep import ParaDbUpdatePrep
 from common_classes.para_db_update_process import ParaDbUpdateProcess
+from common_classes.para_db_update_process_prod import ParaDbUpdateProcessProd
 
 
 def paragraph_list_from_json(json_path):
@@ -144,7 +145,8 @@ def update_paragraphs_step_three(input_data):
 
     :type input_data: dict
     '''
-
+    # print(f'inside update_para_step 3, data == {input_data}')
     updating = input_data.pop('updating', False)
-    para = ParaDbUpdateProcess(input_data, updating)
+    para = input_data['class'](input_data, updating)
+    print(f'running input_data["class"]: {input_data["class"].__name__}')
     para.process_input_data_update_db()

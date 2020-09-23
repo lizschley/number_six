@@ -1,7 +1,7 @@
 ''' This is Step Three of the database update process.  Step 1 retrieves & Step 2 edits the data '''
-# pylint: pylint: disable=unused-import
 
 import sys
+import pprint
 import constants.crud as crud
 import helpers.no_import_common_class.utilities as utils
 
@@ -28,12 +28,14 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.file_data = input_data.pop('file_data')
         self.input_data = input_data
         # print(f'input_data == {self.input_data}')
-        self.process_data = {'categories': [],
-                             'groups': [],
-                             'references': [],
-                             'paragraphs': [],
-                             'associations_to_create': [],
-                             'associations_to_delete': [], }
+        self.process_data = {'updating': self.updating,
+                             'categories': {'existing': [], 'create': [], 'update': []},
+                             'groups': {'existing': [], 'create': [], 'update': []},
+                             'references': {'existing': [], 'create': [], 'update': []},
+                             'paragraphs': {'existing': [], 'create': [], 'update': []},
+                             'group_paragraph': {'create': [], 'update': [], 'delete': []},
+                             'paragraph_reference': {'create': [], 'update': [], 'delete': []},
+                             }
 
     def process_input_data_update_db(self):
         '''
@@ -44,7 +46,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.create_record_loop(crud.CREATE_RECORD_KEYS, self.file_data)
         self.update_record_loop()
         self.add_or_delete_associations()
-        # print(f'self.process_data=={self.process_data}')
+        printer = pprint.PrettyPrinter(indent=1, width=120)
+        printer.pprint(self.process_data)
 
     def validate_input_keys(self):
         '''
@@ -52,23 +55,21 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
-        if self.explicit_creates_in_prod():
+        if self.incorrect_environment():
             data = self.file_data
-            sys.exit(f'Input error: explicit creates prohibited in prod or when run_as_prod: {data}')
+            sys.exit(('Input error: wrong process for development unless running as prod: '
+                      f'input_data: {self.input_data}, file_data: {data}'))
 
-    def explicit_creates_in_prod(self):
+    def incorrect_environment(self):
         '''
-        explicit_creates_in_prod validates ensures that we do not have any add_ keys when we are running
-        production or when we are mimicing the production process.  All production creates will be as if
-        the data was first created in development and will now be created in production with the same
-        unique keys (other than the id, which may or may not be the same)
+        incorrect_environment ensures that the given environment matches the process used
 
-        :return: returns True when it's a production run and there are input keys like add_*
+        :return: returns True if you are running this process in production or running as prod
         :rtype: bool
         '''
-        if not self.input_data['is_prod'] and not self.input_data['run_as_prod']:
-            return False
-        return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
+        if self.input_data['is_prod'] or self.input_data['run_as_prod']:
+            return True
+        return False
 
     def create_record_loop(self, keys, input_data):
         '''
@@ -116,18 +117,21 @@ class ParaDbUpdateProcess(ParaDbMethods):
         '''
         unique_fields = crud.CREATE_DATA[key]['unique_fields']
         class_ = crud.CREATE_DATA[key]['class']
+        temp = key.split('_', 1)
+        top_level_key = temp[1] if len(temp) == 2 else key
         find_dict = {}
         for field in unique_fields:
             # print(f'in for, field == {field}, record == {record}')
             find_dict[field] = record[field]
         create_dict = self.add_category_to_group(record) if key == 'add_groups' else record
         returned_record = self.find_or_create_record(class_, find_dict, create_dict)
+        found = returned_record['found']
+        record = returned_record['record']
         # Todo: find_or_create/in ParaDbMethods: find print output and update return type documentation
-        print(f'Need to update find or create with correct return type: {type(returned_record)} ')
-        record_dict = self.ensure_dictionary(class_, returned_record)
+        print(f'Need to update find or create with correct return type: {type(record)} ')
         if len(unique_fields) == 1:
-            self.assign_to_process_data(key, record_dict, unique_fields[0])
-        print(f'{returned_record.__class__.__name__} found_or_created: {returned_record}')
+            self.assign_to_process_data(top_level_key, self.ensure_dictionary(class_, record),
+                                        unique_fields[0], 'create', found)
 
     def ensure_dictionary(self, class_, record):
         '''
@@ -144,7 +148,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
             return record.__dict__
         return record
 
-    def assign_to_process_data(self, key, record, unique_field):
+    def assign_to_process_data(self, top_key, record, unique_field, action=None, found=True):
         '''
         assign_to_process_data takes the record created and assigns it to the correct key (say if the
         input key as add_categories, then categories is the top key, and the assignment is a dictionary
@@ -158,9 +162,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param unique_field: field name for the unique key (besides id) for the given record
         :type unique_field: str
         '''
-        info = utils.dict_from_split_string(key, '_', ('nothing', 'top_key'))
+        if action is not None:
+            self.process_data[top_key][action].append(record)
+        if top_key in ('group_paragraph', 'paragraph_reference'):
+            return
         record_key = record[unique_field]
-        self.process_data[info['top_key']].append({record_key: record})
+        if found or record.get('id'):
+            self.process_data[top_key]['existing'].append({record_key: record})
 
     def find_and_update_wrapper(self, key, record):
         '''
@@ -177,10 +185,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
         find_dict = {unique_field: record[unique_field]}
         # Todo: find_and_update/in ParaDbMethods: find print output and update return type documentation
         returned_record = self.find_and_update_record(class_, find_dict, record)
+
         print(f'Need to update find & update with correct return type: {type(returned_record)} ')
         if utils.key_in_dictionary(returned_record, 'error'):
             sys.exit(returned_record['error'])
-        print(f'{returned_record.__class__.__name__} updated: {returned_record}')
+
+        self.assign_to_process_data(key, self.ensure_dictionary(class_, returned_record),
+                                    unique_field, 'update', True)
 
     def add_category_to_group(self, group_to_create):
         '''
@@ -194,7 +205,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         cat_title = group_to_create.pop('category_title', '')
         if not cat_title:
             return self.pop_cat_id_if_zero(group_to_create)
-        cat_list = self.process_data['categories']
+        cat_list = self.process_data['categories']['existing']
         if not cat_list:
             return self.pop_cat_id_if_zero(group_to_create)
         cat = utils.find_value_from_dictionary_list(cat_list, cat_title)
@@ -233,13 +244,12 @@ class ParaDbUpdateProcess(ParaDbMethods):
         for input_key in crud.ASSOCIATION_KEYS:
             if utils.key_not_in_dictionary(self.file_data, input_key):
                 continue
-            info = utils.dict_from_split_string(input_key, '_', ('function', 'data_key'))
+            function, data_key = input_key.split('_', 1)
 
-            input_dictionaries = self.prepare_association_data(self.file_data[input_key],
-                                                               info['data_key'])
-            if info['function'] == 'delete':
-                self.delete_associations(input_key, input_dictionaries)
-            elif info['function'] == 'add':
+            input_dictionaries = self.prepare_association_data(self.file_data[input_key], data_key)
+            if function == 'delete':
+                self.delete_associations(data_key, input_key, input_dictionaries)
+            elif function == 'add':
                 self.add_associations(input_key, input_dictionaries)
 
     def add_associations(self, input_key, create_dict_list):
@@ -257,7 +267,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         for create_dict in create_dict_list:
             self.find_or_create_wrapper(input_key, create_dict)
 
-    def delete_associations(self, input_key, find_dict_list):
+    def delete_associations(self, data_key, input_key, find_dict_list):
         '''
         delete_associations makes it possible to delete a many to many association between group and
         paragraph OR paragraph and reference.  This does not get called until the association data
@@ -273,6 +283,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         '''
         class_to_delete = crud.DELETE_ASSOCIATIONS[input_key]['class']
         for find_dict in find_dict_list:
+            self.assign_to_process_data(data_key, find_dict,
+                                        None, 'delete', True)
             self.delete_record(class_to_delete, find_dict)
 
     def prepare_association_data(self, file_input_list, data_key):
@@ -280,7 +292,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         prepare_association_data takes the file input (which is a list) from the input file:
            data/data_for_updates/dev_input_step_three directory
 
-        It also uses data from constants at the top of this file:
+        It also uses data from constants from constants/crud.py:
            ASSOCIATION_KEY
            ASSOCIATION_DATA
            CREATE_DATA

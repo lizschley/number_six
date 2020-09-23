@@ -1,5 +1,6 @@
 ''' writes JSON file that can be used to update the the paragraph
     structure that can be used by the ParagraphsForDisplay class db structure
+    ** Important **
     Can also create the db structure directly by creating ParagraphsToDatabase and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
 '''

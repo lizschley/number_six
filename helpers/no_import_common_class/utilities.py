@@ -45,11 +45,13 @@ def key_not_in_dictionary(dict_to_check, key):
     :param dict_to_check: pass in the dictionary in question
     :type dict_to_check: dictionary
     :param key: key we are looking for
-    :type key: string
+    :type key: depends on input
     :return: True if key is in dict_to_check else false
     :rtype: bool
     '''
-    return dict_to_check.get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48'
+    default = 'hopefully$$** never___ TO return~~~%^&'
+    val = dict_to_check.get(key, default)
+    return val == default
 
 
 def key_in_dictionary(dict_to_check, key):
@@ -63,7 +65,9 @@ def key_in_dictionary(dict_to_check, key):
     :return: False if key not in dict_to_check else True
     :rtype: bool
     '''
-    return not dict_to_check.get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48'
+    default = 'hopefully$$** never___ TO return~~~%^&'
+    val = dict_to_check.get(key, default)
+    return val != default
 
 
 def dictionary_key_begins_with_substring(search_dict, subs):
