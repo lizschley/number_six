@@ -1,19 +1,19 @@
 ''' DbUpdateParagraphRetriever, class used for retrieving the data for batch updates '''
 # pylint: pylint: disable=unused-import
-import json
 import sys
 
 import constants.crud as crud
 import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
-from common_classes.para_db_methods import ParaDbMethods
-from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
-import helpers.no_import_common_class.date_time as dt
 import helpers.no_import_common_class.utilities as utils
-from projects.models.paragraphs import (Category, Group, GroupParagraph,  # noqa: F401
-                                        Paragraph, ParagraphReference,
-                                        Reference)
+import utilities.date_time as dt
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries as para_dict
+from projects.models.paragraphs import (Category, Group,  # noqa: F401
+                                        GroupParagraph, Paragraph,
+                                        ParagraphReference, Reference)
+from utilities.record_dictionary_utility import RecordDictionaryUtility
+
+from common_classes.para_db_methods import ParaDbMethods
 
 
 class ParaDbUpdatePrep(ParaDbMethods):
@@ -63,14 +63,11 @@ class ParaDbUpdatePrep(ParaDbMethods):
         Step 1 will never be run in production, since data is updated only in development
         '''
         self.process_input_and_output()
-        out_dir = self.input_data['output_directory']
-        prefix = constants.PROD_PROCESS_IND if self.run_as_prod else constants.DEFAULT_PREFIX
 
-        output_file = open(ParagraphDbInputCreator.create_json_file_path(directory_path=out_dir,
-                                                                         prefix=prefix), 'w')
-        # magic happens here to make it pretty-printed
-        output_file.write(json.dumps(self.output_data, indent=4, sort_keys=True))
-        output_file.close()
+        params = {}
+        params['directory_path'] = self.input_data['output_directory']
+        params['prefix'] = constants.PROD_PROCESS_IND if self.run_as_prod else constants.DEFAULT_PREFIX
+        RecordDictionaryUtility.write_dictionary_to_file(self.output_data, **params)
 
     def process_input_and_output(self):
         '''
@@ -202,7 +199,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         where = self.get_where_statement()
         if where is None:
-            print(f'Not editing existing records, because no where was built{self.file_data}')
+            print(f'No where, therefore not editing existing records{self.file_data}')
             return
         # print(where)
         return ParaDbUpdatePrep.complete_query_from_constants() + ' ' + where

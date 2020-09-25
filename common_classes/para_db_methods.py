@@ -6,7 +6,7 @@ from django.utils import timezone
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
-from utilities.paragraph_dictionary_utility import ParagraphDictionaryUtility
+from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 class ParaDbMethods:
@@ -49,8 +49,8 @@ class ParaDbMethods:
         If the record is a paragraph, it will validate it before calling the update method.  If the
         paragraph does not pass the validation, it will return an error message (a dict)
 
-        :return: is different based on updating.  If False, dict; if True ??? still need debug
-        :rtype: dict or ??
+        :return: dictionary of newly updated record or the record that was found (if not updating)
+        :rtype: dict
         '''
         try:
             record = class_.objects.get(**find_dict)
@@ -64,7 +64,7 @@ class ParaDbMethods:
         if update_dict['id'] == record.id:
             update_dict['updated_at'] = timezone.now()
             self.update_record(class_, update_dict)
-        queryset = ParagraphDictionaryUtility.get_content(class_, id_to_use=record.id)
+        queryset = RecordDictionaryUtility.get_content(class_, pk_id=record.id)
         return queryset[0]
 
     @staticmethod

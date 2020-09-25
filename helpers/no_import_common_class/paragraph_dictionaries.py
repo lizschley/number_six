@@ -10,8 +10,8 @@ class ParagraphDictionaries:
 
     See scripts/batch_json_db_updater_s1.py and scripts/batch_json_db_updater_s2.py for more details
 
-    There is a sister class, utilities.paragraph_dictionary_utility (ParagraphDictionaryUtility) that
-    as a method to save time and effort in creating or updating these classes
+    There is a sister class, utilities.record_dictionary_utility (RecordDictionaryUtility) that has
+    a method to save time and effort in creating or updating these classes
 
     :param object: inherits from object
     :type object: Object object

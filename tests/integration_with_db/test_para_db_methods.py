@@ -10,7 +10,7 @@ from common_classes.para_db_methods import ParaDbMethods
 import testing.data.create_input as data
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
-from utilities.paragraph_dictionary_utility import ParagraphDictionaryUtility
+from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 @pytest.fixture(scope='module')
@@ -89,7 +89,7 @@ def test_input_data_used_as_para_guid(para_crud_methods) -> None:
 
 @pytest.mark.django_db
 def test_input_unique_subtitle_for_standalone_para(para_crud_methods, existing_para) -> None:
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, existing_para.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, existing_para.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -101,7 +101,7 @@ def test_input_unique_subtitle_for_standalone_para(para_crud_methods, existing_p
 
 @pytest.mark.django_db
 def test_successful_update_to_standalone_para(para_crud_methods, not_standalone) -> None:
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, not_standalone.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, not_standalone.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -115,7 +115,7 @@ def test_successful_update_to_standalone_para(para_crud_methods, not_standalone)
 
 @pytest.mark.django_db
 def test_update_successful_to_not_standalone_no_subtitle(para_crud_methods, existing_para) -> None:
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, existing_para.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, existing_para.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -129,7 +129,7 @@ def test_update_successful_to_not_standalone_no_subtitle(para_crud_methods, exis
 
 @pytest.mark.django_db
 def test_error_standalone_changes_no_subtitle(para_crud_methods, not_standalone) -> None:
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, not_standalone.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, not_standalone.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -143,7 +143,7 @@ def test_error_standalone_changes_no_subtitle(para_crud_methods, not_standalone)
 @pytest.mark.skip(reason='Need to turn this into unit test')
 @pytest.mark.django_db
 def test_error_standalone_subtitle_removed(para_crud_methods, existing_para) -> None:
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, existing_para.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, existing_para.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -158,7 +158,7 @@ def test_error_standalone_subtitle_removed(para_crud_methods, existing_para) -> 
 @pytest.mark.django_db
 def test_error_standalone_non_unique_subtitle_edit(para_crud_methods, existing_para,
                                                    different_standalone):
-    queryset = ParagraphDictionaryUtility.get_content(Paragraph, existing_para.id)
+    queryset = RecordDictionaryUtility.get_content(Paragraph, existing_para.id)
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']

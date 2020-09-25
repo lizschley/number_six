@@ -47,7 +47,7 @@ UPDATE_DATA = {
 
 ASSOCIATION_DATA = {
     'paragraph_reference': {'paragraph': {'unique_fields': ['guid'], 'class': Paragraph},
-                           'reference': {'unique_fields': ['slug'], 'class': Reference}, },
+                            'reference': {'unique_fields': ['slug'], 'class': Reference}, },
     'group_paragraph': {'group': {'unique_fields': ['slug'], 'class': Group},
                         'paragraph': {'unique_fields': ['guid'], 'class': Paragraph}, },
 }

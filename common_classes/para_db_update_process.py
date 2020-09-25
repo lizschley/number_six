@@ -183,10 +183,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         class_ = crud.UPDATE_DATA[key]['class']
         find_dict = {unique_field: record[unique_field]}
-        # Todo: find_and_update/in ParaDbMethods: find print output and update return type documentation
         returned_record = self.find_and_update_record(class_, find_dict, record)
 
-        print(f'Need to update find & update with correct return type: {type(returned_record)} ')
         if utils.key_in_dictionary(returned_record, 'error'):
             sys.exit(returned_record['error'])
 

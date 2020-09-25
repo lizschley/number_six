@@ -164,6 +164,8 @@ class ParagraphDbInputCreator():
         if ref_link_para is not None:
             self.output['ref_link_paragraph'].append(ref_link_para)
 
+    # Todo: call RecordDictionaryUtility.write_dictionary_to_file(self.output_data, **params)
+    # Todo: Combine with above (see init() - ParagraphDbInputCreator.create_json_file_path())
     def write_json_file(self):
         '''
         write_json_file writes the formatted file necessary to update the paragraph
