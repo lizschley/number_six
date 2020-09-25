@@ -16,9 +16,6 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
     :type object: dictionary
     '''
 
-    # def __init__(self):
-    #     super().__init__()  # in Python 2 use super(D, self).__init__()
-
     def retrieve_paragraphs(self, **kwargs):
         '''
         retrieve_paragraphs brings in the data necessary for the basic display paragraphs

@@ -64,6 +64,9 @@ class ParaDbMethods:
         if update_dict['id'] == record.id:
             update_dict['updated_at'] = timezone.now()
             self.update_record(class_, update_dict)
+        else:
+            print('Error! The found record id does not match the input record, existing without update.')
+            print(f'input=={update_dict}, and found== {record}')
         queryset = RecordDictionaryUtility.get_content(class_, pk_id=record.id)
         return queryset[0]
 

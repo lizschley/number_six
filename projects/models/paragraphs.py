@@ -10,10 +10,12 @@ class Category(models.Model):
     BLOG = 'blog'
     RESUME = 'resume'
     FLASH_CARD = 'flash_card'
+    EXERCISE = 'exercise'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
         (FLASH_CARD, 'Flash Card'),
+        (EXERCISE, 'Exercise'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(unique=True, populate_from='title')

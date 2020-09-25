@@ -334,7 +334,12 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :param value: unique key that is different from the primary key
         :type value: str
         '''
-        self.output_data['dev_id_to_unique_key'][top_key][key] = value
+        try:
+            str_key = str(key)
+        except ValueError:
+            sys.exit(f'can not convert key to string {key}')
+        self.output_data['dev_id_to_unique_key'][top_key][str_key] = value
+        self.output_data['dev_id_to_unique_key'][top_key][value] = {'dev_id': key}
 
     def assign_reference(self, row):
         '''

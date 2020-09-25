@@ -1,0 +1,19 @@
+{
+    "categories": [
+        {
+            "category_type": "exercise",
+            "id": 20,
+            "slug": "",
+            "title": "At Home Excercise"
+        }
+    ],
+    "groups": [
+        {
+            "category_id": 20,
+            "id": 30,
+            "note": "",
+            "slug": "",
+            "title": "Stretching"
+        }
+    ]
+}

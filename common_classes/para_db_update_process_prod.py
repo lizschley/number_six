@@ -2,9 +2,13 @@
     development.  Step 1 retrieves & Step 2 edits the data.  If it is truly production, Step 2 will be
     skipped. '''
 
-import sys
+import uuid
 from common_classes.para_db_update_process import ParaDbUpdateProcess
+from django.utils.text import slugify
 import helpers.no_import_common_class.utilities as utils
+
+# guid = uuid.uuid4()
+# slug = slugify(title)
 
 
 class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
@@ -24,7 +28,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         self.validate_input_keys()
         self.build_preliminary_data()
         self.update_record_loop()
-        self.add_or_delete_associations()
+        self.delete_associations_prep()
 
     def validate_input_keys(self):
         '''
@@ -62,16 +66,36 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
     def build_preliminary_data(self):
         '''
         build_preliminary_data will loop through input data and do the following:
-        1. For blank slug or guids:
-           if development, create unique key (guid or slug) and add record to create record.  Will NOT
+        1. For blank slug or guid:
+
+           If development - create unique key (guid or slug) and add record to create record.  Will NOT
            go into create record loop.  It will have a different create record loop
 
-           if production, error out (new validation)
+           If production, error out (new validation)
 
-        2. Any associations should have a dev_id to unique key relationship in the input data.  These
+        2. For non-blank guid or slug (development) or record found:
+
+            Always do find and always do a flip table with unique-key to id
+
+            Error if not found in development
+            Need to do id substitution if not found in production.
+
+
+           If production - need to do id substitution, should be in the dev_id to unique key dictionary.  Flip it, but keep
+           the dev_id one.  We need for the associations
+
+           If development - no change from normal processing, other than adding to the list.    If the id of the record
+           found does not match the id that was in the input file, then no update will happen.
+
+        3. Any associations should have a dev_id to unique key relationship in the input data.  These
            can be new and separate from the parent records. For example, if we forgot a reference or
            are adding a paragraph to a new group.  Or it could be  should have a dev_id to unique key
            for each foreign key.
 
         3. Delete associations will have the unique keys as part of the input data
         '''
+
+    def delete_associations_prep(self):
+        pass
+
+
