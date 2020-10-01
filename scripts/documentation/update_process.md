@@ -12,9 +12,9 @@
 The normal create process for development is to use the scripts/batch_json_processor.py.  This process will never run in production, however.  In production we only load data retrieved from development, understanding the primary keys (automatically created ids) may be different.  In order to test the production process, I created the run_as_prod parameter.  It is fun and different to create data this way, but takes a meticulous touch.
 
 **important note** -->
-If you don't understand this, please read entire documeent.  I wanted this at the top, because it could potentially be hard to recover from these problems.  It is safer to use the normal update and create processes.  The dangers are in running as prod in development.  The problem won't exist in production, because there is no manual step to udate or create data.
+If you don't understand this, please read entire document.  I wanted this at the top, because it could potentially be hard to recover from these problems.  It is safer to use the normal update and create processes.  The dangers are in running as prod in development.  The problem won't exist in production, because there is no manual step to udate or create data.
 
-Here are the two two danger areas:
+Here are the three danger areas:
 1. If you want to pull existing data and over-write it to make new data, it is vital to make empty strings of the unique key (slug or guid).  If you don't, the process could easiy over-write data you started with (identifies records with unique keys).
 2. If you create new data and associate it to other records using fake ids (see below for more details), it is totally necessary to make sure the file does not have any  existing associations with the fake ids.  If you pull in data of the same record type that you are creating and that data has associated data with the same ids, you could associate the wrong records to your newly created ones.
 3. Also if you run Step One - the file created will have a date in the file name.  The program will sort descending on that date, so keep that in mind, if you get confused.  The order can make a difference for sure.  It's better to run Step 1 again and cut and paste your updates (from the messed up file), rather than run against data that has been updated.
@@ -25,11 +25,14 @@ Here are the two two danger areas:
 - <CAPITAL_LETTERS_IN_ANGLE_BRACKETS> indicates a [constant](https://github.com/lizschley/number_six/blob/develop/constants/scripts.py).
 - Step 1 will never run in production, because development is the source of truth.
 - Preparing to run in the actual production environment and preparing to run_as_prod in developmment, are the same in in Step One
-- In production, the assumption is that the data was already created in development.  For that reason, we pull the data from the development database and move the file to production and write the data to production (without editing, the whole process could be automatied).  This is an **implicit create**.  Whereas in development, the data that is loaded can legitimately be new data.  This is an **explicit create** unless we are running with the run_as_prod script argument.
+- In production, the assumption is that the data was already created in development.  For that reason, we pull the data from the development database and move the file to production and write the data to production (without editing, eventually plan to automate this process).  This is an **implicit create**.  Whereas in development, using the normal create and update processes, the data that is loaded can legitimately be new data.  This is an **explicit create**.  If we are running with the run_as_prod script argument, however we are pretending to do implicit creates, even though it is really brand new data.  Basically, run_as_prod fakes out the system.
 - The script argument, run_as_prod, is used programatically to update development in the same way as production.  It was originally designed for testing before there was a production environment, but has evolved as an alternate way to make updates.  It definitely requires manual editing, since otherwise we would be writing back the exact same data.
 - By using run_as_prod as an argument in Step 1, you will not be able to use the wrong input, for example, it forbids using the explicit [create keys](https://github.com/lizschley/number_six/blob/develop/data/json_templates/updating_dev_input_template.json) (JSON keys beginning with add_) as input and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
 - run_as_prod and real production in Step 3 forbids the explicit creates (key beginning with add_) and will only read json files that are named correctly.
-- Deleting associations work identically in development and production, therefore the input is the same
+- Deleting associations work identically in development and production, therefore the input is the same.
+- It does not throw an error if you are trying to delete the same associations multiple times (as long as the foreign keys still exist).
+- No matter how you delete associations, deleting associations automatically writes a file to the production update input directory.  The file contents are exactly like the input for deleting associations in development and the filename has the production prefix.
+- It is also possible to delete associations along with the normal run_as_prod input.
 
 ## Step by step process
 1. Step 1 Json Input process (run_as_prod == False):
@@ -92,7 +95,7 @@ Here are the two two danger areas:
            * If creating new records with run_as_prod in development, the program will create unique keys explicitly (so that the update process mimics production, without the work of manually creating the keys)
            * If in the production environment, blank unique keys will cause the program to error out.
            * After editing the file in the <MANUAL_UPDATE_JSON> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
-           * Once we have a production environment, it will be a decision to move the file to <PROD_INPUT_JSON>.  Have not yet developed an automation process, plan to run manually often first.
+           * Once we have a production environment, it will be a decision to move the file to <PROD_INPUT_JSON>, except for deleting associations, which aleady write to <PROD_INPUT_JSON>.  Have not yet developed an automation process, plan to run manually often first.
         3. In Step 3 - process to make database creates and association updates
            - There is a lookup table that will only be created when you run the step one script with the run_as_prod script argument
            - The <PROD_PROCESS_IND> (value of) prefix will have been added to the filename programatically when using run_as_prod runtime argument in Step One.

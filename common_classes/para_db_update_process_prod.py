@@ -27,6 +27,17 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         This is mostly the same as the normal (not production or run_as_prod) data
         '''
         super(ParaDbUpdateProcessProd, self).__init__(input_data, updating)
+        self.prod_results = {}
+        self.only_delete = False
+        if len(self.file_data.keys()) in range(1, 3):
+            self.only_delete = True
+            for key in self.file_data.keys():
+                if key not in crud.DELETE_KEYS:
+                    self.only_delete = False
+
+        if self.only_delete:
+            return
+
         try:
             self.record_lookups = self.file_data.pop('record_lookups')
         except KeyError:
@@ -35,8 +46,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             else:
                 sys.exit(crud.RECORD_LOOKUP_MESSAGE_DEV)
 
-        self.prod_results = {}
-
     def process_input_data_update_db(self):
         '''
         process_input_data_update_db is the main driver of the update process.  You can see the order
@@ -44,6 +53,11 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         # print(f'input_data == {self.input_data}')
         # print(f'file_data == {self.file_data}')
+        print(f'only delete == {self.only_delete}')
+        if self.only_delete:
+            self.deleting_associations()
+            sys.exit('Exiting after only deleting associations')
+
         self.validate_input_keys()
         self.preliminary_record_setup()
         if not self.updating:
@@ -56,14 +70,23 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         self.create_record_loop()
         self.update_record_loop()
         # We are only doing deletes here.  The adds are done in create_record_loop
+        self.deleting_associations()
+
+    def deleting_associations(self):
+        '''
+        deleting_associations is always called, but usually it is called at the very end of processing.
+        The purpose of this method is to allow a user to delete associations in production without
+        running Step One with a run_as_prod argument
+        '''
         self.add_or_delete_associations()
         print('----------------------------------------------------------------')
         # Todo: move the delete process data to prod_results and then delete the process data print
+        print('-------------------Process Data----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
         printer.pprint(self.process_data)
-        # self.process_data[top_key]['delete']
-        print('-----------------------------------------------------------------')
+        print('------------------prod_results-----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
+        self.add_delete_associations_to_prod_results()
         printer.pprint(self.prod_results)
 
     def validate_input_keys(self):
@@ -487,3 +510,13 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         for field in unique_fields:
             find_dict[field] = record[field]
         return find_dict
+
+    def add_delete_associations_to_prod_results(self):
+        for key in crud.ASSOCIATION_RECORD_KEYS:
+            if len(self.process_data[key]['delete']) > 0:
+                if key in self.prod_results.keys():
+                    self.prod_results[key]['delete'] = self.process_data[key]['delete']
+                else:
+                    self.prod_results[key] = {'delete': self.process_data[key]['delete']}
+
+

@@ -34,6 +34,8 @@ CREATE_DATA = {
                                 'class': ParagraphReference, }
 }
 
+DELETE_KEYS = ('delete_paragraph_reference', 'delete_group_paragraph')
+
 DELETE_ASSOCIATIONS = {
     'delete_group_paragraph': {'class': GroupParagraph, },
     'delete_paragraph_reference': {'class': ParagraphReference, }

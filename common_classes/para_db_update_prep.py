@@ -129,7 +129,6 @@ class ParaDbUpdatePrep(ParaDbMethods):
         After any manual updates, the file becomes input to the update process step.
         '''
         query = self.build_sql()
-        # print(query)
         if query is None:
             return None
         # print(f'Retrieval query == {query}')
@@ -201,7 +200,6 @@ class ParaDbUpdatePrep(ParaDbMethods):
         if where is None:
             print(f'No where, therefore not editing existing records{self.file_data}')
             return
-        # print(where)
         return ParaDbUpdatePrep.complete_query_from_constants() + ' ' + where
 
     @staticmethod
@@ -281,7 +279,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: string with ids in the format to be used in sql, such as g.id in (1, 2, 3)
         :rtype: str
         '''
-        return ', '.join(self.file_data[str(key)])
+        return ', '.join(map(str, self.file_data[key]))
 
     def add_existing_data_to_manual_json(self, queryset):
         '''
