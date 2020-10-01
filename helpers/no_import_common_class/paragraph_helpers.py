@@ -235,16 +235,36 @@ def loop_through_files_for_db_updates(method, process_data):
     ''' Loops through files in directory and processes each individually '''
     directory = process_data['input_directory']
     num_processed = 0
-    for filename in os.listdir(directory):
+    file_list = sorted_files_in_dir(directory, True)
+    for filename in file_list:
         if use_file(filename, str(method), process_data):
             file_path = os.path.join(directory, filename)
             num_processed += 1
-            print(f'file_path == {file_path}')
             process_data['file_data'] = json_to_dict(file_path)
             method(process_data)
         else:
             continue
     return num_processed
+
+
+def sorted_files_in_dir(directory, descending=False):
+    '''
+    sorted_files_in_dir uses directory name to get list of files and sort it by filename
+
+    :param directory: directory name and path
+    :type directory: str
+    :param descending: whether to sort alphebetically or in reverse, defaults to False
+    :type descending: bool, optional
+    :return: sorted list of files
+    :rtype: list
+    '''
+    list_of_files = []
+    for filename in os.listdir(directory):
+        file_path = os.path.join(directory, filename)
+        if os.path.isfile(file_path):
+            list_of_files.append(filename)
+    list_of_files.sort(reverse=descending)
+    return list_of_files
 
 
 def use_file(filename, method, process_data):

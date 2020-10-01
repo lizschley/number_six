@@ -272,12 +272,16 @@ class ParaDbUpdatePrep(ParaDbMethods):
         get_where_ids takes an array of ids and turns it a string to be used as part of a where
         statement.  The key will be one of these: 'group_ids', 'category_ids' or 'paragraph_ids'
 
+        Save the user some effort, by not making them pass in ids as string.  If we create the where
+        clause with an an int, it will throw a ValueError, so, for the ease of the user, doing an
+        exlicit conversion of the int.
+
         :param key: key to a python list of ids
-        :type key: str
+        :type key: str (will do the conversion)
         :return: string with ids in the format to be used in sql, such as g.id in (1, 2, 3)
         :rtype: str
         '''
-        return ', '.join(self.file_data[key])
+        return ', '.join(self.file_data[str(key)])
 
     def add_existing_data_to_manual_json(self, queryset):
         '''
@@ -322,14 +326,13 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
     def run_as_prod_lookup(self, top_key, key, value):
         '''
-        run_as_prod_lookup production and running as prod in development will use this.
+        run_as_prod_lookup production and running as prod in development will use this.  It basically
+        gives a lookup between unique_keys (same between all environments) and primary keys (ids)
+        which will probably differ between environments
 
-        Necessary because primary keys may differ between environments and because when we use
-        run_as_prod in development, we use the unique keys to ensure we are not duplicating records
-
-        :param top_key: record type will be the same as the main output data record key
+        :param top_key: valid top keys are in <UPDATE_RECORD_KEYS> (import constants.crud as crud)
         :type top_key: str
-        :param key: this is the int version of the primary id for the given record
+        :param key: str version of the primary id for the given record
         :type key: int
         :param value: unique key that is different from the primary key
         :type value: str
@@ -338,8 +341,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
             str_key = str(key)
         except ValueError:
             sys.exit(f'can not convert key to string {key}')
-        self.output_data['dev_id_to_unique_key'][top_key][str_key] = value
-        self.output_data['dev_id_to_unique_key'][top_key][value] = {'dev_id': key}
+
+        self.output_data['record_lookups'][top_key][str_key] = value
+        self.output_data['record_lookups'][top_key][value] = {'dev_id': key}
 
     def assign_reference(self, row):
         '''
@@ -411,7 +415,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         self.output_data['groups'].append(group)
         if self.run_as_prod:
             self.run_as_prod_lookup('groups', row.group_id, row.group_slug)
-            self.dev_id_to_unique_key('categories', row.group_category_id, Category)
+            self.record_lookups('categories', row.group_category_id, Category)
 
     def assign_groupparagraph(self, row):
         '''
@@ -433,8 +437,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group_para['order'] = row.gp_order
         self.output_data['group_paragraph'].append(group_para)
         if self.run_as_prod:
-            self.dev_id_to_unique_key('groups', row.gp_group_id, Group)
-            self.dev_id_to_unique_key('paragraphs', row.gp_para_id, Paragraph)
+            self.record_lookups('groups', row.gp_group_id, Group)
+            self.record_lookups('paragraphs', row.gp_para_id, Paragraph)
 
     def assign_paragraphreference(self, row):
         '''
@@ -455,12 +459,12 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para_ref['paragraph_id'] = row.pr_para_id
         self.output_data['paragraph_reference'].append(para_ref)
         if self.run_as_prod:
-            self.dev_id_to_unique_key('references', row.pr_reference_id, Reference)
-            self.dev_id_to_unique_key('paragraphs', row.pr_para_id, Paragraph)
+            self.record_lookups('references', row.pr_reference_id, Reference)
+            self.record_lookups('paragraphs', row.pr_para_id, Paragraph)
 
-    def dev_id_to_unique_key(self, top_key, pk_id, class_):
+    def record_lookups(self, top_key, pk_id, class_):
         '''
-        dev_id_to_unique_key will make sure that there is a way to uniquely identify records
+        record_lookups will make sure that there is a way to uniquely identify records
         that may have a different primary key in production
 
         :param top_key: top key to lookup table: plural form of the main four paragraph records
@@ -472,7 +476,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         if top_key == 'categories' and pk_id is None:
             return
-        dict_to_check = self.output_data['dev_id_to_unique_key'][top_key]
+        dict_to_check = self.output_data['record_lookups'][top_key]
         if utils.key_not_in_dictionary(dict_to_check, pk_id):
             rec = class_.objects.get(pk=pk_id)
             if top_key == 'paragraphs':
@@ -489,9 +493,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: the structure of the lookup table, with only the top keys
         :rtype: dict
         '''
-        self.output_data['dev_id_to_unique_key'] = {
+        self.output_data['record_lookups'] = {
             'categories': {},
             'references': {},
             'paragraphs': {},
             'groups': {},
-        }
+         }

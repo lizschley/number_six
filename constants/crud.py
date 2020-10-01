@@ -11,9 +11,12 @@ COPY_DIRECTLY_TO_OUTPUT = ('add_categories', 'add_references', 'add_groups', 'ad
                            'add_group_paragraph', 'delete_paragraph_reference', 'delete_group_paragraph')
 TABLE_ABBREV = ('c', 'g', 'p', 'r', 'gp', 'pr')
 
-
+# The order of these records is important, because earlier records may have primary keys that are used
+# as foreign keys in later records
 UPDATE_RECORD_KEYS = ('categories', 'references', 'paragraphs', 'groups',
                       'paragraph_reference', 'group_paragraph')
+
+ASSOCIATION_RECORD_KEYS = ('paragraph_reference', 'group_paragraph')
 
 ASSOCIATION_KEYS = ('add_paragraph_reference', 'add_group_paragraph',
                     'delete_paragraph_reference', 'delete_group_paragraph')
@@ -51,3 +54,11 @@ ASSOCIATION_DATA = {
     'group_paragraph': {'group': {'unique_fields': ['slug'], 'class': Group},
                         'paragraph': {'unique_fields': ['guid'], 'class': Paragraph}, },
 }
+
+RECORD_LOOKUP_MESSAGE = ('Input Error!  Please read documentation!  Must run Step One with the '
+                         'run_as_prod script argument. ')
+RECORD_LOOKUP_MESSAGE_PROD = RECORD_LOOKUP_MESSAGE + ('Since this is production, editing could mess up '
+                                                      'the entire process.')
+RECORD_LOOKUP_MESSAGE_DEV = RECORD_LOOKUP_MESSAGE + ('In development, you should edit the data, but do '
+                                                     'not use this method unless you know what you are '
+                                                     'doing.')

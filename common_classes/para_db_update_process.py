@@ -43,7 +43,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         that we process the data by the method names.
         '''
         self.validate_input_keys()
-        self.create_record_loop(crud.CREATE_RECORD_KEYS, self.file_data)
+        self.create_record_loop()
         self.update_record_loop()
         self.add_or_delete_associations()
         printer = pprint.PrettyPrinter(indent=1, width=120)
@@ -71,7 +71,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
             return True
         return False
 
-    def create_record_loop(self, keys, input_data):
+    def create_record_loop(self):
         '''
         create_record_loop finds or creates the record, based on the keys in the input data.  It loops
         through the CREATE_RECORD_KEYS to know which keys to look for and hen calls the find or create
@@ -82,10 +82,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param input_data: the input data, now a dictionary (originally JSON file)
         :type input_data: dict
         '''
-        for key in keys:
+        for key in crud.CREATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
                 continue
-            for record in input_data[key]:
+            for record in self.file_data[key]:
                 self.find_or_create_wrapper(key, record)
 
     def update_record_loop(self):

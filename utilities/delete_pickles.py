@@ -67,7 +67,7 @@ def delete_files_for_extension(file_list):
 
 
 def main():
-    directory_name = '/Users/liz/development/number_six'
+    directory_name = '/Users/liz/development/number_six/common_classes'
 
     # Get the list of all files in directory tree at given path
     file_list = list_of_files(directory_name)
@@ -83,6 +83,7 @@ def main():
     # This is another example of looping through directories recursively (pickle files should be gone)
     # Note this does NOT exclude files that start with an item in EXCLUDE_FIRST_LETTER
     file_list = list()
+    print(f'directory_nam == {directory_name}')
     for (dir_path, file_names) in os.walk(directory_name):
         if exclude_from_directory_with_path(dir_path):
             continue
