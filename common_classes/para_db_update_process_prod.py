@@ -61,15 +61,12 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         self.validate_input_keys()
         self.preliminary_record_setup()
         if not self.updating:
-            print('-------------------------------------------------------------')
+            print('-----------------Process Data-------------------------------')
             printer = pprint.PrettyPrinter(indent=1, width=120)
             printer.pprint(self.process_data)
-            print('-------------------------------------------------------------')
-            printer.pprint(self.record_lookups)
             return
         self.create_record_loop()
         self.update_record_loop()
-        # We are only doing deletes here.  The adds are done in create_record_loop
         self.deleting_associations()
 
     def deleting_associations(self):
@@ -79,19 +76,17 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         running Step One with a run_as_prod argument
         '''
         self.add_or_delete_associations()
-        print('----------------------------------------------------------------')
-        # Todo: move the delete process data to prod_results and then delete the process data print
         print('-------------------Process Data----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
         printer.pprint(self.process_data)
         print('------------------prod_results-----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
-        self.add_delete_associations_to_prod_results()
+        self.move_delete_info_to_prod_results()
         printer.pprint(self.prod_results)
 
     def validate_input_keys(self):
         '''
-        validate_input_keys ensures that the user is doing careful work
+        validate_input_keys ensures that the user isprint('----------------------------------------------------------------') doing careful work
 
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
@@ -116,6 +111,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: True if there is an error, else False
         :rtype: bool
         '''
+        print('----------------------Record Lookups----------------------------')
         for key in crud.UPDATE_RECORD_KEYS:
             if key in crud.ASSOCIATION_RECORD_KEYS:
                 continue
@@ -123,7 +119,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
                 print(f'record lookup for {key} == {self.record_lookups[key]}')
             except KeyError:
                 return True
-        print('----------------------------------------------------------------')
         return False
 
     def incorrect_environment(self):
@@ -160,7 +155,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             self.prod_results[key] = {'created': [], 'updated': []}
             for record in self.file_data[key]:
                 if key in crud.ASSOCIATION_RECORD_KEYS:
-                    self.prod_results[key]['deleted'] = []
                     self.process_data[key]['create'].append(record)
                     continue
                 if self.blank_unique_field(record, key):
@@ -511,12 +505,15 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             find_dict[field] = record[field]
         return find_dict
 
-    def add_delete_associations_to_prod_results(self):
+    def move_delete_info_to_prod_results(self):
+        '''
+        move_delete_info_to_prod_results calls the same process to delete associations as exists
+        in the normal update process.  This moves the generated documentation to prod_results,
+        so we can see what happened
+        '''
         for key in crud.ASSOCIATION_RECORD_KEYS:
             if len(self.process_data[key]['delete']) > 0:
                 if key in self.prod_results.keys():
                     self.prod_results[key]['delete'] = self.process_data[key]['delete']
                 else:
                     self.prod_results[key] = {'delete': self.process_data[key]['delete']}
-
-
