@@ -16,6 +16,8 @@ import sys
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+from common_classes.para_db_update_process import ParaDbUpdateProcess
+from common_classes.para_db_update_process_prod import ParaDbUpdateProcessProd
 
 
 def run(*args):
@@ -103,20 +105,33 @@ def establish_input_directory(process_data):
     ''' The process and files depend on the process data '''
     if process_data['is_prod']:
         process_data['input_directory'] = constants.PROD_INPUT_JSON
+        process_data['class'] = ParaDbUpdateProcessProd
     elif os.getenv('ENVIRONMENT') == 'development':
         process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
+        process_data['class'] = development_update_class(process_data)
     else:
         return {'error': (f'Could not select input directory, process data=={process_data}, '
                           f'and enironment = {os.getenv("ENVIRONMENT")}')}
     return process_data
 
 
+def development_update_class(process_data):
+    if process_data['run_as_prod']:
+        return ParaDbUpdateProcessProd
+    return ParaDbUpdateProcess
+
+
 def call_process(process_data):
     ''' Right now only works for Step 1, which always has same input and output directories '''
     files_processed = step_three_process(process_data)
     if files_processed == 0:
-        return f'Step 3, no updates; 0 Python files in {process_data["input_directory"]}'
+        return f'Step 3, no {prod_or_dev(process_data)} in {process_data["input_directory"]}'
     return 'ok'
+
+def prod_or_dev(process_data):
+    if process_data['is_prod'] or process_data['run_as_prod']:
+        return 'production-like files to use for updating'
+    return 'development files to use for updating'
 
 
 def step_three_process(process_data):

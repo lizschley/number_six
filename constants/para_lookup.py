@@ -1,6 +1,8 @@
 ''' used so that we can facilitate image patterns and save manual labor '''
+
 IMAGE_INFO_LOOKUP = {
     'default': {'classes': 'img-fluid  float-sm-left px-2'},
+    'tall-skinny': {'classes': 'img-fluid px-2 float-sm-left tall-skinny'}
 }
 
 '''Used so that links do not need to exactly match subtitiles to be used in single para lookup'''

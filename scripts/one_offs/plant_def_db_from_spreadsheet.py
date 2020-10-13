@@ -1,4 +1,6 @@
 '''
+    Plan to make this obsolete!!!
+
     Turn csv into dictionary that can be used to update database, this is a one-off
     because it is a unique csv
 
@@ -31,6 +33,7 @@ def run(*args):
         > python manage.py runscript -v3 plant_def_db_from_spreadsheet --script-args create_para='yes'
     '''
     print(f'csv input = {IN_CSV_FILE}')
+    # will be reworking ParagraphDbInputCreator around json file processing
     json_creator = ParagraphDbInputCreator(title='Botany Definitions')
     json_creator = process_csv(json_creator)
     if create_para_directly(args):

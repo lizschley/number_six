@@ -10,13 +10,15 @@ class Category(models.Model):
     BLOG = 'blog'
     RESUME = 'resume'
     FLASH_CARD = 'flash_card'
+    EXERCISE = 'exercise'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
         (FLASH_CARD, 'Flash Card'),
+        (EXERCISE, 'Exercise'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
-    slug = AutoSlugField(unique=True, populate_from='title')
+    slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     category_type = models.CharField(max_length=20, choices=CATEGORY_TYPE_CHOICES,
                                      default=FLASH_CARD)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,7 +39,7 @@ class Category(models.Model):
 class Reference(models.Model):
     ''' Many to many with Paragraphs '''
     link_text = models.CharField(max_length=100, blank=False, unique=True)
-    slug = AutoSlugField(blank=False, unique=True, populate_from='link_text')
+    slug = AutoSlugField(max_length=150, blank=False, unique=True, populate_from='link_text')
     url = models.TextField(blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -88,12 +90,12 @@ class Paragraph(models.Model):
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
     title = models.CharField(max_length=120, blank=False, unique=True)
-    slug = AutoSlugField(unique=True, populate_from='title')
+    slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     note = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     paragraphs = models.ManyToManyField(Paragraph, through='GroupParagraph')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, default=None, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '

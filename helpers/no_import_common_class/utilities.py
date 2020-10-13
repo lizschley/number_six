@@ -45,11 +45,13 @@ def key_not_in_dictionary(dict_to_check, key):
     :param dict_to_check: pass in the dictionary in question
     :type dict_to_check: dictionary
     :param key: key we are looking for
-    :type key: string
+    :type key: depends on input
     :return: True if key is in dict_to_check else false
     :rtype: bool
     '''
-    return dict_to_check.get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48'
+    default = 'hopefully$$** never___ TO return~~~%^&'
+    val = dict_to_check.get(key, default)
+    return val == default
 
 
 def key_in_dictionary(dict_to_check, key):
@@ -63,7 +65,9 @@ def key_in_dictionary(dict_to_check, key):
     :return: False if key not in dict_to_check else True
     :rtype: bool
     '''
-    return not dict_to_check.get(key, 'ab2b-8bf1f660ae48') == 'ab2b-8bf1f660ae48'
+    default = 'hopefully$$** never___ TO return~~~%^&'
+    val = dict_to_check.get(key, default)
+    return val != default
 
 
 def dictionary_key_begins_with_substring(search_dict, subs):
@@ -81,6 +85,23 @@ def dictionary_key_begins_with_substring(search_dict, subs):
 
 
 def dict_from_split_string(str_to_split, split_var, field_names):
+    '''
+    dict_from_split_string is an aid to make processing generic.  The update paragraphs process, parses
+    the input data keys in order to know what constants to use to find the necessary information.
+
+    Based on the returning dictionary, the program will call the correct generic methods, with the
+    correct arguments.
+
+    :param str_to_split: can be any string, but currently the camel_cased input keys from the JSON input
+    :type str_to_split: str
+    :param split_var: string to split on, for example: '_', but could be anything really
+    :type split_var: str
+    :param field_names: Tuple containing the keys of the dictionary, the string that is split supplies
+    the values
+    :type field_names: Tuple of strings
+    :return: Dictionary with the fieldnames as keys and the pieces of the split string as values
+    :rtype: dict
+    '''
     return_dict = {}
     temp = str_to_split.split(split_var)
     if len(temp) < len(field_names):
