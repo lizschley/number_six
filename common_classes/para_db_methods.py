@@ -133,8 +133,8 @@ class ParaDbMethods:
         :type class_: Model object
         :param create_dict: values for fields for given model
         :type create_dict: dict
-        :return: object created
-        :rtype: queryset or object
+        :return: object created model class, where the class_ is django model instance
+        :rtype: projects.models.paragraphs.ClassName instance
         '''
         record = class_(**create_dict)
         if not self.updating:
@@ -145,7 +145,6 @@ class ParaDbMethods:
             print(f'got validation error: {record}')
             raise
         record.save()
-        print(f'find output to make sure the documentation return type is correct {type(record)}')
         return record
 
     def find_record(self, class_, find_dict):

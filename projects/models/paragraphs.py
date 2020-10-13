@@ -18,7 +18,7 @@ class Category(models.Model):
         (EXERCISE, 'Exercise'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
-    slug = AutoSlugField(unique=True, populate_from='title')
+    slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     category_type = models.CharField(max_length=20, choices=CATEGORY_TYPE_CHOICES,
                                      default=FLASH_CARD)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -39,7 +39,7 @@ class Category(models.Model):
 class Reference(models.Model):
     ''' Many to many with Paragraphs '''
     link_text = models.CharField(max_length=100, blank=False, unique=True)
-    slug = AutoSlugField(blank=False, unique=True, populate_from='link_text')
+    slug = AutoSlugField(max_length=150, blank=False, unique=True, populate_from='link_text')
     url = models.TextField(blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -87,12 +87,10 @@ class Paragraph(models.Model):
         get_latest_by = 'updated_at'
 
 
-
-
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
     title = models.CharField(max_length=120, blank=False, unique=True)
-    slug = AutoSlugField(unique=True, populate_from='title')
+    slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     note = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

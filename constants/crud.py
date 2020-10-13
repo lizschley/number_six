@@ -6,7 +6,7 @@ from projects.models.paragraphs import (Category, Group,  # noqa: F401
 
 FILE_DATA = 'file_data'
 
-VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids')
+VALID_RETRIEVAL_KEYS = ('updated_at', 'group_ids', 'category_ids', 'paragraph_ids', 'reference_ids')
 COPY_DIRECTLY_TO_OUTPUT = ('add_categories', 'add_references', 'add_groups', 'add_paragraph_reference',
                            'add_group_paragraph', 'delete_paragraph_reference', 'delete_group_paragraph')
 TABLE_ABBREV = ('c', 'g', 'p', 'r', 'gp', 'pr')

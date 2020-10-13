@@ -4,6 +4,42 @@
 
 {% block content %}
 
-    <h1>{{ project.title }}</h1>
+    <h1>At Home Exercise</h1>
+    <p>This is a personal at home exercise page, written by someone who is sendentary by nature, with
+        no formal training or expertise.  My personal goal is to stay uninjured, active and mobile
+        at least until I am 100 years old.  For about 25 years, I worked out at a gym (off and on),
+        took pilates, yoga and other classes and had many sessions with trainers. Now I work out entirely
+        at home.  My biggest online influences are the
+        <a href='https://www.youtube.com/channel/UCNCtWKts-e2hhF-_ojm7zUQ' target='_blank'>Tapp Brothers</a>
+        and <a href='https://gmb.io/' target='_blank'>GMB</a>.  Even for free, both organizations are
+        so helpful that I want to give them money.</p>
+        <div id="accordion">
+                <div class="text-primary"
+                    data-toggle="collapse"
+                    data-target='#select_id'
+                >
+                    Select Area of Interest
+                </div>
+                <div id='select_id' class="collapse" data-parent="#accordion">
+                        <div class="col-md-12">
+                            <ul class="navbar-nav">
+                                <li>Link 1</li>
+                                <li>Link 2</li>
+                                <li>Link 3</li>
+                            </ul>                        </div>
+                </div>
+        </div>
+        <div class="container">
+            <div class="col-md-12">
+                <div id='first'> Basic Philosophy - write this and display it.  It will have some pop ups: Tapp brothers,
+                    GMB, and background (gym instructors, Stott Pilates, Iyengar yoga, the NYC Ballet book and always,
+                    if I rehab an injury, I learn a ton.)
+                </div>
+                <div id='first'> I am the second </div>
+                <div id='first'> I am the third </div>
+
+            </div>
+        </div>
 
 {% endblock %}
+

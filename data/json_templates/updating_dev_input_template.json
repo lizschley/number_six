@@ -3,6 +3,7 @@
     "group_ids": [],
     "category_ids": [],
     "paragraph_ids": [],
+    "reference_ids": [],
     "add_categories": [{"title": "", "category_type": ""}],
     "add_references": [{"link_text": "", "url": ""}],
     "add_groups": [{"title": "", "note": "", "category_id": 0, "category_title": ""}],

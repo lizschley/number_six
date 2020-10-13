@@ -98,8 +98,6 @@ class ParaDbUpdatePrep(ParaDbMethods):
         if self.invalid_keys():
             sys.exit((f'Input error: there is at least one invalid key: {self.file_data}; '
                       f'The valid keys are {crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT}'))
-        if not self.one_or_zero_retrieval_keys():
-            sys.exit(f'Input error: too many retrieval keys: {self.file_data}')
         if self.run_as_prod_with_adds():
             sys.exit(f'Input error: no explicit creates if run_as_prod: {self.file_data}')
         if not self.valid_input_keys():
@@ -128,12 +126,15 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
         After any manual updates, the file becomes input to the update process step.
         '''
-        query = self.build_sql()
-        if query is None:
-            return None
-        # print(f'Retrieval query == {query}')
-        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph)
-        self.add_existing_data_to_manual_json(raw_queryset)
+        for key in crud.VALID_RETRIEVAL_KEYS:
+            if utils.key_not_in_dictionary(self.file_data, key):
+                continue
+            query = self.build_sql(key)
+            if query is None:
+                continue
+            # print(f'Retrieval query == {query}')
+            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph)
+            self.add_existing_data_to_output(raw_queryset)
 
     # Validation routines
     def invalid_keys(self):
@@ -147,20 +148,6 @@ class ParaDbUpdatePrep(ParaDbMethods):
             if key not in crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT:
                 return True
         return False
-
-    def one_or_zero_retrieval_keys(self):
-        '''
-        one_or_zero_retrieval_keys ensures that there is only one retrieval key.  This is a way of
-        keeping the criteria and the data related, so that there is less chance for confusion.
-
-        :return: True if there is more than one retrieval key, False otherwise
-        :rtype: bool
-        '''
-        num = 0
-        for key in crud.VALID_RETRIEVAL_KEYS:
-            if not utils.key_not_in_dictionary(self.file_data, key):
-                num += 1
-        return num < 2
 
     def run_as_prod_with_adds(self):
         '''
@@ -183,12 +170,12 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         num = 0
         for key in crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT:
-            if not utils.key_not_in_dictionary(self.file_data, key):
+            if utils.key_in_dictionary(self.file_data, key):
                 num += 1
         return num > 0
 
     # retrieval routines
-    def build_sql(self):
+    def build_sql(self, key):
         '''
         build_sql uses the JSON input file to build a where statement.  It appends the where
         to the rest of the sql from the complete query
@@ -196,9 +183,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         :return: complete sql query with where that varies depending on input file
         :rtype: str
         '''
-        where = self.get_where_statement()
+        where = self.get_where_statement(key)
         if where is None:
-            print(f'No where, therefore not editing existing records{self.file_data}')
+            print(f'No where for key=={key}, therefore not editing existing records{self.file_data}')
             return
         return ParaDbUpdatePrep.complete_query_from_constants() + ' ' + where
 
@@ -218,20 +205,17 @@ class ParaDbUpdatePrep(ParaDbMethods):
         query += sql_substrings.JOIN_CATEGORY_TO_GROUP + sql_substrings.JOIN_REFERENCES_TO_PARA
         return query
 
-    def get_where_statement(self):
+    def get_where_statement(self, key):
         '''
         get_where_statement creates a where statement based on the contents of the input JSON file
 
         :return: where clause
         :rtype: str
         '''
-        for key in crud.VALID_RETRIEVAL_KEYS:
-            if utils.key_not_in_dictionary(self.file_data, key):
-                continue
-            if key in ('group_ids', 'category_ids', 'paragraph_ids'):
-                return 'where ' + key[0] + '.id in (' + self.get_where_ids(key) + ')'
-            if key == 'updated_at':
-                return self.get_updated_at_where()
+        if key in ('group_ids', 'category_ids', 'paragraph_ids', 'reference_ids'):
+            return 'where ' + key[0] + '.id in (' + self.get_where_ids(key) + ')'
+        if key == 'updated_at':
+            return self.get_updated_at_where()
 
         return None
 
@@ -268,7 +252,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
     def get_where_ids(self, key):
         '''
         get_where_ids takes an array of ids and turns it a string to be used as part of a where
-        statement.  The key will be one of these: 'group_ids', 'category_ids' or 'paragraph_ids'
+        statement.  The key will be one of these: 'group_ids', 'category_ids', 'paragraph_ids'
+        or 'reference_ids'
 
         Save the user some effort, by not making them pass in ids as string.  If we create the where
         clause with an an int, it will throw a ValueError, so, for the ease of the user, doing an
@@ -281,9 +266,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         '''
         return ', '.join(map(str, self.file_data[key]))
 
-    def add_existing_data_to_manual_json(self, queryset):
+    def add_existing_data_to_output(self, queryset):
         '''
-        add_existing_data_to_manual_json takes each row and assigns it to a dictionary representation of
+        add_existing_data_to_output takes each row and assigns it to a dictionary representation of
         the database record.  If it was already assigned, it will return without doing anything.
 
         The resulting list of dictionaries will be used to find and update or, if you are running as

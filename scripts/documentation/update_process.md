@@ -17,7 +17,7 @@ If you don't understand this, please read entire document.  I wanted this at the
 Here are the three danger areas:
 1. If you want to pull existing data and over-write it to make new data, it is vital to make empty strings of the unique key (slug or guid).  If you don't, the process could easiy over-write data you started with (identifies records with unique keys).
 2. If you create new data and associate it to other records using fake ids (see below for more details), it is totally necessary to make sure the file does not have any  existing associations with the fake ids.  If you pull in data of the same record type that you are creating and that data has associated data with the same ids, you could associate the wrong records to your newly created ones.
-3. Also if you run Step One - the file created will have a date in the file name.  The program will sort descending on that date, so keep that in mind, if you get confused.  The order can make a difference for sure.  It's better to run Step 1 again and cut and paste your updates (from the messed up file), rather than run against data that has been updated.
+3. Also if you run Step One - the file created will have a date in the file name.  The program will sort descending on that date, so keep that in mind.  The order can make a difference.  It's better to run Step 1 again and cut and paste your updates (from the messed up file), rather than run against data that has been updated after you did your data retrieval.
 
 **End Note**
 
@@ -30,7 +30,7 @@ Here are the three danger areas:
 - By using run_as_prod as an argument in Step 1, you will not be able to use the wrong input, for example, it forbids using the explicit [create keys](https://github.com/lizschley/number_six/blob/develop/data/json_templates/updating_dev_input_template.json) (JSON keys beginning with add_) as input and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
 - run_as_prod and real production in Step 3 forbids the explicit creates (key beginning with add_) and will only read json files that are named correctly.
 - Deleting associations work identically in development and production, therefore the input is the same.
-- It does not throw an error if you are trying to delete the same associations multiple times (as long as the foreign keys still exist).
+- It does not throw an error if you are trying to delete the same associations multiple times (as long as the records with the foreign keys still exist).
 - No matter how you delete associations, deleting associations automatically writes a file to the production update input directory.  The file contents are exactly like the input for deleting associations in development and the filename has the production prefix.
 - It is also possible to delete associations along with the normal run_as_prod input.
 
@@ -48,10 +48,14 @@ Here are the three danger areas:
       2. This does not give you any relational data.
       3. Normally follow the Step One process described below.
     - Copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
-    - Choose one or zero retrieval keys: "group_ids", "category_ids", "paragraph_ids", or "updated_at"
+    - Choose zero or more retrieval keys: "group_ids", "category_ids", "paragraph_ids", or "updated_at"
       1. The array of ids or updated_at will be used in a where statement that will pull in all the associated data so it can be edited.
       2. It is necessary to do this data retrieval, before doing updates.
-      3. You may need to run some preliminary db queries, run step 1 just to get the information needed or put in some print statements to get ids, guids, etc
+      3. It could be helpful to do one of the following:
+         * Run preliminary db queries
+         * Run step 1 seperately to get the information needed and delete the manual json after getting what you need
+         * Do inspect element when looking at data on dev web server
+         * Put in some print statements to get ids, guids, etc
     - Open scripts/batch_json_db_updater_s1.py and use the Step One Usage examples
     - Step One output will be written to the <MANUAL_UPDATE_JSON> directory
     - The add_* keys and the delete_* keys will automatically be copied over to the output file and the only reason to change the values would be to use the information retrieved in Step One to add the information or to make corrections.
@@ -60,7 +64,7 @@ Here are the three danger areas:
     - For updating records, always leave the unique keys:
     --> ids (always), guid for paragraphs, and slug for references, categories and groups.
     --> other than that, you only need the field(s) you are updating
-    - If a record is not being updated, just delete it and save some run-time
+    - If an existing record is not being updated, it is ok to delete it.
     - When you are done editing, move the file to <INPUT_TO_UPDATER_STEP_THREE>
  3. Step 3. Open scripts/batch_json_db_updater_s3.py and follow the Step Three Usage Instructions
     - Any actual db change (create, update, delete) happens in Step 3
@@ -71,27 +75,36 @@ Here are the three danger areas:
         1. In step one
            * Copy (don't move) data/json_templates/updating_dev_input_template.json to <INPUT_TO_UPDATER_STEP_ONE>
            * Use run_as_prod parameter
-              1. This will give you the correct output filename
-              2. Will error out if you try to do explicit creates (keys begin with add_*).
-                 - Otherwise it gets too kludgy, because run_as_prod is acting as if the records already exist in development. - Creates are done implicitly in production (& run_as_prod), whereas in the normal development, the creates for categories, groups and references are always explicit and it is impossible to create paragraphs in development using the update process.
-           * **Delete_association works in all situations**  It works the same in production and development whether   using run_as_prod or not
+              1. This gives you the correct output filename
+              2. Prod (whether real production or run_as_prod) creates a lookup table that is necessary in order to update associations
+                 - If you are adding associations, the foreign record dictionaries (Paragraphs, References, Group and/or Category) must be in the original retrieval, in order for Step 1 to programmatically create the lookup table (associating unique key and dev_id).
+                 - In step 2, you can delete the foreign record dictionary, but leave the information in the lookup table
+                 - It will never hurt to have too much in the lookup table, so there is not a good reason to edit it.  You can, obviously, manually update it, but the less manual work the better.
+              3. Program will error out if you try to do explicit creates (keys begin with add_*).
+                 - Otherwise it gets too kludgy, because run_as_prod is acting as if the records already exist in development.
+                 - Creates are done implicitly in production (& run_as_prod), whereas in the normal development, the creates for categories, groups and references are always explicit and it is impossible to create paragraphs in development using the update process.
+           * **Delete_association works in all situations**  It works the same in production and development whether using run_as_prod or not
            * Whatever input you use, the program will pull in data that you have already created in development.
            * For run_as_prod in development (or for production), the prefix will automatically be <PROD_PROCESS_IND>
         2. In step two (for run_as_prod in development) - edit the run_as_prod input data (no editing for production)
            * Will be in <MANUAL_UPDATE_JSON> directory
            * To do an update to existing data, just update the data as normal like you do for normal development updating
-           * To create new records (replacing most of the existing data you pulled), do the following:
-              1. Blank out the unique keys (**slug** for groups, categories or references; and **guid** for paragraphs).
-              2. The primary keys will be ignored, EXCEPT they must match the foreign keys in the association records.
+           * To create new records (can do at the same time you are updating some data)
+              1. Do a data retrieval, making sure to have at least one existing record dictionary of the type (paragraph, group, etc) you are creating.
+              2. Either cut and paste an existing record dictionary or simply edit one that you do not need to update.
+              3. Blank out the unique keys (**slug** for groups, categories or references; and **guid** for paragraphs).
+              4. The primary key (id) MUST match the foreign keys in the association records and MUST NOT be used in other records in the file.
+                  - Therefore make a fake id that is not being used elsewhere (really high, needs to be int or string that can become int)
                   - Make sure that the same ID is not used to update an existing record and also create a new record (will mess up associations).
-                  - Using really high numbers should make it safe
                   - Using non-numerics will cause a Value Error
                   - Associations are as follows: groupparagraph, paragraphreference and also the category id in the group record
-              3. Make sure to carefully check the following, matching the corresponding foreign ids in the association records:
+                  - To create associations for existing records, you need to have retrieved the main record (Paragraphs, References, Group and/or Category),so that the lookup table will have the unique keys necessary.  It is not necessary, however. to keep the main record in the Step 3 input, unless you have updates you want to perform.
+              5. Make sure to carefully check the following, matching the corresponding foreign ids in the association records:
                   - category_id in the group record
                   - group_id and paragraph_id in the group_paragraph record
                   - paragraph_id and reference_id in the paragraph_reference record
-           * **DANGER** - not following through all of the steps:  1, 2 & 3 (directly above) correctly could mess up existing data badly!
+              6. Do not worry about the lookup table when creating new paragraphs, references, groups and/or categories.  That is only for existing records.
+           * **DANGER** - not following through all of the steps: 1-6 (directly above) correctly could mess up existing data!
            * If creating new records with run_as_prod in development, the program will create unique keys explicitly (so that the update process mimics production, without the work of manually creating the keys)
            * If in the production environment, blank unique keys will cause the program to error out.
            * After editing the file in the <MANUAL_UPDATE_JSON> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
@@ -122,4 +135,3 @@ Here are the three danger areas:
    3. Delete existing Associations, keys are as follows: 'delete_paragraph_reference', 'delete_group_paragraph' (always works the same)
 - The program will automatically copy the add_ dictionaries and the delete_ dictionaries to the output file from Step 1 (read below for further details).
 - If you don't need to update any existing records, you can skip Step 1 entirely.  **However**, running step 1 can be helpful to retrieve the information necessary to add new records or delete associations.  But if you have what you need, just copy example from data/json_templates/updating_dev_input_template.json directly to <INPUT_TO_UPDATER_STEP_THREE>, make the updates you want and delete the following keys: 'updated_at','group_ids','category_ids','paragraph_ids' (those are for the retrievals necessary for updating and can only be done in Step 1)
-

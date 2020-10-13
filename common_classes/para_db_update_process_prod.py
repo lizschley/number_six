@@ -10,6 +10,7 @@ from common_classes.para_db_update_process import ParaDbUpdateProcess
 import constants.crud as crud
 import helpers.no_import_common_class.utilities as utils
 import utilities.random_methods as methods
+from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
@@ -53,7 +54,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         # print(f'input_data == {self.input_data}')
         # print(f'file_data == {self.file_data}')
-        print(f'only delete == {self.only_delete}')
         if self.only_delete:
             self.deleting_associations()
             sys.exit('Exiting after only deleting associations')
@@ -64,6 +64,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             print('-----------------Process Data-------------------------------')
             printer = pprint.PrettyPrinter(indent=1, width=120)
             printer.pprint(self.process_data)
+            print('------------------Lookup Data-------------------------------')
+            printer = pprint.PrettyPrinter(indent=1, width=120)
+            printer.pprint(self.record_lookups)
             return
         self.create_record_loop()
         self.update_record_loop()
@@ -97,29 +100,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         if self.incorrect_environment():
             data = self.input_data
             sys.exit(f'Input error: wrong process unless production or running as prod: {data}')
-
-        if self.not_run_as_prod_prep():
-            if self.input_data['is_prod']:
-                sys.exit(crud.RECORD_LOOKUP_MESSAGE_PROD + ' -- in validate input')
-            else:
-                sys.exit(crud.RECORD_LOOKUP_MESSAGE_DEV + ' -- in validate input')
-
-    def not_run_as_prod_prep(self):
-        '''
-        not_run_as_prod_prep is an error in the input data lookup
-
-        :return: True if there is an error, else False
-        :rtype: bool
-        '''
-        print('----------------------Record Lookups----------------------------')
-        for key in crud.UPDATE_RECORD_KEYS:
-            if key in crud.ASSOCIATION_RECORD_KEYS:
-                continue
-            try:
-                print(f'record lookup for {key} == {self.record_lookups[key]}')
-            except KeyError:
-                return True
-        return False
 
     def incorrect_environment(self):
         if self.input_data['is_prod'] or self.input_data['run_as_prod']:
@@ -194,6 +174,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         if key == 'paragraph_reference':
             return self.substitute_prod_foreign_key(record, 'reference_id', 'references')
 
+
     def blank_unique_field(self, record, key):
         '''
         blank_unique_field tests if the input record has a blank unique field.  This method drives the
@@ -240,6 +221,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: [description]
         :rtype: [type]
         '''
+        self.validate_run_as_prod_prep(record, key)
         res = self.find_wrapper(record, key)
         if not self.input_data['is_prod'] and not res['found']:
             message = ('Error! All development records in this method should already exist; '
@@ -294,7 +276,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         if key == 'references':
             record[unique_field] = slugify(record['link_text'])
         elif key == 'paragraphs':
-            record[unique_field] = uuid.uuid4()
+            record[unique_field] = str(uuid.uuid4())
         elif key in ('categories', 'groups'):
             record[unique_field] = slugify(record['title'])
         else:
@@ -348,7 +330,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         if key == 'paragraphs':
             self.record_lookups[key][record['guid']]['prod_id'] = record['id']
-        elif key not in crud.ASSOCIATION_KEYS:
+        elif key not in crud.ASSOCIATION_RECORD_KEYS:
             self.record_lookups[key][record['slug']]['prod_id'] = record['id']
 
     def create_dict_from_record(self, record, key):
@@ -390,8 +372,29 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         str_dev_id = str(record[record_key])
         unique_field = self.record_lookups[top_level_key][str_dev_id]
+        print(f'before error, top key=={top_level_key}, unique field: {unique_field}')
+        print(f'before error, record lookups=={self.record_lookups}')
+        if utils.key_not_in_dictionary(self.record_lookups[top_level_key][unique_field], 'prod_id'):
+            self.assign_existing_record_prod_id(top_level_key, str_dev_id)
         record[record_key] = self.record_lookups[top_level_key][unique_field]['prod_id']
         return record
+
+    def assign_existing_record_prod_id(self, top_level_key, dev_id):
+        '''
+        assign_existing_record_prod_id finds the existing record so if there are any associated the
+        prod id can be substituted
+
+        :param top_level_key: top level key for main record (paragraphs, groups, etc)
+        :type top_level_key: str
+        :param dev_id: str dev id used as key in lookup table for the given record to be associated
+        :type dev_id: str
+        '''
+        unique_key = crud.UPDATE_DATA[top_level_key]['unique_field']
+        class_name = crud.UPDATE_DATA[top_level_key]['class']
+        unique_value = self.record_lookups[top_level_key][dev_id]
+        record = self.find_record(class_name, {unique_key: unique_value})
+        queryset = RecordDictionaryUtility.get_content(class_name, record.id)
+        self.add_prod_id_to_record_lookup(queryset[0], top_level_key)
 
     def update_record_loop(self):
         '''
@@ -517,3 +520,23 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
                     self.prod_results[key]['delete'] = self.process_data[key]['delete']
                 else:
                     self.prod_results[key] = {'delete': self.process_data[key]['delete']}
+
+    def validate_run_as_prod_prep(self, record, key):
+        '''
+        validate_run_as_prod_prep ensures before any updates that all non-association records that have
+        a unique key also have and entry in the record lookup
+
+        Exits the system if there is a key error
+        '''
+        if key in crud.ASSOCIATION_RECORD_KEYS:
+            return
+
+        print('----------------------Record Lookups----------------------------')
+        try:
+            unique_field = self.record_lookups[key][str(record['id'])]
+            print(f'successfully looked up record with unique_key == {unique_field}')
+        except KeyError:
+            if self.input_data['is_prod']:
+                sys.exit(crud.RECORD_LOOKUP_MESSAGE_PROD)
+            else:
+                sys.exit(crud.RECORD_LOOKUP_MESSAGE_DEV)
