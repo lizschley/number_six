@@ -174,7 +174,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         if key == 'paragraph_reference':
             return self.substitute_prod_foreign_key(record, 'reference_id', 'references')
 
-
     def blank_unique_field(self, record, key):
         '''
         blank_unique_field tests if the input record has a blank unique field.  This method drives the

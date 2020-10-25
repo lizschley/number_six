@@ -1,15 +1,11 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-import pprint
-import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
-from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
-from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
-from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
+from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
-class ParagraphsForDisplay(object):
+class ParagraphsForDisplayCat(ParagraphsForDisplay):
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views
 
@@ -24,63 +20,13 @@ class ParagraphsForDisplay(object):
     :type object: dictionary
     '''
     def __init__(self):
-        self.title = ''
-        self.title_note = ''
-        self.reference_links = {}
-        self.paragraphs = []
-        self.input_data = {}
-
-    def retrieve_paragraphs(self, **kwargs):
-        '''
-        retrieve_paragraphs brings in the data necessary for the displaying paragraphs
-
-        :return: dictionary needed to display basic paragraphs
-        :rtype: dict
-        '''
-        self.input_data = self.retrieve_input_data(kwargs)
-        print('-----------------Input Data-------------------------------')
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.input_data)
-
-        if self.input_data is None:
-            sys.exit(f'did not retrieve data with these args: {kwargs}')
-        return self.format_data_for_display()
-
-    def retrieve_input_data(self, kwargs):
-        '''
-        retrieve_input_data decides what class is needed to retrieve the data before formatting it
-        in the way needed for the input to the paragraph display
-
-        :param kwargs: Depending on the args the application knows what class to use for formatting
-        :type kwargs: dict
-        :return: the input data the this class uses for the display paragraph context
-        :rtype: dict
-        '''
-        retriever = None
-        for key in constants.VALID_DATA_RETRIEVAL_ARGS:
-            if key in kwargs.keys():
-                retriever = self.instantiate_class(key)
-        if retriever is not None:
-            return retriever.data_retrieval(kwargs)
-        return None
-
-    # Note: this will need to change once I have search and tags combined with group
-    def instantiate_class(self, key):
-        '''
-        instantiate_class based on the key sent in, instantiates the correct paragraph retriever
-
-        :param key: string object that represents the key of the arguments
-        :type key: str
-        :return: returns the object instantiated by the BaseParagraphRetriever class
-        :rtype: object of type BaseParagraphRetriver
-        '''
-        if key == 'path_to_json':
-            return ParaDisplayRetrieverJson()
-        if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
-            return ParaDisplayRetrieverDb()
-        if key == 'category_id':
-            return ParaDisplayRetrieverCat()
-        return None
+        super().__init__()
+        # self.title = ''
+        # self.title_note = ''
+        # self.reference_links = {}
+        # self.paragraphs = []
+        # self.input_data = {}
+        self.groups = []  # ????
 
     # Todo: make sure this is already tested.  I think it is, through an integration test
     def format_data_for_display(self):

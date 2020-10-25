@@ -102,6 +102,7 @@ def test_input_unique_subtitle_for_standalone_para(para_crud_methods, existing_p
 @pytest.mark.django_db
 def test_successful_update_to_standalone_para(para_crud_methods, not_standalone) -> None:
     queryset = RecordDictionaryUtility.get_content(Paragraph, not_standalone.id)
+    saved_updated_at = queryset[0]['updated_at']
     update_dict = {}
     update_dict['id'] = queryset[0]['id']
     update_dict['guid'] = queryset[0]['guid']
@@ -111,6 +112,7 @@ def test_successful_update_to_standalone_para(para_crud_methods, not_standalone)
     ret_dict = para_crud_methods.find_and_update_record(Paragraph, find_dict, update_dict)
     assert ret_dict['subtitle'] == update_dict['subtitle']
     assert ret_dict['standalone'] == update_dict['standalone']
+    assert ret_dict['updated_at'] > saved_updated_at
 
 
 @pytest.mark.django_db
