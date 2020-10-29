@@ -130,8 +130,10 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
+        # 'references': ["<a href='http....url' target='_blank'>link_text</a>",
+        #                 "<a> etc </a>"]}}
+
         return {'title': self.title,
                 'groups': {'group_slug': {'group': {},
                                           'paragraphs': [],
-                                          'references': ["<a href='http....url' target='_blank'>link_text</a>",
-                                                         "<a> etc </a>"]}}
+                                          'references': [], }}}

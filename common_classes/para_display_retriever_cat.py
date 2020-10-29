@@ -24,7 +24,15 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
             self.groups = {'group_slug': {'group': {}, 'paragraphs': [], 'link_text': []}}
         '''
         super().__init__()
-        # for output (also self.references, unchanged from base class)
+        # using from super
+        # self.ordered
+        # self.para_ids = []
+        # self.ref_ids = []
+        # self.references = []
+
+        # for output
+        self.group_ids = []
+        self.group_id_to_link_text = {}
         self.category = {}
         self.groups = {}
 
