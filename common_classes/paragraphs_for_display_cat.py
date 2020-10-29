@@ -131,5 +131,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :rtype: dict
         '''
         return {'title': self.title,
-                'title_note': self.title_note,
-                'paragraphs': self.paragraphs}
+                'groups': {'group_slug': {'group': {},
+                                          'paragraphs': [],
+                                          'references': ["<a href='http....url' target='_blank'>link_text</a>",
+                                                         "<a> etc </a>"]}}

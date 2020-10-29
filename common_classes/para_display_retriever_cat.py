@@ -21,12 +21,12 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         __init__ different from the base class
 
         Groups are the driving force here:
-            self.group = {'group_id': {'group': {}, 'paragraphs': [], 'link_text': []}}
+            self.groups = {'group_slug': {'group': {}, 'paragraphs': [], 'link_text': []}}
         '''
         super().__init__()
-        # for output (also self.referencdes, unchanged from base class)
+        # for output (also self.references, unchanged from base class)
         self.category = {}
-        self.group = {}
+        self.groups = {}
 
     def data_retrieval(self, kwargs):
         '''
