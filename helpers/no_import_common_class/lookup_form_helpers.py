@@ -3,7 +3,7 @@ from projects.models.paragraphs import Group, Category
 
 STUDY_GROUPS = ['tech-definitions', 'non-native-plant-descriptions', 'native-plant-descriptions',
                 'tech-how-tos-personal-cheat-sheets']
-STUDY_CATEGORIES = ['at-home-exercise']
+STUDY_CATEGORIES = ['flash_card']
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 
@@ -23,7 +23,7 @@ def get_initial_classifications():
     for group in groups:
         classification_list.append((format_group_id(group.pk), group.title))
 
-    categories = Category.objects.filter(slug__in=STUDY_CATEGORIES)
+    categories = Category.objects.filter(category_type__in=STUDY_CATEGORIES)
     for category in categories:
         classification_list.append((format_category_id(category.pk), category.title))
 

@@ -4,7 +4,7 @@ import constants.common as constants
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 import helpers.no_import_common_class.utilities as utils
-from projects.models.paragraphs import (Category)
+from projects.models.paragraphs import Category
 
 
 VALID_SQL_TYPES = ('category_id')
@@ -48,6 +48,8 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         if 'category_id' in kwargs.keys():
             query = self.write_category_sql()
+            print(query)
+            print(kwargs)
             raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Category,
                                                                       kwargs['category_id'])
             return self.db_output_to_display_input(raw_queryset)
@@ -64,7 +66,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         query = self.build_category_sql()
         query += 'where c.id = %s '
-        query += 'order by g.id, gp.order'
+        query += 'order by g.cat_sort, gp.order'
         return query
 
     def build_category_sql(self):
@@ -101,7 +103,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
          :return: Partial query
         :rtype: str
         '''
-        sql = sql_sub.FROM_CATEGORY_JOIN_GROUP + sql_sub.JOIN_GROUP_TO_PARA
+        sql = sql_sub.FROM_CATEGORY_JOIN_GROUP_AND_PARA
         sql += sql_sub.JOIN_REFERENCES_TO_PARA
         return sql
 
@@ -261,7 +263,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         print('in output data')
         print(f'group is {self.group}')
         print(f'references are {self.references}')
-        return {'categories': self.category,
+        return {'category': self.category,
                 'group': self.group,
                 'references': self.references, }
 

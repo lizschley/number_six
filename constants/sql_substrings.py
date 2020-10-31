@@ -1,14 +1,16 @@
 ''' Use to build sql '''
 BEGIN_SELECT = 'select 1 as id'
-SELECT_CATEGORY = 'c.id as category_id, c.title as category_title, c.slug as category_slug, '
-SELECT_GROUP = ('g.id as group_id, title as group_title, g.note as group_note, gp.order, '
+SELECT_CATEGORY = 'c.id as category_id, c.title as category_title, c.slug as category_slug '
+SELECT_GROUP = ('g.id as group_id, g.title as group_title, g.note as group_note, gp.order, '
                 'g.slug as group_slug ')
 SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
                      'image_info_key, text')
 SELECT_REFERENCES = 'r.id as reference_id, link_text, url'
 
-FROM_CATEGORY_JOIN_GROUP = ('from projects_category c '
-                            'join projects_group g on c.id = g.category_id ')
+FROM_CATEGORY_JOIN_GROUP_AND_PARA = ('from projects_category c '
+                                     'join projects_group g on c.id = g.category_id '
+                                     'join projects_groupparagraph gp on g.id = gp.group_id '
+                                     'join projects_paragraph p on p.id = gp.paragraph_id ')
 
 FROM_GROUP_JOIN_PARA = ('from projects_group g '
                         'join projects_groupparagraph gp on g.id = gp.group_id '

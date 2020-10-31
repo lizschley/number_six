@@ -3,6 +3,7 @@
 import sys
 from common_classes.para_db_methods import ParaDbMethods
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
 # Todo: validate input json data --- this is one validation
@@ -56,10 +57,9 @@ class ParaDbCreateProcess(ParaDbMethods):
         create_dict = {'title': self.title, 'note': self.title_note}
         find_dict = {'title': self.title}
 
-        group = self.find_or_create_record(Group, find_dict, create_dict)
-        print(f'in calling find or create, group == {group}')
+        return_data = self.find_or_create_record(Group, find_dict, create_dict)
         if self.updating:
-            self.group = group
+            self.group = return_data['record']
 
     def assign_group_data(self, input_data):
         '''
@@ -69,9 +69,12 @@ class ParaDbCreateProcess(ParaDbMethods):
         :type input_data: dict
         '''
         group_dict = input_data['group']
+        print(f'group_dict=={group_dict}')
         self.title = group_dict['title']
         self.title_note = group_dict['note']
         self.standalone = group_dict['standalone']
+        if group_dict['ordered'] == 'yes':
+            self.ordered = True
 
     def find_or_create_references(self, input_data):
         '''
@@ -79,6 +82,8 @@ class ParaDbCreateProcess(ParaDbMethods):
         :param input_data: references contain link_text & url. Multiple paras can have same reference
         :type input_data: dict
         '''
+        if utils.key_not_in_dictionary(input_data, 'references'):
+            return
         references = input_data['references']
         for ref in references:
             create_dict = {'link_text': ref['link_text'], 'url': ref['url']}
@@ -136,6 +141,8 @@ class ParaDbCreateProcess(ParaDbMethods):
         :param input_data: dictionary created from reading the JSON file used to create the paragraphs
         :type input_data: dict
         '''
+        if utils.key_not_in_dictionary(input_data, 'ref_link_paragraph'):
+            return
         ref_link_paras = input_data['ref_link_paragraph']
         for ref_para in ref_link_paras:
             ref = Reference.objects.get(link_text=ref_para['link_text'])

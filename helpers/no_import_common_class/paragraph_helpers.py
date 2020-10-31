@@ -17,7 +17,6 @@ END_LINK_TEXT = '|end|'
 
 def create_link(url, link_text):
     '''
-    [Summary]
     create_link: takes the input and creates a link to be used in displaying text
 
     :param url: will be a url to link to

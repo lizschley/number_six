@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 from projects.forms.paragraphs import ParagraphLookupForm
 import helpers.no_import_common_class.paragraph_helpers as no_import_para_helper
+import helpers.no_import_common_class.utilities as utils
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
@@ -31,6 +32,18 @@ class StudyLookupView(FormView):
         form_data = request.GET.get("classification", "0")
         in_data = no_import_para_helper.extract_data_from_form(form_data)
         if in_data:
-            return HttpResponseRedirect(reverse('projects:study_paragraphs_with_group',
-                                                kwargs={'group_id': in_data['group']}))
+            arg_dictionary = StudyLookupView.which_args(in_data)
+            return HttpResponseRedirect(reverse(arg_dictionary['identifier'],
+                                                kwargs=arg_dictionary['kwargs']))
         return super().get(request, *args, **kwargs)
+
+    @staticmethod
+    def which_args(in_data):
+        if utils.key_in_dictionary(in_data, 'category'):
+            identifier = 'projects:study_paragraphs_with_category'
+            kwargs = {'category_id': in_data['category']}
+        else:
+            identifier = 'projects:study_paragraphs_with_group'
+            kwargs = {'group_id': in_data['group']}
+        return {'identifier': identifier, 'kwargs': kwargs}
+

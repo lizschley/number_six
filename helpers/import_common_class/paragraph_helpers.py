@@ -5,8 +5,6 @@ from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.para_db_create_process import ParaDbCreateProcess
 from common_classes.para_db_update_prep import ParaDbUpdatePrep
-from common_classes.para_db_update_process import ParaDbUpdateProcess
-from common_classes.para_db_update_process_prod import ParaDbUpdateProcessProd
 
 
 def paragraph_list_from_json(json_path):
@@ -38,7 +36,7 @@ def paragraph_json_to_db(json_path, updating=False):
     paragraphs.dictionary_to_db(dict_data)
 
 
-def paragraph_view_input(context, from_demo=False):
+def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
     '''
     paragraph_view_input extracts arguments for paragraph retrieval from context
     and then uses them to retrieve paragraphs, references, etc
@@ -49,7 +47,7 @@ def paragraph_view_input(context, from_demo=False):
     :rtype: dict
     '''
     # retrieve data
-    paragraphs = ParagraphsForDisplay()
+    paragraphs = class_()
 
     # print(f'in paragraph_helpers.context_to_paragraphs, context=={context}')
     if from_demo:
@@ -66,7 +64,7 @@ def paragraph_view_input(context, from_demo=False):
 def retrieve_paragraphs_based_on_context(paras, context):
     '''
     retrieve_paragraphs_based_on_context if someone chose a group in the lookup form
-    use the group_id and id itself as kwargs
+    use the group_id and id itself as kwargs, for categories use category_id
 
     :param paras: From .../projects/study/lookup to view (context) to then parameters to retrieve paras
     :type paras: ParagraphForDisplay object
@@ -78,6 +76,9 @@ def retrieve_paragraphs_based_on_context(paras, context):
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
+    category_id = context.pop('category_id', None)
+    if category_id is not None:
+        return paras.retrieve_paragraphs(category_id=category_id)
 
 
 def add_collapse_variables(paragraphs):
