@@ -17,7 +17,6 @@ END_LINK_TEXT = '|end|'
 
 def create_link(url, link_text):
     '''
-    [Summary]
     create_link: takes the input and creates a link to be used in displaying text
 
     :param url: will be a url to link to
@@ -104,6 +103,22 @@ def add_paragraphs_to_context(context, paragraphs):
     context['title'] = paragraphs['title']
     context['title_note'] = paragraphs['title_note']
     context['paragraphs'] = paragraphs['paragraphs']
+    return context
+
+
+def add_paragraphs_by_group_to_context(context, paragraphs):
+    '''
+    add_paragraphs_by_group_to_context reformats data to save work in the template
+
+    :param context: original context, minus what was needed for para retrieval
+    :type context: dict
+    :param paragraphs: paragraphs by group list before adding to context
+    :type paragraphs: dict
+    :return: context - will be used in various category templates
+    :rtype: dict
+    '''
+    context['title'] = paragraphs['title']
+    context['groups'] = paragraphs['groups']
     return context
 
 

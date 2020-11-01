@@ -1,8 +1,10 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
+import pprint
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
+from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
 
@@ -30,13 +32,16 @@ class ParagraphsForDisplay(object):
 
     def retrieve_paragraphs(self, **kwargs):
         '''
-        retrieve_paragraphs brings in the data necessary for the basic display paragraphs
+        retrieve_paragraphs brings in the data necessary for the displaying paragraphs
 
         :return: dictionary needed to display basic paragraphs
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
-        # print(f'input_data == {self.input_data}')
+        print('-----------------Input Data-------------------------------')
+        printer = pprint.PrettyPrinter(indent=1, width=120)
+        printer.pprint(self.input_data)
+
         if self.input_data is None:
             sys.exit(f'did not retrieve data with these args: {kwargs}')
         return self.format_data_for_display()
@@ -59,20 +64,22 @@ class ParagraphsForDisplay(object):
             return retriever.data_retrieval(kwargs)
         return None
 
-    # Note: this will need to change once I have search and tags combined with group or category
+    # Note: this will need to change once I have search and tags combined with group
     def instantiate_class(self, key):
         '''
         instantiate_class based on the key sent in, instantiates the correct paragraph retriever
 
         :param key: string object that represents the key of the arguments
         :type key: str
-        :return: returns the object instantiated by the BaseParagraphRetriver class
+        :return: returns the object instantiated by the BaseParagraphRetriever class
         :rtype: object of type BaseParagraphRetriver
         '''
         if key == 'path_to_json':
             return ParaDisplayRetrieverJson()
         if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
             return ParaDisplayRetrieverDb()
+        if key == 'category_id':
+            return ParaDisplayRetrieverCat()
         return None
 
     # Todo: make sure this is already tested.  I think it is, through an integration test

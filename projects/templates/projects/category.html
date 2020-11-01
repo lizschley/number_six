@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="row">
+        <h1>{{title}}</h1>
+    </div>
+
+   {% for group in groups %}
+        <pre><code><p>
+            {{group}}
+        </p></code></pre>
+   {% endfor %}
+{% endblock %}

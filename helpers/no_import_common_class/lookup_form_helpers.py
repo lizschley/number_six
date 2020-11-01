@@ -1,7 +1,9 @@
 ''' These methods help display the form used in the study form '''
-from projects.models.paragraphs import Group
+from projects.models.paragraphs import Group, Category
 
-
+STUDY_GROUPS = ['tech-definitions', 'non-native-plant-descriptions', 'native-plant-descriptions',
+                'tech-how-tos-personal-cheat-sheets', 'botany-definitions']
+STUDY_CATEGORIES = ['flash_card']
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 
@@ -17,9 +19,14 @@ def get_initial_classifications():
     :rtype: str
     '''
     classification_list = INITIAL_CLASSIFICATION
-    groups = Group.objects.all().order_by('id')
+    groups = Group.objects.filter(slug__in=STUDY_GROUPS).order_by('slug')
     for group in groups:
         classification_list.append((format_group_id(group.pk), group.title))
+
+    categories = Category.objects.filter(category_type__in=STUDY_CATEGORIES)
+    for category in categories:
+        classification_list.append((format_category_id(category.pk), category.title))
+
     return classification_list
 
 
@@ -33,3 +40,15 @@ def format_group_id(group_id):
     :rtype: str
     '''
     return 'group_' + str(group_id)
+
+
+def format_category_id(category_id):
+    '''
+    format_category_id makes it so the study dropdown id field can display ids for different tables
+
+    :param category_id: int
+    :type category_id: str
+    :return: used as the id in the study dropdown
+    :rtype: str
+    '''
+    return 'category_' + str(category_id)

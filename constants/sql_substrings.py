@@ -1,13 +1,21 @@
 ''' Use to build sql '''
 BEGIN_SELECT = 'select 1 as id'
-SELECT_GROUP = 'g.id as group_id, title as title, g.note as title_note, gp.order'
+SELECT_CATEGORY = 'c.id as category_id, c.title as category_title, c.slug as category_slug '
+SELECT_GROUP = ('g.id as group_id, g.short_name as group_short_name, g.title as group_title, '
+                'g.note as group_note, g.cat_sort as group_sort, gp.order, g.slug as group_slug ')
 SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
                      'image_info_key, text')
 SELECT_REFERENCES = 'r.id as reference_id, link_text, url'
 
+FROM_CATEGORY_JOIN_GROUP_AND_PARA = ('from projects_category c '
+                                     'join projects_group g on c.id = g.category_id '
+                                     'join projects_groupparagraph gp on g.id = gp.group_id '
+                                     'join projects_paragraph p on p.id = gp.paragraph_id ')
+
 FROM_GROUP_JOIN_PARA = ('from projects_group g '
                         'join projects_groupparagraph gp on g.id = gp.group_id '
                         'join projects_paragraph p on p.id = gp.paragraph_id ')
+
 FROM_PARA = 'from projects_paragraph p '
 
 JOIN_GROUP_TO_PARA = ('join projects_groupparagraph gp on p.id = gp.paragraph_id '
@@ -30,7 +38,8 @@ COMPLETE_GP_SELECT = ('gp.id as gp_id, gp.group_id as gp_group_id, gp.paragraph_
 
 COMPLETE_GROUP_SELECT = ('g.id as group_id, g.category_id as group_category_id, g.title as group_title, '
                          'g.slug as group_slug, g.note as group_note, g.created_at as group_created_at, '
-                         'g.updated_at as group_updated_at ')
+                         'g.updated_at as group_updated_at, g.short_name as group_short_name, '
+                         'g.cat_sort as group_sort')
 
 COMPLETE_PR_SELECT = ('pr.id as pr_id, pr.paragraph_id as pr_para_id, '
                       'pr.reference_id as pr_reference_id, pr.created_at as pr_created_at, '

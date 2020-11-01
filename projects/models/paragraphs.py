@@ -96,13 +96,15 @@ class Group(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     paragraphs = models.ManyToManyField(Paragraph, through='GroupParagraph')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    short_name = models.CharField(max_length=36, blank=False, unique=True, default=uuid.uuid4)
+    cat_sort = models.PositiveSmallIntegerField(blank=True, null=True)
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
-                f'category_id: {self.category_id}, slug: {self.slug}>')
+                f'category_id: {self.category_id}, slug: {self.slug}, short_name: {self.short_name}>')
 
     def __str__(self):
-        return f'<Group id: {self.id}, title: {self.title}>'
+        return f'<Group id: {self.id}, title: {self.title}, short_name: {self.short_name}>'
 
     class Meta:
         get_latest_by = 'updated_at'
