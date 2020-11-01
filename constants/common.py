@@ -7,6 +7,3 @@ SUBTITLE = 'subtitle'
 
 # Note no spaces in div_ids, will do a replace space with _ to turn the link text into div_id
 # https://stackoverflow.com/questions/441018/replacing-spaces-with-underscores-in-javascript
-EXERCISE_GROUP_IDENTIFIERS = {'stretch-overview': 'Stretch Overview',
-                              'animalistic-exercises': 'Animalistic',
-                              'warmup': 'Warmup'}

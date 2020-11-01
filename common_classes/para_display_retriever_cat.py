@@ -1,9 +1,7 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
 import constants.sql_substrings as sql_sub
-import constants.common as constants
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
-import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import Category
 
 
@@ -21,20 +19,20 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         __init__ different from the base class
 
         Groups are the driving force here:
-            self.groups = {'group_slug': {'group': {}, 'paragraphs': [], 'link_text': []}}
+            self.groups = [{'group': group_dict, 'paragraphs': [], 'link_text': []}]
         '''
         super().__init__()
-        # using from super
         # self.ordered
-        # self.para_ids = []
         # self.ref_ids = []
         # self.references = []
 
-        # for output
+        # for processing
         self.group_ids = []
-        self.group_id_to_link_text = {}
+        self.group_id_to_link_text_list = {}
+        self.group_id_to_para_ids = {}
+        # for output
         self.category = {}
-        self.groups = {}
+        self.groups = []
 
     def data_retrieval(self, kwargs):
         '''
@@ -48,8 +46,6 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         if 'category_id' in kwargs.keys():
             query = self.write_category_sql()
-            print(query)
-            print(kwargs)
             raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Category,
                                                                       kwargs['category_id'])
             return self.db_output_to_display_input(raw_queryset)
@@ -107,19 +103,6 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         sql += sql_sub.JOIN_REFERENCES_TO_PARA
         return sql
 
-    def db_output_to_display_input(self, raw_queryset):
-        '''
-        db_output_to_display_input returns the exactly formatted data used by the standard
-        ParagraphsToDB to create the formatted dictionary to be used in the template
-
-        :param raw_queryset: data returned after running the query
-        :type raw_queryset: django.db.models.query.RawQuerySet instance
-        :return: dictionary used by the basic display paragraph template
-        :rtype: dict
-        '''
-        self.loop_through_queryset(raw_queryset)
-        return self.output_data()
-
     def loop_through_queryset(self, query_set):
         '''
         loop_through_queryset to format data in the way needed by ParagraphsForDisplay
@@ -136,32 +119,29 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
 
     def process_group(self, row):
         '''
-        process_group needs to get the group identifier which is used on the display page as link_text
-        If a group with the given slug has already been processed, then nothing happens.
+        In process_group we ensure everything is set up properly, unless the group has already been
+        processed
 
-        if this is the first time for the given group, the following occurs:
-        1. Creates group dictionary that includes the group identifier, along with the db record fields
-        2. Adds an empty array to append the paragraphs in order (sorted in the query)
-        3. Adds an empty array to append any references, which are associated with the entire group
-        '''
-        if utils.key_not_in_dictionary(self.group, row.group_id):
-            group_identifier = constants.EXERCISE_GROUP_IDENTIFIERS[row.group_slug]
-            group_dict = self.group_dictionary(row, group_identifier)
-            self.group[row.group_id] = {'group': group_dict, 'paragraphs': [], 'link_text': []}
+        How things work in general:
+        Each category page is designed for the specific category.  We display paragraphs for a given
+        group, but the paragraphs are ordered within the group and displayed by rules for the page.
+        For now the only category that has different display rules are flash_cards.
 
-    def add_ref_to_group_link_txt_dictionary(self, group_id, link_text):
+        If this is the first time for the given group, the following occurs:
+        1. Add to list to ensure groups do not get processed more than once
+        2. Adds a group dictionary to output['groups']
+           a. Group data
+           b. list to append the paragraphs in order (sorted in the query)
+           c. list to append any link text, since references are associated with groups in display
+           paragraph, but that the page associates with the group
+        3. Add list to make sure that references are displayed only once for given group
+        4. Add list to make sure that paragraphs are displayed only once for given group
         '''
-        add_ref_to_group_link_txt_dictionary associates references to groups.  If the group_id key
-        does not exist, it needs to add the key as well.
-        Have to be careful not to replace the existing relationship.
-
-        :param group_id: group record primary key to str or made up str if displaying from JSON
-        :type group_id: str
-        :param link_text: unique identifier for reference
-        :type link_text: str
-        '''
-        if link_text not in self.group[group_id]['link_text']:
-            self.group[group_id].append(link_text)
+        if row.group_id not in self.group_ids:
+            self.group_ids.append(row.group_id)
+            self.groups.append({'group': self.group_dictionary(row), 'paragraphs': [], 'link_text': []})
+            self.group_id_to_link_text_list[row.group_id] = []
+            self.group_id_to_para_ids[row.group_id] = []
 
     def first_row_assignments(self, row):
         '''
@@ -180,50 +160,34 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
 
     def append_unique_reference(self, row):
         '''
-        append_unique_reference ensuring that even if a reference is used in multiple
-        paragraphs, the process to create the link is only done once
+        append_unique_reference ensures that even if a reference is in multiple rows, and even if it is
+        it used in multiple paragraphs, it will be displayed once and only once for this group
 
         :param row: queryset row, not normalized!
         :type row: one row of django.db.models.query.RawQuerySet
         '''
+        if row.reference_id is None:
+            return
         if row.reference_id not in self.ref_ids:
             self.references.append({'link_text': row.link_text, 'url': row.url})
-            self.ref_ids.append(row.reference_id)
+        if row.link_text not in self.group_id_to_link_text_list[row.group_id]:
+            self.group_id_to_link_text_list[row.group_id].append(row.link_text)
+            self.groups[-1]['link_text'].append(row.link_text)
 
     def append_unique_paragraph(self, row):
         '''
-        append_unique_paragraph ensures that even if a paragraph is repeated that it is only
-        processed one time.
+        append_unique_paragraph ensures that even if a paragraph is in multiple rows, and even if it is
+        it used in multiple groups, it will be displayed once and only once for this group
 
         :param row: queryset row, not normalized!
         :type row: one row of django.db.models.query.RawQuerySet
         '''
-        if row.paragraph_id not in self.para_ids:
-            self.group[row.group_id]['paragraphs'].append(self.paragraph_dictionary(row))
-            self.para_ids.append(row.paragraph_id)
 
-    def paragraph_dictionary(self, row):
-        '''
-        paragraph_dictionary is one formatted paragraph to be added to a paragraph list.  This
-        dict must be in format expected by ParagraphsForDisplay
+        if row.paragraph_id not in self.group_id_to_para_ids[row.group_id]:
+            self.group_id_to_para_ids[row.group_id].append(row.paragraph_id)
+            self.groups[-1]['paragraphs'].append(self.paragraph_dictionary(row))
 
-        :param row: queryset row
-        :type row: one row of django.db.models.query.RawQuerySet
-        :return: dictionary for one paragraph formatted in a way that works for ParagraphsForDisplay
-        :rtype: dict
-        '''
-        order = row.order
-        return {
-            'id': row.paragraph_id,
-            'subtitle': row.subtitle,
-            'note': row.subtitle_note,
-            'text': row.text,
-            'image_path': row.image_path,
-            'image_info_key': row.image_info_key,
-            'order': self.get_paragraph_order(row.subtitle, order),
-        }
-
-    def group_dictionary(self, row, group_identifier):
+    def group_dictionary(self, row):
         '''
         group_dictionary is one formatted paragraph to be added to a paragraph list.  This
         dict must be in format expected by ParagraphsForDisplay
@@ -237,14 +201,12 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
 
         :param row: queryset row
         :type row: one row of django.db.models.query.RawQuerySet
-        :param group_identifier: identifier - will be div_id and link text on a side menu on categories page
-        :type group_identifier: string
         :return: Group db record fields, plus the unique identifier for the side menu and div id
         :rtype: [type]
         '''
         return {
             'id': row.group_id,
-            'group_identifier': group_identifier,
+            'group_identifier': row.group_short_name,
             'title': row.group_title,
             'slug': row.group_slug,
             'note': row.group_note,
@@ -261,10 +223,8 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         :rtype: dict
         '''
         print('in output data')
-        print(f'group is {self.group}')
-        print(f'references are {self.references}')
+        print(f'category is {self.category}')
+        print(f'groups are {self.groups}')
         return {'category': self.category,
-                'group': self.group,
+                'groups': self.groups,
                 'references': self.references, }
-
-
