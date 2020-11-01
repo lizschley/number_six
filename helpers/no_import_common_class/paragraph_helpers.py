@@ -106,6 +106,22 @@ def add_paragraphs_to_context(context, paragraphs):
     return context
 
 
+def add_paragraphs_by_group_to_context(context, paragraphs):
+    '''
+    add_paragraphs_by_group_to_context reformats data to save work in the template
+
+    :param context: original context, minus what was needed for para retrieval
+    :type context: dict
+    :param paragraphs: paragraphs by group list before adding to context
+    :type paragraphs: dict
+    :return: context - will be used in various category templates
+    :rtype: dict
+    '''
+    context['title'] = paragraphs['title']
+    context['groups'] = paragraphs['groups']
+    return context
+
+
 def sort_paragraphs(list_to_be_sorted, key_to_sort):
     '''
     sort_paragraphs sorts paragraphs

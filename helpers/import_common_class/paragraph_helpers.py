@@ -1,6 +1,7 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import helpers.no_import_common_class.utilities as utils
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.para_db_create_process import ParaDbCreateProcess
@@ -55,9 +56,14 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
         paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json)
     else:
         paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
-        paragraphs = add_collapse_variables(paragraphs)
 
-    context = para_helper.add_paragraphs_to_context(context, paragraphs)
+    if utils.key_in_dictionary(paragraphs, 'groups'):
+        paragraphs['groups'] = add_group_div_hide_show_ids(paragraphs['groups'])
+        context = para_helper.add_paragraphs_by_group_to_context(context, paragraphs)
+    else:
+        paragraphs = add_collapse_variables(paragraphs)
+        context = para_helper.add_paragraphs_to_context(context, paragraphs)
+
     return context
 
 
@@ -96,6 +102,22 @@ def add_collapse_variables(paragraphs):
         para['collapse_id'] = 'collapse_' + str(para['id'])
         para['collapse_selector_id'] = '#collapse_' + str(para['id'])
     return paragraphs
+
+
+def add_group_div_hide_show_ids(groups):
+    '''
+    group_div_hide_show_ids adds the variables needed to collapse and expand groups
+    used for category displays
+
+    :param groups: dictionary groups - list of groups
+    :type groups: list of dictionaries of groups
+    :return: list of paragraphs that have collapse variables for display
+    :rtype:  dict containing list of individual paragraphs complete with collapse variables
+    '''
+
+    for group in groups:
+        group['group']['group_div_id'] = '#' + group['group']['group_identifier']
+    return groups
 
 
 def single_para_by_subtitle(subtitle):
