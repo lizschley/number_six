@@ -13,6 +13,7 @@ app_name = 'projects'
 urlpatterns = [
     path('', projects.all_projects, name='all_projects'),
     path('<slug:slug>', ProjectDetailView.as_view(), name='detail'),
+    path('<slug:exercise>', ProjectDetailView.as_view(), name='exercise'),
     path('demo', ProjectDetailView.as_view(), name='about_demo'),
     path('study', ProjectDetailView.as_view(), name='about_study'),
     path('exercise', ProjectDetailView.as_view(), name='about_exercise'),

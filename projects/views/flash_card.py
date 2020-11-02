@@ -5,7 +5,7 @@ from common_classes.paragraphs_for_display_cat import ParagraphsForDisplayCat
 
 
 class FlashCardView(TemplateView):
-    template_name = 'projects/category.html'
+    template_name = 'projects/flash_card.html'
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
