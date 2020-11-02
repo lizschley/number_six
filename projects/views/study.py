@@ -13,6 +13,14 @@ INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 
 class StudyParagraphView(TemplateView):
+    '''
+    StudyParagraphView View standalone paragraphs
+
+    :param TemplateView: Basic view
+    :type TemplateView: Template View Class
+    :return: context which includes the standard paragraph display object
+    :rtype: dict
+    '''
     template_name = 'projects/paragraphs.html'
 
     def get_context_data(self, **kwargs):
@@ -25,6 +33,8 @@ class StudyParagraphView(TemplateView):
 
 
 class StudyLookupView(FormView):
+    ''' StudyLookupView is a form to choose the content to view'''
+
     template_name = 'projects/study_lookup.html'
     form_class = ParagraphLookupForm
 
@@ -39,6 +49,15 @@ class StudyLookupView(FormView):
 
     @staticmethod
     def which_args(in_data):
+        '''
+        which_args allows categories from the study selection go to the flashcard page and groups to go
+        to the standalone paragraph page
+
+        :param in_data: dictionary with group_id as a key or category_id as a key
+        :type in_data: dict
+        :return: information necessary for correct url construction
+        :rtype: dict
+        '''
         if utils.key_in_dictionary(in_data, 'category'):
             identifier = 'projects:study_paragraphs_with_category'
             kwargs = {'category_id': in_data['category']}
@@ -46,4 +65,3 @@ class StudyLookupView(FormView):
             identifier = 'projects:study_paragraphs_with_group'
             kwargs = {'group_id': in_data['group']}
         return {'identifier': identifier, 'kwargs': kwargs}
-

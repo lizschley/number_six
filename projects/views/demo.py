@@ -1,13 +1,12 @@
 '''This view displays the paragraphs in a basic fashion.'''
-import os
 from django.http import JsonResponse
 from django.views.generic import TemplateView
 import constants.file_paths as file_paths
-import portfolio.settings as settings
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
 class DemoParagraphView(TemplateView):
+    ''' This is called from the project detail page.  It gives information about the site. '''
     template_name = 'projects/demo_paragraphs.html'
 
     def get_context_data(self, **kwargs):
@@ -22,6 +21,14 @@ class DemoParagraphView(TemplateView):
 
 
 def para_by_subtitle(request):
+    '''
+    para_by_subtitle retrieves one paragraph and displays in a modal
+
+    :param request: request object
+    :type request: request
+    :return: JSON (serialized) version of a dictionary with a single paragraph display object
+    :rtype: JSON
+    '''
     if request.method == 'GET' and request.is_ajax():
         subtitle = request.GET.get('subtitle')
     else:

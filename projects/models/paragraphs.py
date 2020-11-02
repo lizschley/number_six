@@ -9,18 +9,18 @@ class Category(models.Model):
     ''' one to many with groups '''
     BLOG = 'blog'
     RESUME = 'resume'
-    FLASH_CARD = 'flash_card'
+    FLASHCARD = 'flashcard'
     EXERCISE = 'exercise'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
-        (FLASH_CARD, 'Flash Card'),
+        (FLASHCARD, 'Flash Card'),
         (EXERCISE, 'Exercise'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     category_type = models.CharField(max_length=20, choices=CATEGORY_TYPE_CHOICES,
-                                     default=FLASH_CARD)
+                                     default=FLASHCARD)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

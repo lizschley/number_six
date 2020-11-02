@@ -3,7 +3,7 @@ from projects.models.paragraphs import Group, Category
 
 STUDY_GROUPS = ['tech-definitions', 'non-native-plant-descriptions', 'native-plant-descriptions',
                 'tech-how-tos-personal-cheat-sheets', 'botany-definitions']
-STUDY_CATEGORIES = ['flash_card']
+STUDY_CATEGORIES = ['flashcard']
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
 

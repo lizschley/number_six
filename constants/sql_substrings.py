@@ -55,3 +55,5 @@ COMPLETE_REFERENCE_SELECT = ('r.id as reference_id, r.link_text as reference_lin
                              'r.slug as reference_slug, r.url as reference_url, '
                              'r.created_at as reference_created_at, '
                              'r.updated_at as reference_updated_at ')
+
+CATEGORY_SORT = 'order by g.cat_sort, gp.order'

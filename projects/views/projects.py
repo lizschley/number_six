@@ -1,58 +1,39 @@
+''' Original tutorial code.  Only Exercise uses the paragraphs functionality '''
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from projects.models.projects import Project
 from django.views.generic import TemplateView
+import helpers.import_common_class.paragraph_helpers as para_helper
+from common_classes.paragraphs_for_display_cat import ParagraphsForDisplayCat
+from projects.models.projects import Project
 
 
 # Create your views here.
 def all_projects(request):
+    ''' from original tuturial.  Show the original projects '''
     projects = Project.objects.all().order_by('id')
     return render(request, 'projects/all_projects.html', {'projects': projects})
 
 
 class ProjectDetailView(TemplateView):
+    ''' From original tutorial.  Pulled in paragraphs by Category for Exercise
+        Demo and Study really just display informatin from the projects and text from the page. '''
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+        if context['slug'] == 'exercise':
+            self.template_name = 'projects/exercise.html'
+            context = self._add_to_exercise_context(context)
+            return context
         slug = context['slug']
         context = {
             'project': get_object_or_404(Project, slug=slug)  # pass slug
         }
-        print(f'context={context}')
         if slug == 'demo':
             self.template_name = 'projects/demo.html'
-        elif slug == 'exercise':
-            self.template_name = 'projects/exercise.html'
         else:
             self.template_name = 'projects/study.html'
         return context
 
-
-class ProjectDemoView(TemplateView):
-    template_name = 'projects/demo.html'
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet
-        return context
-
-
-class ProjectStudyView(TemplateView):
-    template_name = 'projects/study.html'
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet
-        return context
-
-
-class ProjectExerciseView(TemplateView):
-    template_name = 'projects/exercise.html'
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in a QuerySet
+    def _add_to_exercise_context(self, context):
+        context = para_helper.paragraph_view_input(context, False, ParagraphsForDisplayCat)
         return context
