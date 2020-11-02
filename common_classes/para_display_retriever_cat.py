@@ -22,6 +22,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
             self.groups = [{'group': group_dict, 'paragraphs': [], 'link_text': []}]
         '''
         super().__init__()
+        # have already
         # self.ordered
         # self.ref_ids = []
         # self.references = []
@@ -44,30 +45,50 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         :return: a dictionary in the format that works with the standard ParagraphsForDisplayCat
         :rtype: dict
         '''
+        sql_results = self.build_category_sql(kwargs)
+        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(sql_results['query'], Category,
+                                                                  sql_results['param'])
+        return self.db_output_to_display_input(raw_queryset)
+
+    def build_category_sql(self, kwargs):
+        '''
+        build_category_sql builds sql that will pull in groups and their paragraphs and references
+        for a given category
+
+        :param kwargs: This will have either a category id or a category slug
+        :type kwargs: dict
+        :return: The data retrieved, everything associated with the category
+        :rtype: dict
+        '''
+        query = self.basic_category_sql()
+        where = self.category_where(kwargs)
+        query += ' ' + where['statement'] + ' ' + sql_sub.CATEGORY_SORT
+        return {'query': query, 'param': where['param']}
+
+    def category_where(self, kwargs):
+        '''
+        category_where constructs where statement
+
+        :param kwargs: information to specify field and value for where
+        :type kwargs: dict
+        :return: where statement with variable and its value
+        :rtype: dict
+        '''
+        where = 'where '
         if 'category_id' in kwargs.keys():
-            query = self.write_category_sql()
-            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Category,
-                                                                      kwargs['category_id'])
-            return self.db_output_to_display_input(raw_queryset)
-        return None
+            val = kwargs['category_id']
+            where += 'c.id = '
+        elif 'category_slug' in kwargs.keys():
+            val = kwargs['category_slug']
+            where += 'c.slug = '
+        else:
+            return None
+        where += '%s'
+        return {'statement': where, 'param': val}
 
-    # Todo: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
-    def write_category_sql(self):
+    def basic_category_sql(self):
         '''
-        write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
-        using a group and the paragraphs are standalone
-
-        :return: the query to be used, minus the actual group_id
-        :rtype: str
-        '''
-        query = self.build_category_sql()
-        query += 'where c.id = %s '
-        query += 'order by g.cat_sort, gp.order'
-        return query
-
-    def build_category_sql(self):
-        '''
-        build_category_sql creates the sql code to retrieve multiple groups associated with a given
+        basic_category_sql creates the sql code to retrieve multiple groups associated with a given
         category.  It will also return associated paragraphs and their related records
 
         :return: sql with the necessary elements and without where statements
@@ -125,7 +146,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         How things work in general:
         Each category page is designed for the specific category.  We display paragraphs for a given
         group, but the paragraphs are ordered within the group and displayed by rules for the page.
-        For now the only category that has different display rules are flash_cards.
+        For now the only category that has different display rules are flashcards.
 
         If this is the first time for the given group, the following occurs:
         1. Add to list to ensure groups do not get processed more than once

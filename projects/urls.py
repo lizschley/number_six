@@ -3,7 +3,7 @@ from django.urls import path
 from projects.views.projects import ProjectDetailView
 from projects.views.demo import DemoParagraphView
 from projects.views.study import StudyLookupView, StudyParagraphView
-from projects.views.flash_card import FlashCardView
+from projects.views.flashcard import FlashcardView
 # from projects.views.study import para_by_subtitle
 from projects.views.demo import para_by_subtitle
 from projects.views import projects
@@ -22,7 +22,7 @@ urlpatterns = [
     path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(),
          name='study_paragraphs_with_group'),
     path('study/paragraphs/para_by_subtitle', para_by_subtitle, name='study_para_by_subtitle'),
-    path('study/paragraphs/flash_cards/<int:category_id>', FlashCardView.as_view(),
+    path('study/paragraphs/flashcards/<int:category_id>', FlashcardView.as_view(),
          name='study_paragraphs_with_category'),
 
 ]

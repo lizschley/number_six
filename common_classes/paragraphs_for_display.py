@@ -61,6 +61,7 @@ class ParagraphsForDisplay(object):
             if key in kwargs.keys():
                 retriever = self.instantiate_class(key)
         if retriever is not None:
+            print(f'retriever == {retriever}')
             return retriever.data_retrieval(kwargs)
         return None
 
@@ -78,7 +79,7 @@ class ParagraphsForDisplay(object):
             return ParaDisplayRetrieverJson()
         if key in constants.VALID_DB_RETRIEVER_KW_ARGS:
             return ParaDisplayRetrieverDb()
-        if key == 'category_id':
+        if key in constants.VALID_CAT_RETRIEVER_ARGS:
             return ParaDisplayRetrieverCat()
         return None
 
