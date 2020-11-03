@@ -29,4 +29,11 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.category_group').click(function(e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        var id = this.getAttribute('data-identifier');
+        alert('id==' + id);
+    })
 })

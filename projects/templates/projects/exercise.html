@@ -3,14 +3,25 @@
 {% load static %}
 
 {% block content %}
-
+    <div class="container">
     <div class="row">
-        <h1>{{title}}</h1>
+    <div class="col-md-3">
+        <h2>Click to Show</h2>
+        <a href="#" data-identifier="group_1" class="category_group">group 1</a>
+        <br>
+        <a href="#" data-identifier="group_2" class="category_group">group 2</a>
+        <br>
+        <a href="#" data-identifier="group_3" class="category_group">group 3</a>
+        <br>
     </div>
-
-   {% for group in groups %}
+    <div class="col-md-9">
+    <h2>{{title}}</h2>
+    {% for group in groups %}
         <pre><code><p>
             {{group}}
         </p></code></pre>
-   {% endfor %}
+    {% endfor %}
+    </div>
+    </div>
+    </div>
 {% endblock %}
