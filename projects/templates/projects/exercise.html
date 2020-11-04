@@ -7,19 +7,20 @@
     <div class="row">
     <div class="col-md-3">
         <h2>Click to Show</h2>
-        <a href="#" data-identifier="group_1" class="category_group">group 1</a>
-        <br>
-        <a href="#" data-identifier="group_2" class="category_group">group 2</a>
-        <br>
-        <a href="#" data-identifier="group_3" class="category_group">group 3</a>
-        <br>
+        {{ side_menu | safe }}
     </div>
     <div class="col-md-9">
     <h2>{{title}}</h2>
     {% for group in groups %}
-        <pre><code><p>
-            {{group}}
-        </p></code></pre>
+    <div id={{ group.group_div_id }}>
+        {% if group.paragraphs %}
+            {{ group.paragraphs | safe }}
+        {% endif %}
+        {% if group.ref_links %}
+            <h6>References</h6>
+             {{ group.ref_links | safe }}
+        {% endif %}
+    </div>
     {% endfor %}
     </div>
     </div>

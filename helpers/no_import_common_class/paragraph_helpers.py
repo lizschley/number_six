@@ -118,6 +118,10 @@ def add_paragraphs_by_group_to_context(context, paragraphs):
     :rtype: dict
     '''
     context['title'] = paragraphs['title']
+    if 'side_menu' in paragraphs.keys():
+        context['side_menu'] = paragraphs['side_menu']
+    elif 'hidden_group_divs' in paragraphs.keys():
+        context['hidden_group_divs'] = paragraphs['hidden_group_divs']
     context['groups'] = paragraphs['groups']
     return context
 

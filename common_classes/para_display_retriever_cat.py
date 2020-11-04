@@ -34,6 +34,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         # for output
         self.category = {}
         self.groups = []
+        self.is_flashcard = False
 
     def data_retrieval(self, kwargs):
         '''
@@ -76,6 +77,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         where = 'where '
         if 'category_id' in kwargs.keys():
+            self.is_flashcard = True
             val = kwargs['category_id']
             where += 'c.id = '
         elif 'category_slug' in kwargs.keys():
@@ -248,4 +250,5 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         print(f'groups are {self.groups}')
         return {'category': self.category,
                 'groups': self.groups,
-                'references': self.references, }
+                'references': self.references,
+                'is_flashcard': self.is_flashcard, }
