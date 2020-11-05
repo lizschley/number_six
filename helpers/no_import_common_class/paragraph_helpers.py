@@ -26,7 +26,7 @@ def create_link(url, link_text):
     :return: Link that will be used as a reference to its associated paragraph
     :rtype: String
     '''
-    return f'<a href="{url}" target="_blank">{link_text}</a>'
+    return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
 
 def json_to_dict(json_path):
@@ -218,7 +218,7 @@ def ajax_link(orig_subtitle, from_ajax):
         return orig_subtitle
     substitute = lookup.SUBTITLE_LOOKUP
     beg_link = '<a href="#" data-subtitle="'
-    mid_link = '" class="para_by_subtitle">'
+    mid_link = '" class="para_by_subtitle modal_popup_link">'
     link_text = orig_subtitle
     end_link = '</a>'
     subtitle = orig_subtitle if orig_subtitle not in substitute.keys() else substitute[orig_subtitle]
