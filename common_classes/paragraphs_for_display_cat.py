@@ -26,7 +26,6 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
 
         # This is the output (along with the title)
         self.groups = []
-        self.is_flashcard = False
         self.side_menu = ''
         self.hidden_group_divs = ''
 
@@ -59,7 +58,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         for data in self.input_data['groups']:
             group = data['group']
             group = self.assign_category_div_variables(group, prefix)
-            prefix = '~' if self.input_data['is_flashcard'] else '<br>'
+            prefix = '~' if self.is_flashcard() else '<br>'
             paragraphs = self.assign_paragraph_list(data['paragraphs'])
             ref_links = self.assign_ref_links(data['link_text'])
             self.groups.append(self.output_group(group, paragraphs, ref_links))
@@ -120,9 +119,10 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :type ref_links: list of strings
         '''
         return {
-            'sub_title': group['title'],
-            'paragraphs': paragraphs,
+            'title': group['title'],
+            'paragraphs': para_helpers.paragraphs_for_category_pages(paragraphs),
             'group_div_id': group['group_div_id'],
+            'group_div_class': group['group_div_class'],
             'ref_links': ref_links, }
 
     def output_for_display(self):
@@ -134,11 +134,20 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         '''
         display = {'title': self.title,
                    'groups': self.groups, }
-        if self.input_data['is_flashcard']:
+        if self.is_flashcard():
             display['hidden_group_divs'] = self.hidden_group_divs
         else:
             display['side_menu'] = self.side_menu
         return display
+
+    def is_flashcard(self):
+        '''
+        is_flashcard returns True if its the flashcard page
+
+        :return: True if flashcard page
+        :rtype: bool
+        '''
+        return self.input_data['category']['category_type'] == 'flashcard'
 
     def assign_category_div_variables(self, group, prefix):
         '''
@@ -160,7 +169,8 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         link_text = group['group_identifier']
         group_div_id = link_text.replace(' ', '_').lower()
         group['group_div_id'] = group_div_id
-        if self.input_data['is_flashcard']:
+        group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
+        if self.is_flashcard():
             self.hidden_group_divs += prefix + group_div_id
         else:
             link_text = group['group_identifier']
