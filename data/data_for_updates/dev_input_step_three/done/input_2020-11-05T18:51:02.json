@@ -1,0 +1,9 @@
+{
+    "paragraphs": [
+        {
+            "guid": "b455fac9-7851-4620-9bc4-8cc72c33177b",
+            "id": 2,
+            "text": "<p>SOLID Principles are a fundamental building block of Object Oriented Programming. <a href='https://en.wikipedia.org/wiki/Robert_C._Martin'  class='reference_link' target='_blank'>Robert C. Martin</a> introduced the five concepts and <a href='https://twitter.com/mfeathers'  class='reference_link' target='_blank'>Michael Feathers</a> introduced the Acronym. <br><strong>S</strong> - Single Responsibility Principle <br><strong>O</strong> - Open/Closed Principle <br><strong>L</strong> - Liskov Substitution Principle <br><strong>I</strong> - Interface Segregation Principle <br><strong>D</strong> - Dependency Inversion Principle <br> <p>The main purposes are interrelated: maintainability, understandability and flexibility</p>"
+        }
+    ]
+}

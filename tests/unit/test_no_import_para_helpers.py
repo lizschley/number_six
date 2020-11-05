@@ -28,11 +28,14 @@ def para_with_indicators():
     return 'preceding |beg|sub_1|end| inbetween text |beg|sub_2|end| |beg|sub_3|end| following text'
 
 
-def test_create_link():
+@pytest.mark.parametrize('substring', [('http://www.math.com/'),
+                                       ('Math'),
+                                       ('reference_link')])
+def test_create_link(substring):
     url: str = 'http://www.math.com/'
     link_text: str = 'Math'
     link: str = para_helper.create_link(url, link_text)
-    assert link == '<a href="http://www.math.com/" target="_blank">Math</a>'
+    assert substring in link
 
 
 def test_json_to_dict(orig_para_dict_data):
@@ -90,13 +93,16 @@ def check_text_para_assertions(text, check_for='<p>', pos=0):
 
 
 def return_para_correct(ret_text, from_ajax):
+    print(f'return text == {ret_text}')
     if from_ajax:
+        print(f'if from ajax return text == {ret_text}')
         expected_text = 'preceding sub_1 inbetween text sub_2 sub_3 following text'
     else:
+        print(f'else return text == {ret_text}')
         expected_text = ('preceding '
-                         '<a href="#" data-subtitle="sub_1" class="para_by_subtitle">sub_1</a> '
+                         '<a href="#" data-subtitle="sub_1" class="para_by_subtitle modal_popup_link">sub_1</a> '
                          'inbetween text '
-                         '<a href="#" data-subtitle="sub_2" class="para_by_subtitle">sub_2</a> '
-                         '<a href="#" data-subtitle="sub_3" class="para_by_subtitle">sub_3</a> '
+                         '<a href="#" data-subtitle="sub_2" class="para_by_subtitle modal_popup_link">sub_2</a> '
+                         '<a href="#" data-subtitle="sub_3" class="para_by_subtitle modal_popup_link">sub_3</a> '
                          'following text')
     return ret_text == expected_text

@@ -26,6 +26,8 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
 
         # This is the output (along with the title)
         self.groups = []
+        self.side_menu = ''
+        self.hidden_group_divs = ''
 
     def format_data_for_display(self):
         '''
@@ -52,8 +54,11 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         assign_groups takes each group input, as retrieved in the the category retriever and
         makes it work for the category display
         '''
+        prefix = ''
         for data in self.input_data['groups']:
             group = data['group']
+            group = self.assign_category_div_variables(group, prefix)
+            prefix = '~' if self.is_flashcard() else '<br>'
             paragraphs = self.assign_paragraph_list(data['paragraphs'])
             ref_links = self.assign_ref_links(data['link_text'])
             self.groups.append(self.output_group(group, paragraphs, ref_links))
@@ -114,8 +119,10 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :type ref_links: list of strings
         '''
         return {
-            'group': group,
-            'paragraphs': paragraphs,
+            'title': group['title'],
+            'paragraphs': para_helpers.paragraphs_for_category_pages(paragraphs),
+            'group_div_id': group['group_div_id'],
+            'group_div_class': group['group_div_class'],
             'ref_links': ref_links, }
 
     def output_for_display(self):
@@ -125,5 +132,48 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
-        return {'title': self.title,
-                'groups': self.groups, }
+        display = {'title': self.title,
+                   'groups': self.groups, }
+        if self.is_flashcard():
+            display['hidden_group_divs'] = self.hidden_group_divs
+        else:
+            display['side_menu'] = self.side_menu
+        return display
+
+    def is_flashcard(self):
+        '''
+        is_flashcard returns True if its the flashcard page
+
+        :return: True if flashcard page
+        :rtype: bool
+        '''
+        return self.input_data['category']['category_type'] == 'flashcard'
+
+    def assign_category_div_variables(self, group, prefix):
+        '''
+        assign_category_div_variables assigns the div id for the group level divs
+
+        for category pages, use the same data to link the side_menu group link to
+        div that will show when the side menu is clicked
+
+        for a flashcard page, use the group display div in a hidden variable that can track the next
+        flashcard to display
+
+        :param group: group information retrieved from the group db record
+        :type group: dict
+        :param prefix: A <br> to separaee side menu links or a tilde to separate the hidden group ids
+        :type prefix: str
+        :return: the group that now has the group_div_id to use in the template
+        :rtype: dict
+        '''
+        link_text = group['group_identifier']
+        group_div_id = link_text.replace(' ', '_').lower()
+        group['group_div_id'] = group_div_id
+        group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
+        if self.is_flashcard():
+            self.hidden_group_divs += prefix + group_div_id
+        else:
+            link_text = group['group_identifier']
+            link = f'<a href="#" data-identifier={group_div_id} class="category_group">{link_text}</a>'
+            self.side_menu += prefix + link
+        return group

@@ -128,7 +128,9 @@ def call_process(process_data):
         return f'Step 3, no {prod_or_dev(process_data)} in {process_data["input_directory"]}'
     return 'ok'
 
+
 def prod_or_dev(process_data):
+    ''' Returns different message based on the process_data '''
     if process_data['is_prod'] or process_data['run_as_prod']:
         return 'production-like files to use for updating'
     return 'development files to use for updating'

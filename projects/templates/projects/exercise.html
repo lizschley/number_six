@@ -3,14 +3,29 @@
 {% load static %}
 
 {% block content %}
-
+    <div class="container">
     <div class="row">
-        <h1>{{title}}</h1>
+        <div class="col-md-3">
+            <h2>Click Links</h2>
+            {{ side_menu | safe }}
+        </div>
+        <div class="col-md-9">
+            <h2>{{title}}</h2>
+            {% for group in groups %}
+                <div id={{ group.group_div_id }} class={{ group.group_div_class}}>
+                    {% if group.title %}
+                        <h4>{{ group.title}}</h4>
+                    {% endif %}
+                    {% if group.paragraphs %}
+                        {{ group.paragraphs | safe }}
+                    {% endif %}
+                    {% if group.ref_links %}
+                        <h6>References</h6>
+                        {{ group.ref_links | safe }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
-   {% for group in groups %}
-        <pre><code><p>
-            {{group}}
-        </p></code></pre>
-   {% endfor %}
+    </div>
 {% endblock %}

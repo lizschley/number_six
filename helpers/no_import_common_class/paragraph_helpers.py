@@ -26,7 +26,7 @@ def create_link(url, link_text):
     :return: Link that will be used as a reference to its associated paragraph
     :rtype: String
     '''
-    return f'<a href="{url}" target="_blank">{link_text}</a>'
+    return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
 
 def json_to_dict(json_path):
@@ -118,6 +118,10 @@ def add_paragraphs_by_group_to_context(context, paragraphs):
     :rtype: dict
     '''
     context['title'] = paragraphs['title']
+    if 'side_menu' in paragraphs.keys():
+        context['side_menu'] = paragraphs['side_menu']
+    elif 'hidden_group_divs' in paragraphs.keys():
+        context['hidden_group_divs'] = paragraphs['hidden_group_divs']
     context['groups'] = paragraphs['groups']
     return context
 
@@ -214,7 +218,7 @@ def ajax_link(orig_subtitle, from_ajax):
         return orig_subtitle
     substitute = lookup.SUBTITLE_LOOKUP
     beg_link = '<a href="#" data-subtitle="'
-    mid_link = '" class="para_by_subtitle">'
+    mid_link = '" class="para_by_subtitle modal_popup_link">'
     link_text = orig_subtitle
     end_link = '</a>'
     subtitle = orig_subtitle if orig_subtitle not in substitute.keys() else substitute[orig_subtitle]
@@ -324,3 +328,26 @@ def treat_like_production(process_data):
     :rtype: bool
     '''
     return process_data['is_prod'] or process_data['run_as_prod']
+
+
+def paragraphs_for_category_pages(paragraphs):
+    '''
+    paragraphs_for_category_pages concatenates paragraphs into a string
+
+    :param paragraphs: all the paragraphs as processed for display
+    :type paragraphs: dict
+    :return: all the paragraph html concatenated into big string
+    :rtype: str
+    '''
+    html_output = ''
+    for para in paragraphs:
+        if para['subtitle']:
+            html_output += f'<h6>{para["subtitle"]}</h6>'
+        if para['image_path']:
+            html_output += '<img class="' + para['image_classes'] + '" '
+            html_output += 'src="' + f'static {para["image_path"]}" '
+            html_output += f'alt="{para.image_alt}">'
+        html_output += para['text']
+        if para['subtitle_note']:
+            html_output += f'<p>({para["subtitle_note"]})</p>'
+    return html_output

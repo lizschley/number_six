@@ -1,0 +1,9 @@
+{
+    "paragraphs": [
+        {
+            "guid": "81fa6fc1-9b6f-4491-8e32-858f1a6c6407",
+            "id": 78,
+            "text": "<p>Taking off the slim from a Bootstrap 4 jquery link caused a bug.  I was able to fix  it, without losing the integrity, by putting the new url into the Hash generator.  </p>  <p>Details: You use the Subresource Integrity feature by specifying a base64-encoded cryptographic hash of a  resource (file) you\u2019re telling the browser to fetch, in the value of the integrity attribute of any  &#60;script&#62; or &#60;link&#62; element.</p><p> Details are directly quoted from  <a href='https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity' class='reference_link' target='_blank'>MDN</a></p>"
+        }
+    ]
+}

@@ -29,4 +29,19 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.category_group').click(function(e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        var div_id = '#' + this.getAttribute('data-identifier');
+        if (!$(div_id).hasClass('category_group_div')) {
+            $(div_id).addClass('category_group_div');
+        }
+        show_one_id_within_class(div_id, '.category_group_div')
+    })
 })
+
+function show_one_id_within_class(id_to_show, class_to_hide) {
+    $(class_to_hide).addClass('d-none');
+    $(id_to_show).removeClass('d-none');
+  }
