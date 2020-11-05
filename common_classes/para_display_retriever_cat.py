@@ -31,10 +31,9 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         self.group_ids = []
         self.group_id_to_link_text_list = {}
         self.group_id_to_para_ids = {}
-        # for output
+        # for output (also self.references from base class)
         self.category = {}
         self.groups = []
-        self.is_flashcard = False
 
     def data_retrieval(self, kwargs):
         '''
@@ -77,7 +76,6 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         where = 'where '
         if 'category_id' in kwargs.keys():
-            self.is_flashcard = True
             val = kwargs['category_id']
             where += 'c.id = '
         elif 'category_slug' in kwargs.keys():
@@ -179,6 +177,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         self.category = {
             'title': row.category_title,
             'id': row.category_id,
+            'category_type': row.category_type,
         }
 
     def append_unique_reference(self, row):
@@ -245,10 +244,6 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         :return: dictionary used to display groups and paragraphs associated with a given category
         :rtype: dict
         '''
-        print('in output data')
-        print(f'category is {self.category}')
-        print(f'groups are {self.groups}')
         return {'category': self.category,
                 'groups': self.groups,
-                'references': self.references,
-                'is_flashcard': self.is_flashcard, }
+                'references': self.references, }

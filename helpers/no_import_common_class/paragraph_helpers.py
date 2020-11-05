@@ -328,3 +328,26 @@ def treat_like_production(process_data):
     :rtype: bool
     '''
     return process_data['is_prod'] or process_data['run_as_prod']
+
+
+def paragraphs_for_category_pages(paragraphs):
+    '''
+    paragraphs_for_category_pages concatenates paragraphs into a string
+
+    :param paragraphs: all the paragraphs as processed for display
+    :type paragraphs: dict
+    :return: all the paragraph html concatenated into big string
+    :rtype: str
+    '''
+    html_output = ''
+    for para in paragraphs:
+        if para['subtitle']:
+            html_output += f'<h6>{para["subtitle"]}</h6>'
+        if para['image_path']:
+            html_output += '<img class="' + para['image_classes'] + '" '
+            html_output += 'src="' + f'static {para["image_path"]}" '
+            html_output += f'alt="{para.image_alt}">'
+        html_output += para['text']
+        if para['subtitle_note']:
+            html_output += f'<p>({para["subtitle_note"]})</p>'
+    return html_output

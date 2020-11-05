@@ -1,6 +1,7 @@
 ''' Use to build sql '''
 BEGIN_SELECT = 'select 1 as id'
-SELECT_CATEGORY = 'c.id as category_id, c.title as category_title, c.slug as category_slug '
+SELECT_CATEGORY = ('c.id as category_id, c.title as category_title, c.slug as category_slug, '
+                   'c.category_type as category_type ')
 SELECT_GROUP = ('g.id as group_id, g.short_name as group_short_name, g.title as group_title, '
                 'g.note as group_note, g.cat_sort as group_sort, gp.order, g.slug as group_slug ')
 SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
