@@ -1,13 +1,13 @@
 {
     "text": ["<p></p>",
         "<ul>",
-        "<li><b>Leaves: </b>",
-        "<li><b>Native Status: </b>",
-        "<li><b>Flowers: </b>",
-        "<li><b>Distinguishing: </b>",
-        "<li><b>Size: </b>",
-        "<li><b>Wildlife Value: </b>",
-        "<li><b>Growing Conditions: </b>",
+        "<li><strong>Leaves: </strong>",
+        "<li><strong>Native Status: </strong>",
+        "<li><strong>Flowers: </strong>",
+        "<li><strong>Distinguishing: </strong>",
+        "<li><strong>Size: </strong>",
+        "<li><strong>Wildlife Value: </strong>",
+        "<li><strong>Growing Conditions: </strong>",
         "</ul>"
     ]
 }

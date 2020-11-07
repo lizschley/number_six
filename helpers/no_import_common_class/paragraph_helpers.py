@@ -330,7 +330,7 @@ def treat_like_production(process_data):
     return process_data['is_prod'] or process_data['run_as_prod']
 
 
-def paragraphs_for_category_pages(paragraphs):
+def paragraphs_for_category_pages(paragraphs, note_after_subtitle=True):
     '''
     paragraphs_for_category_pages concatenates paragraphs into a string
 
@@ -342,12 +342,14 @@ def paragraphs_for_category_pages(paragraphs):
     html_output = ''
     for para in paragraphs:
         if para['subtitle']:
-            html_output += f'<h6>{para["subtitle"]}</h6>'
+            html_output += f'<h5><strong>{para["subtitle"]}</strong></h5>'
+        if para['subtitle_note'] and note_after_subtitle:
+            html_output += f'<p>{para["subtitle_note"]}</p>'
         if para['image_path']:
             html_output += '<img class="' + para['image_classes'] + '" '
             html_output += 'src="' + f'static {para["image_path"]}" '
             html_output += f'alt="{para.image_alt}">'
         html_output += para['text']
-        if para['subtitle_note']:
-            html_output += f'<p>({para["subtitle_note"]})</p>'
+        if para['subtitle_note'] and not note_after_subtitle:
+            html_output += f'<p>{para["subtitle_note"]}</p>'
     return html_output

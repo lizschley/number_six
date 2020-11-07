@@ -9,14 +9,14 @@ $(document).ready(function() {
             data: {'subtitle' : subtitle},
             success: function (response) {
                  var paragraph = response['paragraph'];
-                 var subtitle  = paragraph['subtitle']
-                 var subtitle_note = paragraph['subtitle_note']
-                 var para = paragraph['text']
+                 var subtitle  = paragraph['subtitle'];
+                 var subtitle_note = paragraph['subtitle_note'];
+                 var para = paragraph['text'];
                  if (subtitle_note) {
-                    para = subtitle_note + ' ' + para
+                    para = subtitle_note + ' ' + para;
                  }
                  if (paragraph['references']) {
-                    para = para + '<h5>References</h5>' + paragraph['references']
+                    para = para + '<h5>References</h5>' + paragraph['references'];
                  }
                  $('#subtitle_modal_title').html(subtitle);
                  $('#subtitle_modal_para').html(para);
@@ -37,7 +37,7 @@ $(document).ready(function() {
         if (!$(div_id).hasClass('category_group_div')) {
             $(div_id).addClass('category_group_div');
         }
-        show_one_id_within_class(div_id, '.category_group_div')
+        show_one_id_within_class(div_id, '.category_group_div');
     })
 })
 

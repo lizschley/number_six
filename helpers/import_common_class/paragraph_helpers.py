@@ -84,9 +84,9 @@ def retrieve_paragraphs_based_on_context(paras, context):
     category_id = context.pop('category_id', None)
     if category_id is not None:
         return paras.retrieve_paragraphs(category_id=category_id)
-    project_slug = context.pop('slug', None)
-    if project_slug is not None:
-        return paras.retrieve_paragraphs(category_slug='at-home-exercise')
+    category_slug = context.pop('slug', None)
+    if category_slug is not None:
+        return paras.retrieve_paragraphs(category_slug=category_slug)
 
 
 def add_collapse_variables(paragraphs):

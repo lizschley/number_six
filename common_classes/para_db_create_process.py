@@ -54,7 +54,10 @@ class ParaDbCreateProcess(ParaDbMethods):
         :rtype: [type]
         '''
         self.assign_group_data(input_data)
-        create_dict = {'title': self.title, 'note': self.title_note}
+        create_dict = {'title': self.title, 'note': self.title_note,
+                       'category_id': input_data['group']['category_id'],
+                       'short_name': input_data['group']['short_name'],
+                       'cat_sort': input_data['group']['cat_sort'], }
         find_dict = {'title': self.title}
 
         return_data = self.find_or_create_record(Group, find_dict, create_dict)

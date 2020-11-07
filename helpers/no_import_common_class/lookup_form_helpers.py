@@ -25,7 +25,8 @@ def get_initial_classifications():
 
     categories = Category.objects.filter(category_type__in=STUDY_CATEGORIES)
     for category in categories:
-        classification_list.append((format_category_id(category.pk), category.title))
+        cat_display = 'flashcards: ' + category.title
+        classification_list.append((format_category_id(category.pk), cat_display))
 
     return classification_list
 

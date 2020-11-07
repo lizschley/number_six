@@ -60,7 +60,9 @@ class ParagraphDictionaries:
             'title': '',
             'slug': '',
             'note': '',
-            'category_id': None,
+            'category_id': 0,
+            'short_name': '',
+            'cat_sort': 0
         }
 
     @staticmethod

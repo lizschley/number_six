@@ -1,0 +1,118 @@
+{
+    "group_paragraph": [
+        {
+            "group_id": 2000,
+            "order": 1,
+            "paragraph_id": 3003
+        },
+        {
+            "group_id": 2000,
+            "order": 2,
+            "paragraph_id": 3004
+        },
+        {
+            "group_id": 2000,
+            "order": 3,
+            "paragraph_id": 3005
+        },
+        {
+            "group_id": 2000,
+            "order": 4,
+            "paragraph_id": 3006
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 2,
+            "category_id": 1,
+            "id": 2000,
+            "note": "",
+            "short_name": "Data Transfer",
+            "slug": "",
+            "title": "Data Transfer"
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "",
+            "id": 3003,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "</p>Implemented an end-point for uploading complex data to a relational database from an end-user supplied spreadsheet. The process updated or created records in at least seven different tables and validated against even more. In order to ensure integrity, created extensive rspec tests, making sure to validate all the business rules. There were few to no bugs, in spite of the fact that the original Jira tickets did not have all the AC criteria spelled out.</p>"
+        },
+        {
+            "guid": "",
+            "id": 3004,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "</p>Developed and implemented a plan for table-based transformation in data conversion, taking on a leadership role in the project as a result of this initiative.</p>"
+        },
+        {
+            "guid": "",
+            "id": 3005,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "</p>Worked as a Technical Lead [TL] for a customer-facing web-site (ASP, Javascript, XSLT, VB, Java web services, Intalio and other middleware, many back-end systems) for two years.</p>"
+        },
+        {
+            "guid": "",
+            "id": 3006,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "</p>Fixed highly inaccurate subscription data used by sales reps without disturbing the production process. This was particularly challenging because there were no matching keys and three fundamental problems with the original extract. Sent updates for over 50% of the records (a logistical problem) and rewrote the extract, so that sales reps had completely accurate information.</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "8": "reverse-chronological-resume",
+            "reverse-chronological-resume": {
+                "dev_id": 8
+            }
+        },
+        "paragraphs": {
+            "113": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "114": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "115": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "116": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "117": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "118": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "13ebe744-8bc4-49db-b5cb-629570bd8117": {
+                "dev_id": 116
+            },
+            "1d9e158a-2812-4c1a-96b1-62d295cfb317": {
+                "dev_id": 113
+            },
+            "67c5637c-7d59-406e-b8d7-c49d19e79925": {
+                "dev_id": 115
+            },
+            "8410b8f0-0d7f-4f03-90e5-51f894244975": {
+                "dev_id": 118
+            },
+            "8f871012-f6c8-4826-9194-429bae3b22c3": {
+                "dev_id": 114
+            },
+            "be665b99-e0cf-4252-8a4e-9b1753ac6cd1": {
+                "dev_id": 117
+            }
+        },
+        "references": {}
+    }
+}

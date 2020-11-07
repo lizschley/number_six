@@ -3,7 +3,10 @@
     "title": "",
     "note": "",
     "ordered": "",
-    "standalone": ""
+    "standalone": "",
+    "category_id": null,
+    "short_name": "",
+    "cat_sort": null
   },
   "references": [
      {
