@@ -187,7 +187,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         if where is None:
             print(f'No where for key=={key}, therefore not editing existing records{self.file_data}')
             return
-        return ParaDbUpdatePrep.complete_query_from_constants() + ' ' + where
+        query = ParaDbUpdatePrep.complete_query_from_constants()
+        query += where + ' order by c.id, g.cat_sort, gp.order'
+        return query
 
     @staticmethod
     def complete_query_from_constants():
@@ -395,6 +397,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group['slug'] = row.group_slug
         group['note'] = row.group_note
         group['category_id'] = row.group_category_id
+        group['short_name'] = row.group_short_name
+        group['cat_sort'] = row.group_sort
         self.output_data['groups'].append(group)
         if self.run_as_prod:
             self.run_as_prod_lookup('groups', row.group_id, row.group_slug)

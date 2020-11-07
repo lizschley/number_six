@@ -47,7 +47,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         assign_title, for example title; paragraph displayer has no concept of group
         '''
         category = self.input_data['category']
-        self.title = category['title'].strip()
+        self.title = '' if category['title'].strip() in ('resume') else category['title'].strip()
 
     def assign_groups(self):
         '''
@@ -118,8 +118,9 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :param ref_links: links in html format for the references
         :type ref_links: list of strings
         '''
+        title = '' if group['note'].strip() == 'no-title-display' else group['title']
         return {
-            'title': group['title'],
+            'title': title,
             'paragraphs': para_helpers.paragraphs_for_category_pages(paragraphs),
             'group_div_id': group['group_div_id'],
             'group_div_class': group['group_div_class'],
