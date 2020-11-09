@@ -6,6 +6,7 @@
 
 import json
 import os
+from copy import deepcopy
 from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
@@ -13,6 +14,8 @@ import constants.scripts as constants
 
 BEG_LINK_TEXT = '|beg|'
 END_LINK_TEXT = '|end|'
+RESUME = 'resume'
+NOT_RESUME = ('exercise', 'flashcard')
 
 
 def create_link(url, link_text):
@@ -329,8 +332,42 @@ def treat_like_production(process_data):
     '''
     return process_data['is_prod'] or process_data['run_as_prod']
 
+def flashcard_paragraph_layout(paras, collapse_id, cat_type='flashcard'):
+    '''
+    flashcard_paragraph_layout this will display the first paragraph and then do collapse for the other
+    paragraphs
 
-def paragraphs_for_category_pages(paragraphs, note_after_subtitle=True):
+    :param paragraphs: array of paragraphs
+    :type paragraphs: list
+    '''
+    first_para = paras.pop(0)
+    html_output = format_one_para(first_para, cat_type)
+    html_output += flashcard_wrap_answer(paras, collapse_id)
+    return html_output
+
+
+def flashcard_wrap_answer(paragraphs, collapse_id, cat_type='flashcard'):
+    '''
+    flashcard_wrap_answer wraps the answers in an accordian wrapper
+
+    :param paragraphs: all the paragraphs minus the first one
+    :type paragraphs: list of dicts
+    :param collapse_id: the id of the collapsable div
+    :type collapse_id: str
+    :param cat_type: type of cateogory, this should always be flashcard, defaults to 'flashcard'
+    :type cat_type: str, optional
+    '''
+    return('<div id="accordion">'
+           '<div class="card">'
+           '<div class="card-header collapsed card-link" data-toggle="collapse"'
+           f'data-target="#{collapse_id}"">'
+           '<div>Show Answer</div></div>'
+           f'<div id={collapse_id} class="collapse" data-parent="#accordion">'
+           f'<div class="card-body"><div>{paragraphs_for_category_pages(paragraphs, cat_type)}</div>'
+           '</div></div>')
+
+
+def paragraphs_for_category_pages(paragraphs, cat_type):
     '''
     paragraphs_for_category_pages concatenates paragraphs into a string
 
@@ -341,15 +378,20 @@ def paragraphs_for_category_pages(paragraphs, note_after_subtitle=True):
     '''
     html_output = ''
     for para in paragraphs:
-        if para['subtitle']:
-            html_output += f'<h5><strong>{para["subtitle"]}</strong></h5>'
-        if para['subtitle_note'] and note_after_subtitle:
-            html_output += f'<p>{para["subtitle_note"]}</p>'
-        if para['image_path']:
-            html_output += '<img class="' + para['image_classes'] + '" '
-            html_output += 'src="' + f'static {para["image_path"]}" '
-            html_output += f'alt="{para.image_alt}">'
-        html_output += para['text']
-        if para['subtitle_note'] and not note_after_subtitle:
-            html_output += f'<p>{para["subtitle_note"]}</p>'
+        html_output += format_one_para(para, cat_type)
+    return html_output
+
+def format_one_para(para, cat_type):
+    html_output = ''
+    if para['subtitle']:
+        html_output += f'<h5><strong>{para["subtitle"]}</strong></h5>'
+    if para['subtitle_note'] and cat_type in NOT_RESUME:
+        html_output += f'<p>{para["subtitle_note"]}</p>'
+    if para['image_path']:
+        html_output += '<img class="' + para['image_classes'] + '" '
+        html_output += 'src="' + f'static {para["image_path"]}" '
+        html_output += f'alt="{para.image_alt}">'
+    html_output += para['text']
+    if para['subtitle_note'] and cat_type == RESUME:
+        html_output += f'<p>{para["subtitle_note"]}</p>'
     return html_output

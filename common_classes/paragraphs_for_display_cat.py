@@ -119,9 +119,17 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :type ref_links: list of strings
         '''
         title = '' if group['note'].strip() == 'no-title-display' else group['title']
+        cat_type = self.input_data['category']['category_type']
+        if self.is_flashcard():
+            title = 'Question: ' + title
+            collapse_id = group['group_div_id'] + '_collapse'
+            para_html = para_helpers.flashcard_paragraph_layout(paragraphs, collapse_id)
+        else:
+            para_html = para_helpers.paragraphs_for_category_pages(paragraphs, cat_type)
+
         return {
             'title': title,
-            'paragraphs': para_helpers.paragraphs_for_category_pages(paragraphs),
+            'paragraphs': para_html,
             'group_div_id': group['group_div_id'],
             'group_div_class': group['group_div_class'],
             'ref_links': ref_links, }
@@ -174,7 +182,22 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         if self.is_flashcard():
             self.hidden_group_divs += prefix + group_div_id
         else:
-            link_text = group['group_identifier']
-            link = f'<a href="#" data-identifier={group_div_id} class="category_group">{link_text}</a>'
-            self.side_menu += prefix + link
+            self.assign_side_menu(prefix, link_text, group_div_id)
         return group
+
+    def assign_side_menu(self, prefix, link_text, group_div_id):
+        '''
+        assign_side_menu is the side menu used to select which group of paragraphs to display for
+        a given category
+
+        :param prefix: depending on which category this is the divider between group identifiers
+        :type prefix: str
+        :param link_text: is the text that displays on the sidemenu
+        :type link_text: str
+        :param group_div_id: is the id for the div to show or hide
+        :type group_div_id: str
+        '''
+        menu_id = group_div_id + '_menu'
+        link = (f'<a href="#" id={menu_id} data-identifier={group_div_id} class="category_group">'
+                f'{link_text}</a>')
+        self.side_menu += prefix + link

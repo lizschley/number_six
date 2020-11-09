@@ -1,6 +1,5 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-import pprint
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
@@ -38,9 +37,10 @@ class ParagraphsForDisplay(object):
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
-        print('-----------------Input Data-------------------------------')
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.input_data)
+        # import pprint
+        # print('-----------------Input Data-------------------------------')
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(self.input_data)
 
         if self.input_data is None:
             sys.exit(f'did not retrieve data with these args: {kwargs}')
