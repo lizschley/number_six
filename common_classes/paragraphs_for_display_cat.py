@@ -27,7 +27,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         # This is the output (along with the title)
         self.groups = []
         self.side_menu = ''
-        self.hidden_group_divs = ''
+        self.hidden_flashcard_divs = ''
 
     def format_data_for_display(self):
         '''
@@ -144,7 +144,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         display = {'title': self.title,
                    'groups': self.groups, }
         if self.is_flashcard():
-            display['hidden_group_divs'] = self.hidden_group_divs
+            display['hidden_flashcard_divs'] = self.hidden_flashcard_divs
         else:
             display['side_menu'] = self.side_menu
         return display
@@ -180,7 +180,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         group['group_div_id'] = group_div_id
         group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
         if self.is_flashcard():
-            self.hidden_group_divs += prefix + group_div_id
+            self.hidden_flashcard_divs += prefix + group_div_id
         else:
             self.assign_side_menu(prefix, link_text, group_div_id)
         return group

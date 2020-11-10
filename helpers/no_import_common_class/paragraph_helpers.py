@@ -123,8 +123,8 @@ def add_paragraphs_by_group_to_context(context, paragraphs):
     context['title'] = paragraphs['title']
     if 'side_menu' in paragraphs.keys():
         context['side_menu'] = paragraphs['side_menu']
-    elif 'hidden_group_divs' in paragraphs.keys():
-        context['hidden_group_divs'] = paragraphs['hidden_group_divs']
+    elif 'hidden_flashcard_divs' in paragraphs.keys():
+        context['hidden_flashcard_divs'] = paragraphs['hidden_flashcard_divs']
     context['groups'] = paragraphs['groups']
     return context
 

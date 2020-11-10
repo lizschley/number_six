@@ -1,22 +1,72 @@
 $(document).ready(function() {
-    show_first_question()
+    group_divs = $('#hidden_flashcard_divs').val()
+    if (group_divs.length > 3) {
+        begin_flashcards(group_divs);
+    }
 })
+function begin_flashcards(group_divs) {
+    group_array = group_divs.split('~');
+    hide_category_group_div_class(group_array);
+    if (group_array.length > 1) {
+        alert('length of array should be 1');
+        new_arrary = group_array.sort(() => Math.random() - 0.5);
+        $('#hidden_flashcard_divs').val(new_array.join('~'));
+    }
+    shift_and_show_question();
+}
 
-function show_first_question() {
-    array_to_pop = $('#')
-    currently_viewing = pop_top()
-    show_one_id_within_class(currently_viewing, '.category_group_div')
+function array_from_flashcard_divs() {
+    group_divs = $('#hidden_flashcard_divs').val()
+    return group_divs.split('~');
+}
+
+function hide_category_group_div_class(group_array){
+    for (idx = 0; idx < group_array.length; idx++) {
+        div_id = '#' + group_array[idx];
+        if (!$(div_id).hasClass('category_group_div')) {
+            $(div_id).addClass('category_group_div');
+        }
+        if (!$(div_id).hasClass('d-none')) {
+            $(div_id).addClass('d-none');
+        }
+    }
+}
+
+function shift_and_show_question() {
+    group_array = array_from_flashcard_divs();
+    currently_showing = group_array.shift();
+    alert(currently_showing)
+    if (!(currently_showing)) {
+        $('#flashcard_message').val('We have run out of questions, click study on top menu to continue.');
+        return;
+    }
+    show_one_id_within_class('#' + currently_showing, '.category_group_div');
+    $('#currently_showing').val(currently_showing);
+    $('#hidden_flashcard_divs').val(group_array.join('~'));
 }
 
 function shuffle_questions() {
+    append_currently_showing_to_groups();
+    group_array = $('#hidden_flashcard_divs').split('~');
+    if (group_array.length < 2) {
+        $('#flashcard_message').val('Not shuffling, because there is only ' + group_array.length + ' questions left');
+        return;
+    }
+    new_arrary = group_array.sort(() => Math.random() - 0.5);
+    $('#hidden_flashcard_divs').val(new_array.join('~'));
+    shift_and_show_question();
 }
 
-function pop_top(array_to_pop) {
+function next_question() {
+    append_currently_showing_to_groups();
+    shift_and_show_question();
 }
 
-function append_to_end(array_to_append, value_to_append) {
-}
-
-function replace_variables(curr_group, curr_group_array){
-
+function append_currently_showing_to_groups() {
+    currently_viewing = $('#currently_showing').val()
+    if (currently_showing) {
+        group_array_string = $('#hidden_flashcard_divs')
+        $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing)
+        $('#currently_showing').val('')
+    }
 }
