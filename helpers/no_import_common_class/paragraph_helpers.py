@@ -331,7 +331,7 @@ def treat_like_production(process_data):
     '''
     return process_data['is_prod'] or process_data['run_as_prod']
 
-def flashcard_paragraph_layout(paras, collapse_id, cat_type='flashcard'):
+def flashcard_paragraph_layout(paras, collapse_id, ref_links, cat_type='flashcard'):
     '''
     flashcard_paragraph_layout this will display the first paragraph and then do collapse for the other
     paragraphs
@@ -341,11 +341,11 @@ def flashcard_paragraph_layout(paras, collapse_id, cat_type='flashcard'):
     '''
     first_para = paras.pop(0)
     html_output = format_one_para(first_para, cat_type)
-    html_output += flashcard_wrap_answer(paras, collapse_id)
+    html_output += flashcard_wrap_answer(paras, collapse_id, ref_links)
     return html_output
 
 
-def flashcard_wrap_answer(paragraphs, collapse_id, cat_type='flashcard'):
+def flashcard_wrap_answer(paragraphs, collapse_id, ref_links, cat_type='flashcard'):
     '''
     flashcard_wrap_answer wraps the answers in an accordian wrapper
 
@@ -362,11 +362,12 @@ def flashcard_wrap_answer(paragraphs, collapse_id, cat_type='flashcard'):
            f'data-target="#{collapse_id}"">'
            '<div>Show Answer</div></div>'
            f'<div id={collapse_id} class="collapse" data-parent="#accordion">'
-           f'<div class="card-body"><div>{paragraphs_for_category_pages(paragraphs, cat_type)}</div>'
+           '<div class="card-body"><div>'
+           f'{paragraphs_for_category_pages(paragraphs, cat_type, ref_links)}</div>'
            '</div></div>')
 
 
-def paragraphs_for_category_pages(paragraphs, cat_type):
+def paragraphs_for_category_pages(paragraphs, cat_type, ref_links=''):
     '''
     paragraphs_for_category_pages concatenates paragraphs into a string
 
@@ -378,6 +379,9 @@ def paragraphs_for_category_pages(paragraphs, cat_type):
     html_output = ''
     for para in paragraphs:
         html_output += format_one_para(para, cat_type)
+    if cat_type == 'flashcard':
+        html_output += '<h5>References</h5>'
+        html_output += ref_links
     return html_output
 
 def format_one_para(para, cat_type):

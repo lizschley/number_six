@@ -123,7 +123,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         if self.is_flashcard():
             title = 'Question: ' + title
             collapse_id = group['group_div_id'] + '_collapse'
-            para_html = para_helpers.flashcard_paragraph_layout(paragraphs, collapse_id)
+            para_html = para_helpers.flashcard_paragraph_layout(paragraphs, collapse_id, ref_links)
         else:
             para_html = para_helpers.paragraphs_for_category_pages(paragraphs, cat_type)
 
