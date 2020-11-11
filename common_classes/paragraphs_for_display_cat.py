@@ -132,7 +132,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
             'paragraphs': para_html,
             'group_div_id': group['group_div_id'],
             'group_div_class': group['group_div_class'],
-            'ref_links': ref_links, }
+            'ref_links': '' if self.is_flashcard() else ref_links}
 
     def output_for_display(self):
         '''

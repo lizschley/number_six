@@ -17,10 +17,6 @@
             {% if group.paragraphs %}
                 {{ group.paragraphs | safe }}
             {% endif %}
-            {% if group.ref_links %}
-                <h4>References</h4>
-                {{ group.ref_links | safe }}
-            {% endif %}
         </div>
     {% endfor %}
 {% endblock %}

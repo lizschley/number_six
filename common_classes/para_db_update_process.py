@@ -46,7 +46,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.validate_input_keys()
         self.create_record_loop()
         self.update_record_loop()
-        self.add_or_delete_associations()
+        if self.updating:
+            self.add_or_delete_associations()
         printer = pprint.PrettyPrinter(indent=1, width=120)
         printer.pprint(self.process_data)
 
@@ -128,8 +129,6 @@ class ParaDbUpdateProcess(ParaDbMethods):
         returned_record = self.find_or_create_record(class_, find_dict, create_dict)
         found = returned_record['found']
         record = returned_record['record']
-        # Todo: find_or_create/in ParaDbMethods: find print output and update return type documentation
-        print(f'Need to update find or create with correct return type: {type(record)} ')
         if len(unique_fields) == 1:
             self.assign_to_process_data(top_level_key, self.ensure_dictionary(class_, record),
                                         unique_fields[0], 'create', found)

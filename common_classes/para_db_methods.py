@@ -158,7 +158,13 @@ class ParaDbMethods:
         :return: queryset - containing instance of given model (could be list, depending on find_dict)
         :rtype: queryset
         '''
-        return class_.objects.get(**find_dict)
+        try:
+            return_obj = class_.objects.get(**find_dict)
+        except class_.DoesNotExist:
+            if self.updating:
+                raise
+            return_obj = find_dict
+        return return_obj
 
     # Todo: Haven't written test for this yet
     def delete_record(self, class_, find_dict):
