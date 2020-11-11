@@ -5,15 +5,15 @@ $(document).ready(function() {
         var subtitle = this.getAttribute('data-subtitle');
         $.ajax({
             type: 'GET',
-            url: 'para_by_subtitle',
+            url: '/projects/study/paragraphs/para_by_subtitle',
             data: {'subtitle' : subtitle},
             success: function (response) {
                  var paragraph = response['paragraph'];
                  var subtitle  = paragraph['subtitle'];
                  var subtitle_note = paragraph['subtitle_note'];
-                 var para = paragraph['text'];
+                 var para = image_html(paragraph['image_path']) + paragraph['text'];
                  if (subtitle_note) {
-                    para = subtitle_note + ' ' + para;
+                    para = subtitle_note + ' ' + image_html + para
                  }
                  if (paragraph['references']) {
                     para = para + '<h5>References</h5>' + paragraph['references'];
@@ -30,3 +30,20 @@ $(document).ready(function() {
         })
     })
 })
+
+function image_html(image_path) {
+    console.log('in image link ' + image_path);
+    if (!image_path) return '';
+    var image_html = '<div class="text-center">'
+    image_html += '<img class="img-fluid" '
+    image_html += 'src="/static/' + image_path + '" '
+    image_html += 'alt="' + alt_from_path(image_path) + '">'
+    image_html += '</div>'
+    return image_html
+}
+
+function alt_from_path(image_path) {
+    temp = image_path.split('.')
+    temp = temp[0].split('/')
+    return temp[temp.length - 1]
+}

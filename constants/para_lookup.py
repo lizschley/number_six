@@ -2,7 +2,8 @@
 
 IMAGE_INFO_LOOKUP = {
     'default': {'classes': 'img-fluid  float-sm-left px-2'},
-    'tall-skinny': {'classes': 'img-fluid px-2 float-sm-left tall-skinny'}
+    'tall-skinny': {'classes': 'img-fluid px-2 float-sm-left tall-skinny'},
+    'question': {'classes': 'img-fluid px-2'}
 }
 
 '''Used so that links do not need to exactly match subtitiles to be used in single para lookup'''

@@ -6,7 +6,6 @@
 
 import json
 import os
-from copy import deepcopy
 from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
@@ -388,9 +387,11 @@ def format_one_para(para, cat_type):
     if para['subtitle_note'] and cat_type in NOT_RESUME:
         html_output += f'<p>{para["subtitle_note"]}</p>'
     if para['image_path']:
+        html_output += '<div class="text-center">'
         html_output += '<img class="' + para['image_classes'] + '" '
-        html_output += 'src="' + f'static {para["image_path"]}" '
-        html_output += f'alt="{para.image_alt}">'
+        html_output += 'src="/static/' + para['image_path'] + '" '
+        html_output += 'alt="' + para['image_alt'] + '">'
+        html_output += '</div>'
     html_output += para['text']
     if para['subtitle_note'] and cat_type == RESUME:
         html_output += f'<p>{para["subtitle_note"]}</p>'
