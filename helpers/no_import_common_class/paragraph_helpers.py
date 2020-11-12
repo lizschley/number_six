@@ -10,6 +10,9 @@ from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
 
+BEG_LINK_TEXT = '|beg|'
+END_LINK_TEXT = '|end|'
+
 
 def create_link(url, link_text):
     '''
@@ -166,13 +169,13 @@ def loop_through_text(para_text, from_ajax):
     :return: para_text with the links or para_text with the indicators stripped
     :rtype: str
     '''
-    pieces = para_text.split(BEG_MODAL_LINK_TEXT)
+    pieces = para_text.split(BEG_LINK_TEXT)
     para_piece_list = []
     for piece in pieces:
-        if END_MODAL_LINK_TEXT not in piece:
+        if END_LINK_TEXT not in piece:
             para_piece_list.append(piece)
         else:
-            sub_pieces = piece.split(END_MODAL_LINK_TEXT)
+            sub_pieces = piece.split(END_LINK_TEXT)
             para_piece_list.append(ajax_link(sub_pieces[0], from_ajax))
             if len(sub_pieces) > 1:
                 para_piece_list.append(sub_pieces[1])
