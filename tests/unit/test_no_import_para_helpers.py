@@ -77,12 +77,12 @@ def test_replace_ajax_link_indicators(para_with_indicators, from_ajax):
     assert return_para_correct(return_para, from_ajax)
 
 
-@pytest.mark.parametrize('substring', [('data-subtitle="longer text that is the actual subtitle"'),
-                                       ('>short link text</a>'),
+@pytest.mark.parametrize('substring', [('data-subtitle="testing text is actual subtitle not link_text"'),
+                                       ('>test link text</a>'),
                                        ('data-subtitle="sub_2"'),
                                        ('>sub_2</a>')])
 def test_substitute_real_subtitle_ajax_link(substring):
-    start_para = 'preceding |beg|short link text|end| inbetween text |beg|sub_2|end| following text'
+    start_para = 'preceding |beg|test link text|end| inbetween text |beg|sub_2|end| following text'
     fullstring = para_helper.replace_ajax_link_indicators(start_para, False)
     helper.assert_in_string(fullstring, substring)
 

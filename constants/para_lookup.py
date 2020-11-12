@@ -8,5 +8,6 @@ IMAGE_INFO_LOOKUP = {
 
 '''Used so that links do not need to exactly match subtitiles to be used in single para lookup'''
 SUBTITLE_LOOKUP = {
+    'test link text': 'testing text is actual subtitle not link_text',
     'Chinese Holly': 'Ilex-cornuta; Chinese Holly, Horned Holly',
 }
