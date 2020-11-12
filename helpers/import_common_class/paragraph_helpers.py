@@ -1,6 +1,7 @@
 '''These are methods designed for use outside of the common classes.  The file
    imports the common classes, creating a risk of circluar dependencies.'''
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import helpers.no_import_common_class.category_helpers as cat_helper
 import helpers.no_import_common_class.utilities as utils
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
@@ -58,7 +59,7 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
         paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
 
     if utils.key_in_dictionary(paragraphs, 'groups'):
-        context = para_helper.add_paragraphs_by_group_to_context(context, paragraphs)
+        context = cat_helper.add_paragraphs_by_group_to_context(context, paragraphs)
     else:
         paragraphs = add_collapse_variables(paragraphs)
         context = para_helper.add_paragraphs_to_context(context, paragraphs)

@@ -1,6 +1,7 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
+import helpers.no_import_common_class.category_helpers as cat_helpers
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
@@ -123,9 +124,9 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         if self.is_flashcard():
             title = 'Question: ' + title
             collapse_id = group['group_div_id'] + '_collapse'
-            para_html = para_helpers.flashcard_paragraph_layout(paragraphs, collapse_id, ref_links)
+            para_html = cat_helpers.flashcard_paragraph_layout(paragraphs, collapse_id, ref_links)
         else:
-            para_html = para_helpers.paragraphs_for_category_pages(paragraphs, cat_type)
+            para_html = cat_helpers.paragraphs_for_category_pages(paragraphs, cat_type)
 
         return {
             'title': title,
