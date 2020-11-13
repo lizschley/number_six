@@ -228,7 +228,8 @@ def add_image_information(para):
         para['image_alt'] = ''
         para['image_classes'] = ''
         return para
-    para['image_alt'] = os.path.splitext(para['image_path'])[0]
+    alt_array = os.path.splitext(para['image_path'])[0].split('/')
+    para['image_alt'] = alt_array[-1]
     info = lookup.IMAGE_INFO_LOOKUP[para['image_info_key']]
     print(f'info=={info}')
     para['image_classes'] = info['classes']
