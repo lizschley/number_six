@@ -2,7 +2,6 @@
     for any page that either has only one group or that does not display by group.'''
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-import helpers.no_import_common_class.paragraph_helpers as para_helpers
 
 
 class ParagraphsForDisplayOne(ParagraphsForDisplay):
@@ -56,16 +55,7 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         1. append the paragraph values needed with the keys that are expected
         2. add the reference links that are associated with the given paragraph
         '''
-        inline_args = ParagraphsForDisplay.INLINE_ARGS
-        ajax_args = ParagraphsForDisplay.AJAX_ARGS
-        ajax_args['from_ajax'] = from_ajax
-        for para in self.input_data['paragraphs']:
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
-                                                                para['text'], **inline_args)
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
-                                                                para['text'], **ajax_args)
-            para = para_helpers.add_image_information(para)
-            self.paragraphs.append(self.paragraph(para))
+        self.paragraphs = self.paragraphs_links_and_images(self.input_data['paragraphs'], from_ajax)
         self.add_ref_links_to_paragraphs()
 
     def output_single_para_display(self, subtitle):

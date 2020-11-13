@@ -1,6 +1,5 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-import helpers.no_import_common_class.paragraph_helpers as para_helpers
 import helpers.no_import_common_class.category_helpers as cat_helpers
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
@@ -60,24 +59,9 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
             group = data['group']
             group = self.assign_category_div_variables(group, prefix)
             prefix = '~' if self.is_flashcard() else '<br>'
-            paragraphs = self.assign_paragraph_list(data['paragraphs'])
+            paragraphs = self.paragraphs_links_and_images(data['paragraphs'])
             ref_links = self.assign_ref_links(data['link_text'])
             self.groups.append(self.output_group(group, paragraphs, ref_links))
-
-    def assign_paragraph_list(self, in_para_list):
-        ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
-        out_para_list = []
-        inline_args = ParagraphsForDisplay.INLINE_ARGS
-        ajax_args = ParagraphsForDisplay.AJAX_ARGS
-
-        for para in in_para_list:
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
-                                                                para['text'], **inline_args)
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
-                                                                para['text'], **ajax_args)
-            para = para_helpers.add_image_information(para)
-            out_para_list.append(self.paragraph(para))
-        return out_para_list
 
     def assign_ref_links(self, link_text_list):
         '''
