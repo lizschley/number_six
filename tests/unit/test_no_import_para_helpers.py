@@ -6,6 +6,7 @@ import helpers.no_import_common_class.lookup_form_helpers as form_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import testing.data.list_constants as list_data
 import testing.helpers.testing_helpers as helper
+from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
 @pytest.fixture()
@@ -73,7 +74,11 @@ def test_format_group_id(group_id):
 
 @pytest.mark.parametrize('from_ajax', [(True), (False)])
 def test_replace_ajax_link_indicators(para_with_indicators, from_ajax):
-    return_para = para_helper.replace_ajax_link_indicators(para_with_indicators, from_ajax)
+    ajax_args = ParagraphsForDisplay.AJAX_ARGS
+    ajax_args['from_ajax'] = from_ajax
+    return_para = para_helper.replace_link_indicators(para_helper.ajax_link,
+                                                      para_with_indicators, **ajax_args)
+
     assert return_para_correct(return_para, from_ajax)
 
 
@@ -83,7 +88,9 @@ def test_replace_ajax_link_indicators(para_with_indicators, from_ajax):
                                        ('>sub_2</a>')])
 def test_substitute_real_subtitle_ajax_link(substring):
     start_para = 'preceding |beg|test link text|end| inbetween text |beg|sub_2|end| following text'
-    fullstring = para_helper.replace_ajax_link_indicators(start_para, False)
+    ajax_args = ParagraphsForDisplay.AJAX_ARGS
+    ajax_args['from_ajax'] = False
+    fullstring = para_helper.replace_link_indicators(para_helper.ajax_link, start_para, **ajax_args)
     helper.assert_in_string(fullstring, substring)
 
 
@@ -99,10 +106,11 @@ def return_para_correct(ret_text, from_ajax):
         expected_text = 'preceding sub_1 inbetween text sub_2 sub_3 following text'
     else:
         print(f'else return text == {ret_text}')
-        expected_text = ('preceding '
-                         '<a href="#" data-subtitle="sub_1" class="para_by_subtitle modal_popup_link">sub_1</a> '
-                         'inbetween text '
-                         '<a href="#" data-subtitle="sub_2" class="para_by_subtitle modal_popup_link">sub_2</a> '
-                         '<a href="#" data-subtitle="sub_3" class="para_by_subtitle modal_popup_link">sub_3</a> '
-                         'following text')
+        expected_text = (
+            'preceding '
+            '<a href="#" data-subtitle="sub_1" class="para_by_subtitle modal_popup_link">sub_1</a> '
+            'inbetween text '
+            '<a href="#" data-subtitle="sub_2" class="para_by_subtitle modal_popup_link">sub_2</a> '
+            '<a href="#" data-subtitle="sub_3" class="para_by_subtitle modal_popup_link">sub_3</a> '
+            'following text')
     return ret_text == expected_text

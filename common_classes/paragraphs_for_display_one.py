@@ -56,12 +56,17 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         1. append the paragraph values needed with the keys that are expected
         2. add the reference links that are associated with the given paragraph
         '''
-
+        inline_args = ParagraphsForDisplay.INLINE_ARGS
+        ajax_args = ParagraphsForDisplay.AJAX_ARGS
+        ajax_args['from_ajax'] = from_ajax
         for para in self.input_data['paragraphs']:
-            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
+                                                                para['text'], **inline_args)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
+                                                                para['text'], **ajax_args)
             para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
-        self.add_links_to_paragraphs()
+        self.add_ref_links_to_paragraphs()
 
     def output_single_para_display(self, subtitle):
         '''

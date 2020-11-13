@@ -9,9 +9,7 @@ import os
 from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
-
-BEG_LINK_TEXT = '|beg|'
-END_LINK_TEXT = '|end|'
+import helpers.no_import_common_class.utilities as utils
 
 
 def create_link(url, link_text):
@@ -127,6 +125,78 @@ def check_for_batch_args(args, subs):
     return [i for i in args if subs in i]
 
 
+def replace_link_indicators(link_function, para_text, **kwargs):
+    '''
+    replace_link_indicators replaces the indicators with html links
+    this is a convenience in writing text paragraphs that makes things easier as well as offering
+    consistency
+
+    kwargs always have #s 1 & 2, but #3, from_ajax, is optional:
+    1. Paragraph text (para_text), which is the text in the paragraph
+    2. Beginning and ending link indicators, which enclose the key to the link information within
+       strings that let you know the type of link (modal or reference)
+    3. From ajax is a boolean indicating whether or not to display a link or to simply strip the
+       indicators
+
+    :param link_function: function that is called to actually create the link
+    :type function
+    :param kwargs have different possibilities, see above
+    :type dict
+    '''
+    new_args = {}
+    if utils.key_in_dictionary(kwargs, 'from_ajax'):
+        new_args['from_ajax'] = kwargs['from_ajax']
+    para_piece_list = []
+    pieces = para_text.split(kwargs['beg_link'])
+    for piece in pieces:
+        if kwargs['end_link'] not in piece:
+            para_piece_list.append(piece)
+        else:
+            sub_pieces = piece.split(kwargs['end_link'])
+            new_args['lookup_key'] = sub_pieces[0]
+            para_piece_list.append(link_function(**new_args))
+            if len(sub_pieces) > 1:
+                para_piece_list.append(sub_pieces[1])
+    return ''.join(para_piece_list)
+
+
+def ajax_link(**kwargs):
+    '''
+    ajax_link This creates an ajax link: looks up single para by subtitle and displays result in modal
+
+    :param orig_subtitle: This will be the link text, though it may not be the actual subtitle
+    :type orig_subtitle: str
+    :param from_ajax: True if displaying text that has link indicators - avoiding links with modals
+    :type from_ajax: bool
+    :return: paragraph with link indicators turned into modal link or has link indicators stripped out
+    :rtype: dict
+    '''
+    link_text = kwargs['lookup_key']
+    from_ajax = kwargs.get('from_ajax', False)
+    if from_ajax:
+        return link_text
+    beg_link = '<a href="#" data-subtitle="'
+    mid_link = '" class="para_by_subtitle modal_popup_link">'
+    end_link = '</a>'
+    subtitle = subtitle_lookup(link_text)
+    return beg_link + subtitle + mid_link + link_text + end_link
+
+
+def inline_link(**kwargs):
+    '''
+    inline_link creates a standard link with a class of reference_link.
+
+    :param slug: slug for the reference to use for lookup, so we have ability to update link_text
+    :type slug: string
+    :return: html link within text
+    :rtype: string
+    '''
+    link = lookup.INLINE_LINK_LOOKUP[kwargs['lookup_key']]
+    url = link['url']
+    link_text = link['link_text']
+    return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
+
+
 def subtitle_lookup(orig):
     '''
     This is used to have ajax links for single paragraphs with long subtitles without
@@ -138,70 +208,6 @@ def subtitle_lookup(orig):
     :rtype: str
     '''
     return lookup.SUBTITLE_LOOKUP[orig] if orig in lookup.SUBTITLE_LOOKUP.keys() else orig
-
-
-def replace_ajax_link_indicators(para_text, from_ajax):
-    '''
-    replace_ajax_link_indicators -> contains indicators to say where I want links to definitions
-    or other related standalone paragraphs that are in the database.  The look up is always
-    by subtitle, though if the subtitle is too long, the link_text may be shorter.
-    In that case the code finds the subtitle using a lookup table.
-
-    :param para_text: paragraph['text']
-    :type para_text: str
-    :param from_ajax: If the para_text is from a ajax modal, just strip the indicators.
-    :type from_ajax: bool
-    :return: new para_text with the ajax modal link or the link indicators stripped
-    :rtype: dict
-    '''
-    para_text = loop_through_text(para_text, from_ajax)
-    return para_text
-
-
-def loop_through_text(para_text, from_ajax):
-    '''
-    loop_through_text by splitting it using the indators: |beg| and |end|
-
-    :param para_text: paragraph['text']
-    :type para_text: str
-    :param from_ajax: if the call is from ajax, then just strip the indicators
-    :type from_ajax: bool
-    :return: para_text with the links or para_text with the indicators stripped
-    :rtype: str
-    '''
-    pieces = para_text.split(BEG_LINK_TEXT)
-    para_piece_list = []
-    for piece in pieces:
-        if END_LINK_TEXT not in piece:
-            para_piece_list.append(piece)
-        else:
-            sub_pieces = piece.split(END_LINK_TEXT)
-            para_piece_list.append(ajax_link(sub_pieces[0], from_ajax))
-            if len(sub_pieces) > 1:
-                para_piece_list.append(sub_pieces[1])
-    return ''.join(para_piece_list)
-
-
-def ajax_link(orig_subtitle, from_ajax):
-    '''
-    ajax_link This creates an ajax link: looks up single para by subtitle and displays result in modal
-
-    :param orig_subtitle: This will be the link text, though it may not be the actual subtitle
-    :type orig_subtitle: str
-    :param from_ajax: True if displaying text that has link indicators - avoiding links with modals
-    :type from_ajax: bool
-    :return: paragraph with link indicators turned into modal link or has link indicators stripped out
-    :rtype: dict
-    '''
-    if from_ajax:
-        return orig_subtitle
-    substitute = lookup.SUBTITLE_LOOKUP
-    beg_link = '<a href="#" data-subtitle="'
-    mid_link = '" class="para_by_subtitle modal_popup_link">'
-    link_text = orig_subtitle
-    end_link = '</a>'
-    subtitle = orig_subtitle if orig_subtitle not in substitute.keys() else substitute[orig_subtitle]
-    return beg_link + subtitle + mid_link + link_text + end_link
 
 
 def add_image_information(para):

@@ -67,8 +67,14 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
     def assign_paragraph_list(self, in_para_list):
         ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
         out_para_list = []
+        inline_args = ParagraphsForDisplay.INLINE_ARGS
+        ajax_args = ParagraphsForDisplay.AJAX_ARGS
+
         for para in in_para_list:
-            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], False)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
+                                                                para['text'], **inline_args)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
+                                                                para['text'], **ajax_args)
             para = para_helpers.add_image_information(para)
             out_para_list.append(self.paragraph(para))
         return out_para_list

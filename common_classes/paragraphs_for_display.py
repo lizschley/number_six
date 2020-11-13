@@ -8,7 +8,7 @@ from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
 
 
-class ParagraphsForDisplay(object):
+class ParagraphsForDisplay:
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views
 
@@ -22,6 +22,10 @@ class ParagraphsForDisplay(object):
     :param object: is formatted by a paragraph retriever object
     :type object: dictionary
     '''
+
+    INLINE_ARGS = {'beg_link': '|beg_ref_slug|', 'end_link': '|end_ref_slug|'}
+    AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
+
     def __init__(self):
         self.title = ''
         self.title_note = ''
@@ -125,16 +129,22 @@ class ParagraphsForDisplay(object):
         '''
         input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
                                                        constants.ORDER_FIELD_FOR_PARAS)
+        inline_args = ParagraphsForDisplay.INLINE_ARGS
+        ajax_args = ParagraphsForDisplay.AJAX_ARGS
+        ajax_args['from_ajax'] = from_ajax
         for para in input_para_list:
-            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
+                                                                para['text'], **inline_args)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
+                                                                para['text'], **ajax_args)
             para = para_helpers.add_image_information(para)
             self.paragraphs.append(self.paragraph(para))
         if self.input_data['para_id_to_link_text']:
-            self.add_links_to_paragraphs()
+            self.add_ref_links_to_paragraphs()
 
-    def add_links_to_paragraphs(self):
+    def add_ref_links_to_paragraphs(self):
         '''
-        add_links_to_paragraphs adds a reference string to each paragraph
+        add_ref_links_to_paragraphs adds a reference string to each paragraph
         '''
         for para in self.paragraphs:
             if self.input_data['para_id_to_link_text'].get(para['id']) is None:
