@@ -3,13 +3,30 @@ $(document).ready(function() {
     if (group_divs.length > 3) {
         begin_flashcards(group_divs);
     }
+
+    $('#next_question_menu').click(function(e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        next_question();
+    })
+
+    $('#remove_question_menu').click(function(e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        shift_and_show_question();
+    })
+
+    $('#shuffle_questions_menu').click(function(e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        shuffle_questions();
+    })
 })
 function begin_flashcards(group_divs) {
     group_array = group_divs.split('~');
     hide_category_group_div_class(group_array);
     if (group_array.length > 1) {
-        alert('length of array should be 1');
-        new_arrary = group_array.sort(() => Math.random() - 0.5);
+        new_array = group_array.sort(() => Math.random() - 0.5);
         $('#hidden_flashcard_divs').val(new_array.join('~'));
     }
     shift_and_show_question();
@@ -35,7 +52,6 @@ function hide_category_group_div_class(group_array){
 function shift_and_show_question() {
     group_array = array_from_flashcard_divs();
     currently_showing = group_array.shift();
-    alert(currently_showing)
     if (!(currently_showing)) {
         $('#flashcard_message').val('We have run out of questions, click study on top menu to continue.');
         return;
@@ -63,10 +79,10 @@ function next_question() {
 }
 
 function append_currently_showing_to_groups() {
-    currently_viewing = $('#currently_showing').val()
+    currently_viewing = $('#currently_showing').val();
     if (currently_showing) {
-        group_array_string = $('#hidden_flashcard_divs')
-        $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing)
-        $('#currently_showing').val('')
+        group_array_string = $('#hidden_flashcard_divs');
+        $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing);
+        $('#currently_showing').val('');
     }
 }
