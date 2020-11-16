@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-9">
             <h2>{{title}}</h2>
-            <h4 id='flashcard_message'></h4>
+            <div id='flashcard_message'></div>
             {% for group in groups %}
                 <div id={{ group.group_div_id }} class={{ group.group_div_class}}>
                     {% if group.title %}

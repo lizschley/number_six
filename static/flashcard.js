@@ -1,8 +1,5 @@
 $(document).ready(function() {
-    group_divs = $('#hidden_flashcard_divs').val()
-    if (group_divs.length > 3) {
-        begin_flashcards(group_divs);
-    }
+    begin_flashcards();
 
     $('#next_question_menu').click(function(e) {
         // preventing from page reload and default actions
@@ -13,6 +10,8 @@ $(document).ready(function() {
     $('#remove_question_menu').click(function(e) {
         // preventing from page reload and default actions
         e.preventDefault();
+        remove_question()
+        console.log('in remove question, about to call shift_and_show_question');
         shift_and_show_question();
     })
 
@@ -22,67 +21,120 @@ $(document).ready(function() {
         shuffle_questions();
     })
 })
-function begin_flashcards(group_divs) {
-    group_array = group_divs.split('~');
-    hide_category_group_div_class(group_array);
+function begin_flashcards() {
+    console.log('starting in begin_flashcards, calling array fromm fc divs')
+    hide_all_category_group_div_class();
+    var group_array = array_from_flashcard_divs()
+    console.log('group_array ==' + group_array)
     if (group_array.length > 1) {
         new_array = group_array.sort(() => Math.random() - 0.5);
         $('#hidden_flashcard_divs').val(new_array.join('~'));
     }
+    console.log('in begin_flashcards, about to call shift_and_show')
     shift_and_show_question();
 }
 
 function array_from_flashcard_divs() {
-    group_divs = $('#hidden_flashcard_divs').val()
+    console.log('in array_from_flashcard_divs')
+    temp = $('#hidden_flashcard_divs').val();
+    group_divs = temp.toString().trim()
+    console.log('group_divs==' + group_divs)
+    if (!group_divs) {
+        return []
+    }
     return group_divs.split('~');
 }
 
-function hide_category_group_div_class(group_array){
-    for (idx = 0; idx < group_array.length; idx++) {
-        div_id = '#' + group_array[idx];
-        if (!$(div_id).hasClass('category_group_div')) {
-            $(div_id).addClass('category_group_div');
-        }
-        if (!$(div_id).hasClass('d-none')) {
-            $(div_id).addClass('d-none');
-        }
+function hide_all_category_group_div_class(){
+    $('.category_group_div').addClass('d-none')
+}
+
+function remove_question(){
+    var temp = $('#hidden_flashcard_divs').val();
+    var curr_divs = temp.toString().trim();
+    var temp = $('#currently_showing').val();
+    var currently_showing = temp.toString().trim()
+    if (!curr_divs && ! currently_showing) {
+        display_not_enough_questions('to remove one');
     }
+    shift_and_show_question();
 }
 
 function shift_and_show_question() {
+    console.log('shift_and_show, calling array_from_flashcard_div')
+    hide_all_category_group_div_class()
     group_array = array_from_flashcard_divs();
-    currently_showing = group_array.shift();
-    if (!(currently_showing)) {
-        $('#flashcard_message').val('We have run out of questions, click study on top menu to continue.');
-        return;
+
+    var currently_showing = ''
+    if (group_array.length > 0) {
+        currently_showing = group_array.shift().toString();
+        console.log('shift_and_show, len > 0 about to show, currently showing ==' + currently_showing)
+        show_one_id_within_class('#' + currently_showing, '.category_group_div');
     }
-    show_one_id_within_class('#' + currently_showing, '.category_group_div');
+    assign_hidden_variables(currently_showing, group_array);
+}
+
+function display_not_enough_questions(operation){
+    var message = 'Not enough questions ' + operation + '. Refresh page or click study on top menu to continue. '
+    alert_message(message);
+}
+
+function assign_hidden_variables(currently_showing, group_array) {
+    var curr_divs = ''
+    if (group_array.length > 0) {
+        curr_divs = group_array.join('~')
+    }
     $('#currently_showing').val(currently_showing);
-    $('#hidden_flashcard_divs').val(group_array.join('~'));
+    $('#hidden_flashcard_divs').val(curr_divs);
 }
 
 function shuffle_questions() {
+    console.log('in shuffle, about to call append_currently_showing_to_groups')
     append_currently_showing_to_groups();
-    group_array = $('#hidden_flashcard_divs').split('~');
+    group_array = array_from_flashcard_divs();
     if (group_array.length < 2) {
-        $('#flashcard_message').val('Not shuffling, because there is only ' + group_array.length + ' questions left');
+        display_not_enough_questions('to shuffle');
         return;
     }
-    new_arrary = group_array.sort(() => Math.random() - 0.5);
+    new_array = group_array.sort(() => Math.random() - 0.5);
     $('#hidden_flashcard_divs').val(new_array.join('~'));
     shift_and_show_question();
 }
 
 function next_question() {
+    temp = $('#hidden_flashcard_divs').val();
+    group_array_string = temp.toString().trim();
+    if (!group_array_string){
+        display_not_enough_questions('to show next');
+        return;
+    }
+    console.log('in next question, about to call append_currently_showing_to_groups');
     append_currently_showing_to_groups();
+    console.log('in next question, about to call shift_and_show_question');
     shift_and_show_question();
 }
 
 function append_currently_showing_to_groups() {
-    currently_viewing = $('#currently_showing').val();
+    var temp = $('#currently_showing').val();
+    var currently_showing = temp.toString()
+    console.log('in append_currently_showing_to_groups, currently showing == ' + currently_showing)
     if (currently_showing) {
-        group_array_string = $('#hidden_flashcard_divs');
-        $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing);
+        temp = $('#hidden_flashcard_divs').val();
+        group_array_string = temp.toString().trim();
+        if (group_array_string) {
+            $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing);
+        } else {
+            $('#hidden_flashcard_divs').val(currently_showing);
+        }
         $('#currently_showing').val('');
+        console.log('in append_currently_showing_to_groups, adding to hidden divs: ' + $('#hidden_flashcard_divs').val());
     }
+}
+
+function alert_message(message) {
+    alert_body = '<div class="alert alert-primary alert-dismissible fade show">'
+    alert_body += '<strong>Note: </strong>' + message
+    alert_body += '<button type="button" class="close" data-dismiss="alert">×</button>'
+    alert_body += '</div>'
+    $('#flashcard_message').html(alert_body)
 }

@@ -169,10 +169,12 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         link_text = group['group_identifier']
         group_div_id = link_text.replace(' ', '_').lower()
         group['group_div_id'] = group_div_id
-        group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
+
         if self.is_flashcard():
+            group['group_div_class'] = 'category_group_div'
             self.hidden_flashcard_divs += prefix + group_div_id
         else:
+            group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
             self.assign_side_menu(prefix, link_text, group_div_id)
         return group
 

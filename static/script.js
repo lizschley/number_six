@@ -29,6 +29,9 @@ $(document).ready(function() {
             }
         })
     })
+
+    $().alert()
+    $().alert('close')
 })
 
 function image_html(image_path) {
