@@ -11,8 +11,6 @@ $(document).ready(function() {
         // preventing from page reload and default actions
         e.preventDefault();
         remove_question()
-        console.log('in remove question, about to call shift_and_show_question');
-        shift_and_show_question();
     })
 
     $('#shuffle_questions_menu').click(function(e) {
@@ -23,11 +21,11 @@ $(document).ready(function() {
 })
 function begin_flashcards() {
     console.log('starting in begin_flashcards, calling array fromm fc divs')
-    hide_all_category_group_div_class();
+    hide_all_flashcard_group_div_class();
     var group_array = array_from_flashcard_divs()
     console.log('group_array ==' + group_array)
     if (group_array.length > 1) {
-        new_array = group_array.sort(() => Math.random() - 0.5);
+        var new_array = group_array.sort(() => Math.random() - 0.5);
         $('#hidden_flashcard_divs').val(new_array.join('~'));
     }
     console.log('in begin_flashcards, about to call shift_and_show')
@@ -36,8 +34,8 @@ function begin_flashcards() {
 
 function array_from_flashcard_divs() {
     console.log('in array_from_flashcard_divs')
-    temp = $('#hidden_flashcard_divs').val();
-    group_divs = temp.toString().trim()
+    var temp = $('#hidden_flashcard_divs').val();
+    var group_divs = temp.toString().trim()
     console.log('group_divs==' + group_divs)
     if (!group_divs) {
         return []
@@ -45,14 +43,14 @@ function array_from_flashcard_divs() {
     return group_divs.split('~');
 }
 
-function hide_all_category_group_div_class(){
-    $('.category_group_div').addClass('d-none')
+function hide_all_flashcard_group_div_class(){
+    $('.flashcard_group_div').addClass('d-none')
 }
 
 function remove_question(){
     var temp = $('#hidden_flashcard_divs').val();
     var curr_divs = temp.toString().trim();
-    var temp = $('#currently_showing').val();
+    temp = $('#currently_showing').val();
     var currently_showing = temp.toString().trim()
     if (!curr_divs && ! currently_showing) {
         display_not_enough_questions('to remove one');
@@ -62,14 +60,13 @@ function remove_question(){
 
 function shift_and_show_question() {
     console.log('shift_and_show, calling array_from_flashcard_div')
-    hide_all_category_group_div_class()
-    group_array = array_from_flashcard_divs();
-
+    hide_all_flashcard_group_div_class()
+    var group_array = array_from_flashcard_divs();
     var currently_showing = ''
     if (group_array.length > 0) {
         currently_showing = group_array.shift().toString();
         console.log('shift_and_show, len > 0 about to show, currently showing ==' + currently_showing)
-        show_one_id_within_class('#' + currently_showing, '.category_group_div');
+        show_one_id_within_class('#' + currently_showing, '.flashcard_group_div');
     }
     assign_hidden_variables(currently_showing, group_array);
 }
@@ -91,19 +88,19 @@ function assign_hidden_variables(currently_showing, group_array) {
 function shuffle_questions() {
     console.log('in shuffle, about to call append_currently_showing_to_groups')
     append_currently_showing_to_groups();
-    group_array = array_from_flashcard_divs();
+    var group_array = array_from_flashcard_divs();
     if (group_array.length < 2) {
         display_not_enough_questions('to shuffle');
         return;
     }
-    new_array = group_array.sort(() => Math.random() - 0.5);
+    var new_array = group_array.sort(() => Math.random() - 0.5);
     $('#hidden_flashcard_divs').val(new_array.join('~'));
     shift_and_show_question();
 }
 
 function next_question() {
-    temp = $('#hidden_flashcard_divs').val();
-    group_array_string = temp.toString().trim();
+    var temp = $('#hidden_flashcard_divs').val();
+    var group_array_string = temp.toString().trim();
     if (!group_array_string){
         display_not_enough_questions('to show next');
         return;
@@ -116,11 +113,11 @@ function next_question() {
 
 function append_currently_showing_to_groups() {
     var temp = $('#currently_showing').val();
-    var currently_showing = temp.toString()
+    var currently_showing = temp.toString().trim()
     console.log('in append_currently_showing_to_groups, currently showing == ' + currently_showing)
     if (currently_showing) {
         temp = $('#hidden_flashcard_divs').val();
-        group_array_string = temp.toString().trim();
+        var group_array_string = temp.toString().trim();
         if (group_array_string) {
             $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing);
         } else {

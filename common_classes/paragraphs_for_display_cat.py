@@ -171,7 +171,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         group['group_div_id'] = group_div_id
 
         if self.is_flashcard():
-            group['group_div_class'] = 'category_group_div'
+            group['group_div_class'] = 'flashcard_group_div'
             self.hidden_flashcard_divs += prefix + group_div_id
         else:
             group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
