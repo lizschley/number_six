@@ -34,8 +34,7 @@ function begin_flashcards() {
 
 function array_from_flashcard_divs() {
     console.log('in array_from_flashcard_divs')
-    var temp = $('#hidden_flashcard_divs').val();
-    var group_divs = temp.toString().trim()
+    var group_divs = current_divs()
     console.log('group_divs==' + group_divs)
     if (!group_divs) {
         return []
@@ -43,19 +42,27 @@ function array_from_flashcard_divs() {
     return group_divs.split('~');
 }
 
+function current_divs(){
+    var temp = $('#hidden_flashcard_divs').val();
+    return temp.toString().trim()
+}
+
 function hide_all_flashcard_group_div_class(){
     $('.flashcard_group_div').addClass('d-none')
 }
 
 function remove_question(){
-    var temp = $('#hidden_flashcard_divs').val();
-    var curr_divs = temp.toString().trim();
-    temp = $('#currently_showing').val();
-    var currently_showing = temp.toString().trim()
-    if (!curr_divs && ! currently_showing) {
+    var group_divs = current_divs()
+    var currently_showing = current_group()
+    if (!group_divs && !currently_showing) {
         display_not_enough_questions('to remove one');
     }
     shift_and_show_question();
+}
+
+function current_group(){
+    var temp = $('#currently_showing').val();
+    return temp.toString().trim()
 }
 
 function shift_and_show_question() {
@@ -64,7 +71,7 @@ function shift_and_show_question() {
     var group_array = array_from_flashcard_divs();
     var currently_showing = ''
     if (group_array.length > 0) {
-        currently_showing = group_array.shift().toString();
+        currently_showing = group_array.shift().toString().trim();
         console.log('shift_and_show, len > 0 about to show, currently showing ==' + currently_showing)
         show_one_id_within_class('#' + currently_showing, '.flashcard_group_div');
     }
@@ -99,9 +106,8 @@ function shuffle_questions() {
 }
 
 function next_question() {
-    var temp = $('#hidden_flashcard_divs').val();
-    var group_array_string = temp.toString().trim();
-    if (!group_array_string){
+    var group_divs = current_divs()
+    if (!group_divs){
         display_not_enough_questions('to show next');
         return;
     }
@@ -112,14 +118,12 @@ function next_question() {
 }
 
 function append_currently_showing_to_groups() {
-    var temp = $('#currently_showing').val();
-    var currently_showing = temp.toString().trim()
+    var currently_showing = current_group();
     console.log('in append_currently_showing_to_groups, currently showing == ' + currently_showing)
     if (currently_showing) {
-        temp = $('#hidden_flashcard_divs').val();
-        var group_array_string = temp.toString().trim();
-        if (group_array_string) {
-            $('#hidden_flashcard_divs').val(group_array_string + '~' + currently_showing);
+        var group_divs = current_divs()
+        if (group_divs) {
+            $('#hidden_flashcard_divs').val(group_divs + '~' + currently_showing);
         } else {
             $('#hidden_flashcard_divs').val(currently_showing);
         }
