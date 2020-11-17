@@ -25,6 +25,10 @@ body {
     color: $modal_popup_color;
   }
 
+  a.selected {
+    color: $textcolor;
+  }
+
   .navbar {
      .nav-link {
          a:hover {

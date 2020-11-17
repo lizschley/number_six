@@ -1,6 +1,6 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-import helpers.no_import_common_class.paragraph_helpers as para_helpers
+import helpers.no_import_common_class.category_helpers as cat_helpers
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
@@ -27,7 +27,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         # This is the output (along with the title)
         self.groups = []
         self.side_menu = ''
-        self.hidden_group_divs = ''
+        self.hidden_flashcard_divs = ''
 
     def format_data_for_display(self):
         '''
@@ -59,18 +59,9 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
             group = data['group']
             group = self.assign_category_div_variables(group, prefix)
             prefix = '~' if self.is_flashcard() else '<br>'
-            paragraphs = self.assign_paragraph_list(data['paragraphs'])
+            paragraphs = self.paragraphs_links_and_images(data['paragraphs'])
             ref_links = self.assign_ref_links(data['link_text'])
             self.groups.append(self.output_group(group, paragraphs, ref_links))
-
-    def assign_paragraph_list(self, in_para_list):
-        ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
-        out_para_list = []
-        for para in in_para_list:
-            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], False)
-            para = para_helpers.add_image_information(para)
-            out_para_list.append(self.paragraph(para))
-        return out_para_list
 
     def assign_ref_links(self, link_text_list):
         '''
@@ -119,12 +110,20 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :type ref_links: list of strings
         '''
         title = '' if group['note'].strip() == 'no-title-display' else group['title']
+        cat_type = self.input_data['category']['category_type']
+        if self.is_flashcard():
+            title = 'Question: ' + title
+            collapse_id = group['group_div_id'] + '_collapse'
+            para_html = cat_helpers.flashcard_paragraph_layout(paragraphs, collapse_id, ref_links)
+        else:
+            para_html = cat_helpers.paragraphs_for_category_pages(paragraphs, cat_type)
+
         return {
             'title': title,
-            'paragraphs': para_helpers.paragraphs_for_category_pages(paragraphs),
+            'paragraphs': para_html,
             'group_div_id': group['group_div_id'],
             'group_div_class': group['group_div_class'],
-            'ref_links': ref_links, }
+            'ref_links': '' if self.is_flashcard() else ref_links}
 
     def output_for_display(self):
         '''
@@ -136,7 +135,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         display = {'title': self.title,
                    'groups': self.groups, }
         if self.is_flashcard():
-            display['hidden_group_divs'] = self.hidden_group_divs
+            display['hidden_flashcard_divs'] = self.hidden_flashcard_divs
         else:
             display['side_menu'] = self.side_menu
         return display
@@ -170,11 +169,28 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         link_text = group['group_identifier']
         group_div_id = link_text.replace(' ', '_').lower()
         group['group_div_id'] = group_div_id
-        group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
+
         if self.is_flashcard():
-            self.hidden_group_divs += prefix + group_div_id
+            group['group_div_class'] = 'flashcard_group_div'
+            self.hidden_flashcard_divs += prefix + group_div_id
         else:
-            link_text = group['group_identifier']
-            link = f'<a href="#" data-identifier={group_div_id} class="category_group">{link_text}</a>'
-            self.side_menu += prefix + link
+            group['group_div_class'] = 'd-none' if prefix else 'category_group_div'
+            self.assign_side_menu(prefix, link_text, group_div_id)
         return group
+
+    def assign_side_menu(self, prefix, link_text, group_div_id):
+        '''
+        assign_side_menu is the side menu used to select which group of paragraphs to display for
+        a given category
+
+        :param prefix: depending on which category this is the divider between group identifiers
+        :type prefix: str
+        :param link_text: is the text that displays on the sidemenu
+        :type link_text: str
+        :param group_div_id: is the id for the div to show or hide
+        :type group_div_id: str
+        '''
+        menu_id = group_div_id + '_menu'
+        link = (f'<a href="#" id={menu_id} data-identifier={group_div_id} class="category_group">'
+                f'{link_text}</a>')
+        self.side_menu += prefix + link

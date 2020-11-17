@@ -1,6 +1,5 @@
 ''' This class outputs a dictionary in a format used to display paragraphs.  It can be used
     for any page that either has only one group or that does not display by group.'''
-import pprint
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
@@ -9,7 +8,7 @@ from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
 
 
-class ParagraphsForDisplay(object):
+class ParagraphsForDisplay:
     '''
     ParagraphsForDisplay is used to create the context for the paragraph display views
 
@@ -23,6 +22,10 @@ class ParagraphsForDisplay(object):
     :param object: is formatted by a paragraph retriever object
     :type object: dictionary
     '''
+
+    INLINE_ARGS = {'beg_link': '|beg_ref_slug|', 'end_link': '|end_ref_slug|'}
+    AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
+
     def __init__(self):
         self.title = ''
         self.title_note = ''
@@ -38,9 +41,10 @@ class ParagraphsForDisplay(object):
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
-        print('-----------------Input Data-------------------------------')
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.input_data)
+        # import pprint
+        # print('-----------------Input Data-------------------------------')
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(self.input_data)
 
         if self.input_data is None:
             sys.exit(f'did not retrieve data with these args: {kwargs}')
@@ -125,16 +129,28 @@ class ParagraphsForDisplay(object):
         '''
         input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
                                                        constants.ORDER_FIELD_FOR_PARAS)
-        for para in input_para_list:
-            para['text'] = para_helpers.replace_ajax_link_indicators(para['text'], from_ajax)
-            para = para_helpers.add_image_information(para)
-            self.paragraphs.append(self.paragraph(para))
+        self.paragraphs = self.paragraphs_links_and_images(input_para_list, from_ajax)
         if self.input_data['para_id_to_link_text']:
-            self.add_links_to_paragraphs()
+            self.add_ref_links_to_paragraphs()
 
-    def add_links_to_paragraphs(self):
+    def paragraphs_links_and_images(self, in_para_list, from_ajax=False):
+        ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
+        out_para_list = []
+        inline_args = ParagraphsForDisplay.INLINE_ARGS
+        ajax_args = ParagraphsForDisplay.AJAX_ARGS
+        ajax_args['from_ajax'] = from_ajax
+        for para in in_para_list:
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
+                                                                para['text'], **inline_args)
+            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
+                                                                para['text'], **ajax_args)
+            para = para_helpers.add_image_information(para)
+            out_para_list.append(self.paragraph(para))
+        return out_para_list
+
+    def add_ref_links_to_paragraphs(self):
         '''
-        add_links_to_paragraphs adds a reference string to each paragraph
+        add_ref_links_to_paragraphs adds a reference string to each paragraph
         '''
         for para in self.paragraphs:
             if self.input_data['para_id_to_link_text'].get(para['id']) is None:
