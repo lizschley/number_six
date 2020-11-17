@@ -1,0 +1,396 @@
+{
+    "groups": [
+        {
+            "cat_sort": 2,
+            "category_id": 2,
+            "id": 2011,
+            "note": " ",
+            "short_name": "Stilt Grass Quesion",
+            "slug": "",
+            "title": "What is the significance and some identifying characterics of this grass?"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 2,
+            "id": 2012,
+            "note": "",
+            "short_name": "Bradford Pear Quesion",
+            "slug": "",
+            "title": "What are these beautiful trees and some facts about them?"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 2,
+            "id": 2013,
+            "note": "",
+            "short_name": "Three Berries Question",
+            "slug": "",
+            "title": "What are these three berry bushes and which are native?"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 2,
+            "id": 2014,
+            "note": "",
+            "short_name": "Mimosa Tree or Sensitive Plant",
+            "slug": "",
+            "title": "Relation between Mimosa Trees and sensitive plants?"
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "",
+            "id": 3000,
+            "image_info_key": "question",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "stilt grass (delete later)",
+            "text": "<p>Focus on distinguishing characteristics and look-alikes.</p>"
+        },
+        {
+            "guid": "",
+            "id": 3001,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "stilt grass (delete later)",
+            "text": "<p>Two great resources</p>"
+        },
+        {
+            "guid": "",
+            "id": 3002,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "bradford peare - qustion",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "",
+            "id": 3003,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "bradford peare - answer",
+            "text": "<p>answer</p>"
+        },
+        {
+            "guid": "",
+            "id": 3004,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "blackberry - question",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "",
+            "id": 3005,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "blackberry - answer",
+            "text": "<p>answer</p>"
+        },
+        {
+            "guid": "",
+            "id": 3006,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "mimosta - question",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "",
+            "id": 3007,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "standalone": false,
+            "subtitle": "mimosa - answer",
+            "text": "<p>answer</p>"
+        }
+    ],
+    "references": [
+        {
+            "id": 4000,
+            "link_text": "BlueRidgePrism_201706_Factsheet_JapaneseStiltgrass",
+            "slug": "",
+            "url": "https://blueridgeprism.org/wp-content/uploads/2017/06/Japanese-Stiltgrass-SAR-5-27-17-VDOF-w-BOX-FINAL.pdf"
+        },
+        {
+            "id": 4001,
+            "link_text": "BlueRidgePrism_202008_Factsheet_BradfordPear",
+            "slug": "",
+            "url": "https://blueridgeprism.org/wp-content/uploads/2020/08/Bradford-Pear-Factsheet-8-24-20-FINAL.pdf"
+        },
+        {
+            "id": 4002,
+            "link_text": "USDA_RubusAllegheniensis",
+            "slug": "",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUAL"
+        },
+        {
+            "id": 4003,
+            "link_text": "USDA_RubusFlagellaris",
+            "slug": "",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUFL"
+        },
+        {
+            "id": 4004,
+            "link_text": "USDA_RubusUrsinus",
+            "slug": "",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUUR"
+        },
+        {
+            "id": 4005,
+            "link_text": "NC_CooperativeExtension_PlantToolbox_RubusAllegheniensis",
+            "slug": "",
+            "url": "https://plants.ces.ncsu.edu/plants/rubus-allegheniensis/"
+        },
+        {
+            "id": 4006,
+            "link_text": "MeyerRachelle_2010_AlbiziaJulibrissin_US_Department_Agriculture",
+            "slug": "",
+            "url": "https://www.fs.fed.us/database/feis/plants/tree/albjul/all.html"
+        },
+        {
+            "id": 4007,
+            "link_text": "RajivGupta_2012_PharmacognReview_MimosaPudica_Overview",
+            "slug": "",
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3459453/"
+        },
+        {
+            "id": 4008,
+            "link_text": "NC_CooperativeExtension_PlantToolbox_RubusPensilvanicus",
+            "slug": "",
+            "url": "https://plants.ces.ncsu.edu/plants/rubus-pensilvanicus/"
+        },
+        {
+            "id": 4009,
+            "link_text": "VA_Forestry_2016_CommonNativeShrubsWoodyVinesVirginia",
+            "slug": "",
+            "url": "http://www.dof.virginia.gov/infopubs/Native-Shrub-ID_2016_pub.pdf"
+        },
+        {
+            "id": 4010,
+            "link_text": "DelewareAgriculture_2008_InvasiveSpeciesAndLookAlike",
+            "slug": "",
+            "url": "https://www.nybg.org/files/scientists/rnaczi/Mistaken_Identity_Final.pdf"
+        }
+
+    ],
+    "paragraph_reference": [
+        {
+            "id": 7000,
+            "paragraph_id": 3001,
+            "reference_id": 4000
+        },
+        {
+            "id": 7001,
+            "paragraph_id": 3001,
+            "reference_id": 4010
+        },
+        {
+            "id": 7002,
+            "paragraph_id": 3003,
+            "reference_id": 4001
+        },
+        {
+            "id": 7003,
+            "paragraph_id": 3005,
+            "reference_id": 4002
+        },
+        {
+            "id": 7004,
+            "paragraph_id": 3005,
+            "reference_id": 4003
+        },        {
+            "id": 7005,
+            "paragraph_id": 3005,
+            "reference_id": 4004
+        },        {
+            "id": 7006,
+            "paragraph_id": 3005,
+            "reference_id": 4005
+        },        {
+            "id": 7007,
+            "paragraph_id": 3005,
+            "reference_id": 4008
+        },        {
+            "id": 7008,
+            "paragraph_id": 3005,
+            "reference_id": 4009
+        },
+        {
+            "id": 7009,
+            "paragraph_id": 3007,
+            "reference_id": 4006
+        },
+        {
+            "id": 7010,
+            "paragraph_id": 3007,
+            "reference_id": 4007
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 2011,
+            "id": 7000,
+            "order": 1,
+            "paragraph_id": 3000
+        },
+        {
+            "group_id": 2011,
+            "id": 70001,
+            "order": 2,
+            "paragraph_id": 3001
+        },
+        {
+            "group_id": 2012,
+            "id": 70002,
+            "order": 1,
+            "paragraph_id": 3002
+        },
+        {
+            "group_id": 2012,
+            "id": 60000,
+            "order": 2,
+            "paragraph_id": 3003
+        },
+        {
+            "group_id": 2013,
+            "id": 9100,
+            "order": 1,
+            "paragraph_id": 3004
+        },
+        {
+            "group_id": 2013,
+            "id": 7777,
+            "order": 2,
+            "paragraph_id": 3005
+        },
+        {
+            "group_id": 2014,
+            "id": 8888,
+            "order": 1,
+            "paragraph_id": 3006
+        },
+        {
+            "group_id": 2014,
+            "id": 9999,
+            "order": 2,
+            "paragraph_id": 3007
+        }
+    ],
+   "record_lookups": {
+        "categories": {
+            "2": "native-plant-status",
+            "native-plant-status": {
+                "dev_id": 2
+            }
+        },
+        "groups": {
+            "10": "how-do-you-tell-the-difference-between-hollies",
+            "11": "stretch-overview",
+            "12": "animalistic-exercises",
+            "13": "warmup",
+            "animalistic-exercises": {
+                "dev_id": 12
+            },
+            "how-do-you-tell-the-difference-between-hollies": {
+                "dev_id": 10
+            },
+            "stretch-overview": {
+                "dev_id": 11
+            },
+            "warmup": {
+                "dev_id": 13
+            }
+        },
+        "paragraphs": {
+            "100": "f574259f-9202-4569-b495-637f17fe1893",
+            "101": "f8321a7f-3b82-4b59-9117-de27d662d414",
+            "102": "3b0c590e-09f0-4c9c-8940-04af8d231374",
+            "103": "595523dc-7cf4-4d32-a024-6a41374a1655",
+            "109": "8052929a-26bc-4292-b63c-50b81c6723ed",
+            "110": "c1eb1257-380c-440a-8ea9-4c3ca7926e48",
+            "111": "d236d914-f233-4263-b327-a1b7dbbacb4f",
+            "3b0c590e-09f0-4c9c-8940-04af8d231374": {
+                "dev_id": 102
+            },
+            "4934cf5a-3843-4c31-96fd-e1a8bc3b875b": {
+                "dev_id": 99
+            },
+            "595523dc-7cf4-4d32-a024-6a41374a1655": {
+                "dev_id": 103
+            },
+            "8052929a-26bc-4292-b63c-50b81c6723ed": {
+                "dev_id": 109
+            },
+            "8d46b270-b499-41de-a9a7-67f1017d3b93": {
+                "dev_id": 98
+            },
+            "98": "8d46b270-b499-41de-a9a7-67f1017d3b93",
+            "99": "4934cf5a-3843-4c31-96fd-e1a8bc3b875b",
+            "c1eb1257-380c-440a-8ea9-4c3ca7926e48": {
+                "dev_id": 110
+            },
+            "d236d914-f233-4263-b327-a1b7dbbacb4f": {
+                "dev_id": 111
+            },
+            "f574259f-9202-4569-b495-637f17fe1893": {
+                "dev_id": 100
+            },
+            "f8321a7f-3b82-4b59-9117-de27d662d414": {
+                "dev_id": 101
+            }
+        },
+        "references": {
+            "62": "tappthomas_jonathon_20150218_youtube_parkourwarmup",
+            "63": "ilanojarlo_20190815_gmb_footexercises",
+            "64": "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises",
+            "65": "missouribotanicalgarden_ilexopaca",
+            "66": "spruceeighteenspecieshollytreesshrubs",
+            "67": "picturethisiosapp",
+            "68": "gardenguides_identifytypeshollybushes",
+            "69": "usda_ilexopaca",
+            "70": "flowershopnetworkenglishhollyamericanholly",
+            "flowershopnetworkenglishhollyamericanholly": {
+                "dev_id": 70
+            },
+            "gardenguides_identifytypeshollybushes": {
+                "dev_id": 68
+            },
+            "ilanojarlo_20190815_gmb_footexercises": {
+                "dev_id": 63
+            },
+            "missouribotanicalgarden_ilexopaca": {
+                "dev_id": 65
+            },
+            "picturethisiosapp": {
+                "dev_id": 67
+            },
+            "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises": {
+                "dev_id": 64
+            },
+            "spruceeighteenspecieshollytreesshrubs": {
+                "dev_id": 66
+            },
+            "tappthomas_jonathon_20150218_youtube_parkourwarmup": {
+                "dev_id": 62
+            },
+            "usda_ilexopaca": {
+                "dev_id": 69
+            }
+        }
+    }
+}

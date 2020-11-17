@@ -20,22 +20,17 @@ $(document).ready(function() {
     })
 })
 function begin_flashcards() {
-    console.log('starting in begin_flashcards, calling array fromm fc divs')
     hide_all_flashcard_group_div_class();
     var group_array = array_from_flashcard_divs()
-    console.log('group_array ==' + group_array)
     if (group_array.length > 1) {
         var new_array = group_array.sort(() => Math.random() - 0.5);
         $('#hidden_flashcard_divs').val(new_array.join('~'));
     }
-    console.log('in begin_flashcards, about to call shift_and_show')
     shift_and_show_question();
 }
 
 function array_from_flashcard_divs() {
-    console.log('in array_from_flashcard_divs')
     var group_divs = current_divs()
-    console.log('group_divs==' + group_divs)
     if (!group_divs) {
         return []
     }
@@ -66,13 +61,11 @@ function current_group(){
 }
 
 function shift_and_show_question() {
-    console.log('shift_and_show, calling array_from_flashcard_div')
     hide_all_flashcard_group_div_class()
     var group_array = array_from_flashcard_divs();
     var currently_showing = ''
     if (group_array.length > 0) {
         currently_showing = group_array.shift().toString().trim();
-        console.log('shift_and_show, len > 0 about to show, currently showing ==' + currently_showing)
         show_one_id_within_class('#' + currently_showing, '.flashcard_group_div');
     }
     assign_hidden_variables(currently_showing, group_array);
@@ -93,7 +86,6 @@ function assign_hidden_variables(currently_showing, group_array) {
 }
 
 function shuffle_questions() {
-    console.log('in shuffle, about to call append_currently_showing_to_groups')
     append_currently_showing_to_groups();
     var group_array = array_from_flashcard_divs();
     if (group_array.length < 2) {
@@ -111,15 +103,12 @@ function next_question() {
         display_not_enough_questions('to show next');
         return;
     }
-    console.log('in next question, about to call append_currently_showing_to_groups');
     append_currently_showing_to_groups();
-    console.log('in next question, about to call shift_and_show_question');
     shift_and_show_question();
 }
 
 function append_currently_showing_to_groups() {
     var currently_showing = current_group();
-    console.log('in append_currently_showing_to_groups, currently showing == ' + currently_showing)
     if (currently_showing) {
         var group_divs = current_divs()
         if (group_divs) {
@@ -128,7 +117,6 @@ function append_currently_showing_to_groups() {
             $('#hidden_flashcard_divs').val(currently_showing);
         }
         $('#currently_showing').val('');
-        console.log('in append_currently_showing_to_groups, adding to hidden divs: ' + $('#hidden_flashcard_divs').val());
     }
 }
 

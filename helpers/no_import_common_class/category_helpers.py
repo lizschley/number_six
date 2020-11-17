@@ -61,9 +61,9 @@ def flashcard_wrap_answer(paragraphs, collapse_id, ref_links, cat_type='flashcar
            f'data-target="#{collapse_id}"">'
            '<div>Toggle Answer</div></div>'
            f'<div id={collapse_id} class="collapse" data-parent="#accordion">'
-           '<div class="card-body"><div>'
+           '<div class="card-body">'
            f'{paragraphs_for_category_pages(paragraphs, cat_type, ref_links)}</div>'
-           '</div></div>')
+           '</div></div></div>')
 
 
 def paragraphs_for_category_pages(paragraphs, cat_type, ref_links=''):
