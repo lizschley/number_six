@@ -32,8 +32,8 @@ PARA_DISPLAY_OUTPUT_DATA_FOR_TESTING = {
 
 PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
     'group': {
-        'title': 'Listening',
-        'note': '*Note - subjects I listen to'
+        'group_title': 'Listening',
+        'group_note': '*Note - subjects I listen to'
     },
     'references': [{
         'link_text': 'Literature',
@@ -70,8 +70,8 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
 }
 
 PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
-    'title': 'Listening',
-    'note': '*Note - subjects I listen to',
+    'group_title': 'Listening',
+    'group_note': '*Note - subjects I listen to',
     'paragraphs': [{
         'paragraph_id': 'first',
         'subtitle': 'Fiction',

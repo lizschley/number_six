@@ -102,8 +102,8 @@ def test_db_output_list_data_values_correct(retriever_db_output, outer, idx, inn
     helper.assert_in_string(retriever_db_output[outer][idx][inner], substring)
 
 
-@pytest.mark.parametrize('outer, key, substring', [('group', 'title', 'Listen'),
-                                                   ('group', 'note', 'subjects')])
+@pytest.mark.parametrize('outer, key, substring', [('group', 'group_title', 'Listen'),
+                                                   ('group', 'group_note', 'subjects')])
 def test_db_output_dict_data_values_correct(retriever_db_output, outer, key, substring):
     helper.assert_in_string(retriever_db_output[outer][key], substring)
 

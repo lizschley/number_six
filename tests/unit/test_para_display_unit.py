@@ -34,8 +34,8 @@ def test_retrieve_paragraphs_group_id(mocker, para_for_display_object):
     assert para_for_display_object.retrieve_paragraphs(group_id=1) == {'test': 'test'}
 
 
-@pytest.mark.parametrize('var_name, var_type', [('title', str),
-                                                ('title_note', str),
+@pytest.mark.parametrize('var_name, var_type', [('group_title', str),
+                                                ('group_note', str),
                                                 ('reference_links', dict),
                                                 ('paragraphs', list),
                                                 ('input_data', dict)])
@@ -57,8 +57,8 @@ def test_instantiate_class_with_something_wrong(para_for_display_object):
 
 def test_assign_group_data(para_for_display_object, para_display_input_data):
     para_for_display_object.group = para_display_input_data['group']
-    assert para_for_display_object.group['title'].strip() == 'Listening'
-    assert para_for_display_object.group['note'].strip() == '*Note - subjects I listen to'
+    assert para_for_display_object.group['group_title'].strip() == 'Listening'
+    assert para_for_display_object.group['group_note'].strip() == '*Note - subjects I listen to'
 
 
 def test_create_links_from_references(para_for_display_object, para_display_input_data):
@@ -94,10 +94,10 @@ def test_paragraph(para_display_input_data):
 
 
 def test_output_for_display(para_for_display_object, para_display_input_data):
-    para_for_display_object.title = para_display_input_data['group']['title']
-    para_for_display_object.title_note = para_display_input_data['group']['note']
+    para_for_display_object.group_title = para_display_input_data['group']['group_title']
+    para_for_display_object.group_note = para_display_input_data['group']['group_note']
     para_for_display_object.paragraphs = para_display_input_data['paragraphs']
     out = para_for_display_object.output_for_display()
-    assert out['title'] == para_display_input_data['group']['title']
-    assert out['title_note'] == para_display_input_data['group']['note']
+    assert out['title'] == para_display_input_data['group']['group_title']
+    assert out['title_note'] == para_display_input_data['group']['group_note']
     assert isinstance(out['paragraphs'], list)

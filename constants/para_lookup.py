@@ -33,4 +33,20 @@ INLINE_LINK_LOOKUP = {
         'url': 'https://twitter.com/mfeathers',
         'link_text': 'Michael Feathers'
     },
+    'homebrewmissingpackagemanagermacoslinux': {
+        'url': 'https://brew.sh/',
+        'link_text': 'Homebrew Page'
+    },
+    'homebrewmissingpackagemanager_formulaprintscreen': {
+        'url': 'https://brew.sh/',
+        'link_text': 'printscreen from Homebrew page'
+    },
+    'jessicalaughlin_202002_howdoeshomebrewwork': {
+        'url': 'https://medium.com/@jldlaughlin/how-does-homebrew-work-starring-rust-94ae5aa24552',
+        'link_text': 'Jessica Laughlin Homebrew'
+    },
+    'homebrewdocumentation': {
+        'url': 'https://docs.brew.sh/',
+        'link_text': 'Homebrew Documentation'
+    }
 }

@@ -38,6 +38,3 @@ def inline_link_helper(link_text, url, inline_link_text):
     key = slugify(link_text)
     return {key: {'url': url,
                   'link_text': inline_link_text}}
-
-
-

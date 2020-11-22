@@ -27,8 +27,8 @@ class ParagraphsForDisplay:
     AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
 
     def __init__(self):
-        self.title = ''
-        self.title_note = ''
+        self.group_title = ''
+        self.group_note = ''
         self.reference_links = {}
         self.paragraphs = []
         self.input_data = {}
@@ -106,8 +106,8 @@ class ParagraphsForDisplay:
         assign_group_data, for example title; paragraph displayer has no concept of group
         '''
         group = self.input_data['group']
-        self.title = group['title'].strip()
-        self.title_note = group['note'].strip()
+        self.group_title = group['group_title'].strip()
+        self.group_note = group['group_note'].strip()
 
     def create_links_from_references(self):
         '''
@@ -201,6 +201,6 @@ class ParagraphsForDisplay:
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
-        return {'title': self.title,
-                'title_note': self.title_note,
+        return {'title': self.group_title,
+                'title_note': self.group_note,
                 'paragraphs': self.paragraphs}

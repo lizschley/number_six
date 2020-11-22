@@ -1,0 +1,9 @@
+{
+    "paragraphs": [
+        {
+            "guid": "95b1a6cb-8e0f-47b1-9eb7-3137fa88d43c",
+            "id": 131,
+            "text": "<p>Homebrew is written in Ruby and stored in Git and is, of course, open source.  If  you want to install, checkout the |beg_ref_slug|homebrewmissingpackagemanagermacoslinux|end_ref_slug|.</p> <p>Brew tap is used to add a package to homebrew.  When someone adds their package to Homebrew,  they create a formula, so that Homebrew knows what to do.  A formula is a simple ruby script.   See the |beg_ref_slug|homebrewmissingpackagemanager_formulaprintscreen|end_ref_slug|.</p> <p>|beg_ref_slug|jessicalaughlin_202002_howdoeshomebrewwork|end_ref_slug| page has a good description of this process  and what the parts of the formula mean.</p><p>When you run:<pre> >>> brew install </pre>   Homebrew reads the formula and then, following the directions and protected by the sha,   installs in its own directory and creates a symlink in usr/local.</p><p>One real strength  of Homebrew is its documentation.  Many times, I have run brew update and brew doctor and  followed the directions and solved my own problems.  And sure enough, they instruct people  to do that on their excellent |beg_ref_slug|homebrewdocumentation|end_ref_slug| page.</p>"
+        }
+    ]
+}

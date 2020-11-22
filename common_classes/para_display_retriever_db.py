@@ -145,14 +145,14 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         try:
             self.ordered = row.order != 0
             self.group = {
-                'title': row.title,
-                'note': row.note,
+                'group_title': row.group_title,
+                'group_note': row.group_note,
             }
         except AttributeError:  # Be explicit with catching exceptions.
             self.ordered = False
             self.group = {
-                'title': 'standalone para',
-                'note': '',
+                'group_title': 'standalone para',
+                'group_note': '',
             }
 
     def append_unique_reference(self, row):

@@ -1,7 +1,7 @@
 {
   "group": {
-    "title": "Listening",
-    "note": "*Note - subjects I listen to",
+    "group_title": "Listening",
+    "group_note": "*Note - subjects I listen to",
     "ordered": "no",
     "standalone": "yes"
   },

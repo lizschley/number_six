@@ -48,17 +48,17 @@ def assert_key_not_in_dictionary(test_dictionary, key):
 def create_basic_para_raw_queryset_data():
     out_list = []
     start_data = data.PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING
-    title = start_data['title']
-    note = start_data['note']
+    group_title = start_data['group_title']
+    group_note = start_data['group_note']
     paras = start_data['paragraphs']
     for para in paras:
-        out_list.append(create_row(title, note, para))
+        out_list.append(create_row(group_title, group_note, para))
     return out_list
 
 
-def create_row(title, note, para):
-    return Row(title=title,
-               note=note,
+def create_row(group_title, group_note, para):
+    return Row(group_title=group_title,
+               group_note=group_note,
                paragraph_id=para['paragraph_id'],
                order=para['order'],
                subtitle=para['subtitle'],
