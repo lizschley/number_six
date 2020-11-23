@@ -47,7 +47,7 @@ class ParaDbCreateProcess(ParaDbMethods):
 
     def process_group(self, input_data):
         '''
-        find_or_create_group will look for a group using the title, which must be unique.  It it
+        process_group will look for a group using the title, which must be unique.  It it
         does not exist, it will be created
 
         :return: string that says ok or an error message (may change later)

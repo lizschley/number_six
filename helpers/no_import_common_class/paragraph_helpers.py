@@ -103,6 +103,24 @@ def add_paragraphs_to_context(context, paragraphs):
     return context
 
 
+def add_error_to_context(context, paragraphs, key):
+    '''
+    add_error_to_context reformats data to save work in the template
+
+    :param context: original context, minus what was needed for para retrieval
+    :type context: dict
+    :param paragraphs: paragraph dictionary before adding to context
+    :type paragraphs: dict
+    :return: context - will be used in paragraph template
+    :rtype: dict
+    '''
+    context['error'] = paragraphs[key]
+    context['title'] = ""
+    context['title_note'] = ""
+    context['paragraphs'] = []
+    return context
+
+
 def sort_paragraphs(list_to_be_sorted, key_to_sort):
     '''
     sort_paragraphs sorts paragraphs

@@ -1,0 +1,8 @@
+{
+    "add_groups": [
+        {"title": "Mac Specific Information", "note": "", "short_name": "Mac Info", "category_id": 0, "category_title": "", "cat_sort": null},
+        {"title": "Linux Information", "note": "", "short_name": "Linus Info", "category_id": 0, "category_title": "", "cat_sort": null},
+        {"title": "Python Odds and Ends", "note": "", "short_name": "Python Misc", "category_id": 0, "category_title": "", "cat_sort": null}
+    ]
+
+}

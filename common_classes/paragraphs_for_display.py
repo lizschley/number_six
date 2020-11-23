@@ -96,6 +96,10 @@ class ParagraphsForDisplay:
         :return: dictionary to be added to the context & used in the paragraph display template
         :rtype: dict
         '''
+        if not self.input_data['group']:
+            message = ('Your selection produced no results, please select something else or try '
+                       'the same selection another day.')
+            return self.output_error(message)
         self.assign_group_data()
         self.create_links_from_references()
         self.assign_paragraphs()
@@ -204,3 +208,6 @@ class ParagraphsForDisplay:
         return {'title': self.group_title,
                 'title_note': self.group_note,
                 'paragraphs': self.paragraphs}
+
+    def output_error(self, message):
+        return {'study_error': message}
