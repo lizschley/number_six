@@ -1,0 +1,50 @@
+{
+  "group": {
+    "group_title": "Listening",
+    "group_note": "*Note - subjects I listen to",
+    "ordered": "no",
+    "standalone": "yes"
+  },
+  "references": [
+     {
+       "link_text": "literature",
+       "url": "https://literature.org/",
+       "para_fake_id_list": []
+     },
+     {
+       "link_text": "JessicaSpencerKensley",
+       "url": "https://gymcastic.com/",
+       "para_fake_id_list": ["second"]
+     }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "Fiction",
+      "note": "* Note - only public domain for listening to fall asleep.",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": [
+         "Fiction is my number one non-domestic animal love. ",
+         "My favorite animal is Rick. ",
+         "He shares my love of fiction."
+       ],
+      "ref_link_text_list": ["literature"]
+    },
+    {
+      "id": "second",
+      "subtitle": "A wonderful, but occasionally annoying podcast",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": [
+         "Jessica, Spencer and Kensley are fun to listen too",
+         "Jessica and Spencer can be annoying, but Kensley rarely is.",
+         "But like the way I feel about my cats, ",
+         "I like them all equally in spite of their natures."
+      ],
+      "ref_link_text_list": []
+    }
+  ],
+  "ref_link_paragraph": []
+}

@@ -80,7 +80,6 @@ def dictionary_key_begins_with_substring(search_dict, subs):
     :param subs: substring to search for
     :type subs: string
     '''
-
     return bool([idx for idx in search_dict if idx.lower().startswith(subs.lower())])
 
 
@@ -92,7 +91,7 @@ def dict_from_split_string(str_to_split, split_var, field_names):
     Based on the returning dictionary, the program will call the correct generic methods, with the
     correct arguments.
 
-    :param str_to_split: can be any string, but currently the camel_cased input keys from the JSON input
+    :param str_to_split: can be any string, but currently the snake_cased input keys from the JSON input
     :type str_to_split: str
     :param split_var: string to split on, for example: '_', but could be anything really
     :type split_var: str
@@ -112,3 +111,36 @@ def dict_from_split_string(str_to_split, split_var, field_names):
     for idx, name in enumerate(field_names):
         return_dict[name] = temp[idx]
     return return_dict
+
+
+def add_to_associations(key_1, val_1, key_2, val_2_list, association_list=None):
+    '''
+    add_to_associations makes creating content easier.  Rather than creating the many
+    to many JSON input, simply add a list of values that are associated with a given key.
+
+    To make more generic: pass in all of the key and values and also the return record
+    list, though if there is no return list, we simply pass back a new list of association records.
+
+    This does not any extra fields associated with the association itself.
+
+    :param Key_1: foreign key name
+    :type Key_1: str
+    :param val_1: foreign key value that is the same for all of the association records created
+    :type val_1: same as the input value (most likely str)
+    :param key_2: foreign key name
+    :type key_2: str
+    :param val_2_list: list of values, each one on the list will make a new association record
+    :type val_2_list: list
+    :param association_list: list of existing association records, defaults to None
+    :type association_list: list, optional
+    :return: list of association records.  There may be some existing, but there is probably some that
+             are added
+    :rtype: list
+    '''
+    association_list = [] if association_list is None else association_list
+    for val_2 in val_2_list:
+        new_associtation = {}
+        new_associtation[key_1] = val_1
+        new_associtation[key_2] = val_2
+        association_list.append(new_associtation)
+    return association_list

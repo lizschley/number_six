@@ -123,3 +123,19 @@ PARA_DISPLAY_ONE_PARA_INPUT = {
         68: ['YourDictionary_glabrous']
     }
 }
+
+LIST_OF_SIMILAR_DICTIONARIES = [
+    {'name': 'Nemo', 'color': 'black', 'sex': 'female', 'birth_year': 1964},
+    {'name': 'Sammy', 'color': 'orange and white', 'sex': 'female', 'birth_year': 1994},
+    {'name': 'Mac', 'color': 'orange', 'sex': 'male', 'birth_year': 1994},
+    {'name': 'Ninja', 'color': 'black', 'sex': 'female', 'birth_year': 2017},
+    {'name': 'Ronin', 'color': 'orange and white', 'sex': 'male', 'birth_year': 2017}
+]
+
+LIST_OF_DIFFERENT_DICTIONARIES = [
+    {'name': 'Nemo', 'color': 'black', 'sex': 'female', 'birth_year': 1964},
+    {'name': 'Sammy', 'color': 'orange and white', 'sex': 'female', 'birth_year': 1994},
+    {'name': 'Mac', 'color': 'orange', 'sex': 'male', 'birth_year': 1994},
+    {'name': 'Ninja', 'color': 'black', 'sex': 'female', 'birth_year': 2017, 'alive': True},
+    {'name': 'Ronin', 'color': 'orange and white', 'sex': 'male', 'birth_year': 2017, 'alive': True}
+]
