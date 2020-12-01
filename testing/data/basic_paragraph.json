@@ -3,17 +3,23 @@
     "group_title": "Listening",
     "group_note": "*Note - subjects I listen to",
     "ordered": "no",
-    "standalone": "yes"
+    "standalone": "yes",
+    "group_type": ""
   },
   "references": [
      {
        "link_text": "literature",
-       "url": "https://literature.org/"
-     },
-     {
-       "link_text": "JessicaSpencerKensley",
-       "url": "https://gymcastic.com/"
-     }
+       "url": "https://literature.org/",
+       "short_text": "lit",
+       "slug": "literature"
+    },
+    {
+      "link_text": "JessicaSpencerKensley",
+      "url": "https://gymcastic.com/",
+      "short_text": "jessspencerkensley",
+      "slug": "tired_of_this_podcast"
+
+    }
   ],
   "paragraphs": [
     {

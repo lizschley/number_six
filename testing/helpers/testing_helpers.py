@@ -50,15 +50,17 @@ def create_basic_para_raw_queryset_data():
     start_data = data.PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING
     group_title = start_data['group_title']
     group_note = start_data['group_note']
+    group_type = start_data['group_type']
     paras = start_data['paragraphs']
     for para in paras:
-        out_list.append(create_row(group_title, group_note, para))
+        out_list.append(create_row(group_title, group_note, group_type, para))
     return out_list
 
 
-def create_row(group_title, group_note, para):
+def create_row(group_title, group_note, group_type, para):
     return Row(group_title=group_title,
                group_note=group_note,
+               group_type=group_type,
                paragraph_id=para['paragraph_id'],
                order=para['order'],
                subtitle=para['subtitle'],
@@ -68,4 +70,6 @@ def create_row(group_title, group_note, para):
                text=para['text'],
                reference_id=para['reference_id'],
                link_text=para['link_text'],
-               url=para['url'])
+               url=para['url'],
+               short_text=para['short_text'],
+               ref_slug=para['slug'])

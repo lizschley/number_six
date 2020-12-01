@@ -164,6 +164,8 @@ def replace_link_indicators(link_function, para_text, **kwargs):
     new_args = {}
     if utils.key_in_dictionary(kwargs, 'from_ajax'):
         new_args['from_ajax'] = kwargs['from_ajax']
+    if utils.key_in_dictionary(kwargs, 'link_data'):
+        new_args['link_data'] = kwargs['link_data']
     para_piece_list = []
     pieces = para_text.split(kwargs['beg_link'])
     for piece in pieces:
@@ -209,9 +211,10 @@ def inline_link(**kwargs):
     :return: html link within text
     :rtype: string
     '''
-    link = lookup.INLINE_LINK_LOOKUP[kwargs['lookup_key']]
-    url = link['url']
-    link_text = link['link_text']
+    slug = kwargs['lookup_key']
+    link_data = kwargs['link_data']
+    url = link_data[slug]['url']
+    link_text = link_data[slug]['link_text']
     return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
 

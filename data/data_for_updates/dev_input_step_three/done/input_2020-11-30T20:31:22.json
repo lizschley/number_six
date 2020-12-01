@@ -1,0 +1,44 @@
+{
+    "groups": [
+        {
+            "group_type": "study-standalone",
+            "id": 1,
+            "slug": "tech-definitions"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 19,
+            "slug": "python-environments"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 2,
+            "slug": "tech-how-tos-personal-cheat-sheets"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 20,
+            "slug": "mac-specific-information"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 21,
+            "slug": "linux-information"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 22,
+            "slug": "python-odds-and-ends"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 7,
+            "slug": "non-native-plant-descriptions"
+        },
+        {
+            "group_type": "study-standalone",
+            "id": 9,
+            "slug": "native-plant-descriptions"
+        }
+    ]
+}

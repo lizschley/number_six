@@ -72,7 +72,6 @@ class ParaDbCreateProcess(ParaDbMethods):
         :type input_data: dict
         '''
         group_dict = input_data['group']
-        print(f'group_dict=={group_dict}')
         self.title = group_dict['title']
         self.title_note = group_dict['note']
         self.standalone = group_dict['standalone']

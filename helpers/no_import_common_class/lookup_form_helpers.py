@@ -1,8 +1,6 @@
 ''' These methods help display the form used in the study form '''
 from projects.models.paragraphs import Group, Category
 
-STUDY_GROUPS = ['tech-definitions', 'non-native-plant-descriptions', 'native-plant-descriptions',
-                'tech-how-tos-personal-cheat-sheets', 'botany-definitions', 'python-environments']
 STUDY_CATEGORIES = ['flashcard']
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 
@@ -19,7 +17,7 @@ def get_initial_classifications():
     :rtype: str
     '''
     classification_list = INITIAL_CLASSIFICATION
-    groups = Group.objects.filter(slug__in=STUDY_GROUPS).order_by('slug')
+    groups = Group.objects.filter(group_type__contains='study').order_by('slug')
     for group in groups:
         classification_list.append((format_group_id(group.pk), group.title))
 

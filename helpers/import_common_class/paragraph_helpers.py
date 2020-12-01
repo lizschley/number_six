@@ -115,6 +115,8 @@ def add_collapse_variables(paragraphs):
     :return: list of paragraphs that have collapse variables for display
     :rtype:  dict containing list of individual paragraphs complete with collapse variables
     '''
+    if 'ordered' in paragraphs['group_type']:
+        return paragraphs
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])
