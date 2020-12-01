@@ -25,7 +25,7 @@ def get_initial_classifications():
     for category in categories:
         cat_display = 'flashcards: ' + category.title
         classification_list.append((format_category_id(category.pk), cat_display))
-
+    print(f'category list: {categories}')
     return classification_list
 
 

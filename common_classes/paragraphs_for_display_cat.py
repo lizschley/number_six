@@ -37,6 +37,10 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :return: dictionary to be added to the context & used in the paragraph display template
         :rtype: dict
         '''
+        if not self.input_data['category']:
+            message = ('Your selection produced no results, please select something else or try '
+                       'the same selection another day.')
+            return self.output_error(message)
         self.assign_title()
         self.create_links_from_references()
         self.assign_groups()
