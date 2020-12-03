@@ -1,6 +1,5 @@
 '''Utility for creating static resusable methods to use in the batch update process'''
 # pylint: pylint: disable=unused-import
-import datetime
 import json
 import sys
 import constants.crud as crud
@@ -38,7 +37,6 @@ class RecordDictionaryUtility:
         for pk_id in id_list:
             queryset = RecordDictionaryUtility.get_content(class_, pk_id=pk_id)
             dict_output[key].append(queryset[0])
-        print(f'dict_output == {dict_output}')
         return dict_output
 
     @staticmethod

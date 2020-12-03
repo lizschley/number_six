@@ -2,6 +2,7 @@
   "group": {
     "group_title": "",
     "group_note": "",
+    "group_type": "",
     "ordered": "",
     "standalone": "",
     "category_id": null,
@@ -22,15 +23,14 @@
       "note": "",
       "image_path": "",
       "image_info_key": "default",
-      "text": [
-       ],
+      "text": "",
       "link_text_list": []
     }
   ],
   "ref_link_paragraph": [
     {
-      "link_text": "delete this entire dictionary, if adding",
-      "paragraph_id": "ref para associations by a link_text_list in the paragraph"
+      "link_text": "delete this entire dictionary, if adding ref para associations by",
+      "paragraph_id": "adding a list of link_text strings in the paragraph record"
     }
   ]
 }

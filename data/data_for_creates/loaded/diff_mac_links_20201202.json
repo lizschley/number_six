@@ -1,0 +1,44 @@
+{
+  "group": {
+    "group_title": "What are three ways to create shortcut links on the macOS?",
+    "group_note": "",
+    "group_type": "",
+    "ordered": "yes",
+    "standalone": "no",
+    "category_id": 4,
+    "short_name": "",
+    "cat_sort": null
+  },
+  "references": [
+     {
+       "link_text": "NelsonTom_Lifewire_20200215_AliasesSymbolicLinksHardLinksMac",
+       "url": "https://www.lifewire.com/aliases-symbolic-links-hard-links-mac-2260189",
+       "short_text": "Tom Nelson’s Livewire links"
+     },
+     {
+      "link_text": "CNET_20090901_OSXinDepthAliasesVsSymbolicLinks",
+      "url": "https://www.cnet.com/news/os-x-in-depth-aliases-vs-symbolic-links/",
+      "short_text": "Aliases vs Symbolic links"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": "Placeholder text for question",
+      "link_text_list": ["NelsonTom_Lifewire_20200215_AliasesSymbolicLinksHardLinksMac"]
+    },
+    {
+      "id": "second",
+      "subtitle": "",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": "Placeholder text for answer",
+      "link_text_list": ["CNET_20090901_OSXinDepthAliasesVsSymbolicLinks", "NelsonTom_Lifewire_20200215_AliasesSymbolicLinksHardLinksMac"]
+    }
+  ]
+}
