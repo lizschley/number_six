@@ -74,8 +74,10 @@ class ParaDisplayRetrieverJson(ParaDisplayRetrieverBase):
         :rtype: dict
         '''
         self.ordered = True
-
         para = orig_para
-        para['text'] = para_helper.format_json_text(orig_para['text'])
+        text = ' '.join(orig_para['text'])
+        if text[0] != '<':
+            text = '<p>' + text + '</p>'
+        para['text'] = text
         para['order'] = self.get_paragraph_order(orig_para['subtitle'], order)
         return para

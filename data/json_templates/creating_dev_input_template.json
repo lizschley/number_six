@@ -11,7 +11,8 @@
   "references": [
      {
        "link_text": "",
-       "url": ""
+       "url": "",
+       "short_text": ""
      }
   ],
   "paragraphs": [
@@ -22,13 +23,14 @@
       "image_path": "",
       "image_info_key": "default",
       "text": [
-       ]
+       ],
+      "link_text_list": []
     }
   ],
   "ref_link_paragraph": [
     {
-      "link_text": "",
-      "paragraph_id": ""
+      "link_text": "delete this entire dictionary, if adding",
+      "paragraph_id": "ref para associations by a link_text_list in the paragraph"
     }
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "group": {
+    "group_title": "Technical Definitions",
+    "group_note": "",
+    "group_type": "study-standalone",
+    "ordered": "no",
+    "standalone": "yes",
+    "category_id": null,
+    "short_name": "Tech Definitions",
+    "cat_sort": null
+  },
+  "references": [],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "Shim",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": [
+        "<p>The following is a direct quote from Wikipedia: In computer programming, a shim is a ",
+        "library that transparently intercepts API calls and changes the arguments passed, handles ",
+        "the operation itself or redirects the operation elsewhere.[1][2] Shims can be used to ",
+        "support an old API in a newer environment, or a new API in an older environment. Shims can ",
+        "also be used for running programs on different software platforms than they were developed for.</p>",
+        "<p>There is a great YouTube video done by {{Jacob Sorber - outside link}}.  He says that a ",
+        "shim is a piece of code that sits between a library and the code that uses it.  It does this ",
+        "by calling the shim first.  In the video, Jacob Sorber intercepts calls to the c library’s ",
+        "rand function.  First he just shows that he is intercepting the call by altering the results. ",
+        "Then he makes the call and sends back the original results and then he alters the results and ",
+        "returns the new value.  He also intercepts the connect file and refuses a lot of the stuff from ",
+        "the CNN page using Firefox.  You can simply call your program instead or change the arguments or ",
+        "in the case of {{pyenv - popup}}, decide which versions of python to use.</p>",
+        "<p>While reading about shims, I read that it was an example of the adapter pattern.  Instead ",
+        "of describing the adapter pattern in detail, I am simply adding a Stack Overflow reference.  ",
+        "In the accepted answer the user, tcarvin, says that shims are an example of the adapter pattern, ",
+        "and makes it so your code and the function are both unaware of the changes the shim makes.</p>"
+       ],
+      "link_text_list": ["Wikipedia_20200321_ShimComputing", "ClemsonEdu_People_JSorber",
+                         "SorberJacobYouTube_20190315_HowtoInterceptModifyLibraryCallsShims",
+                         "TCarvin_20120301_stackoverflow_DifferenceShimFacadeAdapterPatterns"]
+    }
+  ]
+}

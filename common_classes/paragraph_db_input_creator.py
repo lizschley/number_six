@@ -14,6 +14,7 @@ from portfolio.settings import BASE_DIR
 OUT_JSON_PATH = os.path.join(BASE_DIR, 'data/data_for_creates')
 
 
+# Todo: rework this to inocorporate common code and also write tests
 class ParagraphDbInputCreator():
     '''
     ParagraphDbInputCreator creates JSON file of the format necessary to create

@@ -1,0 +1,56 @@
+{
+  "group": {
+    "group_title": "Technical Definitions",
+    "group_note": "",
+    "group_type": "study-standalone",
+    "ordered": "no",
+    "standalone": "yes",
+    "category_id": null,
+    "short_name": "Tech Definitions",
+    "cat_sort": null
+  },
+  "references": [
+    {
+      "link_text": "JonesLogan_RealPython_2018_ManagingMultiplePythonVersionsPyenv",
+      "url": "https://realpython.com/intro-to-pyenv/",
+      "short_text": "Real Python Pyenv Intro"
+    },
+    {
+      "link_text": "bmargulies_anatolyg_JackKelly_2011_2018_stackoverflow_CflagsCcflagsCxxflags",
+      "url": "https://stackoverflow.com/questions/5541946/cflags-ccflags-cxxflags-what-exactly-do-these-variables-control",
+      "short_text": "C FLAG VARIABLES"
+    },
+    {
+      "link_text": "BengtssonPeter_20200219_BuildPyenvPythonVersionsMacOSCatalina10.15",
+      "url": "https://www.peterbe.com/plog/build-pyenv-python-versions-on-macos-catalina-10.15",
+      "short_text": "Build Pynv Python Catalina"
+    },
+    {
+      "link_text": "Github_pyenv_issues_1348",
+      "url": "https://github.com/pyenv/pyenv/issues/1348",
+      "short_text": "Pyenv issue install"
+    },
+    {
+      "link_text": "AllanRob_20191127_InstallingPillowCatalina",
+      "url": "https://akrabat.com/installing-pillow-on-macos-10-15-calatalina/",
+      "short_text": ""
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "SDK Headers in Catalina",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": "<p>temporary text |beg|Makefile|end|</p>",
+      "link_text_list": [
+        "JonesLogan_RealPython_2018_ManagingMultiplePythonVersionsPyenv",
+        "BengtssonPeter_20200219_BuildPyenvPythonVersionsMacOSCatalina10.15",
+        "Github_pyenv_issues_1348",
+        "bmargulies_anatolyg_JackKelly_2011_2018_stackoverflow_CflagsCcflagsCxxflags",
+        "AllanRob_20191127_InstallingPillowCatalina"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,6 @@
    to display the paragraph without creating a db record'''
 import sys
 from common_classes.para_db_methods import ParaDbMethods
-import helpers.no_import_common_class.paragraph_helpers as para_helper
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
@@ -23,13 +22,14 @@ class ParaDbCreateProcess(ParaDbMethods):
     def __init__(self, updating=False):
         super(ParaDbCreateProcess, self).__init__(updating)
         self.title = ''
-        self.title_note = ''
+        self.group_note = ''
         # 'fake_para_id': 'para_id'
         self.fake_to_real_para_id = {}
         self.standalone = None
         self.group = None
         self.ordered = False
         self.current_order_num = 0
+        self.input_data = {}
 
     def dictionary_to_db(self, input_data):
         '''
@@ -38,14 +38,15 @@ class ParaDbCreateProcess(ParaDbMethods):
         :param input_data: JSON data formatted into dictionary
         :type input_data: dict
         '''
-        self.process_group(input_data)
-        self.find_or_create_references(input_data)
+        self.input_data = input_data
+        self.process_group()
+        self.find_or_create_references()
         if not self.updating:
             sys.exit(1)
-        self.create_paragraphs(input_data)
-        self.associate_paragraphs_with_references(input_data)
+        self.create_paragraphs()
+        self.associate_paragraphs_with_references()
 
-    def process_group(self, input_data):
+    def process_group(self):
         '''
         process_group will look for a group using the title, which must be unique.  It it
         does not exist, it will be created
@@ -53,61 +54,79 @@ class ParaDbCreateProcess(ParaDbMethods):
         :return: string that says ok or an error message (may change later)
         :rtype: [type]
         '''
-        self.assign_group_data(input_data)
-        create_dict = {'title': self.title, 'note': self.title_note,
-                       'category_id': input_data['group']['category_id'],
-                       'short_name': input_data['group']['short_name'],
-                       'cat_sort': input_data['group']['cat_sort'], }
+        self.assign_group_data()
+        create_dict = {'title': self.title, 'note': self.group_note,
+                       'category_id': self.input_data['group']['category_id'],
+                       'short_name': self.input_data['group']['short_name'],
+                       'group_type': self.input_data['group']['group_type'],
+                       'cat_sort': self.input_data['group']['cat_sort'], }
         find_dict = {'title': self.title}
 
         return_data = self.find_or_create_record(Group, find_dict, create_dict)
         if self.updating:
             self.group = return_data['record']
 
-    def assign_group_data(self, input_data):
+    def assign_group_data(self):
         '''
         assign_group_data to instance variables
-
-        :param input_data: the input data read from a json file or created in batch
-        :type input_data: dict
         '''
-        group_dict = input_data['group']
-        self.title = group_dict['title']
-        self.title_note = group_dict['note']
+        group_dict = self.input_data['group']
+        self.title = group_dict['group_title']
+        self.group_note = group_dict['group_note']
         self.standalone = group_dict['standalone']
         if group_dict['ordered'] == 'yes':
             self.ordered = True
 
-    def find_or_create_references(self, input_data):
+    def find_or_create_references(self):
         '''
         find_or_create_references will find based on link_text which must be unique.
-        :param input_data: references contain link_text & url. Multiple paras can have same reference
-        :type input_data: dict
         '''
-        if utils.key_not_in_dictionary(input_data, 'references'):
+        if utils.key_not_in_dictionary(self.input_data, 'references'):
             return
-        references = input_data['references']
+        references = self.input_data['references']
         for ref in references:
-            create_dict = {'link_text': ref['link_text'], 'url': ref['url']}
+            create_dict = {'link_text': ref['link_text'], 'url': ref['url'],
+                           'short_text': ref['short_text']}
             find_dict = {'link_text': ref['link_text']}
             ref = self.find_or_create_record(Reference, find_dict, create_dict)
 
     # Todo: add some validation, for example the decide_standalone only has three valid possiblities
-    def create_paragraphs(self, input_data):
+    def create_paragraphs(self):
         '''
         create_paragraphs takes the input_data from the JSON file input (just like display JSON), but
         this time actually creates the database records
-        :param input_data: dictionary from JSON file to dictionary transformation
-        :type input_data: dict
         '''
-        para_list = input_data['paragraphs']
+        para_list = self.input_data['paragraphs']
         for para in para_list:
             if self.ordered:
                 self.current_order_num += 1
             para['standalone'] = self.decide_standalone(para)
+            if utils.key_in_dictionary(para, 'link_text_list'):
+                self.add_ref_para_association(para)
+                para.pop('link_text_list')
             paragraph = self.create_paragraph_record(para)
             self.fake_to_real_para_id[para['id']] = paragraph.id
             self.add_association_with_group(paragraph)
+
+    # Todo: Revisit; Maybe call after para creation, no more fake ids, but for now keep existing intact
+    def add_ref_para_association(self, para):
+        '''
+        add_ref_para_association is a convenience method allowing the user to simply list the link text
+        associated with given para, instead of having manually associating each link to its paragraphs
+
+        :param para: one paragraph record
+        :type para: dict
+        '''
+        if not para['link_text_list']:
+            return
+        if utils.key_not_in_dictionary(self.input_data, 'ref_link_paragraph'):
+            self.input_data['ref_link_paragraph'] = []
+        ref_para_association = utils.add_to_associations('paragraph_id',
+                                                         para['id'],
+                                                         'link_text',
+                                                         para['link_text_list'],
+                                                         self.input_data['ref_link_paragraph'])
+        self.input_data['ref_link_paragraph'] = ref_para_association
 
     # Note: three valid values: VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
     def decide_standalone(self, para):
@@ -137,25 +156,24 @@ class ParaDbCreateProcess(ParaDbMethods):
             return True
         return False
 
-    def associate_paragraphs_with_references(self, input_data):
+    def associate_paragraphs_with_references(self):
         '''
         associate_paragraphs_with_references creates the paragraph to reference association
-        :param input_data: dictionary created from reading the JSON file used to create the paragraphs
-        :type input_data: dict
         '''
-        if utils.key_not_in_dictionary(input_data, 'ref_link_paragraph'):
+        if utils.key_not_in_dictionary(self.input_data, 'ref_link_paragraph'):
             return
-        ref_link_paras = input_data['ref_link_paragraph']
+        ref_link_paras = self.input_data['ref_link_paragraph']
         for ref_para in ref_link_paras:
             ref = Reference.objects.get(link_text=ref_para['link_text'])
             para = Paragraph.objects.get(pk=self.fake_to_real_para_id[ref_para['paragraph_id']])
             para.references.add(ref)
 
+    # Todo: Remove the fake ids in this process, but that is for later cleanup
     def create_paragraph_record(self, para):
         '''
         create_paragraph_record creates paragraph records.  This does not do a uniqueness check!
-        This calls format_json_text which takes the paragraph text as formatted in the JSON file and
-        transforms it to a str as needed to store in atabase and use in ParagraphsForDisplay
+        We need the fake id to associate with records, so we do a shallow copy in order to remove
+        the id key from the dictionary we will use to create the record.
         :param para: JSON file to dictionary format
         :type para: dict
         :return: paragraph record
@@ -163,7 +181,7 @@ class ParaDbCreateProcess(ParaDbMethods):
         '''
         create_dict = para.copy()
         del create_dict['id']
-        create_dict['text'] = para_helper.format_json_text(para['text'])
+        create_dict['text'] = para['text']
         return self.create_record(Paragraph, create_dict)
 
     def add_association_with_group(self, paragraph):

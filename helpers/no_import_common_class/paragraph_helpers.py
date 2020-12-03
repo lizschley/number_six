@@ -43,25 +43,6 @@ def json_to_dict(json_path):
     return data
 
 
-def format_json_text(text):
-    '''
-    format_json_text takes a List of strings and concatenates them
-       together with a space
-
-    If there is no html tag (just checks for < in the first character),
-       it adds a paragraph tag
-
-    :param text: List of strings
-    :type text: List
-    :return: html formated text
-    :rtype: str
-    '''
-    text = ' '.join(text)
-    if text[0] != '<':
-        text = '<p>' + text + '</p>'
-    return text
-
-
 def extract_data_from_form(classification):
     '''
     extract_data_from_form formats the Study lookup form return to be usable for
