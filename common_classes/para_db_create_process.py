@@ -5,9 +5,6 @@ from common_classes.para_db_methods import ParaDbMethods
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
-# Todo: validate input json data --- this is one validation
-VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
-
 
 class ParaDbCreateProcess(ParaDbMethods):
     '''
@@ -22,7 +19,6 @@ class ParaDbCreateProcess(ParaDbMethods):
     def __init__(self, updating=False):
         super(ParaDbCreateProcess, self).__init__(updating)
         self.title = ''
-        self.group_note = ''
         # 'fake_para_id': 'para_id'
         self.fake_to_real_para_id = {}
         self.standalone = None
@@ -55,16 +51,34 @@ class ParaDbCreateProcess(ParaDbMethods):
         :rtype: [type]
         '''
         self.assign_group_data()
-        create_dict = {'title': self.title, 'note': self.group_note,
-                       'category_id': self.input_data['group']['category_id'],
-                       'short_name': self.input_data['group']['short_name'],
-                       'group_type': self.input_data['group']['group_type'],
-                       'cat_sort': self.input_data['group']['cat_sort'], }
         find_dict = {'title': self.title}
-
-        return_data = self.find_or_create_record(Group, find_dict, create_dict)
+        creating = self.expect_to_create_group()
+        if not creating:
+            return_data = {}
+            return_data['record'] = self.find_record(Group, find_dict)
+        else:
+            create_dict = {'title': self.title,
+                           'note': self.input_data['group']['group_note'],
+                           'category_id': self.input_data['group']['category_id'],
+                           'short_name': self.input_data['group']['short_name'],
+                           'group_type': self.input_data['group']['group_type'],
+                           'cat_sort': self.cat_sort(), }
+            return_data = self.find_or_create_record(Group, find_dict, create_dict)
         if self.updating:
             self.group = return_data['record']
+
+    def expect_to_create_group(self):
+        '''
+        expect_to_create_group returns True if the user wants to create a new group
+
+        :return: returns True if the user wants to create a new group
+        :rtype: bool
+        '''
+        if utils.key_not_in_dictionary(self.input_data['group'], 'short_name'):
+            return False
+        if len(self.input_data['group']['short_name']) > 2:
+            return True
+        return False
 
     def assign_group_data(self):
         '''
@@ -72,10 +86,14 @@ class ParaDbCreateProcess(ParaDbMethods):
         '''
         group_dict = self.input_data['group']
         self.title = group_dict['group_title']
-        self.group_note = group_dict['group_note']
         self.standalone = group_dict['standalone']
         if group_dict['ordered'] == 'yes':
             self.ordered = True
+
+    def cat_sort(self):
+        if not self.input_data['group']['category_id']:
+            return None
+        return self.max_cat_sort_for_given_category(self.input_data['group']['category_id'])
 
     def find_or_create_references(self):
         '''
@@ -108,7 +126,6 @@ class ParaDbCreateProcess(ParaDbMethods):
             self.fake_to_real_para_id[para['id']] = paragraph.id
             self.add_association_with_group(paragraph)
 
-    # Todo: Revisit; Maybe call after para creation, no more fake ids, but for now keep existing intact
     def add_ref_para_association(self, para):
         '''
         add_ref_para_association is a convenience method allowing the user to simply list the link text
@@ -128,7 +145,6 @@ class ParaDbCreateProcess(ParaDbMethods):
                                                          self.input_data['ref_link_paragraph'])
         self.input_data['ref_link_paragraph'] = ref_para_association
 
-    # Note: three valid values: VALID_STANDALONE = ('yes', 'no', 'depend_on_para')
     def decide_standalone(self, para):
         '''
         Decide_standalone says whether to make the  standalone field in the paragraph record
@@ -148,12 +164,15 @@ class ParaDbCreateProcess(ParaDbMethods):
         :return: True or False based on whether the paragraph stands alone
         :rtype: Boolean
         '''
-        if self.standalone == 'yes':
+        standalone = para.get('standalone', 'default')
+        if standalone == 'default':
+            standalone = self.standalone
+        if utils.key_in_dictionary(para, 'standalone'):
+            return
+        if standalone == 'yes':
             return True
-        if self.standalone == 'no':
+        if standalone == 'no':
             return False
-        if para['standalone'] == 'yes':
-            return True
         return False
 
     def associate_paragraphs_with_references(self):

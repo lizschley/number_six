@@ -1,13 +1,20 @@
 {
   "group": {
-    "group_title": "",
+    "__comment_group_1__": "For new group, must have correct short_name, along with group_title, ordered and standalone fields",
+    "__comment_group_2__": "If group exists, still need correct: group_title, ordered and standalone fields",
+    "__comment_group_3__": "For existing groups, keep default keys and values (other than group_2 above), EXCEPT short_name",
+    "__comment_short_name_1__": "Always and only include short_name if this is a new group. ",
+    "__comment_short_name_2__": "OTHERWISE (group exists) delete the short_name key and value. No editing since only creating!!",
+    "short_name": "",
     "group_note": "",
     "group_type": "",
-    "ordered": "",
-    "standalone": "",
     "category_id": null,
-    "short_name": "",
-    "cat_sort": null
+    "__comment_standalone_1__": "default standalone paragraphs to yes or no.  Can override for individual paras ",
+    "__comment_standalone_2__": "by adding standalone as key & yes or no value to the individual paragraph record",
+    "standalone": "yes",
+    "__comment_ordered_1__": "yes or no, even if group already exists, used in association between para & group",
+    "ordered": "no",
+    "group_title": ""
   },
   "references": [
      {
@@ -29,8 +36,10 @@
   ],
   "ref_link_paragraph": [
     {
-      "link_text": "delete this entire dictionary, if adding ref para associations by",
-      "paragraph_id": "adding a list of link_text strings in the paragraph record"
+      "__comment_ref_para_1__": "delete this entire dictionary, if adding ref para associations only ",
+      "__comment_ref_para_2__": "by adding a list of link_text strings in the paragraph record",
+      "link_text": "",
+      "paragraph_id": ""
     }
   ]
 }

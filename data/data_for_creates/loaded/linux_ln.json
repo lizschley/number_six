@@ -1,0 +1,27 @@
+{
+  "group": {
+    "group_title": "Linux Information",
+    "ordered": "no",
+    "standalone": "yes"
+  },
+  "references": [
+     {
+       "link_text": "Wendy_NoteWorthyJournalBlog_2017059_DifferenceHardSymbolicLink",
+       "url": "https://blog.usejournal.com/what-is-the-difference-between-a-hard-link-and-a-symbolic-link-8c0493041b62",
+       "short_text": "Wendy - Hard & Symbolic Links"
+     }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "Symbolic and Hard Links",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": "<h5>Non-Web References</h5><p>Bash Manual from Terminal Commandline<br>BSD General Commands Manual<br>February 14, 2006</p>",
+      "link_text_list": ["NelsonTom_Lifewire_20200215_AliasesSymbolicLinksHardLinksMac",
+                         "Andrew_Medium_20180116_HardLinksSymbolicLinks",
+                         "Wendy_NoteWorthyJournalBlog_2017059_DifferenceHardSymbolicLink"]
+    }
+  ]
+}

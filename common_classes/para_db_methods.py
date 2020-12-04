@@ -2,6 +2,7 @@
 # pylint: pylint: disable=unused-import
 import sys
 from django.core.exceptions import ValidationError
+from django.db.models import Max
 from django.utils import timezone
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
@@ -193,3 +194,16 @@ class ParaDbMethods:
         :rtype: rawsql queryset
         '''
         return class_.objects.raw(sql, [args])
+
+    @staticmethod
+    def max_cat_sort_for_given_category(category_id):
+        '''
+        max_cat_sort_for_given_category returns the max id for cat_sort within a given group
+
+        :param category_id: id to get categories within
+        :type category_id: int
+        :return: max category id
+        :rtype: int
+        '''
+        max_cat_sort = Group.objects.filter(category_id=category_id).aggregate(Max('cat_sort'))
+        return 1 if not max_cat_sort['cat_sort__max'] else max_cat_sort['cat_sort__max'] + 1
