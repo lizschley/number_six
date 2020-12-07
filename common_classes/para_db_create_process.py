@@ -2,6 +2,7 @@
    to display the paragraph without creating a db record'''
 import sys
 from common_classes.para_db_methods import ParaDbMethods
+import constants.crud as crud
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
@@ -91,6 +92,12 @@ class ParaDbCreateProcess(ParaDbMethods):
             self.ordered = True
 
     def cat_sort(self):
+        '''
+        cat_sort returns a new cat_sort for the group that is being created
+
+        :return: cat_sort that is one higher than the largest cat_sort within a category
+        :rtype: int
+        '''
         if not self.input_data['group']['category_id']:
             return None
         return self.max_cat_sort_for_given_category(self.input_data['group']['category_id'])
@@ -108,7 +115,6 @@ class ParaDbCreateProcess(ParaDbMethods):
             find_dict = {'link_text': ref['link_text']}
             ref = self.find_or_create_record(Reference, find_dict, create_dict)
 
-    # Todo: add some validation, for example the decide_standalone only has three valid possiblities
     def create_paragraphs(self):
         '''
         create_paragraphs takes the input_data from the JSON file input (just like display JSON), but
@@ -119,31 +125,29 @@ class ParaDbCreateProcess(ParaDbMethods):
             if self.ordered:
                 self.current_order_num += 1
             para['standalone'] = self.decide_standalone(para)
-            if utils.key_in_dictionary(para, 'link_text_list'):
-                self.add_ref_para_association(para)
-                para.pop('link_text_list')
+            self.link_text_list(para)
             paragraph = self.create_paragraph_record(para)
             self.fake_to_real_para_id[para['id']] = paragraph.id
             self.add_association_with_group(paragraph)
 
-    def add_ref_para_association(self, para):
+    def link_text_list(self, para):
         '''
-        add_ref_para_association is a convenience method allowing the user to simply list the link text
-        associated with given para, instead of having manually associating each link to its paragraphs
+        link_text_list initiates the process of turning the list of references' link_text to
+        associations between a given paragraph and all of its references
 
-        :param para: one paragraph record
+        :param para: one paragraph
         :type para: dict
         '''
-        if not para['link_text_list']:
-            return
         if utils.key_not_in_dictionary(self.input_data, 'ref_link_paragraph'):
             self.input_data['ref_link_paragraph'] = []
-        ref_para_association = utils.add_to_associations('paragraph_id',
-                                                         para['id'],
-                                                         'link_text',
-                                                         para['link_text_list'],
-                                                         self.input_data['ref_link_paragraph'])
-        self.input_data['ref_link_paragraph'] = ref_para_association
+
+        updated_para_ref = utils.initiate_paragraph_associations(para,
+                                                                 crud.PARA_REF_LINK_TEXT,
+                                                                 self.input_data['ref_link_paragraph'])
+        if updated_para_ref is not None:
+            self.input_data['ref_link_paragraph'] = updated_para_ref
+        if utils.key_in_dictionary(para, 'link_text_list'):
+            para.pop('link_text_list')
 
     def decide_standalone(self, para):
         '''
@@ -168,7 +172,7 @@ class ParaDbCreateProcess(ParaDbMethods):
         if standalone == 'default':
             standalone = self.standalone
         if utils.key_in_dictionary(para, 'standalone'):
-            return
+            return True if para['standalone'] in ('yes', 'true', 'True') else False
         if standalone == 'yes':
             return True
         if standalone == 'no':

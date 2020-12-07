@@ -1,0 +1,10 @@
+{
+    "paragraphs": [
+        {
+            "guid": "60cc7371-4053-483e-abeb-60105ff2e1de",
+            "id": 140,
+            "text": "<p>Python is considered an interpreted language because it runs directly from source code, but it is compiled as well. The interpretation aspect makes it easier to work with, since the errors display line by line. But it is really slow to run through the code. For that reason, Python saves the intermediate byte code in a file with a .pyc extension. The Python Virtual machine [PVM] simultaneously compiles and executes the .pyc file.</p>  <p>The PVM is architecture independent, but needs to have the correct Python version associated with it. The python version is stored along with the byte code.</p>",
+            "ref_slug_list": ["vivekkothari_geekforgeeks_20181109_internalworkingpython"]
+        }
+    ]
+}

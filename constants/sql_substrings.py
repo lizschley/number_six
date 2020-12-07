@@ -41,7 +41,7 @@ COMPLETE_GP_SELECT = ('gp.id as gp_id, gp.group_id as gp_group_id, gp.paragraph_
 COMPLETE_GROUP_SELECT = ('g.id as group_id, g.category_id as group_category_id, g.title as group_title, '
                          'g.slug as group_slug, g.note as group_note, g.created_at as group_created_at, '
                          'g.updated_at as group_updated_at, g.short_name as group_short_name, '
-                         'g.cat_sort as cat_sort g.group_text as group_text')
+                         'g.cat_sort as cat_sort, g.group_type as group_type')
 
 COMPLETE_PR_SELECT = ('pr.id as pr_id, pr.paragraph_id as pr_para_id, '
                       'pr.reference_id as pr_reference_id, pr.created_at as pr_created_at, '
@@ -58,4 +58,4 @@ COMPLETE_REFERENCE_SELECT = ('r.id as reference_id, r.link_text as reference_lin
                              'r.short_text as short_text, r.created_at as reference_created_at, '
                              'r.updated_at as reference_updated_at ')
 
-CATEGORY_SORT = 'order by g.id, g.cat_sort, gp.order'
+CATEGORY_SORT = 'order by g.cat_sort, gp.order'

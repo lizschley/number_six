@@ -5,7 +5,7 @@
     "paragraph_ids": [],
     "reference_ids": [],
     "add_categories": [{"title": "", "category_type": ""}],
-    "add_references": [{"link_text": "", "url": "", "short_text": "",  "para_guids": []}],
+    "add_references": [{"link_text": "", "url": "", "short_text": ""}],
     "add_groups": [{"title": "", "note": "", "short_name": "",
                     "group_type": "", "category_id": 0, "category_title": ""}],
     "add_paragraph_reference": [{"paragraph_guid": "", "reference_slug": ""}],

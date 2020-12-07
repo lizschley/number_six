@@ -180,6 +180,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param record: dictionary representation of the record to be found or created
         :type record: dict
         '''
+        if key == 'paragraphs':
+            self.ref_slug_list(record)
+
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         class_ = crud.UPDATE_DATA[key]['class']
         find_dict = {unique_field: record[unique_field]}
@@ -190,6 +193,24 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
         self.assign_to_process_data(key, self.ensure_dictionary(class_, returned_record),
                                     unique_field, 'update', True)
+
+    def ref_slug_list(self, para):
+        '''
+        ref_slug_list initiates the process of turning the list of references' slug to
+        associations between a given paragraph and all of its references
+
+        :param para: one paragraph
+        :type para: dict
+        '''
+        if utils.key_not_in_dictionary(self.input_data, 'add_paragraph_reference'):
+            self.input_data['add_paragraph_reference'] = []
+        add_para_refs = utils.initiate_paragraph_associations(para,
+                                                              crud.PARA_REF_SLUG,
+                                                              self.input_data['add_paragraph_reference'])
+        if add_para_refs is not None:
+            self.input_data['add_paragraph_reference'] = add_para_refs
+        if utils.key_in_dictionary(para, 'ref_slug_list'):
+            para.pop('ref_slug_list')
 
     def add_category_to_group(self, group_to_create):
         '''
@@ -240,11 +261,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
         the correct process
         '''
         for input_key in crud.ASSOCIATION_KEYS:
-            if utils.key_not_in_dictionary(self.file_data, input_key):
+            if utils.key_not_in_dictionary(self.input_data, input_key):
                 continue
             function, data_key = input_key.split('_', 1)
-
-            input_dictionaries = self.prepare_association_data(self.file_data[input_key], data_key)
+            input_dictionaries = self.prepare_association_data(self.input_data[input_key], data_key)
             if function == 'delete':
                 self.delete_associations(data_key, input_key, input_dictionaries)
                 RecordDictionaryUtility.write_dictionary_to_file(self.file_data[input_key],
@@ -338,6 +358,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :rtype: dict
         '''
         association_data = crud.ASSOCIATION_DATA[data_key]
+
         create_dict = {}
         for rec in foreign_key_records:
             association_key = self.current_association_key(rec)

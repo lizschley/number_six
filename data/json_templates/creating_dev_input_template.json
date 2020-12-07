@@ -1,10 +1,9 @@
 {
   "group": {
-    "__comment_group_1__": "For new group, must have correct short_name, along with group_title, ordered and standalone fields",
-    "__comment_group_2__": "If group exists, still need correct: group_title, ordered and standalone fields",
-    "__comment_group_3__": "For existing groups, keep default keys and values (other than group_2 above), EXCEPT short_name",
-    "__comment_short_name_1__": "Always and only include short_name if this is a new group. ",
-    "__comment_short_name_2__": "OTHERWISE (group exists) delete the short_name key and value. No editing since only creating!!",
+    "__comment_group_1__": "Group always requires (correct): group_title, ordered and default standalone fields",
+    "__comment_group_2__": "New groups also require (correct): short_name, group_type, group_note and category_id fields",
+    "__comment_group_3__": "For existing groups, MUST DELETE the short_name key & value.  Will get error otherwise.",
+    "__comment_group_4__": "(Still existing) Program ignores fields that are not short_name & not specified in group_1 comment above.",
     "short_name": "",
     "group_note": "",
     "group_type": "",
