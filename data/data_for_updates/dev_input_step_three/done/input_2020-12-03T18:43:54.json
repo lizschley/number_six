@@ -1,9 +1,0 @@
-{
-    "paragraphs": [
-        {
-            "guid": "a0666572-6a76-48d2-930a-d00759fe54f6",
-            "id": 132,
-            "text": "<p>The following is a direct quote from Wikipedia: In computer programming, a shim is a  library that transparently intercepts API calls and changes the arguments passed, handles  the operation itself or redirects the operation elsewhere.[1][2] Shims can be used to  support an old API in a newer environment, or a new API in an older environment. Shims can  also be used for running programs on different software platforms than they were developed for.</p> <p>Then I watched |beg_ref_slug|Jacob Sorber 2019 Shim Video|end_ref_slug|, which was great.  He says that a  shim is a piece of code that sits between a library and the code that uses it.  It does this  by calling the shim first.  In the video, Jacob Sorber intercepts calls to the c library\u2019s  rand function.  First he just shows that he is intercepting the call by altering the results.  Then he makes the call and sends back the original results and then he alters the results and  returns the new value.  He also intercepts the connect file and refuses a lot of the stuff from  the CNN page using Firefox.  You can simply call your program instead or change the arguments or  in the case of {{pyenv - popup}}, decide which versions of python to use.</p> <p>While reading about shims, I read that it was an example of the adapter pattern.  Instead  of describing the adapter pattern in detail, I am simply adding a Stack Overflow reference.   In the accepted answer the user, tcarvin, says that shims are an example of the adapter pattern,  and makes it so your code and the function are both unaware of the changes the shim makes.</p>"
-        }
-    ]
-}

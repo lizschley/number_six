@@ -1,9 +1,0 @@
-{
-    "paragraphs": [
-        {
-            "guid": "5dcd43cd-c0cb-4216-88f1-7fa1134a78c7",
-            "id": 137,
-            "text": "<p>According to |beg_ref_slug|andrew_medium_20180116_hardlinkssymboliclinks|end_ref_slug| an inode is actually a datase that describes the file/directory attributes such as metadata and the physical location on the hard drive. </p> <p>An inode makes the following possible:</p> <ul> <li>Retrieving information about the file such as permission privilege.</li> <li>Accessing the file, even if it was renamed or moved.</li> <li>Accessing the file from many different places.</li> </ul>"
-        }
-    ]
-}
