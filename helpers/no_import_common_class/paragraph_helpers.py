@@ -43,25 +43,6 @@ def json_to_dict(json_path):
     return data
 
 
-def format_json_text(text):
-    '''
-    format_json_text takes a List of strings and concatenates them
-       together with a space
-
-    If there is no html tag (just checks for < in the first character),
-       it adds a paragraph tag
-
-    :param text: List of strings
-    :type text: List
-    :return: html formated text
-    :rtype: str
-    '''
-    text = ' '.join(text)
-    if text[0] != '<':
-        text = '<p>' + text + '</p>'
-    return text
-
-
 def extract_data_from_form(classification):
     '''
     extract_data_from_form formats the Study lookup form return to be usable for
@@ -100,6 +81,24 @@ def add_paragraphs_to_context(context, paragraphs):
     context['title'] = paragraphs['title']
     context['title_note'] = paragraphs['title_note']
     context['paragraphs'] = paragraphs['paragraphs']
+    return context
+
+
+def add_error_to_context(context, paragraphs, key):
+    '''
+    add_error_to_context reformats data to save work in the template
+
+    :param context: original context, minus what was needed for para retrieval
+    :type context: dict
+    :param paragraphs: paragraph dictionary before adding to context
+    :type paragraphs: dict
+    :return: context - will be used in paragraph template
+    :rtype: dict
+    '''
+    context['error'] = paragraphs[key]
+    context['title'] = ""
+    context['title_note'] = ""
+    context['paragraphs'] = []
     return context
 
 
@@ -146,6 +145,8 @@ def replace_link_indicators(link_function, para_text, **kwargs):
     new_args = {}
     if utils.key_in_dictionary(kwargs, 'from_ajax'):
         new_args['from_ajax'] = kwargs['from_ajax']
+    if utils.key_in_dictionary(kwargs, 'link_data'):
+        new_args['link_data'] = kwargs['link_data']
     para_piece_list = []
     pieces = para_text.split(kwargs['beg_link'])
     for piece in pieces:
@@ -191,9 +192,10 @@ def inline_link(**kwargs):
     :return: html link within text
     :rtype: string
     '''
-    link = lookup.INLINE_LINK_LOOKUP[kwargs['lookup_key']]
-    url = link['url']
-    link_text = link['link_text']
+    slug = kwargs['lookup_key']
+    link_data = kwargs['link_data']
+    url = link_data[slug]['url']
+    link_text = link_data[slug]['link_text']
     return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
 

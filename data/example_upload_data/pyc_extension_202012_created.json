@@ -1,0 +1,52 @@
+{
+  "group": {
+    "__comment_group_1__": "Group always requires (correct): group_title, ordered and standalone fields",
+    "__comment_group_2__": "New groups also require (correct): short_name, group_type, group_note and category_id fields",
+    "__comment_group_3__": "For existing groups, MUST DELETE the short_name key & value.  Will get error otherwise.",
+    "__comment_group_4__": "(Still existing) Program ignores fields that are not short_name & not specified in group_1 comment above.",
+    "category_id": 4,
+    "__comment_standalone_1__": "default standalone paragraphs to yes or no.  Can override for individual paras ",
+    "__comment_standalone_2__": "by adding standalone as key & yes or no value to the individual paragraph record",
+    "standalone": "no",
+    "__comment_ordered_1__": "yes or no, even if group already exists, used in association between para & group",
+    "ordered": "yes",
+    "short_name": "Python Interpreted or Compiled",
+    "group_type": "",
+    "group_note": "",
+    "group_title": "Is Python interpreted or compiled?"
+  },
+  "references": [
+     {
+       "link_text": "SoftwareTestingHelp_Printscreen_Top6BestPythonTestingFrameworks",
+       "url": "https://www.softwaretestinghelp.com/python-testing-frameworks/",
+       "short_text": "Python Overview Diagram"
+     },
+     {
+      "link_text": "SainiRahul_Medium_20190828_DifferenceCompilerInterpreterRespectJvmPvm",
+      "url": "https://medium.com/@rahul77349/difference-between-compiler-and-interpreter-with-respect-to-jvm-java-virtual-machine-and-pvm-22fc77ae0eb7",
+      "short_text": "Interpreters Compilers PVM JVM"
+    }
+  ],
+  "paragraphs": [
+    {
+      "id": "first",
+      "subtitle": "",
+      "note": "",
+      "image_path": "projects/img/python_interpreter_diagram.png",
+      "image_info_key": "default",
+      "text": "<p>Also, what are the files with the pyc extension?</p>",
+      "link_text_list": ["SoftwareTestingHelp_Printscreen_Top6BestPythonTestingFrameworks"]
+    },
+    {
+      "id": "second",
+      "subtitle": "Python Interpreted and Compiled",
+      "note": "",
+      "image_path": "",
+      "standalone": "yes",
+      "image_info_key": "default",
+      "text": "<p>Python is considered an interpreted language because it runs directly from source code, but it is compiled as well. The interpretation aspect makes it easier to work with, since the errors display line by line. But it is really slow to run through the code line by line. For that reason, Python saves the intermediate byte code in a file with a .pyc extension. The Python Virtual machine [PVN] simultaneously compiles and executes the .pyc file.</p>  <p>The PVM is architecture independent, but needs to have the correct Python version associated with it. The python version is stored along with the byte code.</p>",
+      "link_text_list": ["SainiRahul_Medium_20190828_DifferenceCompilerInterpreterRespectJvmPvm"]
+    }
+
+  ]
+}

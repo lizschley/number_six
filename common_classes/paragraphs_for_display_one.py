@@ -2,6 +2,7 @@
     for any page that either has only one group or that does not display by group.'''
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
 
 
 class ParagraphsForDisplayOne(ParagraphsForDisplay):

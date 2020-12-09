@@ -27,9 +27,12 @@ class ParagraphsForDisplay:
     AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
 
     def __init__(self):
-        self.title = ''
-        self.title_note = ''
+        self.group_title = ''
+        self.group_note = ''
+        self.group_type = ''
         self.reference_links = {}
+        self.inline_ref_data = {}
+        self.inline_ref = {}
         self.paragraphs = []
         self.input_data = {}
 
@@ -65,7 +68,6 @@ class ParagraphsForDisplay:
             if key in kwargs.keys():
                 retriever = self.instantiate_class(key)
         if retriever is not None:
-            print(f'retriever == {retriever}')
             return retriever.data_retrieval(kwargs)
         return None
 
@@ -96,6 +98,10 @@ class ParagraphsForDisplay:
         :return: dictionary to be added to the context & used in the paragraph display template
         :rtype: dict
         '''
+        if not self.input_data['group']:
+            message = ('Your selection produced no results, please select something else or try '
+                       'the same selection another day.')
+            return self.output_error(message)
         self.assign_group_data()
         self.create_links_from_references()
         self.assign_paragraphs()
@@ -106,8 +112,9 @@ class ParagraphsForDisplay:
         assign_group_data, for example title; paragraph displayer has no concept of group
         '''
         group = self.input_data['group']
-        self.title = group['title'].strip()
-        self.title_note = group['note'].strip()
+        self.group_title = group['group_title'].strip()
+        self.group_note = group['group_note'].strip()
+        self.group_type = group['group_type'].strip()
 
     def create_links_from_references(self):
         '''
@@ -118,6 +125,8 @@ class ParagraphsForDisplay:
             link_text = ref['link_text'].strip()
             link = para_helpers.create_link(ref['url'], link_text)
             self.reference_links[link_text] = link.strip()
+            slug = ref['slug']
+            self.inline_ref_data[slug] = {'link_text': ref['short_text'], 'url': ref['url']}
 
     def assign_paragraphs(self, from_ajax=False):
         '''
@@ -137,6 +146,7 @@ class ParagraphsForDisplay:
         ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
         out_para_list = []
         inline_args = ParagraphsForDisplay.INLINE_ARGS
+        inline_args['link_data'] = self.inline_ref_data
         ajax_args = ParagraphsForDisplay.AJAX_ARGS
         ajax_args['from_ajax'] = from_ajax
         for para in in_para_list:
@@ -201,6 +211,10 @@ class ParagraphsForDisplay:
         :return: final dict transformed in the study view to use in display paragraph template
         :rtype: dict
         '''
-        return {'title': self.title,
-                'title_note': self.title_note,
+        return {'title': self.group_title,
+                'title_note': self.group_note,
+                'group_type': self.group_type,
                 'paragraphs': self.paragraphs}
+
+    def output_error(self, message):
+        return {'study_error': message}

@@ -57,14 +57,29 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
         paragraphs = paragraphs.retrieve_paragraphs(path_to_json=path_to_json)
     else:
         paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
+    return appropriate_context(context, paragraphs)
 
+def appropriate_context(context, paragraphs):
+    '''
+    appropriate_context takes the context and the data retriever and returns the information
+    to send to the template
+
+    :param context: information we already have, will be updated
+    :type context: dict
+    :param paragraphs: information returned from the data retriever
+    :type paragraphs: dict
+    :return: the information the front end needs to display the page
+    :rtype: dict
+    '''
     if utils.key_in_dictionary(paragraphs, 'groups'):
         context = cat_helper.add_paragraphs_by_group_to_context(context, paragraphs)
+    elif utils.key_in_dictionary(paragraphs, 'study_error'):
+        context = para_helper.add_error_to_context(context, paragraphs, 'study_error')
     else:
         paragraphs = add_collapse_variables(paragraphs)
         context = para_helper.add_paragraphs_to_context(context, paragraphs)
-
     return context
+
 
 
 def retrieve_paragraphs_based_on_context(paras, context):
@@ -100,6 +115,8 @@ def add_collapse_variables(paragraphs):
     :return: list of paragraphs that have collapse variables for display
     :rtype:  dict containing list of individual paragraphs complete with collapse variables
     '''
+    if 'ordered' in paragraphs['group_type']:
+        return paragraphs
     for para in paragraphs['paragraphs']:
         para['href_collapse'] = '#collapse_' + str(para['id'])
         para['collapse_id'] = 'collapse_' + str(para['id'])

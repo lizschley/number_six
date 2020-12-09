@@ -398,7 +398,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group['note'] = row.group_note
         group['category_id'] = row.group_category_id
         group['short_name'] = row.group_short_name
-        group['cat_sort'] = row.group_sort
+        group['cat_sort'] = row.cat_sort
+        group['group_type'] = row.group_type
         self.output_data['groups'].append(group)
         if self.run_as_prod:
             self.run_as_prod_lookup('groups', row.group_id, row.group_slug)

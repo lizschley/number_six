@@ -2,6 +2,7 @@
 import constants.sql_substrings as sql_sub
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
+from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
 from projects.models.paragraphs import Category
 
 
@@ -191,7 +192,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         if row.reference_id is None:
             return
         if row.reference_id not in self.ref_ids:
-            self.references.append({'link_text': row.link_text, 'url': row.url})
+            self.references.append(ParagraphDictionaries.reference_link_data(row))
         if row.link_text not in self.group_id_to_link_text_list[row.group_id]:
             self.group_id_to_link_text_list[row.group_id].append(row.link_text)
             self.groups[-1]['link_text'].append(row.link_text)
@@ -233,6 +234,9 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
             'slug': row.group_slug,
             'note': row.group_note,
             'category_id': row.category_id,
+            'short_name': row.group_short_name,
+            'cat_sort': row.cat_sort,
+            'group_type': row.group_type,
         }
 
     def output_data(self):

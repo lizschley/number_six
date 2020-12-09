@@ -3,10 +3,11 @@ BEGIN_SELECT = 'select 1 as id'
 SELECT_CATEGORY = ('c.id as category_id, c.title as category_title, c.slug as category_slug, '
                    'c.category_type as category_type ')
 SELECT_GROUP = ('g.id as group_id, g.short_name as group_short_name, g.title as group_title, '
-                'g.note as group_note, g.cat_sort as group_sort, gp.order, g.slug as group_slug ')
+                'g.group_type as group_type, g.note as group_note, g.cat_sort as cat_sort, gp.order, '
+                'g.slug as group_slug ')
 SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
                      'image_info_key, text')
-SELECT_REFERENCES = 'r.id as reference_id, link_text, url'
+SELECT_REFERENCES = 'r.id as reference_id, link_text, url, short_text, r.slug as ref_slug '
 
 FROM_CATEGORY_JOIN_GROUP_AND_PARA = ('from projects_category c '
                                      'join projects_group g on c.id = g.category_id '
@@ -40,7 +41,7 @@ COMPLETE_GP_SELECT = ('gp.id as gp_id, gp.group_id as gp_group_id, gp.paragraph_
 COMPLETE_GROUP_SELECT = ('g.id as group_id, g.category_id as group_category_id, g.title as group_title, '
                          'g.slug as group_slug, g.note as group_note, g.created_at as group_created_at, '
                          'g.updated_at as group_updated_at, g.short_name as group_short_name, '
-                         'g.cat_sort as group_sort')
+                         'g.cat_sort as cat_sort, g.group_type as group_type')
 
 COMPLETE_PR_SELECT = ('pr.id as pr_id, pr.paragraph_id as pr_para_id, '
                       'pr.reference_id as pr_reference_id, pr.created_at as pr_created_at, '
@@ -54,7 +55,7 @@ COMPLETE_PARAGRAPH_SELECT = ('p.id as para_id, p.guid as para_guid, '
 
 COMPLETE_REFERENCE_SELECT = ('r.id as reference_id, r.link_text as reference_link_text, '
                              'r.slug as reference_slug, r.url as reference_url, '
-                             'r.created_at as reference_created_at, '
+                             'r.short_text as short_text, r.created_at as reference_created_at, '
                              'r.updated_at as reference_updated_at ')
 
 CATEGORY_SORT = 'order by g.cat_sort, gp.order'

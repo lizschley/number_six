@@ -62,7 +62,8 @@ class ParagraphDictionaries:
             'note': '',
             'category_id': 0,
             'short_name': '',
-            'cat_sort': 0
+            'cat_sort': 0,
+            'group_type': '',
         }
 
     @staticmethod
@@ -83,3 +84,16 @@ class ParagraphDictionaries:
             'reference_id': 0,
             'paragraph_id': 0,
         }
+
+    @staticmethod
+    def reference_link_data(row):
+        '''
+        reference_link_data returns the reference data needed to create various kinds of links
+
+        :param row: is one row from a sql query
+        :type row: partial query set
+        :return: data needed to create links to display
+        :rtype: dict
+        '''
+        return {'link_text': row.link_text, 'url': row.url,
+                'short_text': row.short_text, 'slug': row.ref_slug}

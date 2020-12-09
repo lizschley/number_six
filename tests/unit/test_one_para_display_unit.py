@@ -16,8 +16,8 @@ def paragraphs_for_display_one_object():
     return paragraph
 
 
-@pytest.mark.parametrize('var_name, var_type', [('title', str),
-                                                ('title_note', str),
+@pytest.mark.parametrize('var_name, var_type', [('group_title', str),
+                                                ('group_note', str),
                                                 ('reference_links', dict),
                                                 ('paragraphs', list),
                                                 ('input_data', dict)])

@@ -64,3 +64,17 @@ RECORD_LOOKUP_MESSAGE_PROD = RECORD_LOOKUP_MESSAGE + ('Since this is production,
 RECORD_LOOKUP_MESSAGE_DEV = RECORD_LOOKUP_MESSAGE + ('In development, you should edit the data, but do '
                                                      'not use this method unless you know what you are '
                                                      'doing.')
+
+PARA_REF_LINK_TEXT = {
+    'key_1': 'paragraph_id',
+    'para_val_1_key': 'id',
+    'key_2': 'link_text',
+    'para_val_2_key': 'link_text_list',
+}
+
+PARA_REF_SLUG = {
+    'key_1': 'paragraph_guid',
+    'para_val_1_key': 'guid',
+    'key_2': 'reference_slug',
+    'para_val_2_key': 'ref_slug_list',
+}

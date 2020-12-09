@@ -43,6 +43,7 @@ class Reference(models.Model):
     url = models.TextField(blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    short_text = models.CharField(max_length=30, blank=True, null=True, default='link')
 
     def __repr__(self):
         return f'<Reference link_text: {self.link_text}>'
@@ -89,6 +90,9 @@ class Paragraph(models.Model):
 
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
+    STUDY_STANDALONE = 'study-standalone'
+    STUDY_ORDERED = 'study-ordered'
+    DEFAULT = ''
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
     note = models.TextField(blank=True)
@@ -98,6 +102,7 @@ class Group(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     short_name = models.CharField(max_length=36, blank=False, unique=True, default=uuid.uuid4)
     cat_sort = models.PositiveSmallIntegerField(blank=True, null=True)
+    group_type = models.CharField(max_length=30, blank=True, null=True, default=DEFAULT)
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '

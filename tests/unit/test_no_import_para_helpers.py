@@ -43,16 +43,6 @@ def test_json_to_dict(orig_para_dict_data):
     assert isinstance(orig_para_dict_data, dict)
 
 
-def test_format_json_text_without_para_tags():
-    data = para_helper.format_json_text(list_data.TEXT_LIST_WITHOUT_PARA_TAGS)
-    check_text_para_assertions(data)
-
-
-def test_format_json_text_with_para_tags():
-    data = para_helper.format_json_text(list_data.TEXT_LIST_WITH_PARA_TAGS)
-    check_text_para_assertions(data)
-
-
 def test_extract_data_from_form():
     classification = 'group_2'
     output = para_helper.extract_data_from_form(classification)

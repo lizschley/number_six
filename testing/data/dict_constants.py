@@ -27,20 +27,27 @@ PARA_DISPLAY_OUTPUT_DATA_FOR_TESTING = {
                     'of their natures.</p>'
         }],
     'title': 'Listening',
-    'title_note': '*Note - subjects I listen to'
+    'title_note': '*Note - subjects I listen to',
+    'group_type': ''
 }
 
 PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
     'group': {
-        'title': 'Listening',
-        'note': '*Note - subjects I listen to'
+        'group_title': 'Listening',
+        'group_note': '*Note - subjects I listen to',
+        'group_type': '',
     },
     'references': [{
         'link_text': 'Literature',
-        'url': 'https://literature.org/'
+        'url': 'https://literature.org/',
+        'short_text': 'lit',
+        'slug': 'literature',
     }, {
         'link_text': 'JessicaSpencerKensley',
-        'url': 'https://gymcastic.com/'
+        'url': 'https://gymcastic.com/',
+        'short_text': 'jessspencerkensley',
+        'slug': 'tired_of_this_podcast',
+
     }],
     'paragraphs': [{
         'id': 'first',
@@ -70,8 +77,9 @@ PARA_DISPLAY_INPUT_DATA_FOR_TESTING = {
 }
 
 PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
-    'title': 'Listening',
-    'note': '*Note - subjects I listen to',
+    'group_title': 'Listening',
+    'group_note': '*Note - subjects I listen to',
+    'group_type': '',
     'paragraphs': [{
         'paragraph_id': 'first',
         'subtitle': 'Fiction',
@@ -83,7 +91,9 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'order': 'fiction',
         'reference_id': 'books',
         'link_text': 'Literature',
-        'url': 'https://literature.org/'
+        'url': 'https://literature.org/',
+        'short_text': 'lit',
+        'slug': 'literature',
     }, {
         'paragraph_id': 'second',
         'subtitle': 'A sometimes wonderful, but often annoying podcast',
@@ -96,7 +106,9 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
         'order': 'a sometimes wonderful, but often annoying podcast',
         'reference_id': 'gym',
         'link_text': 'JessicaSpencerKensley',
-        'url': 'https://gymcastic.com/'
+        'url': 'https://gymcastic.com/',
+        'short_text': 'jessspencerkensley',
+        'slug': 'tired_of_this_podcast',
     }],
 }
 
@@ -104,11 +116,15 @@ PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING = {
 PARA_DISPLAY_ONE_PARA_INPUT = {
     'group': {
         'title': 'glabrous',
-        'note': ''
+        'note': '',
+        'group_type': '',
     },
     'references': [{
         'link_text': 'YourDictionary_glabrous',
-        'url': 'https://www.yourdictionary.com/glabrous'
+        'url': 'https://www.yourdictionary.com/glabrous',
+        'short_text': 'glabrous',
+        'slug': 'yourdictionary_glabrous',
+
     }],
     'paragraphs': [{
         'id': 68,
@@ -123,3 +139,19 @@ PARA_DISPLAY_ONE_PARA_INPUT = {
         68: ['YourDictionary_glabrous']
     }
 }
+
+LIST_OF_SIMILAR_DICTIONARIES = [
+    {'name': 'Nemo', 'color': 'black', 'sex': 'female', 'birth_year': 1964},
+    {'name': 'Sammy', 'color': 'orange and white', 'sex': 'female', 'birth_year': 1994},
+    {'name': 'Mac', 'color': 'orange', 'sex': 'male', 'birth_year': 1994},
+    {'name': 'Ninja', 'color': 'black', 'sex': 'female', 'birth_year': 2017},
+    {'name': 'Ronin', 'color': 'orange and white', 'sex': 'male', 'birth_year': 2017}
+]
+
+LIST_OF_DIFFERENT_DICTIONARIES = [
+    {'name': 'Nemo', 'color': 'black', 'sex': 'female', 'birth_year': 1964},
+    {'name': 'Sammy', 'color': 'orange and white', 'sex': 'female', 'birth_year': 1994},
+    {'name': 'Mac', 'color': 'orange', 'sex': 'male', 'birth_year': 1994},
+    {'name': 'Ninja', 'color': 'black', 'sex': 'female', 'birth_year': 2017, 'alive': True},
+    {'name': 'Ronin', 'color': 'orange and white', 'sex': 'male', 'birth_year': 2017, 'alive': True}
+]

@@ -10,16 +10,13 @@
      {
        "link_text": "literature",
        "url": "https://literature.org/",
-       "short_text": "lit",
-       "slug": "literature"
-    },
-    {
-      "link_text": "JessicaSpencerKensley",
-      "url": "https://gymcastic.com/",
-      "short_text": "jessspencerkensley",
-      "slug": "tired_of_this_podcast"
-
-    }
+       "para_fake_id_list": []
+     },
+     {
+       "link_text": "JessicaSpencerKensley",
+       "url": "https://gymcastic.com/",
+       "para_fake_id_list": ["second"]
+     }
   ],
   "paragraphs": [
     {
@@ -32,7 +29,8 @@
          "Fiction is my number one non-domestic animal love. ",
          "My favorite animal is Rick. ",
          "He shares my love of fiction."
-       ]
+       ],
+      "ref_link_text_list": ["literature"]
     },
     {
       "id": "second",
@@ -45,17 +43,9 @@
          "Jessica and Spencer can be annoying, but Kensley rarely is.",
          "But like the way I feel about my cats, ",
          "I like them all equally in spite of their natures."
-      ]
+      ],
+      "ref_link_text_list": []
     }
   ],
-  "ref_link_paragraph": [
-    {
-      "link_text": "literature",
-      "paragraph_id": "first"
-    },
-    {
-      "link_text": "JessicaSpencerKensley",
-      "paragraph_id": "second"
-    }
-  ]
+  "ref_link_paragraph": []
 }

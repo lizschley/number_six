@@ -2,6 +2,7 @@
 import constants.sql_substrings as sql_sub
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
+from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
 from projects.models.paragraphs import (Group, Paragraph)
 
 
@@ -23,7 +24,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: dict
         '''
         if 'group_id' in kwargs.keys():
-            query = self.write_group_standalone_para_sql()
+            query = self.write_group_para_sql()
             raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
             return self.db_output_to_display_input(raw_queryset)
         if 'subtitle' in kwargs.keys():
@@ -34,18 +35,15 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             return self.db_output_to_display_input(raw_queryset)
         return None
 
-    # Todo: change not standalone to category null and not in EXCLUDE_FROM_STUDY_GROUPS
-    def write_group_standalone_para_sql(self):
+    def write_group_para_sql(self):
         '''
-        write_group_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
-        using a group and the paragraphs are standalone
-
+        write_group_para_sql generates the SQL used to retrieve data when it is retrieved
+        using a group.
         :return: the query to be used, minus the actual group_id
         :rtype: str
         '''
         query = self.build_basic_sql('group_id_only')
         query += 'where g.id = %s'
-        query += ' and p.standalone = TRUE'
         return query
 
     def write_one_standalone_para_sql(self):
@@ -145,14 +143,16 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         try:
             self.ordered = row.order != 0
             self.group = {
-                'title': row.title,
-                'note': row.note,
+                'group_title': row.group_title,
+                'group_note': row.group_note,
+                'group_type': row.group_type,
             }
         except AttributeError:  # Be explicit with catching exceptions.
             self.ordered = False
             self.group = {
-                'title': 'standalone para',
-                'note': '',
+                'group_title': 'standalone para',
+                'group_note': '',
+                'group_type': '',
             }
 
     def append_unique_reference(self, row):
@@ -164,7 +164,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :type row: one row of django.db.models.query.RawQuerySet
         '''
         if row.reference_id not in self.ref_ids:
-            self.references.append({'link_text': row.link_text, 'url': row.url})
+            self.references.append(ParagraphDictionaries.reference_link_data(row))
             self.ref_ids.append(row.reference_id)
 
     def append_unique_paragraph(self, row):

@@ -10,4 +10,4 @@ BASIC_PARA_TEST_JSON = os.path.join(settings.BASE_DIR, 'testing/data/basic_parag
 DISPLAY_PARA_DICT_KEY = 'basic_paragraph_display_dict/value'
 DISPLAY_PARA_DB_DICT_KEY = 'basic_paragraph_db_display_dict/value'
 
-DISPLAY_PARA_KEYS = ['paragraphs', 'title', 'title_note']
+DISPLAY_PARA_KEYS = ['group_type', 'paragraphs', 'title', 'title_note']

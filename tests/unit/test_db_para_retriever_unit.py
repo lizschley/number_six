@@ -25,7 +25,7 @@ def test_para_retriever_init(db_para_retriever, var_name, var_type):
 
 def test_data_retrieval(mocker, db_para_retriever):
     path = 'common_classes.para_display_retriever_db.ParaDisplayRetrieverDb.'
-    mocker.patch(path + 'write_group_standalone_para_sql')
+    mocker.patch(path + 'write_group_para_sql')
     mock = mocker.patch(path + 'db_output_to_display_input')
     mock.return_value = {'test': 'test'}
     assert db_para_retriever.data_retrieval({'group_id': 1}) == {'test': 'test'}
@@ -42,8 +42,8 @@ def test_data_retrieval(mocker, db_para_retriever):
                                        ('projects_paragraph'),
                                        ('reference'),
                                        ('projects_paragraphreference')])
-def test_write_group_standalone_para_sql(db_para_retriever, substring):
-    fullstring = db_para_retriever.write_group_standalone_para_sql()
+def test_write_group_para_sql(db_para_retriever, substring):
+    fullstring = db_para_retriever.write_group_para_sql()
     helper.assert_in_string(fullstring, substring)
 
 
@@ -80,7 +80,7 @@ def test_db_output_keys(retriever_db_output, var_name, var_type):
     assert isinstance(retriever_db_output[var_name], var_type)
 
 
-@pytest.mark.parametrize('var_name, var_length', [('group', 2),
+@pytest.mark.parametrize('var_name, var_length', [('group', 3),
                                                   ('paragraphs', 2),
                                                   ('references', 2),
                                                   ('para_id_to_link_text', 2)])
@@ -102,8 +102,8 @@ def test_db_output_list_data_values_correct(retriever_db_output, outer, idx, inn
     helper.assert_in_string(retriever_db_output[outer][idx][inner], substring)
 
 
-@pytest.mark.parametrize('outer, key, substring', [('group', 'title', 'Listen'),
-                                                   ('group', 'note', 'subjects')])
+@pytest.mark.parametrize('outer, key, substring', [('group', 'group_title', 'Listen'),
+                                                   ('group', 'group_note', 'subjects')])
 def test_db_output_dict_data_values_correct(retriever_db_output, outer, key, substring):
     helper.assert_in_string(retriever_db_output[outer][key], substring)
 

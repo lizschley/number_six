@@ -1,9 +1,10 @@
 {
   "group": {
-    "title": "Urban Coyotes, a Personal Perspective",
-    "note": "",
+    "group_title": "Urban Coyotes, a Personal Perspective",
+    "group_note": "",
     "ordered": "yes",
-    "standalone": "no"
+    "standalone": "no",
+    "group_type": ""
   },
   "references": [
      {
