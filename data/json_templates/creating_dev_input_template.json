@@ -1,6 +1,6 @@
 {
   "group": {
-    "__comment_group_1__": "Group always requires (correct): group_title, ordered and default standalone fields",
+    "__comment_group_1__": "Group always requires (correct): group_title, ordered and standalone (default) fields",
     "__comment_group_2__": "New groups also require (correct): short_name, group_type, group_note and category_id fields",
     "__comment_group_3__": "For existing groups, MUST DELETE the short_name key & value.  Will get error otherwise.",
     "__comment_group_4__": "(Still existing) Program ignores fields that are not short_name & not specified in group_1 comment above.",
@@ -30,6 +30,7 @@
       "image_path": "",
       "image_info_key": "default",
       "text": "",
+      "__comment_standalone__": "add standalone: yes or no, if the paragraph is different from the group",
       "link_text_list": []
     }
   ],
