@@ -2,12 +2,12 @@
 import os
 import shutil
 from django.utils.text import slugify
-import constants.file_paths as file_paths
+import constants.scripts as scripts
 
 
 def valid_non_blank_string(str_to_check):
     '''
-    valid_blank_string returns True if str_to_check is a valid string with more than just whitespace
+    valid_non_blank_string returns True if str_to_check is a valid string with more than just whitespace
 
     :param str_to_check: string to check
     :type str_to_check: str
@@ -36,7 +36,7 @@ def slugify_string(input_str):
     return slugify(input_str)
 
 
-def archive_files_from_input_directories(include_done=True):
+def archive_files_from_input_directories(include_not_done=True):
     '''
     archive_files_from_input_directories moves the files used for processing input data to
     the archive location
@@ -44,10 +44,10 @@ def archive_files_from_input_directories(include_done=True):
     :param include_done: whether to also move files that haven't been manually moved to done or loaded
     :type include_done: bool, optional
     '''
-    in_dirs = file_paths.ONLY_DONE_INPUT_DIRECTORIES
+    in_dirs = scripts.ONLY_DONE_INPUT_DIRECTORIES
     num_processed = 0
-    if include_done:
-        in_dirs += file_paths.NOT_DONE_INPUT_DIRECTORIES
+    if include_not_done:
+        in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
     for dir_path in in_dirs:
         num_processed = loop_through_files_to_move(dir_path, num_processed)
     print(f'After looping through the input data, {num_processed} files were moved.')
@@ -62,7 +62,7 @@ def loop_through_files_to_move(input_dir_path, num_processed):
     :return: number of files that were moved
     :rtype: int
     '''
-    output_dir_path = file_paths.USED_INPUT_FINAL_DIRECTORY
+    output_dir_path = scripts.USED_INPUT_FINAL_DIRECTORY
     for filename in os.listdir(input_dir_path):
         if not filename.endswith('.json'):
             continue

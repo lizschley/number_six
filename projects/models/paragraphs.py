@@ -11,11 +11,15 @@ class Category(models.Model):
     RESUME = 'resume'
     FLASHCARD = 'flashcard'
     EXERCISE = 'exercise'
+    STUDY = 'study'
+    SEARCH = 'search'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
         (FLASHCARD, 'Flash Card'),
         (EXERCISE, 'Exercise'),
+        (STUDY, 'Study'),
+        (SEARCH, 'Search'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -90,8 +94,8 @@ class Paragraph(models.Model):
 
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
-    STUDY_STANDALONE = 'study-standalone'
-    STUDY_ORDERED = 'study-ordered'
+    STUDY_STANDALONE = 'standalone'
+    STUDY_ORDERED = 'ordered'
     DEFAULT = ''
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')

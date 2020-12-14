@@ -3,6 +3,7 @@
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
+import helpers.no_import_common_class.utilities as utils
 from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
@@ -125,6 +126,8 @@ class ParagraphsForDisplay:
             link_text = ref['link_text'].strip()
             link = para_helpers.create_link(ref['url'], link_text)
             self.reference_links[link_text] = link.strip()
+            if utils.key_not_in_dictionary(ref, 'slug'):
+                continue
             slug = ref['slug']
             self.inline_ref_data[slug] = {'link_text': ref['short_text'], 'url': ref['url']}
 
@@ -217,4 +220,5 @@ class ParagraphsForDisplay:
                 'paragraphs': self.paragraphs}
 
     def output_error(self, message):
+        ''' return error message with expected key '''
         return {'study_error': message}

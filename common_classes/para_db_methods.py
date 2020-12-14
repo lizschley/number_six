@@ -3,10 +3,10 @@
 import sys
 from django.core.exceptions import ValidationError
 from django.db.models import Max
-from django.utils import timezone
 import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
+import utilities.date_time as dt
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
@@ -63,7 +63,7 @@ class ParaDbMethods:
             return {'error': f'Invalid paragraph! {results["message"]}'}
 
         if update_dict['id'] == record.id:
-            update_dict['updated_at'] = timezone.now()
+            update_dict['updated_at'] = dt.current_timestamp_with_timezone()
             self.update_record(class_, update_dict)
         else:
             print('Error! The found record id does not match the input record, existing without update.')
@@ -121,9 +121,9 @@ class ParaDbMethods:
         if not self.updating:
             return
         pk_id = update_dict.pop('id')
+        update_dict.pop('created_at', None)
         class_.objects.filter(pk=pk_id).update(**update_dict)
 
-    # Todo: Check return type, print statements already in
     def create_record(self, class_, create_dict):
         '''
         create_record - creates a record of the class type with the values in create_dict

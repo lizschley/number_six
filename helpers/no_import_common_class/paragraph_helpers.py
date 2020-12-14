@@ -81,6 +81,7 @@ def add_paragraphs_to_context(context, paragraphs):
     context['title'] = paragraphs['title']
     context['title_note'] = paragraphs['title_note']
     context['paragraphs'] = paragraphs['paragraphs']
+    context['ordered'] = not paragraphs['group_type'] == 'standalone'
     return context
 
 

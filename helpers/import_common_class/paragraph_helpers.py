@@ -76,10 +76,10 @@ def appropriate_context(context, paragraphs):
     elif utils.key_in_dictionary(paragraphs, 'study_error'):
         context = para_helper.add_error_to_context(context, paragraphs, 'study_error')
     else:
-        paragraphs = add_collapse_variables(paragraphs)
+        if paragraphs['group_type'] == 'standalone':
+            paragraphs = add_collapse_variables(paragraphs)
         context = para_helper.add_paragraphs_to_context(context, paragraphs)
     return context
-
 
 
 def retrieve_paragraphs_based_on_context(paras, context):

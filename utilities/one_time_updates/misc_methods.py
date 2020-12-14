@@ -1,4 +1,5 @@
 ''' Methods to use for batch updates or whatever is needed'''
+from projects.models.paragraphs import Group
 from common_classes.para_db_methods import ParaDbMethods
 from projects.models.paragraphs import Reference
 
@@ -54,4 +55,19 @@ def add_short_text(updating=False):
                                        {'id': existing.id},
                                        {'id': existing.id,
                                         'short_text': ref_data['link_text']
+                                        })
+
+
+def add_category_alter_group_type(updating=False):
+    ''' one off for updating groups '''
+    updater = ParaDbMethods(updating)
+    groups = Group.objects.filter(group_type__contains='study').order_by('id')
+    for group in groups:
+        group_type = 'ordered' if 'ordered' in group.group_type else 'standalone'
+        updater.find_and_update_record(Group,
+                                       {'id': group.id},
+                                       {'id': group.id,
+                                        'cat_sort': None,
+                                        'category_id': 5,
+                                        'group_type': group_type,
                                         })

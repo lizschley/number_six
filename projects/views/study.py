@@ -10,6 +10,8 @@ import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
 INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
+STANDALONE_TMPLT = 'projects/paragraphs.html'
+ORDERED_TMPLT = 'projects/demo_paragraphs.html'
 
 
 class StudyParagraphView(TemplateView):
@@ -21,10 +23,10 @@ class StudyParagraphView(TemplateView):
     :return: context which includes the standard paragraph display object
     :rtype: dict
     '''
-    template_name = 'projects/paragraphs.html'
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
+        self.template_name = ORDERED_TMPLT if context['paragraphs']['ordered'] else STANDALONE_TMPLT
         return context
 
     def _add_to_context(self, context):
@@ -62,6 +64,7 @@ class StudyLookupView(FormView):
             identifier = 'projects:study_paragraphs_with_category'
             kwargs = {'category_id': in_data['category']}
         else:
+            breakpoint()
             identifier = 'projects:study_paragraphs_with_group'
             kwargs = {'group_id': in_data['group']}
         return {'identifier': identifier, 'kwargs': kwargs}

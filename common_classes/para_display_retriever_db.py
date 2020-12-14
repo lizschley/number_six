@@ -141,7 +141,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :type row: queryset row
         '''
         try:
-            self.ordered = row.order != 0
+            self.ordered = not row.group_type == 'standalone'
             self.group = {
                 'group_title': row.group_title,
                 'group_note': row.group_note,

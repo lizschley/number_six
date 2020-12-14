@@ -1,31 +1,37 @@
 ''' These methods help display the form used in the study form '''
 from projects.models.paragraphs import Group, Category
 
-STUDY_CATEGORIES = ['flashcard']
-INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
+STUDY_CATEGORIES = ['flashcard', 'study']
+INIT_STANDALONE = ('0', 'Choose Standalone Paras (i.e. Definitions or About)')
+INIT_ORDERED = ('0', 'Choose Ordered Paras (i.e. Instructions)')
+INIT_FLASHCARDS = ('0', 'Choose Flashcards (i.e. Questions and Answers)')
 
 
-def get_initial_classifications():
-    '''
-    get_initial_classifications help with displaying data in a simple, but flexible
-    way in the study lookup form
+def study_dropdowns():
+    group_lists = {}
+    group_lists['flashcard'] = list_flaschards()
+    group_lists['ordered'] = [INIT_ORDERED]
+    group_lists['standalone'] = [INIT_STANDALONE]
+    return organize_group_lists(group_lists)
 
-    This gets all of the groups for the study dropdown.  Later that dropdown will
-    include some categories, so this will get more complex.
 
-    :return: group_idx or (later) category_idx - where idx == the db id
-    :rtype: str
-    '''
-    classification_list = INITIAL_CLASSIFICATION
-    groups = Group.objects.filter(group_type__contains='study').order_by('slug')
-    for group in groups:
-        classification_list.append((format_group_id(group.pk), group.title))
-
-    categories = Category.objects.filter(category_type__in=STUDY_CATEGORIES)
+def list_flaschards():
+    flashcard_list = [INIT_FLASHCARDS]
+    categories = Category.objects.filter(category_type__in=['flashcard'])
     for category in categories:
-        cat_display = 'flashcards: ' + category.title
-        classification_list.append((format_category_id(category.pk), cat_display))
-    return classification_list
+        cat_display = category.title
+        flashcard_list.append((format_category_id(category.pk), cat_display))
+    return flashcard_list
+
+
+def organize_group_lists(dropdown_lists):
+    groups = Group.objects.filter(category__category_type='study')
+    for group in groups:
+        if group.group_type == 'ordered':
+            dropdown_lists['ordered'].append((format_group_id(group.pk), group.title))
+        elif group.group_type == 'standalone':
+            dropdown_lists['standalone'].append((format_group_id(group.pk), group.title))
+    return dropdown_lists
 
 
 def format_group_id(group_id):

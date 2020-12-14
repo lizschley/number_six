@@ -22,7 +22,6 @@ class ParaDbCreateProcess(ParaDbMethods):
         self.title = ''
         # 'fake_para_id': 'para_id'
         self.fake_to_real_para_id = {}
-        self.standalone = None
         self.group = None
         self.ordered = False
         self.current_order_num = 0
@@ -87,9 +86,7 @@ class ParaDbCreateProcess(ParaDbMethods):
         '''
         group_dict = self.input_data['group']
         self.title = group_dict['group_title']
-        self.standalone = group_dict['standalone']
-        if group_dict['ordered'] == 'yes':
-            self.ordered = True
+        self.ordered = not group_dict['group_type'] == 'standalone'
 
     def cat_sort(self):
         '''
@@ -151,33 +148,29 @@ class ParaDbCreateProcess(ParaDbMethods):
 
     def decide_standalone(self, para):
         '''
-        Decide_standalone says whether to make the  standalone field in the paragraph record
-        True or False.
-        If all the paragraphs in a given JSON file are True or False, then the data in the
-        group record is sufficient ('yes' is True and 'no' is False).
-        BUT if the group record says 'depend_on_para' then that means that the JSON file is
-        responsible to saying whether the paragraph stands alone.  (For flashcards, the questions
-        will not standalone, but the answers probably will)
-        The standalone field in the paragraph record will be used eliminate non-standalone
+        Decide_standalone says whether to make the standalone field in the paragraph record
+        True or False.  If self.ordered is False (group_type is standalone), the paragraph must be a
+        standalone paragraph, even if it is used elsewhere as part of an ordered group.
+
+        If the group is ordered, but the paragraph is designed to also be a standalone paragraph then
+        the paragraph record will be standalone. In this case, it is up to the person creating the
+        input data to make sure the paragraph is standalone.
+
+        The standalone field in the paragraph record will be used to eliminate non-standalone
         paragraphs when doing a search string or tag search when no group or catagory is chosen.
         In that case, the rule is that only standalone records will be retrieved.  This field
-        is in the paragraph because a given group can have some standalone and
-        some not-standalone records
+        is in the paragraph because groups and paragrapsh have a many to many relationship and a ordered
+        group can have some standalone and some not-standalone records.
+
         :param para: paragraph record from the input
         :type para: dict
         :return: True or False based on whether the paragraph stands alone
         :rtype: Boolean
         '''
-        standalone = para.get('standalone', 'default')
-        if standalone == 'default':
-            standalone = self.standalone
+        if not self.ordered:
+            return True
         if utils.key_in_dictionary(para, 'standalone'):
             return True if para['standalone'] in ('yes', 'true', 'True') else False
-        if standalone == 'yes':
-            return True
-        if standalone == 'no':
-            return False
-        return False
 
     def associate_paragraphs_with_references(self):
         '''

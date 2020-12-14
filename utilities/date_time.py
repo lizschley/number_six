@@ -1,7 +1,6 @@
 ''' Any date or time convenience methods should go here '''
 from datetime import datetime, timedelta
 from dateutil import tz
-import utilities.date_time as dt
 
 
 def timediff_from_now_for_where(oper='-', units=None):
@@ -22,20 +21,16 @@ def timediff_from_now_for_where(oper='-', units=None):
         new_date = str(now - timedelta(**units))
     else:
         new_date = str(now + timedelta(**units))
+    return new_date
 
-    return dt.postgres_friendly_datetime(new_date)
 
-
-def postgres_friendly_datetime(datetime_obj):
+def current_timestamp_with_timezone():
     '''
-    postgres_friendly_datetime takes a datetime object and writes it to a string
-    in a format that can be used to update postgres
-    :param datetime_obj: passed in datetime obj
-    :type datetime_obj: datetime.datetime
-    :return: string representaion of the object that postgres understands
+    current_timestamp_with_timezone returns the current time in the format to update a
+    postgres timestamp with time zone field
+
+    :return: current time with time zone
     :rtype: str
     '''
-    string_dt = str(datetime_obj)
-    temp = string_dt.split('.')
-
-    return temp[0] + '+00'
+    now = datetime.now(tz=tz.tzlocal())
+    return str(now)
