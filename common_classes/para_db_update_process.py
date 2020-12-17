@@ -12,7 +12,7 @@ from utilities.record_dictionary_utility import RecordDictionaryUtility
 class ParaDbUpdateProcess(ParaDbMethods):
     '''
         ParaDbUpdateProcess updates (or if production or run_as_prod, creates) data based on
-        self.input_data
+        self.file_data
     '''
 
     def __init__(self, input_data, updating):
@@ -27,8 +27,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         '''
         super(ParaDbUpdateProcess, self).__init__(updating)
         self.file_data = input_data.pop('file_data')
-        self.input_data = input_data
-        # print(f'input_data == {self.input_data}')
+        self.script_data = input_data
+        # print(f'script_data == {self.script_data}')
         self.process_data = {'updating': self.updating,
                              'categories': {'existing': [], 'create': [], 'update': []},
                              'groups': {'existing': [], 'create': [], 'update': []},
@@ -58,9 +58,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
         if self.incorrect_environment():
-            data = self.file_data
             sys.exit(('Input error: wrong process for development unless running as prod: '
-                      f'input_data: {self.input_data}, file_data: {data}'))
+                      f'script_data: {self.script_data}, file_data: {self.file_data}'))
 
     def incorrect_environment(self):
         '''
@@ -69,7 +68,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :return: returns True if you are running this process in production or running as prod
         :rtype: bool
         '''
-        if self.input_data['is_prod'] or self.input_data['run_as_prod']:
+        if self.script_data['is_prod'] or self.script_data['run_as_prod']:
             return True
         return False
 
@@ -78,11 +77,6 @@ class ParaDbUpdateProcess(ParaDbMethods):
         create_record_loop finds or creates the record, based on the keys in the input data.  It loops
         through the CREATE_RECORD_KEYS to know which keys to look for and hen calls the find or create
         wrapper method with the necessary arguments to do the actual find or create CRUD.
-
-        :param keys: constants of the keys we use to do the explicit creates
-        :type keys: tuple of strings
-        :param input_data: the input data, now a dictionary (originally JSON file)
-        :type input_data: dict
         '''
         for key in crud.CREATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
@@ -96,11 +90,6 @@ class ParaDbUpdateProcess(ParaDbMethods):
         through the UPDATE_RECORD_KEYS to know which keys to look for and then calls the
         find_and_update_wrapper method with the necessary arguments to do the actual find and update
         CRUD.
-
-        :param keys: constants of the keys we use to do the updates
-        :type keys: tuple of strings
-        :param input_data: the input data, now a dictionary (originally JSON file)
-        :type input_data: dict
         '''
         for key in crud.UPDATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
@@ -155,7 +144,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         that has the unique key value pointing to the record created.  This ensures the we do not try
         to create duplicate records and that the record created information is available
 
-        :param key: this is the input data key (originally from a JSON file)
+        :param top_key: this is the input data key (originally from a JSON file)
         :type key: string
         :param record: This is the record created or a dictionary representation of that record
         :type record: model.Model or dictionary
@@ -202,13 +191,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param para: one paragraph
         :type para: dict
         '''
-        if utils.key_not_in_dictionary(self.input_data, 'add_paragraph_reference'):
-            self.input_data['add_paragraph_reference'] = []
+        if utils.key_not_in_dictionary(self.file_data, 'add_paragraph_reference'):
+            self.file_data['add_paragraph_reference'] = []
         add_para_refs = utils.initiate_paragraph_associations(para,
                                                               crud.PARA_REF_SLUG,
-                                                              self.input_data['add_paragraph_reference'])
+                                                              self.file_data['add_paragraph_reference'])
         if add_para_refs is not None:
-            self.input_data['add_paragraph_reference'] = add_para_refs
+            self.file_data['add_paragraph_reference'] = add_para_refs
         if utils.key_in_dictionary(para, 'ref_slug_list'):
             para.pop('ref_slug_list')
 
@@ -261,10 +250,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
         the correct process
         '''
         for input_key in crud.ASSOCIATION_KEYS:
-            if utils.key_not_in_dictionary(self.input_data, input_key):
+            if utils.key_not_in_dictionary(self.file_data, input_key):
                 continue
             function, data_key = input_key.split('_', 1)
-            input_dictionaries = self.prepare_association_data(self.input_data[input_key], data_key)
+            input_dictionaries = self.prepare_association_data(self.file_data[input_key], data_key)
             if function == 'delete':
                 self.delete_associations(data_key, input_key, input_dictionaries)
                 RecordDictionaryUtility.write_dictionary_to_file(self.file_data[input_key],

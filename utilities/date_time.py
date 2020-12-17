@@ -34,3 +34,18 @@ def current_timestamp_with_timezone():
     '''
     now = datetime.now(tz=tz.tzlocal())
     return str(now)
+
+
+def postgres_friendly_datetime(datetime_obj):
+    '''
+    postgres_friendly_datetime takes a datetime object and writes it to a string
+    in a format that can be used to update postgres
+    :param datetime_obj: passed in datetime obj
+    :type datetime_obj: datetime.datetime
+    :return: string representaion of the object that postgres understands
+    :rtype: str
+    '''
+    string_dt = str(datetime_obj)
+    temp = string_dt.split('.')
+
+    return temp[0] + '+00'

@@ -26,6 +26,7 @@ class ParagraphsForDisplay:
 
     INLINE_ARGS = {'beg_link': '|beg_ref_slug|', 'end_link': '|end_ref_slug|'}
     AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
+    INTERNAL_ARGS = {'beg_link': '|beg_blue_slug|', 'end_link': '|end_blue_slug|'}
 
     def __init__(self):
         self.group_title = ''
@@ -131,6 +132,7 @@ class ParagraphsForDisplay:
             slug = ref['slug']
             self.inline_ref_data[slug] = {'link_text': ref['short_text'], 'url': ref['url']}
 
+    # Todo: if from_ajax is true we will make the pop-up a blue link
     def assign_paragraphs(self, from_ajax=False):
         '''
         assign_paragraphs - steps to create paragraph list:

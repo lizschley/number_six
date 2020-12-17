@@ -43,30 +43,6 @@ def json_to_dict(json_path):
     return data
 
 
-def extract_data_from_form(classification):
-    '''
-    extract_data_from_form formats the Study lookup form return to be usable for
-    queries
-
-    This takes data that is sent directly from the Study lookup form and
-    transforms it in a way that can be used for view paramaters.  This is so the
-    correct queries can be performed in the view.
-
-    :param classification: string that has the fieldname and the value separated
-        by an underscore
-    :type classification: str
-    :return: dictionary with key and value parsed from the input data
-    :rtype: dictionary
-    '''
-    temp = classification.split('_')
-    if len(temp) != 2:
-        return {}
-    try:
-        return {temp[0]: int(temp[1])}
-    except ValueError:
-        return {}
-
-
 def add_paragraphs_to_context(context, paragraphs):
     '''
     add_paragraphs_to_context reformats data to save work in the template

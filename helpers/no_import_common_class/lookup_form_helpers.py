@@ -6,6 +6,7 @@ INIT_STANDALONE = ('0', 'Choose Standalone Paras (i.e. Definitions or About)')
 INIT_ORDERED = ('0', 'Choose Ordered Paras (i.e. Instructions)')
 INIT_FLASHCARDS = ('0', 'Choose Flashcards (i.e. Questions and Answers)')
 
+EXPECTED_GET_VARIABLES = ['standalone', 'flashcard', 'ordered']
 
 def study_dropdowns():
     group_lists = {}
@@ -56,3 +57,37 @@ def format_category_id(category_id):
     :rtype: str
     '''
     return 'category_' + str(category_id)
+
+
+def extract_data_from_form(input_from_form):
+    in_data = {}
+    for key in EXPECTED_GET_VARIABLES:
+        if not input_from_form[key]:
+            continue
+        if input_from_form[key][0] == '0':
+            continue
+        in_data = create_dictionary_from_form_input(input_from_form[key][0])
+    return in_data
+
+
+def create_dictionary_from_form_input(data_from_form):
+    '''
+    create_dictionary_from_form_input formats the Study lookup form return to be usable for queries
+
+    This takes data that is sent directly from the Study lookup form and
+    transforms it in a way that can be used for view paramaters.  This is so the
+    correct queries can be performed in the view.
+
+    :param data_from_form: string that has the fieldname and the value separated
+        by an underscore
+    :type data_from_form: str
+    :return: dictionary with key and value parsed from the input data
+    :rtype: dictionary
+    '''
+    temp = data_from_form.split('_')
+    if len(temp) != 2:
+        return {}
+    try:
+        return {temp[0]: int(temp[1])}
+    except ValueError:
+        return {}

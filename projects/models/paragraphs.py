@@ -12,14 +12,14 @@ class Category(models.Model):
     FLASHCARD = 'flashcard'
     EXERCISE = 'exercise'
     STUDY = 'study'
-    SEARCH = 'search'
+    MODAL = 'modal'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
         (FLASHCARD, 'Flash Card'),
         (EXERCISE, 'Exercise'),
         (STUDY, 'Study'),
-        (SEARCH, 'Search'),
+        (MODAL, 'Modal'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -63,6 +63,7 @@ class Reference(models.Model):
 class Paragraph(models.Model):
     ''' Many to many with References and with Groups '''
     subtitle = models.CharField(blank=True, max_length=120, db_index=True)
+    slug = AutoSlugField(db_index=True, max_length=150, blank=True, populate_from='subtitle')
     note = models.TextField(blank=True)
     text = models.TextField(blank=True)
     standalone = models.BooleanField(default=False, null=False)
@@ -96,6 +97,8 @@ class Group(models.Model):
     ''' Many to many with Paragraphs '''
     STUDY_STANDALONE = 'standalone'
     STUDY_ORDERED = 'ordered'
+    SEARCH = 'search'
+    NO_SEARCH = 'no_search'
     DEFAULT = ''
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -110,10 +113,12 @@ class Group(models.Model):
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
-                f'category_id: {self.category_id}, slug: {self.slug}, short_name: {self.short_name}>')
+                f'group_type: {self.group_type}, category_id: {self.category_id}, '
+                f'slug: {self.slug}, short_name: {self.short_name}>')
 
     def __str__(self):
-        return f'<Group id: {self.id}, title: {self.title}, short_name: {self.short_name}>'
+        return (f'<Group id: {self.id}, title: {self.title}, group_type: {self.group_type}, '
+                f'short_name: {self.short_name}>')
 
     class Meta:
         get_latest_by = 'updated_at'

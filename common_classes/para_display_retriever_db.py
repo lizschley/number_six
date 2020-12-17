@@ -126,8 +126,9 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         for row in query_set:
             if not self.group:
                 self.first_row_assignments(row)
-            self.add_ref_to_paragraph_link_txt_dictionary(row.paragraph_id, row.link_text)
-            self.append_unique_reference(row)
+            if row.link_text is not None:
+                self.add_ref_to_paragraph_link_txt_dictionary(row.paragraph_id, row.link_text)
+                self.append_unique_reference(row)
             self.append_unique_paragraph(row)
 
     # Todo: eventually validate that if one row.order is zero in set, they all are

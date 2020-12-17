@@ -4,12 +4,11 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from projects.forms.paragraphs import ParagraphLookupForm
-import helpers.no_import_common_class.paragraph_helpers as no_import_para_helper
+import helpers.no_import_common_class.lookup_form_helpers as lookup
 import helpers.no_import_common_class.utilities as utils
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
-INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
 STANDALONE_TMPLT = 'projects/paragraphs.html'
 ORDERED_TMPLT = 'projects/demo_paragraphs.html'
 
@@ -26,7 +25,10 @@ class StudyParagraphView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
-        self.template_name = ORDERED_TMPLT if context['paragraphs']['ordered'] else STANDALONE_TMPLT
+        if utils.key_not_in_dictionary(context, 'ordered'):
+            self.template_name = STANDALONE_TMPLT
+            return context
+        self.template_name = ORDERED_TMPLT if context['ordered'] else STANDALONE_TMPLT
         return context
 
     def _add_to_context(self, context):
@@ -41,8 +43,20 @@ class StudyLookupView(FormView):
     form_class = ParagraphLookupForm
 
     def get(self, request, *args, **kwargs):
-        form_data = request.GET.get("classification", "0")
-        in_data = no_import_para_helper.extract_data_from_form(form_data)
+        '''
+        get processes the get parameters
+
+        :param request: Request object containing the selected items from form
+        :type request: WSGIRequest
+        :return: Return data from form
+        :rtype: dict
+        '''
+        input_from_form = {}
+        input_from_form['ordered'] = request.GET.getlist('ordered')
+        input_from_form['standalone'] = request.GET.getlist('standalone')
+        input_from_form['flashcard'] = request.GET.getlist('flashcard')
+
+        in_data = lookup.extract_data_from_form(input_from_form)
         if in_data:
             arg_dictionary = StudyLookupView.which_args(in_data)
             return HttpResponseRedirect(reverse(arg_dictionary['identifier'],
@@ -64,7 +78,6 @@ class StudyLookupView(FormView):
             identifier = 'projects:study_paragraphs_with_category'
             kwargs = {'category_id': in_data['category']}
         else:
-            breakpoint()
             identifier = 'projects:study_paragraphs_with_group'
             kwargs = {'group_id': in_data['group']}
         return {'identifier': identifier, 'kwargs': kwargs}

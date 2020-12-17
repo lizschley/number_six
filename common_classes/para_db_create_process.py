@@ -65,7 +65,10 @@ class ParaDbCreateProcess(ParaDbMethods):
                            'cat_sort': self.cat_sort(), }
             return_data = self.find_or_create_record(Group, find_dict, create_dict)
         if self.updating:
+            self.ordered = not return_data['record'].group_type in ('standalone', 'no_search', 'search')
             self.group = return_data['record']
+        else:
+            self.ordered = False
 
     def expect_to_create_group(self):
         '''
@@ -86,7 +89,6 @@ class ParaDbCreateProcess(ParaDbMethods):
         '''
         group_dict = self.input_data['group']
         self.title = group_dict['group_title']
-        self.ordered = not group_dict['group_type'] == 'standalone'
 
     def cat_sort(self):
         '''
@@ -169,8 +171,9 @@ class ParaDbCreateProcess(ParaDbMethods):
         '''
         if not self.ordered:
             return True
-        if utils.key_in_dictionary(para, 'standalone'):
-            return True if para['standalone'] in ('yes', 'true', 'True') else False
+        if utils.key_not_in_dictionary(para, 'standalone'):
+            return False
+        return True if para['standalone'] in ('yes', 'true', 'True') else False
 
     def associate_paragraphs_with_references(self):
         '''

@@ -2,6 +2,7 @@
 # pylint: pylint: disable=unused-import
 import json
 import sys
+from django.db.models import Q
 import constants.crud as crud
 from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
@@ -87,3 +88,12 @@ class RecordDictionaryUtility:
     def get_content(class_, pk_id=1):
         ''' time saver in creating content for paragraph dictionaries '''
         return class_.objects.filter(id=pk_id).values()
+
+    @staticmethod
+    def one_time_get_content(out_dir):
+        list_output = []
+        queryset = Reference.objects.filter(~Q(short_text='link')).values()
+        out_directory = {'directory_path': out_dir}
+        for qs in queryset:
+            list_output.append(qs)
+        RecordDictionaryUtility.write_dictionary_to_file(list_output, **out_directory)

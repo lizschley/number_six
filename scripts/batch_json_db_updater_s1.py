@@ -20,6 +20,7 @@ import constants.crud as crud
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import helpers.no_import_common_class.utilities as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
@@ -83,7 +84,10 @@ def init_process_data(args):
         return {'error': params['message']}
     if params.get('bypass_step1_prep'):
         params.pop('bypass_step1_prep')
-        RecordDictionaryUtility.create_json_list_of_records(constants.MANUAL_UPDATE_JSON, params)
+        if params['params']['key'] == 'one_time':
+            RecordDictionaryUtility.one_time_get_content(constants.MANUAL_UPDATE_JSON)
+        else:
+            RecordDictionaryUtility.create_json_list_of_records(constants.MANUAL_UPDATE_JSON, params)
         return {'bypassed': True}
     return {'run_as_prod': run_as_prod}
 
@@ -113,8 +117,10 @@ def check_input(args):
     temp = args.split('=')
     if len(temp) != 2:
         sys.exit(f'Error: Wrong input variables, should be key=value, but is {args}')
-    if temp[0] not in crud.UPDATE_DATA.keys():
-        sys.exit(f'Error: key (left of =) should in {crud.UPDATE_DATA.keys()}, but is {args}')
+    if temp[0] == 'one_time':
+        pass
+    elif temp[0] not in crud.UPDATE_DATA.keys():
+        sys.exit(f'Error: key (left of =) should be in {crud.UPDATE_DATA.keys()}, but is {args}')
     return {'key': temp[0], 'select_criteria': temp[1]}
 
 

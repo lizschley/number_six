@@ -1,7 +1,8 @@
 ''' Methods to use for batch updates or whatever is needed'''
+from django.utils.text import slugify
 from projects.models.paragraphs import Group
 from common_classes.para_db_methods import ParaDbMethods
-from projects.models.paragraphs import Reference
+from projects.models.paragraphs import Paragraph
 
 
 DATA_TO_ADD = {
@@ -70,4 +71,23 @@ def add_category_alter_group_type(updating=False):
                                         'cat_sort': None,
                                         'category_id': 5,
                                         'group_type': group_type,
+                                        })
+
+
+def add_slug_for_paragraphs_with_subtitles(updating=False):
+    '''
+    add_slug_for_paragraphs_with_subtitles adds slugs so that we can use for displaying paragraphs
+    that are standalone (which require slugs)
+
+    :param updating: use to test ahead of running, defaults to False
+    :type updating: bool, optional
+    '''
+    updater = ParaDbMethods(updating)
+    groups = Group.objects.all()
+    for group in groups:
+        new_slug = slugify(group.title)
+        updater.find_and_update_record(Group,
+                                       {'id': group.id},
+                                       {'id': group.id,
+                                        'slug': new_slug,
                                         })
