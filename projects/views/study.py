@@ -10,7 +10,7 @@ import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
 STANDALONE_TMPLT = 'projects/paragraphs.html'
-ORDERED_TMPLT = 'projects/demo_paragraphs.html'
+ORDERED_TMPLT = 'projects/single_or_ordered_paragraphs.html'
 
 
 class StudyParagraphView(TemplateView):
