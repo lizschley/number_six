@@ -50,6 +50,7 @@ class ParagraphDictionaries:
             'image_path': '',
             'image_info_key': 'default',
             'guid': '',
+            'slug': '',
         }
 
     @staticmethod

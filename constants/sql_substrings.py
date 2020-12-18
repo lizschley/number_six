@@ -6,7 +6,7 @@ SELECT_GROUP = ('g.id as group_id, g.short_name as group_short_name, g.title as 
                 'g.group_type as group_type, g.note as group_note, g.cat_sort as cat_sort, gp.order, '
                 'g.slug as group_slug ')
 SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, image_path, '
-                     'image_info_key, text')
+                     'image_info_key, text, p.slug as para_slug')
 SELECT_REFERENCES = 'r.id as reference_id, link_text, url, short_text, r.slug as ref_slug '
 
 FROM_CATEGORY_JOIN_GROUP_AND_PARA = ('from projects_category c '
@@ -51,7 +51,8 @@ COMPLETE_PARAGRAPH_SELECT = ('p.id as para_id, p.guid as para_guid, '
                              'p.subtitle as para_subtitle, p.note as para_note,'
                              'p.text as para_text, p.image_info_key as para_image_info_key, '
                              'p.image_path as para_image_path, p.standalone as para_standalone, '
-                             'p.created_at as para_created_at, p.updated_at as para_updated_at ')
+                             'p.created_at as para_created_at, p.updated_at as para_updated_at, '
+                             'p.slug  as para_slug')
 
 COMPLETE_REFERENCE_SELECT = ('r.id as reference_id, r.link_text as reference_link_text, '
                              'r.slug as reference_slug, r.url as reference_url, '

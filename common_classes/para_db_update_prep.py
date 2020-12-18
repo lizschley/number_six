@@ -348,6 +348,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         ref['link_text'] = row.reference_link_text
         ref['slug'] = row.reference_slug
         ref['url'] = row.reference_url
+        ref['short_text'] = row.short_text
         self.output_data['references'].append(ref)
         if self.run_as_prod:
             self.run_as_prod_lookup('references', row.reference_id, row.reference_slug)
@@ -374,6 +375,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para['image_path'] = row.para_image_path
         para['image_info_key'] = row.para_image_info_key
         para['guid'] = row.para_guid
+        para['slug'] = row.para_slug
         self.output_data['paragraphs'].append(para)
         if self.run_as_prod:
             self.run_as_prod_lookup('paragraphs', row.para_id, row.para_guid)

@@ -8,6 +8,7 @@ from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 import utilities.date_time as utils
+import utilities.random_methods as misc
 
 
 class RecordDictionaryUtility:
@@ -91,9 +92,18 @@ class RecordDictionaryUtility:
 
     @staticmethod
     def one_time_get_content(out_dir):
+        ''' fix references to be consistant '''
         list_output = []
-        queryset = Reference.objects.filter(~Q(short_text='link')).values()
+        para_ids = []
+        references = Reference.objects.all().values()
         out_directory = {'directory_path': out_dir}
-        for qs in queryset:
-            list_output.append(qs)
+        for ref in references:
+            link_text = ref['link_text']
+            short_text = ref['short_text']
+            ref_slug = ref['slug']
+            if misc.no_work_required(link_text, short_text):
+                continue
+            para_ids = misc.add_to_para_id_list_if_necessary(ref_slug, para_ids)
+            list_output.append(ref)
+        print(f'paras to update== {",".join(para_ids)}')
         RecordDictionaryUtility.write_dictionary_to_file(list_output, **out_directory)

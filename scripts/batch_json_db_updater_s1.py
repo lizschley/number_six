@@ -50,7 +50,9 @@ def run(*args):
         or to get the run_as_prod variations on the output file
         >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args run_as_prod
         to bypass normal Step One processing (which gets related data) and only get one type of record
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args paragraphs=1,2,3 (example)
+        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args paragraphs=1,2,3 (ex)
+        For complicated one_time retrieval, edit RecordDictionaryUtility.one_time_get_content(out_dir):
+        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args one_time=true
 
 
         Step One Process

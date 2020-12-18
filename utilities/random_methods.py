@@ -2,6 +2,7 @@
 import os
 import shutil
 from django.utils.text import slugify
+from projects.models.paragraphs import Paragraph
 import constants.scripts as scripts
 
 
@@ -73,3 +74,31 @@ def loop_through_files_to_move(input_dir_path, num_processed):
     return num_processed
 
 
+def add_to_para_id_list_if_necessary(ref_slug, para_ids):
+    ''' This is potentially useful elsewhere, maybe if I ever make a utility to update slugs once we
+        have a production environment used with one_time_get_content(out_dir) from
+        record_dictionary_utility
+    '''
+    try:
+        para = Paragraph.objects.get(text__icontains=ref_slug)
+    except Paragraph.DoesNotExist:
+        return para_ids
+    para_ids.append(str(para.id))
+    return para_ids
+
+
+def no_work_required(link_text, short_text):
+    ''' Return True if there is no plan to fix this reference else False '''
+    chars = set('0123456789')
+    if not any((c in chars) for c in link_text):
+        return True
+    temp = link_text.split('_')
+    if len(temp) < 2:
+        return True
+    if not any((c in chars) for c in short_text):
+        return False
+    if temp[0][0] in '123456789':
+        return True
+    if temp[1][0] in '123456789':
+        return True
+    return False
