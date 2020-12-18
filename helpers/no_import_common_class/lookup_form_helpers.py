@@ -60,6 +60,14 @@ def format_category_id(category_id):
 
 
 def extract_data_from_form(input_from_form):
+    '''
+    extract_data_from_form takes the user choices from the lookup form to do data lookup
+
+    :param input_from_form: input from the form
+    :type input_from_form: dict
+    :return: data in a form ready to use in where statements
+    :rtype: dict
+    '''
     in_data = {}
     for key in EXPECTED_GET_VARIABLES:
         if not input_from_form[key]:

@@ -2,8 +2,8 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=redefined-outer-name
 import pytest
-import helpers.no_import_common_class.lookup_form_helpers as form_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import helpers.no_import_common_class.lookup_form_helpers as lookup_helper
 import testing.data.list_constants as list_data
 import testing.helpers.testing_helpers as helper
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
@@ -15,6 +15,7 @@ def add_para_to_context_input():
         'context': {'whatever': 'it is'},
         'paragraphs': {'title': 'title',
                        'title_note': 'note',
+                       'group_type': 'standalone',
                        'paragraphs': ['para1', 'para2', 'para3']}
     }
 
@@ -44,10 +45,12 @@ def test_json_to_dict(orig_para_dict_data):
 
 
 def test_extract_data_from_form():
-    classification = 'group_2'
-    output = para_helper.extract_data_from_form(classification)
+    input_from_form = {'ordered': ['0'],
+                       'standalone': ['group_22'],
+                       'flashcard': ['0']}
+    output = lookup_helper.extract_data_from_form(input_from_form)
     assert isinstance(output, dict)
-    assert output == {'group': 2}
+    assert output == {'group': 22}
 
 
 def test_add_paragraphs_to_context(add_para_to_context_input):
@@ -59,7 +62,7 @@ def test_add_paragraphs_to_context(add_para_to_context_input):
 
 
 def test_format_group_id(group_id):
-    assert form_helper.format_group_id(group_id) == 'group_23'
+    assert lookup_helper.format_group_id(group_id) == 'group_23'
 
 
 @pytest.mark.parametrize('from_ajax', [(True), (False)])

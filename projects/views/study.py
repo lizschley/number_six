@@ -55,7 +55,6 @@ class StudyLookupView(FormView):
         input_from_form['ordered'] = request.GET.getlist('ordered')
         input_from_form['standalone'] = request.GET.getlist('standalone')
         input_from_form['flashcard'] = request.GET.getlist('flashcard')
-
         in_data = lookup.extract_data_from_form(input_from_form)
         if in_data:
             arg_dictionary = StudyLookupView.which_args(in_data)
