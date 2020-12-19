@@ -1,5 +1,5 @@
 ''' Study View classes '''
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse
@@ -80,3 +80,42 @@ class StudyLookupView(FormView):
             identifier = 'projects:study_paragraphs_with_group'
             kwargs = {'group_id': in_data['group']}
         return {'identifier': identifier, 'kwargs': kwargs}
+
+
+class OneParagraphView(TemplateView):
+    '''
+    OneParagraphView View standalone paragraphs on a single page (identified by slug)
+
+    :param TemplateView: Basic view
+    :type TemplateView: Template View Class
+    :return: context which includes the standard paragraph display object
+    :rtype: dict
+    '''
+
+    template_name = 'projects/single_or_ordered_paragraphs.html'
+
+    def get_context_data(self, **kwargs):
+        context = self._add_to_context(super().get_context_data(**kwargs))
+        return context
+
+    def _add_to_context(self, context):
+        context = import_para_helper.single_para(context)
+        return context
+
+
+def para_by_subtitle(request):
+    '''
+    para_by_subtitle retrieves one paragraph and displays in a modal
+
+    :param request: request object
+    :type request: request
+    :return: JSON (serialized) version of a dictionary with a single paragraph display object
+    :rtype: JSON
+    '''
+    context = {}
+    if request.method == 'GET' and request.is_ajax():
+        context['subtitle'] = request.GET.get('subtitle')
+    else:
+        return JsonResponse({'success': False}, status=400)
+    para = import_para_helper.single_para(context)
+    return JsonResponse({'paragraph': para}, status=200)

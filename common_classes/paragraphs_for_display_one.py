@@ -2,7 +2,7 @@
     for any page that either has only one group or that does not display by group.'''
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
+import helpers.no_import_common_class.utilities as utils
 
 
 class ParagraphsForDisplayOne(ParagraphsForDisplay):
@@ -23,11 +23,11 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :return: dictionary needed to display basic paragraphs
         :rtype: dict
         '''
-        if not kwargs['subtitle']:
-            message = ('ParagraphsForDisplayOne only works with subtitle as key word arg, '
+        if (utils.key_not_in_dictionary(kwargs, 'subtitle') and
+                utils.key_not_in_dictionary(kwargs, 'slug')):
+            message = ('ParagraphsForDisplayOne only works with subtitle or slug as key word arg, '
                        f'kwargs=={kwargs}')
             return ParagraphsForDisplayOne.error_output(message)
-
         retriever = ParaDisplayRetrieverDb()
         self.input_data = retriever.data_retrieval(kwargs)
         if self.input_data is None:

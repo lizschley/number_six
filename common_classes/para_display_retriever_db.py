@@ -3,6 +3,7 @@ import constants.sql_substrings as sql_sub
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
+import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, Paragraph)
 
 
@@ -27,13 +28,16 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             query = self.write_group_para_sql()
             raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
             return self.db_output_to_display_input(raw_queryset)
-        if 'subtitle' in kwargs.keys():
-            self.group = {'title': kwargs['subtitle'], 'note': ''}
-            query = self.write_one_standalone_para_sql()
-            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph,
-                                                                      kwargs['subtitle'])
-            return self.db_output_to_display_input(raw_queryset)
-        return None
+
+        if utils.key_not_in_dictionary(kwargs, 'subtitle'):
+            return
+
+        which_where = 'slug' if utils.key_in_dictionary(kwargs, 'slug') else 'subtitle'
+        which_val = kwargs['slug'] if which_where == 'slug' else kwargs['subtitle']
+        query = self.write_one_standalone_para_sql(which_where)
+        self.group = {'title': kwargs['subtitle'], 'note': ''}
+        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph, which_val)
+        return self.db_output_to_display_input(raw_queryset)
 
     def write_group_para_sql(self):
         '''
@@ -46,7 +50,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         query += 'where g.id = %s'
         return query
 
-    def write_one_standalone_para_sql(self):
+    def write_one_standalone_para_sql(self, field_to_query):
         '''
         write_one_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
         using a paragraph_id
@@ -54,8 +58,11 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: the query to be used, minus the actual para_id
         :rtype: str
         '''
-        query = self.build_basic_sql('subtitle')
-        query += 'where lower(p.subtitle) = lower(%s)'
+
+        field = f'lower(p.{field_to_query})'
+
+        query = self.build_basic_sql('single_para')
+        query += 'where ' + field + ' = lower(%s)'
         query += ' and p.standalone = TRUE'
         return query
 
@@ -202,5 +209,6 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             'text': row.text,
             'image_path': row.image_path,
             'image_info_key': row.image_info_key,
+            'slug': row.para_slug,
             'order': self.get_paragraph_order(row.subtitle, order),
         }

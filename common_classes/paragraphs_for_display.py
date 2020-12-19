@@ -155,6 +155,7 @@ class ParagraphsForDisplay:
         ajax_args = ParagraphsForDisplay.AJAX_ARGS
         ajax_args['from_ajax'] = from_ajax
         for para in in_para_list:
+            ajax_args['para_slug'] = para['slug']
             para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
                                                                 para['text'], **inline_args)
             para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,

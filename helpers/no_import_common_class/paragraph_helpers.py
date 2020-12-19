@@ -122,6 +122,7 @@ def replace_link_indicators(link_function, para_text, **kwargs):
     new_args = {}
     if utils.key_in_dictionary(kwargs, 'from_ajax'):
         new_args['from_ajax'] = kwargs['from_ajax']
+        new_args['para_slug'] = kwargs['para_slug']
     if utils.key_in_dictionary(kwargs, 'link_data'):
         new_args['link_data'] = kwargs['link_data']
     para_piece_list = []
@@ -152,12 +153,17 @@ def ajax_link(**kwargs):
     link_text = kwargs['lookup_key']
     from_ajax = kwargs.get('from_ajax', False)
     if from_ajax:
-        return link_text
+        return internal_link(link_text, kwargs.get('para_slug', False), subtitle_lookup(link_text))
     beg_link = '<a href="#" data-subtitle="'
     mid_link = '" class="para_by_subtitle modal_popup_link">'
     end_link = '</a>'
     subtitle = subtitle_lookup(link_text)
     return beg_link + subtitle + mid_link + link_text + end_link
+
+
+def internal_link(link_text, slug, subtitle):
+    print(f'link_text=={link_text}, slug=={slug}, subtitle=={subtitle}')
+    return f'link_text=={link_text}, slug=={slug}, subtitle=={subtitle}'
 
 
 def inline_link(**kwargs):

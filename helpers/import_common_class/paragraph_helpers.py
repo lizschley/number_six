@@ -59,6 +59,7 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
         paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
     return appropriate_context(context, paragraphs)
 
+
 def appropriate_context(context, paragraphs):
     '''
     appropriate_context takes the context and the data retriever and returns the information
@@ -124,17 +125,19 @@ def add_collapse_variables(paragraphs):
     return paragraphs
 
 
-def single_para_by_subtitle(subtitle):
+def single_para(context):
     '''
-    single_para_by_subtitle gets a single para with references by subtitle
+    single_para gets a single para with references by either subtitle or slug
 
-    :param subtitle: from ajax link_text or from lookup table { 'link_text': 'real subtitle' }
-    :type subtitle: str
+    :param context: contains subtitle or slug for single paragraph lookup
+    :type subtitle: dict
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
     para = ParagraphsForDisplayOne()
-    return para.retrieve_paragraphs(subtitle=subtitle)
+    if utils.key_in_dictionary(context, 'subtitle'):
+        return para.retrieve_paragraphs(subtitle=context['subtitle'])
+    return para.retrieve_paragraphs(para_slug=context['slug'])
 
 
 def update_paragraphs_step_one(input_data):
