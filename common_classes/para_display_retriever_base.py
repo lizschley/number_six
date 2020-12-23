@@ -19,7 +19,7 @@ class ParaDisplayRetrieverBase(ABC):
         self.paragraphs = []
         self.para_id_to_link_text = {}
         self.slug_to_lookup_link = {'para_slug_to_short_title': {},
-                                    'ref_slug_to_short_text': {},
+                                    'ref_slug_to_reference': {},
                                     'group_slug_to_short_name': {}, }
 
     @abstractmethod

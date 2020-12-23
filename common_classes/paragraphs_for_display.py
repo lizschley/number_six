@@ -26,6 +26,7 @@ class ParagraphsForDisplay:
     '''
 
     def __init__(self):
+        self.is_modal = False
         self.group_title = ''
         self.group_note = ''
         self.group_type = ''
@@ -42,7 +43,6 @@ class ParagraphsForDisplay:
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
-
         # import pprint
         # print('-----------------Input Data-------------------------------')
         # printer = pprint.PrettyPrinter(indent=1, width=120)
@@ -128,8 +128,7 @@ class ParagraphsForDisplay:
             slug = ref['slug']
             self.para_link_lookup['ref'][slug] = {'link_text': ref['short_text'], 'url': ref['url']}
 
-    # Todo: if from_ajax is true we will make the pop-up a blue link
-    def assign_paragraphs(self, from_ajax=False):
+    def assign_paragraphs(self):
         '''
         assign_paragraphs - steps to create paragraph list:
 
@@ -139,16 +138,15 @@ class ParagraphsForDisplay:
         '''
         input_para_list = para_helpers.sort_paragraphs(self.input_data['paragraphs'],
                                                        constants.ORDER_FIELD_FOR_PARAS)
-        self.paragraphs = self.paragraphs_links_and_images(input_para_list, from_ajax)
+        self.paragraphs = self.paragraphs_links_and_images(input_para_list)
         if self.input_data['para_id_to_link_text']:
             self.add_ref_links_to_paragraphs()
 
-    def paragraphs_links_and_images(self, in_para_list, from_ajax=False):
+    def paragraphs_links_and_images(self, in_para_list):
         ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
-
-        replacing_text = True
-        create_modal_links = not from_ajax
-        link_helper = ParaLinkHelper(replacing_text, create_modal_links)
+        kwargs = {'para_slugs': [], 'group_slugs': [],
+                  'create_modal_links': not self.is_modal}
+        link_helper = ParaLinkHelper(**kwargs)
         out_para_list = []
         for para in in_para_list:
             data = link_helper.links_from_indicators(para['text'],

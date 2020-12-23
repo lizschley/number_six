@@ -127,17 +127,16 @@ def add_collapse_variables(paragraphs):
 
 def single_para(context):
     '''
-    single_para gets a single para with references by either subtitle or slug
+    single_para gets a single para with references by para slug
 
-    :param context: contains subtitle or slug for single paragraph lookup
+    :param context: contains slug for single paragraph lookup, also contains is_modal
     :type subtitle: dict
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
     para = ParagraphsForDisplayOne()
-    if utils.key_in_dictionary(context, 'subtitle'):
-        return para.retrieve_paragraphs(subtitle=context['subtitle'])
-    return para.retrieve_paragraphs(slug=context['slug'])
+    is_modal = True if utils.key_in_dictionary(context, 'is_modal') else False
+    return para.retrieve_paragraphs(slug=context['slug'], is_modal=is_modal)
 
 
 def update_paragraphs_step_one(input_data):

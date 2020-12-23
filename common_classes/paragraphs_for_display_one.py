@@ -24,12 +24,12 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :return: dictionary needed to display basic paragraphs
         :rtype: dict
         '''
-        is_modal = utils.key_in_dictionary(kwargs, 'is_modal')
+        self.is_modal = True if kwargs['is_modal'] else False
         retriever = ParaDisplayRetrieverDb()
         self.input_data = retriever.data_retrieval(kwargs)
-        return self.format_single_para_display(is_modal)
+        return self.format_single_para_display()
 
-    def format_single_para_display(self, is_modal):
+    def format_single_para_display(self):
         '''
         format_data_for_display Once we know what class to use for retrieving the input data
         this is the main driver for the formatting process
@@ -38,10 +38,10 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :rtype: dict
         '''
         self.create_links_from_references()
-        self.assign_paragraphs(is_modal)
-        return self.output_single_para_display(is_modal)
+        self.assign_paragraphs()
+        return self.output_single_para_display()
 
-    def assign_paragraphs(self, from_ajax=True):
+    def assign_paragraphs(self):
         '''
         assign_paragraphs - steps to create paragraph list:
 
@@ -49,10 +49,10 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         1. append the paragraph values needed with the keys that are expected
         2. add the reference links that are associated with the given paragraph
         '''
-        self.paragraphs = self.paragraphs_links_and_images(self.input_data['paragraphs'], from_ajax)
+        self.paragraphs = self.paragraphs_links_and_images(self.input_data['paragraphs'])
         self.add_ref_links_to_paragraphs()
 
-    def output_single_para_display(self, is_modal):
+    def output_single_para_display(self):
         '''
         output_for_display creates the **kwargs for the display paragraph template
 
@@ -60,12 +60,10 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :rtype: dict
         '''
         if len(self.paragraphs) < 1:
-            return ParagraphsForDisplayOne.error_output(f'Data not loaded for para')
-
+            return ParagraphsForDisplayOne.error_output('Data not loaded for para')
         orig_subtitle = self.paragraphs[0]['subtitle']
         self.paragraphs[0]['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
-
-        if not is_modal:
+        if not self.is_modal:
             return self.output_page_display()
         return self.paragraphs[0]
 

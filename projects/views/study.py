@@ -115,7 +115,8 @@ def study_modal_para(request):
     context = {}
     if request.method == 'GET' and request.is_ajax():
         context['slug'] = request.GET.get('slug')
+        context['is_modal'] = 'true'
     else:
         return JsonResponse({'success': False}, status=400)
     para = import_para_helper.single_para(context)
-    return JsonResponse({'paragraph': para, 'is_modal': 'true'}, status=200)
+    return JsonResponse({'paragraph': para}, status=200)

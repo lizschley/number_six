@@ -25,9 +25,9 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         # self.paragraphs = []
         # self.para_id_to_link_text = {}
         # self.slug_to_lookup_link = {'para_slug_to_short_title': {},
-        #                             'ref_slug_to_short_text': {},
+        #                             'ref_slug_to_reference': {},
         #                             'group_slug_to_short_name': {}, }
-        # from this __init__, all processing variables
+        # from this __init__ (below), all processing variables
         self.para_slugs = []
         self.group_slugs = []
         self.para_ids = []
@@ -72,7 +72,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: str
         '''
         query = self.build_basic_sql('single_para')
-        query += 'where slug = lower(%s)'
+        query += 'where p.slug = lower(%s)'
         query += ' and p.standalone = TRUE'
         return query
 
@@ -186,7 +186,8 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             ref = ParagraphDictionaries.reference_link_data(row)
             self.references.append(ref)
             self.ref_ids.append(row.reference_id)
-            self.slug_to_lookup_link['ref_slug_to_short_text'][ref['slug']] = ref['short_text']
+            ref_lookup = {'link_text': ref['short_text'], 'url': ref['url']}
+            self.slug_to_lookup_link['ref_slug_to_reference'][ref['slug']] = ref_lookup
 
     def append_unique_paragraph(self, row):
         '''
@@ -228,8 +229,9 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: list of slugs used for looking up data needed for internal links
         :rtype: list of strings
         '''
-        replacing_text = False
-        link_helper = ParaLinkHelper(replacing_text)
+        kwargs = {'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs,
+                  'replacing_text': False}
+        link_helper = ParaLinkHelper(**kwargs)
         data = link_helper.links_from_indicators(para_text, {})
         self.para_slugs = data['para_slugs']
         self.group_slugs = data['group_slugs']

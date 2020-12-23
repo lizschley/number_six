@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    $('.para_by_subtitle').click(function(e) {
+    $('.one_para_modal').click(function(e) {
         // preventing from page reload and default actions
         e.preventDefault();
-        var subtitle = this.getAttribute('data-subtitle');
+        var slug = this.getAttribute('data-slug');
         $.ajax({
             type: 'GET',
             url: '/projects/study/paragraphs/modal',

@@ -3,6 +3,7 @@ import constants.sql_substrings as sql_sub
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
+import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import Category
 
 
@@ -196,6 +197,11 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         if row.link_text not in self.group_id_to_link_text_list[row.group_id]:
             self.group_id_to_link_text_list[row.group_id].append(row.link_text)
             self.groups[-1]['link_text'].append(row.link_text)
+            refs = utils.find_dictionary_from_list_by_key_and_value(self.references, 'link_text',
+                                                                    row.link_text)
+            ref_lookup = {'link_text': refs[0]['short_text'], 'url': refs[0]['url']}
+            self.slug_to_lookup_link['ref_slug_to_reference'][refs[0]['slug']] = ref_lookup
+
 
     def append_unique_paragraph(self, row):
         '''
@@ -208,7 +214,9 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
 
         if row.paragraph_id not in self.group_id_to_para_ids[row.group_id]:
             self.group_id_to_para_ids[row.group_id].append(row.paragraph_id)
-            self.groups[-1]['paragraphs'].append(self.paragraph_dictionary(row))
+            para = self.paragraph_dictionary(row)
+            self.groups[-1]['paragraphs'].append(para)
+            self.unique_slug_lists(para['text'])
 
     def group_dictionary(self, row):
         '''
@@ -250,4 +258,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
         return {'category': self.category,
                 'groups': self.groups,
-                'references': self.references, }
+                'references': self.references,
+                'para_id_to_link_text': self.para_id_to_link_text,
+                'slug_to_lookup_link': self.slug_to_lookup_link,
+                }

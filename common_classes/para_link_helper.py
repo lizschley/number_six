@@ -8,11 +8,13 @@ class ParaLinkHelper:
     ParaLinkHelper allows convvenient and flexible inline links in the paragraph records.  This does not
     include references, unless they are used within the paragraph text)
     '''
-    def __init__(self, replacing_text=True, create_modal_links=True):
-        self.replacing_text = replacing_text
-        self.create_modal_links = create_modal_links
+    def __init__(self, **kwargs):
+        self.para_slugs = kwargs['para_slugs']
+        self.group_slugs = kwargs['group_slugs']
+        self.replacing_text = kwargs.get('replacing_text', True)
+        self.create_modal_links = kwargs.get('create_modal_links', True)
         self.link_data = {}
-        self.return_data = {'text': '', 'para_slugs': [], 'group_slugs': []}
+        self.return_data = {'text': '', 'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs}
         self.text = ''
 
     def links_from_indicators(self, text, link_data):
@@ -31,6 +33,7 @@ class ParaLinkHelper:
         self.link_data = link_data
         for indicator in lookup.INDICATOR_ARGS:
             self.loop_through_text(indicator['beg_link'], indicator['end_link'])
+        self.return_data['text'] = self.text
         return self.return_data
 
     def loop_through_text(self, beg_link, end_link):
@@ -75,7 +78,7 @@ class ParaLinkHelper:
                 if len(sub_pieces) > 1:
                     para_piece_list.append(sub_pieces[1])
         if self.replacing_text:
-            self.return_data['text'] = ''.join(para_piece_list)
+            self.text = ''.join(para_piece_list)
         else:
             self.make_slug_list_unique()
 
@@ -91,9 +94,9 @@ class ParaLinkHelper:
         :type beg_link: string
         '''
         if beg_link in lookup.PARA_BEGIN:
-            self.return_data['para_slugs'].append(slug)
+            self.para_slugs.append(slug)
         if beg_link == lookup.GROUP_ARGS['beg_link']:
-            self.return_data['group_slugs'].append(slug)
+            self.group_slugs.append(slug)
 
     def lookup_link(self, slug, beg_link):
         '''
@@ -111,7 +114,7 @@ class ParaLinkHelper:
         if (beg_link == lookup.AJAX_ARGS['beg_link'] or beg_link == lookup.PARA_ARGS['beg_link']):
             return self.para_link(slug)
         if beg_link == lookup.REF_ARGS['beg_link']:
-            return self.para_link(slug)
+            return self.ref_link(slug)
         if beg_link == lookup.GROUP_ARGS['beg_link']:
             return self.group_link(slug)
         return ''
@@ -122,15 +125,15 @@ class ParaLinkHelper:
 
         :param orig_subtitle: This will be the link text, though it may not be the actual subtitle
         :type orig_subtitle: str
-        :param from_ajax: True if displaying text that has link indicators - avoiding links with modals
-        :type from_ajax: bool
+        :param is_modal: True if displaying text that has link indicators - avoiding links with modals
+        :type is_modal: bool
         :return: paragraph with link indicators turned into modal link or has link indicators stripped
         :rtype: dict
         '''
         link_text = self.link_data['para_slug_to_short_title'][slug]
 
         beg_link = '<a href="#" data-slug="'
-        mid_link = '" class="para_by_subtitle modal_popup_link">'
+        mid_link = '" class="one_para_modal modal_popup_link">'
         end_link = '</a>'
         return beg_link + slug + mid_link + link_text + end_link
 
@@ -143,7 +146,7 @@ class ParaLinkHelper:
         :rtype: string
         '''
         link_text = self.link_data['para_slug_to_short_title'][slug]
-        beg_link = '<a class="nav-link" href="'
+        beg_link = '<a href="'
         end_link = f'">{link_text}</a>'
         url = reverse('projects:study_para_by_slug', kwargs={"slug":  slug})
         return beg_link + url + end_link
@@ -157,8 +160,8 @@ class ParaLinkHelper:
         :return: html link within text
         :rtype: string
         '''
-        link_text = self.link_data['ref_slug_to_short_text'][slug]
-        url = self.link_data['ref'][slug]['url']
+        link_text = self.link_data['ref_slug_to_reference'][slug]['link_text']
+        url = self.link_data['ref_slug_to_reference'][slug]['url']
         return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
     def group_link(self, _slug):
@@ -173,8 +176,8 @@ class ParaLinkHelper:
         '''
         make_slug_list_unique ensures that records will not be retrieved multiple times
         '''
-        for key in ('para_slugs', 'group_slugs'):
-            slug_list = self.return_data[key]
-            if len(slug_list) > 1:
-                slug_list = list(dict.fromkeys(slug_list))
+        slug_dict = {'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs}
+        for key in slug_dict:
+            if len(slug_dict[key]) > 1:
+                slug_list = list(dict.fromkeys(slug_dict[key]))
                 self.return_data[key] = slug_list
