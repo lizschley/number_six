@@ -369,6 +369,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para = para_dict.paragraph_dictionary()
         para['id'] = row.para_id
         para['subtitle'] = row.para_subtitle
+        para['short_title'] = row.short_title
         para['note'] = row.para_note
         para['text'] = row.para_text
         para['standalone'] = row.para_standalone

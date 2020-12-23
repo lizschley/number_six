@@ -13,13 +13,14 @@ class ParaDisplayRetrieverBase(ABC):
     def __init__(self):
         # for processing db retrieval, not needed for demo (JSON to display)
         self.ordered = False
-        self.para_ids = []
-        self.ref_ids = []
         # for output
         self.group = {}
-        self.para_id_to_link_text = {}
-        self.paragraphs = []
         self.references = []
+        self.paragraphs = []
+        self.para_id_to_link_text = {}
+        self.slug_to_lookup_link = {'para_slug_to_short_title': {},
+                                    'ref_slug_to_short_text': {},
+                                    'group_slug_to_short_name': {}, }
 
     @abstractmethod
     def data_retrieval(self, kwargs):
@@ -80,11 +81,9 @@ class ParaDisplayRetrieverBase(ABC):
         :return: dictionary used to display paragraphs
         :rtype: dict
         '''
-        # print('in output data')
-        # print(f'group is {self.group}')
-        # print(f'references are {self.references}')
-        # print(f'paragraphs are {self.paragraphs}')
         return {'group': self.group,
                 'references': self.references,
                 'paragraphs': self.paragraphs,
-                'para_id_to_link_text': self.para_id_to_link_text, }
+                'para_id_to_link_text': self.para_id_to_link_text,
+                'slug_to_lookup_link': self.slug_to_lookup_link,
+                }

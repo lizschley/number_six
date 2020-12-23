@@ -51,6 +51,7 @@ class ParagraphDictionaries:
             'image_info_key': 'default',
             'guid': '',
             'slug': '',
+            'short_title': '',
         }
 
     @staticmethod

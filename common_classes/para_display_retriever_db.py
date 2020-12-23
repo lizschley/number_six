@@ -1,9 +1,9 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
 import constants.sql_substrings as sql_sub
+from common_classes.para_link_helper import ParaLinkHelper
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
-import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Group, Paragraph)
 
 
@@ -13,6 +13,25 @@ VALID_SQL_TYPES = ('group_id_only', 'subtitle')
 class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
     ''' The ParaDisplayRetrieverDb class retrieves the information to use to output paragraphs.  Later
         there may be other flavors, such as a blog or flash cards'''
+
+    def __init__(self):
+        super().__init__()
+        # from super
+        # for processing db retrieval, not needed for demo (JSON to display)
+        # self.ordered = False
+        # # for output
+        # self.group = {}
+        # self.references = []
+        # self.paragraphs = []
+        # self.para_id_to_link_text = {}
+        # self.slug_to_lookup_link = {'para_slug_to_short_title': {},
+        #                             'ref_slug_to_short_text': {},
+        #                             'group_slug_to_short_name': {}, }
+        # from this __init__, all processing variables
+        self.para_slugs = []
+        self.group_slugs = []
+        self.para_ids = []
+        self.ref_ids = []
 
     def data_retrieval(self, kwargs):
         '''
@@ -29,14 +48,8 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
             return self.db_output_to_display_input(raw_queryset)
 
-        if utils.key_not_in_dictionary(kwargs, 'subtitle'):
-            return
-
-        which_where = 'slug' if utils.key_in_dictionary(kwargs, 'slug') else 'subtitle'
-        which_val = kwargs['slug'] if which_where == 'slug' else kwargs['subtitle']
-        query = self.write_one_standalone_para_sql(which_where)
-        self.group = {'title': kwargs['subtitle'], 'note': ''}
-        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph, which_val)
+        query = self.write_one_standalone_para_sql()
+        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph, kwargs['slug'])
         return self.db_output_to_display_input(raw_queryset)
 
     def write_group_para_sql(self):
@@ -50,7 +63,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         query += 'where g.id = %s'
         return query
 
-    def write_one_standalone_para_sql(self, field_to_query):
+    def write_one_standalone_para_sql(self):
         '''
         write_one_standalone_para_sql generates the SQL used to retrieve data when it is retrieved
         using a paragraph_id
@@ -58,11 +71,8 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: the query to be used, minus the actual para_id
         :rtype: str
         '''
-
-        field = f'lower(p.{field_to_query})'
-
         query = self.build_basic_sql('single_para')
-        query += 'where ' + field + ' = lower(%s)'
+        query += 'where slug = lower(%s)'
         query += ' and p.standalone = TRUE'
         return query
 
@@ -121,6 +131,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: dict
         '''
         self.loop_through_queryset(raw_queryset)
+        self.create_lookup_for_paragraph_links()
         return self.output_data()
 
     def loop_through_queryset(self, query_set):
@@ -172,8 +183,10 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :type row: one row of django.db.models.query.RawQuerySet
         '''
         if row.reference_id not in self.ref_ids:
-            self.references.append(ParagraphDictionaries.reference_link_data(row))
+            ref = ParagraphDictionaries.reference_link_data(row)
+            self.references.append(ref)
             self.ref_ids.append(row.reference_id)
+            self.slug_to_lookup_link['ref_slug_to_short_text'][ref['slug']] = ref['short_text']
 
     def append_unique_paragraph(self, row):
         '''
@@ -184,8 +197,42 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :type row: one row of django.db.models.query.RawQuerySet
         '''
         if row.paragraph_id not in self.para_ids:
-            self.paragraphs.append(self.paragraph_dictionary(row))
+            para = self.paragraph_dictionary(row)
+            self.unique_slug_lists(para['text'])
+            self.paragraphs.append(para)
             self.para_ids.append(row.paragraph_id)
+
+    def create_lookup_for_paragraph_links(self):
+        '''
+        create_lookup_for_paragraph_links creates a lookup dictionary with the lookup key, which is
+        always a slug, though can be for a reference, paragraph or a group
+
+        Note - making updating true (__init__ for ParaDbMethods), so that an exception will be raised if
+        the slug doesn't get a record
+
+        :param para_text: para_text to be searched for the slugs to create the internal links
+        :type para: str
+        '''
+        para_getter = ParaDbMethods(True)
+        for para_slug in self.para_slugs:
+            link_para = para_getter.find_record(Paragraph, {'slug': para_slug})
+            self.slug_to_lookup_link['para_slug_to_short_title'][link_para.slug] = link_para.short_title
+
+    def unique_slug_lists(self, para_text):
+        '''
+        unique_slug_lists extracts the slugs from the paragraph using the link indicators, thus
+        ensuring that the resulting array of slugs used for lookup is unique
+
+        :param para_text: text from one paragraph that is being retrieved
+        :type para: str
+        :return: list of slugs used for looking up data needed for internal links
+        :rtype: list of strings
+        '''
+        replacing_text = False
+        link_helper = ParaLinkHelper(replacing_text)
+        data = link_helper.links_from_indicators(para_text, {})
+        self.para_slugs = data['para_slugs']
+        self.group_slugs = data['group_slugs']
 
     def paragraph_dictionary(self, row):
         '''
@@ -210,5 +257,6 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
             'image_path': row.image_path,
             'image_info_key': row.image_info_key,
             'slug': row.para_slug,
+            'short_title': row.short_title,
             'order': self.get_paragraph_order(row.subtitle, order),
         }

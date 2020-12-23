@@ -7,7 +7,8 @@ import helpers.no_import_common_class.utilities as utils
 
 class ParagraphsForDisplayOne(ParagraphsForDisplay):
     '''
-    ParagraphsForDisplayOne is used for Ajax calls to display a definition or whatever
+    ParagraphsForDisplayOne is used to display one pargraph record on a page and also to make
+    asynchronous calls for modal popups
 
     The input_data is a dictionary that is formatted by a paragraph retriever object.
     Still using the para_display_retriever_db to get the data, but the output is different
@@ -23,20 +24,12 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :return: dictionary needed to display basic paragraphs
         :rtype: dict
         '''
-        if (utils.key_not_in_dictionary(kwargs, 'subtitle') and
-                utils.key_not_in_dictionary(kwargs, 'slug')):
-            message = ('ParagraphsForDisplayOne only works with subtitle or slug as key word arg, '
-                       f'kwargs=={kwargs}')
-            return ParagraphsForDisplayOne.error_output(message)
+        is_modal = utils.key_in_dictionary(kwargs, 'is_modal')
         retriever = ParaDisplayRetrieverDb()
         self.input_data = retriever.data_retrieval(kwargs)
-        if self.input_data is None:
-            message = ('ParagraphsForDisplayOne retrieved no data with this '
-                       f'subtitle=={kwargs["subtitle"]}')
-            return ParagraphsForDisplayOne.error_output(message)
-        return self.format_single_para_display(kwargs['subtitle'])
+        return self.format_single_para_display(is_modal)
 
-    def format_single_para_display(self, subtitle):
+    def format_single_para_display(self, is_modal):
         '''
         format_data_for_display Once we know what class to use for retrieving the input data
         this is the main driver for the formatting process
@@ -45,8 +38,8 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :rtype: dict
         '''
         self.create_links_from_references()
-        self.assign_paragraphs()
-        return self.output_single_para_display(subtitle)
+        self.assign_paragraphs(is_modal)
+        return self.output_single_para_display(is_modal)
 
     def assign_paragraphs(self, from_ajax=True):
         '''
@@ -59,7 +52,7 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         self.paragraphs = self.paragraphs_links_and_images(self.input_data['paragraphs'], from_ajax)
         self.add_ref_links_to_paragraphs()
 
-    def output_single_para_display(self, subtitle):
+    def output_single_para_display(self, is_modal):
         '''
         output_for_display creates the **kwargs for the display paragraph template
 
@@ -67,11 +60,30 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         :rtype: dict
         '''
         if len(self.paragraphs) < 1:
-            return ParagraphsForDisplayOne.error_output(f'Data not yet loaded for subtitle=={subtitle}')
-        para = self.paragraphs[0]
-        orig_subtitle = para['subtitle']
-        para['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
-        return para
+            return ParagraphsForDisplayOne.error_output(f'Data not loaded for para')
+
+        orig_subtitle = self.paragraphs[0]['subtitle']
+        self.paragraphs[0]['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
+
+        if not is_modal:
+            return self.output_page_display()
+        return self.paragraphs[0]
+
+    def output_page_display(self):
+        '''
+        output_page_display moves the subtitle and subtitle notes to the title and title note field
+        since there is no group data and we want to use the same template
+
+        :return: paragraph that will work in the single para page view
+        :rtype: dict
+        '''
+        single_para_for_page = {}
+        single_para_for_page['title'] = self.paragraphs[0]['subtitle']
+        single_para_for_page['title_note'] = self.paragraphs[0]['subtitle_note']
+        self.paragraphs[0]['subtitle'] = ''
+        self.paragraphs[0]['subtitle_note'] = ''
+        single_para_for_page['paragraphs'] = self.paragraphs
+        return single_para_for_page
 
     @staticmethod
     def error_output(message):

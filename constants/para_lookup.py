@@ -6,8 +6,10 @@ IMAGE_INFO_LOOKUP = {
     'question': {'classes': 'img-fluid px-2'}
 }
 
-'''Used so that links do not need to exactly match subtitiles to be used in single para lookup'''
-SUBTITLE_LOOKUP = {
-    'test link text': 'testing text is actual subtitle not link_text',
-    'Chinese Holly': 'Ilex-cornuta; Chinese Holly, Horned Holly',
-}
+REF_ARGS = {'beg_link': '|beg_ref|', 'end_link': '|end_ref|'}
+AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
+PARA_ARGS = {'beg_link': '|beg_para|', 'end_link': '|end_para|'}
+GROUP_ARGS = {'beg_link': '|beg_group|', 'end_link': '|end_group|'}
+
+INDICATOR_ARGS = (REF_ARGS, AJAX_ARGS, PARA_ARGS, GROUP_ARGS)
+PARA_BEGIN = ('|beg|', '|beg_para|')

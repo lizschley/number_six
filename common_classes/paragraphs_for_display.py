@@ -7,6 +7,7 @@ import helpers.no_import_common_class.utilities as utils
 from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
+from common_classes.para_link_helper import ParaLinkHelper
 
 
 class ParagraphsForDisplay:
@@ -24,17 +25,12 @@ class ParagraphsForDisplay:
     :type object: dictionary
     '''
 
-    INLINE_ARGS = {'beg_link': '|beg_ref_slug|', 'end_link': '|end_ref_slug|'}
-    AJAX_ARGS = {'beg_link': '|beg|', 'end_link': '|end|'}
-    INTERNAL_ARGS = {'beg_link': '|beg_blue_slug|', 'end_link': '|end_blue_slug|'}
-
     def __init__(self):
         self.group_title = ''
         self.group_note = ''
         self.group_type = ''
         self.reference_links = {}
-        self.inline_ref_data = {}
-        self.inline_ref = {}
+        self.para_link_lookup = {'ref': {}, 'para': {}, 'group': {}}
         self.paragraphs = []
         self.input_data = {}
 
@@ -46,11 +42,11 @@ class ParagraphsForDisplay:
         :rtype: dict
         '''
         self.input_data = self.retrieve_input_data(kwargs)
+
         # import pprint
         # print('-----------------Input Data-------------------------------')
         # printer = pprint.PrettyPrinter(indent=1, width=120)
         # printer.pprint(self.input_data)
-
         if self.input_data is None:
             sys.exit(f'did not retrieve data with these args: {kwargs}')
         return self.format_data_for_display()
@@ -130,7 +126,7 @@ class ParagraphsForDisplay:
             if utils.key_not_in_dictionary(ref, 'slug'):
                 continue
             slug = ref['slug']
-            self.inline_ref_data[slug] = {'link_text': ref['short_text'], 'url': ref['url']}
+            self.para_link_lookup['ref'][slug] = {'link_text': ref['short_text'], 'url': ref['url']}
 
     # Todo: if from_ajax is true we will make the pop-up a blue link
     def assign_paragraphs(self, from_ajax=False):
@@ -149,17 +145,15 @@ class ParagraphsForDisplay:
 
     def paragraphs_links_and_images(self, in_para_list, from_ajax=False):
         ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
+
+        replacing_text = True
+        create_modal_links = not from_ajax
+        link_helper = ParaLinkHelper(replacing_text, create_modal_links)
         out_para_list = []
-        inline_args = ParagraphsForDisplay.INLINE_ARGS
-        inline_args['link_data'] = self.inline_ref_data
-        ajax_args = ParagraphsForDisplay.AJAX_ARGS
-        ajax_args['from_ajax'] = from_ajax
         for para in in_para_list:
-            ajax_args['para_slug'] = para['slug']
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.inline_link,
-                                                                para['text'], **inline_args)
-            para['text'] = para_helpers.replace_link_indicators(para_helpers.ajax_link,
-                                                                para['text'], **ajax_args)
+            data = link_helper.links_from_indicators(para['text'],
+                                                     self.input_data['slug_to_lookup_link'])
+            para['text'] = data['text']
             para = para_helpers.add_image_information(para)
             out_para_list.append(self.paragraph(para))
         return out_para_list
@@ -206,6 +200,8 @@ class ParagraphsForDisplay:
             'image_path': para['image_path'],
             'image_classes': para['image_classes'],
             'image_alt': para['image_alt'],
+            'slug': para['slug'],
+            'short_title': para['short_title'],
             'references': '',
         }
         return para

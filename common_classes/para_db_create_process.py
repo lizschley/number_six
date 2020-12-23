@@ -4,6 +4,7 @@ import sys
 from common_classes.para_db_methods import ParaDbMethods
 import constants.crud as crud
 import helpers.no_import_common_class.utilities as utils
+import utilities.random_methods as random
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
 
@@ -125,9 +126,27 @@ class ParaDbCreateProcess(ParaDbMethods):
                 self.current_order_num += 1
             para['standalone'] = self.decide_standalone(para)
             self.link_text_list(para)
+            self.add_short_title(para['standalone'], para)
             paragraph = self.create_paragraph_record(para)
             self.fake_to_real_para_id[para['id']] = paragraph.id
             self.add_association_with_group(paragraph)
+
+    def add_short_title(self, standalone, para):
+        '''
+        add_short_title is a convenience method so that the subtitle will be used for modal popups and
+        internal links to standalone paragraphs unless it is too long
+
+        :param standalone: if the paragraph can be independant from other paragraphs in the group
+        :type standalone: bool
+        :param para: a unit of text that had lots of associated information
+        :type para: dict
+        '''
+        if not standalone:
+            return
+        if len(para['subtitle']) > 50:
+            return
+        if not random.valid_non_blank_string(para['short_title']):
+            para['short_title'] = para['subtile']
 
     def link_text_list(self, para):
         '''

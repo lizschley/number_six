@@ -63,6 +63,7 @@ class Reference(models.Model):
 class Paragraph(models.Model):
     ''' Many to many with References and with Groups '''
     subtitle = models.CharField(blank=True, max_length=120, db_index=True)
+    short_title = models.CharField(blank=True, max_length=50, db_index=True)
     slug = AutoSlugField(db_index=True, max_length=150, blank=True, populate_from='subtitle')
     note = models.TextField(blank=True)
     text = models.TextField(blank=True)
@@ -83,11 +84,11 @@ class Paragraph(models.Model):
 
     def __repr__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}>')
 
     def __str__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}>')
 
     class Meta:
         get_latest_by = 'updated_at'

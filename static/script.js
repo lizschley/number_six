@@ -5,8 +5,8 @@ $(document).ready(function() {
         var subtitle = this.getAttribute('data-subtitle');
         $.ajax({
             type: 'GET',
-            url: '/projects/study/paragraphs/para_by_subtitle',
-            data: {'subtitle' : subtitle},
+            url: '/projects/study/paragraphs/modal',
+            data: {'slug' : slug},
             success: function (response) {
                  var paragraph = response['paragraph'];
                  var subtitle  = paragraph['subtitle'];

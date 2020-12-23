@@ -54,7 +54,7 @@ class ParagraphDbInputCreator():
         }
 
     @staticmethod
-    def paragraph_dictionary(para_id, text, subtitle='', note='', standalone=None):
+    def paragraph_dictionary(para_id, text, subtitle='', short_title='',  note='', standalone=None):
         '''
         paragraph_dictionary - helper method to create format for paragraph
         input to create ParagraphToDb input data
@@ -77,6 +77,10 @@ class ParagraphDbInputCreator():
         }
         if standalone is not None:
             para['standalone'] = standalone
+        if (standalone and len(subtitle) < 51 and len(short_title) == 0):
+            para['short_title'] = subtitle
+        else:
+            para['short_title'] = short_title
         return para
 
     @staticmethod

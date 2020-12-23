@@ -1,0 +1,15 @@
+{
+    "updated_at": {"oper": "-", "units": {"days": 1}},
+    "group_ids": [],
+    "category_ids": [],
+    "paragraph_ids": [],
+    "reference_ids": [],
+    "add_categories": [{"title": "", "category_type": ""}],
+    "add_references": [{"link_text": "", "url": "", "short_text": ""}],
+    "add_groups": [{"title": "", "note": "", "short_name": "",
+                    "group_type": "", "category_id": 0, "category_title": ""}],
+    "add_paragraph_reference": [{"paragraph_guid": "", "reference_slug": ""}],
+    "add_group_paragraph": [{"group_slug": "", "paragraph_guid": ""}],
+    "delete_paragraph_reference": [{"paragraph_guid": "", "reference_slug": ""}],
+    "delete_group_paragraph": [{"group_slug": "", "paragraph_guid": ""}]
+}

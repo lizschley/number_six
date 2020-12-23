@@ -137,7 +137,7 @@ def single_para(context):
     para = ParagraphsForDisplayOne()
     if utils.key_in_dictionary(context, 'subtitle'):
         return para.retrieve_paragraphs(subtitle=context['subtitle'])
-    return para.retrieve_paragraphs(para_slug=context['slug'])
+    return para.retrieve_paragraphs(slug=context['slug'])
 
 
 def update_paragraphs_step_one(input_data):

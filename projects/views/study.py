@@ -103,9 +103,9 @@ class OneParagraphView(TemplateView):
         return context
 
 
-def para_by_subtitle(request):
+def study_modal_para(request):
     '''
-    para_by_subtitle retrieves one paragraph and displays in a modal
+    study_modal_para retrieves one paragraph and displays in a modal
 
     :param request: request object
     :type request: request
@@ -114,8 +114,8 @@ def para_by_subtitle(request):
     '''
     context = {}
     if request.method == 'GET' and request.is_ajax():
-        context['subtitle'] = request.GET.get('subtitle')
+        context['slug'] = request.GET.get('slug')
     else:
         return JsonResponse({'success': False}, status=400)
     para = import_para_helper.single_para(context)
-    return JsonResponse({'paragraph': para}, status=200)
+    return JsonResponse({'paragraph': para, 'is_modal': 'true'}, status=200)

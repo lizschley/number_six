@@ -26,6 +26,8 @@
       "text": "",
       "__comment_standalone__": "make 'yes' if the group_type == 'ordered' and it is a standalone para",
       "standalone": "",
+      "__comment_short_title__": "used for internal link_text, if blank & program will copy subtitle if len <= 51",
+      "short_title": "",
       "link_text_list": []
     }
   ],
