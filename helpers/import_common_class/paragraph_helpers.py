@@ -98,6 +98,9 @@ def retrieve_paragraphs_based_on_context(paras, context):
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
+    group_slug = context.pop('group_slug', None)
+    if group_slug is not None:
+        return paras.retrieve_paragraphs(group_slug=group_slug)
     category_id = context.pop('category_id', None)
     if category_id is not None:
         return paras.retrieve_paragraphs(category_id=category_id)

@@ -43,24 +43,27 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: a dictionary in the format that works with the standard ParagraphsToDB
         :rtype: dict
         '''
-        if 'group_id' in kwargs.keys():
-            query = self.write_group_para_sql()
-            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs['group_id'])
+        for key in kwargs.keys():
+            if 'group' not in key:
+                continue
+            query = self.write_group_para_sql(key)
+            raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, kwargs[key])
             return self.db_output_to_display_input(raw_queryset)
 
         query = self.write_one_standalone_para_sql()
         raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Paragraph, kwargs['slug'])
         return self.db_output_to_display_input(raw_queryset)
 
-    def write_group_para_sql(self):
+    def write_group_para_sql(self, key):
         '''
         write_group_para_sql generates the SQL used to retrieve data when it is retrieved
         using a group.
         :return: the query to be used, minus the actual group_id
         :rtype: str
         '''
-        query = self.build_basic_sql('group_id_only')
-        query += 'where g.id = %s'
+        where_field = 'g.id' if key == 'group_id' else 'g.slug'
+        query = self.build_basic_sql('group')
+        query += f'where {where_field} = %s'
         return query
 
     def write_one_standalone_para_sql(self):
@@ -96,7 +99,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: str
         '''
         sql = sql_sub.BEGIN_SELECT
-        if sql_type == 'group_id_only':
+        if sql_type == 'group':
             sql += ', ' + sql_sub.SELECT_GROUP
         sql += ', ' + sql_sub.SELECT_PARAGRAPHS + ', ' + sql_sub.SELECT_REFERENCES + ' '
         return sql
@@ -113,7 +116,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :return: Partial query
         :rtype: str
         '''
-        if sql_type == 'group_id_only':
+        if sql_type == 'group':
             sql += sql_sub.FROM_GROUP_JOIN_PARA + ' '
         else:
             sql += sql_sub.FROM_PARA + ' '
@@ -218,6 +221,9 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         for para_slug in self.para_slugs:
             link_para = para_getter.find_record(Paragraph, {'slug': para_slug})
             self.slug_to_lookup_link['para_slug_to_short_title'][link_para.slug] = link_para.short_title
+        for group_slug in self.group_slugs:
+            link_group = para_getter.find_record(Group, {'slug': group_slug})
+            self.slug_to_lookup_link['group_slug_to_short_name'][link_group.slug] = link_group.short_name
 
     def unique_slug_lists(self, para_text):
         '''

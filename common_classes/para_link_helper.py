@@ -42,7 +42,7 @@ class ParaLinkHelper:
         split variable it uses the link indicators that enclose a slug.  The slug is used for the link
         data lookup.
 
-        The result is added to self.return_data
+        The final result will later be added to self.return_data
 
         There are two goals:
         1. Parsing out the slugs, so we can retrieve the data necessary for creating the links.  This
@@ -110,8 +110,8 @@ class ParaLinkHelper:
         :rtype: str
         '''
         if (beg_link == lookup.AJAX_ARGS['beg_link'] and self.create_modal_links):
-            return self.ajax_link(slug)
-        if (beg_link == lookup.AJAX_ARGS['beg_link'] or beg_link == lookup.PARA_ARGS['beg_link']):
+            return self.modal_link(slug)
+        if beg_link in (lookup.AJAX_ARGS['beg_link'], lookup.PARA_ARGS['beg_link']):
             return self.para_link(slug)
         if beg_link == lookup.REF_ARGS['beg_link']:
             return self.ref_link(slug)
@@ -119,9 +119,9 @@ class ParaLinkHelper:
             return self.group_link(slug)
         return ''
 
-    def ajax_link(self, slug):
+    def modal_link(self, slug):
         '''
-        ajax_link This creates an ajax link: looks up single para by slug and displays result in modal
+        modal_link This creates an modal link: looks up single para by slug and displays result in modal
 
         :param orig_subtitle: This will be the link text, though it may not be the actual subtitle
         :type orig_subtitle: str
@@ -153,7 +153,7 @@ class ParaLinkHelper:
 
     def ref_link(self, slug):
         '''
-        ref_link creates a standard link to display in a para with a class of reference_link.
+        ref_link creates a standard link (with class of reference_link) to display in text.
 
         :param slug: slug for the reference to use for lookup, so we have ability to update link_text
         :type slug: string
@@ -164,13 +164,18 @@ class ParaLinkHelper:
         url = self.link_data['ref_slug_to_reference'][slug]['url']
         return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
-    def group_link(self, _slug):
+    def group_link(self, slug):
         '''
-        group_link is not implementd
-        :return: empty string
+        group_link takes slugs and creates links to ordered paragraph groups
+
+        :return: a link to the paragraphs ordered within a group.
         :rtype: string
         '''
-        return ''
+        link_text = self.link_data['group_slug_to_short_name'][slug]
+        beg_link = '<a href="'
+        end_link = f'">{link_text}</a>'
+        url = reverse('projects:study_paragraphs_group_slug', kwargs={"group_slug":  slug})
+        return beg_link + url + end_link
 
     def make_slug_list_unique(self):
         '''

@@ -19,6 +19,8 @@ urlpatterns = [
     path('demo/paragraphs', DemoParagraphView.as_view(), name='demo_paragraphs'),
     path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(),
          name='study_paragraphs_with_group'),
+    path('study/ordered_paragraphs/<slug:group_slug>', StudyParagraphView.as_view(),
+         name='study_paragraphs_group_slug'),
     path('study/paragraphs/modal', study_modal_para, name='study_modal_para'),
     path('study/paragraphs/flashcards/<int:category_id>', FlashcardView.as_view(),
          name='study_paragraphs_with_category'),
