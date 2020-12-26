@@ -163,6 +163,8 @@ class ParaDbMethods:
             return_obj = class_.objects.get(**find_dict)
         except class_.DoesNotExist:
             if self.updating:
+                print(f'not found for record: {class_}')
+                print(f'looking for: {find_dict}')
                 raise
             return_obj = find_dict
         return return_obj

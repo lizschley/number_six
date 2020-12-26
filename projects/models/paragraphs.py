@@ -84,11 +84,11 @@ class Paragraph(models.Model):
 
     def __repr__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}, short_title: {self.short_title}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}, slug: {self.slug}>')
 
     def __str__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}, short_title: {self.short_title}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}, slug: {self.slug}>')
 
     class Meta:
         get_latest_by = 'updated_at'
@@ -115,11 +115,11 @@ class Group(models.Model):
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
                 f'group_type: {self.group_type}, category_id: {self.category_id}, '
-                f'slug: {self.slug}, short_name: {self.short_name}>')
+                f'slug: {self.slug}, short_name: {self.short_name}, slug: {self.slug}>')
 
     def __str__(self):
         return (f'<Group id: {self.id}, title: {self.title}, group_type: {self.group_type}, '
-                f'short_name: {self.short_name}>')
+                f'short_name: {self.short_name}, slug: {self.slug}>')
 
     class Meta:
         get_latest_by = 'updated_at'

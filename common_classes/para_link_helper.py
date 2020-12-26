@@ -1,5 +1,6 @@
 '''class used in formatting various and consistant links within the paragraph text'''
 from django.urls import reverse
+from projects.models.paragraphs import Paragraph
 import constants.para_lookup as lookup
 
 
@@ -9,13 +10,16 @@ class ParaLinkHelper:
     include references, unless they are used within the paragraph text)
     '''
     def __init__(self, **kwargs):
-        self.para_slugs = kwargs['para_slugs']
-        self.group_slugs = kwargs['group_slugs']
         self.replacing_text = kwargs.get('replacing_text', True)
         self.create_modal_links = kwargs.get('create_modal_links', True)
-        self.link_data = {}
+        self.para_link_slugs = kwargs.get('para_link_slugs', False)
+        self.para_slugs = kwargs.get('para_slugs')
+        self.group_slugs = kwargs.get('group_slugs')
+        self.slug_data = kwargs.get('slug_data')
         self.return_data = {'text': '', 'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs}
+        self.link_data = {}
         self.text = ''
+        self.do_update = False
 
     def links_from_indicators(self, text, link_data):
         '''
@@ -35,6 +39,19 @@ class ParaLinkHelper:
             self.loop_through_text(indicator['beg_link'], indicator['end_link'])
         self.return_data['text'] = self.text
         return self.return_data
+
+    def paragraph_slug_replacement(self, indicator):
+        paras_to_update = []
+        paras = Paragraph.objects.filter(text__contains=self.slug_data['existing_slug'])
+        for para in paras:
+            self.do_update = False
+            self.text = para.text
+            self.loop_through_text(indicator['beg_link'], indicator['end_link'])
+            if self.do_update:
+                para.text = self.text
+                paras_to_update.append(para)
+        return paras_to_update
+
 
     def loop_through_text(self, beg_link, end_link):
         '''
@@ -74,7 +91,7 @@ class ParaLinkHelper:
                 if not self.replacing_text:
                     self.append_slug(slug, beg_link)
                     continue
-                para_piece_list.append(self.lookup_link(slug, beg_link))
+                para_piece_list.append(self.lookup_link(slug, beg_link, end_link))
                 if len(sub_pieces) > 1:
                     para_piece_list.append(sub_pieces[1])
         if self.replacing_text:
@@ -98,7 +115,7 @@ class ParaLinkHelper:
         if beg_link == lookup.GROUP_ARGS['beg_link']:
             self.group_slugs.append(slug)
 
-    def lookup_link(self, slug, beg_link):
+    def lookup_link(self, slug, beg_link, end_link):
         '''
         lookup_link is where the methods that create the inline links are called
 
@@ -109,6 +126,8 @@ class ParaLinkHelper:
         :return: link to the paragraph, group or reference
         :rtype: str
         '''
+        if self.para_link_slugs:
+            return self.replace_slugs(slug, beg_link, end_link)
         if (beg_link == lookup.AJAX_ARGS['beg_link'] and self.create_modal_links):
             return self.modal_link(slug)
         if beg_link in (lookup.AJAX_ARGS['beg_link'], lookup.PARA_ARGS['beg_link']):
@@ -186,3 +205,9 @@ class ParaLinkHelper:
             if len(slug_dict[key]) > 1:
                 slug_list = list(dict.fromkeys(slug_dict[key]))
                 self.return_data[key] = slug_list
+
+    def replace_slugs(self, found_slug, beg_link, end_link):
+        if found_slug != self.slug_data['existing_slug']:
+            return beg_link + self.slug_data['existing_slug'] + end_link
+        self.do_update = True
+        return beg_link + self.slug_data['new_slug'] + end_link
