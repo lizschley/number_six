@@ -26,17 +26,11 @@
       "text": "",
       "__comment_standalone__": "make 'yes' if the group_type == 'ordered' and it is a standalone para",
       "standalone": "",
-      "__comment_short_title__": "used for internal link_text, if blank & program will copy subtitle if len <= 51",
+      "__comment_short_title__": "used for internal link_text, if blank and program will copy subtitle if len <= 51",
       "short_title": "",
       "link_text_list": []
     }
   ],
-  "ref_link_paragraph": [
-    {
-      "__comment_ref_para_1__": "delete this entire dictionary, if adding ref para associations only ",
-      "__comment_ref_para_2__": "by adding a list of link_text strings in the paragraph record",
-      "link_text": "",
-      "paragraph_id": ""
-    }
-  ]
+  "__comment1__":"'ref_link_paragraph': [] is created programmatically.",
+  "__comment2__":"Within array, hash with keys, link_text and paragraph_id and values are strings"
 }

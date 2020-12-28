@@ -146,7 +146,7 @@ class ParaDbCreateProcess(ParaDbMethods):
         if len(para['subtitle']) > 50:
             return
         if not random.valid_non_blank_string(para['short_title']):
-            para['short_title'] = para['subtile']
+            para['short_title'] = para['subtitle']
 
     def link_text_list(self, para):
         '''
@@ -217,9 +217,7 @@ class ParaDbCreateProcess(ParaDbMethods):
         :return: paragraph record
         :rtype: db record
         '''
-        create_dict = para.copy()
-        del create_dict['id']
-        create_dict['text'] = para['text']
+        create_dict = self.assign_paragraph(para)
         return self.create_record(Paragraph, create_dict)
 
     def add_association_with_group(self, paragraph):
@@ -231,3 +229,15 @@ class ParaDbCreateProcess(ParaDbMethods):
         create_dict = {'group_id': self.group.id, 'paragraph_id': paragraph.id,
                        'order': self.current_order_num}
         return self.create_record(GroupParagraph, create_dict)
+
+    def assign_paragraph(self, para):
+        ''' returns new paragraph dictionary to use for creation '''
+        return {
+            'subtitle': para['subtitle'],
+            'note': para['note'],
+            'text': para['text'],
+            'standalone': para['standalone'],
+            'image_path': para['image_path'],
+            'image_info_key': para['image_info_key'],
+            'short_title': para['short_title'],
+        }

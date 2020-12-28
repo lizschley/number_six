@@ -1,4 +1,5 @@
 {
+    "__comment_existing_ref__": "manual json, in paragraph record: 'ref_slug_list': [existing_ref_slug1, slug2]",
     "updated_at": {"oper": "-", "units": {"days": 1}},
     "group_ids": [],
     "category_ids": [],
