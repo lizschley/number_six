@@ -6,7 +6,6 @@
 
 import os
 import sys
-from dotenv import load_dotenv
 
 
 def main():
@@ -17,7 +16,6 @@ def main():
 
     :raises ImportError: [description]
     '''
-    load_dotenv()
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
     try:
