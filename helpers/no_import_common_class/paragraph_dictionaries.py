@@ -36,6 +36,7 @@ class ParagraphDictionaries:
             'link_text': '',
             'slug': '',
             'url': '',
+            'short_text': '',
         }
 
     @staticmethod
@@ -50,6 +51,8 @@ class ParagraphDictionaries:
             'image_path': '',
             'image_info_key': 'default',
             'guid': '',
+            'slug': '',
+            'short_title': '',
         }
 
     @staticmethod

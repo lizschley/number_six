@@ -59,6 +59,7 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
         paragraphs = retrieve_paragraphs_based_on_context(paragraphs, context)
     return appropriate_context(context, paragraphs)
 
+
 def appropriate_context(context, paragraphs):
     '''
     appropriate_context takes the context and the data retriever and returns the information
@@ -76,10 +77,10 @@ def appropriate_context(context, paragraphs):
     elif utils.key_in_dictionary(paragraphs, 'study_error'):
         context = para_helper.add_error_to_context(context, paragraphs, 'study_error')
     else:
-        paragraphs = add_collapse_variables(paragraphs)
+        if paragraphs['group_type'] == 'standalone':
+            paragraphs = add_collapse_variables(paragraphs)
         context = para_helper.add_paragraphs_to_context(context, paragraphs)
     return context
-
 
 
 def retrieve_paragraphs_based_on_context(paras, context):
@@ -97,6 +98,9 @@ def retrieve_paragraphs_based_on_context(paras, context):
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
+    group_slug = context.pop('group_slug', None)
+    if group_slug is not None:
+        return paras.retrieve_paragraphs(group_slug=group_slug)
     category_id = context.pop('category_id', None)
     if category_id is not None:
         return paras.retrieve_paragraphs(category_id=category_id)
@@ -124,17 +128,18 @@ def add_collapse_variables(paragraphs):
     return paragraphs
 
 
-def single_para_by_subtitle(subtitle):
+def single_para(context):
     '''
-    single_para_by_subtitle gets a single para with references by subtitle
+    single_para gets a single para with references by para slug
 
-    :param subtitle: from ajax link_text or from lookup table { 'link_text': 'real subtitle' }
-    :type subtitle: str
+    :param context: contains slug for single paragraph lookup, also contains is_modal
+    :type subtitle: dict
     :return: one paragraph object (includes reference(s))
     :rtype: dict
     '''
     para = ParagraphsForDisplayOne()
-    return para.retrieve_paragraphs(subtitle=subtitle)
+    is_modal = True if utils.key_in_dictionary(context, 'is_modal') else False
+    return para.retrieve_paragraphs(slug=context['slug'], is_modal=is_modal)
 
 
 def update_paragraphs_step_one(input_data):

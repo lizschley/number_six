@@ -29,7 +29,6 @@ def test_data_retrieval(mocker, db_para_retriever):
     mock = mocker.patch(path + 'db_output_to_display_input')
     mock.return_value = {'test': 'test'}
     assert db_para_retriever.data_retrieval({'group_id': 1}) == {'test': 'test'}
-    assert db_para_retriever.data_retrieval({}) is None
 
 
 @pytest.mark.parametrize('substring', [('where g.id ='),

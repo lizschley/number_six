@@ -11,11 +11,15 @@ class Category(models.Model):
     RESUME = 'resume'
     FLASHCARD = 'flashcard'
     EXERCISE = 'exercise'
+    STUDY = 'study'
+    MODAL = 'modal'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
         (FLASHCARD, 'Flash Card'),
         (EXERCISE, 'Exercise'),
+        (STUDY, 'Study'),
+        (MODAL, 'Modal'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -59,6 +63,8 @@ class Reference(models.Model):
 class Paragraph(models.Model):
     ''' Many to many with References and with Groups '''
     subtitle = models.CharField(blank=True, max_length=120, db_index=True)
+    short_title = models.CharField(blank=True, max_length=50, db_index=True)
+    slug = AutoSlugField(db_index=True, max_length=150, blank=True, populate_from='subtitle')
     note = models.TextField(blank=True)
     text = models.TextField(blank=True)
     standalone = models.BooleanField(default=False, null=False)
@@ -78,11 +84,11 @@ class Paragraph(models.Model):
 
     def __repr__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}, slug: {self.slug}>')
 
     def __str__(self):
         return (f'<Paragraph id: {self.id}, guid: {self.guid}, standalone: {self.standalone}'
-                f', subtitle: {self.subtitle}>')
+                f', subtitle: {self.subtitle}, short_title: {self.short_title}, slug: {self.slug}>')
 
     class Meta:
         get_latest_by = 'updated_at'
@@ -90,8 +96,10 @@ class Paragraph(models.Model):
 
 class Group(models.Model):
     ''' Many to many with Paragraphs '''
-    STUDY_STANDALONE = 'study-standalone'
-    STUDY_ORDERED = 'study-ordered'
+    STUDY_STANDALONE = 'standalone'
+    STUDY_ORDERED = 'ordered'
+    SEARCH = 'search'
+    NO_SEARCH = 'no_search'
     DEFAULT = ''
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -106,10 +114,12 @@ class Group(models.Model):
 
     def __repr__(self):
         return (f'<Group id: {self.id}, title: {self.title}, title_note: {self.note}, '
-                f'category_id: {self.category_id}, slug: {self.slug}, short_name: {self.short_name}>')
+                f'group_type: {self.group_type}, category_id: {self.category_id}, '
+                f'slug: {self.slug}, short_name: {self.short_name}, slug: {self.slug}>')
 
     def __str__(self):
-        return f'<Group id: {self.id}, title: {self.title}, short_name: {self.short_name}>'
+        return (f'<Group id: {self.id}, title: {self.title}, group_type: {self.group_type}, '
+                f'short_name: {self.short_name}, slug: {self.slug}>')
 
     class Meta:
         get_latest_by = 'updated_at'

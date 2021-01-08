@@ -2,10 +2,8 @@
 from django.urls import path
 from projects.views.projects import ProjectDetailView
 from projects.views.demo import DemoParagraphView
-from projects.views.study import StudyLookupView, StudyParagraphView
+from projects.views.study import StudyLookupView, StudyParagraphView, OneParagraphView, study_modal_para
 from projects.views.flashcard import FlashcardView
-# from projects.views.study import para_by_subtitle
-from projects.views.demo import para_by_subtitle
 from projects.views import projects
 
 app_name = 'projects'
@@ -21,8 +19,11 @@ urlpatterns = [
     path('demo/paragraphs', DemoParagraphView.as_view(), name='demo_paragraphs'),
     path('study/paragraphs/<int:group_id>', StudyParagraphView.as_view(),
          name='study_paragraphs_with_group'),
-    path('study/paragraphs/para_by_subtitle', para_by_subtitle, name='study_para_by_subtitle'),
+    path('study/ordered_paragraphs/<slug:group_slug>', StudyParagraphView.as_view(),
+         name='study_paragraphs_group_slug'),
+    path('study/paragraphs/modal', study_modal_para, name='study_modal_para'),
     path('study/paragraphs/flashcards/<int:category_id>', FlashcardView.as_view(),
          name='study_paragraphs_with_category'),
+    path('study/paragraphs/one/<slug:slug>', OneParagraphView.as_view(), name='study_para_by_slug'),
 
 ]

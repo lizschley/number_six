@@ -7,6 +7,7 @@ from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 import utilities.date_time as utils
+import utilities.random_methods as misc
 
 
 class RecordDictionaryUtility:

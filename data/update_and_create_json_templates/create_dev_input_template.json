@@ -1,0 +1,36 @@
+{
+  "group": {
+    "__comment_group_1__": "Group always requires correct group_title field (must be unique)",
+    "__comment_group_2__": "Program uses title for lookup, but will ignore other fields, if the group exists.",
+    "__comment_group_3__": "If existing group, delete shortname for sure (any field, but title)",
+    "short_name": "",
+    "group_note": "",
+    "group_type": "",
+    "category_id": null,
+    "group_title": ""
+  },
+  "references": [
+     {
+       "link_text": "",
+       "url": "",
+       "short_text": ""
+     }
+  ],
+  "paragraphs": [
+    {
+      "id": "",
+      "subtitle": "",
+      "note": "",
+      "image_path": "",
+      "image_info_key": "default",
+      "text": "",
+      "__comment_standalone__": "make 'yes' if the group_type == 'ordered' and it is a standalone para",
+      "standalone": "",
+      "__comment_short_title__": "used for internal link_text, if blank and program will copy subtitle if len <= 51",
+      "short_title": "",
+      "link_text_list": []
+    }
+  ],
+  "__comment1__":"'ref_link_paragraph': [] is created programmatically.",
+  "__comment2__":"Within array, hash with keys, link_text and paragraph_id and values are strings"
+}

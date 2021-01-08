@@ -114,7 +114,6 @@ def test_successful_update_to_standalone_para(para_crud_methods, not_standalone)
     assert ret_dict['standalone'] == update_dict['standalone']
     assert ret_dict['updated_at'] > saved_updated_at
 
-
 @pytest.mark.django_db
 def test_update_successful_to_not_standalone_no_subtitle(para_crud_methods, existing_para) -> None:
     queryset = RecordDictionaryUtility.get_content(Paragraph, existing_para.id)

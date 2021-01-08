@@ -2,8 +2,6 @@
   "group": {
     "group_title": "Urban Coyotes, a Personal Perspective",
     "group_note": "",
-    "ordered": "yes",
-    "standalone": "no",
     "group_type": ""
   },
   "references": [
@@ -55,7 +53,9 @@
         "in Virginia. </p><p> This is partly because of the way humans massacred wolves, opening ",
         "up a habitat vacuum. But people’s efforts to do the same to coyotes have not been ",
         "effective, because they breed quickly and there are new coyotes to take over vacated ",
-        "territories.</p>"]
+        "territories.</p>"],
+      "short_title": "",
+      "slug": ""
     },
     {
       "id": "second",
@@ -73,7 +73,9 @@
         "But studies support this point of view.</p> ",
         "<p>It makes sense to educate people, for example, not to leave out food, but coyotes will learn as well. ",
         "If a community has established coyote territories with parents that teach their pups acceptable behaviors, ",
-        "coexistence can be peaceful.</p>"]
+        "coexistence can be peaceful.</p>"],
+      "short_title": "",
+      "slug": ""
     }
   ],
   "ref_link_paragraph": [

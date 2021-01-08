@@ -5,6 +5,7 @@
 
     These methods are specific to category pages
 '''
+import constants.file_paths as file_paths
 
 RESUME = 'resume'
 NOT_RESUME = ('exercise', 'flashcard')
@@ -104,7 +105,7 @@ def format_one_para(para, cat_type):
     if para['image_path']:
         html_output += '<div class="text-center">'
         html_output += '<img class="' + para['image_classes'] + '" '
-        html_output += 'src="/static/' + para['image_path'] + '" '
+        html_output += 'src="' + file_paths.S3_CLOUDFRONT + para['image_path'] + '" '
         html_output += 'alt="' + para['image_alt'] + '">'
         html_output += '</div>'
     html_output += para['text']

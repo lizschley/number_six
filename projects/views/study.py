@@ -1,15 +1,16 @@
 ''' Study View classes '''
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from projects.forms.paragraphs import ParagraphLookupForm
-import helpers.no_import_common_class.paragraph_helpers as no_import_para_helper
+import helpers.no_import_common_class.lookup_form_helpers as lookup
 import helpers.no_import_common_class.utilities as utils
 import helpers.import_common_class.paragraph_helpers as import_para_helper
 
 
-INITIAL_CLASSIFICATION = [('0', 'Choose Classification')]
+STANDALONE_TMPLT = 'projects/paragraphs.html'
+ORDERED_TMPLT = 'projects/single_or_ordered_paragraphs.html'
 
 
 class StudyParagraphView(TemplateView):
@@ -21,10 +22,13 @@ class StudyParagraphView(TemplateView):
     :return: context which includes the standard paragraph display object
     :rtype: dict
     '''
-    template_name = 'projects/paragraphs.html'
 
     def get_context_data(self, **kwargs):
         context = self._add_to_context(super().get_context_data(**kwargs))
+        if utils.key_not_in_dictionary(context, 'ordered'):
+            self.template_name = STANDALONE_TMPLT
+            return context
+        self.template_name = ORDERED_TMPLT if context['ordered'] else STANDALONE_TMPLT
         return context
 
     def _add_to_context(self, context):
@@ -39,8 +43,19 @@ class StudyLookupView(FormView):
     form_class = ParagraphLookupForm
 
     def get(self, request, *args, **kwargs):
-        form_data = request.GET.get("classification", "0")
-        in_data = no_import_para_helper.extract_data_from_form(form_data)
+        '''
+        get processes the get parameters
+
+        :param request: Request object containing the selected items from form
+        :type request: WSGIRequest
+        :return: Return data from form
+        :rtype: dict
+        '''
+        input_from_form = {}
+        input_from_form['ordered'] = request.GET.getlist('ordered')
+        input_from_form['standalone'] = request.GET.getlist('standalone')
+        input_from_form['flashcard'] = request.GET.getlist('flashcard')
+        in_data = lookup.extract_data_from_form(input_from_form)
         if in_data:
             arg_dictionary = StudyLookupView.which_args(in_data)
             return HttpResponseRedirect(reverse(arg_dictionary['identifier'],
@@ -65,3 +80,43 @@ class StudyLookupView(FormView):
             identifier = 'projects:study_paragraphs_with_group'
             kwargs = {'group_id': in_data['group']}
         return {'identifier': identifier, 'kwargs': kwargs}
+
+
+class OneParagraphView(TemplateView):
+    '''
+    OneParagraphView View standalone paragraphs on a single page (identified by slug)
+
+    :param TemplateView: Basic view
+    :type TemplateView: Template View Class
+    :return: context which includes the standard paragraph display object
+    :rtype: dict
+    '''
+
+    template_name = 'projects/single_or_ordered_paragraphs.html'
+
+    def get_context_data(self, **kwargs):
+        context = self._add_to_context(super().get_context_data(**kwargs))
+        return context
+
+    def _add_to_context(self, context):
+        context = import_para_helper.single_para(context)
+        return context
+
+
+def study_modal_para(request):
+    '''
+    study_modal_para retrieves one paragraph and displays in a modal
+
+    :param request: request object
+    :type request: request
+    :return: JSON (serialized) version of a dictionary with a single paragraph display object
+    :rtype: JSON
+    '''
+    context = {}
+    if request.method == 'GET' and request.is_ajax():
+        context['slug'] = request.GET.get('slug')
+        context['is_modal'] = 'true'
+    else:
+        return JsonResponse({'success': False}, status=400)
+    para = import_para_helper.single_para(context)
+    return JsonResponse({'paragraph': para}, status=200)

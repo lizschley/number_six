@@ -23,3 +23,14 @@ PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json'
 # filename prefixes
 PROD_PROCESS_IND = 'prod_input_'
 DEFAULT_PREFIX = 'input_'
+
+# used in utilities.random methods to clear out data, to make things be easier to work with
+ONLY_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one/done',
+                               'data/data_for_updates/dev_input_step_three/done',
+                               'data/data_for_creates/loaded'
+                               ]
+NOT_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one',
+                              'data/data_for_updates/dev_input_step_three',
+                              'data/data_for_creates']
+USED_INPUT_FINAL_DIRECTORY = '/Users/liz/Documents/app_data/archived_input'
+

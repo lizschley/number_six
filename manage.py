@@ -1,12 +1,21 @@
 #!/usr/bin/env python
+
 """Django's command-line utility for administrative tasks."""
+
+# pylint: disable=import-outside-toplevel
+
 import os
 import sys
-from dotenv import load_dotenv
 
 
 def main():
-    load_dotenv()
+    '''
+    main [summary]
+
+    [extended_summary]
+
+    :raises ImportError: [description]
+    '''
 
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
     try:

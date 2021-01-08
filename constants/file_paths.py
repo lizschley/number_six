@@ -3,17 +3,12 @@
 import os
 import portfolio.settings as settings
 
-if os.getenv('ENVIRONMENT') == 'production':
-    DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, 'data/demo/urban_coyotes.json')
-else:
+if os.getenv('ENVIRONMENT') == 'development':
     DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, 'data/demo/reverse_resume_private.json')
+else:
+    DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, 'data/demo/urban_coyotes.json')
 
 
-ONLY_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one/done',
-                               'data/data_for_updates/dev_input_step_three/done',
-                               'data/data_for_creates/loaded'
-                               ]
-NOT_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one',
-                              'data/data_for_updates/dev_input_step_three',
-                              'data/data_for_creates']
-USED_INPUT_FINAL_DIRECTORY = '/Users/liz/Documents/app_data/archived_input'
+S3_CLOUDFRONT = 'https://dirl4bhsg8ywj.cloudfront.net/static/'
+COMPILE_SCSS = os.path.join(settings.BASE_DIR, 'originals/compile')
+UPLOAD_TO_S3 = os.path.join(settings.BASE_DIR, 'uploads/css')
