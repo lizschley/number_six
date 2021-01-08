@@ -36,6 +36,7 @@ class ParagraphDictionaries:
             'link_text': '',
             'slug': '',
             'url': '',
+            'short_text': '',
         }
 
     @staticmethod

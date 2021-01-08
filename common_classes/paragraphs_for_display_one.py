@@ -2,7 +2,7 @@
     for any page that either has only one group or that does not display by group.'''
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
-import helpers.no_import_common_class.utilities as utils
+import constants.file_paths as file_paths
 
 
 class ParagraphsForDisplayOne(ParagraphsForDisplay):
@@ -65,7 +65,15 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         self.paragraphs[0]['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
         if not self.is_modal:
             return self.output_page_display()
+        image_url = self.create_image_url(self.paragraphs[0]['image_path'])
+        if image_url:
+            self.paragraphs[0]['image_path'] = self.create_image_url(self.paragraphs[0]["image_path"])
         return self.paragraphs[0]
+
+    def create_image_url(self, image_path):
+        if not image_path:
+            return None
+        return f'{file_paths.S3_CLOUDFRONT}{image_path}'
 
     def output_page_display(self):
         '''

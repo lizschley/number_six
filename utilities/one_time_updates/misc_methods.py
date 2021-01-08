@@ -4,6 +4,7 @@ from projects.models.paragraphs import Group, Paragraph, Reference
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_link_helper import ParaLinkHelper
 import constants.para_lookup as lookup
+from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 def add_short_text(updating=False):
@@ -54,16 +55,16 @@ def add_slug_for_paragraphs_with_subtitles(updating=False):
                                         })
 
 
-# Todo: should this be a script?
 def update_slugs_field_and_links(class_, updating=False, **kwargs):
     '''
     update_slugs_field_and_links finds the class using the old_slug and then updates the slug with
     the new slug
 
-    kwargs are as follows:
-        title_fieldname = kwargs['title_fieldname']
-        title_new_value = kwargs['title_value']
-        existing_slug = kwargs['existing_slug']
+    kwargs = {
+        'title_fieldname': '',
+        'title_value': '',
+        'existing_slug': ''
+    }
 
     IMPORTANT: Slugs should NOT be updated after the slugs are used in production for the following
     reasons:
@@ -130,3 +131,51 @@ def replace_slugs_in_paragraph_links(indicators, existing_slug, new_slug, updati
         find_dict = {'id': para.id}
         create_dict = {'id': para.id, 'text': para.text}
         updater.find_and_update_record(Paragraph, find_dict, create_dict)
+
+
+def one_time_get_content(out_dir):
+    ''' fix references to be consistant '''
+    list_output = []
+    para_ids = []
+    references = Reference.objects.all().values()
+    out_directory = {'directory_path': out_dir}
+    for ref in references:
+        link_text = ref['link_text']
+        short_text = ref['short_text']
+        ref_slug = ref['slug']
+        if no_work_required(link_text, short_text):
+            continue
+        para_ids = add_to_para_id_list_if_necessary(ref_slug, para_ids)
+        list_output.append(ref)
+    print(f'paras to update== {",".join(para_ids)}')
+    RecordDictionaryUtility.write_dictionary_to_file(list_output, **out_directory)
+
+
+def no_work_required(link_text, short_text):
+    ''' Return True if there is no plan to fix this reference else False '''
+    chars = set('0123456789')
+    if not any((c in chars) for c in link_text):
+        return True
+    temp = link_text.split('_')
+    if len(temp) < 2:
+        return True
+    if not any((c in chars) for c in short_text):
+        return False
+    if temp[0][0] in '123456789':
+        return True
+    if temp[1][0] in '123456789':
+        return True
+    return False
+
+
+def add_to_para_id_list_if_necessary(ref_slug, para_ids):
+    ''' This is potentially useful elsewhere, maybe if I ever make a utility to update slugs once we
+        have a production environment used with one_time_get_content(out_dir) from
+        record_dictionary_utility
+    '''
+    try:
+        para = Paragraph.objects.get(text__icontains=ref_slug)
+    except Paragraph.DoesNotExist:
+        return para_ids
+    para_ids.append(str(para.id))
+    return para_ids

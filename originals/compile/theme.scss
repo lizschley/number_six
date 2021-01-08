@@ -1,0 +1,76 @@
+/* Define standard variables and values for website */
+$bgcolor: #FEF9E7;
+$textcolor: #006600;
+$navbar_color: #FEF9E7;
+$btntoolbar_color: #9C640C;
+$ref_link_color: #1A5276;
+$modal_popup_color: #800020;
+
+/* Use the variables */
+body {
+  background-color: $bgcolor;
+  color: $textcolor;
+  .navbar_color {
+    background-color: $navbar_color;
+  }
+
+  a.reference_link {
+    color: $ref_link_color;
+  }
+
+  a.modal_popup_link {
+    color: $modal_popup_color;
+  }
+
+  a.selected {
+    color: $textcolor;
+  }
+
+  .navbar {
+     .nav-link {
+         a:hover {
+            color: $textcolor;
+            text-decoration: none;
+          };
+         .dropdown-menu {
+           left: 166px;
+           top: 39px;
+           background-color: $bgcolor;
+           min-width: 0;
+           padding: 3px;
+         }
+     }
+  }
+
+  .tall-skinny {
+    max-width: 360px;
+    height: 70%;
+    height: auto;
+  }
+
+  .demo {
+    margin-top: 15px;
+    .btn-toolbar {
+        padding: 10px 10px 10px 10px;
+        text-align: center;
+        .btn {
+            margin: 10px 10px 10px 60px;
+        }
+    }
+  }
+
+  .study_lookup {
+    .card-body {
+        background-color: $bgcolor;
+        .asteriskField {
+            display: none;
+        }
+    }
+  }
+
+  #accordion {
+    .card {
+      background-color: $bgcolor;
+    }
+  }
+}

@@ -2,7 +2,6 @@
 # pylint: pylint: disable=unused-import
 import json
 import sys
-from django.db.models import Q
 import constants.crud as crud
 from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
@@ -89,21 +88,3 @@ class RecordDictionaryUtility:
     def get_content(class_, pk_id=1):
         ''' time saver in creating content for paragraph dictionaries '''
         return class_.objects.filter(id=pk_id).values()
-
-    @staticmethod
-    def one_time_get_content(out_dir):
-        ''' fix references to be consistant '''
-        list_output = []
-        para_ids = []
-        references = Reference.objects.all().values()
-        out_directory = {'directory_path': out_dir}
-        for ref in references:
-            link_text = ref['link_text']
-            short_text = ref['short_text']
-            ref_slug = ref['slug']
-            if misc.no_work_required(link_text, short_text):
-                continue
-            para_ids = misc.add_to_para_id_list_if_necessary(ref_slug, para_ids)
-            list_output.append(ref)
-        print(f'paras to update== {",".join(para_ids)}')
-        RecordDictionaryUtility.write_dictionary_to_file(list_output, **out_directory)
