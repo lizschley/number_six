@@ -65,14 +65,21 @@ RECORD_LOOKUP_MESSAGE_DEV = RECORD_LOOKUP_MESSAGE + ('In development, you should
                                                      'not use this method unless you know what you are '
                                                      'doing.')
 
-PARA_REF_LINK_TEXT = {
+PARA_ID_REF_LINK_TEXT = {
     'key_1': 'paragraph_id',
     'para_val_1_key': 'id',
     'key_2': 'link_text',
     'para_val_2_key': 'link_text_list',
 }
 
-PARA_REF_SLUG = {
+PARA_GUID_REF_LINK_TEXT = {
+    'key_1': 'paragraph_guid',
+    'para_val_1_key': 'guid',
+    'key_2': 'link_text',
+    'para_val_2_key': 'link_text_list',
+}
+
+PARA_GUID_REF_SLUG = {
     'key_1': 'paragraph_guid',
     'para_val_1_key': 'guid',
     'key_2': 'reference_slug',

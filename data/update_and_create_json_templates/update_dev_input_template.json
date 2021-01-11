@@ -1,5 +1,5 @@
 {
-    "__comment_existing_ref__": "manual json, in paragraph record: 'ref_slug_list': [existing_ref_slug1, slug2]",
+    "__comment_add_new_or_existing_references_to_para__": "'ref_slug_list': [] or 'link_text_list': []",
     "updated_at": {"oper": "-", "units": {"days": 1}},
     "group_ids": [],
     "category_ids": [],
@@ -9,6 +9,7 @@
     "add_references": [{"link_text": "", "url": "", "short_text": ""}],
     "add_groups": [{"title": "", "note": "", "short_name": "",
                     "group_type": "", "category_id": 0, "category_title": ""}],
+    "__add_paragraph_reference is usually created programatically__": "make a list of ref slugs or link_text instead",
     "add_paragraph_reference": [{"paragraph_guid": "", "reference_slug": ""}],
     "add_group_paragraph": [{"group_slug": "", "paragraph_guid": ""}],
     "delete_paragraph_reference": [{"paragraph_guid": "", "reference_slug": ""}],

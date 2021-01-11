@@ -32,5 +32,5 @@
     }
   ],
   "__comment1__":"'ref_link_paragraph': [] is created programmatically.",
-  "__comment2__":"Within array, hash with keys, link_text and paragraph_id and values are strings"
+  "__comment_add_new_or_existing_references_to_para__": "'ref_slug_list': [] or 'link_text_list': []"
 }
