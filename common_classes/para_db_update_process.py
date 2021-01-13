@@ -170,7 +170,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :type record: dict
         '''
         if key == 'paragraphs':
-            record = self.ref_slug_list(record)
+            record = self.associate_ref_para(record)
 
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         class_ = crud.UPDATE_DATA[key]['class']
@@ -183,9 +183,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.assign_to_process_data(key, self.ensure_dictionary(class_, returned_record),
                                     unique_field, 'update', True)
 
-    def ref_slug_list(self, para):
+    def associate_ref_para(self, para):
         '''
-        ref_slug_list initiates the process of turning the list of references' slug to
+        associate_ref_para initiates the process of turning the list of references' slug or link_text to
         associations between a given paragraph and all of its references
 
         :param para: one paragraph
@@ -198,7 +198,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
             self.file_data['add_paragraph_reference'] = []
 
         add_para_refs = utils.initiate_paragraph_associations(para,
-                                                              self.correct_ref_data(para),
+                                                              self.correct_ref_data(para.keys()),
                                                               self.file_data['add_paragraph_reference'])
         if add_para_refs is not None:
             self.file_data['add_paragraph_reference'] = add_para_refs
@@ -206,9 +206,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         return para
 
     @staticmethod
-    def correct_ref_data(key):
+    def correct_ref_data(keys):
         ''' return the necessary information to assign the the list of references to the para'''
-        return crud.PARA_GUID_REF_SLUG if key == 'ref_slug_list' else crud.PARA_GUID_REF_LINK_TEXT
+        return crud.PARA_GUID_REF_SLUG if 'ref_slug_list' in keys else crud.PARA_GUID_REF_LINK_TEXT
 
     def add_category_to_group(self, group_to_create):
         '''
