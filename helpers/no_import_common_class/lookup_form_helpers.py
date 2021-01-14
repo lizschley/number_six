@@ -8,15 +8,28 @@ INIT_FLASHCARDS = ('0', 'Choose Flashcards (i.e. Questions and Answers)')
 
 EXPECTED_GET_VARIABLES = ['standalone', 'flashcard', 'ordered']
 
+
 def study_dropdowns():
+    '''
+    study_dropdowns controls dropdowns on the study lookup gotm
+
+    :return: input to the form, so that the dropdowns will display correctly
+    :rtype: dict
+    '''
     group_lists = {}
-    group_lists['flashcard'] = list_flaschards()
+    group_lists['flashcard'] = list_flashcards()
     group_lists['ordered'] = [INIT_ORDERED]
     group_lists['standalone'] = [INIT_STANDALONE]
     return organize_group_lists(group_lists)
 
 
-def list_flaschards():
+def list_flashcards():
+    '''
+    list_flashcards is used for flashcard dropdown
+
+    :return: information to display flashcard dropdown
+    :rtype: dict
+    '''
     flashcard_list = [INIT_FLASHCARDS]
     categories = Category.objects.filter(category_type__in=['flashcard'])
     for category in categories:
@@ -26,6 +39,15 @@ def list_flaschards():
 
 
 def organize_group_lists(dropdown_lists):
+    '''
+    organize_group_lists separates the study group, depending on whether the paragraphs are displayed
+    as standalones or ordered in one continuous document
+
+    :param dropdown_lists: initial entry for dropdown
+    :type dropdown_lists: tuple
+    :return: list of all the data
+    :rtype: list of tuples
+    '''
     query = Group.objects.filter(category__category_type='study')
     groups = query.order_by('cat_sort')
     for group in groups:
