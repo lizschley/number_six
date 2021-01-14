@@ -26,7 +26,8 @@ def list_flaschards():
 
 
 def organize_group_lists(dropdown_lists):
-    groups = Group.objects.filter(category__category_type='study')
+    query = Group.objects.filter(category__category_type='study')
+    groups = query.order_by('cat_sort')
     for group in groups:
         if group.group_type == 'ordered':
             dropdown_lists['ordered'].append((format_group_id(group.pk), group.title))
