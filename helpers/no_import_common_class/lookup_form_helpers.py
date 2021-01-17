@@ -2,9 +2,9 @@
 from projects.models.paragraphs import Group, Category
 
 STUDY_CATEGORIES = ['flashcard', 'study']
-INIT_STANDALONE = ('0', 'Choose Standalone Paras (i.e. Definitions or About)')
-INIT_ORDERED = ('0', 'Choose Ordered Paras (i.e. Instructions)')
-INIT_FLASHCARDS = ('0', 'Choose Flashcards (i.e. Questions and Answers)')
+INIT_STANDALONE = ('0', 'Choose Standalone Paras')
+INIT_ORDERED = ('0', 'Choose Ordered Paras')
+INIT_FLASHCARDS = ('0', 'Choose Flashcards')
 
 EXPECTED_GET_VARIABLES = ['standalone', 'flashcard', 'ordered']
 
