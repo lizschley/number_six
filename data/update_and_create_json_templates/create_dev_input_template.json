@@ -26,11 +26,11 @@
       "text": "",
       "__comment_standalone__": "make 'yes' if the group_type == 'ordered' and it is a standalone para",
       "standalone": "",
-      "__comment_short_title__": "used for internal link_text, if blank and program will copy subtitle if len <= 51",
+      "__comment_short_title__": "necessary for internal link_text; if blank & subtile len <= 51, will auto copy subtitle",
       "short_title": "",
       "link_text_list": []
     }
   ],
   "__comment1__":"'ref_link_paragraph': [] is created programmatically.",
-  "__comment_add_new_or_existing_references_to_para__": "'ref_slug_list': [] or 'link_text_list': []"
+  "__comment_add_new_or_existing_references_to__new_para__": "'link_text_list': []"
 }
