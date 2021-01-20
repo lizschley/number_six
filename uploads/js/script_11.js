@@ -51,6 +51,13 @@ $(document).ready(function() {
 
     $().alert()
     $().alert('close')
+
+    $('.collapse').on('shown.bs.collapse', function (e) {
+        var $header = $(this).closest('.card');
+        $('html,body').animate({
+            scrollTop: $header.offset().top
+        }, 500);
+    });
 })
 
 function image_html(image_path) {
