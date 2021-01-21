@@ -160,7 +160,7 @@ class ParaDbCreateProcess(ParaDbMethods):
             self.input_data['ref_link_paragraph'] = []
 
         updated_para_ref = utils.initiate_paragraph_associations(para,
-                                                                 crud.PARA_REF_LINK_TEXT,
+                                                                 crud.PARA_ID_REF_LINK_TEXT,
                                                                  self.input_data['ref_link_paragraph'])
         if updated_para_ref is not None:
             self.input_data['ref_link_paragraph'] = updated_para_ref

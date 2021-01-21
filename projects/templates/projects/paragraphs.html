@@ -13,36 +13,35 @@
             </div>
         {% endif %}
     </div>
-
-   {% for para in paragraphs %}
-        <div id="accordion">
-            <div class="card">
-                <div class="card-header collapsed card-link"
-                    data-toggle="collapse"
-                    data-target={{para.collapse_selector_id}}
-                >
-                    <h6> {{ para.subtitle | safe }} </h6>
-                </div>
-                <div id={{para.collapse_id}} class="collapse" data-parent="#accordion">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            {% if para.subtitle_note %}
-                                <p> {{ para.subtitle_note | safe }} </p>
-                            {% endif %}
-                            {% if para.image_path %}
-                                <img class="{{ para.image_classes }}"
-                                     src="{% static para.image_path %}"
-                                     alt="{{ para.image_alt }}">
-                            {% endif %}
-                            {{ para.text | safe  }}
-                            {% if para.references %}
-                                <h5>References</h5>
-                                {{ para.references | safe }}
-                            {% endif %}
-                        </div>
+    <div id="accordion">
+    {% for para in paragraphs %}
+        <div class="card">
+            <div class="card-header collapsed card-link"
+                data-toggle="collapse"
+                data-target={{para.collapse_selector_id}}
+            >
+                <h6> {{ para.subtitle | safe }} </h6>
+            </div>
+            <div id={{para.collapse_id}} class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <div class="col-md-12">
+                        {% if para.subtitle_note %}
+                            <p> {{ para.subtitle_note | safe }} </p>
+                        {% endif %}
+                        {% if para.image_path %}
+                            <img class="{{ para.image_classes }}"
+                                    src="{% static para.image_path %}"
+                                    alt="{{ para.image_alt }}">
+                        {% endif %}
+                        {{ para.text | safe  }}
+                        {% if para.references %}
+                            <h5>References</h5>
+                            {{ para.references | safe }}
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     {% endfor %}
+    </div>
 {% endblock %}

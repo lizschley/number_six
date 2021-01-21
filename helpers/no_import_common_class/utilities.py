@@ -173,3 +173,39 @@ def add_to_associations(key_1, val_1, key_2, val_2_list, association_list):
         new_association[key_2] = val_2
         association_list.append(new_association)
     return association_list
+
+
+def pop_keys(keys_to_pop, dict_to_check):
+    '''
+    pop_keys gets rid of unwanted keys
+
+    :param keys_to_pop: list of keys that we don't want
+    :type keys_to_pop: list of strings
+    :param dict_with_keys: dictionary that might have extraneous keys
+    :type dict_with_keys: dict
+    '''
+    for key in keys_to_pop:
+        if key_in_dictionary(dict_to_check, key):
+            dict_to_check.pop(key)
+    return dict_to_check
+
+
+def no_keys_from_list_in_dictionary(key_list, dict_to_check):
+    '''
+    no_keys_from_list_in_dictionary returns True if any of the keys in the key list
+    is in the dictionary
+
+    Otherwise return False
+
+    :param key_list: list of keys
+    :type key_list: list of strings
+    :param dict_to_check: dictionary to check for keys in list
+    :type dict_to_check: dict
+    :return: False if any of the keys from the list are in the dictionary, else True
+    :rtype: bool
+    '''
+    keys = dict_to_check.keys()
+    for key in keys:
+        if key in key_list:
+            return False
+    return True

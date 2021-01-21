@@ -1,0 +1,66 @@
+/* Define standard variables and values for website */
+/* Use the variables */
+body {
+  background-color: #FEF9E7;
+  color: #006600;
+}
+
+body .navbar_color {
+  background-color: #FEF9E7;
+}
+
+body a.reference_link {
+  color: #1A5276;
+}
+
+body a.modal_popup_link {
+  color: #800020;
+}
+
+body a.selected {
+  color: #006600;
+}
+
+body .navbar .nav-link a:hover {
+  color: #006600;
+  text-decoration: none;
+}
+
+body .navbar .nav-link .dropdown-menu {
+  left: 166px;
+  top: 39px;
+  background-color: #FEF9E7;
+  min-width: 0;
+  padding: 3px;
+}
+
+body .tall-skinny {
+  max-width: 360px;
+  height: 70%;
+  height: auto;
+}
+
+body .demo {
+  margin-top: 15px;
+}
+
+body .demo .btn-toolbar {
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+}
+
+body .demo .btn-toolbar .btn {
+  margin: 10px 10px 10px 60px;
+}
+
+body .study_lookup .card-body {
+  background-color: #FEF9E7;
+}
+
+body .study_lookup .card-body .asteriskField {
+  display: none;
+}
+
+body #accordion .card {
+  background-color: #FEF9E7;
+}

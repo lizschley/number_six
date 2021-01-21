@@ -170,7 +170,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :type record: dict
         '''
         if key == 'paragraphs':
-            self.ref_slug_list(record)
+            record = self.associate_ref_para(record)
 
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         class_ = crud.UPDATE_DATA[key]['class']
@@ -183,23 +183,32 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.assign_to_process_data(key, self.ensure_dictionary(class_, returned_record),
                                     unique_field, 'update', True)
 
-    def ref_slug_list(self, para):
+    def associate_ref_para(self, para):
         '''
-        ref_slug_list initiates the process of turning the list of references' slug to
+        associate_ref_para initiates the process of turning the list of references' slug or link_text to
         associations between a given paragraph and all of its references
 
         :param para: one paragraph
         :type para: dict
         '''
+        if utils.no_keys_from_list_in_dictionary(('ref_slug_list', 'link_text_list'), para):
+            return para
+
         if utils.key_not_in_dictionary(self.file_data, 'add_paragraph_reference'):
             self.file_data['add_paragraph_reference'] = []
+
         add_para_refs = utils.initiate_paragraph_associations(para,
-                                                              crud.PARA_REF_SLUG,
+                                                              self.correct_ref_data(para.keys()),
                                                               self.file_data['add_paragraph_reference'])
         if add_para_refs is not None:
             self.file_data['add_paragraph_reference'] = add_para_refs
-        if utils.key_in_dictionary(para, 'ref_slug_list'):
-            para.pop('ref_slug_list')
+        para = utils.pop_keys(('ref_slug_list', 'link_text_list'), para)
+        return para
+
+    @staticmethod
+    def correct_ref_data(keys):
+        ''' return the necessary information to assign the the list of references to the para'''
+        return crud.PARA_GUID_REF_SLUG if 'ref_slug_list' in keys else crud.PARA_GUID_REF_LINK_TEXT
 
     def add_category_to_group(self, group_to_create):
         '''
@@ -353,6 +362,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
             association_key = self.current_association_key(rec)
             input_dict = {rec: foreign_key_records[rec]}
             data = association_data[association_key]
+            if rec == 'link_text':
+                data['unique_fields'] = [rec]
             create_dict.update(self.one_create_key_and_value(input_dict, association_key, data))
         return create_dict
 
@@ -374,10 +385,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
         # input_dict == {'paragraph_guid': 'para_guid_r_a', 'reference_slug': 'ref_slug_a'}
         # or input_dict == {'group_slug': 'group_slug_a', 'paragraph_guid': 'parag_guid_g_a'}
         # association_data[key] = {'unique_fields': ['guid'], 'class': Paragraph} for example
-        unique_field_name = association_data['unique_fields'][0]
-        input_key = association_key + '_' + unique_field_name
+        unique_field = association_data['unique_fields'][0]
+        input_key = 'link_text' if unique_field == 'link_text' else association_key + '_' + unique_field
         unique_value = input_dict[input_key]
-        record = self.find_record(association_data['class'], {unique_field_name: unique_value})
+        record = self.find_record(association_data['class'], {unique_field: unique_value})
         create_field_name = association_key + '_id'
         return {create_field_name: record.id}
 
@@ -392,5 +403,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :return: the specific key needed in to obtain the data needed
         :rtype: str
         '''
+        if association_from_input == 'link_text':
+            return 'reference'
         info = utils.dict_from_split_string(association_from_input, '_', ['association_key'])
         return info['association_key']
