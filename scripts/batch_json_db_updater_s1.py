@@ -20,7 +20,6 @@ import constants.crud as crud
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
-import helpers.no_import_common_class.utilities as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
