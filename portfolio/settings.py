@@ -25,7 +25,10 @@ SECRET_KEY = os.getenv('HASH_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') in ('true', 'True')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+if os.getenv('ENVIRONMENT') == 'development':
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+else:
+    ALLOWED_HOSTS = ['lizschley.com', 'ec2-54-226-45-173.compute-1.amazonaws.com']
 
 
 # Application definition
