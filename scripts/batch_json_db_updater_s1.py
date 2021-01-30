@@ -14,8 +14,8 @@
 
 :Output: Writes a json file to be edited or (in the future) used to update production
 '''
-import os
 import sys
+from decouple import config
 import constants.crud as crud
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
@@ -77,7 +77,7 @@ def run(*args):
 
 def init_process_data(args):
     ''' Gather input parameters and data from file '''
-    if os.getenv('ENVIRONMENT') != 'development':
+    if config('ENVIRONMENT') != 'development':
         return {'error': 'This script should only run in the development environment'}
     run_as_prod = constants.RUN_AS_PROD in args
     params = process_other_args(args, run_as_prod)
