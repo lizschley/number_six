@@ -13,6 +13,7 @@
 '''
 import os
 import sys
+from decouple import config
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
@@ -75,7 +76,7 @@ def init_process_data(args):
     message = test_for_errors(args, run_as_prod, updating)
     if message != 'ok':
         return {'error': message}
-    if os.getenv('ENVIRONMENT') == 'production':
+    if config('ENVIRONMENT') == 'production':
         is_prod = True
     return switches_from_args(is_prod, updating, run_as_prod)
 
@@ -87,7 +88,7 @@ def test_for_errors(args, run_as_prod, updating):
         return message
     if len(args) == 2 and (not updating or not run_as_prod):
         return message
-    if run_as_prod and os.getenv('ENVIRONMENT') == 'production':
+    if run_as_prod and config('ENVIRONMENT') == 'production':
         return f'Invalid parameter (run_as_prod) for production environment, args == {args} '
     return 'ok'
 
@@ -106,12 +107,12 @@ def establish_input_directory(process_data):
     if process_data['is_prod']:
         process_data['input_directory'] = constants.PROD_INPUT_JSON
         process_data['class'] = ParaDbUpdateProcessProd
-    elif os.getenv('ENVIRONMENT') == 'development':
+    elif config('ENVIRONMENT') == 'development':
         process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
         process_data['class'] = development_update_class(process_data)
     else:
         return {'error': (f'Could not select input directory, process data=={process_data}, '
-                          f'and enironment = {os.getenv("ENVIRONMENT")}')}
+                          f'and enironment = {config("ENVIRONMENT")}')}
     return process_data
 
 

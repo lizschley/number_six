@@ -2,8 +2,10 @@
 
 import os
 import portfolio.settings as settings
+from decouple import config
 
-if os.getenv('ENVIRONMENT') == 'development':
+
+if config('ENVIRONMENT') == 'development':
     DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, 'data/demo/reverse_resume_private.json')
 else:
     DEMO_PARAGRAPH_JSON = os.path.join(settings.BASE_DIR, 'data/demo/urban_coyotes.json')
