@@ -11,7 +11,6 @@
 
 :returns: nothing
 '''
-import os
 import sys
 from decouple import config
 import constants.scripts as constants
