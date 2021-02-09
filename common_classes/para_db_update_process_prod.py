@@ -27,7 +27,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         __init__ stores the input data and provides the necessary framework to process the input data.
         This is mostly the same as the normal (not production or run_as_prod) data
         '''
-        super(ParaDbUpdateProcessProd, self).__init__(input_data, updating)
+        super().__init__(input_data, updating)
         self.prod_results = {}
         self.only_delete = False
         if len(self.file_data.keys()) in range(1, 3):
@@ -42,7 +42,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         try:
             self.record_lookups = self.file_data.pop('record_lookups')
         except KeyError:
-            if self.input_data['is_prod']:
+            if self.script_data['is_prod']:
                 sys.exit(crud.RECORD_LOOKUP_MESSAGE_PROD)
             else:
                 sys.exit(crud.RECORD_LOOKUP_MESSAGE_DEV)
@@ -52,7 +52,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         process_input_data_update_db is the main driver of the update process.  You can see the order
         that we process the data by the method names.
         '''
-        # print(f'input_data == {self.input_data}')
         # print(f'file_data == {self.file_data}')
         if self.only_delete:
             self.deleting_associations()
@@ -98,11 +97,11 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             sys.exit(f'Input error: explicit creates prohibited in prod or when run_as_prod: {data}')
 
         if self.incorrect_environment():
-            data = self.input_data
+            data = self.script_data
             sys.exit(f'Input error: wrong process unless production or running as prod: {data}')
 
     def incorrect_environment(self):
-        if self.input_data['is_prod'] or self.input_data['run_as_prod']:
+        if self.script_data['is_prod'] or self.script_data['run_as_prod']:
             return False
         return True
 
@@ -116,7 +115,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: returns True when it's a production run and there are input keys like add_*
         :rtype: bool
         '''
-        if not self.input_data['is_prod'] and not self.input_data['run_as_prod']:
+        if not self.script_data['is_prod'] and not self.script_data['run_as_prod']:
             return False
         return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
@@ -199,7 +198,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         if methods.valid_non_blank_string(record[unique_field]):
             return False
-        if self.input_data['is_prod']:
+        if self.script_data['is_prod']:
             sys.exit(f'Error! production environment, blank unique field in {record}')
         rec_to_create = self.add_unique_field(record, key, unique_field)
         self.add_fake_dev_ids_to_record_lookup(key, record['id'], record[unique_field])
@@ -222,7 +221,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         self.validate_run_as_prod_prep(record, key)
         res = self.find_wrapper(record, key)
-        if not self.input_data['is_prod'] and not res['found']:
+        if not self.script_data['is_prod'] and not res['found']:
             message = ('Error! All development records in this method should already exist; '
                        'Input record == {res["record"]}')
             sys.exit(message)
@@ -247,7 +246,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :param existing_record: [description]
         :type existing_record: [type]
         '''
-        if self.input_data['is_prod']:
+        if self.script_data['is_prod']:
             record['id'] = existing_record.id
         elif record['id'] != existing_record.id:
             message = ('Error! In development the found record id should match the existing record id'
@@ -535,7 +534,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             unique_field = self.record_lookups[key][str(record['id'])]
             print(f'successfully looked up record with unique_key == {unique_field}')
         except KeyError:
-            if self.input_data['is_prod']:
+            if self.script_data['is_prod']:
                 sys.exit(crud.RECORD_LOOKUP_MESSAGE_PROD)
             else:
                 sys.exit(crud.RECORD_LOOKUP_MESSAGE_DEV)

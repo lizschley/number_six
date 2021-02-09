@@ -1,0 +1,465 @@
+{
+    "categories": [
+        {
+            "category_type": "flashcard",
+            "id": 4,
+            "slug": "general-tech",
+            "title": "General Tech"
+        },
+        {
+            "category_type": "modal",
+            "id": 7,
+            "slug": "category-for-popups",
+            "title": "Category for Popups"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 31,
+            "id": 176,
+            "order": 1,
+            "paragraph_id": 185
+        },
+        {
+            "group_id": 31,
+            "id": 177,
+            "order": 2,
+            "paragraph_id": 186
+        },
+        {
+            "group_id": 27,
+            "id": 187,
+            "order": 0,
+            "paragraph_id": 196
+        },
+        {
+            "group_id": 27,
+            "id": 182,
+            "order": 0,
+            "paragraph_id": 191
+        },
+        {
+            "group_id": 27,
+            "id": 180,
+            "order": 0,
+            "paragraph_id": 189
+        },
+        {
+            "group_id": 27,
+            "id": 178,
+            "order": 0,
+            "paragraph_id": 187
+        },
+        {
+            "group_id": 27,
+            "id": 185,
+            "order": 0,
+            "paragraph_id": 194
+        },
+        {
+            "group_id": 27,
+            "id": 183,
+            "order": 0,
+            "paragraph_id": 192
+        },
+        {
+            "group_id": 27,
+            "id": 184,
+            "order": 0,
+            "paragraph_id": 193
+        },
+        {
+            "group_id": 27,
+            "id": 181,
+            "order": 0,
+            "paragraph_id": 190
+        },
+        {
+            "group_id": 27,
+            "id": 179,
+            "order": 0,
+            "paragraph_id": 188
+        },
+        {
+            "group_id": 27,
+            "id": 186,
+            "order": 0,
+            "paragraph_id": 195
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 3,
+            "category_id": 4,
+            "group_type": "",
+            "id": 31,
+            "note": "",
+            "short_name": "Ten Python Security Issues",
+            "slug": "what-are-ten-common-security-gotchas-in-python",
+            "title": "What are ten common security gotchas in Python?"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 7,
+            "group_type": "search",
+            "id": 27,
+            "note": "",
+            "short_name": "Searchable Modal Popup",
+            "slug": "searchable-modal-popups",
+            "title": "Searchable Modal Popups"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 252,
+            "paragraph_id": 185,
+            "reference_id": 216
+        },
+        {
+            "id": 246,
+            "paragraph_id": 185,
+            "reference_id": 215
+        },
+        {
+            "id": 253,
+            "paragraph_id": 186,
+            "reference_id": 216
+        },
+        {
+            "id": 249,
+            "paragraph_id": 196,
+            "reference_id": 216
+        },
+        {
+            "id": 250,
+            "paragraph_id": 196,
+            "reference_id": 218
+        },
+        {
+            "id": 251,
+            "paragraph_id": 196,
+            "reference_id": 217
+        },
+        {
+            "id": 254,
+            "paragraph_id": 191,
+            "reference_id": 216
+        },
+        {
+            "id": 255,
+            "paragraph_id": 189,
+            "reference_id": 216
+        },
+        {
+            "id": 256,
+            "paragraph_id": 187,
+            "reference_id": 216
+        },
+        {
+            "id": 257,
+            "paragraph_id": 194,
+            "reference_id": 216
+        },
+        {
+            "id": 258,
+            "paragraph_id": 192,
+            "reference_id": 216
+        },
+        {
+            "id": 259,
+            "paragraph_id": 193,
+            "reference_id": 216
+        },
+        {
+            "id": 260,
+            "paragraph_id": 190,
+            "reference_id": 216
+        },
+        {
+            "id": 261,
+            "paragraph_id": 188,
+            "reference_id": 216
+        },
+        {
+            "id": 262,
+            "paragraph_id": 191,
+            "reference_id": 217
+        },
+        {
+            "id": 247,
+            "paragraph_id": 195,
+            "reference_id": 216
+        },
+        {
+            "id": 248,
+            "paragraph_id": 195,
+            "reference_id": 218
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b",
+            "id": 185,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Initial Python 10 Security Gotchas",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "Never want to make these mistakes (from Real Python Ricky White's October 7, 2018 Interview of Anthony Shaw) in the future."
+        },
+        {
+            "guid": "f20a75db-1075-4c3b-8d70-11e716c8c6fd",
+            "id": 186,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "10 Python Security Gotchas",
+            "slug": "list-of-10-python-security-gotchas",
+            "standalone": true,
+            "subtitle": "List of 10 Python Security Gotchas",
+            "text": "<ul><li>|beg|input-injection|end|</li><li>|beg|parsing-xml|end|</li><li>|beg|assert-statements|end|</li><li>|beg|timing-attacks|end|</li><li>|beg|a-polluted-site-packages-or-import-path|end|</li><li>|beg|temporary-files|end|</li><li>|beg|using-yamlload|end|</li><li>|beg|pickles|end|</li><li>|beg|using-the-system-python-runtime-and-not-patching-it|end|</li><li>|beg|not-patching-your-dependencies|end|</li></ul>"
+        },
+        {
+            "guid": "b5e575c7-7365-40d0-8c6e-2a7599e501de",
+            "id": 196,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Not patching your dependencies",
+            "slug": "not-patching-your-dependencies",
+            "standalone": true,
+            "subtitle": "Not patching your dependencies",
+            "text": "<p>Also patch your dependencies. See the following: |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref|, |beg_ref|pyupio_faq_copied_on20210208|end_ref| and |beg_ref|banditpypi_copied_on20210208|end_ref|</p>"
+        },
+        {
+            "guid": "9d63270a-05c0-463f-93b7-07e452d082bc",
+            "id": 191,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Polluted site-packages or import path",
+            "slug": "a-polluted-site-packages-or-import-path",
+            "standalone": true,
+            "subtitle": "A polluted site-packages or import path",
+            "text": "<p>The solution for this is careful vetting of packages. |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref| suggests |beg_ref|pyupio_faq_copied_on20210208|end_ref|</p>"
+        },
+        {
+            "guid": "b62b45d0-b4cb-44ea-9ffd-8d87c9cc441f",
+            "id": 189,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Assert statements",
+            "slug": "assert-statements",
+            "standalone": true,
+            "subtitle": "Assert statements",
+            "text": "<p>Only use assert statements to communicate with other developers, such as in unit tests or in to guard against incorrect API usage.  Directly quoted from |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref|</p>"
+        },
+        {
+            "guid": "8b17493b-898a-4377-a60f-3c004057f901",
+            "id": 187,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Input injection",
+            "slug": "input-injection",
+            "standalone": true,
+            "subtitle": "Input injection",
+            "text": "<p>This can be SQL Injection or Command Injection.  See |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref| for examples</p><p>Fix it by sanitizing input using the utilities that come with your web framework, if you're using one. Unless you have a good reason, don't construct SQL queries by hand. Most ORMs have builtin sanitization methods.</p><p>For the shell, use the shlex module to escape input correctly.</p><p>Mostly cut and pasted from fix it section of the |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref|</p>"
+        },
+        {
+            "guid": "6b1c11c9-b945-4505-9892-aad6a9ba58c5",
+            "id": 194,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Pickles",
+            "slug": "pickles",
+            "standalone": true,
+            "subtitle": "Pickles",
+            "text": "<p>Like YAML, Pickle is highly exploitable.  This fix directly quoted from |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref|: Never unpickle data from an untrusted or unauthenticated source. Use another serialization pattern instead, like JSON.</p>"
+        },
+        {
+            "guid": "ddeabcb2-151f-4f32-afee-a491f67d3b95",
+            "id": 192,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Temporary files",
+            "slug": "temporary-files",
+            "standalone": true,
+            "subtitle": "Temporary files",
+            "text": "<p>Use the tempfile module and use mkstemp() if you need to generate temporary files.  Directly quoted from |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref|</p>"
+        },
+        {
+            "guid": "d9397a36-1479-4b34-8ca8-0444c5fd431e",
+            "id": 193,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Using yaml.load",
+            "slug": "using-yamlload",
+            "standalone": true,
+            "subtitle": "Using yaml.load",
+            "text": "<p>YAML files can have python code embedded in it, in a way that will actually call the code.  Very dangerous.  Best protection is to know your YAML source and to always use yaml.safe_load()</p>"
+        },
+        {
+            "guid": "0158ccef-a934-46eb-bc80-26f56195847d",
+            "id": 190,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Timing attacks",
+            "slug": "timing-attacks",
+            "standalone": true,
+            "subtitle": "Timing attacks",
+            "text": "<p>Timing Attacks are a step towards figuring out secrets for commandline applications that prompt for passwords.  Python 3.5 introduced secrets.compare_digest to compare secret information in order to fill this security hole.</p>"
+        },
+        {
+            "guid": "57c03062-ac17-4f9f-a29e-10e164530ecb",
+            "id": 188,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Parsing XML",
+            "slug": "parsing-xml",
+            "standalone": true,
+            "subtitle": "Parsing XML",
+            "text": "<p>There are a couple of XML related attacks |beg_ref|shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python|end_ref| discusses and gives solutions for.  The most important takeaway for people who do not use a lot of XML is to research XML security holes in preparation for using it.</p>"
+        },
+        {
+            "guid": "7a6b0ab7-dda6-4f50-ac83-02372f1db0f7",
+            "id": 195,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Not patching system Python runtime",
+            "slug": "using-the-system-python-runtime-and-not-patching-it",
+            "standalone": true,
+            "subtitle": "Using the system Python runtime and not patching it",
+            "text": "<p>Make sure to use up-to-date runtime Python and keep it patched!  Try |beg_ref|banditpypi_copied_on20210208|end_ref|</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "4": "general-tech",
+            "7": "category-for-popups",
+            "category-for-popups": {
+                "dev_id": 7
+            },
+            "general-tech": {
+                "dev_id": 4
+            }
+        },
+        "groups": {
+            "27": "searchable-modal-popups",
+            "31": "what-are-ten-common-security-gotchas-in-python",
+            "searchable-modal-popups": {
+                "dev_id": 27
+            },
+            "what-are-ten-common-security-gotchas-in-python": {
+                "dev_id": 31
+            }
+        },
+        "paragraphs": {
+            "0158ccef-a934-46eb-bc80-26f56195847d": {
+                "dev_id": 190
+            },
+            "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b": {
+                "dev_id": 185
+            },
+            "185": "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b",
+            "186": "f20a75db-1075-4c3b-8d70-11e716c8c6fd",
+            "187": "8b17493b-898a-4377-a60f-3c004057f901",
+            "188": "57c03062-ac17-4f9f-a29e-10e164530ecb",
+            "189": "b62b45d0-b4cb-44ea-9ffd-8d87c9cc441f",
+            "190": "0158ccef-a934-46eb-bc80-26f56195847d",
+            "191": "9d63270a-05c0-463f-93b7-07e452d082bc",
+            "192": "ddeabcb2-151f-4f32-afee-a491f67d3b95",
+            "193": "d9397a36-1479-4b34-8ca8-0444c5fd431e",
+            "194": "6b1c11c9-b945-4505-9892-aad6a9ba58c5",
+            "195": "7a6b0ab7-dda6-4f50-ac83-02372f1db0f7",
+            "196": "b5e575c7-7365-40d0-8c6e-2a7599e501de",
+            "57c03062-ac17-4f9f-a29e-10e164530ecb": {
+                "dev_id": 188
+            },
+            "6b1c11c9-b945-4505-9892-aad6a9ba58c5": {
+                "dev_id": 194
+            },
+            "7a6b0ab7-dda6-4f50-ac83-02372f1db0f7": {
+                "dev_id": 195
+            },
+            "8b17493b-898a-4377-a60f-3c004057f901": {
+                "dev_id": 187
+            },
+            "9d63270a-05c0-463f-93b7-07e452d082bc": {
+                "dev_id": 191
+            },
+            "b5e575c7-7365-40d0-8c6e-2a7599e501de": {
+                "dev_id": 196
+            },
+            "b62b45d0-b4cb-44ea-9ffd-8d87c9cc441f": {
+                "dev_id": 189
+            },
+            "d9397a36-1479-4b34-8ca8-0444c5fd431e": {
+                "dev_id": 193
+            },
+            "ddeabcb2-151f-4f32-afee-a491f67d3b95": {
+                "dev_id": 192
+            },
+            "f20a75db-1075-4c3b-8d70-11e716c8c6fd": {
+                "dev_id": 186
+            }
+        },
+        "references": {
+            "215": "whitericky_20201007_realpython_interviewanthonyshaw",
+            "216": "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "217": "pyupio_faq_copied_on20210208",
+            "218": "banditpypi_copied_on20210208",
+            "banditpypi_copied_on20210208": {
+                "dev_id": 218
+            },
+            "pyupio_faq_copied_on20210208": {
+                "dev_id": 217
+            },
+            "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python": {
+                "dev_id": 216
+            },
+            "whitericky_20201007_realpython_interviewanthonyshaw": {
+                "dev_id": 215
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 216,
+            "link_text": "ShawAnthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "short_text": "Shaw 20180618",
+            "slug": "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "url": "https://tonybaloney.github.io/posts/10-common-security-gotchas-in-python.html"
+        },
+        {
+            "id": 215,
+            "link_text": "WhiteRicky_20201007_RealPython_InterviewAnthonyShaw",
+            "short_text": "White 20201007",
+            "slug": "whitericky_20201007_realpython_interviewanthonyshaw",
+            "url": "https://realpython.com/interview-anthony-shaw/"
+        },
+        {
+            "id": 218,
+            "link_text": "BanditPyPi_copied_on20210208",
+            "short_text": "Bandit PyPi",
+            "slug": "banditpypi_copied_on20210208",
+            "url": "https://pypi.org/project/bandit/"
+        },
+        {
+            "id": 217,
+            "link_text": "Pyup.io_FAQ_copied_on20210208",
+            "short_text": "Pyup.io FAQ",
+            "slug": "pyupio_faq_copied_on20210208",
+            "url": "https://pyup.io/help/faq/"
+        }
+    ]
+}
