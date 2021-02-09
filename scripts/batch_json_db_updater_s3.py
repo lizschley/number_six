@@ -116,6 +116,7 @@ def establish_input_directory(process_data):
 
 
 def development_update_class(process_data):
+    ''' Allows testing prod update before there was a prod '''
     if process_data['run_as_prod']:
         return ParaDbUpdateProcessProd
     return ParaDbUpdateProcess
