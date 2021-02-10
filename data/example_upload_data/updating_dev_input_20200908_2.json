@@ -1,6 +1,0 @@
-{
-    "add_categories": [{"title": "Resume", "category_type": "resume"}],
-    "add_references": [{"link_text": "AggarwalNikhil_20200114_GeeksForGeeks_TypesInheritancePython",
-                        "url": "https://www.geeksforgeeks.org/types-of-inheritance-python/?ref=lbp"}],
-    "add_groups": [{"title": "Functional Resume", "note": "", "category_id": 0, "category_title": "Resume"}]
-}

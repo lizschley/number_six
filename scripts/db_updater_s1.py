@@ -9,7 +9,7 @@
     2. Start with S1 output data and edit what you want updated and delete the rest
        * Note - it is possible to bypass this step and send in input parameters to get one record type
                 Please see Step One run notes and scripts/documentation/update_process.md
-    3. Run batch_json_db_updater_s3 to update the database using the Step 2 file changes
+    3. Run db_updater_s3 to update the database using the Step 2 file changes
 
 
 :Output: Writes a json file to be edited or (in the future) used to update production
@@ -45,13 +45,13 @@ def run(*args):
           not need to worry about any of the relational data
 
         Step One Usage
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1
+        >>> python manage.py runscript -v3  db_updater_s1
         or to get the run_as_prod variations on the output file
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args run_as_prod
+        >>> python manage.py runscript -v3  db_updater_s1 --script-args run_as_prod
         to bypass normal Step One processing (which gets related data) and only get one type of record
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args paragraphs=1,2,3 (ex)
+        >>> python manage.py runscript -v3  db_updater_s1 --script-args paragraphs=1,2,3 (ex)
         For complicated one_time retrieval, edit RecordDictionaryUtility.one_time_get_content(out_dir):
-        >>> python manage.py runscript -v3  batch_json_db_updater_s1 --script-args one_time=true
+        >>> python manage.py runscript -v3  db_updater_s1 --script-args one_time=true
 
 
         Step One Process

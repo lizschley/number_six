@@ -15,14 +15,14 @@ import constants.scripts as constants
 def run(*args):
     '''
         For simply creating and displaying input, no args, though you can specify filename:
-        >>> python manage.py runscript -v3  batch_json_processor --script-args
+        >>> python manage.py runscript -v3  create_paragraphs --script-args
             filename=/Users/liz/development/number_six/data/data_for_creates/loaded/chinese_holly_load.json
         or
-        >>> python manage.py runscript -v3  batch_json_processor (picks first json file in directory)
+        >>> python manage.py runscript -v3  create_paragraphs (picks first json file in directory)
 
         To either do or test the create process, use the following args:
-        >>> python manage.py runscript -v3  batch_json_processor --script-args process=db_update
-        >>> python manage.py runscript -v3  batch_json_processor --script-args process=test_update
+        >>> python manage.py runscript -v3  create_paragraphs --script-args process=db_update
+        >>> python manage.py runscript -v3  create_paragraphs --script-args process=test_update
     '''
     filename = filename_checker(args, constants.SCRIPT_PARAM_SUBSTR['filename'])
     print(f'filename == {filename}')

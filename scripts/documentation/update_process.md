@@ -1,15 +1,15 @@
 # Update Process for Development and Eventually Production
 ## Three Step Process
-1. Prepare input and run scripts/batch_json_db_updater_s1.py
+1. Prepare input and run scripts/db_updater_s1.py
     - note - usage documented in run method
 2. Start with Step 1 output data and edit what you want updated and delete the rest
-3. Run batch_json_db_updater_s3 to update the database using the Step 2 file changes
+3. Run db_updater_s3 to update the database using the Step 2 file changes
 
 
 ## Distinction between running in development and running in production
 ### Also running in development as if it were production (run_as_prod)
 
-The normal create process for development is to use the scripts/batch_json_processor.py.  This process will never run in production, however.  In production we only load data retrieved from development, understanding the primary keys (automatically created ids) may be different.  In order to test the production process, I created the run_as_prod parameter.  It is fun and different to create data this way, but takes a meticulous touch.
+The normal create process for development is to use the scripts/create_paragraphs.py.  This process will never run in production, however.  In production we only load data retrieved from development, understanding the primary keys (automatically created ids) may be different.  In order to test the production process, I created the run_as_prod parameter.  It is fun and different to create data this way, but takes a meticulous touch.
 
 **important note** -->
 If you don't understand this, please read entire document.  I wanted this at the top, because it could potentially be hard to recover from these problems.  It is safer to use the normal update and create processes.  The dangers are in running as prod in development.  The problem won't exist in production, because there is no manual step to udate or create data.
@@ -56,7 +56,7 @@ Here are the three danger areas:
          * Run step 1 seperately to get the information needed and delete the manual json after getting what you need
          * Do inspect element when looking at data on dev web server
          * Put in some print statements to get ids, guids, etc
-    - Open scripts/batch_json_db_updater_s1.py and use the Step One Usage examples
+    - Open scripts/db_updater_s1.py and use the Step One Usage examples
     - Step One output will be written to the <MANUAL_UPDATE_JSON> directory
     - The add_* keys and the delete_* keys will automatically be copied over to the output file and the only reason to change the values would be to use the information retrieved in Step One to add the information or to make corrections.
  2. Step 2.  Edit the file produced by Step 1 (still with run_as_prod == False).
@@ -66,7 +66,7 @@ Here are the three danger areas:
     --> other than that, you only need the field(s) you are updating
     - If an existing record is not being updated, it is ok to delete it.
     - When you are done editing, move the file to <INPUT_TO_UPDATER_STEP_THREE>
- 3. Step 3. Open scripts/batch_json_db_updater_s3.py and follow the Step Three Usage Instructions
+ 3. Step 3. Open scripts/db_updater_s3.py and follow the Step Three Usage Instructions
     - Any actual db change (create, update, delete) happens in Step 3
     - After running, the program will copy the delete_associations input dictionary to the <PROD_INPUT_JSON> directory
     - delete_associations dictionaries are identical in development and production input

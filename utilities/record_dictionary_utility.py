@@ -15,7 +15,7 @@ class RecordDictionaryUtility:
     RecordDictionaryUtility contains static methods to easily create dictionaries to be used to
     update existing records.
 
-    See scripts/batch_json_db_updater_s1.py and scripts/batch_json_db_updater_s2.py for more details
+    See scripts/db_updater_s1.py and scripts/updater_s3.py for more details
 
     It is used to create the methods in helpers.no_import_common_class.paragraph_dictionaries
 
@@ -24,6 +24,7 @@ class RecordDictionaryUtility:
     '''
     @staticmethod
     def create_json_list_of_records(out_dir, input_data):
+        ''' list db record data in json file; records retrieved based on input parameters '''
         key = input_data['params']['key']
         class_ = crud.UPDATE_DATA[key]['class']
         id_list = RecordDictionaryUtility.retrieve_id_list(class_,
@@ -34,6 +35,7 @@ class RecordDictionaryUtility:
 
     @staticmethod
     def create_output(key, class_, id_list):
+        ''' used to get dictionary representation of db records using list of ids '''
         dict_output = {key: []}
         for pk_id in id_list:
             queryset = RecordDictionaryUtility.get_content(class_, pk_id=pk_id)
@@ -42,6 +44,7 @@ class RecordDictionaryUtility:
 
     @staticmethod
     def retrieve_id_list(class_, criteria):
+        ''' get list of ids based on input parameters '''
         if criteria == 'all':
             return RecordDictionaryUtility.retrieve_id_list_from_all(class_)
         id_list = []
@@ -56,6 +59,7 @@ class RecordDictionaryUtility:
 
     @staticmethod
     def retrieve_id_list_from_all(class_):
+        ''' retrieve list of all the ids for a given model '''
         id_list = []
         queryset = class_.objects.values_list('id')
         for qs in queryset:

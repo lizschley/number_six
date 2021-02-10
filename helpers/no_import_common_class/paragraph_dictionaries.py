@@ -8,7 +8,7 @@ class ParagraphDictionaries:
 
     Returns an empty dictionary to use when in Step 1 & input to Step 2 of batch updater+
 
-    See scripts/batch_json_db_updater_s1.py and scripts/batch_json_db_updater_s2.py for more details
+    See scripts/db_updater_s1.py and scripts/batch_json_db_updater_s2.py for more details
 
     There is a sister class, utilities.record_dictionary_utility (RecordDictionaryUtility) that has
     a method to save time and effort in creating or updating these classes

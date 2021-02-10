@@ -4,7 +4,7 @@
     Make sure you have read and understood process: scripts/documentation/update_process.md
 
     Three part process (this is Step 3):
-    1. copy and edit json to be edited, then run scripts/batch_json_db_updater_s1.py
+    1. copy and edit json to be edited, then run scripts/db_updater_s1.py
     2. Start with Step 1 output data and edit what you want updated and delete the rest
     3. Run this script to update the database using the Step 2 file changes
         (run method has usage information)
@@ -26,7 +26,7 @@ def run(*args):
             * Note - designed to run in development or production
 
         1. Make sure you have input created and edited correctly in Steps 1 and 2
-            * See scripts/batch_json_db_updater_s1.py
+            * See scripts/db_updater_s1.py
                 and scripts/documentation/update_process.md for details
             * The edited input must have been moved to one of the following directories (see constants):
             ***  <PROD_INPUT_JSON > (for production updates) or
@@ -36,13 +36,13 @@ def run(*args):
                 updated_at as an input)
 
         2. Run this script, possible parameters
-        >>> python manage.py runscript -v3  batch_json_db_updater_s3
+        >>> python manage.py runscript -v3  db_updater_s3
         or
-        >>> python manage.py runscript -v3  batch_json_db_updater_s3 --script-args updating
+        >>> python manage.py runscript -v3  db_updater_s3 --script-args updating
         or
-        >>> python manage.py runscript -v3  batch_json_db_updater_s3 --script-args run_as_prod
+        >>> python manage.py runscript -v3  db_updater_s3 --script-args run_as_prod
         or
-        >>> python manage.py runscript -v3  batch_json_db_updater_s3 --script-args run_as_prod updating
+        >>> python manage.py runscript -v3  db_updater_s3 --script-args run_as_prod updating
 
         Notes on Arguments
         * No arguments - will process the input data as much as it can without updating; prints to aid
