@@ -52,7 +52,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         process_input_data_update_db is the main driver of the update process.  You can see the order
         that we process the data by the method names.
         '''
-        # print(f'file_data == {self.file_data}')
         if self.only_delete:
             self.deleting_associations()
             sys.exit('Exiting after only deleting associations')
@@ -88,7 +87,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def validate_input_keys(self):
         '''
-        validate_input_keys ensures that the user isprint('----------------------------------------------------------------') doing careful work
+        validate_input_keys ensures that the user does careful work
 
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
@@ -221,13 +220,11 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         self.validate_run_as_prod_prep(record, key)
         res = self.find_wrapper(record, key)
-        print(f'in not_blank_unique res=={res}')
         if not self.script_data['is_prod'] and not res['found']:
             message = ('Error! All development records in this method should already exist; '
                        'Input record == {res["record"]}')
             sys.exit(message)
         if res['found']:
-            print(f'res found is true.....')
             self.finalize_update_prep(record, key, res['record'])
         else:
             self.process_data[key]['create'].append(record)
@@ -249,7 +246,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :type existing_record: [type]
         '''
         if self.script_data['is_prod']:
-            print(f'existing record == {existing_record};  input record == {record}')
             record['id'] = existing_record.id
         elif record['id'] != existing_record.id:
             message = ('Error! In development the found record id should match the existing record id'
@@ -373,8 +369,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         str_dev_id = str(record[record_key])
         unique_field = self.record_lookups[top_level_key][str_dev_id]
-        print(f'before error, top key=={top_level_key}, unique field: {unique_field}')
-        print(f'before error, record lookups=={self.record_lookups}')
         if utils.key_not_in_dictionary(self.record_lookups[top_level_key][unique_field], 'prod_id'):
             self.assign_existing_record_prod_id(top_level_key, str_dev_id)
         record[record_key] = self.record_lookups[top_level_key][unique_field]['prod_id']
@@ -477,7 +471,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: dictionary containing the boolean found, and the record
         :rtype: dict
         '''
-        print(f'in find_wrapper, key=={key}, record == {record}')
         output = {'found': False, 'record': record}
         if key in crud.ASSOCIATION_RECORD_KEYS:
             find_dict = self.dictionary_to_find_association_records(record, key)
@@ -534,7 +527,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         if key in crud.ASSOCIATION_RECORD_KEYS:
             return
-
         print('----------------------Record Lookups----------------------------')
         try:
             unique_field = self.record_lookups[key][str(record['id'])]
