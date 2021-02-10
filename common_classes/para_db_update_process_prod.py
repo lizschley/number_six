@@ -489,7 +489,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             output['record'] = self.find_record(crud.UPDATE_DATA[key]['class'], find_dict)
         except crud.UPDATE_DATA[key]['class'].DoesNotExist:
             return output
-        output['found'] = True
+
+        if output['record'] != find_dict:
+            output['found'] = True
         return output
 
     def dictionary_to_find_association_records(self, record, key):
