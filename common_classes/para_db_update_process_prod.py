@@ -466,7 +466,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
         :param key: key to find the information to identify record class and unique field
         :type key: string
-        :param unique_field: unique field value======`
+        :param unique_field: unique field value
         :type unique_field: str
         :return: dictionary containing the boolean found, and the record
         :rtype: dict
