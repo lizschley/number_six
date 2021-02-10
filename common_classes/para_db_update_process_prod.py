@@ -221,11 +221,13 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         self.validate_run_as_prod_prep(record, key)
         res = self.find_wrapper(record, key)
+        print(f'in not_blank_unique res=={res}')
         if not self.script_data['is_prod'] and not res['found']:
             message = ('Error! All development records in this method should already exist; '
                        'Input record == {res["record"]}')
             sys.exit(message)
         if res['found']:
+            print(f'res found is true.....')
             self.finalize_update_prep(record, key, res['record'])
         else:
             self.process_data[key]['create'].append(record)
@@ -247,6 +249,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :type existing_record: [type]
         '''
         if self.script_data['is_prod']:
+            print(f'existing record == {existing_record};  input record == {record}')
             record['id'] = existing_record.id
         elif record['id'] != existing_record.id:
             message = ('Error! In development the found record id should match the existing record id'
@@ -469,11 +472,12 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
         :param key: key to find the information to identify record class and unique field
         :type key: string
-        :param unique_field: unique field value
+        :param unique_field: unique field value======`
         :type unique_field: str
         :return: dictionary containing the boolean found, and the record
         :rtype: dict
         '''
+        print(f'in find_wrapper, key=={key}, record == {record}')
         output = {'found': False, 'record': record}
         if key in crud.ASSOCIATION_RECORD_KEYS:
             find_dict = self.dictionary_to_find_association_records(record, key)
