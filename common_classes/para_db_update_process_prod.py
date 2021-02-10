@@ -52,7 +52,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         process_input_data_update_db is the main driver of the update process.  You can see the order
         that we process the data by the method names.
         '''
-        # print(f'file_data == {self.file_data}')
         if self.only_delete:
             self.deleting_associations()
             sys.exit('Exiting after only deleting associations')
@@ -88,7 +87,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def validate_input_keys(self):
         '''
-        validate_input_keys ensures that the user isprint('----------------------------------------------------------------') doing careful work
+        validate_input_keys ensures that the user does careful work
 
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
@@ -370,8 +369,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         str_dev_id = str(record[record_key])
         unique_field = self.record_lookups[top_level_key][str_dev_id]
-        print(f'before error, top key=={top_level_key}, unique field: {unique_field}')
-        print(f'before error, record lookups=={self.record_lookups}')
         if utils.key_not_in_dictionary(self.record_lookups[top_level_key][unique_field], 'prod_id'):
             self.assign_existing_record_prod_id(top_level_key, str_dev_id)
         record[record_key] = self.record_lookups[top_level_key][unique_field]['prod_id']
@@ -485,7 +482,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             output['record'] = self.find_record(crud.UPDATE_DATA[key]['class'], find_dict)
         except crud.UPDATE_DATA[key]['class'].DoesNotExist:
             return output
-        output['found'] = True
+
+        if output['record'] != find_dict:
+            output['found'] = True
         return output
 
     def dictionary_to_find_association_records(self, record, key):
@@ -528,7 +527,6 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         if key in crud.ASSOCIATION_RECORD_KEYS:
             return
-
         print('----------------------Record Lookups----------------------------')
         try:
             unique_field = self.record_lookups[key][str(record['id'])]
