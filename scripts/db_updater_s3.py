@@ -36,13 +36,13 @@ def run(*args):
                 updated_at as an input)
 
         2. Run this script, possible parameters
-        >>> python manage.py runscript -v3  db_updater_s3
+        >>> python manage.py runscript -v3 db_updater_s3
         or
-        >>> python manage.py runscript -v3  db_updater_s3 --script-args updating
+        >>> python manage.py runscript -v3 db_updater_s3 --script-args updating
         or
-        >>> python manage.py runscript -v3  db_updater_s3 --script-args run_as_prod
+        >>> python manage.py runscript -v3 db_updater_s3 --script-args run_as_prod
         or
-        >>> python manage.py runscript -v3  db_updater_s3 --script-args run_as_prod updating
+        >>> python manage.py runscript -v3 db_updater_s3 --script-args run_as_prod updating
 
         Notes on Arguments
         * No arguments - will process the input data as much as it can without updating; prints to aid
