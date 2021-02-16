@@ -40,6 +40,11 @@ body .tall-skinny {
   height: auto;
 }
 
+body .default {
+  max-width: 410px;
+  height: auto;
+}
+
 body .demo {
   margin-top: 15px;
 }
@@ -63,4 +68,17 @@ body .study_lookup .card-body .asteriskField {
 
 body #accordion .card {
   background-color: #FEF9E7;
+}
+
+body .num_six pre {
+  margin-bottom: 0;
+  color: #7D6608;
+}
+
+body .num_six pre code {
+  color: #7D6608;
+}
+
+body .num_six code {
+  color: #7D6608;
 }

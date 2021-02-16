@@ -1,6 +1,7 @@
 ''' Methods that are not specific to Paragraph functionality, but could be useful '''
 import os
 import shutil
+import sys
 from django.utils.text import slugify
 import constants.scripts as scripts
 
@@ -48,12 +49,18 @@ def archive_files_from_input_directories(include_not_done=True):
     num_processed = 0
     if include_not_done:
         in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
+    num_processed = 0
     for dir_path in in_dirs:
-        num_processed = loop_through_files_to_move(dir_path, num_processed)
+        params = {'in_dir': dir_path,
+                  'out_dir': scripts.USED_INPUT_FINAL_DIRECTORY,
+                  'check_extension': True,
+                  'extensions': ['.json'],
+                  'num_processed': num_processed}
+        num_processed = loop_through_files_to_move(**params)
     print(f'After looping through the input data, {num_processed} files were moved.')
 
 
-def loop_through_files_to_move(input_dir_path, num_processed):
+def loop_through_files_to_move(**kwargs):
     '''
     loop_through_files_to_move moves all the files from input directory to output directory
 
@@ -62,12 +69,32 @@ def loop_through_files_to_move(input_dir_path, num_processed):
     :return: number of files that were moved
     :rtype: int
     '''
-    output_dir_path = scripts.USED_INPUT_FINAL_DIRECTORY
+    input_dir_path = kwargs.get('in_dir')
+    output_dir_path = kwargs.get('out_dir')
+    check_extension = kwargs.get('check_extension', False)
+    extensions = kwargs.get('extensions')
+    num_processed = kwargs.get('num_processed', 0)
     for filename in os.listdir(input_dir_path):
-        if not filename.endswith('.json'):
+        if check_extension and filename not in extensions:
             continue
         output_path = os.path.join(output_dir_path, filename)
         input_path = os.path.join(input_dir_path, filename)
         shutil.move(input_path, output_path)
         num_processed += 1
     return num_processed
+
+
+def copy_file_from_source_to_target(source, target):
+    '''
+    copy_file_from_source_to_target to target.  Both source and target should have
+    a complete file_path
+
+    :param source: path to source file path
+    :param target: path to target file path
+    '''
+
+    try:
+        shutil.copyfile(source, target)
+    except IOError as err:
+        print(f'Unable to copy file from {source} to {target}')
+        sys.exit(f'Error: {err}')

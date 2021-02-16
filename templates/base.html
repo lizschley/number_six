@@ -6,6 +6,7 @@
     <title>Portfolio</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="{% static 'home/img/ninja_circle_icon.png' %}"/>
     <link rel="stylesheet" href="{%static 'css/theme.css' %}" media="screen">
 </head>
 <body>
@@ -41,7 +42,7 @@
       </ul>
     </nav>
 
-    <div class="container">
+    <div class="container num_six">
         {% block content %}
 
         {% endblock %}
@@ -55,7 +56,7 @@
     <script src="{% static 'js/categories.js' %}" type="text/javascript"></script>
     <script src="{% static 'js/flashcard_1.js' %}" type="text/javascript"></script>
 </body>
-<div class="modal fade" id="standalone_para_modal">
+<div class="modal fade num_six" id="standalone_para_modal">
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <!-- Modal Header -->
