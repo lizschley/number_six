@@ -5,6 +5,7 @@ $navbar_color: #FEF9E7;
 $btntoolbar_color: #9C640C;
 $ref_link_color: #1A5276;
 $modal_popup_color: #800020;
+$code_color: #7D6608;
 
 /* Use the variables */
 body {
@@ -48,6 +49,11 @@ body {
     height: auto;
   }
 
+  .default {
+    max-width: 410px;
+    height: auto;
+  }
+
   .demo {
     margin-top: 15px;
     .btn-toolbar {
@@ -71,6 +77,19 @@ body {
   #accordion {
     .card {
       background-color: $bgcolor;
+    }
+  }
+
+  .num_six {
+    pre {
+      margin-bottom: 0;
+      color: $code_color;
+      code {
+        color: $code_color;
+      }
+    }
+    code {
+      color: $code_color;
     }
   }
 }
