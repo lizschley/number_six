@@ -37,5 +37,3 @@ ONLY_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one/done',
 NOT_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_one',
                               'data/data_for_updates/dev_input_step_three',
                               'data/data_for_creates']
-USED_INPUT_FINAL_DIRECTORY = '/Users/liz/Documents/app_data/archived_input'
-
