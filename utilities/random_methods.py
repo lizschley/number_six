@@ -2,6 +2,7 @@
 import os
 import shutil
 import sys
+from decouple import config
 from django.utils.text import slugify
 import constants.scripts as scripts
 
@@ -50,9 +51,12 @@ def archive_files_from_input_directories(include_not_done=True):
     if include_not_done:
         in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
     num_processed = 0
+    target = config('USED_INPUT_FINAL_DIRECTORY', default='')
+    if len(target) < 10:
+        sys.exit('Target directory does not exist. Checks USED_INPUT_FINAL_DIRECTORY env variable')
     for dir_path in in_dirs:
         params = {'in_dir': dir_path,
-                  'out_dir': scripts.USED_INPUT_FINAL_DIRECTORY,
+                  'out_dir': target,
                   'check_extension': True,
                   'extensions': ['.json'],
                   'num_processed': num_processed}
