@@ -2,11 +2,16 @@
 import os
 from portfolio.settings import BASE_DIR
 
-# script arguments
+# db script arguments
 RUN_AS_PROD = 'run_as_prod'
 UPDATING = 'updating'
 DB_UPDATE = 'db_update'
 TEST_UPDATE = 'test_update'
+
+# s3 updater script argurments
+HOME = 'home'
+DELETE = 'delete'
+S3_DATA_KEYS = ['css', 'flashcard', 'cat', 'script', 'image']
 
 # substrings
 JSON_SUB = '.json'

@@ -49,3 +49,14 @@ def postgres_friendly_datetime(datetime_obj):
     temp = string_dt.split('.')
 
     return temp[0] + '+00'
+
+
+def get_current_epoch_date():
+    '''
+    get_current_epoch_date returns current date in seconds from 1/1/1970 to use for versioning on S3
+
+    :return: epoch date in seconds
+    :rtype: int
+    '''
+    epoch = int(datetime.now().timestamp())
+    return epoch
