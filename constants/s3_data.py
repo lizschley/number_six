@@ -8,7 +8,7 @@ S3_DATA = {
     'originals_base': os.path.join(settings.BASE_DIR, 'originals'),
     'base_html': os.path.join(settings.BASE_DIR, 'templates/base.html'),
     'css': {
-        'scss_file': os.path.join(settings.BASE_DIR, 'originals/css/uncompiled'),
+        'scss_dir': os.path.join(settings.BASE_DIR, 'originals/css/uncompiled'),
         'base_filename': 'theme',
         'prelim_s3_key': 'static/css/',
         'extension': '.css',

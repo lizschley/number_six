@@ -1,7 +1,6 @@
 '''class for any boto3 automation '''
 # pylint: disable-msg=C0103
 import boto3
-from decouple import config
 import portfolio.settings as settings
 
 
@@ -17,11 +16,9 @@ class AwsAutomater:
         )
         self.s3 = self.session.resource('s3')
         self.bucket_name = settings.AWS_STORAGE_BUCKET_NAME
-        self.region = settings.AWS_S3_REGION_NAME
-        self.distribution_id = config('CLOUDFRONT_DISTRIBUTION_ID')
 
     def test_credentials(self):
-        ''' just for testing '''
+        ''' testing '''
         for bucket in self.s3.buckets.all():
             print(bucket.name)
 
@@ -35,24 +32,25 @@ class AwsAutomater:
             'content_type': content_type
         }
         '''
-        print(kwargs)
+        print(f'Uploading file to S3: {kwargs}')
         new_obj = self.s3.Object(self.bucket_name, kwargs['s3_name'])
         new_obj.upload_file(kwargs['path_to_file'], ExtraArgs={'ContentType': kwargs['content_type']})
 
-        # self.s3.Object(self.bucket_name, kwargs['s3_name']).upload_file(kwargs['path_to_file'])
-
     def delete_file_on_s3(self, key):
-        ''' dummy method for deleting.  Only one bucket name, so it's self '''
-        # this only deletes versioned files
-        print(f'before deletion, key to be deleted is {key}')
-        if '_' not in key:
-            return
+        ''' Delete object with passed in key '''
+        print(f'Deleting {key} from s3 bucket: {self.bucket_name}')
         self.s3.Object(bucket_name=self.bucket_name, key=key).delete()
-        print(f'deleted {key} from s3 bucket: {self.bucket_name}')
 
-    def invalidate_s3_cache(self, s3_path):
-        ''' dummy method for invalidating
-            invalidate_s3_cache will invalidate the cache for the given object or wildcard
-            https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects
+    @staticmethod
+    def upload_params(path_to_file, s3_name, content_type):
         '''
-        print(f'invaldiating s3 for {s3_path} using cloudfront distribution id: {self.distribution_id}')
+        upload_params used for uploading files to S3
+
+        :return: params to upload S3
+        :rtype: dictionary
+        '''
+        return {
+            'path_to_file': path_to_file,
+            's3_name': s3_name,
+            'content_type': content_type
+        }
