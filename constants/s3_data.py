@@ -1,12 +1,13 @@
 ''' Use these constants for S3 processing '''
 import os
+import constants.file_paths as file_path
 import portfolio.settings as settings
 
 
 S3_DATA = {
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
     'originals_base': os.path.join(settings.BASE_DIR, 'originals'),
-    'base_html': os.path.join(settings.BASE_DIR, 'templates/base.html'),
+    'base_html': file_path.BASE_HTML,
     'css': {
         'scss_dir': os.path.join(settings.BASE_DIR, 'originals/css/uncompiled'),
         'base_filename': 'theme',

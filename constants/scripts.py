@@ -1,6 +1,7 @@
 ''' Script constants '''
 import os
 from portfolio.settings import BASE_DIR
+import constants.common as common
 
 # db script arguments
 RUN_AS_PROD = 'run_as_prod'
@@ -11,7 +12,10 @@ TEST_UPDATE = 'test_update'
 # s3 updater script argurments
 HOME = 'home'
 DELETE = 'delete'
-S3_DATA_KEYS = ['css', 'flashcard', 'cat', 'script', 'image']
+
+static_files = list(common.STATIC_FILE_KEYS)
+static_files.append('image')
+S3_DATA_KEYS = static_files
 
 # substrings
 JSON_SUB = '.json'

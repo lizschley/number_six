@@ -5,6 +5,7 @@ import shutil
 from decouple import config
 import sass
 from common_classes.aws_automater import AwsAutomater
+from common_classes.html_file_processer import HtmlFileProcesser
 import constants.s3_data as lookup
 import helpers.no_import_common_class.utilities as helper
 import utilities.random_methods as utils
@@ -55,7 +56,7 @@ class StaticFiles(AwsAutomater):
         params = self.upload_params(self.versions['upload_filepath'],
                                     self.versions['s3_object'],
                                     self.file_data['content_type'])
-        self.upload_file_to_s3(**params)
+        # self.upload_file_to_s3(**params)
         # Todo: delete old versions will be called once automation is built and tested thoroughly
         # self.delete_old_versions()
 
@@ -66,6 +67,7 @@ class StaticFiles(AwsAutomater):
         self.file_data = lookup.S3_DATA[kwargs['s3_data_key']]
         self.file_data['base_html'] = lookup.S3_DATA['base_html']
         self.file_data['upload_dir'] = lookup.S3_DATA['upload_dir']
+        self.file_data['s3_data_key'] = kwargs['s3_data_key']
         if kwargs['s3_data_key'] == 'image':
             self.assign_image(kwargs['is_home'])
             return
@@ -138,7 +140,9 @@ class StaticFiles(AwsAutomater):
             versioned
         '''
         # Todo: assign this when automation makes it safe (don't want to delete prod versions)
-        self.versions['delete_on_s3'] = ''
+        file_updater = HtmlFileProcesser(self.file_data['s3_data_key'])
+        prior_version = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
+        print(f'prior_version returned is {prior_version}')
 
     def create_new_versions(self):
         '''
