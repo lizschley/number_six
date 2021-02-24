@@ -2,6 +2,7 @@
 # pylint: disable-msg=C0103
 import os
 import shutil
+import sys
 from decouple import config
 import sass
 from common_classes.aws_automater import AwsAutomater
@@ -41,6 +42,7 @@ class StaticFiles(AwsAutomater):
             Someday it will also delete old versions from S3, but that is once
             I have automation that works every time
         '''
+
         self.assign_variables(**kwargs)
 
         if self.is_css:
@@ -53,12 +55,12 @@ class StaticFiles(AwsAutomater):
             return
         utils.copy_file_from_source_to_target(self.versions['original_filepath'],
                                               self.versions['upload_filepath'])
+
         params = self.upload_params(self.versions['upload_filepath'],
                                     self.versions['s3_object'],
                                     self.file_data['content_type'])
-        # self.upload_file_to_s3(**params)
-        # Todo: delete old versions will be called once automation is built and tested thoroughly
-        # self.delete_old_versions()
+        self.upload_file_to_s3(**params)
+        self.delete_old_versions()
 
     def assign_variables(self, **kwargs):
         '''
@@ -141,8 +143,10 @@ class StaticFiles(AwsAutomater):
         '''
         # Todo: assign this when automation makes it safe (don't want to delete prod versions)
         file_updater = HtmlFileProcesser(self.file_data['s3_data_key'])
-        prior_version = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
-        print(f'prior_version returned is {prior_version}')
+        base_html_ret = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
+        if helper.key_in_dictionary(base_html_ret, 'error'):
+            sys.exit(base_html_ret['error'])
+        self.versions['prior_version'] = base_html_ret['prior_version']
 
     def create_new_versions(self):
         '''
@@ -151,18 +155,20 @@ class StaticFiles(AwsAutomater):
         '''
         if self.is_image:
             return
-        if helper.key_not_in_dictionary(self.versions, 'curr_version'):
-            self.versions['curr_version'] = str(dt.get_current_epoch_date())
+        self.versions['curr_version'] = str(dt.get_current_epoch_date())
         versioned_filename = self.use_filename()
         self.versions['upload_filepath'] = self.file_data['upload_dir'] + '/' + versioned_filename
         self.versions['original_filepath'] = self.file_data['orig_dir'] + self.use_filename(True)
         self.versions['s3_object'] = self.file_data['prelim_s3_key'] + versioned_filename
 
-    def delete_old_versions(self, path_to_uploaded_file):
+    # Todo: once we have trusted automation around prod versions we can test and implement this
+    def delete_old_versions(self):
         ''' This worked before, but change in versioning changes everything. Deleted prelim code.'''
+        s2_obj_to_delete = self.file_data['prelim_s3_key'] + self.use_filename(False, 'prior_version')
+        print(f's3 file to delete is {s2_obj_to_delete}')
         # self.delete_file_on_s3(s3_object)
 
-    def use_filename(self, is_original=False):
+    def use_filename(self, is_original=False, which='curr_version'):
         '''
         use_filename creates the filename that we will use for both the s3 filename
         and for the file in the upload_to_s3 directory
@@ -176,4 +182,4 @@ class StaticFiles(AwsAutomater):
         ext = self.file_data['extension']
         if is_original:
             return base + ext
-        return base + '_' + self.versions['curr_version'] + ext
+        return base + '_' + self.versions[which] + ext

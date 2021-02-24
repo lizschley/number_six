@@ -1,9 +1,13 @@
 ''' Use these constants for S3 processing '''
+import os
 import constants.file_paths as file_path
 import constants.s3_data as s3
+import portfolio.settings as settings
+
 
 BASE_FILE_DATA = {
     'base_html_path': file_path.BASE_HTML,
+    'new_base_html': os.path.join(settings.BASE_DIR, 'templates/new_base.html'),
     'css': {
         'id': 'theme_css',
         'base_filename': s3.S3_DATA['css']['base_filename'],

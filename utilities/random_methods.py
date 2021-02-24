@@ -102,3 +102,13 @@ def copy_file_from_source_to_target(source, target):
     except IOError as err:
         print(f'Unable to copy file from {source} to {target}')
         sys.exit(f'Error: {err}')
+
+
+def replace_line(**kwargs):
+    ''' replace_line replaces one line in the base.html file '''
+    with open(kwargs['in_file']) as fin, open(kwargs['out_file'], 'w') as fout:
+        for line in fin:
+            lineout = line
+            if kwargs['sub_str'] in line:
+                lineout = f'{kwargs["new_line"]}\n'
+            fout.write(lineout)
