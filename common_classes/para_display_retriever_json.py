@@ -1,6 +1,6 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
 from common_classes.para_display_retriever_base import ParaDisplayRetrieverBase
-import helpers.no_import_common_class.paragraph_helpers as para_helper
+import utilities.json_methods as json_helper
 
 
 class ParaDisplayRetrieverJson(ParaDisplayRetrieverBase):
@@ -37,7 +37,7 @@ class ParaDisplayRetrieverJson(ParaDisplayRetrieverBase):
         :return: Input that works correctly for ParagraphsForDisplay
         :rtype: dict
         '''
-        input_data = para_helper.json_to_dict(path_to_json)
+        input_data = json_helper.json_to_dict(path_to_json)
         self.group = input_data['group']
         self.process_json_paragraphs(input_data['paragraphs'])
         self.references = input_data['references']

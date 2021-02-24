@@ -14,6 +14,7 @@ from portfolio.settings import BASE_DIR
 OUT_JSON_PATH = os.path.join(BASE_DIR, 'data/data_for_creates')
 
 
+# Todo: Fix this technical debt as part of screen scraping
 # Todo: rework this to inocorporate common code and also write tests
 class ParagraphDbInputCreator():
     '''
@@ -169,7 +170,8 @@ class ParagraphDbInputCreator():
         if ref_link_para is not None:
             self.output['ref_link_paragraph'].append(ref_link_para)
 
-    # Todo: call RecordDictionaryUtility.write_dictionary_to_file(self.output_data, **params)
+    # Todo: This is repeated code, because I created it in utilities/json_methods
+    # Todo: this whole thing needs to be rewritten, when I start uploading using screen scraping, etc
     # Todo: Combine with above (see init() - ParagraphDbInputCreator.create_json_file_path())
     def write_json_file(self):
         '''

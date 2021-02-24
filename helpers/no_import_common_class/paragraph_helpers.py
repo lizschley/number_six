@@ -4,7 +4,6 @@
     the common class folder.
 '''
 
-import json
 import os
 from operator import itemgetter
 import constants.para_lookup as lookup
@@ -23,23 +22,6 @@ def create_link(url, link_text):
     :rtype: String
     '''
     return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
-
-
-def json_to_dict(json_path):
-    '''
-    json_to_dict takes a json file path, reads the content and uses it to create a dictionary.
-
-    :param json_path: Path to a file on the project directory structure
-    :type json_path: String
-    :return: dictionary based on the contents of the JSON file
-    :rtype: dictionary
-    '''
-    # Opening JSON file
-    file = open(json_path, 'r')
-    # load and return JSON object as a dictionary
-    data = json.load(file)
-    file.close()
-    return data
 
 
 def add_paragraphs_to_context(context, paragraphs):

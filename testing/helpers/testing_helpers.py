@@ -1,7 +1,7 @@
 '''Common code for tests'''
 # pylint: disable=missing-function-docstring
 import helpers.import_common_class.paragraph_helpers as import_class_para_helper
-import helpers.no_import_common_class.paragraph_helpers as para_helper
+import utilities.json_methods as json_helper
 import testing.constants.common as common
 import testing.data.dict_constants as data
 from testing.data.row import Row
@@ -11,7 +11,7 @@ def get_set_dict_from_json_cache(request, path=common.BASIC_PARA_TEST_JSON,
                                  key=common.BASIC_PARA_DICT_KEY):
     return_dict = request.config.cache.get(key, None)
     if not return_dict:
-        return_dict = para_helper.json_to_dict(path)
+        return_dict = json_helper.json_to_dict(path)
         request.config.cache.set(key, return_dict)
     return return_dict
 
