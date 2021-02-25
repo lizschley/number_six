@@ -45,14 +45,15 @@ class StaticFiles(AwsAutomater):
 
         self.assign_variables(**kwargs)
 
+        if self.is_image:
+            self.loop_through_images()
+            return
+
         if self.is_css:
             self.compile_original_to_upload()
 
         self.adjust_versions()
 
-        if self.is_image:
-            self.loop_through_images()
-            return
         utils.copy_file_from_source_to_target(self.versions['original_filepath'],
                                               self.versions['upload_filepath'])
 
