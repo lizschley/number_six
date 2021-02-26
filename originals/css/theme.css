@@ -38,11 +38,13 @@ body .tall-skinny {
   max-width: 360px;
   height: 70%;
   height: auto;
+  margin: 3px;
 }
 
 body .default {
   max-width: 410px;
   height: auto;
+  margin: 5px;
 }
 
 body .demo {

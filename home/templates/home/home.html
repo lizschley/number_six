@@ -4,16 +4,41 @@
 
 {% block content %}
 
-    <h1>Home Page</h1>
-    <div class="row">
-        <div class="col-md-8">
-            <img src='{%static "home/img/planet-earth.png" %}' alt='home'>
-        </div>
-        <div class="col-md-4">
-            <h5>Hello World!</h5>
-            <p>Let's see if the modals work: <a href="#" data-slug="sdk-headers-in-catalina" class="one_para_modal modal_popup_link">SDK Headers in Catalina</a></p>
-            <p>Yes, but good-bye to the convenience method.</p>
+    <h1>Elizabeth Schley's Personal Study and Fun Site</h1>
+    <div class="clearfix">
+        <a href="#">
+            <img class="default float-right"
+                    src="{%static 'home/img/fort_tryon_park.jpg' %}"
+                    alt='Fort Tryon Park, NYC'>
+        </a>
+        <p>This site is all about learning and sharing information. Although I have many ideas for the future, for now it is a portfolio and study aid.</p>
+        <p>When I am an employed programmer, work always comes first.  Yet, I always imagine applications that I would create, if my priorities were different.  This site will eventually give me the platform to do that.  But in the here and now, my first goal is to create a site, allowing me to learn whatever I want, whenever I want, and to share the information with anyone interested. </p>
+        <p>Note about <a href="#" data-slug="home-page-images" class="one_para_modal modal_popup_link">home page images</a></p>
+     </div>
+     <div class="row">
+     <div class="col-md-5">
+        <a href="#">
+            <img class="default float-left"
+                    src="{%static 'home/img/ninja_circle.png' %}"
+                    alt='black cat named Ninja'>
+        </a>
+     </div>
+     <div class="col-md-7">
+        <br>
+        <p>My Personal Requirements:</p>
+        <p>
+        <ol>
+            <li>No logins</li>
+            <li>No typing https to get https and no www ever (it won't work)</li>
+            <li>No extra buttons when a refresh or back button will work just as well.</li>
+            <li>No data entry using forms</li>
+            <li>Only a few static pages. Most pages will pull the data from the database, allowing the same information to be displayed on its own page, as a popup or as an answer to the a flashcard question</li>
+            <li>Having a flexible format, so that different pages can be created by simply loading data with different categories and groups</li>
+            <li>Easy and convenient to upload data and static files</li>
+            <li>Excellent automated tests (the only requirement I have not met to my own satisfation)</li>
+        </ol>
+        </p>
         </div>
     </div>
-
+    </span>
 {% endblock %}
