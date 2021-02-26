@@ -6,7 +6,7 @@ import sys
 from decouple import config
 import sass
 from common_classes.aws_automater import AwsAutomater
-from common_classes.html_file_processer import HtmlFileProcesser
+from common_classes.base_html_processer import BaseHtmlProcesser
 import constants.s3_data as lookup
 import helpers.no_import_common_class.utilities as helper
 import utilities.random_methods as utils
@@ -143,7 +143,7 @@ class StaticFiles(AwsAutomater):
             versioned
         '''
         # Todo: assign this when automation makes it safe (don't want to delete prod versions)
-        file_updater = HtmlFileProcesser(self.file_data['s3_data_key'])
+        file_updater = BaseHtmlProcesser(self.file_data['s3_data_key'])
         base_html_ret = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
         if helper.key_in_dictionary(base_html_ret, 'error'):
             sys.exit(base_html_ret['error'])

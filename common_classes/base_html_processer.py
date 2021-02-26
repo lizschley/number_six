@@ -7,7 +7,7 @@ import helpers.no_import_common_class.utilities as helper
 import utilities.random_methods as utils
 
 
-class HtmlFileProcesser:
+class BaseHtmlProcesser:
     ''' Use for updating template/base_file.html '''
     def __init__(self, lookup_key, process='base_html'):
         if process == 'base_html':
