@@ -14,9 +14,10 @@
 import csv
 import os
 from common_classes.para_db_create_process import ParaDbCreateProcess
-from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
-import helpers.no_import_common_class.paragraph_helpers as no_import_helper
+from update_db_utils.classes.paragraph_db_input_creator import ParagraphDbInputCreator
 from portfolio.settings import BASE_DIR
+import helpers.no_import_common_class.paragraph_helpers as no_import_helper
+import utilities.json_methods as json_helper
 
 
 IN_CSV_FILE = os.path.join(BASE_DIR, 'data/csv/botany_vocabulary.csv')
@@ -34,7 +35,7 @@ def run(*args):
     '''
     print(f'csv input = {IN_CSV_FILE}')
     # will be reworking ParagraphDbInputCreator around json file processing
-    json_creator = ParagraphDbInputCreator(title='Botany Definitions')
+    json_creator = ParagraphDbInputCreator()
     json_creator = process_csv(json_creator)
     if create_para_directly(args):
         updating = True

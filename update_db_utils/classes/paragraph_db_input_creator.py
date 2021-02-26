@@ -4,38 +4,37 @@
     Can also create the db structure directly by creating ParagraphsToDatabase and
     passing self.output directly into new_obj.dictionary_to_db(input_data)
 '''
-from datetime import datetime
-import json
-import os
 import constants.scripts as constants
-from portfolio.settings import BASE_DIR
+import utilities.json_methods as json_helper
 
 
-OUT_JSON_PATH = os.path.join(BASE_DIR, 'data/data_for_creates')
-
-
-# Todo: Fix this technical debt as part of screen scraping
-# Todo: rework this to inocorporate common code and also write tests
 class ParagraphDbInputCreator():
     '''
-    ParagraphDbInputCreator creates JSON file of the format necessary to create
-    db structure for paragraphs
-    Can also create the db structure directly by creating ParagraphsToDatabase and
-    passing self.output directly into new_obj.dictionary_to_db(input_data)
+        ParagraphDbInputCreator creates JSON file of the format necessary to create
+        db structure for paragraphs
+        
+        Can also create the db structure directly by creating ParagraphsToDatabase and
+        passing self.output directly into new_obj.dictionary_to_db(input_data)
    '''
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         '''
         __init__ Assign the framework needed to easily build the dictionary used
         as input to create the paragraph structure in the db
         only title is required
         '''
-        title = kwargs.get('title')
-        note = kwargs.get('note', '')
-        ordered = kwargs.get('ordered', 'no')
-        standalone = kwargs.get('standalone', 'yes')
-        self.output = self.starting_dictionary(title, note, ordered, standalone)
-        self.path_to_json = ParagraphDbInputCreator.create_json_file_path()
+        self.output_to_json: self.base_dictionary()
+        self.path_to_json = constants.INPUT_CREATE_JSON
+
+    @staticmethod
+    def base_dictionary():
+        ''' data structure needed for paragraph create '''
+        return {
+            'group': {},
+            'references': [],
+            'paragraphs': [],
+        }
+
 
     @staticmethod
     def reference_dictionary(link_text, url):
@@ -129,28 +128,6 @@ class ParagraphDbInputCreator():
             'ref_link_paragraph': []
         }
 
-    @staticmethod
-    def create_json_file_path(**kwargs):
-        '''
-        create_json_file_name_with_path creates json output file
-
-        :param directory_path: directory to write to.  defaults to OUT_JSON_PATH, which is always wrong
-        :type directory_path: str, optional
-        :param filename: if filename is None will create filename with datetime stamp, defaults to None
-        :type filename: str, optional
-        :return: file_path
-        :rtype: str
-        '''
-        prefix = kwargs.get('prefix', constants.DEFAULT_PREFIX)
-        filename = kwargs.get('filename',
-                              prefix + datetime.now().isoformat(timespec='seconds') + '.json')
-        directory_path = kwargs.get('directory_path', OUT_JSON_PATH)
-
-        if filename is None:
-            filename = prefix + datetime.now().isoformat(timespec='seconds') + '.json'
-
-        return directory_path + '/' + filename
-
     def assign_output(self, ref, para, ref_link_para):
         '''
         assign_output assigns the ref, para and ref_link_para to the outpu
@@ -170,14 +147,9 @@ class ParagraphDbInputCreator():
         if ref_link_para is not None:
             self.output['ref_link_paragraph'].append(ref_link_para)
 
-    # Todo: This is repeated code, because I created it in utilities/json_methods
-    # Todo: this whole thing needs to be rewritten, when I start uploading using screen scraping, etc
-    # Todo: Combine with above (see init() - ParagraphDbInputCreator.create_json_file_path())
     def write_json_file(self):
-        '''
-        write_json_file writes the formatted file necessary to update the paragraph
-        structure in the db
-        This test mainly for testing
-        '''
-        with open(self.path_to_json, 'w') as file_path:
-            json.dump(self.output, file_path)
+        ''' write_json_file writes a dictionary to the specified path '''
+        json_helper.write_json_file(self.path_to_json, self.output_to_json)
+
+
+

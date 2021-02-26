@@ -4,7 +4,7 @@ from projects.models.paragraphs import Group, Paragraph, Reference
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_link_helper import ParaLinkHelper
 import constants.para_lookup as lookup
-from utilities.record_dictionary_utility import RecordDictionaryUtility
+import utilities.json_methods as json_helper
 
 
 def add_short_text(updating=False):
@@ -148,7 +148,7 @@ def one_time_get_content(out_dir):
         para_ids = add_to_para_id_list_if_necessary(ref_slug, para_ids)
         list_output.append(ref)
     print(f'paras to update== {",".join(para_ids)}')
-    RecordDictionaryUtility.write_dictionary_to_file(list_output, **out_directory)
+    json_helper.write_dictionary_to_file(list_output, **out_directory)
 
 
 def no_work_required(link_text, short_text):

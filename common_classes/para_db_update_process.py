@@ -5,8 +5,8 @@ import pprint
 import constants.crud as crud
 import constants.scripts as scripts
 import helpers.no_import_common_class.utilities as utils
+import utilities.json_methods as json_helper
 from common_classes.para_db_methods import ParaDbMethods
-from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 class ParaDbUpdateProcess(ParaDbMethods):
@@ -265,9 +265,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
             input_dictionaries = self.prepare_association_data(self.file_data[input_key], data_key)
             if function == 'delete':
                 self.delete_associations(data_key, input_key, input_dictionaries)
-                RecordDictionaryUtility.write_dictionary_to_file(self.file_data[input_key],
-                                                                 prefix=scripts.PROD_PROCESS_IND,
-                                                                 directory_path=scripts.PROD_INPUT_JSON)
+                json_helper.write_dictionary_to_file(self.file_data[input_key],
+                                                     prefix=scripts.PROD_PROCESS_IND,
+                                                     directory_path=scripts.PROD_INPUT_JSON)
             elif function == 'add':
                 self.add_associations(input_key, input_dictionaries)
 

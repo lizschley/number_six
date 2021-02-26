@@ -1,13 +1,10 @@
 '''Utility for creating static resusable methods to use in the batch update process'''
 # pylint: pylint: disable=unused-import
-import json
 import sys
 import constants.crud as crud
-from common_classes.paragraph_db_input_creator import ParagraphDbInputCreator
+import utilities.json_methods as json_helper
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
-import utilities.date_time as utils
-import utilities.random_methods as misc
 
 
 class RecordDictionaryUtility:
@@ -31,7 +28,7 @@ class RecordDictionaryUtility:
                                                            input_data['params']['select_criteria'])
         out_directory = {'directory_path': out_dir}
         dict_output = RecordDictionaryUtility.create_output(key, class_, id_list)
-        RecordDictionaryUtility.write_dictionary_to_file(dict_output, **out_directory)
+        json_helper.write_dictionary_to_file(dict_output, **out_directory)
 
     @staticmethod
     def create_output(key, class_, id_list):
@@ -66,26 +63,6 @@ class RecordDictionaryUtility:
             id_list.append(qs[0])
         return id_list
 
-    @staticmethod
-    def write_dictionary_to_file(output_data, **kwargs):
-        '''
-        write_dictionary_to_file is a static method that can be used generically, though it does take
-        advantage of some of the batch json db update processing
-
-        Key word args are optional:
-        prefix will be input_, unless you override
-        filename will be prefix_datetime.json unless you override (note = won't use prefix if you provide
-                 filename)
-        directory_path will be base path + data/data_for_creates unless you override
-
-        :param input_data: dictionary to be written to json
-        :type input_data: dictionary
-        '''
-        output_file = open(ParagraphDbInputCreator.create_json_file_path(**kwargs), 'w')
-        # magic happens here to make it pretty-printed
-        output_file.write(json.dumps(output_data, default=utils.postgres_friendly_datetime,
-                                     indent=4, sort_keys=True))
-        output_file.close()
 
     # Just pass in the model class name and id if id #1 has been deleted
     @staticmethod
