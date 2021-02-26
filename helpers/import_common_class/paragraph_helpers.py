@@ -3,6 +3,7 @@
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import helpers.no_import_common_class.category_helpers as cat_helper
 import helpers.no_import_common_class.utilities as utils
+import utilities.json_methods as json_helper
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
 from common_classes.para_db_create_process import ParaDbCreateProcess

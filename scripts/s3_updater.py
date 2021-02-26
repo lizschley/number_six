@@ -6,9 +6,7 @@
     Goal: make updating S3 with new versions and deleting the S3 versions a seamless process.
 
     Danger: Must make sure NOT to delete the file version that is being used in production. Eventually
-            plan to automate this by reading the master base.html files (right after base.html changes
-            get merged into master) and then writing the versions used in production into
-            data/config/s3_config.json using the production_versions key
+            plan to automate this.  
 
     For now deleting files on S3 is a totally manual process.  Even when I implement automation that
     includes deleting the old S3 files, it is vital to keep the mistakes easily recoverable, by

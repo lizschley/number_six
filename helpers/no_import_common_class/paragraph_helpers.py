@@ -8,6 +8,7 @@ import os
 from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
+import utilities.json_methods as json_helper
 
 
 def create_link(url, link_text):
@@ -116,7 +117,7 @@ def loop_through_files_for_db_updates(method, process_data):
         if use_file(filename, str(method), process_data):
             file_path = os.path.join(directory, filename)
             num_processed += 1
-            process_data['file_data'] = json_to_dict(file_path)
+            process_data['file_data'] = json_helper.json_to_dict(file_path)
             method(process_data)
         else:
             continue
