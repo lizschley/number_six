@@ -3,7 +3,7 @@
 import sys
 import constants.common as constants
 import helpers.no_import_common_class.paragraph_helpers as para_helpers
-import helpers.no_import_common_class.utilities as utils
+import utilities.random_methods as utils
 from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson

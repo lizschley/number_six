@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 from projects.forms.paragraphs import ParagraphLookupForm
 import helpers.no_import_common_class.lookup_form_helpers as lookup
-import helpers.no_import_common_class.utilities as utils
 import helpers.import_common_class.paragraph_helpers as import_para_helper
+import utilities.random_methods as utils
 
 
 STANDALONE_TMPLT = 'projects/paragraphs.html'

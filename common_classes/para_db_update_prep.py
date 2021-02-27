@@ -5,9 +5,9 @@ import sys
 import constants.crud as crud
 import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
-import helpers.no_import_common_class.utilities as utils
 import utilities.date_time as dt
 import utilities.json_methods as json_helper
+import utilities.random_methods as utils
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries as para_dict
 from projects.models.paragraphs import (Category, Group,  # noqa: F401
                                         GroupParagraph, Paragraph,

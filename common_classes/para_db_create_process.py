@@ -3,8 +3,8 @@
 import sys
 from common_classes.para_db_methods import ParaDbMethods
 import constants.crud as crud
-import helpers.no_import_common_class.utilities as utils
-import utilities.random_methods as random
+import helpers.no_import_common_class.paragraph_helpers as helpers
+import utilities.random_methods as utils
 from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
 
@@ -145,7 +145,7 @@ class ParaDbCreateProcess(ParaDbMethods):
             return
         if len(para['subtitle']) > 50:
             return
-        if not random.valid_non_blank_string(para['short_title']):
+        if not utils.valid_non_blank_string(para['short_title']):
             para['short_title'] = para['subtitle']
 
     def link_text_list(self, para):
@@ -159,9 +159,9 @@ class ParaDbCreateProcess(ParaDbMethods):
         if utils.key_not_in_dictionary(self.input_data, 'ref_link_paragraph'):
             self.input_data['ref_link_paragraph'] = []
 
-        updated_para_ref = utils.initiate_paragraph_associations(para,
-                                                                 crud.PARA_ID_REF_LINK_TEXT,
-                                                                 self.input_data['ref_link_paragraph'])
+        updated_para_ref = helpers.initiate_paragraph_associations(para,
+                                                                   crud.PARA_ID_REF_LINK_TEXT,
+                                                                   self.input_data['ref_link_paragraph'])
         if updated_para_ref is not None:
             self.input_data['ref_link_paragraph'] = updated_para_ref
         if utils.key_in_dictionary(para, 'link_text_list'):

@@ -4,7 +4,8 @@ import sys
 import pprint
 import constants.crud as crud
 import constants.scripts as scripts
-import helpers.no_import_common_class.utilities as utils
+import helpers.no_import_common_class.paragraph_helpers as helpers
+import utilities.random_methods as utils
 import utilities.json_methods as json_helper
 from common_classes.para_db_methods import ParaDbMethods
 
@@ -197,9 +198,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         if utils.key_not_in_dictionary(self.file_data, 'add_paragraph_reference'):
             self.file_data['add_paragraph_reference'] = []
 
-        add_para_refs = utils.initiate_paragraph_associations(para,
-                                                              self.correct_ref_data(para.keys()),
-                                                              self.file_data['add_paragraph_reference'])
+        add_para_refs = helpers.initiate_paragraph_associations(para,
+                                                                self.correct_ref_data(para.keys()),
+                                                                self.file_data['add_paragraph_reference'])
         if add_para_refs is not None:
             self.file_data['add_paragraph_reference'] = add_para_refs
         para = utils.pop_keys(('ref_slug_list', 'link_text_list'), para)

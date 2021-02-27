@@ -3,7 +3,6 @@
 import shutil
 from bs4 import BeautifulSoup
 import constants.html_lookup as lookup
-import helpers.no_import_common_class.utilities as helper
 import utilities.random_methods as utils
 
 
@@ -35,7 +34,7 @@ class BaseHtmlProcesser:
         soup = BeautifulSoup(html, features='lxml')
         el = soup.find(id=self.data['id'])
         path_info = self.new_path(el[attr])
-        if helper.key_in_dictionary(path_info, 'error'):
+        if utils.key_in_dictionary(path_info, 'error'):
             return path_info
         el[attr] = path_info['new_path']
         soup.find(id=self.data['id']).replace_with(el)
@@ -57,7 +56,7 @@ class BaseHtmlProcesser:
         '''
         path_info = {}
         result = self.split_path(path)
-        if helper.key_in_dictionary(result, 'error'):
+        if utils.key_in_dictionary(result, 'error'):
             return result
         path_list = result['path_list']
         path_info['prior_version'] = path_list[1]

@@ -8,9 +8,8 @@ import sass
 from common_classes.aws_automater import AwsAutomater
 from common_classes.base_html_processer import BaseHtmlProcesser
 import constants.s3_data as lookup
-import helpers.no_import_common_class.utilities as helper
-import utilities.random_methods as utils
 import utilities.date_time as dt
+import utilities.random_methods as utils
 
 
 class StaticFiles(AwsAutomater):
@@ -145,7 +144,7 @@ class StaticFiles(AwsAutomater):
         # Todo: assign this when automation makes it safe (don't want to delete prod versions)
         file_updater = BaseHtmlProcesser(self.file_data['s3_data_key'])
         base_html_ret = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
-        if helper.key_in_dictionary(base_html_ret, 'error'):
+        if utils.key_in_dictionary(base_html_ret, 'error'):
             sys.exit(base_html_ret['error'])
         self.versions['prior_version'] = base_html_ret['prior_version']
 
