@@ -26,7 +26,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param updating: [description]
         :type updating: [type]
         '''
-        super(ParaDbUpdateProcess, self).__init__(updating)
+        super().__init__(updating)
         self.file_data = input_data.pop('file_data')
         self.script_data = input_data
         # print(f'script_data == {self.script_data}')

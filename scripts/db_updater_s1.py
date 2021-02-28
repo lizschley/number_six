@@ -20,6 +20,7 @@ import constants.crud as crud
 import constants.scripts as constants
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as para_helper
+import update_db_utils.one_time_db_updates.misc_methods as update_utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
@@ -50,7 +51,7 @@ def run(*args):
         >>> python manage.py runscript -v3 db_updater_s1 --script-args run_as_prod
         to bypass normal Step One processing (which gets related data) and only get one type of record
         >>> python manage.py runscript -v3 db_updater_s1 --script-args paragraphs=1,2,3 (ex)
-        For complicated one_time retrieval, edit RecordDictionaryUtility.one_time_get_content(out_dir):
+        For complicated one_time retrieval, edit update_utils.one_time_get_content(out_dir):
         >>> python manage.py runscript -v3 db_updater_s1 --script-args one_time=true
 
 
@@ -86,7 +87,7 @@ def init_process_data(args):
     if params.get('bypass_step1_prep'):
         params.pop('bypass_step1_prep')
         if params['params']['key'] == 'one_time':
-            RecordDictionaryUtility.one_time_get_content(constants.MANUAL_UPDATE_JSON)
+            update_utils.one_time_get_content(constants.MANUAL_UPDATE_JSON)
         else:
             RecordDictionaryUtility.create_json_list_of_records(constants.MANUAL_UPDATE_JSON, params)
         return {'bypassed': True}
