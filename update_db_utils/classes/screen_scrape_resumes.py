@@ -29,11 +29,13 @@ class ScreenScrapeResumes(ParagraphDbInputCreator):
         self.process_data['before_work_experience'] = True
         self.process_data['before_education'] = True
         self.process_data['curr_company'] = ''
+        self.process_data['counts'] = {'total': 0, 'cc': 0, 'ts': 0, 'mas': 0, 'ln': 0}
 
     def screen_scrape_html(self):
         ''' driver function for resume screen scraping '''
         html = self.retrieve_data()
         self.step_through_html(html)
+        print(self.process_data['counts'])
         self.create_content([], self.process_data['paragraphs'])
 
     def retrieve_data(self):
@@ -70,10 +72,10 @@ class ScreenScrapeResumes(ParagraphDbInputCreator):
             return
         for substr in constants.COMPANY_SUBSTR:
             if substr in span:
-                print(f'subsr {substr} in span{span}')
                 self.process_data['curr_company'] = constants.COMPANIES[substr]
                 return
-        self.create_para(span)
+        if len(span) > 10:
+            self.create_para(span)
 
     def new_para(self):
         ''' These are the pargraph variables that do not have defaults in ParagraphDbInputCreator '''
@@ -91,4 +93,25 @@ class ScreenScrapeResumes(ParagraphDbInputCreator):
         new_para['text'] += constants.TEXT['beg_tech_list'] + constants.TECH_LIST
         new_para['text'] += constants.TEXT['beg_company'] + self.process_data['curr_company']
         new_para['text'] += constants.TEXT['end_para']
+        for substr in constants.COMPANY_SUBSTR:
+            self.increment_counts(substr)
         self.process_data['paragraphs'].append(new_para)
+
+    def increment_counts(self, substr):
+        '''
+           for these substring ('Medical', 'LexisNexis', 'Teachstone', 'Construct')
+           increment the correct number of records
+        '''
+        self.process_data['counts']['total'] += 1
+        if substr == 'Medical' and substr in self.process_data['curr_company']:
+            self.process_data['counts']['mas'] += 1
+            return
+        if substr == 'LexisNexis' and substr in self.process_data['curr_company']:
+            self.process_data['counts']['ln'] += 1
+            return
+        if substr == 'Teachstone' and substr in self.process_data['curr_company']:
+            self.process_data['counts']['ts'] += 1
+            return
+        if substr == 'Construct' and substr in self.process_data['curr_company']:
+            self.process_data['counts']['cc'] += 1
+            return

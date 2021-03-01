@@ -214,7 +214,7 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
         '''
 
         if row.paragraph_id not in self.group_id_to_para_ids[row.group_id]:
-            self.group_id_to_para_ids[f'{row.group_id}'].append(row.paragraph_id)
+            self.group_id_to_para_ids[row.group_id].append(row.paragraph_id)
             para = self.paragraph_dictionary(row)
             self.groups[-1]['paragraphs'].append(para)
             self.unique_slug_lists(para['text'])
