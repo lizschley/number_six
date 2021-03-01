@@ -9,6 +9,7 @@ from operator import itemgetter
 import constants.para_lookup as lookup
 import constants.scripts as constants
 import utilities.json_methods as json_helper
+import utilities.random_methods as utils  # pylint: disable-msg=E0611
 
 
 def create_link(url, link_text):
@@ -186,3 +187,65 @@ def treat_like_production(process_data):
     :rtype: bool
     '''
     return process_data['is_prod'] or process_data['run_as_prod']
+
+
+def initiate_paragraph_associations(para, key_vars, association_list=None):
+    '''
+    add_ref_para_associations is a convenience method allowing the user to simply list the link text
+    associated with given para, instead of having to manually associate each link to its paragraph
+
+    for example, we may create and assign an association list as follows:
+    self.input_data["add_paragraph_reference"] = [{"paragraph_guid": "val", "reference_slug": "val"}]
+
+    :param para: one para
+    :type para: dict
+    :param key_vars: key to a foreign key's identifier field name or its value
+    :type key_vars: dictionary of strings
+    :param association_list: existing association records, works with None (default)
+    :type association_list: list, optional
+    :return: the dicionary with the keys and values necessary to create paragraph reference associations
+    :rtype: dict
+    '''
+    if utils.key_not_in_dictionary(para, key_vars['para_val_2_key']):
+        return
+    if not para[key_vars['para_val_2_key']]:
+        return
+
+    return add_to_associations(key_vars['key_1'],
+                               para[key_vars['para_val_1_key']],
+                               key_vars['key_2'],
+                               para[key_vars['para_val_2_key']],
+                               association_list)
+
+
+def add_to_associations(key_1, val_1, key_2, val_2_list, association_list):
+    '''
+    add_to_associations makes creating content easier.  Rather than creating the many
+    to many JSON input, simply add a list of values that are associated with a given key.
+
+    To make more generic: pass in all of the key and values and also the return record
+    list, though if there is no return list, we simply pass back a new list of association records.
+
+    This does not any extra fields associated with the association itself.
+
+    :param Key_1: foreign key name
+    :type Key_1: str
+    :param val_1: foreign key value that is the same for all of the association records created
+    :type val_1: same as the input value (most likely str)
+    :param key_2: foreign key name
+    :type key_2: str
+    :param val_2_list: list of values, each one on the list will make a new association record
+    :type val_2_list: list
+    :param association_list: list of existing association records, defaults to None
+    :type association_list: list, optional
+    :return: list of association records.  There may be some existing, but there is probably some that
+             are added
+    :rtype: list
+    '''
+    association_list = [] if association_list is None else association_list
+    for val_2 in val_2_list:
+        new_association = {}
+        new_association[key_1] = val_1
+        new_association[key_2] = val_2
+        association_list.append(new_association)
+    return association_list

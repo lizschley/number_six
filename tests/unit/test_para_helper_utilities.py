@@ -3,7 +3,8 @@
 # pylint: disable=redefined-outer-name
 
 import pytest
-import helpers.no_import_common_class.utilities as utils
+import helpers.no_import_common_class.paragraph_helpers as helpers
+import utilities.random_methods as utils
 import testing.data.dict_constants as constants
 
 
@@ -56,7 +57,7 @@ def test_dict_from_split_string(key, value):
 ])
 def test_add_to_associations(key_1, val_1, key_2, val_2_list, association_list):
     size = 0 if association_list is None else len(association_list)
-    resulting_list = utils.add_to_associations(key_1, val_1, key_2, val_2_list, association_list)
+    resulting_list = helpers.add_to_associations(key_1, val_1, key_2, val_2_list, association_list)
     val_2 = val_2_list[-1]
     last_association = resulting_list[-1]
     assert len(resulting_list) == size + len(val_2_list)

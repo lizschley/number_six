@@ -4,9 +4,10 @@ import sys
 import pprint
 import constants.crud as crud
 import constants.scripts as scripts
-import helpers.no_import_common_class.utilities as utils
+import helpers.no_import_common_class.paragraph_helpers as helpers
+import utilities.random_methods as utils
+import utilities.json_methods as json_helper
 from common_classes.para_db_methods import ParaDbMethods
-from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
 class ParaDbUpdateProcess(ParaDbMethods):
@@ -25,7 +26,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :param updating: [description]
         :type updating: [type]
         '''
-        super(ParaDbUpdateProcess, self).__init__(updating)
+        super().__init__(updating)
         self.file_data = input_data.pop('file_data')
         self.script_data = input_data
         # print(f'script_data == {self.script_data}')
@@ -197,9 +198,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
         if utils.key_not_in_dictionary(self.file_data, 'add_paragraph_reference'):
             self.file_data['add_paragraph_reference'] = []
 
-        add_para_refs = utils.initiate_paragraph_associations(para,
-                                                              self.correct_ref_data(para.keys()),
-                                                              self.file_data['add_paragraph_reference'])
+        add_para_refs = helpers.initiate_paragraph_associations(para,
+                                                                self.correct_ref_data(para.keys()),
+                                                                self.file_data['add_paragraph_reference'])
         if add_para_refs is not None:
             self.file_data['add_paragraph_reference'] = add_para_refs
         para = utils.pop_keys(('ref_slug_list', 'link_text_list'), para)
@@ -265,9 +266,9 @@ class ParaDbUpdateProcess(ParaDbMethods):
             input_dictionaries = self.prepare_association_data(self.file_data[input_key], data_key)
             if function == 'delete':
                 self.delete_associations(data_key, input_key, input_dictionaries)
-                RecordDictionaryUtility.write_dictionary_to_file(self.file_data[input_key],
-                                                                 prefix=scripts.PROD_PROCESS_IND,
-                                                                 directory_path=scripts.PROD_INPUT_JSON)
+                json_helper.write_dictionary_to_file(self.file_data[input_key],
+                                                     prefix=scripts.PROD_PROCESS_IND,
+                                                     directory_path=scripts.PROD_INPUT_JSON)
             elif function == 'add':
                 self.add_associations(input_key, input_dictionaries)
 

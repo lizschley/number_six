@@ -8,8 +8,7 @@ import pprint
 from django.utils.text import slugify
 from common_classes.para_db_update_process import ParaDbUpdateProcess
 import constants.crud as crud
-import helpers.no_import_common_class.utilities as utils
-import utilities.random_methods as methods
+import utilities.random_methods as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
@@ -195,7 +194,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :rtype: bool
         '''
         unique_field = crud.UPDATE_DATA[key]['unique_field']
-        if methods.valid_non_blank_string(record[unique_field]):
+        if utils.valid_non_blank_string(record[unique_field]):
             return False
         if self.script_data['is_prod']:
             sys.exit(f'Error! production environment, blank unique field in {record}')

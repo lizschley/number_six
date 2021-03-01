@@ -1,9 +1,10 @@
 ''' Derived from an abstract class containing common functionality for basic paragraph display '''
 import constants.sql_substrings as sql_sub
+import utilities.random_methods as utils
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
-import helpers.no_import_common_class.utilities as utils
+
 from projects.models.paragraphs import Category
 
 

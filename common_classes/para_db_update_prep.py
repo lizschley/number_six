@@ -5,14 +5,13 @@ import sys
 import constants.crud as crud
 import constants.scripts as constants
 import constants.sql_substrings as sql_substrings
-import helpers.no_import_common_class.utilities as utils
 import utilities.date_time as dt
+import utilities.json_methods as json_helper
+import utilities.random_methods as utils
 from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries as para_dict
 from projects.models.paragraphs import (Category, Group,  # noqa: F401
                                         GroupParagraph, Paragraph,
                                         ParagraphReference, Reference)
-from utilities.record_dictionary_utility import RecordDictionaryUtility
-
 from common_classes.para_db_methods import ParaDbMethods
 
 
@@ -67,7 +66,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         params = {}
         params['directory_path'] = self.input_data['output_directory']
         params['prefix'] = constants.PROD_PROCESS_IND if self.run_as_prod else constants.DEFAULT_PREFIX
-        RecordDictionaryUtility.write_dictionary_to_file(self.output_data, **params)
+        json_helper.write_dictionary_to_file(self.output_data, **params)
 
     def process_input_and_output(self):
         '''

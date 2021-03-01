@@ -3,10 +3,10 @@
 import sys
 from django.core.exceptions import ValidationError
 from django.db.models import Max
-import helpers.no_import_common_class.utilities as utils
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 import utilities.date_time as dt
+import utilities.random_methods as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 
