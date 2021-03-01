@@ -1,3 +1,4 @@
 select string_agg(distinct cast (p.id as varchar), ',') as para_ids
 from projects_paragraph p
-where text like '%pyenv%'
+join projects_groupparagraph gp on gp.paragraph_id = p.id
+where gp.group_id = 14

@@ -6,7 +6,7 @@
 '''
 # pylint: disable=c0301
 import os
-from pprint import pprint
+# from pprint import pprint
 from update_db_utils.classes.screen_scrape_resumes import ScreenScrapeResumes
 import constants.scripts as constants
 
@@ -21,7 +21,7 @@ def run():
     for filepath in file_list:
         params['html_path'] = filepath
         scraper = ScreenScrapeResumes(**params)
-        scraper.process_data()
+        scraper.screen_scrape_html()
 
 
 def list_of_files(in_directory):
@@ -53,6 +53,6 @@ def params_to_use():
     '''
     return {
         'group_title': 'Temporary',
-        'json_only': False,
+        'json_only': True,
         'updating': False
     }

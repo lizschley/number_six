@@ -58,9 +58,10 @@ class ParagraphDbInputCreator():
         self.output_to_json = self.base_dictionary()
         self.output_to_json['group'] = {'group_title': group_title}
         self.path_to_json = constants.INPUT_CREATE_JSON
-        self.fake_id = 963963962
         self.json_only = json_only
         self.updating = updating
+        self.process_data = {}
+        self.process_data['fake_id'] = 963963962
 
     def create_content(self, references, paragraphs):
         '''
@@ -100,8 +101,8 @@ class ParagraphDbInputCreator():
         '''
         new_ref = dictionaries.reference_dictionary()
         for ref in references:
-            self.fake_id += 1
-            new_ref['id'] = self.fake_id
+            self.process_data['fake_id'] += 1
+            new_ref['id'] = self.process_data['fake_id']
             new_ref['link_text'] = ref['link_text']
             new_ref['url'] = ref['url']
             new_ref['short_text'] = ref['short_text']
@@ -119,8 +120,8 @@ class ParagraphDbInputCreator():
         '''
         new_para = {}
         for para in paragraphs:
-            self.fake_id += 1
-            new_para['id'] = self.fake_id
+            self.process_data['fake_id'] += 1
+            new_para['id'] = self.process_data['fake_id']
             new_para['subtitle'] = para['subtitle']
             new_para['note'] = para['note']
             new_para['text'] = para['text']
@@ -128,10 +129,11 @@ class ParagraphDbInputCreator():
             new_para['image_path'] = para.get('image_path', '')
             new_para['image_info_key'] = para.get('image_info_key', 'default')
             new_para['link_text_list'] = para.get('link_text_list', [])
-            self.output_to_json['paragraphs'].append(para)
+            self.output_to_json['paragraphs'].append(new_para)
 
     def write_json_file(self):
         ''' write_json_file writes a dictionary to the specified path '''
+        print('in wrtie json file, path to json{self.path_to_json}')
         json_helper.write_json_file(self.path_to_json, self.output_to_json)
 
     def create_records(self):

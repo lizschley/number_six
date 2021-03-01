@@ -1,6 +1,7 @@
 ''' This is a json utility method.  It only has json extracted from business logic '''
 from datetime import datetime
 import json
+import os
 import constants.scripts as constants
 import utilities.date_time as dt
 
@@ -11,7 +12,14 @@ def write_json_file(path_to_json, output_data):
     structure in the db
     This test mainly for testing
     '''
-    with open(path_to_json, 'w') as file_path:
+  
+    if os.path.isdir(path_to_json):
+        params = {'directory_path': path_to_json}
+        out_file = create_json_file_path(**params)
+    else:
+        out_file = path_to_json
+
+    with open(out_file, 'w') as file_path:
         json.dump(output_data, file_path)
 
 
