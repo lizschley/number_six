@@ -10,5 +10,3 @@ from projects_group g
 join projects_groupparagraph gp on g.id = gp.group_id
 join projects_paragraph p on p.id = gp.paragraph_id
 where g.category_id = 1 and p.id > 118
-
-
