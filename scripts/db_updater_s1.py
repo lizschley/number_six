@@ -58,8 +58,8 @@ def run(*args):
         Step One Process
             * reads json data from <INPUT_TO_UPDATER_STEP_ONE>
             * copies add_* and delete_* input to the output file without changes
-            * writes json file to <MANUAL_UPDATE_JSON> that includes all of the data specified by
-              the input (<INPUT_TO_UPDATER_STEP_ONE>)
+            * writes json file to <INPUT_TO_UPDATER_STEP_THREE> that includes all of the data specified
+              by the input (<INPUT_TO_UPDATER_STEP_ONE>)
         Step Two Process
             * manually edit the output from Step 1 (only if not a real production run)
             * If development environment, move the file to <INPUT_TO_UPDATER_STEP_THREE>
@@ -67,7 +67,7 @@ def run(*args):
     '''
     process_data = init_process_data(args)
     if process_data.get('bypassed'):
-        sys.exit(f'Sucessfully bypassed process, check {constants.MANUAL_UPDATE_JSON}')
+        sys.exit(f'Sucessfully bypassed process, check latest {constants.INPUT_TO_UPDATER_STEP_THREE}')
     if process_data.get('error'):
         sys.exit(process_data['error'])
     process_data = establish_directories(process_data)
@@ -87,9 +87,10 @@ def init_process_data(args):
     if params.get('bypass_step1_prep'):
         params.pop('bypass_step1_prep')
         if params['params']['key'] == 'one_time':
-            update_utils.one_time_get_content(constants.MANUAL_UPDATE_JSON)
+            update_utils.one_time_get_content(constants.INPUT_TO_UPDATER_STEP_THREE)
         else:
-            RecordDictionaryUtility.create_json_list_of_records(constants.MANUAL_UPDATE_JSON, params)
+            RecordDictionaryUtility.create_json_list_of_records(constants.INPUT_TO_UPDATER_STEP_THREE,
+                                                                params)
         return {'bypassed': True}
     return {'run_as_prod': run_as_prod}
 
@@ -129,7 +130,7 @@ def check_input(args):
 def establish_directories(process_data):
     ''' Establish input and output directories for Step One '''
     process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_ONE
-    process_data['output_directory'] = constants.MANUAL_UPDATE_JSON
+    process_data['output_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
     return process_data
 
 

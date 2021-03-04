@@ -50,18 +50,16 @@ def archive_files_from_input_directories(include_not_done=True):
     num_processed = 0
     if include_not_done:
         in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
-    num_processed = 0
     target = config('USED_INPUT_FINAL_DIRECTORY', default='')
     if len(target) < 10:
         sys.exit('Target directory does not exist. Checks USED_INPUT_FINAL_DIRECTORY env variable')
     for dir_path in in_dirs:
         params = {'in_dir': dir_path,
                   'out_dir': target,
-                  'check_extension': True,
-                  'extensions': ['.json'],
+                  'extensions': ['json'],
                   'num_processed': num_processed}
         num_processed = loop_through_files_to_move(**params)
-    print(f'After looping through the input data, {num_processed} files were moved.')
+    return num_processed
 
 
 def loop_through_files_to_move(**kwargs):
@@ -75,17 +73,38 @@ def loop_through_files_to_move(**kwargs):
     '''
     input_dir_path = kwargs.get('in_dir')
     output_dir_path = kwargs.get('out_dir')
-    check_extension = kwargs.get('check_extension', False)
-    extensions = kwargs.get('extensions')
+    extensions_to_delete = kwargs.get('extensions')
     num_processed = kwargs.get('num_processed', 0)
     for filename in os.listdir(input_dir_path):
-        if check_extension and filename not in extensions:
+        if not delete_file(filename, extensions_to_delete):
             continue
         output_path = os.path.join(output_dir_path, filename)
         input_path = os.path.join(input_dir_path, filename)
         shutil.move(input_path, output_path)
         num_processed += 1
     return num_processed
+
+
+def delete_file(filename, extensions_to_delete):
+    '''
+    delete_file return True if the file extension is included in extensions_to_delete
+    otherwise False
+
+    :param filename: filename that may be deleted
+    :type filename: str
+    :param extensions_to_delete: extension for temporary files you want to delete
+    :type extensions_to_delete: list or tuple
+    :return: True if you want to delete the file, else False
+    :rtype: bool
+    '''
+    do_delete = False
+    temp = filename.split('.')
+    if len(temp) != 2:
+        return do_delete
+    for ext in extensions_to_delete:
+        if ext == temp[1]:
+            do_delete = True
+    return do_delete
 
 
 def copy_file_from_source_to_target(source, target):

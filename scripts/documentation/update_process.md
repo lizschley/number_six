@@ -27,7 +27,7 @@ Here are the three danger areas:
 - Preparing to run in the actual production environment and preparing to run_as_prod in developmment, are the same in in Step One
 - In production, the assumption is that the data was already created in development.  For that reason, we pull the data from the development database and move the file to production and write the data to production (without editing, eventually plan to automate this process).  This is an **implicit create**.  Whereas in development, using the normal create and update processes, the data that is loaded can legitimately be new data.  This is an **explicit create**.  If we are running with the run_as_prod script argument, however we are pretending to do implicit creates, even though it is really brand new data.  Basically, run_as_prod fakes out the system.
 - The script argument, run_as_prod, is used programatically to update development in the same way as production.  It was originally designed for testing before there was a production environment, but has evolved as an alternate way to make updates.  It definitely requires manual editing, since otherwise we would be writing back the exact same data.
-- By using run_as_prod as an argument in Step 1, you will not be able to use the wrong input, for example, it forbids using the explicit [create keys](https://github.com/lizschley/number_six/blob/develop/data/json_templates/updating_dev_input_template.json) (JSON keys beginning with add_) as input and also adds the <PROD_PROCESS_IND> prefix to the file output to the <MANUAL_UPDATE_JSON> directory
+- By using run_as_prod as an argument in Step 1, you will not be able to use the wrong input, for example, it forbids using the explicit [create keys](https://github.com/lizschley/number_six/blob/develop/data/json_templates/updating_dev_input_template.json) (JSON keys beginning with add_) as input and also adds the <PROD_PROCESS_IND> prefix to the file output to the <INPUT_TO_UPDATER_STEP_THREE> directory
 - run_as_prod and real production in Step 3 forbids the explicit creates (key beginning with add_) and will only read json files that are named correctly.
 - Deleting associations work identically in development and production, therefore the input is the same.
 - It does not throw an error if you are trying to delete the same associations multiple times (as long as the records with the foreign keys still exist).
@@ -41,7 +41,7 @@ Here are the three danger areas:
          - Use one of the top level keys in <UPDATE_DATA> (constants.crud)
          - Add an equal sign
          - Add a list of ids **1,2,3** with no spaces OR add the word **all**
-         - This will copy all of the data needed to start the update to the <MANUAL_UPDATE_JSON> directory
+         - This will copy all of the data needed to start the update to the <INPUT_TO_UPDATER_STEP_THREE> directory
          - Follow the Step 2 and Step 3 process as normal
          - For example: **paragraphs=80,86**
          - Another example: **categories=all**
@@ -57,10 +57,10 @@ Here are the three danger areas:
          * Do inspect element when looking at data on dev web server
          * Put in some print statements to get ids, guids, etc
     - Open scripts/db_updater_s1.py and use the Step One Usage examples
-    - Step One output will be written to the <MANUAL_UPDATE_JSON> directory
+    - Step One output will be written to the <INPUT_TO_UPDATER_STEP_THREE> directory
     - The add_* keys and the delete_* keys will automatically be copied over to the output file and the only reason to change the values would be to use the information retrieved in Step One to add the information or to make corrections.
  2. Step 2.  Edit the file produced by Step 1 (still with run_as_prod == False).
-    - Will be in <MANUAL_UPDATE_JSON> directory
+    - Will be in <INPUT_TO_UPDATER_STEP_THREE> directory
     - For updating records, always leave the unique keys:
     --> ids (always), guid for paragraphs, and slug for references, categories and groups.
     --> other than that, you only need the field(s) you are updating
@@ -87,7 +87,7 @@ Here are the three danger areas:
            * Whatever input you use, the program will pull in data that you have already created in development.
            * For run_as_prod in development (or for production), the prefix will automatically be <PROD_PROCESS_IND>
         2. In step two (for run_as_prod in development) - edit the run_as_prod input data (no editing for production)
-           * Will be in <MANUAL_UPDATE_JSON> directory
+           * Will be in <INPUT_TO_UPDATER_STEP_THREE> directory
            * To do an update to existing data, just update the data as normal like you do for normal development updating
            * To create new records (can do at the same time you are updating some data)
               1. Do a data retrieval, making sure to have at least one existing record dictionary of the type (paragraph, group, etc) you are creating.
@@ -107,7 +107,7 @@ Here are the three danger areas:
            * **DANGER** - not following through all of the steps: 1-6 (directly above) correctly could mess up existing data!
            * If creating new records with run_as_prod in development, the program will create unique keys explicitly (so that the update process mimics production, without the work of manually creating the keys)
            * If in the production environment, blank unique keys will cause the program to error out.
-           * After editing the file in the <MANUAL_UPDATE_JSON> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
+           * After editing the file in the <INPUT_TO_UPDATER_STEP_THREE> directory, make sure the prefix is correct and move to <INPUT_TO_UPDATER_STEP_THREE> for run_as_prod in development.
            * Once we have a production environment, it will be a decision to move the file to <PROD_INPUT_JSON>, except for deleting associations, which aleady write to <PROD_INPUT_JSON>.  Have not yet developed an automation process, plan to run manually often first.
         3. In Step 3 - process to make database creates and association updates
            - There is a lookup table that will only be created when you run the step one script with the run_as_prod script argument
@@ -123,7 +123,7 @@ Here are the three danger areas:
            * Retrieve the records that were edited on development.  Use the run_as_prod script argument.
            * Data with these keys should run, unchanged, on production: 'delete_paragraph_reference', 'delete_group_paragraph'.  This will happen automatically whenever an association is deleted: output will be written to the <PROD_INPUT_JSON>  directory.
            * Real production updates should happen without manual intervention.  The manual steps are only because we are writing new content.
-        2. If you are confident, just assume the data is correct and move the file from <MANUAL_UPDATE_JSON>
+        2. If you are confident, just assume the data is correct and move the file from <INPUT_TO_UPDATER_STEP_THREE>
            to the <PROD_INPUT_JSON> directory (Maybe we should always move it automatically)... later decision
         3. If you are not confident, just go back to steps 1 & 2 and edit the data and run the db updates
            in development first

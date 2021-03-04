@@ -20,11 +20,11 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
     '''
     def __init__(self):
         super().__init__()
-        # self.title = ''
         # self.reference_links = {}
         # self.input_data = {}
 
-        # This is the output (along with the title)
+        # This is the output
+        self.title = ''
         self.groups = []
         self.side_menu = ''
         self.hidden_flashcard_divs = ''
@@ -171,7 +171,7 @@ class ParagraphsForDisplayCat(ParagraphsForDisplay):
         :rtype: dict
         '''
         link_text = group['group_identifier']
-        group_div_id = link_text.replace(' ', '_').lower()
+        group_div_id = group['slug'].replace(' ', '_').lower()
         group['group_div_id'] = group_div_id
 
         if self.is_flashcard():
