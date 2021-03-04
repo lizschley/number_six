@@ -61,7 +61,11 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         '''
         if len(self.paragraphs) < 1:
             return ParagraphsForDisplayOne.error_output('Data not loaded for para')
-        orig_subtitle = self.paragraphs[0]['subtitle']
+
+        if len(self.paragraphs[0]['subtitle']) > 0:
+            orig_subtitle = self.paragraphs[0]['subtitle']
+        else:
+            orig_subtitle = self.paragraphs[0]['short_title']
         self.paragraphs[0]['subtitle'] = orig_subtitle[:1].upper() + orig_subtitle[1:]
         if not self.is_modal:
             return self.output_page_display()
@@ -71,6 +75,7 @@ class ParagraphsForDisplayOne(ParagraphsForDisplay):
         return self.paragraphs[0]
 
     def create_image_url(self, image_path):
+        ''' use image_path (from db) and cloudfront url to create hrefs for images '''
         if not image_path:
             return None
         return f'{file_paths.S3_CLOUDFRONT}{image_path}'

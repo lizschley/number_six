@@ -52,7 +52,6 @@ class ParaLinkHelper:
                 paras_to_update.append(para)
         return paras_to_update
 
-
     def loop_through_text(self, beg_link, end_link):
         '''
         loop_through_text loops through the text field, which is split into an array of pieces.  For the

@@ -76,7 +76,6 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         '''
         query = self.build_basic_sql('single_para')
         query += 'where p.slug = lower(%s)'
-        query += ' and p.standalone = TRUE'
         return query
 
     def build_basic_sql(self, sql_type):
