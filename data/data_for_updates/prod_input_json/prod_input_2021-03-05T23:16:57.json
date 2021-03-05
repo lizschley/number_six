@@ -1,0 +1,3242 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        },
+        {
+            "category_type": "flashcard",
+            "id": 2,
+            "slug": "native-plant-status",
+            "title": "Native Plant Status"
+        },
+        {
+            "category_type": "exercise",
+            "id": 3,
+            "slug": "at-home-exercise",
+            "title": "At Home Exercise"
+        },
+        {
+            "category_type": "flashcard",
+            "id": 4,
+            "slug": "general-tech",
+            "title": "General Tech"
+        },
+        {
+            "category_type": "flashcard",
+            "id": 8,
+            "slug": "bacteria-monitoring",
+            "title": "Bacteria Monitoring"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 8,
+            "id": 101,
+            "order": 1,
+            "paragraph_id": 113
+        },
+        {
+            "group_id": 8,
+            "id": 102,
+            "order": 2,
+            "paragraph_id": 114
+        },
+        {
+            "group_id": 8,
+            "id": 103,
+            "order": 3,
+            "paragraph_id": 115
+        },
+        {
+            "group_id": 8,
+            "id": 104,
+            "order": 4,
+            "paragraph_id": 116
+        },
+        {
+            "group_id": 8,
+            "id": 105,
+            "order": 5,
+            "paragraph_id": 117
+        },
+        {
+            "group_id": 8,
+            "id": 106,
+            "order": 6,
+            "paragraph_id": 118
+        },
+        {
+            "group_id": 32,
+            "id": 278,
+            "order": 0,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 32,
+            "id": 236,
+            "order": 0,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 32,
+            "id": 245,
+            "order": 0,
+            "paragraph_id": 120
+        },
+        {
+            "group_id": 32,
+            "id": 282,
+            "order": 0,
+            "paragraph_id": 212
+        },
+        {
+            "group_id": 32,
+            "id": 253,
+            "order": 0,
+            "paragraph_id": 231
+        },
+        {
+            "group_id": 32,
+            "id": 270,
+            "order": 0,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 32,
+            "id": 247,
+            "order": 0,
+            "paragraph_id": 229
+        },
+        {
+            "group_id": 32,
+            "id": 286,
+            "order": 0,
+            "paragraph_id": 237
+        },
+        {
+            "group_id": 32,
+            "id": 258,
+            "order": 0,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 32,
+            "id": 264,
+            "order": 0,
+            "paragraph_id": 233
+        },
+        {
+            "group_id": 32,
+            "id": 268,
+            "order": 0,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 32,
+            "id": 249,
+            "order": 0,
+            "paragraph_id": 230
+        },
+        {
+            "group_id": 32,
+            "id": 289,
+            "order": 0,
+            "paragraph_id": 213
+        },
+        {
+            "group_id": 32,
+            "id": 285,
+            "order": 0,
+            "paragraph_id": 214
+        },
+        {
+            "group_id": 33,
+            "id": 267,
+            "order": 0,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 33,
+            "id": 235,
+            "order": 0,
+            "paragraph_id": 119
+        },
+        {
+            "group_id": 33,
+            "id": 280,
+            "order": 0,
+            "paragraph_id": 228
+        },
+        {
+            "group_id": 33,
+            "id": 254,
+            "order": 0,
+            "paragraph_id": 208
+        },
+        {
+            "group_id": 33,
+            "id": 274,
+            "order": 0,
+            "paragraph_id": 122
+        },
+        {
+            "group_id": 33,
+            "id": 295,
+            "order": 0,
+            "paragraph_id": 216
+        },
+        {
+            "group_id": 33,
+            "id": 269,
+            "order": 0,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 33,
+            "id": 244,
+            "order": 0,
+            "paragraph_id": 120
+        },
+        {
+            "group_id": 33,
+            "id": 292,
+            "order": 0,
+            "paragraph_id": 218
+        },
+        {
+            "group_id": 34,
+            "id": 272,
+            "order": 0,
+            "paragraph_id": 203
+        },
+        {
+            "group_id": 34,
+            "id": 256,
+            "order": 0,
+            "paragraph_id": 209
+        },
+        {
+            "group_id": 34,
+            "id": 234,
+            "order": 0,
+            "paragraph_id": 119
+        },
+        {
+            "group_id": 34,
+            "id": 243,
+            "order": 0,
+            "paragraph_id": 202
+        },
+        {
+            "group_id": 34,
+            "id": 276,
+            "order": 0,
+            "paragraph_id": 204
+        },
+        {
+            "group_id": 34,
+            "id": 293,
+            "order": 0,
+            "paragraph_id": 205
+        },
+        {
+            "group_id": 34,
+            "id": 240,
+            "order": 0,
+            "paragraph_id": 225
+        },
+        {
+            "group_id": 34,
+            "id": 239,
+            "order": 0,
+            "paragraph_id": 201
+        },
+        {
+            "group_id": 35,
+            "id": 279,
+            "order": 0,
+            "paragraph_id": 228
+        },
+        {
+            "group_id": 35,
+            "id": 266,
+            "order": 0,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 35,
+            "id": 251,
+            "order": 0,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 35,
+            "id": 261,
+            "order": 0,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 35,
+            "id": 257,
+            "order": 0,
+            "paragraph_id": 209
+        },
+        {
+            "group_id": 35,
+            "id": 281,
+            "order": 0,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 35,
+            "id": 237,
+            "order": 0,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 35,
+            "id": 260,
+            "order": 0,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 35,
+            "id": 275,
+            "order": 0,
+            "paragraph_id": 122
+        },
+        {
+            "group_id": 35,
+            "id": 277,
+            "order": 0,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 36,
+            "id": 290,
+            "order": 0,
+            "paragraph_id": 215
+        },
+        {
+            "group_id": 36,
+            "id": 291,
+            "order": 0,
+            "paragraph_id": 218
+        },
+        {
+            "group_id": 37,
+            "id": 255,
+            "order": 0,
+            "paragraph_id": 208
+        },
+        {
+            "group_id": 37,
+            "id": 288,
+            "order": 0,
+            "paragraph_id": 238
+        },
+        {
+            "group_id": 37,
+            "id": 250,
+            "order": 0,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 37,
+            "id": 273,
+            "order": 0,
+            "paragraph_id": 203
+        },
+        {
+            "group_id": 37,
+            "id": 262,
+            "order": 0,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 37,
+            "id": 283,
+            "order": 0,
+            "paragraph_id": 212
+        },
+        {
+            "group_id": 37,
+            "id": 271,
+            "order": 0,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 37,
+            "id": 238,
+            "order": 0,
+            "paragraph_id": 201
+        },
+        {
+            "group_id": 37,
+            "id": 287,
+            "order": 0,
+            "paragraph_id": 237
+        },
+        {
+            "group_id": 37,
+            "id": 265,
+            "order": 0,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 37,
+            "id": 284,
+            "order": 0,
+            "paragraph_id": 214
+        },
+        {
+            "group_id": 39,
+            "id": 246,
+            "order": 0,
+            "paragraph_id": 229
+        },
+        {
+            "group_id": 39,
+            "id": 263,
+            "order": 0,
+            "paragraph_id": 233
+        },
+        {
+            "group_id": 39,
+            "id": 259,
+            "order": 0,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 39,
+            "id": 242,
+            "order": 0,
+            "paragraph_id": 202
+        },
+        {
+            "group_id": 39,
+            "id": 252,
+            "order": 0,
+            "paragraph_id": 231
+        },
+        {
+            "group_id": 39,
+            "id": 241,
+            "order": 0,
+            "paragraph_id": 225
+        },
+        {
+            "group_id": 10,
+            "id": 97,
+            "order": 1,
+            "paragraph_id": 109
+        },
+        {
+            "group_id": 10,
+            "id": 98,
+            "order": 2,
+            "paragraph_id": 110
+        },
+        {
+            "group_id": 10,
+            "id": 99,
+            "order": 3,
+            "paragraph_id": 111
+        },
+        {
+            "group_id": 18,
+            "id": 117,
+            "order": 1,
+            "paragraph_id": 129
+        },
+        {
+            "group_id": 18,
+            "id": 118,
+            "order": 2,
+            "paragraph_id": 130
+        },
+        {
+            "group_id": 17,
+            "id": 115,
+            "order": 1,
+            "paragraph_id": 127
+        },
+        {
+            "group_id": 17,
+            "id": 116,
+            "order": 2,
+            "paragraph_id": 128
+        },
+        {
+            "group_id": 16,
+            "id": 113,
+            "order": 1,
+            "paragraph_id": 125
+        },
+        {
+            "group_id": 16,
+            "id": 114,
+            "order": 2,
+            "paragraph_id": 126
+        },
+        {
+            "group_id": 15,
+            "id": 111,
+            "order": 1,
+            "paragraph_id": 123
+        },
+        {
+            "group_id": 15,
+            "id": 112,
+            "order": 2,
+            "paragraph_id": 124
+        },
+        {
+            "group_id": 23,
+            "id": 123,
+            "order": 1,
+            "paragraph_id": 135
+        },
+        {
+            "group_id": 23,
+            "id": 124,
+            "order": 2,
+            "paragraph_id": 136
+        },
+        {
+            "group_id": 24,
+            "id": 127,
+            "order": 1,
+            "paragraph_id": 139
+        },
+        {
+            "group_id": 24,
+            "id": 128,
+            "order": 2,
+            "paragraph_id": 140
+        },
+        {
+            "group_id": 31,
+            "id": 176,
+            "order": 1,
+            "paragraph_id": 185
+        },
+        {
+            "group_id": 31,
+            "id": 177,
+            "order": 2,
+            "paragraph_id": 186
+        },
+        {
+            "group_id": 40,
+            "id": 296,
+            "order": 1,
+            "paragraph_id": 243
+        },
+        {
+            "group_id": 40,
+            "id": 297,
+            "order": 2,
+            "paragraph_id": 244
+        },
+        {
+            "group_id": 41,
+            "id": 298,
+            "order": 1,
+            "paragraph_id": 245
+        },
+        {
+            "group_id": 41,
+            "id": 299,
+            "order": 2,
+            "paragraph_id": 246
+        },
+        {
+            "group_id": 42,
+            "id": 300,
+            "order": 1,
+            "paragraph_id": 247
+        },
+        {
+            "group_id": 42,
+            "id": 301,
+            "order": 2,
+            "paragraph_id": 248
+        },
+        {
+            "group_id": 43,
+            "id": 302,
+            "order": 1,
+            "paragraph_id": 249
+        },
+        {
+            "group_id": 43,
+            "id": 303,
+            "order": 2,
+            "paragraph_id": 250
+        },
+        {
+            "group_id": 44,
+            "id": 304,
+            "order": 1,
+            "paragraph_id": 251
+        },
+        {
+            "group_id": 44,
+            "id": 305,
+            "order": 2,
+            "paragraph_id": 252
+        },
+        {
+            "group_id": 45,
+            "id": 306,
+            "order": 1,
+            "paragraph_id": 253
+        },
+        {
+            "group_id": 45,
+            "id": 307,
+            "order": 2,
+            "paragraph_id": 254
+        },
+        {
+            "group_id": 46,
+            "id": 310,
+            "order": 1,
+            "paragraph_id": 257
+        },
+        {
+            "group_id": 46,
+            "id": 311,
+            "order": 2,
+            "paragraph_id": 258
+        },
+        {
+            "group_id": 47,
+            "id": 312,
+            "order": 1,
+            "paragraph_id": 259
+        },
+        {
+            "group_id": 47,
+            "id": 313,
+            "order": 2,
+            "paragraph_id": 260
+        },
+        {
+            "group_id": 48,
+            "id": 314,
+            "order": 1,
+            "paragraph_id": 261
+        },
+        {
+            "group_id": 48,
+            "id": 315,
+            "order": 2,
+            "paragraph_id": 262
+        },
+        {
+            "group_id": 49,
+            "id": 316,
+            "order": 1,
+            "paragraph_id": 263
+        },
+        {
+            "group_id": 49,
+            "id": 317,
+            "order": 2,
+            "paragraph_id": 264
+        },
+        {
+            "group_id": 50,
+            "id": 318,
+            "order": 1,
+            "paragraph_id": 265
+        },
+        {
+            "group_id": 50,
+            "id": 319,
+            "order": 2,
+            "paragraph_id": 266
+        },
+        {
+            "group_id": 51,
+            "id": 322,
+            "order": 1,
+            "paragraph_id": 269
+        },
+        {
+            "group_id": 51,
+            "id": 323,
+            "order": 2,
+            "paragraph_id": 270
+        },
+        {
+            "group_id": 52,
+            "id": 324,
+            "order": 1,
+            "paragraph_id": 271
+        },
+        {
+            "group_id": 52,
+            "id": 325,
+            "order": 2,
+            "paragraph_id": 272
+        },
+        {
+            "group_id": 53,
+            "id": 326,
+            "order": 1,
+            "paragraph_id": 273
+        },
+        {
+            "group_id": 53,
+            "id": 327,
+            "order": 2,
+            "paragraph_id": 274
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 1,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 8,
+            "note": "no-title-display",
+            "short_name": "Reverse Chronological",
+            "slug": "reverse-chronological-resume",
+            "title": "Reverse Chronological Resume"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 32,
+            "note": "",
+            "short_name": "Working with Team",
+            "slug": "working-with-team",
+            "title": "Working with Team"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 33,
+            "note": "",
+            "short_name": "Extract, Load and Transform",
+            "slug": "extract-load-and-transform",
+            "title": "Extract, Load and Transform"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 34,
+            "note": "",
+            "short_name": "Quality and Maintenance",
+            "slug": "quality-and-maintenance",
+            "title": "Quality and Maintenance"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 35,
+            "note": "",
+            "short_name": "Analysis",
+            "slug": "analysis",
+            "title": "Analysis"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 36,
+            "note": "",
+            "short_name": "DevOps and Automation",
+            "slug": "dev-ops-and-automation",
+            "title": "DevOps and Automation"
+        },
+        {
+            "cat_sort": 7,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 37,
+            "note": "",
+            "short_name": "Motivated to Learn",
+            "slug": "motivated-to-learn",
+            "title": "Motivated to Learn"
+        },
+        {
+            "cat_sort": 9,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 39,
+            "note": "",
+            "short_name": "Organization & Documentation",
+            "slug": "organization-and-documentation",
+            "title": "Organization and Documentation"
+        },
+        {
+            "cat_sort": 1,
+            "category_id": 2,
+            "group_type": "ordered",
+            "id": 10,
+            "note": "",
+            "short_name": "Diff Hollies",
+            "slug": "how-do-you-tell-the-difference-between-hollies-ilex",
+            "title": "How do you tell the difference between hollies (Ilex)?"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 2,
+            "group_type": "ordered",
+            "id": 18,
+            "note": "",
+            "short_name": "Mimosa Tree or Sensitive Plant",
+            "slug": "relation-between-mimosa-trees-and-sensitive-plants",
+            "title": "Relation between Mimosa Trees and sensitive plants?"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 2,
+            "group_type": "ordered",
+            "id": 17,
+            "note": "",
+            "short_name": "Three Berries Question",
+            "slug": "what-are-these-three-berry-bushes-and-which-are-native",
+            "title": "What are these three berry bushes and which are native?"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 2,
+            "group_type": "ordered",
+            "id": 16,
+            "note": "",
+            "short_name": "Bradford Pear Quesion",
+            "slug": "what-are-these-beautiful-trees-and-some-facts-about-them",
+            "title": "What are these beautiful trees and some facts about them?"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 2,
+            "group_type": "ordered",
+            "id": 15,
+            "note": " ",
+            "short_name": "Stilt Grass Quesion",
+            "slug": "what-is-the-significance-and-some-identifying-characterics-of-this-grass",
+            "title": "What is the significance and some identifying characterics of this grass?"
+        },
+        {
+            "cat_sort": 1,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 13,
+            "note": " ",
+            "short_name": "Warmup",
+            "slug": "warmup",
+            "title": "Warmup"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 12,
+            "note": "",
+            "short_name": "Animalistic",
+            "slug": "animalistic-exercises",
+            "title": "Animalistic Exercises"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 11,
+            "note": "",
+            "short_name": "Stretch Overview",
+            "slug": "stretch-overview",
+            "title": "Stretch Overview"
+        },
+        {
+            "cat_sort": 1,
+            "category_id": 4,
+            "group_type": "ordered",
+            "id": 23,
+            "note": "",
+            "short_name": "Three Mac shortcut links",
+            "slug": "what-are-three-ways-to-create-shortcut-links-on-the-macos",
+            "title": "What are three ways to create shortcut links on the macOS?"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 4,
+            "group_type": "ordered",
+            "id": 24,
+            "note": "",
+            "short_name": "Python Interpreted or Compiled",
+            "slug": "is-python-interpreted-or-compiled",
+            "title": "Is Python interpreted or compiled?"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 4,
+            "group_type": "ordered",
+            "id": 31,
+            "note": "",
+            "short_name": "Ten Python Security Issues",
+            "slug": "what-are-ten-common-security-gotchas-in-python",
+            "title": "What are ten common security gotchas in Python?"
+        },
+        {
+            "cat_sort": 1,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 40,
+            "note": "",
+            "short_name": "DEQ",
+            "slug": "what-does-deq-stand-for",
+            "title": "What does DEQ stand for?"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 41,
+            "note": "",
+            "short_name": "What monitoring?",
+            "slug": "what-exactly-are-we-monitoring-and-why",
+            "title": "What exactly are we monitoring and why?"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 42,
+            "note": "",
+            "short_name": "How does bacteria enter the water",
+            "slug": "how-does-fecal-waste-enter-the-water-body",
+            "title": "How does fecal waste enter the water body?"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 43,
+            "note": "",
+            "short_name": "fecal coliform bacteria definition",
+            "slug": "what-are-fecal-coliform-bacteria",
+            "title": "What are fecal coliform bacteria?"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 44,
+            "note": "",
+            "short_name": "Colilert Testing",
+            "slug": "what-is-colilert-testing",
+            "title": "What is Colilert Testing?"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 45,
+            "note": "",
+            "short_name": "Coliscan Easygel",
+            "slug": "what-is-coliscan-easygel-micrology-labs",
+            "title": "What is Coliscan Easygel (Micrology Labs)?"
+        },
+        {
+            "cat_sort": 7,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 46,
+            "note": "",
+            "short_name": "What do the results mean",
+            "slug": "how-does-the-monitoring-we-do-relate-to-virginia-quality-standards",
+            "title": "How does the monitoring we do relate to Virginia quality standards?"
+        },
+        {
+            "cat_sort": 8,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 47,
+            "note": "",
+            "short_name": "Representitive Sample",
+            "slug": "how-do-you-get-a-representative-sample",
+            "title": "How do you get a representative sample?"
+        },
+        {
+            "cat_sort": 9,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 48,
+            "note": "",
+            "short_name": "Time Frame",
+            "slug": "why-do-we-gather-the-samples-before-one-pm",
+            "title": "Why do we gather the samples before one pm?"
+        },
+        {
+            "cat_sort": 10,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 49,
+            "note": "",
+            "short_name": "Order for collecting data",
+            "slug": "what-order-do-we-collect-information-in",
+            "title": "What order do we collect information in?"
+        },
+        {
+            "cat_sort": 11,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 50,
+            "note": "",
+            "short_name": "Things to Avoid: Bacteria Samples",
+            "slug": "what-are-some-things-to-avoid-when-collecting-bacteria-samples",
+            "title": "What are some things to avoid when collecting bacteria samples?"
+        },
+        {
+            "cat_sort": 12,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 51,
+            "note": "",
+            "short_name": "Taking Temperature",
+            "slug": "what-temperatures-do-you-measure",
+            "title": "What temperatures do you measure?"
+        },
+        {
+            "cat_sort": 13,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 52,
+            "note": "",
+            "short_name": "Collect Turbidity Sample",
+            "slug": "directions-for-collecting-turbidity-sample",
+            "title": "Directions for collecting Turbidity Sample"
+        },
+        {
+            "cat_sort": 14,
+            "category_id": 8,
+            "group_type": "ordered",
+            "id": 53,
+            "note": "",
+            "short_name": "Hours Bacteria Sample can wait",
+            "slug": "how-many-hours-can-a-bacteria-sample-collected-correctly-wait",
+            "title": "How many hours can a bacteria sample, collected correctly, wait?"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 84,
+            "paragraph_id": 110,
+            "reference_id": 70
+        },
+        {
+            "id": 80,
+            "paragraph_id": 110,
+            "reference_id": 65
+        },
+        {
+            "id": 81,
+            "paragraph_id": 110,
+            "reference_id": 66
+        },
+        {
+            "id": 82,
+            "paragraph_id": 110,
+            "reference_id": 68
+        },
+        {
+            "id": 83,
+            "paragraph_id": 110,
+            "reference_id": 69
+        },
+        {
+            "id": 85,
+            "paragraph_id": 110,
+            "reference_id": 67
+        },
+        {
+            "id": 86,
+            "paragraph_id": 111,
+            "reference_id": 67
+        },
+        {
+            "id": 96,
+            "paragraph_id": 130,
+            "reference_id": 79
+        },
+        {
+            "id": 97,
+            "paragraph_id": 130,
+            "reference_id": 80
+        },
+        {
+            "id": 90,
+            "paragraph_id": 128,
+            "reference_id": 75
+        },
+        {
+            "id": 91,
+            "paragraph_id": 128,
+            "reference_id": 76
+        },
+        {
+            "id": 92,
+            "paragraph_id": 128,
+            "reference_id": 77
+        },
+        {
+            "id": 95,
+            "paragraph_id": 128,
+            "reference_id": 82
+        },
+        {
+            "id": 94,
+            "paragraph_id": 128,
+            "reference_id": 81
+        },
+        {
+            "id": 93,
+            "paragraph_id": 128,
+            "reference_id": 78
+        },
+        {
+            "id": 89,
+            "paragraph_id": 126,
+            "reference_id": 74
+        },
+        {
+            "id": 88,
+            "paragraph_id": 124,
+            "reference_id": 83
+        },
+        {
+            "id": 87,
+            "paragraph_id": 124,
+            "reference_id": 73
+        },
+        {
+            "id": 74,
+            "paragraph_id": 100,
+            "reference_id": 62
+        },
+        {
+            "id": 79,
+            "paragraph_id": 101,
+            "reference_id": 64
+        },
+        {
+            "id": 75,
+            "paragraph_id": 101,
+            "reference_id": 62
+        },
+        {
+            "id": 78,
+            "paragraph_id": 101,
+            "reference_id": 63
+        },
+        {
+            "id": 76,
+            "paragraph_id": 102,
+            "reference_id": 62
+        },
+        {
+            "id": 77,
+            "paragraph_id": 103,
+            "reference_id": 62
+        },
+        {
+            "id": 116,
+            "paragraph_id": 135,
+            "reference_id": 100
+        },
+        {
+            "id": 117,
+            "paragraph_id": 136,
+            "reference_id": 101
+        },
+        {
+            "id": 118,
+            "paragraph_id": 136,
+            "reference_id": 100
+        },
+        {
+            "id": 125,
+            "paragraph_id": 139,
+            "reference_id": 106
+        },
+        {
+            "id": 123,
+            "paragraph_id": 139,
+            "reference_id": 104
+        },
+        {
+            "id": 124,
+            "paragraph_id": 140,
+            "reference_id": 105
+        },
+        {
+            "id": 246,
+            "paragraph_id": 185,
+            "reference_id": 215
+        },
+        {
+            "id": 252,
+            "paragraph_id": 185,
+            "reference_id": 216
+        },
+        {
+            "id": 253,
+            "paragraph_id": 186,
+            "reference_id": 216
+        },
+        {
+            "id": 289,
+            "paragraph_id": 244,
+            "reference_id": 243
+        },
+        {
+            "id": 287,
+            "paragraph_id": 244,
+            "reference_id": 242
+        },
+        {
+            "id": 288,
+            "paragraph_id": 244,
+            "reference_id": 241
+        },
+        {
+            "id": 290,
+            "paragraph_id": 246,
+            "reference_id": 241
+        },
+        {
+            "id": 291,
+            "paragraph_id": 246,
+            "reference_id": 243
+        },
+        {
+            "id": 293,
+            "paragraph_id": 248,
+            "reference_id": 243
+        },
+        {
+            "id": 292,
+            "paragraph_id": 248,
+            "reference_id": 241
+        },
+        {
+            "id": 294,
+            "paragraph_id": 250,
+            "reference_id": 244
+        },
+        {
+            "id": 297,
+            "paragraph_id": 252,
+            "reference_id": 243
+        },
+        {
+            "id": 299,
+            "paragraph_id": 252,
+            "reference_id": 242
+        },
+        {
+            "id": 298,
+            "paragraph_id": 252,
+            "reference_id": 241
+        },
+        {
+            "id": 295,
+            "paragraph_id": 254,
+            "reference_id": 243
+        },
+        {
+            "id": 296,
+            "paragraph_id": 254,
+            "reference_id": 241
+        },
+        {
+            "id": 301,
+            "paragraph_id": 258,
+            "reference_id": 241
+        },
+        {
+            "id": 300,
+            "paragraph_id": 258,
+            "reference_id": 243
+        },
+        {
+            "id": 302,
+            "paragraph_id": 260,
+            "reference_id": 241
+        },
+        {
+            "id": 303,
+            "paragraph_id": 262,
+            "reference_id": 241
+        },
+        {
+            "id": 304,
+            "paragraph_id": 264,
+            "reference_id": 241
+        },
+        {
+            "id": 305,
+            "paragraph_id": 266,
+            "reference_id": 241
+        },
+        {
+            "id": 307,
+            "paragraph_id": 270,
+            "reference_id": 241
+        },
+        {
+            "id": 308,
+            "paragraph_id": 272,
+            "reference_id": 241
+        },
+        {
+            "id": 309,
+            "paragraph_id": 274,
+            "reference_id": 241
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "id": 113,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Resume Summary",
+            "slug": "resume-summary",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Experienced back end web developer who loves to program. For the past year, Python has been my main language, but for the seven years worked with Ruby, Javascript and PHP and still earlier, Java. Worked for four years with AWS (S3, EC2, SNS, SQS, Aurora & Cloudfront) and over ten years with relational databases, most recently Postgres and mySql.</p><p><strong>Location:</strong> Charlottesville, VA &nbsp;&nbsp;&nbsp;&nbsp; <strong>Email:</strong> elizabeth.schley@yahoo.com</p>"
+        },
+        {
+            "guid": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "id": 114,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "<small>2019 \u2013 2020 (5 months)</small>",
+            "short_title": "",
+            "slug": "coconstruct-llc",
+            "standalone": false,
+            "subtitle": "CoConstruct, LLC",
+            "text": "<p><strong>QA Automation Engineer: </strong> Worked with devops quality engineers to develop a world class Azure Pipeline by setting up a UI testing framework and many tests that covered vital functionality, using data driven, screen scraping and object oriented approaches and caching for speed and efficiency.</p> <p><strong>Technologies:</strong> Python, Pytest, Selenium, Azure, SQL Server</p>"
+        },
+        {
+            "guid": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "id": 115,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": " <small>2013 \u2013 2019</small>",
+            "short_title": "",
+            "slug": "teachstone-training-llc",
+            "standalone": false,
+            "subtitle": "Teachstone Training, LLC",
+            "text": "<p><strong>Backend Web Developer: </strong> Worked with developers, devops, product management, QA, content and customer service to create and maintain a web application to help teachers improve their interactions with their students.  The system interfaced with third party services, including BigCommerce, FedEx and Moodle, and in-house mobile applications and multiple applications using both restful and other Rails and PHP interfaces.  Played a large role in developing a single signon system for both third party and in-house systems.  Wrote many unit and integration tests.</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p> <p>2013 \u2013 2019</p>"
+        },
+        {
+            "guid": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "id": 116,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "<small>2007 \u2013 2012</small>",
+            "short_title": "",
+            "slug": "medical-automation-systems-abbott",
+            "standalone": false,
+            "subtitle": "Medical Automation Systems (Abbott)",
+            "text": "<p><strong>Project Manager: </strong> Helped lead many projects through conception to release, following FDA compliant software development practices, including test plan approval, risk management and problem solving strategies.</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p>"
+        },
+        {
+            "guid": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "id": 117,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "<small>1993 \u2013 2007</small>",
+            "short_title": "",
+            "slug": "lexisnexis-senior-software-engineer",
+            "standalone": false,
+            "subtitle": "LexisNexis, Senior Software Engineer",
+            "text": "<p><strong>Senior Software Engineer: </strong> Worked as technical lead and developer for a customer-facing eCommerce web-site that interfaced with multiple order fulfillment and financial back-end systems.  Responsible for both release and test plans, timely releases, unit and integration testing and project management.  Designed and wrote an object-oriented Java web service as one of several middle-ware strategies.</p> <p><strong>Technologies:</strong> Java web services, ASP, Javascript, XSLT, VB, FE</p> <p><strong>Computer Programmer:</strong> Moved from entry level position to Senior Software Engineer by taking courses, self-study, hard work and excellent results.  Worked on timecards, order fulfillment, invoices, pricing and subscription reporting. </p> <p><strong>Technologies:</strong> Java, JS,  VB, Oracle, Sybase, SQL Server, Mainframe</p>"
+        },
+        {
+            "guid": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "id": 118,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "education",
+            "standalone": false,
+            "subtitle": "Education",
+            "text": "<ul><li>Masters of Science - Information Studies, Florida State University: 4.0 GPA</li> <li>BA in English, Old Dominion University</li> <li>Java Certified Java 2 Platform</li></ul>"
+        },
+        {
+            "guid": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "id": 227,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Re-designed subscriptions statistics storage and reporting. Reports went from obscurity to being widely distributed, used and emulated.<br><strong>Technologies:</strong> SAS, IDMS<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "id": 224,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Initiated and led effort to fix problem caused by Windows Security Patch by upgrading MSXML. Implementation required research into IIS security and registry settings and negotiation for a new integration server and both technical and business resources.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa",
+            "id": 120,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed and implemented a plan for table-based transformation in data conversion, becoming a natural leader for the project as a result of this initiative.<br><strong>Technologies:</strong> Java, CSV Processing, SAS, IDMS, Sybase<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "id": 212,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked with the Quality Director and Project Managers to design the Engineering Project Management processes that involved MS Project schedules and feasibility and status reporting. Upon review, the new processes were implemented with almost no changes.<br><strong>Technologies:</strong> VBA with MS Project<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "62cf7442-c493-4b77-a74a-8b48090ca780",
+            "id": 231,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Facilitated our best Indian contractor's move to the US to manage our off-shore resources and insure quality of our team's work.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "e27c5b55-6b0d-4d80-a59d-8a4efc43de04",
+            "id": 121,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>As a Technical Lead for a customer-facing web-site, familiarized myself with various middleware processes that interfaced with multiple backends, situated in three different states: Virgina, New York and Ohio.<br><strong>Technologies:</strong> Java, Javascript, ASP, Web Services, Intalio and other middleware applications, XML, XSLT, SQL Server, Sybase, IDMS<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "4b64dee4-1453-4d82-8624-03056fcf868b",
+            "id": 229,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Led six Print and CD (web application) releases: making all dates, and meeting all requirements. This success was based largely on communication, particularly listening to the development and the product management teams.<br><strong>Technologies:</strong> Java, JavaScript, SQL Server, IDMS, Sybase, SAS, XML, XSLT, Web Services, SQL, ASP, various middleware products<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "791855ee-4925-4b00-88ff-02c7f38ed9b7",
+            "id": 237,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed a case law entry program, originally designed for limited usage, which was adopted and used company wide. Accomplished this by working with the law editors, who were our in-house customers and convincing my boss that it was needed.<br><strong>Technologies:</strong> VB, PL1<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c",
+            "id": 232,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Satisfied angry and frustrated customers who were using an application with over 50 existing problems when another developer quit suddenly. Met with users individually and in small groups, organized and prioritized the problems, designed solutions and negotiated with management for additional programming resources. Resulted in a solid, usable system.<br><strong>Technologies:</strong> ACCESS, SQL Server, VB<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "7f99fa94-bb8e-4392-9267-aaedb0adc15c",
+            "id": 233,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Frequently taken off of one project and assigned to a higher priority project. The transitions were seamless, because I had thoroughly documentated the processes.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "4e9128d0-fab3-435c-94c3-293af6183350",
+            "id": 211,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked with a first-time Product Manager, Customer Support, course specialists and QA to flesh out complex requirements, write new Jira tickets and to update three unfamiliar, non-intuitive and complex back-end applications. The goal, to improve the user experience in our video upload mobile application, was fulfilled.<br><strong>Technologies:</strong> Ruby, Rails, Rest API, HTML5, MySQL, Totara, PHP<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "e5a2790f-1f38-4b6b-a522-3b115460fb37",
+            "id": 230,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Negotiated a reorganization of what was included in various related application releases, thus making our date independent of work done by other teams. Without the foresight to negotiate this change, we would not have released until the following year.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "id": 213,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Led numerous projects as Team Lead (also acted as developer and system architect). Delivered all releases on time, meeting the requirements with very few bugs. This success was largely because of communication with people playing the following roles: people managers, project manager, specification writers, programmers, test lead, testers and the various platform owners.<br><strong>Technologies:</strong> Java, JavaScript, SQL Server, IDMS, Sybase, XML, XSLT, Web Services, SQL, ASP<br><strong>Company:</strong>  LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "5913f339-c3e0-4270-a27e-917b827eff08",
+            "id": 214,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Learned MS Project and VBA independently, teaching the other engineering project managers enough MSP to get them over the initial learning curve. This enabled our engineering department to use MS Project in a consistent manner.<br><strong>Technologies:</strong>MS Project, VBA<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "f2760b98-c246-4af4-86f0-4a2789755a53",
+            "id": 119,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented an end-point for uploading complex data to a relational database from an end-user supplied spreadsheet. The process updated or created records in at least seven different tables and validated against even more. In order to ensure integrity, created extensive rspec tests, making sure to validate all the business rules. There were few to no bugs, with extensive use an in spite of the fact that the original Jira tickets did not have all the AC criteria spelled out.<br><strong>Technologies:</strong> Ruby, Rails, CSV Processing, API, MySql<br><strong>Company:</strong> Teachstone</li></ul>"
+        },
+        {
+            "guid": "81ad8ebd-5d7b-4cea-a857-97cf3249e62c",
+            "id": 228,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed on-line pricing form, using many different data sources, thus saving the company $10,560 per year by saving time for Editorial management team.<br><strong>Technologies:</strong> SQL Server, Sybase, IDMS, SAS, SQL<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "dfb2a05f-da1e-45dc-b436-508244a77e63",
+            "id": 208,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Incorporated Totara, an LMS based off of Moodle, into our existing processes by learning how to create and implement Moodle web services. This required mapping our data with information displayed on the Totara web page. Was successful, in spite of the fact that the Totara database fields that I needed to update were often named and fielded in non-intuitive ways.<br><strong>Technologies:</strong> Ruby, Rails, Totara, Moodle, PHP, MySQL<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "be9ad23f-3c95-4b6a-9592-e45608e4c7ef",
+            "id": 122,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Fixed highly inaccurate subscription data used by sales reps without disturbing the production process. This was particularly challenging because there were no matching keys and three fundamental problems with the original extract. Sent SQL updates for over 50% of the records (a logistical problem) and rewrote the extract, so that sales reps had completely accurate information.<br><strong>Technologies:</strong> SAS, IDMS, Sybase<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "47ab62da-93bc-4b1c-9bbb-a3534ddc1662",
+            "id": 216,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote programs in PHP that parsed and analyzed text files for data conversion from Excel and Word to SQL Server, and to aid in DIACAP certification.<br><strong>Technologies:</strong> PHP, SQL Server, Excel Word, SQL<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "id": 218,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Instituted logging, log parsing and data analysis to systematically eliminate pre-existing inefficiencies and bugs in the site for which I was in charge.<br><strong>Technologies:</strong> Java, JavaScript, Excel</li></ul>"
+        },
+        {
+            "guid": "f479c6c2-238a-4b3b-bcde-f4389b815835",
+            "id": 203,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Eliminated login and navigation time by saving the login cookie and going directly to the page to be tested. Navigated to pages only when testing navigation.<br><strong>Technologies:</strong> Python, Selenium, Pytest, SQL Server, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "57fd69df-5351-4310-97f2-56a484d1f73c",
+            "id": 209,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Overhauled the trainer panel, turning a bug-laden application with inconsistent business rules into a serviceable application with consistent business rules. This was an interim solution, but workable enough to still be in place six years later.<br><strong>Technologies:</strong> PHP, jQuery, Ruby, Rails, Javascript, MySQL<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "b1d24eb6-ec9a-4937-8b87-9b52fb237516",
+            "id": 202,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Set up a system that allowed many tests to be created quickly and ensured that the tests were both valuable to the business and followed object oriented and other best programming practices.<br><strong>Technologies:</strong> Python, Selenium, Pytest, SQL Server, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "eda62fd3-99a3-483a-ba39-a7f3fa541cea",
+            "id": 204,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Cached page data collected by screen scraping techniques, making it so the tests were comprehensive without the overhead of many page loads.<br><strong>Technologies:</strong> Python, Pytest, SQL Server, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7",
+            "id": 205,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Used data-driven test development. This allowed test data and creation data to be changed in one place, and made it easy to reuse assertion methods.<br><strong>Technologies:</strong> Python, Selenium, Pytest, SQL Server, Azure Pipeline<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "id": 225,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote programs that parsed and analyzed log files to monitor performance. Systematically eliminated pre-existing inefficiencies and bugs.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "c23de2c1-c62c-4de6-8533-ab88aeb9cced",
+            "id": 201,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Set up a UI testing framework from scratch using Python, Pytest and Selenium.<br><strong>Technologies:</strong> Python, Selenium, Pytest, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "id": 207,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented, as one of my first ruby projects, single sign-on according to complex requirements. As the requirements changed, played a major role in that implementation as well.<br><strong>Technologies:</strong> Ruby, Rails, JavaScript, HTML5, Web Server Authentication<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "id": 210,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Built cross-application monitoring for data syncs, using New Relic Insight custom fields, allowing us to measure the time from one in-house application to another through a third-party application for which we had no access. We created alerts and New Relic dashboards based on the resulting data. As a by-product, the information helped with bug analysis.<br><strong>Technologies:</strong> Ruby, Rails, New Relic<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "id": 235,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Conceived and executed strategy for programmatically creating programs, SQL code, and XML definitions by reading data definition files, saving over a month of development time in data archiving project.<br><strong>Technologies:</strong> Sybase, IDMS, SAS, SQL, Web Services, XML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "id": 215,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Automated status reports that read MS Project and produced Excel Reports with four months rolling history, allowing the engineering department to accurately and consistently report progress to the management team.<br><strong>Technologies:</strong> VBA with MS Project and Excel<br><strong>Company:</strong> Medical Automation Systems (Abbott)</li></ul>"
+        },
+        {
+            "guid": "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b",
+            "id": 238,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote, as a first year programmer, a dynamic menu program, in C++, which allocated and freed arrays of pointers without leaking any memory.<br><strong>Technologies:</strong> C++</li></ul>"
+        },
+        {
+            "guid": "8052929a-26bc-4292-b63c-50b81c6723ed",
+            "id": 109,
+            "image_info_key": "question",
+            "image_path": "projects/img/two_hollies.jpg",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Given these two images, what are they and which is native?</p>"
+        },
+        {
+            "guid": "c1eb1257-380c-440a-8ea9-4c3ca7926e48",
+            "id": 110,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The one on the left is American Holly, based on the identification using PictureThis (IOS app), which may be wrong.  Supposedly, English Hollies are difficult to distinguish from American Holly.  English Ivy has glossier leaves, but that is subjective and otherwise the leaves are described almost identically.  Because I can't be sure, I am assuming PictureThis is correct and the Hollies growing in my yard are American Holly, which is native to Eastern and Central US.</p>"
+        },
+        {
+            "guid": "d236d914-f233-4263-b327-a1b7dbbacb4f",
+            "id": 111,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The one on the right is |beg|ilex-cornuta-chinese-holly-horned-holly|end|, definitely not native. </p>"
+        },
+        {
+            "guid": "d65464c4-e721-4d96-aa51-f00c804d48f7",
+            "id": 129,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "58167505-450c-4041-82fc-0db77406e2c6",
+            "id": 130,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>answer</p>"
+        },
+        {
+            "guid": "e5173fc1-22fa-4485-b969-5db32b457ff5",
+            "id": 127,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>testtesttext</p>"
+        },
+        {
+            "guid": "b35a4148-cb24-42e8-82f1-091591f4c8d4",
+            "id": 128,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>answer</p>"
+        },
+        {
+            "guid": "9b54cb9f-1615-4813-93aa-b70a501b7088",
+            "id": 125,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "7b394f7b-523d-438a-9501-4d494a0854cc",
+            "id": 126,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>answer</p>"
+        },
+        {
+            "guid": "ce5c5de2-83bc-4296-b595-9ed86b965a6b",
+            "id": 123,
+            "image_info_key": "question",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Focus on distinguishing characteristics and look-alikes.</p>"
+        },
+        {
+            "guid": "184b3ab2-56e2-4404-ad1e-42d3fd54d90f",
+            "id": 124,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Two great resources</p>"
+        },
+        {
+            "guid": "f574259f-9202-4569-b495-637f17fe1893",
+            "id": 100,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The first four minutes of the Tapp Brother Parkour Warmup video (|beg_ref|tappthomas_jonathon_20150218_youtube_parkourwarmup|end_ref|) is much like  the warm up routine I use before working out.  Actually, I see this as a warm up for life itself and sometimes do this warm up as a mini-work out before eating lunch.</p>"
+        },
+        {
+            "guid": "f8321a7f-3b82-4b59-9117-de27d662d414",
+            "id": 101,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Here are some differences in my warm up:</p>    <ol><li>Do not roll my head back, because of years of yoga instructors telling me not to.  Instead I add some extra neck exercises as illustrated in the Bob and Brad video below (Bob and Brad link below).</li>        <li>Do add lots of wrist and hand exercise variations, mostly because I have felt some arthritis in my fingers and have suffered from wrist pain in the past.  I open and close my hands while circling my wrists, move my wrist in all directions, touch my thumbs to the fingers in the same hand and anything else I can think of until my hand, wrist and forearms are tired.</li>        <li>Do a hip series, isolating the hips: side to side, front to back, circle right and circle left. Here is a link to circles done like I want to do.  After this, I do hip circles like Thomas Tapp does.</li>        <li>Do spend way more time on ankle mobility, in order to avoid foot and calf cramps.  I pretty much follow the GMB guide to ankle mobility (Jarlo Ilano link below).</li>    </ol>"
+        },
+        {
+            "guid": "3b0c590e-09f0-4c9c-8940-04af8d231374",
+            "id": 102,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>After the exercises as shown in the Parkour Warm up video, I do arm swings, both horizontally and vertically, twists at the waist, leg swings, hip rotations, easy squats (popup link here) and lunges (popup link here).  Then I add any exercises specific to the workout I am planning, such as modified push ups or front planks before pushups (popup link here).</p>"
+        },
+        {
+            "guid": "595523dc-7cf4-4d32-a024-6a41374a1655",
+            "id": 103,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Someday I plan do the whole Tapp Brothers warmup as an after lunch workout after to see how I like it.</p>"
+        },
+        {
+            "guid": "4934cf5a-3843-4c31-96fd-e1a8bc3b875b",
+            "id": 99,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Animalistic exercises are functional make it so you move well.</p>"
+        },
+        {
+            "guid": "8d46b270-b499-41de-a9a7-67f1017d3b93",
+            "id": 98,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Stretching is vital as you get older, in order to maintain agility and range of motion.</p>"
+        },
+        {
+            "guid": "c1a62c79-537a-44a2-8dc2-33b4dda56b9b",
+            "id": 135,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong>Clue:</strong> All three types of links are shortcuts to an original file system object. A file system object is usually a file on your Mac, but it can also be a folder, a drive, or a networked device.  (From the |beg_ref|nelsontom_20200215_lifewire_aliasessymboliclinkshardlinksmac|end_ref| article.)</p>"
+        },
+        {
+            "guid": "5868c084-f2a8-4cfb-8719-219a6c74ae7b",
+            "id": 136,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The three kinds of links are aliases, hard links and symbolic links.  Both the symbolic and hard links are from unix and are part of the linux operating system.  They work on the Mac terminal. <p> <ol> <li>Alias: associated with the Mac\u2019s finder app.  Along with the path and filename, the link is associated with a unique inode name, an identifier that will track the file even when it moves.</li> <li>Symbolic Link: like with an alias, a symbolic link is associated with path and filename, but it is not associated with the file itself.  That way you can have a different file with the same name and path, and the symbolic link will still work, assuming you were upgrading a version, for example, and you wanted the new file associated with the symlink.</li> <li>Hard Link: Like with an alias, a hard link is associated with the inode, so will still be attached to the file, even if it is moved.  Like with a symbolic link, hard links are part of the Unix operating system.  They are generally used when you want multiple links to the same file.</li></ol>"
+        },
+        {
+            "guid": "ecc87b2b-f1ff-41f2-809f-8fcf8e788718",
+            "id": 139,
+            "image_info_key": "question",
+            "image_path": "projects/img/python_interpreter_diagram.png",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Also, what are the files with the pyc extension?</p>"
+        },
+        {
+            "guid": "60cc7371-4053-483e-abeb-60105ff2e1de",
+            "id": 140,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Python Interpreted and Compiled",
+            "slug": "python-interpreted-and-compiled",
+            "standalone": true,
+            "subtitle": "Python Interpreted and Compiled",
+            "text": "<p>Python is considered an interpreted language because it runs directly from source code, but it is compiled as well. The interpretation aspect makes it easier to work with, since the errors display line by line. But it is really slow to run through the code. For that reason, Python saves the intermediate byte code in a file with a .pyc extension. The Python Virtual machine [PVM] simultaneously compiles and executes the .pyc file.</p>  <p>The PVM is architecture independent, but needs to have the correct Python version associated with it. The python version is stored along with the byte code.</p>"
+        },
+        {
+            "guid": "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b",
+            "id": 185,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Initial Python 10 Security Gotchas",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "Never want to make these mistakes (from Real Python Ricky White's October 7, 2018 Interview of Anthony Shaw) in the future."
+        },
+        {
+            "guid": "f20a75db-1075-4c3b-8d70-11e716c8c6fd",
+            "id": 186,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "10 Python Security Gotchas",
+            "slug": "list-of-10-python-security-gotchas",
+            "standalone": true,
+            "subtitle": "List of 10 Python Security Gotchas",
+            "text": "<ul><li>|beg|input-injection|end|</li><li>|beg|parsing-xml|end|</li><li>|beg|assert-statements|end|</li><li>|beg|timing-attacks|end|</li><li>|beg|a-polluted-site-packages-or-import-path|end|</li><li>|beg|temporary-files|end|</li><li>|beg|using-yamlload|end|</li><li>|beg|pickles|end|</li><li>|beg|using-the-system-python-runtime-and-not-patching-it|end|</li><li>|beg|not-patching-your-dependencies|end|</li></ul>"
+        },
+        {
+            "guid": "f9d3d0bf-77c1-4f73-9d09-3ee69c8f7ad2",
+            "id": 243,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "dd1db19c-eea2-4bdd-901e-153c517c5ccd",
+            "id": 244,
+            "image_info_key": "question",
+            "image_path": "projects/img/LogoRivannaConservationAlliance.png",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The Department of Environmental Quality [DEQ] oversees the methods and criteria used by the Rivanna Conservation Alliance to judge whether streams are safe for humans."
+        },
+        {
+            "guid": "15ac74b0-e347-4c63-9df8-9458d3204d09",
+            "id": 245,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Given that pathogenic (disease-causing) bacteria, viruses, and protozoans are often found in fecal waste. (see |beg_ref|rivannariver_2020_rcsbacteriamonitormanual|end_ref|)</p>"
+        },
+        {
+            "guid": "276bcf4b-b4cd-4bb2-adc9-7048df1b984c",
+            "id": 246,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The Department of Environmental Quality recomments testing for <u>Escherichia coli (E. coli)</u> and <u>enterococci</u>, because these indicators are normally prevalent in the fecal waste of warm-blooded animals, including humans.</p>"
+        },
+        {
+            "guid": "af15bd59-e936-475a-860f-e6c8dbd3aa0b",
+            "id": 247,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Eight examples</p>"
+        },
+        {
+            "guid": "de5ddcde-b261-427c-b2b7-47226ce6a35f",
+            "id": 248,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Fecal waste from humans or other warm-blooded animals may enter a waterbody from various sources including faulty wastewater treatment plants, livestock, malfunctioning septic systems, untreated sewage discharge, pets, stormwater runoff, wildlife, or boat waste. (Directly quoted from |beg_ref|rivannariver_2020_rcsbacteriamonitormanual|end_ref|.)</p>"
+        },
+        {
+            "guid": "898cea45-779e-4964-b2db-08da97c6052a",
+            "id": 249,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "33ac1148-2a17-4339-9d65-b64fc8bab5c8",
+            "id": 250,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Fecal coliform bacteria are a group of bacteria that are passed through the fecal excrement of humans, livestock and wildlife. They aid in the digestion of food. A specific subgroup of this collection is the fecal coliform bacteria, the most common member being Eschericia coli. These organisms may be separated from the total coliform group by their ability to grow at elevated temperatures and are associated only with the fecal material of warm-blooded animals. Bacteria reproduce rapidly if conditions are right for growth. Most bacteria grow best in dark, warm, moist environments with food. Some bacteria form colonies as they multiply which may grow large enough to be seen. By growing and counting colonies of fecal coliform bacteria from a sample of stream water, we can determine approximately how many bacteria were originally present. (Directly quoted from |beg_ref|waterresearchfecalcoliformbacteriainwater|end_ref|.)</p>"
+        },
+        {
+            "guid": "7cdf4313-2e44-4464-97c9-b3abd7525887",
+            "id": 251,
+            "image_info_key": "question",
+            "image_path": "projects/img/LogoRivannaConservationAlliance.png",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong>Clue:</strong> RCA has been certified by DEQ to use the Colilert Method</p>"
+        },
+        {
+            "guid": "ca952eeb-d4c0-4ae9-b5e2-fffda256c20e",
+            "id": 252,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The Colilert method (Micrology Labs) was added to RCA\u2019s testing protocols in 2017. This method measures Most Probable Number (MPN) of bacteria in a sample. Medium is added to the 100 mL sample of water, and the sample is sealed into a Quanti-Tray and incubated before reading (Directly quoted from |beg_ref|rivannariver_2020_rcsbacteriamonitormanual|end_ref|.)  DEQ reuses the the RCA findings directly for water quality assessments.</p>"
+        },
+        {
+            "guid": "f210dd03-0da5-4378-b227-68ee3541c19c",
+            "id": 253,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Significance, advantages and disadvantages?</p>"
+        },
+        {
+            "guid": "36158627-122e-4e10-9fb3-cae65db6d3cb",
+            "id": 254,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The Coliscan Easygel method measures the total coliforms and E. coli by adding a water sample into a liquid medium and pouring it into a treated petri dish.  The advantage is that it is quick and easy.  The disadvantage is that it can not be used directly by the DEQ for water assessment.  However, it is useful for locating hot spots for fecal contamination in order to concentrate extra monitoring around those areas.</p>"
+        },
+        {
+            "guid": "c8f2e109-a872-457d-b19a-b7c7a04343bc",
+            "id": 257,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "05cd27a7-501c-4c4e-90bd-5e5e1491b648",
+            "id": 258,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Water quality standards for E.coli and Enterococci were adopted by Virginia and became effective in January 2003. Water is deemed unsafe for recreation when E. coli (freshwater) is above 235 CFU (colony forming units) /100 ml water. With the Colilert technique, this standard is 235 MPN (most probable number).  Directly quoted from the |beg_ref|rivannariver_2020_rcsbacteriamonitormanual|end_ref|</p>"
+        },
+        {
+            "guid": "038eef7c-364e-4ce7-85bf-bfc4ee11aee4",
+            "id": 259,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "e2dc04f5-7626-47fa-b377-391ce2b685ba",
+            "id": 260,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Representative samples comes from the main flow of the stream.  If it is too deep, then you may need to use a pole.</p>"
+        },
+        {
+            "guid": "1f8f4e0a-e1d0-44c9-bf2a-fc0af7e9e5c5",
+            "id": 261,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "79aca5c1-8f63-491c-8d9c-05f6d2f1ec46",
+            "id": 262,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>We need daylight to collect our samples.  Then they must be delivered to the lab in time for the laboratory technicians to have time to run the Colilert sample.</p>"
+        },
+        {
+            "guid": "d40db8ab-9919-457b-b277-37b0f67896af",
+            "id": 263,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong>Clue:</strong> Three things</p>"
+        },
+        {
+            "guid": "be9ffe16-b530-403f-b586-f4ee07cee0f1",
+            "id": 264,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ol><li>Bacteria</li><li>Temperature</li><li>Turbidity</li></ol>"
+        },
+        {
+            "guid": "172ec7bd-275f-4584-9019-853f98305ea2",
+            "id": 265,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong></strong> Seven things</p>"
+        },
+        {
+            "guid": "3b3275e9-6b03-4dd5-b3c6-3ade1607081f",
+            "id": 266,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ol><li>Contaminating the samples by stirring up too much sedimate upstream or not facing upstream</li><li>Touching the inside of the cap</li><li>Not using the 'U' method to ensure the bacteria from your boot or hand does not contaminate the sample</li><li>Allowing debris or mud to enter the sample</li><li>Not filling the colilert sample bottle between the 100 mL line on the bottle and the shoulder of the bottle</li><li>Not labelling the sample with a pen or sharpie: location ID and date (-1 or -2, if taking multiple samples for that particular site</li><li>Not putting the sample on ice immediately </li></ol>"
+        },
+        {
+            "guid": "9e69134c-4b75-4ebf-b93e-747da1a796fd",
+            "id": 269,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong>Clue: </strong> What to measure, unit, things to avoid (seven)</p>"
+        },
+        {
+            "guid": "8f40a884-b992-4327-8f7d-91dbde7d0926",
+            "id": 270,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>While not in water, measure air temperature</li><li>Keep out of direct sunlight</li><li>Keep thermometer away from body</li><li>For water, make sure not to touch debris or rock</li><li>Make sure you are close to where you gathered your samples</li><li>Always use Celsius</li><li>Always allow time for the temperature to stabilize</li></ul>"
+        },
+        {
+            "guid": "b5ae74a4-74fb-4b57-bf48-feb76491d65e",
+            "id": 271,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p><strong></strong> Five Steps</p>"
+        },
+        {
+            "guid": "c39a690f-87b8-43bc-b6d7-f0bb01d30aed",
+            "id": 272,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ol><li>Use the turbidity bottle</li><li>Uncap and Submerge to fill</li><li>Empty downstream</li><li>Fill bottle again</li><li>Store it on ice</li></ol>"
+        },
+        {
+            "guid": "c18b27d1-bd70-4fc5-8ebe-d5675d0d40fb",
+            "id": 273,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p></p>"
+        },
+        {
+            "guid": "90603312-3467-45ec-b596-390bc67f53eb",
+            "id": 274,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Twenty-four hours</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "2": "native-plant-status",
+            "3": "at-home-exercise",
+            "4": "general-tech",
+            "8": "bacteria-monitoring",
+            "at-home-exercise": {
+                "dev_id": 3
+            },
+            "bacteria-monitoring": {
+                "dev_id": 8
+            },
+            "general-tech": {
+                "dev_id": 4
+            },
+            "native-plant-status": {
+                "dev_id": 2
+            },
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "10": "how-do-you-tell-the-difference-between-hollies-ilex",
+            "11": "stretch-overview",
+            "12": "animalistic-exercises",
+            "13": "warmup",
+            "15": "what-is-the-significance-and-some-identifying-characterics-of-this-grass",
+            "16": "what-are-these-beautiful-trees-and-some-facts-about-them",
+            "17": "what-are-these-three-berry-bushes-and-which-are-native",
+            "18": "relation-between-mimosa-trees-and-sensitive-plants",
+            "23": "what-are-three-ways-to-create-shortcut-links-on-the-macos",
+            "24": "is-python-interpreted-or-compiled",
+            "31": "what-are-ten-common-security-gotchas-in-python",
+            "32": "working-with-team",
+            "33": "extract-load-and-transform",
+            "34": "quality-and-maintenance",
+            "35": "analysis",
+            "36": "dev-ops-and-automation",
+            "37": "motivated-to-learn",
+            "39": "organization-and-documentation",
+            "40": "what-does-deq-stand-for",
+            "41": "what-exactly-are-we-monitoring-and-why",
+            "42": "how-does-fecal-waste-enter-the-water-body",
+            "43": "what-are-fecal-coliform-bacteria",
+            "44": "what-is-colilert-testing",
+            "45": "what-is-coliscan-easygel-micrology-labs",
+            "46": "how-does-the-monitoring-we-do-relate-to-virginia-quality-standards",
+            "47": "how-do-you-get-a-representative-sample",
+            "48": "why-do-we-gather-the-samples-before-one-pm",
+            "49": "what-order-do-we-collect-information-in",
+            "50": "what-are-some-things-to-avoid-when-collecting-bacteria-samples",
+            "51": "what-temperatures-do-you-measure",
+            "52": "directions-for-collecting-turbidity-sample",
+            "53": "how-many-hours-can-a-bacteria-sample-collected-correctly-wait",
+            "8": "reverse-chronological-resume",
+            "analysis": {
+                "dev_id": 35
+            },
+            "animalistic-exercises": {
+                "dev_id": 12
+            },
+            "dev-ops-and-automation": {
+                "dev_id": 36
+            },
+            "directions-for-collecting-turbidity-sample": {
+                "dev_id": 52
+            },
+            "extract-load-and-transform": {
+                "dev_id": 33
+            },
+            "how-do-you-get-a-representative-sample": {
+                "dev_id": 47
+            },
+            "how-do-you-tell-the-difference-between-hollies-ilex": {
+                "dev_id": 10
+            },
+            "how-does-fecal-waste-enter-the-water-body": {
+                "dev_id": 42
+            },
+            "how-does-the-monitoring-we-do-relate-to-virginia-quality-standards": {
+                "dev_id": 46
+            },
+            "how-many-hours-can-a-bacteria-sample-collected-correctly-wait": {
+                "dev_id": 53
+            },
+            "is-python-interpreted-or-compiled": {
+                "dev_id": 24
+            },
+            "motivated-to-learn": {
+                "dev_id": 37
+            },
+            "organization-and-documentation": {
+                "dev_id": 39
+            },
+            "quality-and-maintenance": {
+                "dev_id": 34
+            },
+            "relation-between-mimosa-trees-and-sensitive-plants": {
+                "dev_id": 18
+            },
+            "reverse-chronological-resume": {
+                "dev_id": 8
+            },
+            "stretch-overview": {
+                "dev_id": 11
+            },
+            "warmup": {
+                "dev_id": 13
+            },
+            "what-are-fecal-coliform-bacteria": {
+                "dev_id": 43
+            },
+            "what-are-some-things-to-avoid-when-collecting-bacteria-samples": {
+                "dev_id": 50
+            },
+            "what-are-ten-common-security-gotchas-in-python": {
+                "dev_id": 31
+            },
+            "what-are-these-beautiful-trees-and-some-facts-about-them": {
+                "dev_id": 16
+            },
+            "what-are-these-three-berry-bushes-and-which-are-native": {
+                "dev_id": 17
+            },
+            "what-are-three-ways-to-create-shortcut-links-on-the-macos": {
+                "dev_id": 23
+            },
+            "what-does-deq-stand-for": {
+                "dev_id": 40
+            },
+            "what-exactly-are-we-monitoring-and-why": {
+                "dev_id": 41
+            },
+            "what-is-colilert-testing": {
+                "dev_id": 44
+            },
+            "what-is-coliscan-easygel-micrology-labs": {
+                "dev_id": 45
+            },
+            "what-is-the-significance-and-some-identifying-characterics-of-this-grass": {
+                "dev_id": 15
+            },
+            "what-order-do-we-collect-information-in": {
+                "dev_id": 49
+            },
+            "what-temperatures-do-you-measure": {
+                "dev_id": 51
+            },
+            "why-do-we-gather-the-samples-before-one-pm": {
+                "dev_id": 48
+            },
+            "working-with-team": {
+                "dev_id": 32
+            }
+        },
+        "paragraphs": {
+            "038eef7c-364e-4ce7-85bf-bfc4ee11aee4": {
+                "dev_id": 259
+            },
+            "05cd27a7-501c-4c4e-90bd-5e5e1491b648": {
+                "dev_id": 258
+            },
+            "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b": {
+                "dev_id": 185
+            },
+            "100": "f574259f-9202-4569-b495-637f17fe1893",
+            "101": "f8321a7f-3b82-4b59-9117-de27d662d414",
+            "102": "3b0c590e-09f0-4c9c-8940-04af8d231374",
+            "103": "595523dc-7cf4-4d32-a024-6a41374a1655",
+            "109": "8052929a-26bc-4292-b63c-50b81c6723ed",
+            "110": "c1eb1257-380c-440a-8ea9-4c3ca7926e48",
+            "111": "d236d914-f233-4263-b327-a1b7dbbacb4f",
+            "113": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "114": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "115": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "116": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "117": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "118": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "119": "f2760b98-c246-4af4-86f0-4a2789755a53",
+            "120": "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa",
+            "121": "e27c5b55-6b0d-4d80-a59d-8a4efc43de04",
+            "122": "be9ad23f-3c95-4b6a-9592-e45608e4c7ef",
+            "123": "ce5c5de2-83bc-4296-b595-9ed86b965a6b",
+            "124": "184b3ab2-56e2-4404-ad1e-42d3fd54d90f",
+            "125": "9b54cb9f-1615-4813-93aa-b70a501b7088",
+            "126": "7b394f7b-523d-438a-9501-4d494a0854cc",
+            "127": "e5173fc1-22fa-4485-b969-5db32b457ff5",
+            "128": "b35a4148-cb24-42e8-82f1-091591f4c8d4",
+            "129": "d65464c4-e721-4d96-aa51-f00c804d48f7",
+            "1290e353-cbe5-43c1-b4bf-b94d36eb81e8": {
+                "dev_id": 227
+            },
+            "130": "58167505-450c-4041-82fc-0db77406e2c6",
+            "135": "c1a62c79-537a-44a2-8dc2-33b4dda56b9b",
+            "136": "5868c084-f2a8-4cfb-8719-219a6c74ae7b",
+            "139": "ecc87b2b-f1ff-41f2-809f-8fcf8e788718",
+            "13ebe744-8bc4-49db-b5cb-629570bd8117": {
+                "dev_id": 116
+            },
+            "140": "60cc7371-4053-483e-abeb-60105ff2e1de",
+            "15ac74b0-e347-4c63-9df8-9458d3204d09": {
+                "dev_id": 245
+            },
+            "172ec7bd-275f-4584-9019-853f98305ea2": {
+                "dev_id": 265
+            },
+            "184b3ab2-56e2-4404-ad1e-42d3fd54d90f": {
+                "dev_id": 124
+            },
+            "185": "08ffe184-3fa7-4a7b-b2fa-bed09bbfb83b",
+            "186": "f20a75db-1075-4c3b-8d70-11e716c8c6fd",
+            "1d9e158a-2812-4c1a-96b1-62d295cfb317": {
+                "dev_id": 113
+            },
+            "1f8f4e0a-e1d0-44c9-bf2a-fc0af7e9e5c5": {
+                "dev_id": 261
+            },
+            "201": "c23de2c1-c62c-4de6-8533-ab88aeb9cced",
+            "202": "b1d24eb6-ec9a-4937-8b87-9b52fb237516",
+            "203": "f479c6c2-238a-4b3b-bcde-f4389b815835",
+            "204": "eda62fd3-99a3-483a-ba39-a7f3fa541cea",
+            "205": "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7",
+            "207": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "208": "dfb2a05f-da1e-45dc-b436-508244a77e63",
+            "209": "57fd69df-5351-4310-97f2-56a484d1f73c",
+            "210": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "211": "4e9128d0-fab3-435c-94c3-293af6183350",
+            "212": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "213": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "214": "5913f339-c3e0-4270-a27e-917b827eff08",
+            "215": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "216": "47ab62da-93bc-4b1c-9bbb-a3534ddc1662",
+            "218": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "224": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "225": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "227": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "228": "81ad8ebd-5d7b-4cea-a857-97cf3249e62c",
+            "229": "4b64dee4-1453-4d82-8624-03056fcf868b",
+            "230": "e5a2790f-1f38-4b6b-a522-3b115460fb37",
+            "231": "62cf7442-c493-4b77-a74a-8b48090ca780",
+            "232": "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c",
+            "233": "7f99fa94-bb8e-4392-9267-aaedb0adc15c",
+            "235": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "237": "791855ee-4925-4b00-88ff-02c7f38ed9b7",
+            "238": "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b",
+            "243": "f9d3d0bf-77c1-4f73-9d09-3ee69c8f7ad2",
+            "244": "dd1db19c-eea2-4bdd-901e-153c517c5ccd",
+            "245": "15ac74b0-e347-4c63-9df8-9458d3204d09",
+            "246": "276bcf4b-b4cd-4bb2-adc9-7048df1b984c",
+            "247": "af15bd59-e936-475a-860f-e6c8dbd3aa0b",
+            "248": "de5ddcde-b261-427c-b2b7-47226ce6a35f",
+            "249": "898cea45-779e-4964-b2db-08da97c6052a",
+            "250": "33ac1148-2a17-4339-9d65-b64fc8bab5c8",
+            "251": "7cdf4313-2e44-4464-97c9-b3abd7525887",
+            "252": "ca952eeb-d4c0-4ae9-b5e2-fffda256c20e",
+            "253": "f210dd03-0da5-4378-b227-68ee3541c19c",
+            "254": "36158627-122e-4e10-9fb3-cae65db6d3cb",
+            "257": "c8f2e109-a872-457d-b19a-b7c7a04343bc",
+            "258": "05cd27a7-501c-4c4e-90bd-5e5e1491b648",
+            "259": "038eef7c-364e-4ce7-85bf-bfc4ee11aee4",
+            "260": "e2dc04f5-7626-47fa-b377-391ce2b685ba",
+            "261": "1f8f4e0a-e1d0-44c9-bf2a-fc0af7e9e5c5",
+            "262": "79aca5c1-8f63-491c-8d9c-05f6d2f1ec46",
+            "262b1d4a-e5c5-46fe-810e-ee891e2312d3": {
+                "dev_id": 212
+            },
+            "263": "d40db8ab-9919-457b-b277-37b0f67896af",
+            "264": "be9ffe16-b530-403f-b586-f4ee07cee0f1",
+            "265": "172ec7bd-275f-4584-9019-853f98305ea2",
+            "266": "3b3275e9-6b03-4dd5-b3c6-3ade1607081f",
+            "269": "9e69134c-4b75-4ebf-b93e-747da1a796fd",
+            "270": "8f40a884-b992-4327-8f7d-91dbde7d0926",
+            "271": "b5ae74a4-74fb-4b57-bf48-feb76491d65e",
+            "272": "c39a690f-87b8-43bc-b6d7-f0bb01d30aed",
+            "273": "c18b27d1-bd70-4fc5-8ebe-d5675d0d40fb",
+            "274": "90603312-3467-45ec-b596-390bc67f53eb",
+            "276bcf4b-b4cd-4bb2-adc9-7048df1b984c": {
+                "dev_id": 246
+            },
+            "33ac1148-2a17-4339-9d65-b64fc8bab5c8": {
+                "dev_id": 250
+            },
+            "33fcd4ad-af4a-4205-bc6b-3321115ccfff": {
+                "dev_id": 213
+            },
+            "36158627-122e-4e10-9fb3-cae65db6d3cb": {
+                "dev_id": 254
+            },
+            "3b0c590e-09f0-4c9c-8940-04af8d231374": {
+                "dev_id": 102
+            },
+            "3b3275e9-6b03-4dd5-b3c6-3ade1607081f": {
+                "dev_id": 266
+            },
+            "47ab62da-93bc-4b1c-9bbb-a3534ddc1662": {
+                "dev_id": 216
+            },
+            "4934cf5a-3843-4c31-96fd-e1a8bc3b875b": {
+                "dev_id": 99
+            },
+            "4b64dee4-1453-4d82-8624-03056fcf868b": {
+                "dev_id": 229
+            },
+            "4e9128d0-fab3-435c-94c3-293af6183350": {
+                "dev_id": 211
+            },
+            "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7": {
+                "dev_id": 205
+            },
+            "57fd69df-5351-4310-97f2-56a484d1f73c": {
+                "dev_id": 209
+            },
+            "58167505-450c-4041-82fc-0db77406e2c6": {
+                "dev_id": 130
+            },
+            "5868c084-f2a8-4cfb-8719-219a6c74ae7b": {
+                "dev_id": 136
+            },
+            "5913f339-c3e0-4270-a27e-917b827eff08": {
+                "dev_id": 214
+            },
+            "595523dc-7cf4-4d32-a024-6a41374a1655": {
+                "dev_id": 103
+            },
+            "60cc7371-4053-483e-abeb-60105ff2e1de": {
+                "dev_id": 140
+            },
+            "62cf7442-c493-4b77-a74a-8b48090ca780": {
+                "dev_id": 231
+            },
+            "67c5637c-7d59-406e-b8d7-c49d19e79925": {
+                "dev_id": 115
+            },
+            "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c": {
+                "dev_id": 232
+            },
+            "791855ee-4925-4b00-88ff-02c7f38ed9b7": {
+                "dev_id": 237
+            },
+            "79aca5c1-8f63-491c-8d9c-05f6d2f1ec46": {
+                "dev_id": 262
+            },
+            "7b394f7b-523d-438a-9501-4d494a0854cc": {
+                "dev_id": 126
+            },
+            "7cdf4313-2e44-4464-97c9-b3abd7525887": {
+                "dev_id": 251
+            },
+            "7f99fa94-bb8e-4392-9267-aaedb0adc15c": {
+                "dev_id": 233
+            },
+            "8052929a-26bc-4292-b63c-50b81c6723ed": {
+                "dev_id": 109
+            },
+            "81ad8ebd-5d7b-4cea-a857-97cf3249e62c": {
+                "dev_id": 228
+            },
+            "8410b8f0-0d7f-4f03-90e5-51f894244975": {
+                "dev_id": 118
+            },
+            "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa": {
+                "dev_id": 120
+            },
+            "898cea45-779e-4964-b2db-08da97c6052a": {
+                "dev_id": 249
+            },
+            "8d46b270-b499-41de-a9a7-67f1017d3b93": {
+                "dev_id": 98
+            },
+            "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b": {
+                "dev_id": 238
+            },
+            "8f40a884-b992-4327-8f7d-91dbde7d0926": {
+                "dev_id": 270
+            },
+            "8f871012-f6c8-4826-9194-429bae3b22c3": {
+                "dev_id": 114
+            },
+            "90603312-3467-45ec-b596-390bc67f53eb": {
+                "dev_id": 274
+            },
+            "98": "8d46b270-b499-41de-a9a7-67f1017d3b93",
+            "99": "4934cf5a-3843-4c31-96fd-e1a8bc3b875b",
+            "9b54cb9f-1615-4813-93aa-b70a501b7088": {
+                "dev_id": 125
+            },
+            "9bee2e9b-e85d-468d-a25b-3eca38e1358f": {
+                "dev_id": 218
+            },
+            "9e69134c-4b75-4ebf-b93e-747da1a796fd": {
+                "dev_id": 269
+            },
+            "9fd22b7d-482d-46d8-96cb-3a2d98b8b904": {
+                "dev_id": 215
+            },
+            "a7d03e7f-dc20-472f-9d23-1f0964f242a5": {
+                "dev_id": 207
+            },
+            "af15bd59-e936-475a-860f-e6c8dbd3aa0b": {
+                "dev_id": 247
+            },
+            "b1d24eb6-ec9a-4937-8b87-9b52fb237516": {
+                "dev_id": 202
+            },
+            "b29d8208-f33f-4ec2-bbae-6f838d7aa36a": {
+                "dev_id": 235
+            },
+            "b35a4148-cb24-42e8-82f1-091591f4c8d4": {
+                "dev_id": 128
+            },
+            "b5ae74a4-74fb-4b57-bf48-feb76491d65e": {
+                "dev_id": 271
+            },
+            "be665b99-e0cf-4252-8a4e-9b1753ac6cd1": {
+                "dev_id": 117
+            },
+            "be9ad23f-3c95-4b6a-9592-e45608e4c7ef": {
+                "dev_id": 122
+            },
+            "be9ffe16-b530-403f-b586-f4ee07cee0f1": {
+                "dev_id": 264
+            },
+            "c18b27d1-bd70-4fc5-8ebe-d5675d0d40fb": {
+                "dev_id": 273
+            },
+            "c1a62c79-537a-44a2-8dc2-33b4dda56b9b": {
+                "dev_id": 135
+            },
+            "c1eb1257-380c-440a-8ea9-4c3ca7926e48": {
+                "dev_id": 110
+            },
+            "c23de2c1-c62c-4de6-8533-ab88aeb9cced": {
+                "dev_id": 201
+            },
+            "c39a690f-87b8-43bc-b6d7-f0bb01d30aed": {
+                "dev_id": 272
+            },
+            "c6e17ac1-e879-47ef-952e-6479a95e7b01": {
+                "dev_id": 210
+            },
+            "c8f2e109-a872-457d-b19a-b7c7a04343bc": {
+                "dev_id": 257
+            },
+            "ca952eeb-d4c0-4ae9-b5e2-fffda256c20e": {
+                "dev_id": 252
+            },
+            "ce5c5de2-83bc-4296-b595-9ed86b965a6b": {
+                "dev_id": 123
+            },
+            "d236d914-f233-4263-b327-a1b7dbbacb4f": {
+                "dev_id": 111
+            },
+            "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b": {
+                "dev_id": 225
+            },
+            "d40db8ab-9919-457b-b277-37b0f67896af": {
+                "dev_id": 263
+            },
+            "d65464c4-e721-4d96-aa51-f00c804d48f7": {
+                "dev_id": 129
+            },
+            "d83d14de-afe1-4b2f-a925-b450148358e0": {
+                "dev_id": 224
+            },
+            "dd1db19c-eea2-4bdd-901e-153c517c5ccd": {
+                "dev_id": 244
+            },
+            "de5ddcde-b261-427c-b2b7-47226ce6a35f": {
+                "dev_id": 248
+            },
+            "dfb2a05f-da1e-45dc-b436-508244a77e63": {
+                "dev_id": 208
+            },
+            "e27c5b55-6b0d-4d80-a59d-8a4efc43de04": {
+                "dev_id": 121
+            },
+            "e2dc04f5-7626-47fa-b377-391ce2b685ba": {
+                "dev_id": 260
+            },
+            "e5173fc1-22fa-4485-b969-5db32b457ff5": {
+                "dev_id": 127
+            },
+            "e5a2790f-1f38-4b6b-a522-3b115460fb37": {
+                "dev_id": 230
+            },
+            "ecc87b2b-f1ff-41f2-809f-8fcf8e788718": {
+                "dev_id": 139
+            },
+            "eda62fd3-99a3-483a-ba39-a7f3fa541cea": {
+                "dev_id": 204
+            },
+            "f20a75db-1075-4c3b-8d70-11e716c8c6fd": {
+                "dev_id": 186
+            },
+            "f210dd03-0da5-4378-b227-68ee3541c19c": {
+                "dev_id": 253
+            },
+            "f2760b98-c246-4af4-86f0-4a2789755a53": {
+                "dev_id": 119
+            },
+            "f479c6c2-238a-4b3b-bcde-f4389b815835": {
+                "dev_id": 203
+            },
+            "f574259f-9202-4569-b495-637f17fe1893": {
+                "dev_id": 100
+            },
+            "f8321a7f-3b82-4b59-9117-de27d662d414": {
+                "dev_id": 101
+            },
+            "f9d3d0bf-77c1-4f73-9d09-3ee69c8f7ad2": {
+                "dev_id": 243
+            }
+        },
+        "references": {
+            "100": "nelsontom_20200215_lifewire_aliasessymboliclinkshardlinksmac",
+            "101": "cnet_20090901_osxindepthaliasesvssymboliclinks",
+            "104": "softwaretestinghelp_top6bestpythontestingframeworks",
+            "105": "sainirahul_20190828_medium_differencecompilerinterpreterrespectjvmpvm",
+            "106": "vivekkothari_20181109_geekforgeeks_internalworkingpython",
+            "215": "whitericky_20201007_realpython_interviewanthonyshaw",
+            "216": "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "241": "rivannariver_2020_rcsbacteriamonitormanual",
+            "242": "rivannaconservationalliance_logo",
+            "243": "va_gov_department_environmentalquality",
+            "244": "waterresearchfecalcoliformbacteriainwater",
+            "62": "tappthomas_jonathon_20150218_youtube_parkourwarmup",
+            "63": "ilanojarlo_20190815_gmb_footexercises",
+            "64": "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises",
+            "65": "missouribotanicalgarden_ilexopaca",
+            "66": "spruceeighteenspecieshollytreesshrubs",
+            "67": "picturethisiosapp",
+            "68": "gardenguides_identifytypeshollybushes",
+            "69": "usda_ilexopaca",
+            "70": "flowershopnetworkenglishhollyamericanholly",
+            "73": "blueridgeprism_201706_factsheet_japanesestiltgrass",
+            "74": "blueridgeprism_202008_factsheet_bradfordpear",
+            "75": "usda_rubusallegheniensis",
+            "76": "usda_rubusflagellaris",
+            "77": "usda_rubusursinus",
+            "78": "nc_cooperativeextension_planttoolbox_rubusallegheniensis",
+            "79": "meyerrachelle_2010_albiziajulibrissin_us_department_agriculture",
+            "80": "rajivgupta_2012_pharmacognreview_mimosapudica_overview",
+            "81": "nc_cooperativeextension_planttoolbox_rubuspensilvanicus",
+            "82": "va_forestry_2016_commonnativeshrubswoodyvinesvirginia",
+            "83": "delewareagriculture_2008_invasivespeciesandlookalike",
+            "blueridgeprism_201706_factsheet_japanesestiltgrass": {
+                "dev_id": 73
+            },
+            "blueridgeprism_202008_factsheet_bradfordpear": {
+                "dev_id": 74
+            },
+            "cnet_20090901_osxindepthaliasesvssymboliclinks": {
+                "dev_id": 101
+            },
+            "delewareagriculture_2008_invasivespeciesandlookalike": {
+                "dev_id": 83
+            },
+            "flowershopnetworkenglishhollyamericanholly": {
+                "dev_id": 70
+            },
+            "gardenguides_identifytypeshollybushes": {
+                "dev_id": 68
+            },
+            "ilanojarlo_20190815_gmb_footexercises": {
+                "dev_id": 63
+            },
+            "meyerrachelle_2010_albiziajulibrissin_us_department_agriculture": {
+                "dev_id": 79
+            },
+            "missouribotanicalgarden_ilexopaca": {
+                "dev_id": 65
+            },
+            "nc_cooperativeextension_planttoolbox_rubusallegheniensis": {
+                "dev_id": 78
+            },
+            "nc_cooperativeextension_planttoolbox_rubuspensilvanicus": {
+                "dev_id": 81
+            },
+            "nelsontom_20200215_lifewire_aliasessymboliclinkshardlinksmac": {
+                "dev_id": 100
+            },
+            "picturethisiosapp": {
+                "dev_id": 67
+            },
+            "rajivgupta_2012_pharmacognreview_mimosapudica_overview": {
+                "dev_id": 80
+            },
+            "rivannaconservationalliance_logo": {
+                "dev_id": 242
+            },
+            "rivannariver_2020_rcsbacteriamonitormanual": {
+                "dev_id": 241
+            },
+            "sainirahul_20190828_medium_differencecompilerinterpreterrespectjvmpvm": {
+                "dev_id": 105
+            },
+            "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises": {
+                "dev_id": 64
+            },
+            "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python": {
+                "dev_id": 216
+            },
+            "softwaretestinghelp_top6bestpythontestingframeworks": {
+                "dev_id": 104
+            },
+            "spruceeighteenspecieshollytreesshrubs": {
+                "dev_id": 66
+            },
+            "tappthomas_jonathon_20150218_youtube_parkourwarmup": {
+                "dev_id": 62
+            },
+            "usda_ilexopaca": {
+                "dev_id": 69
+            },
+            "usda_rubusallegheniensis": {
+                "dev_id": 75
+            },
+            "usda_rubusflagellaris": {
+                "dev_id": 76
+            },
+            "usda_rubusursinus": {
+                "dev_id": 77
+            },
+            "va_forestry_2016_commonnativeshrubswoodyvinesvirginia": {
+                "dev_id": 82
+            },
+            "va_gov_department_environmentalquality": {
+                "dev_id": 243
+            },
+            "vivekkothari_20181109_geekforgeeks_internalworkingpython": {
+                "dev_id": 106
+            },
+            "waterresearchfecalcoliformbacteriainwater": {
+                "dev_id": 244
+            },
+            "whitericky_20201007_realpython_interviewanthonyshaw": {
+                "dev_id": 215
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 70,
+            "link_text": "FlowerShopNetworkEnglishHollyAmericanHolly",
+            "short_text": "link",
+            "slug": "flowershopnetworkenglishhollyamericanholly",
+            "url": "https://www.flowershopnetwork.com/blog/english-holly-american-holly/"
+        },
+        {
+            "id": 65,
+            "link_text": "MissouriBotanicalGarden_IlexOpaca",
+            "short_text": "link",
+            "slug": "missouribotanicalgarden_ilexopaca",
+            "url": "http://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=k640"
+        },
+        {
+            "id": 66,
+            "link_text": "SpruceEighteenSpeciesHollyTreesShrubs",
+            "short_text": "link",
+            "slug": "spruceeighteenspecieshollytreesshrubs",
+            "url": "https://www.thespruce.com/eighteen-species-holly-trees-and-shrubs-3269647"
+        },
+        {
+            "id": 68,
+            "link_text": "GardenGuides_IdentifyTypesHollyBushes",
+            "short_text": "link",
+            "slug": "gardenguides_identifytypeshollybushes",
+            "url": "https://www.gardenguides.com/105554-identify-shrubs-berries.html"
+        },
+        {
+            "id": 69,
+            "link_text": "USDA_IlexOpaca",
+            "short_text": "link",
+            "slug": "usda_ilexopaca",
+            "url": "https://plants.usda.gov/core/profile?symbol=ILOP"
+        },
+        {
+            "id": 67,
+            "link_text": "PictureThisIOSApp",
+            "short_text": "link",
+            "slug": "picturethisiosapp",
+            "url": "https://www.picturethisai.com/"
+        },
+        {
+            "id": 79,
+            "link_text": "MeyerRachelle_2010_AlbiziaJulibrissin_US_Department_Agriculture",
+            "short_text": "Meyer 2010",
+            "slug": "meyerrachelle_2010_albiziajulibrissin_us_department_agriculture",
+            "url": "https://www.fs.fed.us/database/feis/plants/tree/albjul/all.html"
+        },
+        {
+            "id": 80,
+            "link_text": "RajivGupta_2012_PharmacognReview_MimosaPudica_Overview",
+            "short_text": "RajivGupta 2012",
+            "slug": "rajivgupta_2012_pharmacognreview_mimosapudica_overview",
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3459453/"
+        },
+        {
+            "id": 75,
+            "link_text": "USDA_RubusAllegheniensis",
+            "short_text": "link",
+            "slug": "usda_rubusallegheniensis",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUAL"
+        },
+        {
+            "id": 76,
+            "link_text": "USDA_RubusFlagellaris",
+            "short_text": "link",
+            "slug": "usda_rubusflagellaris",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUFL"
+        },
+        {
+            "id": 77,
+            "link_text": "USDA_RubusUrsinus",
+            "short_text": "link",
+            "slug": "usda_rubusursinus",
+            "url": "https://plants.usda.gov/core/profile?symbol=RUUR"
+        },
+        {
+            "id": 82,
+            "link_text": "VA_Forestry_2016_CommonNativeShrubsWoodyVinesVirginia",
+            "short_text": "VA_Forestry 2016",
+            "slug": "va_forestry_2016_commonnativeshrubswoodyvinesvirginia",
+            "url": "http://www.dof.virginia.gov/infopubs/Native-Shrub-ID_2016_pub.pdf"
+        },
+        {
+            "id": 81,
+            "link_text": "NC_CooperativeExtension_PlantToolbox_RubusPensilvanicus",
+            "short_text": "link",
+            "slug": "nc_cooperativeextension_planttoolbox_rubuspensilvanicus",
+            "url": "https://plants.ces.ncsu.edu/plants/rubus-pensilvanicus/"
+        },
+        {
+            "id": 78,
+            "link_text": "NC_CooperativeExtension_PlantToolbox_RubusAllegheniensis",
+            "short_text": "link",
+            "slug": "nc_cooperativeextension_planttoolbox_rubusallegheniensis",
+            "url": "https://plants.ces.ncsu.edu/plants/rubus-allegheniensis/"
+        },
+        {
+            "id": 74,
+            "link_text": "BlueRidgePrism_202008_Factsheet_BradfordPear",
+            "short_text": "BlueRidgePrism 202008",
+            "slug": "blueridgeprism_202008_factsheet_bradfordpear",
+            "url": "https://blueridgeprism.org/wp-content/uploads/2020/08/Bradford-Pear-Factsheet-8-24-20-FINAL.pdf"
+        },
+        {
+            "id": 83,
+            "link_text": "DelewareAgriculture_2008_InvasiveSpeciesAndLookAlike",
+            "short_text": "Deleware Agriculture 2008",
+            "slug": "delewareagriculture_2008_invasivespeciesandlookalike",
+            "url": "https://www.nybg.org/files/scientists/rnaczi/Mistaken_Identity_Final.pdf"
+        },
+        {
+            "id": 73,
+            "link_text": "BlueRidgePrism_201706_Factsheet_JapaneseStiltgrass",
+            "short_text": "BlueRidgePrism 201706",
+            "slug": "blueridgeprism_201706_factsheet_japanesestiltgrass",
+            "url": "https://blueridgeprism.org/wp-content/uploads/2017/06/Japanese-Stiltgrass-SAR-5-27-17-VDOF-w-BOX-FINAL.pdf"
+        },
+        {
+            "id": 62,
+            "link_text": "TappThomas_Jonathon_20150218_youtube_ParkourWarmUp",
+            "short_text": "Tapp 20150218",
+            "slug": "tappthomas_jonathon_20150218_youtube_parkourwarmup",
+            "url": "https://www.youtube.com/watch?v=qGSc-EUlyrQ"
+        },
+        {
+            "id": 64,
+            "link_text": "SchruppBob_HeineckBrad_20170619_youtube_10BestNeckExercises",
+            "short_text": "SchruppBob Et al. 20170619",
+            "slug": "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises",
+            "url": "https://www.youtube.com/watch?v=cog4Dds__a0"
+        },
+        {
+            "id": 63,
+            "link_text": "IlanoJarlo_20190815_GMB_FootExercises",
+            "short_text": "IlanoJarlo 2019081",
+            "slug": "ilanojarlo_20190815_gmb_footexercises",
+            "url": " https://gmb.io/feet/"
+        },
+        {
+            "id": 100,
+            "link_text": "NelsonTom_20200215_Lifewire_AliasesSymbolicLinksHardLinksMac",
+            "short_text": "Nelson 20200215",
+            "slug": "nelsontom_20200215_lifewire_aliasessymboliclinkshardlinksmac",
+            "url": "https://www.lifewire.com/aliases-symbolic-links-hard-links-mac-2260189"
+        },
+        {
+            "id": 101,
+            "link_text": "CNET_20090901_OSXinDepthAliasesVsSymbolicLinks",
+            "short_text": "CNET 20090901",
+            "slug": "cnet_20090901_osxindepthaliasesvssymboliclinks",
+            "url": "https://www.cnet.com/news/os-x-in-depth-aliases-vs-symbolic-links/"
+        },
+        {
+            "id": 106,
+            "link_text": "vivekkothari_20181109_GeekforGeeks_InternalWorkingPython",
+            "short_text": "vivekkothari 20181109",
+            "slug": "vivekkothari_20181109_geekforgeeks_internalworkingpython",
+            "url": "https://www.geeksforgeeks.org/internal-working-of-python/"
+        },
+        {
+            "id": 104,
+            "link_text": "SoftwareTestingHelp_Top6BestPythonTestingFrameworks",
+            "short_text": "Python Overview Diagram",
+            "slug": "softwaretestinghelp_top6bestpythontestingframeworks",
+            "url": "https://www.softwaretestinghelp.com/python-testing-frameworks/"
+        },
+        {
+            "id": 105,
+            "link_text": "SainiRahul_20190828_Medium_DifferenceCompilerInterpreterRespectJvmPvm",
+            "short_text": "Saini 20190828",
+            "slug": "sainirahul_20190828_medium_differencecompilerinterpreterrespectjvmpvm",
+            "url": "https://medium.com/@rahul77349/difference-between-compiler-and-interpreter-with-respect-to-jvm-java-virtual-machine-and-pvm-22fc77ae0eb7"
+        },
+        {
+            "id": 215,
+            "link_text": "WhiteRicky_20201007_RealPython_InterviewAnthonyShaw",
+            "short_text": "White 20201007",
+            "slug": "whitericky_20201007_realpython_interviewanthonyshaw",
+            "url": "https://realpython.com/interview-anthony-shaw/"
+        },
+        {
+            "id": 216,
+            "link_text": "ShawAnthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "short_text": "Shaw 20180618",
+            "slug": "shawanthony_20180618_tonybaloney_github_10-common-security-gotchas-in-python",
+            "url": "https://tonybaloney.github.io/posts/10-common-security-gotchas-in-python.html"
+        },
+        {
+            "id": 243,
+            "link_text": "VA_Gov_Department_EnvironmentalQuality",
+            "short_text": "Dept Environmental Quality",
+            "slug": "va_gov_department_environmentalquality",
+            "url": "https://www.virginia.gov/agencies/department-of-environmental-quality/"
+        },
+        {
+            "id": 242,
+            "link_text": "RivannaConservationAlliance_Logo",
+            "short_text": "RCA Logo",
+            "slug": "rivannaconservationalliance_logo",
+            "url": "https://www.rivannariver.org/wp-content/uploads/2020/03/RCA_Bacteria_Monitor_Manual_2020.pdf"
+        },
+        {
+            "id": 241,
+            "link_text": "RivannaRiver_2020_RcsBacteriaMonitorManual",
+            "short_text": "Bacteria Monitor Manual",
+            "slug": "rivannariver_2020_rcsbacteriamonitormanual",
+            "url": "https://www.rivannariver.org/wp-content/uploads/2020/03/RCA_Bacteria_Monitor_Manual_2020.pdf"
+        },
+        {
+            "id": 244,
+            "link_text": "WaterResearch_FecalColiformBacteriaInWater",
+            "short_text": "Fecal Coliform Bacteria",
+            "slug": "waterresearchfecalcoliformbacteriainwater",
+            "url": "https://www.water-research.net/index.php/fecal-coliform-bacteria-in-water"
+        }
+    ]
+}
