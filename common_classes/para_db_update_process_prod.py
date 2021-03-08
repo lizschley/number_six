@@ -153,6 +153,8 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         res = self.find_wrapper(record, key)
         if not res['found']:
             self.do_prod_create(record, key)
+        else:
+            self.do_prod_update(record, key)
 
     def find_associated_foreign_keys(self, record, key):
         '''
