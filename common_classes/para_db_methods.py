@@ -66,8 +66,8 @@ class ParaDbMethods:
             update_dict['updated_at'] = dt.current_timestamp_with_timezone()
             self.update_record(class_, update_dict)
         else:
-            print('Error! The found record id does not match the input record, existing without update.')
-            print(f'input=={update_dict}, and found== {record}')
+            return {'error': (('Error! The found record id does not match the input record, existing'
+                               f' without update. input=={update_dict}, and found== {record}'))}
         queryset = RecordDictionaryUtility.get_content(class_, pk_id=record.id)
         return queryset[0]
 
@@ -119,6 +119,8 @@ class ParaDbMethods:
         :type update_dict: dict
         '''
         if not self.updating:
+            print((f'if updating were true, would update {update_dict} '
+                   f'for class, name=={class_.__name__}'))
             return
         pk_id = update_dict.pop('id')
         update_dict.pop('created_at', None)
@@ -209,3 +211,15 @@ class ParaDbMethods:
         '''
         max_cat_sort = Group.objects.filter(category_id=category_id).aggregate(Max('cat_sort'))
         return 1 if not max_cat_sort['cat_sort__max'] else max_cat_sort['cat_sort__max'] + 1
+
+    @staticmethod
+    def record_counts_by_criteria(class_, **kwargs):
+        '''
+        record_counts_by_criteria returns the number of records based on input args
+
+        :param class_: Class that is passed in
+        :type class_: models.Model
+        :return: number of records for the given class and criteria
+        :rtype: int
+        '''
+        return class_.objects.filter(**kwargs).count()

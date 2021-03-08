@@ -183,3 +183,20 @@ def update_paragraphs_step_three(input_data):
     para = input_data['class'](input_data, updating)
     print(f'running input_data["class"]: {input_data["class"].__name__}')
     para.process_input_data_update_db()
+
+
+def update_paragraphs_update_order(input_data):
+    '''
+    update_paragraphs_update_order is called by a batch process created to update data.
+
+    It calls the ParaDbUpdateOrder class
+
+    :param input_data: data produced by the db_change_order script
+
+    :type input_data: dict
+    '''
+    # print(f'inside update_para_step 3, data == {input_data}')
+    updating = input_data.pop('updating', False)
+    para = input_data['class'](input_data, updating)
+    print(f'running input_data["class"]: {input_data["class"].__name__}')
+    para.fix_order()
