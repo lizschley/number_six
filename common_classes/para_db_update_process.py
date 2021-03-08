@@ -59,7 +59,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         It runs some tests on the input keys and errors with a message, if the tests fail
         '''
         if self.incorrect_environment():
-            sys.exit(('Input error: wrong process for development unless running as prod: '
+            sys.exit(('Input error: wrong process for development: '
                       f'script_data: {self.script_data}, file_data: {self.file_data}'))
 
     def incorrect_environment(self):
