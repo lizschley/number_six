@@ -65,6 +65,8 @@ RECORD_LOOKUP_MESSAGE_DEV = RECORD_LOOKUP_MESSAGE + ('In development, you should
                                                      'not use this method unless you know what you are '
                                                      'doing.')
 
+UPDATE_ASSOCIATED = ('GroupParagraph')
+
 PARA_ID_REF_LINK_TEXT = {
     'key_1': 'paragraph_id',
     'para_val_1_key': 'id',
