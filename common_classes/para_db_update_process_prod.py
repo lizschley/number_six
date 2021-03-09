@@ -76,9 +76,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         running Step One with a run_as_prod argument
         '''
         self.add_or_delete_associations()
-        print('-------------------Process Data----------------------------------')
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.process_data)
+        # print('-------------------Process Data----------------------------------')
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(self.process_data)
         print('------------------prod_results-----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
         self.move_delete_info_to_prod_results()
@@ -155,6 +155,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
             self.do_prod_create(record, key)
         else:
             params = self.update_group_paragraph_params(record, key)
+            print(f'params=={params}')
             self.update_group_paragraph_order(**params)
 
     def update_group_paragraph_params(self, record, key):

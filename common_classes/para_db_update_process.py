@@ -49,8 +49,8 @@ class ParaDbUpdateProcess(ParaDbMethods):
         self.update_record_loop()
         if self.updating:
             self.add_or_delete_associations()
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.process_data)
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(self.process_data)
 
     def validate_input_keys(self):
         '''
