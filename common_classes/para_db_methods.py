@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Max
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
+import constants.crud as crud
 import utilities.date_time as dt
 import utilities.random_methods as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility
@@ -223,3 +224,20 @@ class ParaDbMethods:
         :rtype: int
         '''
         return class_.objects.filter(**kwargs).count()
+
+    @staticmethod
+    def update_group_paragraph_order(**kwargs):
+        '''
+        update_group_paragraph_order updates the order field in the GroupParagraph association.
+        This is only needed in production, because Django does not return the primary key for
+        associations, so normal update processing did not work.  Previously we were just adding and
+        deleting associations, so this is new and it is the association record that has fields that
+        need to be updated.  Adds and Deletes generall work fine.
+
+        Will make more generic, if there is ever a need.
+        '''
+        if kwargs['key'] not in crud.UPDATE_ASSOCIATED:
+            return
+
+        GroupParagraph.objects.filter(group_id=kwargs['group_id'],
+                                      paragraph_id=kwargs['paragraph_id']).update(order=kwargs['order'])

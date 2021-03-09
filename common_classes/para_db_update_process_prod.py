@@ -76,9 +76,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         running Step One with a run_as_prod argument
         '''
         self.add_or_delete_associations()
-        print('-------------------Process Data----------------------------------')
-        printer = pprint.PrettyPrinter(indent=1, width=120)
-        printer.pprint(self.process_data)
+        # print('-------------------Process Data----------------------------------')
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(self.process_data)
         print('------------------prod_results-----------------------------------')
         printer = pprint.PrettyPrinter(indent=1, width=120)
         self.move_delete_info_to_prod_results()
@@ -154,7 +154,27 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         if not res['found']:
             self.do_prod_create(record, key)
         else:
-            self.do_prod_update(record, key)
+            params = self.update_group_paragraph_params(record, key)
+            print(f'params=={params}')
+            self.update_group_paragraph_order(**params)
+
+    def update_group_paragraph_params(self, record, key):
+        '''
+        update_group_paragraph_params returns params needed to update_group_paragraph_order
+
+        :param record: contains the value to update and the data needed to find the correct record
+        :type record: dict
+        :param key: used to know which record we are updating or creating
+        :type key: str
+        :return: parameters needed by para_db_methods to update the order field
+        :rtype: dict
+        '''
+        return {
+            'key': key,
+            'group_id': record['group_id'],
+            'paragraph_id': record['paragraph_id'],
+            'order': record['order']
+        }
 
     def find_associated_foreign_keys(self, record, key):
         '''
