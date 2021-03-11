@@ -7,12 +7,14 @@
 
 
 ## Distinction between running in development and running in production
-### Also running in development as if it were production (run_as_prod)
 
-The normal create process for development is to use the scripts/create_paragraphs.py.  This process will never run in production, however.  In production we only load data retrieved from development, understanding the primary keys (automatically created ids) may be different.  In order to test the production process, I created the run_as_prod parameter.  It is fun and different to create data this way, but takes a meticulous touch.
+The normal create process for development is to use the scripts/create_paragraphs.py.  This process will never run in production, however.  In production we only load data retrieved from development, understanding the primary keys (automatically created ids) may be different.
 
-**important note** -->
-If you don't understand this, please read entire document.  I wanted this at the top, because it could potentially be hard to recover from these problems.  It is safer to use the normal update and create processes.  The dangers are in running as prod in development.  The problem won't exist in production, because there is no manual step to udate or create data.
+**Step 1 with run_as_prod parameter**
+This simply creates the file with the prod prefix.  Production input is designed to skip Step 2 (the manual step) entirely
+
+**Step 3 with run_as_prod parameter**
+In order to test the production process, I created the run_as_prod parameter.  This is a pain to actually use and adds more room for error that could be hard to recover from.
 
 Here are the three danger areas:
 1. If you want to pull existing data and over-write it to make new data, it is vital to make empty strings of the unique key (slug or guid).  If you don't, the process could easiy over-write data you started with (identifies records with unique keys).

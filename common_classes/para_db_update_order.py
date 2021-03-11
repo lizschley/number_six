@@ -16,7 +16,7 @@ class ParaDbUpdateOrder(ParaDbUpdateProcess):
             OR (not and)
         If a category_id is part of input: order groups owned by that category
 
-        Fail if the input data does not contain a group_id or a category slug or if it has both
+        Fail if the input data does not contain a group_id or a category_id or if it has both
         Fail if the list of paragraphs does not have an id, or text and if the count doesn't match the
             count of the paragraphs owned by the given group
         Fail if the list of groups does not have an id, or title and if the count doesn't match the
