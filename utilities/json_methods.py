@@ -1,36 +1,18 @@
 ''' This is a json utility method.  It only has json extracted from business logic '''
 from datetime import datetime
 import json
-import os
 import constants.scripts as constants
 import utilities.date_time as dt
 
 
-def write_json_file(path_to_json, output_data):
-    '''
-    write_json_file writes the formatted file necessary to update the paragraph
-    structure in the db
-    This test mainly for testing
-    '''
-  
-    if os.path.isdir(path_to_json):
-        params = {'directory_path': path_to_json}
-        out_file = create_json_file_path(**params)
-    else:
-        out_file = path_to_json
-
-    with open(out_file, 'w') as file_path:
-        json.dump(output_data, file_path)
-
-
 def json_to_dict(json_path):
     '''
-    json_to_dict takes a json file path, reads the content and uses it to create a dictionary.
+        json_to_dict takes a json file path, reads the content and uses it to create a dictionary.
 
-    :param json_path: Path to a file on the project directory structure
-    :type json_path: String
-    :return: dictionary based on the contents of the JSON file
-    :rtype: dictionary
+        :param json_path: Path to a file on the project directory structure
+        :type json_path: String
+        :return: dictionary based on the contents of the JSON file
+        :rtype: dictionary
     '''
     # Opening JSON file
     file = open(json_path, 'r')
@@ -88,11 +70,7 @@ def create_json_file_path(**kwargs):
     '''
     prefix = kwargs.get('prefix', constants.DEFAULT_PREFIX)
     out_json_path = kwargs.get('out_json_path', constants.INPUT_CREATE_JSON)
-    filename = kwargs.get('filename',
-                          prefix + datetime.now().isoformat(timespec='seconds') + '.json')
+    filename = kwargs.get('filename', prefix + datetime.now().isoformat(timespec='seconds') + '.json')
     directory_path = kwargs.get('directory_path', out_json_path)
-
-    if filename is None:
-        filename = prefix + datetime.now().isoformat(timespec='seconds') + '.json'
 
     return directory_path + '/' + filename

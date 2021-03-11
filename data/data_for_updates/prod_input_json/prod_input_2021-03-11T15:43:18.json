@@ -1,0 +1,300 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 33,
+            "id": 334,
+            "order": 0,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 34,
+            "id": 329,
+            "order": 0,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 34,
+            "id": 333,
+            "order": 0,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 35,
+            "id": 330,
+            "order": 0,
+            "paragraph_id": 212
+        },
+        {
+            "group_id": 36,
+            "id": 332,
+            "order": 0,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 36,
+            "id": 337,
+            "order": 0,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 36,
+            "id": 336,
+            "order": 0,
+            "paragraph_id": 225
+        },
+        {
+            "group_id": 36,
+            "id": 335,
+            "order": 0,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 39,
+            "id": 331,
+            "order": 0,
+            "paragraph_id": 213
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 3,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 33,
+            "note": "",
+            "short_name": "Extract, Load and Transform",
+            "slug": "extract-load-and-transform",
+            "title": "Extract, Load and Transform"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 34,
+            "note": "",
+            "short_name": "Quality and Maintenance",
+            "slug": "quality-and-maintenance",
+            "title": "Quality and Maintenance"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 35,
+            "note": "",
+            "short_name": "Analysis",
+            "slug": "analysis",
+            "title": "Analysis"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 36,
+            "note": "",
+            "short_name": "DevOps and Automation",
+            "slug": "dev-ops-and-automation",
+            "title": "DevOps and Automation"
+        },
+        {
+            "cat_sort": 9,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 39,
+            "note": "",
+            "short_name": "Organization & Documentation",
+            "slug": "organization-and-documentation",
+            "title": "Organization and Documentation"
+        }
+    ],
+    "paragraph_reference": [],
+    "paragraphs": [
+        {
+            "guid": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "id": 235,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Conceived and executed strategy for programmatically creating programs, SQL code, and XML definitions by reading data definition files, saving over a month of development time in data archiving project.<br><strong>Technologies:</strong> Sybase, IDMS, SAS, SQL, Web Services, XML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "id": 227,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Re-designed subscriptions statistics storage and reporting. Reports went from obscurity to being widely distributed, used and emulated.<br><strong>Technologies:</strong> SAS, IDMS<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "id": 212,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked with the Quality Director and Project Managers to design the Engineering Project Management processes that involved MS Project schedules and feasibility and status reporting. Upon review, the new processes were implemented with almost no changes.<br><strong>Technologies:</strong> VBA with MS Project<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "id": 207,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented, as one of my first ruby projects, single sign-on according to complex requirements. As the requirements changed, played a major role in that implementation as well.<br><strong>Technologies:</strong> Ruby, Rails, JavaScript, HTML5, Web Server Authentication<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "id": 224,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Initiated and led effort to fix problem caused by Windows Security Patch by upgrading MSXML. Implementation required research into IIS security and registry settings and negotiation for a new integration server and both technical and business resources.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "id": 225,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote programs that parsed and analyzed log files to monitor performance. Systematically eliminated pre-existing inefficiencies and bugs.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "id": 210,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Built cross-application monitoring for data syncs, using New Relic Insight custom fields, allowing us to measure the time from one in-house application to another through a third-party application for which we had no access. We created alerts and New Relic dashboards based on the resulting data. As a by-product, the information helped with bug analysis.<br><strong>Technologies:</strong> Ruby, Rails, New Relic<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "id": 213,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Led numerous projects as Team Lead (also acted as developer and system architect). Delivered all releases on time, meeting the requirements with very few bugs. This success was largely because of communication with people playing the following roles: people managers, project manager, specification writers, programmers, test lead, testers and the various platform owners.<br><strong>Technologies:</strong> Java, JavaScript, SQL Server, IDMS, Sybase, XML, XSLT, Web Services, SQL, ASP<br><strong>Company:</strong>  LexisNexis, Senior Software Engineer</li></ul>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "33": "extract-load-and-transform",
+            "34": "quality-and-maintenance",
+            "35": "analysis",
+            "36": "dev-ops-and-automation",
+            "39": "organization-and-documentation",
+            "analysis": {
+                "dev_id": 35
+            },
+            "dev-ops-and-automation": {
+                "dev_id": 36
+            },
+            "extract-load-and-transform": {
+                "dev_id": 33
+            },
+            "organization-and-documentation": {
+                "dev_id": 39
+            },
+            "quality-and-maintenance": {
+                "dev_id": 34
+            }
+        },
+        "paragraphs": {
+            "1290e353-cbe5-43c1-b4bf-b94d36eb81e8": {
+                "dev_id": 227
+            },
+            "207": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "210": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "212": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "213": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "224": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "225": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "227": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "235": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "262b1d4a-e5c5-46fe-810e-ee891e2312d3": {
+                "dev_id": 212
+            },
+            "33fcd4ad-af4a-4205-bc6b-3321115ccfff": {
+                "dev_id": 213
+            },
+            "a7d03e7f-dc20-472f-9d23-1f0964f242a5": {
+                "dev_id": 207
+            },
+            "b29d8208-f33f-4ec2-bbae-6f838d7aa36a": {
+                "dev_id": 235
+            },
+            "c6e17ac1-e879-47ef-952e-6479a95e7b01": {
+                "dev_id": 210
+            },
+            "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b": {
+                "dev_id": 225
+            },
+            "d83d14de-afe1-4b2f-a925-b450148358e0": {
+                "dev_id": 224
+            }
+        },
+        "references": {}
+    },
+    "delete_group_paragraph": [
+        {
+            "group_slug": "motivated-to-learn",
+            "paragraph_guid": "262b1d4a-e5c5-46fe-810e-ee891e2312d3"
+        },
+        {
+            "group_slug": "organization-and-documentation",
+            "paragraph_guid": "62cf7442-c493-4b77-a74a-8b48090ca780"
+        },
+        {
+            "group_slug": "analysis",
+            "paragraph_guid": "f2760b98-c246-4af4-86f0-4a2789755a53"
+        },
+        {
+            "group_slug": "motivated-to-learn",
+            "paragraph_guid": "f479c6c2-238a-4b3b-bcde-f4389b815835"
+        }
+    ]
+}

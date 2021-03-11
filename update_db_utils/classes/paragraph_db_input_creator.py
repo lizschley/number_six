@@ -147,7 +147,8 @@ class ParagraphDbInputCreator():
 
     def write_json_file(self):
         ''' write_json_file writes a dictionary to the specified path '''
-        json_helper.write_json_file(self.path_to_json, self.output_to_json)
+        params = {'out_json_path': self.path_to_json}
+        json_helper.write_dictionary_to_file(self.output_to_json, **params)
 
     def create_records(self):
         '''
