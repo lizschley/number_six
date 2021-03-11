@@ -13,11 +13,11 @@ from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 class ParaDbMethods:
     '''
-    ParagraphsRecordCreateOrUpdate is a class of static methods to retrieve, update or create
-    paragraph associated records.
+        ParagraphsRecordCreateOrUpdate is a class of static methods to retrieve, update or create
+        paragraph associated records.
 
-    :param object: inherits from object
-    :type object: Object object
+        :param object: inherits from object
+        :type object: Object object
     '''
 
     def __init__(self, updating):
@@ -25,10 +25,10 @@ class ParaDbMethods:
 
     def find_or_create_record(self, class_, find_dict, create_dict):
         '''
-        find_or_create_record will look for the record using the unique field in find_dict. If it
-        does not exist, the record will be created
-        :return: dictionary including the record found or created
-        :rtype: dict or model.Model
+            find_or_create_record will look for the record using the unique field in find_dict. If it
+            does not exist, the record will be created
+            :return: dictionary including the record found or created
+            :rtype: dict or model.Model
         '''
         found = True
         try:
@@ -44,15 +44,15 @@ class ParaDbMethods:
 
     def find_and_update_record(self, class_, find_dict, update_dict):
         '''
-        find_or_update_record will look for the record using the unique field in find_dict. If it
-        if found, it will check the id.  If that is not the same, it will pass back an error message,
-        which will be dealt with in the calling program
+            find_or_update_record will look for the record using the unique field in find_dict. If it
+            is found, it will check the id.  If that is not the same, it will pass back an error message,
+            which will be dealt with in the calling program
 
-        If the record is a paragraph, it will validate it before calling the update method.  If the
-        paragraph does not pass the validation, it will return an error message (a dict)
+            If the record is a paragraph, it will validate it before calling the update method.  If the
+            paragraph does not pass the validation, it will return an error message (a dict)
 
-        :return: dictionary of newly updated record or the record that was found (if not updating)
-        :rtype: dict
+            :return: dictionary of newly updated record or the record that was found (if not updating)
+            :rtype: dict
         '''
         try:
             record = class_.objects.get(**find_dict)
@@ -75,49 +75,38 @@ class ParaDbMethods:
     @staticmethod
     def valid_paragraph_subtitle(para, update_dict):
         '''
-        valid_paragraph_subtitle checks to ensure that standalone paragraphs do not have blank or
-        non-unique subtitles.  Non-standalone paragraphs are ok either way (technically at least)
+            valid_paragraph_subtitle checks to ensure that standalone paragraphs do not have blank or
+            non-unique subtitles.  Non-standalone paragraphs are ok either way (technically at least)
 
-        :param para: This is a dictionary form of the paragraph before it is updated.
-        :type para: Paragraph (program will send in other models, but the method checks)
-        :param update_dict: id, unique_key and fields to be changed
-        :type update_dict: dictionary
-        :return: dictionary with valid key that is true or False.  If False, will have error message
-        :rtype: dict
+            :param para: This is a dictionary form of the paragraph before it is updated.
+            :type para: Paragraph (program will send in other models, but the method checks)
+            :param update_dict: id, unique_key and fields to be changed
+            :type update_dict: dictionary
+            :return: dictionary with valid key that is true or False.  If False, will have error message
+            :rtype: dict
         '''
         if not isinstance(para, Paragraph):
-            # ret = {'valid': True}
             return {'valid': True}
         if utils.key_in_dictionary(update_dict, 'standalone'):
-            # print(f'if #2, updating para.standalone to {update_dict["standalone"]}')
             para.standalone = update_dict['standalone']
         if not para.standalone:
-            # ret = {'valid': True}
-            # print(f'if #3 returning {ret}')
             return {'valid': True}
         if utils.key_in_dictionary(update_dict, 'subtitle'):
-            # print(f'if 4, updating para.subtitle to {update_dict["subtitle"]}')
             para.subtitle = update_dict['subtitle']
         if not para.subtitle.strip():
-            # ret = {'valid': False, 'message': f'Empty subtitle on standalone para: {para}'}
-            # print(f'if #5 returning {ret}')
             return {'valid': False, 'message': f'Empty subtitle on standalone para: {para}'}
         if Paragraph.objects.exclude(guid=para.guid).filter(subtitle__iexact=para.subtitle).exists():
-            # ret = {'valid': False, 'message': f'Not unique subtitle for para: {para}'}
-            # print(f'if 6, found an identical subtitle in another para, ret=={ret}')
             return {'valid': False, 'message': f'Not unique subtitle for para: {para}'}
-        # ret = {'valid': True}
-        # print('passed all the tests, therefore valid, ret=={ret}')
         return {'valid': True}
 
     def update_record(self, class_, update_dict):
         '''
-        update_record takes the model class name and the dictionary for updating
+            update_record takes the model class name and the dictionary for updating
 
-        :param class_: model class
-        :type class_: models.Model
-        :param update_dict: Dictionary with the id and the fields to update
-        :type update_dict: dict
+            :param class_: model class
+            :type class_: models.Model
+            :param update_dict: Dictionary with the id and the fields to update
+            :type update_dict: dict
         '''
         if not self.updating:
             print((f'if updating were true, would update {update_dict} '
@@ -129,16 +118,16 @@ class ParaDbMethods:
 
     def create_record(self, class_, create_dict):
         '''
-        create_record - creates a record of the class type with the values in create_dict
+            create_record - creates a record of the class type with the values in create_dict
 
-        May throw ValidationError
+            May throw ValidationError
 
-        :param class_: Model name, for example: Group
-        :type class_: Model object
-        :param create_dict: values for fields for given model
-        :type create_dict: dict
-        :return: object created model class, where the class_ is django model instance
-        :rtype: projects.models.paragraphs.ClassName instance
+            :param class_: Model name, for example: Group
+            :type class_: Model object
+            :param create_dict: values for fields for given model
+            :type create_dict: dict
+            :return: object created model class, where the class_ is django model instance
+            :rtype: projects.models.paragraphs.ClassName instance
         '''
         record = class_(**create_dict)
         if not self.updating:
@@ -153,14 +142,14 @@ class ParaDbMethods:
 
     def find_record(self, class_, find_dict):
         '''
-        find_record on the field defined in find_dict
+            find_record on the field defined in find_dict
 
-        :param class_: Model name, for example: Group
-        :type class_: Model object
-        :param find_dict: dictionary with field and values used to find the given model's record
-        :type find_dict: dict
-        :return: queryset - containing instance of given model (could be list, depending on find_dict)
-        :rtype: queryset
+            :param class_: Model name, for example: Group
+            :type class_: Model object
+            :param find_dict: dictionary with field and values used to find the given model's record
+            :type find_dict: dict
+            :return: queryset - contains instance of given model (could be list, depending on find_dict)
+            :rtype: queryset
         '''
         try:
             return_obj = class_.objects.get(**find_dict)
@@ -175,12 +164,12 @@ class ParaDbMethods:
     # Todo: Haven't written test for this yet
     def delete_record(self, class_, find_dict):
         '''
-        delete_record deletes the records found using filter
+            delete_record deletes the records found using filter
 
-        :param class_: Model for the record you want deleted
-        :type class_: models.Model
-        :param find_dict: dictionary with the unique key
-        :type find_dict: dict
+            :param class_: Model for the record you want deleted
+            :type class_: models.Model
+            :param find_dict: dictionary with the unique key
+            :type find_dict: dict
         '''
         if class_ not in (GroupParagraph, ParagraphReference):
             sys.exit(f'Not allowing hard deletes of {class_.__name__}')
@@ -190,25 +179,25 @@ class ParaDbMethods:
     @staticmethod
     def class_based_rawsql_retrieval(sql, class_, *args):
         '''
-        class_based_rawsql_retrieval reusable retrieval query
-        :param sql: arguments with the key matching the key in the query
-        :type sql: str
-        :param class_: class to start with
-        :type class_: model class
-        :return: result from query
-        :rtype: rawsql queryset
+            class_based_rawsql_retrieval reusable retrieval query
+            :param sql: arguments with the key matching the key in the query
+            :type sql: str
+            :param class_: class to start with
+            :type class_: model class
+            :return: result from query
+            :rtype: rawsql queryset
         '''
         return class_.objects.raw(sql, [args])
 
     @staticmethod
     def max_cat_sort_for_given_category(category_id):
         '''
-        max_cat_sort_for_given_category returns the max id for cat_sort within a given group
+            max_cat_sort_for_given_category returns the max id for cat_sort within a given group
 
-        :param category_id: id to get categories within
-        :type category_id: int
-        :return: max category id
-        :rtype: int
+            :param category_id: id to get categories within
+            :type category_id: int
+            :return: max category id
+            :rtype: int
         '''
         max_cat_sort = Group.objects.filter(category_id=category_id).aggregate(Max('cat_sort'))
         return 1 if not max_cat_sort['cat_sort__max'] else max_cat_sort['cat_sort__max'] + 1
@@ -216,25 +205,25 @@ class ParaDbMethods:
     @staticmethod
     def record_counts_by_criteria(class_, **kwargs):
         '''
-        record_counts_by_criteria returns the number of records based on input args
+            record_counts_by_criteria returns the number of records based on input args
 
-        :param class_: Class that is passed in
-        :type class_: models.Model
-        :return: number of records for the given class and criteria
-        :rtype: int
+            :param class_: Class that is passed in
+            :type class_: models.Model
+            :return: number of records for the given class and criteria
+            :rtype: int
         '''
         return class_.objects.filter(**kwargs).count()
 
     @staticmethod
     def update_group_paragraph_order(**kwargs):
         '''
-        update_group_paragraph_order updates the order field in the GroupParagraph association.
-        This is only needed in production, because Django does not return the primary key for
-        associations, so normal update processing did not work.  Previously we were just adding and
-        deleting associations, so this is new and it is the association record that has fields that
-        need to be updated.  Adds and Deletes generall work fine.
+            update_group_paragraph_order updates the order field in the GroupParagraph association.
+            This is only needed in production, because Django does not return the primary key for
+            associations, so normal update processing did not work.  Previously we were just adding and
+            deleting associations, so this is new and it is the association record that has fields that
+            need to be updated.  Adds and Deletes generall work fine.
 
-        Will make more generic, if there is ever a need.
+            Will make more generic, if there is ever a need.
         '''
         if kwargs['key'] not in crud.UPDATE_ASSOCIATED:
             return

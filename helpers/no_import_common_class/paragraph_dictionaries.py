@@ -100,3 +100,22 @@ class ParagraphDictionaries:
         '''
         return {'link_text': row.link_text, 'url': row.url,
                 'short_text': row.short_text, 'slug': row.ref_slug}
+
+    @staticmethod
+    def group_para_associations(guid, slugs):
+        '''
+        group_para_associations returns a dictionary needed to add or delete GroupParagraph associations
+
+        :param input: dictionary with these keys: guid, group_slug
+        :type input: dict
+        :return: dictioary with the exact format needed to add or delete group para associations
+        :rtype: dict
+        '''
+        association_list = []
+        group_list = slugs.split(',')
+        for slug in group_list:
+            if len(slug.strip()) == 0:
+                continue
+            association = {'group_slug': slug.strip(), 'paragraph_guid': guid.strip()}
+            association_list.append(association)
+        return association_list

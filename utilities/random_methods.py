@@ -1,4 +1,5 @@
 ''' Methods that are not specific to Paragraph functionality, but could be useful '''
+import csv
 import os
 import shutil
 import sys
@@ -279,3 +280,14 @@ def no_keys_from_list_in_dictionary(key_list, dict_to_check):
         if key in key_list:
             return False
     return True
+
+
+def dictionary_list_from_csv(filepath):
+    ''' generate a list of dictionaries from a csv file '''
+    return_list = []
+    with open(filepath, 'r') as file:
+        reader = csv.DictReader(file)
+        return_list = list(reader)
+    return return_list
+
+

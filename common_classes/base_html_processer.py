@@ -7,7 +7,7 @@ import utilities.random_methods as utils
 
 
 class BaseHtmlProcesser:
-    ''' Use for updating template/base_file.html '''
+    ''' Use for updating template/base_file.html with new versioned filename (for css and js files) '''
     def __init__(self, lookup_key, process='base_html'):
         if process == 'base_html':
             self.data = lookup.BASE_FILE_DATA[lookup_key]
@@ -24,7 +24,8 @@ class BaseHtmlProcesser:
 
     def replace_path_attribute(self):
         '''
-        replace_path_attribute uses beautifulsoup to find an element by id
+        replace_path_attribute uses beautifulsoup to find an element by id and then calls a method to
+        replace the line in a new base.html file and then overwrite the old base.html with the new one
 
         :return: either the prior version (to be used in the future to delete file on S3) or error msg
         :rtype: dictionary
@@ -67,7 +68,7 @@ class BaseHtmlProcesser:
 
     def split_path(self, in_str):
         '''
-        split_path prepares the path for parsing, by splitting it into three pieces
+        split_path prepares the path for parsing by splitting it into three pieces
 
         :param in_str: path (href for css file or src for javascript file)
         :type in_str: str

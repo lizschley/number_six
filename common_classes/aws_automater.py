@@ -8,7 +8,7 @@ class AwsAutomater:
     ''' Use for all aws automation '''
 
     def __init__(self):
-        ''' Get items to be reused frequently '''
+        ''' Establish credentials, region and reusable S3 information '''
         self.session = boto3.Session(
             aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
             aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
