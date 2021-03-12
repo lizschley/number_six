@@ -1,7 +1,7 @@
 ''' This is Step Three of the database update process.  Step 1 retrieves & Step 2 edits the data '''
 
 import sys
-import pprint
+from decouple import config
 import constants.crud as crud
 import constants.scripts as scripts
 import helpers.no_import_common_class.paragraph_helpers as helpers
@@ -12,24 +12,40 @@ from common_classes.para_db_methods import ParaDbMethods
 
 class ParaDbUpdateProcess(ParaDbMethods):
     '''
-        ParaDbUpdateProcess updates (or if production or for_prod, creates) data based on
-        self.file_data
+        ParaDbUpdateProcess updates or creates data based on self.file_data, which is created by
+        ParaDbUpdatePrep (running scripts/db_updater_s1.py creates self.file_data, see it for details).
+
+        ParaDbUpdateProcess's main purpose is to update existing data, preserving the relationships.
+
+        For development - The only way to create paragraphs is through ParaDbCreateProcess.  The create
+                          process also creates a paragraph's related records
+
+                        ParaDbUpdateProcess allows you to create any records besides a paragraph
+
+                        In fact, categories can only be created in the update process, since they are
+                        not directly related to paragraphs
+
+        For production - All updates use ParaDbUpdateProcessProd, which inherits this process.
+                         If you try to use this class for production, if should error out
+
     '''
 
     def __init__(self, input_data, updating):
         '''
-        __init__ stores the input data and provides the necessary framework to process the input data
+            __init__ stores the input data and provides the necessary framework to process the input data
 
-        :param input_data: This is generally a file produced by ParaDBUpdatePrep and then manually
-        updated.  There are a lot of variations, see documentation:
-        :type input_data: [type]
-        :param updating: [description]
-        :type updating: [type]
-        '''
+            :param input_data: This is generally a file produced by ParaDBUpdatePrep and then manually
+                               updated.
+            :type input_data: dict
+            :param updating: if this parameter does not exist, there will be no db updates
+            :type updating: bool
+            '''
         super().__init__(updating)
         self.file_data = input_data.pop('file_data')
         self.script_data = input_data
-        # print(f'script_data == {self.script_data}')
+        # import pprint
+        # printer = pprint.PrettyPrinter(indent=1, width=120)
+        # printer.pprint(f'script_data == {self.script_data}')
         self.process_data = {'updating': self.updating,
                              'categories': {'existing': [], 'create': [], 'update': []},
                              'groups': {'existing': [], 'create': [], 'update': []},
@@ -41,43 +57,31 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def process_input_data_update_db(self):
         '''
-        process_input_data_update_db is the main driver of the update process.  You can see the order
-        that we process the data by the method names.
+            process_input_data_update_db is the main driver of the update process.  You can see the order
+            that we process the data by the method names.
         '''
-        self.validate_input_keys()
+        self.check_environment()
         self.create_record_loop()
         self.update_record_loop()
         if self.updating:
             self.add_or_delete_associations()
+        # import pprint
         # printer = pprint.PrettyPrinter(indent=1, width=120)
         # printer.pprint(self.process_data)
 
-    def validate_input_keys(self):
+    def check_environment(self):
         '''
-        validate_input_keys ensures that the user (me) is doing careful work
-
-        It runs some tests on the input keys and errors with a message, if the tests fail
+            Exit with error message if this is run in the production environment
         '''
-        if self.incorrect_environment():
-            sys.exit(('Input error: wrong process for development: '
-                      f'script_data: {self.script_data}, file_data: {self.file_data}'))
-
-    def incorrect_environment(self):
-        '''
-        incorrect_environment ensures that the given environment matches the process used
-
-        :return: returns True if you are running this process in production or running as prod
-        :rtype: bool
-        '''
-        if self.script_data['is_prod'] or self.script_data['for_prod']:
-            return True
-        return False
+        if config('ENVIRONMENT') == 'production':
+            sys.exit(f'Input error: wrong process for production: script_data: {self.script_data}')
 
     def create_record_loop(self):
         '''
-        create_record_loop finds or creates the record, based on the keys in the input data.  It loops
-        through the CREATE_RECORD_KEYS to know which keys to look for and hen calls the find or create
-        wrapper method with the necessary arguments to do the actual find or create CRUD.
+            create_record_loop finds or creates the record, based on the keys in the input data.
+            It loops through the CREATE_RECORD_KEYS to know which keys to look for and hen calls the
+            find or create wrapper method with the necessary arguments to do the actual find or create
+            CRUD.
         '''
         for key in crud.CREATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
@@ -87,10 +91,10 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def update_record_loop(self):
         '''
-        update_record_loop finds and updates the record, based on the keys in the input data.  It loops
-        through the UPDATE_RECORD_KEYS to know which keys to look for and then calls the
-        find_and_update_wrapper method with the necessary arguments to do the actual find and update
-        CRUD.
+            update_record_loop finds and updates the record, based on the keys in the input data.
+            It loops through the UPDATE_RECORD_KEYS to know which keys to look for and then calls the
+            find_and_update_wrapper method with the necessary arguments to do the actual find and update
+            CRUD.
         '''
         for key in crud.UPDATE_RECORD_KEYS:
             if utils.key_not_in_dictionary(self.file_data, key):
@@ -100,12 +104,12 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def find_or_create_wrapper(self, key, record):
         '''
-        find_or_create_wrapper prepares the input data to use the generic crud methods
+            find_or_create_wrapper prepares the input data to use the generic crud methods
 
-        :param key: input key from input data (now key to dictionary was once JSON key)
-        :type key: string
-        :param record: model.Model class
-        :type record: Model
+            :param key: input key from input data (now key to dictionary was once JSON key)
+            :type key: string
+            :param record: model.Model class
+            :type record: Model
         '''
         unique_fields = crud.CREATE_DATA[key]['unique_fields']
         class_ = crud.CREATE_DATA[key]['class']
@@ -125,14 +129,14 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def ensure_dictionary(self, class_, record):
         '''
-        ensure_dictionary creates a dictionary from the returned record if it is not already a dictionary
+            ensure_dictionary makes sure the record is in dictionary format
 
-        :param class_: model class that was found or created
-        :type class_: model.Model
-        :param record: The instance of the model created or found OR the create dict record
-        :type record: model.Model or dictionary
-        :return: dictionary form of the record that was created
-        :rtype: dict
+            :param class_: model class that was found or created
+            :type class_: model.Model
+            :param record: The instance of the model created or found OR the create dict record
+            :type record: model.Model or dictionary
+            :return: dictionary form of the record that was created
+            :rtype: dict
         '''
         if record.__class__.__name__ == class_.__name__:
             return record.__dict__
@@ -140,17 +144,17 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def assign_to_process_data(self, top_key, record, unique_field, action=None, found=True):
         '''
-        assign_to_process_data takes the record created and assigns it to the correct key (say if the
-        input key as add_categories, then categories is the top key, and the assignment is a dictionary
-        that has the unique key value pointing to the record created.  This ensures the we do not try
-        to create duplicate records and that the record created information is available
+            assign_to_process_data takes the record created and assigns it to the correct key (say if the
+            input key as add_categories, then categories is the top key, and the assignment is a
+            dictionary that has the unique key value pointing to the record created.  This ensures we do
+            not create duplicate records and that the record created information is available
 
-        :param top_key: this is the input data key (originally from a JSON file)
-        :type key: string
-        :param record: This is the record created or a dictionary representation of that record
-        :type record: model.Model or dictionary
-        :param unique_field: field name for the unique key (besides id) for the given record
-        :type unique_field: str
+            :param top_key: this is the input data key (originally from a JSON file)
+            :type key: string
+            :param record: This is the record created or a dictionary representation of that record
+            :type record: model.Model or dictionary
+            :param unique_field: field name for the unique key (besides id) for the given record
+            :type unique_field: str
         '''
         if action is not None:
             self.process_data[top_key][action].append(record)
@@ -162,13 +166,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def find_and_update_wrapper(self, key, record):
         '''
-        find_and_update_wrapper finds the record based on the information in the UPDATE_DATA constant
-        with the given key
+            find_and_update_wrapper finds the record based on the information in the UPDATE_DATA constant
+            with the given key
 
-        :param key: key used to find the UPDATE_DATA information
-        :type key: [str
-        :param record: dictionary representation of the record to be found or created
-        :type record: dict
+            :param key: key used to find the UPDATE_DATA information
+            :type key: [str
+            :param record: dictionary representation of the record to be found or created
+            :type record: dict
         '''
         if key == 'paragraphs':
             record = self.associate_ref_para(record)
@@ -186,11 +190,11 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def associate_ref_para(self, para):
         '''
-        associate_ref_para initiates the process of turning the list of references' slug or link_text to
-        associations between a given paragraph and all of its references
+            associate_ref_para initiates the process of turning the list of references' slug or
+            link_text to associations between a given paragraph and all of its references
 
-        :param para: one paragraph
-        :type para: dict
+            :param para: one paragraph
+            :type para: dict
         '''
         if utils.no_keys_from_list_in_dictionary(('ref_slug_list', 'link_text_list'), para):
             return para
@@ -213,12 +217,12 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def add_category_to_group(self, group_to_create):
         '''
-        add_category_to_group makes it so you can add a category id to a group before updating the group
+            add_category_to_group allows adding a category id to a group before updating the group
 
-        :param group_to_create: dictionary used to create a group
-        :type group_to_create: dict
-        :return: updated group to create (no category_title and category_id equal to  None or int)
-        :rtype: dict
+            :param group_to_create: dictionary used to create a group
+            :type group_to_create: dict
+            :return: updated group to create (no category_title and category_id equal to  None or int)
+            :rtype: dict
         '''
         cat_title = group_to_create.pop('category_title', '')
         if not cat_title:
@@ -235,13 +239,13 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def pop_cat_id_if_zero(self, group_to_create):
         '''
-        pop_cat_id_if_zero replaces a zero with a None (null category field)  This only gets called
-        when there is no category to associate with the given group
+            pop_cat_id_if_zero replaces a zero with a None (null category field)  This only gets called
+            when there is no category to associate with the given group
 
-        :param group_to_create: group dictionary (create_dict) with no associated category
-        :type group_to_create: dict
-        :return: dict with None as the category id (postgres null)
-        :rtype: dict
+            :param group_to_create: group dictionary (create_dict) with no associated category
+            :type group_to_create: dict
+            :return: dict with None as the category id (postgres null)
+            :rtype: dict
         '''
         if group_to_create['category_id'] == 0:
             group_to_create.pop('category_id', None)
@@ -249,15 +253,15 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def add_or_delete_associations(self):
         '''
-        add_or_delete_associations starts the process of reading data from the add and delete
-        associations portion of the input data.  This will be used when you want to associate a
-        paragraph with another group, for example.  Usually adding a reference will be done in a
-        normal update, but if you just forgot to add a reference, this is an easy fix.
+            add_or_delete_associations starts the process of reading data from the add and delete
+            associations portion of the input data.  This will be used when you want to associate a
+            paragraph with another group, for example.  Usually adding a reference will be done in a
+            normal update, but if you just forgot to add a reference, this is an easy fix.
 
-        This is called only in Step 3 since it involves changing data in the database
+            This is called only in Step 3 since it involves changing data in the database
 
-        Throughout much of this process we have constants that drive the input data, directing to
-        the correct process
+            Throughout much of this process we have constants that drive the input data, directing to
+            the correct process
         '''
         for input_key in crud.ASSOCIATION_KEYS:
             if utils.key_not_in_dictionary(self.file_data, input_key):
@@ -274,14 +278,15 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def add_associations(self, input_key, create_dict_list):
         '''
-        add_associations makes it possible to create a many to many association between group and
-        paragraph OR paragraph and reference.  This does not get called until the association data
-        is prepared, unique keys are used to look up data and the ids are substituted in the create_dict
+            add_associations makes it possible to create a many to many association between group and
+            paragraph OR paragraph and reference.  This does not get called until the association data
+            is prepared by looking up the parent data using unique keys.  The parent record information
+            is substituted in the create_dict
 
-        :param input_key: would be add_paragraphreference or add_groupparagraph
-        :type input_key: str
-        :param create_dict_list: list of all the add associations for the given key
-        :type create_dict_list: list
+            :param input_key: would be add_paragraphreference or add_groupparagraph
+            :type input_key: str
+            :param create_dict_list: list of all the add associations for the given key
+            :type create_dict_list: list
         '''
         # print(f'create_dict_list: {create_dict_list}')
         for create_dict in create_dict_list:
@@ -289,17 +294,18 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def delete_associations(self, data_key, input_key, find_dict_list):
         '''
-        delete_associations makes it possible to delete a many to many association between group and
-        paragraph OR paragraph and reference.  This does not get called until the association data
-        is prepared, unique keys are used to look up data and the ids are substituted in the create_dict
+            delete_associations makes it possible to delete a many to many association between group and
+            paragraph OR paragraph and reference.  This does not get called until the association data
+            is prepared by looking up the parent data using unique keys.  The parent record information
+            is substituted in the find_dict
 
-        The same process will be used in production, so after the association is deleted, the
-        delete_association data will be written to a file in the prod input directory
+            The same process will be used in production, so after the association is deleted, the
+            delete_association data will be written to a file in the prod input directory
 
-        :param input_key: would be delete_paragraphreference or delete_groupparagraph
-        :type input_key: str
-        :param create_dict_list: list of all the delete associations for the given key
-        :type create_dict_list: list
+            :param input_key: would be delete_paragraphreference or delete_groupparagraph
+            :type input_key: str
+            :param create_dict_list: list of all the delete associations for the given key
+            :type create_dict_list: list
         '''
         class_to_delete = crud.DELETE_ASSOCIATIONS[input_key]['class']
         for find_dict in find_dict_list:
@@ -309,20 +315,20 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def prepare_association_data(self, file_input_list, data_key):
         '''
-        prepare_association_data takes the file input (which is a list) from the input file:
-           data/data_for_updates/dev_input_step_three directory
+            prepare_association_data takes the file input (which is a list) from the input file:
+            data/data_for_updates/dev_input_step_three directory
 
-        It also uses data from constants from constants/crud.py:
-           ASSOCIATION_KEY
-           ASSOCIATION_DATA
-           CREATE_DATA
+            It also uses data from constants from constants/crud.py:
+            ASSOCIATION_KEY
+            ASSOCIATION_DATA
+            CREATE_DATA
 
-        The final result is a find or create on the association create dictionary
+            The final result is a find or create on the association create dictionary
 
-        :param input_key: key from input json: found in data/data_for_updates/dev_input_step_three
-        :type input_key: str
-        :param data_key: last part of the input_key is the key to ASSOCIATION_DATA constant
-        :type data_key: str
+            :param input_key: key from input json: found in data/data_for_updates/dev_input_step_three
+            :type input_key: str
+            :param data_key: last part of the input_key is the key to ASSOCIATION_DATA constant
+            :type data_key: str
         '''
         input_dictionaries = []
         for file_input in file_input_list:
@@ -331,30 +337,30 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def dict_from_foreign_associations(self, foreign_key_records, data_key):
         '''
-        dict_from_foreign_associations reads the input file and finds the two foreign associations
-        (input_data), using the following format to find the foreign key records to associate
-        groups with paragraphs or paragraphs with references.
-        Here are two foreign key input_data examples:
-        1.  [{"paragraph_guid": "a3575efb-e443-48da-89d7-20f8c5910229",
-              "reference_slug": "unclebobmartincleancodeprogrammerspeakerteacher"}]
-        2.  [{"group_slug": "functional-resume",
-              "paragraph_guid": "21028615-1e01-4444-acc9-e581637e460b"}]
+            dict_from_foreign_associations reads the input file and finds the two foreign associations
+            (input_data), using the following format to find the foreign key records to associate
+            groups with paragraphs or paragraphs with references.
+            Here are two foreign key input_data examples:
+            1.  [{"paragraph_guid": "a3575efb-e443-48da-89d7-20f8c5910229",
+                "reference_slug": "unclebobmartincleancodeprogrammerspeakerteacher"}]
+            2.  [{"group_slug": "functional-resume",
+                "paragraph_guid": "21028615-1e01-4444-acc9-e581637e460b"}]
 
-        Number 1 usage - For the paragraph_reference it finds the Paragraph using the guid and the
-                         Reference using the slug.
-        Number 2 usage - For the group_paragraph association, if finds the Group from the group slug
-                         and the Paragraph from the paragraph guid.
+            Number 1 usage - For the paragraph_reference it finds the Paragraph using the guid and the
+                            Reference using the slug.
+            Number 2 usage - For the group_paragraph association, if finds the Group from the group slug
+                            and the Paragraph from the paragraph guid.
 
-        Once it finds the records, it gets the id to create the return dictionary
+            Once it finds the records, it gets the id to create the return dictionary
 
-        example of return: {'paragraph_id': 9, 'reference_id': 9}
+            example of return: {'paragraph_id': 9, 'reference_id': 9}
 
-        :param foreign_key_records: dictionary from the input data (from json file mentioned earlier)
-        :type foreign_key_records: dict
-        :param data_key: key obtained from parsing input_data key.  Used to find ASSOCIATION_DATA
-        :type data_key: str
-        :return: dictionary that is used to create or delete the new association record
-        :rtype: dict
+            :param foreign_key_records: dictionary from the input data (from json file mentioned earlier)
+            :type foreign_key_records: dict
+            :param data_key: key obtained from parsing input_data key.  Used to find ASSOCIATION_DATA
+            :type data_key: str
+            :return: dictionary that is used to create or delete the new association record
+            :rtype: dict
         '''
         association_data = crud.ASSOCIATION_DATA[data_key]
 
@@ -370,18 +376,18 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def one_create_key_and_value(self, input_dict, association_key, association_data):
         '''
-        one_create_key_and_value takes the input record and the ASSOCIATION_DATA and puts it together
-        to find one of the foreign records (Group, Paragraph or Record) so we use the key value pair,
-        for example: {'paragraph_id': 9}
+            one_create_key_and_value takes the input record and the ASSOCIATION_DATA and puts it together
+            to find one of the foreign records (Group, Paragraph or Record) so we use the key value pair,
+            for example: {'paragraph_id': 9}
 
-        :param input_dict: unique key information to find the foreign key parts of the association record
-        :type input_dict: dict
-        :param association_key: string
-        :type association_key: used to find the necessary information to do the database lookups
-        :param association_data: Constants used to understand the associations
-        :type association_data: dict
-        :return: one key value pair that is part of the data needed to create the association record
-        :rtype: dict
+            :param input_dict: unique key information to find the foreign key parts of the association record
+            :type input_dict: dict
+            :param association_key: string
+            :type association_key: used to find the necessary information to do the database lookups
+            :param association_data: Constants used to understand the associations
+            :type association_data: dict
+            :return: one key value pair that is part of the data needed to create the association record
+            :rtype: dict
         '''
         # input_dict == {'paragraph_guid': 'para_guid_r_a', 'reference_slug': 'ref_slug_a'}
         # or input_dict == {'group_slug': 'group_slug_a', 'paragraph_guid': 'parag_guid_g_a'}
@@ -395,14 +401,14 @@ class ParaDbUpdateProcess(ParaDbMethods):
 
     def current_association_key(self, association_from_input):
         '''
-        current_assoication_key parses the input for the given record.  All we need is the first
-        part, since it is the key to the ASSOCIATION_DATA, which is used by both add and delete
-        associations to find the class and the unique field to find the object
+            current_association_key parses the input for the given record.  All we need is the first
+            part, since it is the key to the ASSOCIATION_DATA, which is used by both add and delete
+            associations to find the class and the unique field to find the object
 
-        :param association_from_input: key to ASSOCIATION_DATA parsed from input data
-        :type association_from_input: dict
-        :return: the specific key needed in to obtain the data needed
-        :rtype: str
+            :param association_from_input: key to ASSOCIATION_DATA parsed from input data
+            :type association_from_input: dict
+            :return: the specific key needed in to obtain the data needed
+            :rtype: str
         '''
         if association_from_input == 'link_text':
             return 'reference'
