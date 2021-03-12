@@ -26,19 +26,6 @@ def valid_non_blank_string(str_to_check):
     return not res
 
 
-def slugify_string(input_str):
-    '''
-    slugify_string slugifies the input string.  This is a convenience method, currently for creating
-    reference links for a new reference record in a new paragraph record.
-
-    :param input_str: string to slugify
-    :type input_str: str
-    :return: slugified version of the input string
-    :rtype: str
-    '''
-    return slugify(input_str)
-
-
 def archive_files_from_input_directories(**kwargs):
     '''
     archive_files_from_input_directories moves the files used for processing input data to
@@ -294,5 +281,3 @@ def dictionary_list_from_csv(filepath):
         reader = csv.DictReader(file)
         return_list = list(reader)
     return return_list
-
-
