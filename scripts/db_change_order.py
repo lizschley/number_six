@@ -22,7 +22,7 @@ from common_classes.para_db_update_order import ParaDbUpdateOrder
 def run(*args):
     '''
         Step Three Usage:
-            * Note - designed to run in development or production
+            * Note - designed to run in development only
 
         1. Make sure you have input created and edited correctly in Steps 1 and 2
             * See scripts/db_updater_s1.py

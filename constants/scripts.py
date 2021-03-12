@@ -27,10 +27,9 @@ INPUT_CREATE_JSON = os.path.join(BASE_DIR, 'data/data_for_creates')
 INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_step_one')
 INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_step_three')
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
-PROD_DONE_INPUT = PROD_INPUT_JSON + '/done'
 
 # screen scraping input html
-INPUT_FOR_RESUME_HTML = os.path.join(BASE_DIR, 'data/input_html')
+INPUT_FOR_HTML = os.path.join(BASE_DIR, 'data/input_html')
 
 # filename prefixes
 PROD_PROCESS_IND = 'prod_input_'
