@@ -171,10 +171,10 @@ def update_paragraphs_step_three(input_data):
     1. ParaDbUpdateProcess or 2. ParaDbUpdateProcessProd
 
     It will call the first one for the development process and the second one always if it is the
-    production environment, but also if you run in development with the run_as_prod script argument
+    production environment, but also if you run in development with the for_prod script argument
 
     :param input_data: data produced by Step one of the script or, if it is only for adding new data and
-    is not run_as_prod or production, sent in directly
+    is not for_prod or production, sent in directly
 
     :type input_data: dict
     '''

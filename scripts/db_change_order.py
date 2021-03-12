@@ -52,8 +52,8 @@ def run(*args):
 def init_process_data(args):
     ''' Gather information for Step Three, in order to update the database '''
     updating = False
-    if constants.RUN_AS_PROD in args:
-        return f'{constants.RUN_AS_PROD} is invalid for this process'
+    if constants.FOR_PROD in args:
+        return f'{constants.FOR_PROD} is invalid for this process'
     if constants.UPDATING in args:
         updating = True
     message = test_for_errors(args, updating)

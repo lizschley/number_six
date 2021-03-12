@@ -4,7 +4,7 @@ from portfolio.settings import BASE_DIR
 import constants.common as common
 
 # db script arguments
-RUN_AS_PROD = 'run_as_prod'
+FOR_PROD = 'for_prod'
 UPDATING = 'updating'
 DB_UPDATE = 'db_update'
 TEST_UPDATE = 'test_update'
@@ -37,8 +37,13 @@ PROD_PROCESS_IND = 'prod_input_'
 DEFAULT_PREFIX = 'input_'
 
 # used in utilities.random methods to clear out data, to make things be easier to work with
-ONLY_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_three/done',
-                               'data/data_for_creates/loaded'
-                               ]
-NOT_DONE_INPUT_DIRECTORIES = ['data/data_for_updates/dev_input_step_three',
-                              'data/data_for_creates']
+ALWAYS_ARCHIVE_INPUT_DIRECTORIES = [
+                                        'data/data_for_updates/dev_input_step_three/done',
+                                        'data/data_for_creates/loaded'
+                                    ]
+NOT_DONE_INPUT_DIRECTORIES = [
+                                'data/data_for_updates/dev_input_step_three',
+                                'data/data_for_creates'
+                             ]
+
+PROD_INPUT_DIRECTORY = 'data/data_for_updates/prod_input_json'

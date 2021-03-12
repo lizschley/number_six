@@ -58,7 +58,7 @@ ASSOCIATION_DATA = {
 }
 
 RECORD_LOOKUP_MESSAGE = ('Input Error!  Please read documentation!  Must run Step One with the '
-                         'run_as_prod script argument. ')
+                         'for_prod script argument. ')
 RECORD_LOOKUP_MESSAGE_PROD = RECORD_LOOKUP_MESSAGE + ('Since this is production, editing could mess up '
                                                       'the entire process.')
 RECORD_LOOKUP_MESSAGE_DEV = RECORD_LOOKUP_MESSAGE + ('In development, you should edit the data, but do '

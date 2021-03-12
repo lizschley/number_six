@@ -29,7 +29,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         # https://stackoverflow.com/questions/8653516/python-list-of-dictionaries-search
         # this is the output data
         super(ParaDbUpdatePrep, self).__init__(updating)
-        self.run_as_prod = input_data.pop('run_as_prod', False)
+        self.for_prod = input_data.pop('for_prod', False)
         self.file_data = input_data.pop('file_data')
         self.input_data = input_data
         self.included_ids = {
@@ -65,7 +65,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
 
         params = {}
         params['directory_path'] = self.input_data['output_directory']
-        params['prefix'] = constants.PROD_PROCESS_IND if self.run_as_prod else constants.DEFAULT_PREFIX
+        params['prefix'] = constants.PROD_PROCESS_IND if self.for_prod else constants.DEFAULT_PREFIX
         json_helper.write_dictionary_to_file(self.output_data, **params)
 
     def process_input_and_output(self):
@@ -82,7 +82,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         COPY_DIRECTLY_TO_OUTPUT
         '''
         self.validate_input_keys()
-        if self.run_as_prod:
+        if self.for_prod:
             self.unique_key_lookup_to_output()
         self.retrieve_existing_data()
         self.copy_directly_to_output()
@@ -97,8 +97,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         if self.invalid_keys():
             sys.exit((f'Input error: there is at least one invalid key: {self.file_data}; '
                       f'The valid keys are {crud.VALID_RETRIEVAL_KEYS + crud.COPY_DIRECTLY_TO_OUTPUT}'))
-        if self.run_as_prod_with_adds():
-            sys.exit(f'Input error: no explicit creates if run_as_prod: {self.file_data}')
+        if self.for_prod_with_adds():
+            sys.exit(f'Input error: no explicit creates if for_prod: {self.file_data}')
         if not self.valid_input_keys():
             sys.exit(f'Input error: Must be at least one valid key: {self.file_data}')
 
@@ -148,15 +148,15 @@ class ParaDbUpdatePrep(ParaDbMethods):
                 return True
         return False
 
-    def run_as_prod_with_adds(self):
+    def for_prod_with_adds(self):
         '''
-        run_as_prod_with_adds validates that when we are using the run_as_prod input indicator we are
+        for_prod_with_adds validates that when we are using the for_prod input indicator we are
         not doing explicit creates on associations, categories, groups or references
 
-        :return: returns True when run_as_prod is True and the are input keys like add_*
+        :return: returns True when for_prod is True and the are input keys like add_*
         :rtype: bool
         '''
-        if not self.run_as_prod:
+        if not self.for_prod:
             return False
         return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
@@ -305,12 +305,12 @@ class ParaDbUpdatePrep(ParaDbMethods):
         category['slug'] = row.category_slug
         category['category_type'] = row.category_type
         self.output_data['categories'].append(category)
-        if self.run_as_prod:
-            self.run_as_prod_lookup('categories', row.category_id, row.category_slug)
+        if self.for_prod:
+            self.for_prod_lookup('categories', row.category_id, row.category_slug)
 
-    def run_as_prod_lookup(self, top_key, key, value):
+    def for_prod_lookup(self, top_key, key, value):
         '''
-        run_as_prod_lookup production and running as prod in development will use this.  It basically
+        for_prod_lookup production and running as prod in development will use this.  It basically
         gives a lookup between unique_keys (same between all environments) and primary keys (ids)
         which will probably differ between environments
 
@@ -349,8 +349,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         ref['url'] = row.reference_url
         ref['short_text'] = row.short_text
         self.output_data['references'].append(ref)
-        if self.run_as_prod:
-            self.run_as_prod_lookup('references', row.reference_id, row.reference_slug)
+        if self.for_prod:
+            self.for_prod_lookup('references', row.reference_id, row.reference_slug)
 
     def assign_paragraph(self, row):
         '''
@@ -377,8 +377,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para['guid'] = row.para_guid
         para['slug'] = row.para_slug
         self.output_data['paragraphs'].append(para)
-        if self.run_as_prod:
-            self.run_as_prod_lookup('paragraphs', row.para_id, row.para_guid)
+        if self.for_prod:
+            self.for_prod_lookup('paragraphs', row.para_id, row.para_guid)
 
     def assign_group(self, row):
         '''
@@ -403,8 +403,8 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group['cat_sort'] = row.cat_sort
         group['group_type'] = row.group_type
         self.output_data['groups'].append(group)
-        if self.run_as_prod:
-            self.run_as_prod_lookup('groups', row.group_id, row.group_slug)
+        if self.for_prod:
+            self.for_prod_lookup('groups', row.group_id, row.group_slug)
             self.record_lookups('categories', row.group_category_id, Category)
 
     def assign_groupparagraph(self, row):
@@ -426,7 +426,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         group_para['paragraph_id'] = row.gp_para_id
         group_para['order'] = row.gp_order
         self.output_data['group_paragraph'].append(group_para)
-        if self.run_as_prod:
+        if self.for_prod:
             self.record_lookups('groups', row.gp_group_id, Group)
             self.record_lookups('paragraphs', row.gp_para_id, Paragraph)
 
@@ -448,7 +448,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
         para_ref['reference_id'] = row.pr_reference_id
         para_ref['paragraph_id'] = row.pr_para_id
         self.output_data['paragraph_reference'].append(para_ref)
-        if self.run_as_prod:
+        if self.for_prod:
             self.record_lookups('references', row.pr_reference_id, Reference)
             self.record_lookups('paragraphs', row.pr_para_id, Paragraph)
 
@@ -470,9 +470,9 @@ class ParaDbUpdatePrep(ParaDbMethods):
         if utils.key_not_in_dictionary(dict_to_check, pk_id):
             rec = class_.objects.get(pk=pk_id)
             if top_key == 'paragraphs':
-                self.run_as_prod_lookup(top_key, rec.id, rec.guid)
+                self.for_prod_lookup(top_key, rec.id, rec.guid)
                 return
-            self.run_as_prod_lookup(top_key, rec.id, rec.slug)
+            self.for_prod_lookup(top_key, rec.id, rec.slug)
 
     def unique_key_lookup_to_output(self):
         '''

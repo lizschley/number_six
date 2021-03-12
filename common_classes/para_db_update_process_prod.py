@@ -14,7 +14,7 @@ from utilities.record_dictionary_utility import RecordDictionaryUtility
 
 class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
     '''
-        ParaDbUpdateProcessProd will be run for updates that either use the run_as_prod method or that
+        ParaDbUpdateProcessProd will be run for updates that either use the for_prod method or that
         run in the actual production environment.  The process will do different things, based on which
         of the above scenarios is true. The main difference is that in development, you can send in
         blank guids and slugs, but in production, you never can, because development is the source of
@@ -24,7 +24,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
     def __init__(self, input_data, updating):
         '''
         __init__ stores the input data and provides the necessary framework to process the input data.
-        This is mostly the same as the normal (not production or run_as_prod) data
+        This is mostly the same as the normal (not production or for_prod) data
         '''
         super().__init__(input_data, updating)
         self.prod_results = {}
@@ -73,7 +73,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         deleting_associations is always called, but usually it is called at the very end of processing.
         The purpose of this method is to allow a user to delete associations in production without
-        running Step One with a run_as_prod argument
+        running Step One with a for_prod argument
         '''
         self.add_or_delete_associations()
         # print('-------------------Process Data----------------------------------')
@@ -92,14 +92,14 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         '''
         if self.explicit_creates_in_prod():
             data = self.file_data
-            sys.exit(f'Input error: explicit creates prohibited in prod or when run_as_prod: {data}')
+            sys.exit(f'Input error: explicit creates prohibited in prod or when for_prod: {data}')
 
         if self.incorrect_environment():
             data = self.script_data
             sys.exit(f'Input error: wrong process unless production or running as prod: {data}')
 
     def incorrect_environment(self):
-        if self.script_data['is_prod'] or self.script_data['run_as_prod']:
+        if self.script_data['is_prod'] or self.script_data['for_prod']:
             return False
         return True
 
@@ -113,7 +113,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: returns True when it's a production run and there are input keys like add_*
         :rtype: bool
         '''
-        if not self.script_data['is_prod'] and not self.script_data['run_as_prod']:
+        if not self.script_data['is_prod'] and not self.script_data['for_prod']:
             return False
         return utils.dictionary_key_begins_with_substring(self.file_data, 'add_')
 
@@ -239,7 +239,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
         :return: [description]
         :rtype: [type]
         '''
-        self.validate_run_as_prod_prep(record, key)
+        self.validate_for_prod_prep(record, key)
         res = self.find_wrapper(record, key)
         if not self.script_data['is_prod'] and not res['found']:
             message = ('Error! All development records in this method should already exist; '
@@ -279,16 +279,16 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
     def add_unique_field(self, record, key, unique_field):
         '''
         add_unique_field allows user to simply blank out the unique field during the manual step (see
-        scripts/documentation/update_process.md) of updating records.  This is when using run_as_prod
+        scripts/documentation/update_process.md) of updating records.  This is when using for_prod
         in the development environment to create new records.
 
-        :param record: record that was created manually using the run_as_prod process
+        :param record: record that was created manually using the for_prod process
         :type record: dict
         :param key: key used to find the information necessary to run generic creates and updates
         :type key: str
         :param unique_field: key that is used to identify records, always unique for given db table
         :type unique_field: str
-        :return: dictionary with necessary information to create a new record with run_as_prod method
+        :return: dictionary with necessary information to create a new record with for_prod method
         :rtype: dict
         '''
         if key == 'references':
@@ -373,7 +373,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def substitute_prod_foreign_key(self, record, record_key, top_level_key):
         '''
-        substitute_prod_foreign_key finds the prod_id or the real dev_id for the run_as_prod process
+        substitute_prod_foreign_key finds the prod_id or the real dev_id for the for_prod process
         for the previously created category.  This will be used for the category_id in the group
 
         Since groups are the only records with a foriegn key field, so we named this method in a
@@ -539,9 +539,9 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
                 else:
                     self.prod_results[key] = {'delete': self.process_data[key]['delete']}
 
-    def validate_run_as_prod_prep(self, record, key):
+    def validate_for_prod_prep(self, record, key):
         '''
-        validate_run_as_prod_prep ensures before any updates that all non-association records that have
+        validate_for_prod_prep ensures before any updates that all non-association records that have
         a unique key also have and entry in the record lookup
 
         Exits the system if there is a key error

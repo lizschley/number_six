@@ -12,7 +12,7 @@ from common_classes.para_db_methods import ParaDbMethods
 
 class ParaDbUpdateProcess(ParaDbMethods):
     '''
-        ParaDbUpdateProcess updates (or if production or run_as_prod, creates) data based on
+        ParaDbUpdateProcess updates (or if production or for_prod, creates) data based on
         self.file_data
     '''
 
@@ -69,7 +69,7 @@ class ParaDbUpdateProcess(ParaDbMethods):
         :return: returns True if you are running this process in production or running as prod
         :rtype: bool
         '''
-        if self.script_data['is_prod'] or self.script_data['run_as_prod']:
+        if self.script_data['is_prod'] or self.script_data['for_prod']:
             return True
         return False
 

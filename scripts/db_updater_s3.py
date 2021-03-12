@@ -30,8 +30,8 @@ def run(*args):
                 and scripts/documentation/update_process.md for details
             * The edited input must have been moved to one of the following directories (see constants):
             ***  <PROD_INPUT_JSON > (for production updates) or
-            ***  <INPUT_TO_UPDATER_STEP_THREE> (for run_as_prod and regular updates)
-            * if you are updating development with the run_as_prod parameter, the filename
+            ***  <INPUT_TO_UPDATER_STEP_THREE> (for for_prod and regular updates)
+            * if you are updating development with the for_prod parameter, the filename
                 must have constants.PROD_PROCESS_IND as a prefix (happens automatically if using
                 updated_at as an input)
 
@@ -40,17 +40,17 @@ def run(*args):
         or
         >>> python manage.py runscript -v3 db_updater_s3 --script-args updating
         or
-        >>> python manage.py runscript -v3 db_updater_s3 --script-args run_as_prod
+        >>> python manage.py runscript -v3 db_updater_s3 --script-args for_prod
         or
-        >>> python manage.py runscript -v3 db_updater_s3 --script-args run_as_prod updating
+        >>> python manage.py runscript -v3 db_updater_s3 --script-args for_prod updating
 
         Notes on Arguments
         * No arguments - will process the input data as much as it can without updating; prints to aid
                          in testing.
         * updating (only) - will process the input data, doing updates.
-        * run_as_prod - will process the input data as much as it can without updating, will give
+        * for_prod - will process the input data as much as it can without updating, will give
                         errors if there is data that came from any other input than date
-        * updating run_as_prod (both) - will process the data, if there are no errors, doing updates
+        * updating for_prod (both) - will process the data, if there are no errors, doing updates
     '''
     process_data = init_process_data(args)
     if process_data.get('error'):
@@ -67,37 +67,37 @@ def init_process_data(args):
     ''' Gather information for Step Three, in order to update the database '''
     is_prod = False
     updating = False
-    run_as_prod = False
-    if constants.RUN_AS_PROD in args:
-        run_as_prod = True
+    for_prod = False
+    if constants.FOR_PROD in args:
+        for_prod = True
     if constants.UPDATING in args:
         updating = True
-    message = test_for_errors(args, run_as_prod, updating)
+    message = test_for_errors(args, for_prod, updating)
     if message != 'ok':
         return {'error': message}
     if config('ENVIRONMENT') == 'production':
         is_prod = True
-    return switches_from_args(is_prod, updating, run_as_prod)
+    return switches_from_args(is_prod, updating, for_prod)
 
 
-def test_for_errors(args, run_as_prod, updating):
+def test_for_errors(args, for_prod, updating):
     'Ensures the correct number and combinations of parameters.'
     message = f'Error! To many args or wrong args, args == {args}'
     if len(args) > 2:
         return message
-    if len(args) == 2 and (not updating or not run_as_prod):
+    if len(args) == 2 and (not updating or not for_prod):
         return message
-    if run_as_prod and config('ENVIRONMENT') == 'production':
-        return f'Invalid parameter (run_as_prod) for production environment, args == {args} '
+    if for_prod and config('ENVIRONMENT') == 'production':
+        return f'Invalid parameter (for_prod) for production environment, args == {args} '
     return 'ok'
 
 
-def switches_from_args(is_prod, updating, run_as_prod):
+def switches_from_args(is_prod, updating, for_prod):
     ''' Return from init process data '''
     return {
         'is_prod': is_prod,
         'updating': updating,
-        'run_as_prod': run_as_prod,
+        'for_prod': for_prod,
     }
 
 
@@ -117,7 +117,7 @@ def establish_input_directory(process_data):
 
 def development_update_class(process_data):
     ''' Allows testing prod update before there was a prod '''
-    if process_data['run_as_prod']:
+    if process_data['for_prod']:
         return ParaDbUpdateProcessProd
     return ParaDbUpdateProcess
 
@@ -132,7 +132,7 @@ def call_process(process_data):
 
 def prod_or_dev(process_data):
     ''' Returns different message based on the process_data '''
-    if process_data['is_prod'] or process_data['run_as_prod']:
+    if process_data['is_prod'] or process_data['for_prod']:
         return 'production-like files to use for updating'
     return 'development files to use for updating'
 
