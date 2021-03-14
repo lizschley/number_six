@@ -1,6 +1,6 @@
 '''
     This is Step Three of the database update process, but for production.  Step 1 retrieves data &
-    Step 2 edits the data.  If this is truly production & not testing, Step 2 should ALWAYS be skipped
+    Step 2 edits the data.  If this is truly production & not testing, Step 2 will be skipped
 '''
 
 import sys
@@ -186,7 +186,7 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def unique_field_lookup(self, record, key):
         '''
-        unique_field_lookup does the followiing:
+        unique_field_lookup (of non-association records) does the followiing:
             1. Does a record lookup based on the unique field
             2. Not found in the development environment - error! (may eventually allow this in test)
             3. Not found in the production environment - add record to the create list
@@ -306,20 +306,17 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def substitute_prod_foreign_key(self, record, record_key, top_level_key):
         '''
-        substitute_prod_foreign_key finds the prod_id or the real dev_id for the for_prod process
-        for the previously created category.  This will be used for the category_id in the group
+            substitute_prod_foreign_key finds the production id for the foreign keys in the association
+            records.  For example, group_id and paragraph_id in the GroupParagraph record
 
-        Since groups are the only records with a foriegn key field, so we named this method in a
-        non-generic way.
+            Two errors could be thrown, theoretically, but it would mean a programming mistake in Step 1.
+            1. A Value Error if a dev id is not an integer
+            2. A Key Error if there is no prod id for the given category in the lookup table
 
-        Two errors could be thrown.
-        1. A Value Error if a fake dev id is not an integer
-        2. A Key Error if there is no prod id for the given category in the lookup table
-
-        :param record: record created manually when a record has foreign keys
-        :type record: dict
-        :return: group record with the production id (or real development id) added
-        :rtype: dict
+            :param record: record created manually when a record has foreign keys
+            :type record: dict
+            :return: group record with the production id (or, for testing test id) added
+            :rtype: dict
         '''
         str_dev_id = str(record[record_key])
         unique_field = self.record_lookups[top_level_key][str_dev_id]
@@ -330,13 +327,13 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def assign_existing_record_prod_id(self, top_level_key, dev_id):
         '''
-        assign_existing_record_prod_id finds the existing record so if there are any associated the
-        prod id can be substituted
+            assign_existing_record_prod_id finds the existing record, so if there are any associated the
+            prod id can be substituted
 
-        :param top_level_key: top level key for main record (paragraphs, groups, etc)
-        :type top_level_key: str
-        :param dev_id: str dev id used as key in lookup table for the given record to be associated
-        :type dev_id: str
+            :param top_level_key: top level key for main record (paragraphs, groups, etc)
+            :type top_level_key: str
+            :param dev_id: str dev id used as key in lookup table for the given record to be associated
+            :type dev_id: str
         '''
         unique_key = crud.UPDATE_DATA[top_level_key]['unique_field']
         class_name = crud.UPDATE_DATA[top_level_key]['class']
@@ -359,12 +356,12 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def do_prod_update(self, record, key):
         '''
-        do_prod_updates does an update with the record was found by the unique field
+            do_prod_updates does an update with the record was found by the unique field
 
-        :param record: This is the original found record with the prod id
-        :type record: dict
-        :param key: key to the information necessary to do the generic find and update
-        :type key: string
+            :param record: This is the original found record with the prod id
+            :type record: dict
+            :param key: key to the information necessary to do the generic find and update
+            :type key: string
         '''
         unique_field = crud.UPDATE_DATA[key]['unique_field']
         class_ = crud.UPDATE_DATA[key]['class']
@@ -376,15 +373,15 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def change_to_dict_or_error_out(self, record, info):
         '''
-        change_to_dict_or_error_out if something is wrong with db update then get out as soon as possible
-        Change the db model to a dictionary to enable association processing
+            change_to_dict_or_error_out changes the record to dictionary format to enable association
+            processing.  If record is None, processing stops.
 
-        :param record: db record of model type
-        :type record: projects.models.paragraphs object (Group for example)
-        :param info: dictionary used to find or create the db object
-        :type info: dict
-        :return: dictionary form of projects.models.paragraphs object (Group for example)
-        :rtype: dict
+            :param record: db record of model type
+            :type record: projects.models.paragraphs object (Group for example)
+            :param info: dictionary used to find or create the db object
+            :type info: dict
+            :return: dictionary form of projects.models.paragraphs object (Group for example)
+            :rtype: dict
         '''
         if not record:
             sys.exit(f'Something happened with {record.__name__} create or update, info=={info}')
@@ -394,15 +391,15 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def find_wrapper(self, record, key):
         '''
-        find_wrapper creates a dictionary to find the record and catches the record not found error
-        returns a boolean found, indicating if the record is found and also the record if it is found
+            find_wrapper finds the record associated with the given keys.  It uses constants to
+            enable generic code.
 
-        :param key: key to find the information to identify record class and unique field
-        :type key: string
-        :param unique_field: unique field value
-        :type unique_field: str
-        :return: dictionary containing the boolean found, and the record
-        :rtype: dict
+            :param key: key to find the information to identify record class and unique field
+            :type key: string
+            :param unique_field: unique field value
+            :type unique_field: str
+            :return: dictionary containing the boolean found, and the record
+            :rtype: dict
         '''
         output = {'found': False, 'record': record}
         if key in crud.ASSOCIATION_RECORD_KEYS:
@@ -422,15 +419,15 @@ class ParaDbUpdateProcessProd(ParaDbUpdateProcess):
 
     def dictionary_to_find_association_records(self, record, key):
         '''
-        dictionary_to_find_association_records creates the dictionary needed in the find method to
-        find an existing association method
+            dictionary_to_find_association_records creates the dictionary needed in the find method to
+            find an existing association method
 
-        :param key: key from input data used to find process data
-        :type key: str
-        :param record: record retrieved from JSON input, may or may not exist on database
-        :type record: dict
-        :return: the dictionary used to find the database record corresponding to the input record
-        :rtype: dict
+            :param key: key from input data used to find process data
+            :type key: str
+            :param record: record retrieved from JSON input, may or may not exist on database
+            :type record: dict
+            :return: the dictionary used to find the database record corresponding to the input record
+            :rtype: dict
         '''
         unique_fields = crud.CREATE_DATA[f'add_{key}']['unique_fields']
         find_dict = {}
