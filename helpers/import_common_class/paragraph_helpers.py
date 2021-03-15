@@ -143,9 +143,9 @@ def single_para(context):
     return para.retrieve_paragraphs(slug=context['slug'], is_modal=is_modal)
 
 
-def update_paragraphs_step_one(input_data):
+def retrieve_paragraphs_step_one(input_data):
     '''
-        update_paragraphs_step_one is called by a batch process created to update data.
+        retrieve_paragraphs_step_one is called by a batch process created to update data.
 
         The overall process is designed to work in both development and production.  But the prep
         happens only in development because the production database is the same as development.
@@ -158,8 +158,7 @@ def update_paragraphs_step_one(input_data):
         :return: JSON file that to be manually edited for updates
         :rtype: writes JSON file
     '''
-    updating = input_data.pop('updating', False)
-    para = ParaDbUpdatePrep(input_data, updating)
+    para = ParaDbUpdatePrep(input_data)
     para.collect_data_and_write_json()
 
 

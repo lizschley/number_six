@@ -24,16 +24,16 @@ def run(*args):
     '''
         Step Three Usage:
             * Note - designed to run in development or production
+            * IMPORTANT - using for_prod in step 3 is ONLY for testing. It will error out in production
 
         1. Make sure you have input created and edited correctly in Steps 1 and 2
             * See scripts/db_updater_s1.py
                 and scripts/documentation/update_process.md for details
-            * The edited input must have been moved to one of the following directories (see constants):
-            ***  <PROD_INPUT_JSON > (for production updates (use for_prod parameter in step 1)) or
+            * Edited input must be in one of the following directories (see constants.scripts.py):
+            ***  <PROD_INPUT_JSON > (for production updates or testing) or
             ***  <INPUT_TO_UPDATER_STEP_THREE> (for development updates)
             * if you are updating development with the for_prod parameter, the filename
-                must have constants.PROD_PROCESS_IND as a prefix (happens automatically if using
-                updated_at as an input)
+                must have constants.PROD_PROCESS_IND as a prefix (use for_prod argument when in step 1)
 
         2. Run this script, possible parameters
         >>> python manage.py runscript -v3 db_updater_s3
@@ -49,9 +49,9 @@ def run(*args):
                         in testing.
         * updating - will process the input data, doing updates.
         * if NOT for_prod, will use the ParaDbUpdateProcess class (won't work in production environment)
-        * for_prod - will use the ParaDbUpdateProcessProd class
-                     will error out if if there is data that came from any other db retrieval
-                     (exception is that it allows deleting associations using delete_* keys)
+        * for_prod (or in the production environment) - will use the ParaDbUpdateProcessProd class
+                     will error out if Step 1 hasn't been run with for_prod parameter (creates lookup)
+                     will error out if you use add_* as an input key
      '''
     process_data = init_process_data(args)
     if process_data.get('error'):
@@ -100,7 +100,7 @@ def switches_from_args(updating, for_prod):
 
 def establish_input_directory(process_data):
     ''' The process and files depend on the process data '''
-    if process_data['for_prod']:
+    if config('ENVIRONMENT') == 'production':
         process_data['input_directory'] = constants.PROD_INPUT_JSON
         process_data['class'] = ParaDbUpdateProcessProd
     elif config('ENVIRONMENT') == 'development':
@@ -129,9 +129,10 @@ def call_process(process_data):
 
 def prod_or_dev(process_data):
     ''' Returns different message based on the process_data '''
+    env = config('ENVIRONMENT')
     if process_data['for_prod']:
-        return 'production-like files to use for updating'
-    return 'development files to use for updating'
+        return f'production-like files to use for updating, env=={env}'
+    return f'development files to use for updating, env=={env}'
 
 
 def step_three_process(process_data):

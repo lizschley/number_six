@@ -151,6 +151,6 @@ def call_process(process_data):
 
 def step_one_process(process_data):
     ''' passes function with correct calls to common looping through json files function '''
-    num = para_helper.loop_through_files_for_db_updates(import_helper.update_paragraphs_step_one,
+    num = para_helper.loop_through_files_for_db_updates(import_helper.retrieve_paragraphs_step_one,
                                                         process_data)
     return num
