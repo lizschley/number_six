@@ -57,7 +57,7 @@ class ParaDbUpdateOrder(ParaDbUpdateProcess):
 
         if self.incorrect_keys():
             sys.exit(('Input error: Keys are incorrect: '
-                      f'group_id: {self.group_id}, category slug: {self.category_id}'))
+                      f'group_id: {self.group_id}, category_id: {self.category_id}'))
 
         if not self.counts_work():
             sys.exit(('Input error: The counts of the input list (either groups or paras must match '
@@ -68,6 +68,7 @@ class ParaDbUpdateOrder(ParaDbUpdateProcess):
                   f'{self.process_data["db_count"]}, list_len=={self.process_data["list_len"]}'))
 
     def incorrect_environment(self):
+        ''' only allow this to work in development '''
         if config('ENVIRONMENT') != 'development':
             return True
         return False

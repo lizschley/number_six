@@ -12,7 +12,7 @@
     3. Run db_updater_s3 to update the database using the Step 2 file changes
 
 
-:Output: Writes a json file to be edited or (in the future) used to update production
+:Output: Writes a json file to be edited or used to update production
 '''
 import sys
 from decouple import config
@@ -27,11 +27,12 @@ from utilities.record_dictionary_utility import RecordDictionaryUtility
 def run(*args):
     '''
         Step One Notes
-        * Read, understand and follow directions: scripts/documentation/update_process.md
+        * More complete directions as follows: scripts/documentation/update_process.md
+        * Input templates found in the following directory: data/update_and_create_json_templates
         * Step One only runs in development, since production data comes from development
-        * Preparing to run in the actual production environment and preparing to run_as_prod in
+        * Preparing to run in the actual production environment and preparing to for_prod in
           developmment, are the same in in Step One
-        * Using the run_as_prod parameter does three things:
+        * Using the for_prod parameter does three things:
           1. it prefixes the output file with <PROD_PROCESS_IND>
           2. add_* file_data input will throw an error (see update_process.md for more information)
           3. creates a dev_id to unique_key table.  This is necessary to handle new associations
@@ -41,16 +42,19 @@ def run(*args):
              or reference.
         * If you only want explicit creates (add_* and delete_* keys) and no updates, you can bypass
           step 1 entirely.  However it can be helpful to run step 1 to get the data needed to do the
-          updates (just copy over the template)
+          updates
         * You can also send in input parameters if you only need to change wording in one record and do
           not need to worry about any of the relational data
 
         Step One Usage
         >>> python manage.py runscript -v3 db_updater_s1
-        or to get the run_as_prod variations on the output file
-        >>> python manage.py runscript -v3 db_updater_s1 --script-args run_as_prod
+
+        or to get the for_prod variations on the output file
+        >>> python manage.py runscript -v3 db_updater_s1 --script-args for_prod
+
         to bypass normal Step One processing (which gets related data) and only get one type of record
         >>> python manage.py runscript -v3 db_updater_s1 --script-args paragraphs=1,2,3 (ex)
+
         For complicated one_time retrieval, edit update_utils.one_time_get_content(out_dir):
         >>> python manage.py runscript -v3 db_updater_s1 --script-args one_time=true
 
@@ -80,8 +84,8 @@ def init_process_data(args):
     ''' Gather input parameters and data from file '''
     if config('ENVIRONMENT') != 'development':
         return {'error': 'This script should only run in the development environment'}
-    run_as_prod = constants.RUN_AS_PROD in args
-    params = process_other_args(args, run_as_prod)
+    for_prod = constants.FOR_PROD in args
+    params = process_other_args(args, for_prod)
     if params['message'] != 'ok':
         return {'error': params['message']}
     if params.get('bypass_step1_prep'):
@@ -92,15 +96,15 @@ def init_process_data(args):
             RecordDictionaryUtility.create_json_list_of_records(constants.INPUT_TO_UPDATER_STEP_THREE,
                                                                 params)
         return {'bypassed': True}
-    return {'run_as_prod': run_as_prod}
+    return {'for_prod': for_prod}
 
 
-def process_other_args(args, run_as_prod):
+def process_other_args(args, for_prod):
     'Ensures the correct environment and number of parameters.'
     message = f'Error! Too many args, args == {args}'
     if len(args) > 1:
         return {'message': message}
-    if not run_as_prod and len(args) == 1:
+    if not for_prod and len(args) == 1:
         params = validate_input(args[0])
         print(f'Bypassing relational process with these args: {args}')
         return {'message': 'ok', 'bypass_step1_prep': True, 'params': params}
@@ -130,7 +134,10 @@ def check_input(args):
 def establish_directories(process_data):
     ''' Establish input and output directories for Step One '''
     process_data['input_directory'] = constants.INPUT_TO_UPDATER_STEP_ONE
-    process_data['output_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
+    if process_data['for_prod']:
+        process_data['output_directory'] = constants.PROD_INPUT_JSON
+    else:
+        process_data['output_directory'] = constants.INPUT_TO_UPDATER_STEP_THREE
     return process_data
 
 
@@ -144,6 +151,6 @@ def call_process(process_data):
 
 def step_one_process(process_data):
     ''' passes function with correct calls to common looping through json files function '''
-    num = para_helper.loop_through_files_for_db_updates(import_helper.update_paragraphs_step_one,
+    num = para_helper.loop_through_files_for_db_updates(import_helper.retrieve_paragraphs_step_one,
                                                         process_data)
     return num

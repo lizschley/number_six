@@ -17,7 +17,7 @@ def run():
         >>> python manage.py runscript -v3  screen_scraper
     '''
     params = params_to_use()
-    file_list = list_of_files(constants.INPUT_FOR_RESUME_HTML)
+    file_list = list_of_files(constants.INPUT_FOR_HTML)
     for filepath in file_list:
         params['html_path'] = filepath
         scraper = ScreenScrapeResumes(**params)

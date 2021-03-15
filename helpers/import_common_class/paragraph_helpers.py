@@ -12,14 +12,14 @@ from common_classes.para_db_update_prep import ParaDbUpdatePrep
 
 def paragraph_list_from_json(json_path):
     '''
-    paragraph_list_from_json reads JSON file that is formatted like the files
-    used to upload data to the database.  Transforms it into a dictionary that
-    can be passed to a display paragraph template
+        paragraph_list_from_json reads JSON file that is formatted like the files
+        used to upload data to the database.  Transforms it into a dictionary that
+        can be passed to a display paragraph template
 
-    :param json_path: path to the json file
-    :type json_path: str
-    :return: a dictionary formatted to best facilite displaying paragraphs
-    :rtype: dict
+        :param json_path: path to the json file
+        :type json_path: str
+        :return: a dictionary formatted to best facilite displaying paragraphs
+        :rtype: dict
     '''
     paragraphs = ParagraphsForDisplay()
     return paragraphs.retrieve_paragraphs(path_to_json=json_path)
@@ -27,12 +27,12 @@ def paragraph_list_from_json(json_path):
 
 def paragraph_json_to_db(json_path, updating=False):
     '''
-    paragraph_json_to_db
-    Run by batch job to read a json file and update the database.  There is
-    currently no return, though will probably in the future return ok or not ok
+        paragraph_json_to_db
+        Run by batch job to read a json file and update the database.  There is
+        currently no return, though will probably in the future return ok or not ok
 
-    :param json_path: path to json file
-    :type json_path: string
+        :param json_path: path to json file
+        :type json_path: string
     '''
     dict_data = json_helper.json_to_dict(json_path)
     paragraphs = ParaDbCreateProcess(updating)
@@ -41,13 +41,13 @@ def paragraph_json_to_db(json_path, updating=False):
 
 def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
     '''
-    paragraph_view_input extracts arguments for paragraph retrieval from context
-    and then uses them to retrieve paragraphs, references, etc
+        paragraph_view_input extracts arguments for paragraph retrieval from context
+        and then uses them to retrieve paragraphs, references, etc
 
-    :param context: para views, for ex: demo_paragraphs & study_paragraphs_with_group
-    :type context: dict
-    :return: context with the paragraphs added
-    :rtype: dict
+        :param context: para views, for ex: demo_paragraphs & study_paragraphs_with_group
+        :type context: dict
+        :return: context with the paragraphs added
+        :rtype: dict
     '''
     # retrieve data
     paragraphs = class_()
@@ -63,15 +63,15 @@ def paragraph_view_input(context, from_demo=False, class_=ParagraphsForDisplay):
 
 def appropriate_context(context, paragraphs):
     '''
-    appropriate_context takes the context and the data retriever and returns the information
-    to send to the template
+        appropriate_context takes the context and the data retriever and returns the information
+        to send to the template
 
-    :param context: information we already have, will be updated
-    :type context: dict
-    :param paragraphs: information returned from the data retriever
-    :type paragraphs: dict
-    :return: the information the front end needs to display the page
-    :rtype: dict
+        :param context: information we already have, will be updated
+        :type context: dict
+        :param paragraphs: information returned from the data retriever
+        :type paragraphs: dict
+        :return: the information the front end needs to display the page
+        :rtype: dict
     '''
     if utils.key_in_dictionary(paragraphs, 'groups'):
         context = cat_helper.add_paragraphs_by_group_to_context(context, paragraphs)
@@ -86,15 +86,15 @@ def appropriate_context(context, paragraphs):
 
 def retrieve_paragraphs_based_on_context(paras, context):
     '''
-    retrieve_paragraphs_based_on_context if someone chose a group in the lookup form
-    use the group_id and id itself as kwargs, for categories use category_id
+        retrieve_paragraphs_based_on_context if someone chose a group in the lookup form
+        use the group_id and id itself as kwargs, for categories use category_id
 
-    :param paras: From .../projects/study/lookup to view (context) to then parameters to retrieve paras
-    :type paras: ParagraphForDisplay object
-    :param context: started with form output and then transform and add data as needed
-    :type context: dict
-    :return: input needed to display paragraphs
-    :rtype: dict
+        :param paras: From .../projects/study/lookup - view (context), retrieve paras using selected data
+        :type paras: ParagraphForDisplay object
+        :param context: started with form output and then transform and add data as needed
+        :type context: dict
+        :return: input needed to display paragraphs
+        :rtype: dict
     '''
     group_id = context.pop('group_id', None)
     if group_id is not None:
@@ -112,13 +112,13 @@ def retrieve_paragraphs_based_on_context(paras, context):
 
 def add_collapse_variables(paragraphs):
     '''
-    add_collapse_variables adds the variables needed to collapse and expand paragraphs
-    used for standalone paragraph display
+        add_collapse_variables adds the variables needed to collapse and expand paragraphs
+        used for standalone paragraph display
 
-    :param paragraphs: dictionary paragraphs - list of paragraphs
-    :type paragraphs: dict containing list of individual paragraphs
-    :return: list of paragraphs that have collapse variables for display
-    :rtype:  dict containing list of individual paragraphs complete with collapse variables
+        :param paragraphs: dictionary paragraphs - list of paragraphs
+        :type paragraphs: dict containing list of individual paragraphs
+        :return: list of paragraphs that have collapse variables for display
+        :rtype:  dict containing list of individual paragraphs complete with collapse variables
     '''
     if 'ordered' in paragraphs['group_type']:
         return paragraphs
@@ -131,52 +131,45 @@ def add_collapse_variables(paragraphs):
 
 def single_para(context):
     '''
-    single_para gets a single para with references by para slug
+        single_para gets a single para with references by para slug
 
-    :param context: contains slug for single paragraph lookup, also contains is_modal
-    :type subtitle: dict
-    :return: one paragraph object (includes reference(s))
-    :rtype: dict
+        :param context: contains slug for single paragraph lookup, also contains is_modal
+        :type subtitle: dict
+        :return: one paragraph object (includes reference(s))
+        :rtype: dict
     '''
     para = ParagraphsForDisplayOne()
     is_modal = True if utils.key_in_dictionary(context, 'is_modal') else False
     return para.retrieve_paragraphs(slug=context['slug'], is_modal=is_modal)
 
 
-def update_paragraphs_step_one(input_data):
+def retrieve_paragraphs_step_one(input_data):
     '''
-    update_paragraphs_step_one is called by a batch process created to update data.
+        retrieve_paragraphs_step_one is called by a batch process created to update data.
 
-    The overall process is designed to work in both development and production.  But the prep
-    happens only in development because the production database is the same as development.
-    Once the manual process works seamlessly, the move data to production process can be
-    automated.  Since the content needs to be created, however, this step will always be
-    manual.
+        The overall process is designed to work in both development and production.  But the prep
+        happens only in development because the production database is the same as development.
+        Once the manual process works seamlessly, the move data to production process can be
+        automated.  Since the content needs to be created, however, this step will always be
+        manual.
 
-    :param input_data: Manually retrieved & updated data or, for production, retrieved by updated_date.
-    :type input_data: dict
-    :return: JSON file that to be manually edited for updates
-    :rtype: writes JSON file
+        :param input_data: Manually retrieved & updated data or, for prod, retrieved by updated_date.
+        :type input_data: dict
+        :return: JSON file that to be manually edited for updates
+        :rtype: writes JSON file
     '''
-    updating = input_data.pop('updating', False)
-    para = ParaDbUpdatePrep(input_data, updating)
+    para = ParaDbUpdatePrep(input_data)
     para.collect_data_and_write_json()
 
 
 def update_paragraphs_step_three(input_data):
     '''
-    update_paragraphs_step_three is called by a batch process created to update data.  There are two
-    possible processes it can call:
+        update_paragraphs_step_three is called by a batch process created to update data.
+        input_data['class'] is either 1. ParaDbUpdateProcess or 2. ParaDbUpdateProcessProd
+        (input_data, updating) are the input arguments for the __init__ method
 
-    1. ParaDbUpdateProcess or 2. ParaDbUpdateProcessProd
-
-    It will call the first one for the development process and the second one always if it is the
-    production environment, but also if you run in development with the run_as_prod script argument
-
-    :param input_data: data produced by Step one of the script or, if it is only for adding new data and
-    is not run_as_prod or production, sent in directly
-
-    :type input_data: dict
+        :param input_data - file_data->dict, plus any input parameters from the script
+        :type input_data: dict
     '''
     # print(f'inside update_para_step 3, data == {input_data}')
     updating = input_data.pop('updating', False)
@@ -187,13 +180,13 @@ def update_paragraphs_step_three(input_data):
 
 def update_paragraphs_update_order(input_data):
     '''
-    update_paragraphs_update_order is called by a batch process created to update data.
+        update_paragraphs_update_order is called by a batch process created to update data.
 
-    It calls the ParaDbUpdateOrder class
+        It calls the ParaDbUpdateOrder class
 
-    :param input_data: data produced by the db_change_order script
+        :param input_data: data produced by the db_change_order script
 
-    :type input_data: dict
+        :type input_data: dict
     '''
     # print(f'inside update_para_step 3, data == {input_data}')
     updating = input_data.pop('updating', False)

@@ -6,6 +6,7 @@
 
 import os
 from operator import itemgetter
+from decouple import config
 import constants.para_lookup as lookup
 import constants.scripts as constants
 import utilities.json_methods as json_helper
@@ -162,7 +163,7 @@ def use_file(filename, method, process_data):
     :type filename: str
     :param method: string representation of method name (tell whether step 1 or 3)
     :type method: str
-    :param process_data: passed in: environment (from environment variable) or run_as_prod, script arg
+    :param process_data: passed in: environment (from environment variable) or for_prod, script arg
     :type process_data: dictionary
     :return: Depending on factors mentioned above, pass back True if file is correct oe False, elsewise
     :rtype: bool
@@ -178,15 +179,15 @@ def use_file(filename, method, process_data):
 
 def treat_like_production(process_data):
     '''
-    treat_like_production returns true if it is the production environment (is_prod is True) or
+    treat_like_production returns true if it is the production environment (for_prod is True) or
     if we are running as prod
 
-    :param process_data: dictionary that contains is_prod and run_as_prod information
+    :param process_data: dictionary that contains is_prod and for_prod information
     :type process_data: dict
     :return: whether or not we should treat it like production
     :rtype: bool
     '''
-    return process_data['is_prod'] or process_data['run_as_prod']
+    return config('ENVIRONMENT') == 'production' or process_data['for_prod']
 
 
 def initiate_paragraph_associations(para, key_vars, association_list=None):

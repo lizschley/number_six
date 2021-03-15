@@ -1,4 +1,7 @@
 '''These will be static resusable methods to use in the batch update process'''
+import sys
+import uuid
+from django.utils.text import slugify
 
 
 class ParagraphDictionaries:
@@ -119,3 +122,29 @@ class ParagraphDictionaries:
             association = {'group_slug': slug.strip(), 'paragraph_guid': guid.strip()}
             association_list.append(association)
         return association_list
+
+    @staticmethod
+    def add_unique_field(record, key, unique_field):
+        '''
+            add_unique_field makes it possible to explicitly add unique fields to the paragraph records.
+            Not currently using this, but it has been created and tested back when it was needed and
+            there are ways to use it for sure.
+
+            :param record: dictionary that corresponds to one of the four main paragraph records
+            :type record: dict
+            :param key: key used to find the information necessary to run generic creates and updates
+            :type key: str
+            :param unique_field: key that is used to identify records, always unique for given db table
+            :type unique_field: str
+            :return: dictionary with necessary information to create a new record
+            :rtype: dict
+        '''
+        if key == 'references':
+            record[unique_field] = slugify(record['link_text'])
+        elif key == 'paragraphs':
+            record[unique_field] = str(uuid.uuid4())
+        elif key in ('categories', 'groups'):
+            record[unique_field] = slugify(record['title'])
+        else:
+            sys.exit(f'Error! Invalid key in add_unique_field, key == {key} & record == {record}')
+        return record

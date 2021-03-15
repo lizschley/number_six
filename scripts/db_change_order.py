@@ -1,13 +1,15 @@
 '''
     ref: https://django-extensions.readthedocs.io/en/latest/runscript.html
 
-    Make sure you have read and understood process: scripts/documentation/update_process.md
+    Run scripts/db_updater_s1.py with json:  {"group_ids": [35]} or {"category_ids": [1]} (examples)
 
-    Three part process (this is Step 3):
-    1. copy and edit json to be edited, then run scripts/db_updater_s1.py
-    2. Start with Step 1 output data and edit what you want updated and delete the rest
-    3. Run this script to update the database using the Step 2 file changes
-        (run method has usage information)
+    Follow instructions in run method.
+
+    Note - This script will only change the paragraphs (or group) order, but if you find yourself
+    updating the update the paragraph text
+    First - delete the group_id or the category_id in the input file:
+           (<INPUT_TO_UPDATER_STEP_THREE> (in scripts/constants))
+    Then - run the the same input with the db_updater_s3 script
 
 :returns: nothing
 '''
@@ -21,16 +23,26 @@ from common_classes.para_db_update_order import ParaDbUpdateOrder
 
 def run(*args):
     '''
-        Step Three Usage:
-            * Note - designed to run in development or production
+        This runs Step Three, which is designed to run in development only
 
-        1. Make sure you have input created and edited correctly in Steps 1 and 2
-            * See scripts/db_updater_s1.py
-                and scripts/documentation/update_process.md for details
-            * The edited input must have been moved to one of the following directories (see constants):
-            ***  <INPUT_TO_UPDATER_STEP_THREE>
+        Prerequisites:
+        Step 1. Make sure you have input created and edited correctly in Steps 1 and 2
+            Run scripts/db_updater_s1.py with json, example below:
+               {"group_ids": [35]} OR {"category_ids": [1]}
+            Output will be in <INPUT_TO_UPDATER_STEP_THREE> (in scripts/constants)
 
-        2. Run this script, possible parameters
+        Step 2. Add key "group_id": 35 (group_id from Step One Json file)
+                Also keep paragraph list intact:  Need all the records, plus the id, guid and text
+                     keep the groupparagraph list intact as well
+                     Reorder the paragraph records to be the desired order
+
+                ----> OR <-----
+
+                Add key "category_id": 1 (category_id from Step One Json file)
+                Also keep the group list intact
+                Reorder the group records to be the desired order
+
+        3. Run this script, possible parameters
         >>> python manage.py runscript -v3 db_change_order --script-args
         or
         >>> python manage.py runscript -v3 db_change_order --script-args updating
@@ -52,8 +64,8 @@ def run(*args):
 def init_process_data(args):
     ''' Gather information for Step Three, in order to update the database '''
     updating = False
-    if constants.RUN_AS_PROD in args:
-        return f'{constants.RUN_AS_PROD} is invalid for this process'
+    if constants.FOR_PROD in args:
+        return f'{constants.FOR_PROD} is invalid for this process'
     if constants.UPDATING in args:
         updating = True
     message = test_for_errors(args, updating)

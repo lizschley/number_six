@@ -26,31 +26,23 @@ def valid_non_blank_string(str_to_check):
     return not res
 
 
-def slugify_string(input_str):
-    '''
-    slugify_string slugifies the input string.  This is a convenience method, currently for creating
-    reference links for a new reference record in a new paragraph record.
-
-    :param input_str: string to slugify
-    :type input_str: str
-    :return: slugified version of the input string
-    :rtype: str
-    '''
-    return slugify(input_str)
-
-
-def archive_files_from_input_directories(include_not_done=True):
+def archive_files_from_input_directories(**kwargs):
     '''
     archive_files_from_input_directories moves the files used for processing input data to
     the archive location
 
+    It offers the option to exclude certain directories.  This is driven by kwargs and constants
+
     :param include_done: whether to also move files that haven't been manually moved to done or loaded
     :type include_done: bool, optional
     '''
-    in_dirs = scripts.ONLY_DONE_INPUT_DIRECTORIES
+    in_dirs = scripts.ALWAYS_ARCHIVE_INPUT_DIRECTORIES
     num_processed = 0
-    if include_not_done:
+    if key_not_in_dictionary(kwargs, 'exclude_not_done'):
         in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
+    if key_not_in_dictionary(kwargs, 'exclude_prod'):
+        in_dirs.append(scripts.PROD_INPUT_DIRECTORY)
+
     target = config('USED_INPUT_FINAL_DIRECTORY', default='')
     if len(target) < 10:
         sys.exit('Target directory does not exist. Checks USED_INPUT_FINAL_DIRECTORY env variable')
@@ -289,5 +281,3 @@ def dictionary_list_from_csv(filepath):
         reader = csv.DictReader(file)
         return_list = list(reader)
     return return_list
-
-
