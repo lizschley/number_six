@@ -11,7 +11,7 @@ The goal is the same.  Creates, retrievals, updates and deletions (besides resea
 5. ParagraphReference - associates a paragraph with a reference.  It is also a many-to-many relationship
 6. Category - associates one category with many groups.  Groups can be ordered using the cat_sort field in the group record.
 ## Creating Paragraph Data
-The normal create process runs only in development.  It will throw an error if you try to run it in production.  The script is scripts/create_paragraphs.py and corresponds to a class (ParaDbCreateProcess). The input data is in json format and uses this template: data/update_and_create_json_templates/create_dev_input_template.json.  Using this template, you can create a group with multiple associated paragraphs.  You can also create many references.
+The normal create process runs only in development.  It will throw an error if you try to run it in production.  The script is scripts/create_paragraphs.py and corresponds to a class (ParaDbCreateProcess). The input data is in json format and uses this template: data/crud_input_templates/create_dev_input_template.json.  Using this template, you can create a group with multiple associated paragraphs.  You can also create many references.
 
 The paragraph creation is for one group at a time and there is no way to create a paragraph without a group. Each paragraph within a "paragraphs" list will be automatically associated with the group.  If the group already exists, the create process uses the group["group_title"] to look up the group record and automatically associates the paragraph with the group.  If the group is found, the program will ignore any other group fields.  Sometimes paragraphs within a group are ordered.  This will happen programmatically, based on the paragraph order in the input data's paragraphs list.
 
@@ -25,7 +25,7 @@ You can create the following records using the db_update process: category, grou
 You can update the following records using the db_update process: paragraph, category, group, reference and group_paragraph
 You can delete the following records using the db_update process: group_paragraph and paragraph_reference
 ### Step One
-To update records, it is important to retrieve the existing record.  This is what step one does.  It also retrieves all the related data.  To retrieve only the data you want to update, send in information, such as record ids.  All of the possibilites for retrieving the records and their related data are in data/update_and_create_json_templates/update_dev_input_template.json. The script will loop through the json files in the data/data_for_updates directory.
+To update records, it is important to retrieve the existing record.  This is what step one does.  It also retrieves all the related data.  To retrieve only the data you want to update, send in information, such as record ids.  All of the possibilites for retrieving the records and their related data are in data/crud_input_templates/update_dev_input_template.json. The script will loop through the json files in the data/data_for_updates directory.
 
 Generally, I move a file in the /data/data_for_updates/dev_input_step_one/save folder to the dev_input_step_one directory and modify it to be what I want.
 
