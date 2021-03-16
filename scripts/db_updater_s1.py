@@ -28,7 +28,7 @@ def run(*args):
     '''
         Step One Notes
         * More complete directions as follows: scripts/documentation/update_process.md
-        * Input templates found in the following directory: data/update_and_create_json_templates
+        * Input templates found in the following directory: data/crud_input_templates
         * Step One only runs in development, since production data comes from development
         * Preparing to run in the actual production environment and preparing to for_prod in
           developmment, are the same in in Step One

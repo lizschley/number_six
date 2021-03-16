@@ -12,4 +12,3 @@ else:
 S3_CLOUDFRONT = 'https://dirl4bhsg8ywj.cloudfront.net/static/'
 
 BASE_HTML = os.path.join(settings.BASE_DIR, 'templates/base.html')
-STATIC_FILE_VERSIONS = os.path.join(settings.BASE_DIR, 'data/file_data/static_file_versions.json')
