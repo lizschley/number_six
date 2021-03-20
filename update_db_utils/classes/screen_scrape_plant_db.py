@@ -33,7 +33,7 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         html = self.retrieve_data()
         self.step_through_html(html)
         print(f'processed {self.process_data["num_records"]} records')
-        # self.create_content(self.process_data['references'], self.process_data['paragraphs'])
+        self.create_content(self.process_data['references'], self.process_data['paragraphs'])
 
     def retrieve_data(self):
         '''
@@ -43,7 +43,6 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         if self.url:
             res = requests.get(self.url)
             html = res.text
-
         return html
 
     def step_through_html(self, html):
@@ -57,17 +56,6 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
             if idx > 3:
                 self.process_row(cells)
                 self.create_para()
-                continue
-            self.test_headers(cells)
-
-    def test_headers(self, cells):
-        ''' ensure headers are correct '''
-        for idx, cell in enumerate(cells):
-            if constants.AC_NATIVE_PLANT_HEADERS[idx] in cell.get_text():
-                print(f'working ok: text == {cell.get_text()}')
-            else:
-                print((f'error! idx=={idx} template=={constants.AC_NATIVE_PLANT_HEADERS[idx]}; '
-                       f'text == {cell.get_text()}'))
 
     def process_row(self, cells):
         ''' loop through table columns for the given row. Process each one '''
@@ -75,7 +63,6 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         self.process_data['text_dictionary'] = copy.deepcopy(constants.TEXT_TEMPLATE)
         for idx, cell in enumerate(cells):
             col = constants.AC_NATIVE_PLANT_HEADERS[idx]
-            print(f'idx=={idx} col=={col} size cells = {len(cells)}')
             self.process_data[col] = {}
             if col == 'Scientific/Common Name':
                 self.name_column(cell, col)
@@ -142,8 +129,8 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         ''' use url and knowledge of data to create new a new reference record '''
         url = self.return_usda_url(usda_url)
         self.process_data[key]['scientific_name'] = short_text.replace(' ', '-')
-        link_text = 'USDA_' + short_text.title().replace(' ', '')
-        short_text = 'USDA ' + short_text if len(short_text) < 25 else short_text
+        link_text = self.return_link_text(short_text)
+        short_text = self.return_short_text(short_text)
         self.process_data['new_ref'] = self.new_ref_dictionary(link_text, url, short_text)
         self.process_data['new_para']['link_text_list'].append(link_text)
 
@@ -160,6 +147,41 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
             return None
         return constants.USDA_BASE_PLANT_URL + temp_list[1].strip()
 
+    @staticmethod
+    def return_link_text(new_text):
+        '''
+        return_link_text truncates link text if it is too long (length == 100)
+
+        :param new_text: what will be link_text after transformations
+        :type new_text: string
+        :return: newly transformed link_text
+        :rtype: string
+        '''
+        new_text = new_text.title().replace(' ', '')
+        length = len(new_text)
+        if length < 96:
+            return 'USDA_' + new_text
+        if length < 101:
+            return new_text
+        return new_text[0:100]
+
+    @staticmethod
+    def return_short_text(short_text):
+        '''
+        return_short_text truncates short_text if it is too long (length == 30)
+
+        :param new_text: what will be short_text after transformations
+        :type new_text: string
+        :return: newly transformed short_text
+        :rtype: string
+        '''
+        length = len(short_text)
+        if length < 25:
+            return 'USDA ' + short_text
+        if length < 31:
+            return short_text
+        return short_text[0:30]
+
     def uses_column(self, cell, key):
         ''' assign this to wildlife for now.  Will have to change some text '''
         uses_list = self.extract_text_into_list(cell)
@@ -174,7 +196,8 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         where = {'key': '', 'save_text': ''}
         for text in text_list:
             if len(where['save_text']) > 3:
-                self.process_data['text_dictionary'][where['key']] = where['save_text'] + ' ' + text
+                new_text = where['save_text'] + ' ' + text
+                self.process_data['text_dictionary'][where['key']].append(new_text)
                 where['save_text'] = ''
                 where['key'] = ''
                 continue
@@ -223,7 +246,7 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
     def create_para(self):
         ''' taking span text and using it to create a paragraph '''
         self.increment_counts()
-        self.process_data['new_para']['text'] = self.create_text()
+        self.create_text()
         self.process_data['paragraphs'].append(self.process_data['new_para'])
         self.process_data['references'].append(self.process_data['new_ref'])
 
@@ -232,8 +255,7 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         self.refine_wildlife()
         printer = pprint.PrettyPrinter(indent=1, width=120)
         printer.pprint(self.process_data["text_dictionary"])
-        breakpoint()
-        return ''
+        self.loop_through_text_dictionary()
 
     def refine_wildlife(self):
         ''' Move text to appropriate text dictionary key '''
@@ -244,6 +266,33 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
         self.process_data['text_dictionary']['Wildlife Value'] = res['fix_list']
         self.process_data['text_dictionary']['Growing Conditions'] += res['new_list']
 
+    def loop_through_text_dictionary(self):
+        ''' represents one text record in one paragraph record '''
+        plant = self.process_data['text_dictionary']
+        for key in constants.TEXT_KEYS:
+            if len(plant[key]) == 0:
+                continue
+            self.begin_plant_key(key)
+            if len(plant[key]) == 1:
+                self.assign_one_line(key, plant)
+                continue
+            self.assign_multiple_lines(key, plant)
+            self.process_data['new_para']['text'] += constants.END_KEY
+
+    def begin_plant_key(self, key):
+        ''' Always start a key on a new line (<p> starts a new line, so don't worry about first one) '''
+        finish_last = constants.END_KEY if len(self.process_data['new_para']['text']) > 1 else ''
+        self.process_data['new_para']['text'] += finish_last + constants.BEG_KEY + '<strong>' + key
+
+    def assign_one_line(self, key, plant):
+        ''' key and text on same line '''
+        self.process_data['new_para']['text'] += ': </strong>' + plant[key][0]
+
+    def assign_multiple_lines(self, key, plant):
+        ''' key above list of items '''
+        self.process_data['new_para']['text'] += '</strong>'
+        for line in plant[key]:
+            self.process_data['new_para']['text'] += '<li>' + line + '</li>'
 
     def increment_counts(self):
         '''

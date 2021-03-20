@@ -18,12 +18,15 @@ AC_NATIVE_SUBTITLE_NOTE = ('Text was originally screen scraped from Albermarle C
                            'Native Plant Database: '
                            '<a href="http://webapps.albemarle.org/NativePlants/list.asp?ShowAll=ALL" '
                            'class="reference_link" '
-                           'target="_blank">Albemarle Native DB retrieved on 20210318</a> '
+                           'target="_blank">Albemarle Native DB retrieved on 20210317</a> '
                            'The text here, has not been changed since.')
 
 TEXT_KEYS = ('Type of Plant', 'Native Status', 'Leaves', 'Flowers', 'Size', 'Wildlife Value',
              'Caterpillars', 'Characteristics', 'Growing Conditions', 'Uses',
              'Stormwater Facilities')
+
+BEG_KEY = '<p class=\"plant_descriptions\">'
+END_KEY = '</p>'
 
 TEXT_TEMPLATE = {
     'Leaves': [],
