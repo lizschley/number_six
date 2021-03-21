@@ -4,7 +4,6 @@ import os
 import shutil
 import sys
 from decouple import config
-from django.utils.text import slugify
 import constants.scripts as scripts
 
 
@@ -281,3 +280,32 @@ def dictionary_list_from_csv(filepath):
         reader = csv.DictReader(file)
         return_list = list(reader)
     return return_list
+
+
+def separate_lists(fix_list, remove_list):
+    ''' returns two lists: 1. intersection of two input lists (new_list),
+                           2. fix_list without the items '''
+    new_list = []
+    for remove_item in remove_list:
+        for idx, val in enumerate(fix_list):
+            if remove_item in val:
+                new_list.append(fix_list.pop(idx))
+    return {'fix_list': fix_list, 'new_list': new_list}
+
+
+def file_path_with_extension(directory, ext):
+    ''' simple retrieve file with given extension in given directory '''
+    for filename in os.listdir(directory):
+        if use_file(filename, ext):
+            file_path = os.path.join(directory, filename)
+            return file_path
+        continue
+    return None
+
+
+def use_file(filename, ext):
+    ''' ensure file extension is correct '''
+    temp = filename.split('.')
+    if temp[-1] == ext:
+        return True
+    return False

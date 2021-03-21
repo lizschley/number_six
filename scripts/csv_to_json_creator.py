@@ -1,5 +1,10 @@
 '''
     This is a csv to JSON utility to edit and use however is needed
+
+    For example, a way to quickly move paragraphs to and from various groups
+
+    The input is created using sql like:  originals/sql/comma_delim_group_slugs_with_text_guids.sql
+    Must be to be modified, but it saves a lot of typing
 '''
 # pylint: disable=missing-function-docstring
 import os
@@ -19,7 +24,7 @@ def run():
         usage as follows:
         >>> python manage.py runscript -v3 csv_to_json_creator
 
-        Input data, like so:
+        Example input data, like so:
         [
             {
                 'guid': 'd40b2a7a-21a8-4b58-81b2-1beabba8bd6b',

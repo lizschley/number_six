@@ -75,24 +75,23 @@ class ParagraphDbInputCreator():
         '''
         self.assign_references(references)
         print(f'size of input paragraphs = {len(paragraphs)}')
-        print('first 30 for input')
         self.first_80(paragraphs)
         self.assign_paragraphs(paragraphs)
         print(f'size of output paragraphs = {len(self.output_to_json["paragraphs"])}')
-        print('first 30 for output')
         self.first_80(self.output_to_json["paragraphs"])
         if self.json_only:
             self.write_json_file()
         else:
             self.create_records()
 
-    def first_80(self, para_list):
+    @staticmethod
+    def first_80(para_list):
+        ''' print first line of para text '''
         num = 0
         for para in para_list:
             num += 1
             line = para['text']
             print(f'#{num}. {line[0:80]}')
-
 
     @staticmethod
     def base_dictionary():
