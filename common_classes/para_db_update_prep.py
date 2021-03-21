@@ -444,7 +444,7 @@ class ParaDbUpdatePrep(ParaDbMethods):
             return
         if row.pr_id in self.included_ids['paragraph_reference']:
             return
-        self.included_ids['group_paragraph'].append(row.pr_id)
+        self.included_ids['paragraph_reference'].append(row.pr_id)
         para_ref = para_dict.paragraphreference_dictionary()
         para_ref['id'] = row.pr_id
         para_ref['reference_id'] = row.pr_reference_id
