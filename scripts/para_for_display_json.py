@@ -1,10 +1,11 @@
 '''
-    Reads a json file creates new paragraphs
+    Reads a json file and either displays how it looks after basic paragraph processing
 
 :returns: nothing
 '''
 import os
 import sys
+import pprint
 import helpers.import_common_class.paragraph_helpers as import_helper
 import helpers.no_import_common_class.paragraph_helpers as no_import_helper
 import constants.scripts as constants
@@ -12,17 +13,18 @@ import constants.scripts as constants
 
 def run(*args):
     '''
-        test the create process use no args
+        For simply creating and displaying input, no args, though you can specify filename:
         >>> python manage.py runscript -v3  create_paragraphs --script-args
-
-        run the updates, use updating
-        >>> python manage.py runscript -v3  create_paragraphs --script-args updating
+            filename=/Users/liz/development/number_six/data/data_for_creates/loaded/chinese_holly_load.json
+        or
+        >>> python manage.py runscript -v3  create_paragraphs (picks first json file in directory)
     '''
-    updating = True if constants.UPDATING in args else False
     filename = filename_checker(args, constants.SCRIPT_PARAM_SUBSTR['filename'])
-    print(f'Running paragraph creator with updating == {updating} and filename == {filename}')
+    print(f'filename == {filename}')
 
-    import_helper.paragraph_json_to_db(filename, updating)
+    paragraphs = import_helper.paragraph_list_from_json(filename)
+    printer = pprint.PrettyPrinter(indent=1, width=120)
+    printer.pprint(paragraphs)
 
 
 def filename_checker(args, subs):

@@ -84,3 +84,20 @@ body .num_six pre code {
 body .num_six code {
   color: #7D6608;
 }
+
+body p.plant_descriptions {
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+body li.plant_descriptions {
+  margin-left: 10px;
+  list-style-type: none;
+}
+
+body li.plant_descriptions + p {
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}

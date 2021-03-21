@@ -28,8 +28,8 @@ INPUT_TO_UPDATER_STEP_ONE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_in
 INPUT_TO_UPDATER_STEP_THREE = os.path.join(BASE_DIR, 'data/data_for_updates/dev_input_step_three')
 PROD_INPUT_JSON = os.path.join(BASE_DIR, 'data/data_for_updates/prod_input_json')
 
-# screen scraping input html
-INPUT_FOR_HTML = os.path.join(BASE_DIR, 'data/input_html')
+# screen scraping input html and any other one_off
+GENERAL_INPUT = os.path.join(BASE_DIR, 'data/input')
 
 # filename prefixes
 PROD_PROCESS_IND = 'prod_input_'

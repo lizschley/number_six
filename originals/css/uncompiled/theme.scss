@@ -94,4 +94,23 @@ body {
       color: $code_color;
     }
   }
+
+  p.plant_descriptions {
+    margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  li.plant_descriptions {
+    margin-left: 10px;
+    list-style-type: none;
+
+  }
+
+  li.plant_descriptions + p {
+    margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+  }
 }

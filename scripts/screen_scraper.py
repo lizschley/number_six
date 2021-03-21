@@ -5,10 +5,8 @@
 :returns: nothing
 '''
 # pylint: disable=c0301
-import os
 # from pprint import pprint
-from update_db_utils.classes.screen_scrape_resumes import ScreenScrapeResumes
-import constants.scripts as constants
+from update_db_utils.classes.screen_scrape_plant_db import ScreenScrapePlantDb
 
 
 def run():
@@ -17,31 +15,8 @@ def run():
         >>> python manage.py runscript -v3  screen_scraper
     '''
     params = params_to_use()
-    file_list = list_of_files(constants.INPUT_FOR_HTML)
-    for filepath in file_list:
-        params['html_path'] = filepath
-        scraper = ScreenScrapeResumes(**params)
-        scraper.screen_scrape_html()
-
-
-def list_of_files(in_directory):
-    '''
-    list_of_files gets a list of files from the input directory
-
-    :param in_directory: path to a directory containing files to put in a list
-    :type in_directory: str
-    :return: list of filepaths
-    :rtype: list
-    '''
-    file_list = []
-    for filename in os.listdir(in_directory):
-        temp = filename.split('.')
-        if len(temp) < 2 or temp[1] != 'html':
-            continue
-        file_path = os.path.join(in_directory, filename)
-        if os.path.isfile(file_path):
-            file_list.append(file_path)
-    return file_list
+    scraper = ScreenScrapePlantDb(**params)
+    scraper.screen_scrape_html()
 
 
 def params_to_use():
@@ -52,7 +27,6 @@ def params_to_use():
                as part of the dictionary
     '''
     return {
-        'group_title': 'Temporary',
         'json_only': True,
         'updating': False
     }

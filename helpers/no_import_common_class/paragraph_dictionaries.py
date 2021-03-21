@@ -148,3 +148,13 @@ class ParagraphDictionaries:
         else:
             sys.exit(f'Error! Invalid key in add_unique_field, key == {key} & record == {record}')
         return record
+
+    @staticmethod
+    def text_only_paragraph_updates(guid, pk_id, text):
+        ''' use this for updates to text field only when editing programmaically '''
+        return {
+            'guid': guid,
+            'id': pk_id,
+            'text': text,
+        }
+
