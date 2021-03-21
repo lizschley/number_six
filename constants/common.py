@@ -11,3 +11,5 @@ PROD_VERSION_KEY = 'production_versions'
 DEV_VERSION_KEY = 'development_versions'
 
 STATIC_FILE_KEYS = ('css', 'flashcard', 'script', 'cat')
+
+JSON_EXT = 'json'
