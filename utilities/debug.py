@@ -1,22 +1,15 @@
 '''
-    this is a one time cleanup, may reuse later
-
-    Takes normal json created by scripts.db_updater_s1 and makes methodical updates to each record
-    It outputs the file to the normal input file for scripts.db_updater_s3 to make the db updates
-
-    * it just takes the first json file it finds.  It doesn't check anything other than the JSON ext
-    * uses ParagraphDictionaries.text_only_paragraph_updates(guid, pk_id, text) for each record
+    this is a one time bug fix helper, may reuse later
 '''
 import sys
 import constants.common as constants
 import constants.file_paths as file_paths
 import utilities.json_methods as json_helper
 import utilities.random_methods as utils
-import utilities.debug as me
 
 
 def run_analysis():
-    ''' Drives updates to the paragraphs with the mistakes and new ideas left by plant screen scraping'''
+    ''' driver '''
     file_path = utils.file_path_with_extension(file_paths.INPUT_DIR, constants.JSON_EXT)
     if file_path is None:
         sys.exit(f'No files with extension=={constants.JSON_EXT} in directory: {file_paths.INPUT_DIR}')
@@ -26,7 +19,7 @@ def run_analysis():
 
 
 def loop_through_paras(indata):
-    ''' takes a dictionary as input, transforms it and returns a new dictionary '''
+    ''' looping through paras from Step 1 output (Step 3 input) '''
     print(f'num paras =={len(indata["paragraphs"])}')
     print(f'num gp =={len(indata["group_paragraph"])}')
     no_guid = 0
@@ -52,7 +45,7 @@ def loop_through_paras(indata):
 
 
 def loop_through_gp(indata):
-    ''' takes a dictionary as input, transforms it and returns a new dictionary '''
+    ''' why do the group paras stop being written '''
     for gp in indata['group_paragraph']:
         para_id = gp['paragraph_id']
         res = utils.find_dictionary_from_list_by_key_and_value(indata['paragraphs'], 'id', para_id)
