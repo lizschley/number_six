@@ -1,36 +1,5 @@
 # portfolio
- Project created for learning Python and Django, fun, study and job search
+Project created for learning Python and Django, fun, study and job search
 
- **This is a work in progress in the early stages**
+The [website](https://lizschley.com/) for this is currently deployed on AWS. There is some information about the site on [the demo page:](https://lizschley.com/projects/demo).  
 
-The following steps are not complete, for example you need to have Python and a database
-set up.  Later on, in a later stage of development, there will be more complete instructions.
-
-
-1. change directory to the common directory for development
-
-`>> cd development`
-
-2. Clone the code
-
-`>> git clone git@github.com:lizschley/number_six.git`
-
-3. Change into the base directory and create the virtual environment. There are many ways to do this, but this is what I did.
-
-`>> cd development/number_six`
-
-`>> virtualenv num_six_venv`
-
-4 Activate the virtual environment
-
-`>> source num_six_venv/bin/activate`
-
-5. Install the requirements necessary
-
-`>> pip install -r requirements.txt`
-
-6. Run the server
-
-`>> python manage.py runserver`
-
-7. URL is localhost: http://127.0.0.1:8000/
