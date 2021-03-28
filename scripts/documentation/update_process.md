@@ -77,12 +77,12 @@ My experience was that having all of those paragraphs in front of me, made me wa
 ## Creates and Updates in Production
 I have lots of plans to automate this, but for now there are no real pain points.  Once the process is no longer new, the exact automation needed will become clear.
 ### Step One
-This is the data retrieval step and there is input data designed for updating production: [retrieval based on updated date](https://github.com/lizschley/number_six/blob/develop/data/data_for_updates/dev_input_step_one/save/num_days_before.json).  It can be changed to hours. Any of the standard data retrieval inputs will work, however, as long as you get the related data. To do this, use the for_prod parameter when retrieving data to update production (see the db_updater scripts for usage) In Step One this does two things:
+This is the data retrieval step and, it only gets run in development.  If the data is being used to update production, the [retrieval](https://github.com/lizschley/number_six/blob/develop/data/data_for_updates/dev_input_step_one/save/num_days_before.json) is generally based on updated date. It can be changed to hours. Any of the standard data retrieval inputs will work, however, as long as you use the for_prod parameter (See [db_updater_s1](https://github.com/lizschley/number_six/blob/develop/scripts/db_updater_s1.py) for usage.) In Step One this does two things:
 1. Names the input file correctly
 2. Creates a lookup table that associates a given development id to the unique key for the corresponding record.  Usually these are slugs, but for paragraphs, we use a guid.  This is vital information when creating new association.
 ### Step Two - always skip when updating production
 ### Step Three
-[db_updater_s3](https://github.com/lizschley/number_six/blob/develop/scripts/db_updater_s3.py) can be run in development or in production. If it is in the production environment, using the for_prod argument will raise an error.  In step three, the for_prod variable is for testing production code in a test environment.
+[db_updater_s3](https://github.com/lizschley/number_six/blob/develop/scripts/db_updater_s3.py) can be run in development or in production. If it is in the production environment, using the for_prod argument will raise an error.  In step three, the for_prod argument is only for testing production code in the test or development environment.
 
 For the production environment (and non-production with for_prod argument (testing only)):
 1. Input data will be in [<PROD_INPUT_JSON>](https://github.com/lizschley/number_six/blob/develop/constants/scripts.py).
@@ -92,4 +92,4 @@ Some additional information about running in production:
 1. ParaDbUpdateProcessProd will raise an error if there is no lookup table (see Step One above)
 2. ParaDbUpdateProcessProd will raise an error if there are any add_* keys (explicit creates not allowed)
 3. Data is created in production, by looking up the development record (supplied by the Step One data retrieval that was run in development) with the unique key.  If the record does not exist, it is created.
-4. Once the new record is found or created, the production primary key is added to the lookup table.  When it comes time to process associations, we can create the associations using the production ids instead of the devlopment ids.
+4. Once the new record is found or created, the production primary key is added to the lookup table.  When it comes time to process associations, we can create the associations using the production ids instead of the development ids.
