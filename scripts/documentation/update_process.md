@@ -77,9 +77,7 @@ My experience was that having all of those paragraphs in front of me, made me wa
 ## Creates and Updates in Production
 I have lots of plans to automate this, but for now there are no real pain points.  Once the process is no longer new, the exact automation needed will become clear.
 ### Step One
-Since development is the source of truth, [db_updater_s3](https://github.com/lizschley/number_six/blob/develop/scripts/db_updater_s3.py) is only run in development.  We have special input data designed for updating production: [retrieval based on updated date](https://github.com/lizschley/number_six/blob/develop/data/data_for_updates/dev_input_step_one/save/num_days_before.json).  It can be changed to hours. Any of the standard inputs will work, however, as long as you get the related data. 
-
-It is important to use the for_prod parameter when retrieving data to update prodcution (see the db_updater scripts for usage) In Step One this does two things:
+This is the data retrieval step and there is input data designed for updating production: [retrieval based on updated date](https://github.com/lizschley/number_six/blob/develop/data/data_for_updates/dev_input_step_one/save/num_days_before.json).  It can be changed to hours. Any of the standard data retrieval inputs will work, however, as long as you get the related data. To do this, use the for_prod parameter when retrieving data to update production (see the db_updater scripts for usage) In Step One this does two things:
 1. Names the input file correctly
 2. Creates a lookup table that associates a given development id to the unique key for the corresponding record.  Usually these are slugs, but for paragraphs, we use a guid.  This is vital information when creating new association.
 ### Step Two - always skip when updating production
