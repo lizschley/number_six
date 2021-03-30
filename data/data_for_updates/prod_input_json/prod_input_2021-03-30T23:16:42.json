@@ -1,0 +1,67 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 8,
+            "id": 101,
+            "order": 1,
+            "paragraph_id": 113
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 1,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 8,
+            "note": "no-title-display",
+            "short_name": "Reverse Chronological",
+            "slug": "reverse-chronological-resume",
+            "title": "Reverse Chronological Resume"
+        }
+    ],
+    "paragraph_reference": [],
+    "paragraphs": [
+        {
+            "guid": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "id": 113,
+            "image_info_key": "to-right",
+            "image_path": "projects/img/LexisNexisCharlottesville.jpg",
+            "note": "",
+            "short_title": "Resume Summary",
+            "slug": "resume-summary",
+            "standalone": false,
+            "subtitle": "Charlottesville, VA",
+            "text": "<p>Experienced back end web developer who loves to program. For the past year, Python has been my main language, but for the prior six and a half years worked mostly with Ruby on Rails, with some Javascript and PHP.  Still earlier, Java was my main language. Worked for four years with AWS (S3, EC2, SNS, SQS, Aurora & Cloudfront) and over ten years with relational databases, most recently Postgres and mySql.</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "8": "reverse-chronological-resume",
+            "reverse-chronological-resume": {
+                "dev_id": 8
+            }
+        },
+        "paragraphs": {
+            "113": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "1d9e158a-2812-4c1a-96b1-62d295cfb317": {
+                "dev_id": 113
+            }
+        },
+        "references": {}
+    },
+    "references": []
+}
