@@ -48,12 +48,18 @@ body {
     height: 70%;
     height: auto;
     margin: 3px;
+    cursor: default;
   }
 
   .default {
     max-width: 410px;
     height: auto;
     margin: 5px;
+    cursor: default;
+  }
+
+  .question {
+    cursor: default;
   }
 
   .demo {
