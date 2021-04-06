@@ -1,0 +1,1469 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        },
+        {
+            "category_type": "study",
+            "id": 5,
+            "slug": "study",
+            "title": "Study"
+        },
+        {
+            "category_type": "modal",
+            "id": 7,
+            "slug": "category-for-popups",
+            "title": "Category for Popups"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 8,
+            "id": 101,
+            "order": 1,
+            "paragraph_id": 113
+        },
+        {
+            "group_id": 8,
+            "id": 102,
+            "order": 2,
+            "paragraph_id": 114
+        },
+        {
+            "group_id": 8,
+            "id": 103,
+            "order": 3,
+            "paragraph_id": 115
+        },
+        {
+            "group_id": 8,
+            "id": 104,
+            "order": 4,
+            "paragraph_id": 116
+        },
+        {
+            "group_id": 8,
+            "id": 105,
+            "order": 5,
+            "paragraph_id": 117
+        },
+        {
+            "group_id": 8,
+            "id": 106,
+            "order": 6,
+            "paragraph_id": 118
+        },
+        {
+            "group_id": 54,
+            "id": 808,
+            "order": 1,
+            "paragraph_id": 745
+        },
+        {
+            "group_id": 32,
+            "id": 268,
+            "order": 1,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 32,
+            "id": 258,
+            "order": 2,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 32,
+            "id": 289,
+            "order": 3,
+            "paragraph_id": 213
+        },
+        {
+            "group_id": 32,
+            "id": 282,
+            "order": 4,
+            "paragraph_id": 212
+        },
+        {
+            "group_id": 32,
+            "id": 285,
+            "order": 5,
+            "paragraph_id": 214
+        },
+        {
+            "group_id": 32,
+            "id": 236,
+            "order": 6,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 32,
+            "id": 249,
+            "order": 7,
+            "paragraph_id": 230
+        },
+        {
+            "group_id": 32,
+            "id": 247,
+            "order": 8,
+            "paragraph_id": 229
+        },
+        {
+            "group_id": 32,
+            "id": 270,
+            "order": 9,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 32,
+            "id": 278,
+            "order": 10,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 32,
+            "id": 253,
+            "order": 11,
+            "paragraph_id": 231
+        },
+        {
+            "group_id": 32,
+            "id": 245,
+            "order": 12,
+            "paragraph_id": 120
+        },
+        {
+            "group_id": 32,
+            "id": 264,
+            "order": 13,
+            "paragraph_id": 233
+        },
+        {
+            "group_id": 32,
+            "id": 286,
+            "order": 14,
+            "paragraph_id": 237
+        },
+        {
+            "group_id": 33,
+            "id": 334,
+            "order": 0,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 33,
+            "id": 235,
+            "order": 1,
+            "paragraph_id": 119
+        },
+        {
+            "group_id": 33,
+            "id": 328,
+            "order": 2,
+            "paragraph_id": 275
+        },
+        {
+            "group_id": 33,
+            "id": 244,
+            "order": 3,
+            "paragraph_id": 120
+        },
+        {
+            "group_id": 33,
+            "id": 254,
+            "order": 4,
+            "paragraph_id": 208
+        },
+        {
+            "group_id": 33,
+            "id": 274,
+            "order": 5,
+            "paragraph_id": 122
+        },
+        {
+            "group_id": 33,
+            "id": 269,
+            "order": 6,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 33,
+            "id": 295,
+            "order": 7,
+            "paragraph_id": 216
+        },
+        {
+            "group_id": 33,
+            "id": 280,
+            "order": 8,
+            "paragraph_id": 228
+        },
+        {
+            "group_id": 34,
+            "id": 256,
+            "order": 1,
+            "paragraph_id": 209
+        },
+        {
+            "group_id": 34,
+            "id": 234,
+            "order": 2,
+            "paragraph_id": 119
+        },
+        {
+            "group_id": 34,
+            "id": 240,
+            "order": 3,
+            "paragraph_id": 225
+        },
+        {
+            "group_id": 34,
+            "id": 293,
+            "order": 4,
+            "paragraph_id": 205
+        },
+        {
+            "group_id": 34,
+            "id": 243,
+            "order": 5,
+            "paragraph_id": 202
+        },
+        {
+            "group_id": 34,
+            "id": 329,
+            "order": 6,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 34,
+            "id": 272,
+            "order": 7,
+            "paragraph_id": 203
+        },
+        {
+            "group_id": 34,
+            "id": 276,
+            "order": 8,
+            "paragraph_id": 204
+        },
+        {
+            "group_id": 34,
+            "id": 333,
+            "order": 9,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 34,
+            "id": 239,
+            "order": 10,
+            "paragraph_id": 201
+        },
+        {
+            "group_id": 35,
+            "id": 257,
+            "order": 1,
+            "paragraph_id": 209
+        },
+        {
+            "group_id": 35,
+            "id": 261,
+            "order": 2,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 35,
+            "id": 266,
+            "order": 3,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 35,
+            "id": 275,
+            "order": 4,
+            "paragraph_id": 122
+        },
+        {
+            "group_id": 35,
+            "id": 237,
+            "order": 5,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 35,
+            "id": 281,
+            "order": 6,
+            "paragraph_id": 235
+        },
+        {
+            "group_id": 35,
+            "id": 277,
+            "order": 7,
+            "paragraph_id": 227
+        },
+        {
+            "group_id": 35,
+            "id": 279,
+            "order": 8,
+            "paragraph_id": 228
+        },
+        {
+            "group_id": 35,
+            "id": 251,
+            "order": 9,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 35,
+            "id": 260,
+            "order": 10,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 35,
+            "id": 330,
+            "order": 11,
+            "paragraph_id": 212
+        },
+        {
+            "group_id": 36,
+            "id": 338,
+            "order": 0,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 36,
+            "id": 335,
+            "order": 1,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 36,
+            "id": 291,
+            "order": 2,
+            "paragraph_id": 218
+        },
+        {
+            "group_id": 36,
+            "id": 332,
+            "order": 4,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 36,
+            "id": 290,
+            "order": 6,
+            "paragraph_id": 215
+        },
+        {
+            "group_id": 37,
+            "id": 255,
+            "order": 1,
+            "paragraph_id": 208
+        },
+        {
+            "group_id": 37,
+            "id": 238,
+            "order": 2,
+            "paragraph_id": 201
+        },
+        {
+            "group_id": 37,
+            "id": 271,
+            "order": 3,
+            "paragraph_id": 121
+        },
+        {
+            "group_id": 37,
+            "id": 250,
+            "order": 4,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 37,
+            "id": 262,
+            "order": 5,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 37,
+            "id": 284,
+            "order": 6,
+            "paragraph_id": 214
+        },
+        {
+            "group_id": 37,
+            "id": 288,
+            "order": 7,
+            "paragraph_id": 238
+        },
+        {
+            "group_id": 37,
+            "id": 287,
+            "order": 8,
+            "paragraph_id": 237
+        },
+        {
+            "group_id": 37,
+            "id": 265,
+            "order": 9,
+            "paragraph_id": 211
+        },
+        {
+            "group_id": 39,
+            "id": 263,
+            "order": 1,
+            "paragraph_id": 233
+        },
+        {
+            "group_id": 39,
+            "id": 242,
+            "order": 2,
+            "paragraph_id": 202
+        },
+        {
+            "group_id": 39,
+            "id": 246,
+            "order": 3,
+            "paragraph_id": 229
+        },
+        {
+            "group_id": 39,
+            "id": 259,
+            "order": 4,
+            "paragraph_id": 232
+        },
+        {
+            "group_id": 39,
+            "id": 241,
+            "order": 5,
+            "paragraph_id": 225
+        },
+        {
+            "group_id": 39,
+            "id": 331,
+            "order": 6,
+            "paragraph_id": 213
+        },
+        {
+            "group_id": 19,
+            "id": 812,
+            "order": 0,
+            "paragraph_id": 749
+        },
+        {
+            "group_id": 27,
+            "id": 809,
+            "order": 0,
+            "paragraph_id": 746
+        },
+        {
+            "group_id": 27,
+            "id": 813,
+            "order": 0,
+            "paragraph_id": 750
+        },
+        {
+            "group_id": 27,
+            "id": 811,
+            "order": 0,
+            "paragraph_id": 748
+        },
+        {
+            "group_id": 27,
+            "id": 810,
+            "order": 0,
+            "paragraph_id": 747
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 1,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 8,
+            "note": "no-title-display",
+            "short_name": "Reverse Chronological",
+            "slug": "reverse-chronological-resume",
+            "title": "Reverse Chronological Resume"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 54,
+            "note": "",
+            "short_name": "Content Management",
+            "slug": "content-management",
+            "title": "Content Management"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 32,
+            "note": "",
+            "short_name": "Working with Team",
+            "slug": "working-with-team",
+            "title": "Working with Team"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 33,
+            "note": "",
+            "short_name": "Extract, Load and Transform",
+            "slug": "extract-load-and-transform",
+            "title": "Extract, Load and Transform"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 34,
+            "note": "",
+            "short_name": "Quality and Maintenance",
+            "slug": "quality-and-maintenance",
+            "title": "Quality and Maintenance"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 35,
+            "note": "",
+            "short_name": "Analysis",
+            "slug": "analysis",
+            "title": "Analysis"
+        },
+        {
+            "cat_sort": 7,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 36,
+            "note": "",
+            "short_name": "DevOps and Automation",
+            "slug": "dev-ops-and-automation",
+            "title": "DevOps and Automation"
+        },
+        {
+            "cat_sort": 8,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 37,
+            "note": "",
+            "short_name": "Motivated to Learn",
+            "slug": "motivated-to-learn",
+            "title": "Motivated to Learn"
+        },
+        {
+            "cat_sort": 9,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 39,
+            "note": "",
+            "short_name": "Organization & Documentation",
+            "slug": "organization-and-documentation",
+            "title": "Organization and Documentation"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 5,
+            "group_type": "standalone",
+            "id": 19,
+            "note": "",
+            "short_name": "Web Applications",
+            "slug": "web-applications",
+            "title": "Web Applications"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 7,
+            "group_type": "search",
+            "id": 27,
+            "note": "",
+            "short_name": "Searchable Modal Popup",
+            "slug": "searchable-modal-popups",
+            "title": "Searchable Modal Popups"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 1255,
+            "paragraph_id": 745,
+            "reference_id": 720
+        },
+        {
+            "id": 1251,
+            "paragraph_id": 746,
+            "reference_id": 717
+        },
+        {
+            "id": 1254,
+            "paragraph_id": 750,
+            "reference_id": 720
+        },
+        {
+            "id": 1250,
+            "paragraph_id": 748,
+            "reference_id": 715
+        },
+        {
+            "id": 1253,
+            "paragraph_id": 750,
+            "reference_id": 719
+        },
+        {
+            "id": 1252,
+            "paragraph_id": 747,
+            "reference_id": 716
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "id": 113,
+            "image_info_key": "to-right",
+            "image_path": "projects/img/LexisNexisCharlottesville.jpg",
+            "note": "",
+            "short_title": "Resume Summary",
+            "slug": "resume-summary",
+            "standalone": false,
+            "subtitle": "Charlottesville, VA; liz@lizschley.org",
+            "text": "<p>Experienced back end web developer who loves to program. For the past year, Python has been my main language, but for the prior six and a half years worked mostly with Ruby on Rails, with some Javascript and PHP.  Still earlier, Java was my main language. Worked for four years with AWS (S3, EC2, SNS, SQS, Aurora & Cloudfront) and over ten years with relational databases, most recently Postgres and mySql.</p>"
+        },
+        {
+            "guid": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "id": 114,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "coconstruct-llc",
+            "standalone": false,
+            "subtitle": "CoConstruct, LLC",
+            "text": "<p><strong>QA Automation Engineer: </strong> Worked with devops quality engineers to develop a world class Azure Pipeline by setting up a UI testing framework and many tests that covered vital functionality, using data driven, screen scraping and object oriented approaches and caching for speed and efficiency. (2019 - 2020 (5 months))</p> <p><strong>Technologies:</strong> Python, Pytest, Selenium, Azure, SQL Server</p>"
+        },
+        {
+            "guid": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "id": 115,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "teachstone-training-llc",
+            "standalone": false,
+            "subtitle": "Teachstone Training, LLC",
+            "text": "<p><strong>Backend Web Developer: </strong> Worked with developers, devops, product management, QA, content and customer service to create and maintain a web application to help teachers improve their interactions with their students.  The system interfaced with third party services, including BigCommerce, FedEx and Moodle, and in-house mobile applications and multiple applications using both restful and other Rails and PHP interfaces.  Played a large role in developing a single signon system for both third party and in-house systems.  Wrote many unit and integration tests. (2013 - 2019)</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p>"
+        },
+        {
+            "guid": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "id": 116,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "medical-automation-systems-abbott",
+            "standalone": false,
+            "subtitle": "Medical Automation Systems (Abbott)",
+            "text": "<p><strong>Project Manager: </strong> Helped lead many projects through conception to release, following FDA compliant software development practices, including test plan approval, risk management and problem solving strategies. (2007 - 2012)</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p>"
+        },
+        {
+            "guid": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "id": 117,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "lexisnexis-senior-software-engineer",
+            "standalone": false,
+            "subtitle": "LexisNexis",
+            "text": "<p><strong>Senior Software Engineer: </strong> Worked as technical lead and developer for a customer-facing eCommerce web-site that interfaced with multiple order fulfillment and financial back-end systems.  Responsible for both release and test plans, timely releases, unit and integration testing and project management.  Designed and wrote an object-oriented Java web service as one of several middle-ware strategies. (1999 - 2007)</p> <p><strong>Technologies:</strong> Java web services, ASP, Javascript, XSLT, VB, FE</p> <p><strong>Computer Programmer:</strong> Moved from entry level position to Senior Software Engineer by taking courses, self-study, hard work and excellent results.  Worked on timecards, order fulfillment, invoices, pricing and subscription reporting. (1993 - 1999)</p> <p><strong>Technologies:</strong> Java, JS,  VB, Oracle, Sybase, SQL Server, Mainframe </p>"
+        },
+        {
+            "guid": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "id": 118,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "education",
+            "standalone": false,
+            "subtitle": "Education",
+            "text": "<ul><li>Masters of Science - Information Studies, Florida State University: 4.0 GPA</li> <li>BA in English, Old Dominion University</li> <li>Java Certified Java 2 Platform</li></ul>"
+        },
+        {
+            "guid": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
+            "id": 745,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>This past year, I have developed this site, which, as I discovered while playing around with |beg|drupal|end|, is a |beg|content-management-system|end| [CMS].  I have also created a small |beg_ref|lizschley_drupaldemosite_on2021040|end_ref|. In addition, I have written many plugins and blocks (in PHP) for |beg|moodle|end|, which although a |beg|learning-management-system|end|, also manages data like a CMS and, like Drupal, is open source and written in PHP.</p>"
+        },
+        {
+            "guid": "4e9128d0-fab3-435c-94c3-293af6183350",
+            "id": 211,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked with a first-time Product Manager, Customer Support, course specialists and QA to flesh out complex requirements, write new Jira tickets and to update three unfamiliar, non-intuitive and complex back-end applications. The goal, to improve the user experience in our video upload mobile application, was fulfilled.<br><strong>Technologies:</strong> Ruby, Rails, Rest API, HTML5, MySQL, Totara, PHP<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c",
+            "id": 232,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Satisfied angry and frustrated customers who were using an application with over 50 existing problems when another developer quit suddenly. Met with users individually and in small groups, organized and prioritized the problems, designed solutions and negotiated with management for additional programming resources. Resulted in a solid, usable system.<br><strong>Technologies:</strong> ACCESS, SQL Server, VB<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "id": 213,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Led numerous projects as Team Lead (also acted as developer and system architect). Delivered all releases on time, meeting the requirements with very few bugs. This success was largely because of communication with people playing the following roles: people managers, project manager, specification writers, programmers, test lead, testers and the various platform owners.<br><strong>Technologies:</strong> Java, JavaScript, SQL Server, IDMS, Sybase, XML, XSLT, Web Services, SQL, ASP<br><strong>Company:</strong>  LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "id": 212,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked with the Quality Director and Project Managers to design the Engineering Project Management processes that involved MS Project schedules and feasibility and status reporting. Upon review, the new processes were implemented with almost no changes.<br><strong>Technologies:</strong> VBA with MS Project<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "5913f339-c3e0-4270-a27e-917b827eff08",
+            "id": 214,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Learned MS Project and VBA independently, teaching the other engineering project managers enough MSP to get them over the initial learning curve. This enabled our engineering department to use MS Project in a consistent manner.<br><strong>Technologies:</strong>MS Project, VBA<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "id": 224,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Initiated and led effort to fix problem caused by Windows Security Patch by upgrading MSXML. Implementation required research into IIS security and registry settings and negotiation for a new integration server and both technical and business resources.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "e5a2790f-1f38-4b6b-a522-3b115460fb37",
+            "id": 230,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Negotiated a reorganization of what was included in various related application releases, thus making our date independent of work done by other teams. Without the foresight to negotiate this change, we would not have released until the following year.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "4b64dee4-1453-4d82-8624-03056fcf868b",
+            "id": 229,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Led six Print and CD (web application) releases: making all dates, and meeting all requirements. This success was based largely on communication, particularly listening to the development and the product management teams.<br><strong>Technologies:</strong> Java, JavaScript, SQL Server, IDMS, Sybase, SAS, XML, XSLT, Web Services, SQL, ASP, various middleware products<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "e27c5b55-6b0d-4d80-a59d-8a4efc43de04",
+            "id": 121,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>As a Technical Lead for a customer-facing web-site, familiarized myself with various middleware processes that interfaced with multiple backends, situated in three different states: Virgina, New York and Ohio.<br><strong>Technologies:</strong> Java, Javascript, ASP, Web Services, Intalio and other middleware applications, XML, XSLT, SQL Server, Sybase, IDMS<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "id": 227,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Re-designed subscriptions statistics storage and reporting. Reports went from obscurity to being widely distributed, used and emulated.<br><strong>Technologies:</strong> SAS, IDMS<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "62cf7442-c493-4b77-a74a-8b48090ca780",
+            "id": 231,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Facilitated our best Indian contractor's move to the US to manage our off-shore resources and insure quality of our team's work.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa",
+            "id": 120,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed and implemented a plan for table-based transformation in data conversion, becoming a natural leader for the project as a result of this initiative.<br><strong>Technologies:</strong> Java, CSV Processing, SAS, IDMS, Sybase<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "7f99fa94-bb8e-4392-9267-aaedb0adc15c",
+            "id": 233,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Frequently taken off of one project and assigned to a higher priority project. The transitions were seamless, because I had thoroughly documentated the processes.<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "791855ee-4925-4b00-88ff-02c7f38ed9b7",
+            "id": 237,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed a case law entry program, originally designed for limited usage, which was adopted and used company wide. Accomplished this by working with the law editors, who were our in-house customers and convincing my boss that it was needed.<br><strong>Technologies:</strong> VB, PL1<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "id": 235,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Conceived and executed strategy for programmatically creating programs, SQL code, and XML definitions by reading data definition files, saving over a month of development time in data archiving project.<br><strong>Technologies:</strong> Sybase, IDMS, SAS, SQL, Web Services, XML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "f2760b98-c246-4af4-86f0-4a2789755a53",
+            "id": 119,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented an end-point for uploading complex data to a relational database from an end-user supplied spreadsheet. The process updated or created records in at least seven different tables and validated against even more. In order to ensure integrity, created extensive rspec tests, making sure to validate all the business rules. There were few to no bugs, with extensive use an in spite of the fact that the original Jira tickets did not have all the AC criteria spelled out.<br><strong>Technologies:</strong> Ruby, Rails, CSV Processing, API, MySql<br><strong>Company:</strong> Teachstone, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "d50d13b7-4638-4173-88a1-fd8d9060ca7d",
+            "id": 275,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Using a rest API, based on a request sent by a mobile application, extracted data from one of three very different back-end systems: two Ruby on Rails and one Totara.  Based on another request, loaded the data sent by the mobile app to the correct backend system.<br><strong>Technologies:</strong> Ruby, Rails, Rest API, HTML5, MySQL, Totara, PHP<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "dfb2a05f-da1e-45dc-b436-508244a77e63",
+            "id": 208,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Incorporated Totara, an LMS based off of Moodle, into our existing processes by learning how to create and implement Moodle web services. This required mapping our data with information displayed on the Totara web page. Was successful, in spite of the fact that the Totara database fields that I needed to update were often named and fielded in non-intuitive ways.<br><strong>Technologies:</strong> Ruby, Rails, Totara, Moodle, PHP, MySQL<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "be9ad23f-3c95-4b6a-9592-e45608e4c7ef",
+            "id": 122,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Fixed highly inaccurate subscription data used by sales reps without disturbing the production process. This was particularly challenging because there were no matching keys and three fundamental problems with the original extract. Sent SQL updates for over 50% of the records (a logistical problem) and rewrote the extract, so that sales reps had completely accurate information going forward.<br><strong>Technologies:</strong> SAS, IDMS, Sybase<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "47ab62da-93bc-4b1c-9bbb-a3534ddc1662",
+            "id": 216,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote programs in PHP that parsed and analyzed text files for data conversion from Excel and Word to SQL Server, and to aid in DIACAP certification.<br><strong>Technologies:</strong> PHP, SQL Server, Excel Word, SQL<br><strong>Company:</strong> Medical Automation Systems (Abbott), Project Manager</li></ul>"
+        },
+        {
+            "guid": "81ad8ebd-5d7b-4cea-a857-97cf3249e62c",
+            "id": 228,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Developed on-line pricing form, extracting and using data from many different data sources, thus saving the company $10,560 per year by saving time for Editorial management team.<br><strong>Technologies:</strong> SQL Server, Sybase, IDMS, SAS, SQL<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "57fd69df-5351-4310-97f2-56a484d1f73c",
+            "id": 209,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Overhauled the trainer panel, turning a bug-laden application with inconsistent business rules into a serviceable application with consistent business rules. This was an interim solution, but workable enough to still be in place six years later.<br><strong>Technologies:</strong> PHP, jQuery, Ruby, Rails, Javascript, MySQL<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "id": 225,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote programs that parsed and analyzed log files to monitor performance. Systematically eliminated pre-existing inefficiencies and bugs.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7",
+            "id": 205,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Used data-driven test development. This allowed test data and creation data to be changed in one place, and made it easy to reuse assertion methods.<br><strong>Technologies:</strong> Ruby on Rails, Rspec, Python, Selenium, Pytest, MySql, SQL Server, Azure Pipeline<br><strong>Companies:</strong> Teachstone Training, Backend Web Developer; CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "b1d24eb6-ec9a-4937-8b87-9b52fb237516",
+            "id": 202,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Set up a system that allowed many tests to be created quickly and ensured that the tests were both valuable to the business and followed object oriented and other best programming practices.<br><strong>Technologies:</strong> Python, Selenium, Pytest, SQL Server, Azure Pipelines<br><strong>Companies:</strong> Teachstone Training, Backend Web Developer; CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "f479c6c2-238a-4b3b-bcde-f4389b815835",
+            "id": 203,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Eliminated login and navigation time by saving the login cookie and going directly to the page to be tested. Navigated to pages only when testing navigation.<br><strong>Technologies:</strong> Python, Selenium, Pytest, SQL Server, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "eda62fd3-99a3-483a-ba39-a7f3fa541cea",
+            "id": 204,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Cached page data collected by screen scraping techniques, making it so the tests were comprehensive without the overhead of many page loads.<br><strong>Technologies:</strong> Python, Pytest, SQL Server, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "c23de2c1-c62c-4de6-8533-ab88aeb9cced",
+            "id": 201,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>As a first time Python user, set up a UI testing framework from scratch using Python, Pytest and Selenium.<br><strong>Technologies:</strong> Python, Selenium, Pytest, Azure Pipelines<br><strong>Company:</strong> CoConstruct, QA Automation Engineer</li></ul>"
+        },
+        {
+            "guid": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "id": 210,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Built cross-application monitoring for data syncs, using New Relic Insight custom fields, allowing us to measure the time from one in-house application to another through a third-party application for which we had no access. We created alerts and New Relic dashboards based on the resulting data. As a by-product, the information helped with bug analysis.<br><strong>Technologies:</strong> Ruby, Rails, New Relic<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "id": 207,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented, as one of my first ruby projects, single sign-on according to complex requirements. As the requirements changed, played a major role in that implementation as well.<br><strong>Technologies:</strong> Ruby, Rails, JavaScript, HTML5, Web Server Authentication<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "id": 218,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Instituted logging, log parsing and data analysis to systematically eliminate pre-existing inefficiencies and bugs in the site for which I was in charge.<br><strong>Technologies:</strong> Java, JavaScript, Excel</li></ul>"
+        },
+        {
+            "guid": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "id": 215,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Automated status reports that read MS Project and produced Excel Reports with four months rolling history, allowing the engineering department to accurately and consistently report progress to the management team.<br><strong>Technologies:</strong> VBA with MS Project and Excel<br><strong>Company:</strong> Medical Automation Systems (Abbott)</li></ul>"
+        },
+        {
+            "guid": "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b",
+            "id": 238,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Wrote, as a first year programmer, a dynamic menu program, in C++, which allocated and freed arrays of pointers without leaking any memory.<br><strong>Technologies:</strong> C++</li></ul>"
+        },
+        {
+            "guid": "72c41c3a-e428-48a0-9e23-753ab88fdd8e",
+            "id": 749,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Content Management Terminology",
+            "slug": "content-management-terminology",
+            "standalone": true,
+            "subtitle": "Content Management Terminology",
+            "text": "<ul><li>|beg|content-management-system|end|</li><li>|beg|learning-management-system|end|</li><li>|beg|moodle|end|</li><li>|beg|drupal|end|</li></ul>"
+        },
+        {
+            "guid": "bdaea1bf-4d5f-46f9-b88a-f11fed30902f",
+            "id": 746,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Learning Management System",
+            "slug": "learning-management-system",
+            "standalone": true,
+            "subtitle": "Learning Management System",
+            "text": "<p>The goal of a Learning Management System [LMS] is allow a company to organise online courses.  This includes creating, managing and delivering courses, adding learners, analyzing reports, automating notifications, etc. </p><p>An LMS also provides a web interfaces for learners to take the courses, and then be evaluated using tests or quizzes. (See |beg_ref|talentlms_whatlms_on202104075|end_ref|.)</p>"
+        },
+        {
+            "guid": "18aa4650-b946-48d6-af38-031ee2d03291",
+            "id": 750,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Drupal",
+            "slug": "drupal",
+            "standalone": true,
+            "subtitle": "Drupal",
+            "text": "<p>Drupal seems like a great |beg|content-management-system|end|[CMS] for developers. Each node (content type) can be created and then reused in lots of different ways.  It is highly flexible and configurable, and open source. You can make the make site's look and feel exactly how you want by extending an existing theme (so you don't reinvent the wheel) and configuring the new theme however you want. The modules seem just like Ruby gems, Python packages, PHP plugins or C++ includes. If you need functionality that does not not exist in core or in an existing module, you can just write yourself.</p><p>Reading about Drupal makes me realize the I created my own personal CMS, designed to my taste. My site uses <a class='reference_link' href='https://github.com/lizschley/number_six/blob/develop/scripts/documentation/update_process.md' target='_blank'>groups and categories</a> to define how to display the paragraphs.</p>"
+        },
+        {
+            "guid": "df03a2f7-16c3-47be-b80e-bdbfb5b1f755",
+            "id": 748,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Moodle",
+            "slug": "moodle",
+            "standalone": true,
+            "subtitle": "Moodle",
+            "text": "<p>Moodle is an acronym for 'Modular Object-Oriented Dynamic Learning Environment.' It is an online educational platform that provides custom learning environments for students. Educators can use Moodle to create lessons, manage courses, and interact with teachers and students. Students can use Moodle to review the class calendar, submit assignments, take quizzes, and interact with their classmates. Directly quoted from |beg_ref|christenssonp_201803033_techterms_moodledefinition_on202104075|end_ref|.</p>"
+        },
+        {
+            "guid": "5c9cffe7-facb-4aac-a241-f024146d41ff",
+            "id": 747,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Content Management System",
+            "slug": "content-management-system",
+            "standalone": true,
+            "subtitle": "Content Management System",
+            "text": "<p>The goal of a Content Management System [CMS] is to provide an intuitive user interface for building and modifying webpage content. Each CMS also provides a web publishing tool that allows one or more users to publish updates live on the Web. The editing component is called the content management application (CMA), while the publishing tool is called the content delivery application (CDA). These two components are integrated together in a CMS to streamline the web development process.  Directly quoted from |beg_ref|christenssonp_20130328_techterms_cmsdefinition_on20210405|end_ref|.</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "5": "study",
+            "7": "category-for-popups",
+            "category-for-popups": {
+                "dev_id": 7
+            },
+            "resume": {
+                "dev_id": 1
+            },
+            "study": {
+                "dev_id": 5
+            }
+        },
+        "groups": {
+            "19": "web-applications",
+            "27": "searchable-modal-popups",
+            "32": "working-with-team",
+            "33": "extract-load-and-transform",
+            "34": "quality-and-maintenance",
+            "35": "analysis",
+            "36": "dev-ops-and-automation",
+            "37": "motivated-to-learn",
+            "39": "organization-and-documentation",
+            "54": "content-management",
+            "8": "reverse-chronological-resume",
+            "analysis": {
+                "dev_id": 35
+            },
+            "content-management": {
+                "dev_id": 54
+            },
+            "dev-ops-and-automation": {
+                "dev_id": 36
+            },
+            "extract-load-and-transform": {
+                "dev_id": 33
+            },
+            "motivated-to-learn": {
+                "dev_id": 37
+            },
+            "organization-and-documentation": {
+                "dev_id": 39
+            },
+            "quality-and-maintenance": {
+                "dev_id": 34
+            },
+            "reverse-chronological-resume": {
+                "dev_id": 8
+            },
+            "searchable-modal-popups": {
+                "dev_id": 27
+            },
+            "web-applications": {
+                "dev_id": 19
+            },
+            "working-with-team": {
+                "dev_id": 32
+            }
+        },
+        "paragraphs": {
+            "113": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "114": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "115": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "116": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "117": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "118": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "119": "f2760b98-c246-4af4-86f0-4a2789755a53",
+            "120": "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa",
+            "121": "e27c5b55-6b0d-4d80-a59d-8a4efc43de04",
+            "122": "be9ad23f-3c95-4b6a-9592-e45608e4c7ef",
+            "1290e353-cbe5-43c1-b4bf-b94d36eb81e8": {
+                "dev_id": 227
+            },
+            "13ebe744-8bc4-49db-b5cb-629570bd8117": {
+                "dev_id": 116
+            },
+            "18aa4650-b946-48d6-af38-031ee2d03291": {
+                "dev_id": 750
+            },
+            "1d9e158a-2812-4c1a-96b1-62d295cfb317": {
+                "dev_id": 113
+            },
+            "201": "c23de2c1-c62c-4de6-8533-ab88aeb9cced",
+            "202": "b1d24eb6-ec9a-4937-8b87-9b52fb237516",
+            "203": "f479c6c2-238a-4b3b-bcde-f4389b815835",
+            "204": "eda62fd3-99a3-483a-ba39-a7f3fa541cea",
+            "205": "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7",
+            "207": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "208": "dfb2a05f-da1e-45dc-b436-508244a77e63",
+            "209": "57fd69df-5351-4310-97f2-56a484d1f73c",
+            "210": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "211": "4e9128d0-fab3-435c-94c3-293af6183350",
+            "212": "262b1d4a-e5c5-46fe-810e-ee891e2312d3",
+            "213": "33fcd4ad-af4a-4205-bc6b-3321115ccfff",
+            "214": "5913f339-c3e0-4270-a27e-917b827eff08",
+            "215": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "216": "47ab62da-93bc-4b1c-9bbb-a3534ddc1662",
+            "218": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "224": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "225": "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b",
+            "227": "1290e353-cbe5-43c1-b4bf-b94d36eb81e8",
+            "228": "81ad8ebd-5d7b-4cea-a857-97cf3249e62c",
+            "229": "4b64dee4-1453-4d82-8624-03056fcf868b",
+            "230": "e5a2790f-1f38-4b6b-a522-3b115460fb37",
+            "231": "62cf7442-c493-4b77-a74a-8b48090ca780",
+            "232": "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c",
+            "233": "7f99fa94-bb8e-4392-9267-aaedb0adc15c",
+            "235": "b29d8208-f33f-4ec2-bbae-6f838d7aa36a",
+            "237": "791855ee-4925-4b00-88ff-02c7f38ed9b7",
+            "238": "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b",
+            "262b1d4a-e5c5-46fe-810e-ee891e2312d3": {
+                "dev_id": 212
+            },
+            "275": "d50d13b7-4638-4173-88a1-fd8d9060ca7d",
+            "33fcd4ad-af4a-4205-bc6b-3321115ccfff": {
+                "dev_id": 213
+            },
+            "47ab62da-93bc-4b1c-9bbb-a3534ddc1662": {
+                "dev_id": 216
+            },
+            "4b64dee4-1453-4d82-8624-03056fcf868b": {
+                "dev_id": 229
+            },
+            "4e9128d0-fab3-435c-94c3-293af6183350": {
+                "dev_id": 211
+            },
+            "5090eeb9-acb2-47e2-8c0b-8fbf8daa10f7": {
+                "dev_id": 205
+            },
+            "57fd69df-5351-4310-97f2-56a484d1f73c": {
+                "dev_id": 209
+            },
+            "5913f339-c3e0-4270-a27e-917b827eff08": {
+                "dev_id": 214
+            },
+            "5c9cffe7-facb-4aac-a241-f024146d41ff": {
+                "dev_id": 747
+            },
+            "62cf7442-c493-4b77-a74a-8b48090ca780": {
+                "dev_id": 231
+            },
+            "67c5637c-7d59-406e-b8d7-c49d19e79925": {
+                "dev_id": 115
+            },
+            "6e2c2b8b-fd83-49e4-a3df-9a408ade8c3c": {
+                "dev_id": 232
+            },
+            "72c41c3a-e428-48a0-9e23-753ab88fdd8e": {
+                "dev_id": 749
+            },
+            "745": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
+            "746": "bdaea1bf-4d5f-46f9-b88a-f11fed30902f",
+            "747": "5c9cffe7-facb-4aac-a241-f024146d41ff",
+            "748": "df03a2f7-16c3-47be-b80e-bdbfb5b1f755",
+            "749": "72c41c3a-e428-48a0-9e23-753ab88fdd8e",
+            "750": "18aa4650-b946-48d6-af38-031ee2d03291",
+            "791855ee-4925-4b00-88ff-02c7f38ed9b7": {
+                "dev_id": 237
+            },
+            "7f99fa94-bb8e-4392-9267-aaedb0adc15c": {
+                "dev_id": 233
+            },
+            "81ad8ebd-5d7b-4cea-a857-97cf3249e62c": {
+                "dev_id": 228
+            },
+            "8410b8f0-0d7f-4f03-90e5-51f894244975": {
+                "dev_id": 118
+            },
+            "87585a50-cbbd-4b70-b9b8-6ccf1f51b8aa": {
+                "dev_id": 120
+            },
+            "8dbe7c60-1adb-468c-b0bb-47a842ac0e6b": {
+                "dev_id": 238
+            },
+            "8f871012-f6c8-4826-9194-429bae3b22c3": {
+                "dev_id": 114
+            },
+            "9bee2e9b-e85d-468d-a25b-3eca38e1358f": {
+                "dev_id": 218
+            },
+            "9fd22b7d-482d-46d8-96cb-3a2d98b8b904": {
+                "dev_id": 215
+            },
+            "a7d03e7f-dc20-472f-9d23-1f0964f242a5": {
+                "dev_id": 207
+            },
+            "b1d24eb6-ec9a-4937-8b87-9b52fb237516": {
+                "dev_id": 202
+            },
+            "b29d8208-f33f-4ec2-bbae-6f838d7aa36a": {
+                "dev_id": 235
+            },
+            "bdaea1bf-4d5f-46f9-b88a-f11fed30902f": {
+                "dev_id": 746
+            },
+            "be665b99-e0cf-4252-8a4e-9b1753ac6cd1": {
+                "dev_id": 117
+            },
+            "be9ad23f-3c95-4b6a-9592-e45608e4c7ef": {
+                "dev_id": 122
+            },
+            "c23de2c1-c62c-4de6-8533-ab88aeb9cced": {
+                "dev_id": 201
+            },
+            "c6e17ac1-e879-47ef-952e-6479a95e7b01": {
+                "dev_id": 210
+            },
+            "d40b2a7a-21a8-4b58-81b2-1beabba8bd6b": {
+                "dev_id": 225
+            },
+            "d50d13b7-4638-4173-88a1-fd8d9060ca7d": {
+                "dev_id": 275
+            },
+            "d83d14de-afe1-4b2f-a925-b450148358e0": {
+                "dev_id": 224
+            },
+            "df03a2f7-16c3-47be-b80e-bdbfb5b1f755": {
+                "dev_id": 748
+            },
+            "dfb2a05f-da1e-45dc-b436-508244a77e63": {
+                "dev_id": 208
+            },
+            "e106f0b7-bdaa-465f-ae5f-5036f45292df": {
+                "dev_id": 745
+            },
+            "e27c5b55-6b0d-4d80-a59d-8a4efc43de04": {
+                "dev_id": 121
+            },
+            "e5a2790f-1f38-4b6b-a522-3b115460fb37": {
+                "dev_id": 230
+            },
+            "eda62fd3-99a3-483a-ba39-a7f3fa541cea": {
+                "dev_id": 204
+            },
+            "f2760b98-c246-4af4-86f0-4a2789755a53": {
+                "dev_id": 119
+            },
+            "f479c6c2-238a-4b3b-bcde-f4389b815835": {
+                "dev_id": 203
+            }
+        },
+        "references": {
+            "715": "christenssonp_201803033_techterms_moodledefinition_on202104075",
+            "716": "christenssonp_20130328_techterms_cmsdefinition_on20210405",
+            "717": "talentlms_whatlms_on202104075",
+            "719": "drupalorg_understandingdrupaloverview_on2021040",
+            "720": "lizschley_drupaldemosite_on2021040",
+            "christenssonp_20130328_techterms_cmsdefinition_on20210405": {
+                "dev_id": 716
+            },
+            "christenssonp_201803033_techterms_moodledefinition_on202104075": {
+                "dev_id": 715
+            },
+            "drupalorg_understandingdrupaloverview_on2021040": {
+                "dev_id": 719
+            },
+            "lizschley_drupaldemosite_on2021040": {
+                "dev_id": 720
+            },
+            "talentlms_whatlms_on202104075": {
+                "dev_id": 717
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 720,
+            "link_text": "LizSchley_DrupalDemoSite_on2021040",
+            "short_text": "Drupal Demo",
+            "slug": "lizschley_drupaldemosite_on2021040",
+            "url": "https://www.lizschley.org/"
+        },
+        {
+            "id": 717,
+            "link_text": "TalentLms_WhatLms_on202104075",
+            "short_text": "LMS Definition",
+            "slug": "talentlms_whatlms_on202104075",
+            "url": "https://www.talentlms.com/what-is-an-lms"
+        },
+        {
+            "id": 715,
+            "link_text": "ChristenssonP_201803033_TechTerms_MoodleDefinition_on202104075",
+            "short_text": "Christensson 201803033",
+            "slug": "christenssonp_201803033_techterms_moodledefinition_on202104075",
+            "url": "https://techterms.com/definition/moodle"
+        },
+        {
+            "id": 719,
+            "link_text": "DrupalOrg_UnderstandingDrupalOverview_on2021040",
+            "short_text": "Drupal Overview",
+            "slug": "drupalorg_understandingdrupaloverview_on2021040",
+            "url": "https://www.drupal.org/docs/understanding-drupal/overview-of-drupal"
+        },
+        {
+            "id": 716,
+            "link_text": "ChristenssonP_20130328_TechTerms_CmsDefinition_on20210405",
+            "short_text": "Christensson 20130328",
+            "slug": "christenssonp_20130328_techterms_cmsdefinition_on20210405",
+            "url": "https://techterms.com/definition/cms"
+        }
+    ]
+}
