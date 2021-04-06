@@ -4,12 +4,12 @@ For this portfolio application, the development data is the source of truth.  If
 
 The goal for development and production, however, is the same.  Creates, retrievals, updates and deletions (besides research and writing) should be easy.
 ## Record Types
-1. Paragraphs - the main unit for the text that is displayed dynamically on the site
+1. Paragraphs - the main unit for the text that is displayed dynamically on the site.  One paragraph can be displayed in many different ways, based on the group and category.
 2. Groups - describe (to the application) how the paragraphs are to be displayed
 3. References - show where the information comes from.  One exception, if the reference is not online, the reference information will be directly associated with the paragraph as part of the text field
 4. GroupParagraph - associates a paragraph with a Group.  This is a many-to-many relationship.  Sometime paragraphs are ordered within a given group.  For that reason, there is order field in the GroupParagraph record.
 5. ParagraphReference - associates a paragraph with a reference.  It is also a many-to-many relationship
-6. Category - associates one category with many groups.  Groups can be ordered within a category using the cat_sort field in the group record.
+6. Category - associates one category with many groups.  Categories make it so groups and paragraphs can be displayed in various ways, for example, flashcard is a category just for questions and answers.  Within a category, groups can be ordered using the cat_sort field in the group record.
 ## Creating Paragraph Data in Development
 The normal create process runs only in development.  It will throw an error if you try to run it in production.  The script is [create_paragraphs](https://github.com/lizschley/number_six/blob/develop/scripts/create_paragraphs.py) and corresponds to a class [para_db_create_paragraphs](https://github.com/lizschley/number_six/blob/develop/common_classes/para_db_create_process.py). The input data is in json format and uses this [create para template](https://github.com/lizschley/number_six/blob/develop/data/crud_input_templates/create_input.json). Using this template, you can create a group with multiple associated paragraphs.  You can also create many references or simply associate the new paragraphs with existing references.
 
