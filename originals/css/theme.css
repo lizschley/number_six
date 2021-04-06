@@ -39,12 +39,18 @@ body .tall-skinny {
   height: 70%;
   height: auto;
   margin: 3px;
+  cursor: default;
 }
 
 body .default {
   max-width: 410px;
   height: auto;
   margin: 5px;
+  cursor: default;
+}
+
+body .question {
+  cursor: default;
 }
 
 body .demo {
