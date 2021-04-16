@@ -2,3 +2,29 @@
  * @file
  * Subtheme specific CSS.
  */
+ #header {
+    padding-left: 20px;
+  }
+
+ #header h1 {
+    font-weight: 400;
+  }
+
+  #header h3 {
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .caption>figcaption {
+	border: 1px solid #006600;
+	text-align: center;
+	font-size: small;
+}
+
+  figure.align-left {
+    margin-right: 1em;
+  }
+
+  .nav-link a {
+    display: inline;
+  }

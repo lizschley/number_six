@@ -6,11 +6,22 @@ body {
 }
 
 #header {
+  padding-left: 20px;
   color: #FEF9E7;
 	background-color: #fef9e7;
 	background-image: -webkit-linear-gradient(top, #006600 0%, #fef9e7 100%);
 	background-image: linear-gradient(to bottom, #006600 0%, #fef9e7 100%);
 }
+
+.field--name-title {
+  color: #006600;
+}
+
+th.views-field {
+  background-color: #006600;
+  color: #FEF9E7;
+}
+
 
 a,
 .link {
@@ -50,7 +61,12 @@ a:active,
 }
 
 .site-footer {
-  background: #292929;
+  color: #FEF9E7;
+	background-color:   #006600;;
+}
+
+.site-footer a {
+  color: #FEF9E7;
 }
 
 /* ---------- Color Form ----------- */
