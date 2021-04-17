@@ -16,10 +16,10 @@
   }
 
   .caption>figcaption {
-	border: 1px solid #006600;
-	text-align: center;
-	font-size: small;
-}
+	  border: 1px solid #006600;
+	  text-align: center;
+	  font-size: small;
+  }
 
   figure.align-left {
     margin-right: 1em;
@@ -27,4 +27,25 @@
 
   .nav-link a {
     display: inline;
+  }
+
+  .views-field-field-title {
+    text-align: center;
+    width: 25%;
+  }
+
+  .view-field-time-frame-table-column {
+    width: 10%;
+  }
+
+  .girl_power_description_field {
+    width: 40%;
+  }
+
+  .views-field-field-citation {
+    width: 25%;
+  }
+
+  .views-field-field-title-link {
+    text-align: center;
   }
