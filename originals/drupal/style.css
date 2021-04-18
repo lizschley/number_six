@@ -30,7 +30,6 @@
   }
 
   .views-field-field-title {
-    text-align: center;
     width: 25%;
   }
 
@@ -46,6 +45,14 @@
     width: 25%;
   }
 
-  .views-field-field-title-link {
+  td.views-field-field-title-link {
+    text-align: center;
+  }
+
+  td.views-field-field-title {
+    text-align: center;
+  }
+
+  th.views-field {
     text-align: center;
   }
