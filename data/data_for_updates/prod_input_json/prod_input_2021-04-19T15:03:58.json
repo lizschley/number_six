@@ -1,0 +1,164 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        },
+        {
+            "category_type": "modal",
+            "id": 7,
+            "slug": "category-for-popups",
+            "title": "Category for Popups"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 54,
+            "id": 808,
+            "order": 1,
+            "paragraph_id": 745
+        },
+        {
+            "group_id": 27,
+            "id": 814,
+            "order": 0,
+            "paragraph_id": 751
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 2,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 54,
+            "note": "",
+            "short_name": "Content Management",
+            "slug": "content-management",
+            "title": "Content Management"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 7,
+            "group_type": "search",
+            "id": 27,
+            "note": "",
+            "short_name": "Searchable Modal Popup",
+            "slug": "searchable-modal-popups",
+            "title": "Searchable Modal Popups"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 1255,
+            "paragraph_id": 745,
+            "reference_id": 720
+        },
+        {
+            "id": 1256,
+            "paragraph_id": 751,
+            "reference_id": 721
+        },
+        {
+            "id": 1257,
+            "paragraph_id": 751,
+            "reference_id": 722
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
+            "id": 745,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>This past year, I have developed this site, which, as I discovered while playing around with |beg|drupal|end|, is a |beg|content-management-system|end| [CMS].  I have also created a small |beg_ref|lizschley_drupaldemosite_on2021040|end_ref|. In addition, I have written many plugins and blocks (in PHP) for |beg|totara|end|, based on |beg|moodle|end|, which although a |beg|learning-management-system|end|, also manages data like a CMS and, like Drupal, is open source and written in PHP.  In addition to experience with PHP, Javascript, CSS and HTML, I also have years of experience with Github, CircleCI, Yaml, deploy hooks and other technologies commonly used in Web Development.</p><p>What follows is a detailed description of my experience in Totara:</p><p style='color:#E74C3C';><strong>Content in development</strong></p>"
+        },
+        {
+            "guid": "8141d87c-145b-402f-8dcb-af28cdb9aeea",
+            "id": 751,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Totara",
+            "slug": "totara",
+            "standalone": true,
+            "subtitle": "Totara",
+            "text": "Totara is a |beg|learning-management-system|end| based on |beg|moodle|end|. At the time I worked on Totara, they had just stopped keeping in sync with Moodle updates. Please see the |beg_ref|moonami_20190819_totaravsmoodle|end_ref| for an overview of the features in Totara and the |beg_ref|totaralearning_201901_features_version12_pdf_outdatedattimeofretrieval_on20210419|end_ref| for more details.  The references reflect the version of Totara that I am familiar with."
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "7": "category-for-popups",
+            "category-for-popups": {
+                "dev_id": 7
+            },
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "27": "searchable-modal-popups",
+            "54": "content-management",
+            "content-management": {
+                "dev_id": 54
+            },
+            "searchable-modal-popups": {
+                "dev_id": 27
+            }
+        },
+        "paragraphs": {
+            "745": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
+            "751": "8141d87c-145b-402f-8dcb-af28cdb9aeea",
+            "8141d87c-145b-402f-8dcb-af28cdb9aeea": {
+                "dev_id": 751
+            },
+            "e106f0b7-bdaa-465f-ae5f-5036f45292df": {
+                "dev_id": 745
+            }
+        },
+        "references": {
+            "720": "lizschley_drupaldemosite_on2021040",
+            "721": "totaralearning_201901_features_version12_pdf_outdatedattimeofretrieval_on20210419",
+            "722": "moonami_20190819_totaravsmoodle",
+            "lizschley_drupaldemosite_on2021040": {
+                "dev_id": 720
+            },
+            "moonami_20190819_totaravsmoodle": {
+                "dev_id": 722
+            },
+            "totaralearning_201901_features_version12_pdf_outdatedattimeofretrieval_on20210419": {
+                "dev_id": 721
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 720,
+            "link_text": "LizSchley_DrupalDemoSite_on2021040",
+            "short_text": "Drupal Demo",
+            "slug": "lizschley_drupaldemosite_on2021040",
+            "url": "https://www.lizschley.org/"
+        },
+        {
+            "id": 721,
+            "link_text": "TotaraLearning_201901_Features_Version12_PDF_OutdatedAtTimeOfRetrieval_on20210419",
+            "short_text": "Totara 12 Features",
+            "slug": "totaralearning_201901_features_version12_pdf_outdatedattimeofretrieval_on20210419",
+            "url": "https://www.totaralearning.com/sites/default/files/2019-01/Totara%20Learn%2012%20Features.pdf"
+        },
+        {
+            "id": 722,
+            "link_text": "Moonami_20190819_TotaraVsMoodle",
+            "short_text": "Totara vs Moodle",
+            "slug": "moonami_20190819_totaravsmoodle",
+            "url": "https://www.moonami.com/insights/moodle-vs-totara-which-is-the-right-choice-for-you/"
+        }
+    ]
+}

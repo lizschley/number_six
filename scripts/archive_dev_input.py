@@ -19,8 +19,7 @@ def run(*args):
 
         The default (no script args), archives the input files that have not been
         removed to the done folder and the production input files.
-
-        >>> python manage.py runscript -v3 s3_updater --script-args
+        >>> python manage.py runscript -v3 archive_dev_input
         or
         >>> python manage.py runscript -v3 archive_dev_input --script-args exclude_not_done
         or

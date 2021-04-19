@@ -21,6 +21,10 @@ body a.selected {
   color: #006600;
 }
 
+body h4 {
+  margin-top: 1em;
+}
+
 body .navbar .nav-link a:hover {
   color: #006600;
   text-decoration: none;
