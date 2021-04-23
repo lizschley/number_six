@@ -9,6 +9,48 @@
     ],
     "group_paragraph": [
         {
+            "group_id": 8,
+            "id": 101,
+            "order": 1,
+            "paragraph_id": 113
+        },
+        {
+            "group_id": 8,
+            "id": 818,
+            "order": 2,
+            "paragraph_id": 756
+        },
+        {
+            "group_id": 8,
+            "id": 102,
+            "order": 3,
+            "paragraph_id": 114
+        },
+        {
+            "group_id": 8,
+            "id": 103,
+            "order": 4,
+            "paragraph_id": 115
+        },
+        {
+            "group_id": 8,
+            "id": 104,
+            "order": 5,
+            "paragraph_id": 116
+        },
+        {
+            "group_id": 8,
+            "id": 105,
+            "order": 6,
+            "paragraph_id": 117
+        },
+        {
+            "group_id": 8,
+            "id": 106,
+            "order": 7,
+            "paragraph_id": 118
+        },
+        {
             "group_id": 54,
             "id": 808,
             "order": 1,
@@ -35,6 +77,16 @@
     ],
     "groups": [
         {
+            "cat_sort": 1,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 8,
+            "note": "no-title-display",
+            "short_name": "Reverse Chronological",
+            "slug": "reverse-chronological-resume",
+            "title": "Reverse Chronological Resume"
+        },
+        {
             "cat_sort": 2,
             "category_id": 1,
             "group_type": "ordered",
@@ -52,17 +104,101 @@
             "reference_id": 720
         },
         {
-            "id": 1258,
-            "paragraph_id": 753,
-            "reference_id": 724
-        },
-        {
             "id": 1259,
             "paragraph_id": 753,
             "reference_id": 723
+        },
+        {
+            "id": 1258,
+            "paragraph_id": 753,
+            "reference_id": 724
         }
     ],
     "paragraphs": [
+        {
+            "guid": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "id": 113,
+            "image_info_key": "to-right",
+            "image_path": "projects/img/LexisNexisCharlottesville.jpg",
+            "note": "",
+            "short_title": "Resume Summary",
+            "slug": "resume-summary",
+            "standalone": false,
+            "subtitle": "Charlottesville, VA; liz@lizschley.org",
+            "text": "<p>Experienced back end web developer who loves to program. For the past year, Python has been my main language, but for the prior six and a half years worked mostly with Ruby on Rails, with some Javascript and PHP.  Still earlier, Java was my main language. Worked for four years with AWS (S3, EC2, SNS, SQS, Aurora & Cloudfront) and over ten years with relational databases, most recently Postgres and mySql.</p>"
+        },
+        {
+            "guid": "c856d2c0-2781-4f7d-a830-31e43da3fc06",
+            "id": 756,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "portfolio-inquiries-and-observations-site",
+            "standalone": false,
+            "subtitle": "Portfolio: Inquiries and Observations Site",
+            "text": "<p><strong>Web Developer: </strong>Developed lizschley.com in order to learn Python, have a personal site for study and a platform for trying out new ideas and technologies. The content management decisions are based on the easiest way for me to add data and to learn. For further information see the <a href='/projects/demo'>Demo page</a>. (2020 - Current)</p><p><strong>Technologies: </strong>Python, Django, Postgres, SCSS, HTML, Javascript, AWS: EC2, S3, RDS, Cloudfront</p>"
+        },
+        {
+            "guid": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "id": 114,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "coconstruct-llc",
+            "standalone": false,
+            "subtitle": "CoConstruct, LLC",
+            "text": "<p><strong>QA Automation Engineer: </strong> Worked with devops quality engineers to develop a world class Azure Pipeline by setting up a UI testing framework and many tests that covered vital functionality, using data driven, screen scraping and object oriented approaches and caching for speed and efficiency. (2019 - 2020 (5 months))</p> <p><strong>Technologies:</strong> Python, Pytest, Selenium, Azure, SQL Server</p>"
+        },
+        {
+            "guid": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "id": 115,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "teachstone-training-llc",
+            "standalone": false,
+            "subtitle": "Teachstone Training, LLC",
+            "text": "<p><strong>Backend Web Developer: </strong> Worked with developers, devops, product management, QA, content and customer service to create and maintain a web application to help teachers improve their interactions with their students.  The system interfaced with third party services, including BigCommerce, FedEx and Moodle, and in-house mobile applications and multiple applications using both restful and other Rails and PHP interfaces.  Played a large role in developing a single signon system for both third party and in-house systems.  Wrote many unit and integration tests. (2013 - 2019)</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p>"
+        },
+        {
+            "guid": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "id": 116,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "medical-automation-systems-abbott",
+            "standalone": false,
+            "subtitle": "Medical Automation Systems (Abbott)",
+            "text": "<p><strong>Project Manager: </strong> Helped lead many projects through conception to release, following FDA compliant software development practices, including test plan approval, risk management and problem solving strategies. (2007 - 2012)</p> <p><strong>Technologies:</strong> Rspec, Ruby, Rails, PHP, MySQL, New Relic, AWS</p>"
+        },
+        {
+            "guid": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "id": 117,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "lexisnexis-senior-software-engineer",
+            "standalone": false,
+            "subtitle": "LexisNexis",
+            "text": "<p><strong>Senior Software Engineer: </strong> Worked as technical lead and developer for a customer-facing eCommerce web-site that interfaced with multiple order fulfillment and financial back-end systems.  Responsible for both release and test plans, timely releases, unit and integration testing and project management.  Designed and wrote an object-oriented Java web service as one of several middle-ware strategies. (1999 - 2007)</p> <p><strong>Technologies:</strong> Java web services, ASP, Javascript, XSLT, VB, FE</p> <p><strong>Computer Programmer:</strong> Moved from entry level position to Senior Software Engineer by taking courses, self-study, hard work and excellent results.  Worked on timecards, order fulfillment, invoices, pricing and subscription reporting. (1993 - 1999)</p> <p><strong>Technologies:</strong> Java, JS,  VB, Oracle, Sybase, SQL Server, Mainframe </p>"
+        },
+        {
+            "guid": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "id": 118,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "education",
+            "standalone": false,
+            "subtitle": "Education",
+            "text": "<ul><li>Masters of Science - Information Studies, Florida State University: 4.0 GPA</li> <li>BA in English, Old Dominion University</li> <li>Java Certified Java 2 Platform</li></ul>"
+        },
         {
             "guid": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
             "id": 745,
@@ -121,20 +257,52 @@
         },
         "groups": {
             "54": "content-management",
+            "8": "reverse-chronological-resume",
             "content-management": {
                 "dev_id": 54
+            },
+            "reverse-chronological-resume": {
+                "dev_id": 8
             }
         },
         "paragraphs": {
+            "113": "1d9e158a-2812-4c1a-96b1-62d295cfb317",
+            "114": "8f871012-f6c8-4826-9194-429bae3b22c3",
+            "115": "67c5637c-7d59-406e-b8d7-c49d19e79925",
+            "116": "13ebe744-8bc4-49db-b5cb-629570bd8117",
+            "117": "be665b99-e0cf-4252-8a4e-9b1753ac6cd1",
+            "118": "8410b8f0-0d7f-4f03-90e5-51f894244975",
+            "13ebe744-8bc4-49db-b5cb-629570bd8117": {
+                "dev_id": 116
+            },
+            "1d9e158a-2812-4c1a-96b1-62d295cfb317": {
+                "dev_id": 113
+            },
             "3ee40b55-0ac0-4061-8565-0e212afe7c05": {
                 "dev_id": 753
+            },
+            "67c5637c-7d59-406e-b8d7-c49d19e79925": {
+                "dev_id": 115
             },
             "745": "e106f0b7-bdaa-465f-ae5f-5036f45292df",
             "753": "3ee40b55-0ac0-4061-8565-0e212afe7c05",
             "754": "cf1739a9-283a-4ef9-92d3-2e3038fb1f31",
             "755": "a601286b-528e-46ae-8910-3d93e3614d5c",
+            "756": "c856d2c0-2781-4f7d-a830-31e43da3fc06",
+            "8410b8f0-0d7f-4f03-90e5-51f894244975": {
+                "dev_id": 118
+            },
+            "8f871012-f6c8-4826-9194-429bae3b22c3": {
+                "dev_id": 114
+            },
             "a601286b-528e-46ae-8910-3d93e3614d5c": {
                 "dev_id": 755
+            },
+            "be665b99-e0cf-4252-8a4e-9b1753ac6cd1": {
+                "dev_id": 117
+            },
+            "c856d2c0-2781-4f7d-a830-31e43da3fc06": {
+                "dev_id": 756
             },
             "cf1739a9-283a-4ef9-92d3-2e3038fb1f31": {
                 "dev_id": 754
@@ -167,18 +335,18 @@
             "url": "https://www.lizschley.org/"
         },
         {
-            "id": 724,
-            "link_text": "Moodle_Doc_LocalPlugins_on20210422",
-            "short_text": "PHP Plugins",
-            "slug": "moodle_doc_localplugins_on20210422",
-            "url": "https://docs.moodle.org/dev/Local_plugins"
-        },
-        {
             "id": 723,
             "link_text": "Oracle_ImportingExportingMySqlDatabases_on20210422",
             "short_text": "Importing & Exporting DBs",
             "slug": "oracle_importingexportingmysqldatabases_on20210422",
             "url": "https://docs.oracle.com/en-us/iaas/mysql-database/doc/importing-and-exporting-databases.html"
+        },
+        {
+            "id": 724,
+            "link_text": "Moodle_Doc_LocalPlugins_on20210422",
+            "short_text": "PHP Plugins",
+            "slug": "moodle_doc_localplugins_on20210422",
+            "url": "https://docs.moodle.org/dev/Local_plugins"
         }
     ]
 }
