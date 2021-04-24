@@ -13,6 +13,7 @@ class Category(models.Model):
     EXERCISE = 'exercise'
     STUDY = 'study'
     MODAL = 'modal'
+    ARCHIVED = 'archived'
     CATEGORY_TYPE_CHOICES = [
         (BLOG, 'Blog'),
         (RESUME, 'Resume'),
@@ -20,6 +21,7 @@ class Category(models.Model):
         (EXERCISE, 'Exercise'),
         (STUDY, 'Study'),
         (MODAL, 'Modal'),
+        (ARCHIVED, 'Archived'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
@@ -100,6 +102,7 @@ class Group(models.Model):
     STUDY_ORDERED = 'ordered'
     SEARCH = 'search'
     NO_SEARCH = 'no_search'
+    ARCHIVED = 'archived'
     DEFAULT = ''
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')
