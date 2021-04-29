@@ -1,0 +1,505 @@
+{
+    "categories": [
+        {
+            "category_type": "study",
+            "id": 5,
+            "slug": "study",
+            "title": "Study"
+        },
+        {
+            "category_type": "modal",
+            "id": 7,
+            "slug": "category-for-popups",
+            "title": "Category for Popups"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 2,
+            "id": 825,
+            "order": 0,
+            "paragraph_id": 760
+        },
+        {
+            "group_id": 19,
+            "id": 823,
+            "order": 0,
+            "paragraph_id": 198
+        },
+        {
+            "group_id": 19,
+            "id": 824,
+            "order": 0,
+            "paragraph_id": 182
+        },
+        {
+            "group_id": 19,
+            "id": 822,
+            "order": 0,
+            "paragraph_id": 760
+        },
+        {
+            "group_id": 27,
+            "id": 172,
+            "order": 0,
+            "paragraph_id": 182
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 1,
+            "category_id": 5,
+            "group_type": "standalone",
+            "id": 2,
+            "note": " ",
+            "short_name": "Tech How-tos",
+            "slug": "tech-how-tos-personal-cheat-sheets",
+            "title": "Tech How-tos - personal cheat sheets"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 5,
+            "group_type": "standalone",
+            "id": 19,
+            "note": "",
+            "short_name": "Web Applications",
+            "slug": "web-applications",
+            "title": "Web Applications"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 7,
+            "group_type": "search",
+            "id": 27,
+            "note": "",
+            "short_name": "Searchable Modal Popup",
+            "slug": "searchable-modal-popups",
+            "title": "Searchable Modal Popups"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 1261,
+            "paragraph_id": 760,
+            "reference_id": 726
+        },
+        {
+            "id": 1260,
+            "paragraph_id": 760,
+            "reference_id": 725
+        },
+        {
+            "id": 268,
+            "paragraph_id": 198,
+            "reference_id": 219
+        },
+        {
+            "id": 269,
+            "paragraph_id": 198,
+            "reference_id": 221
+        },
+        {
+            "id": 270,
+            "paragraph_id": 198,
+            "reference_id": 224
+        },
+        {
+            "id": 271,
+            "paragraph_id": 198,
+            "reference_id": 225
+        },
+        {
+            "id": 272,
+            "paragraph_id": 198,
+            "reference_id": 226
+        },
+        {
+            "id": 273,
+            "paragraph_id": 198,
+            "reference_id": 227
+        },
+        {
+            "id": 274,
+            "paragraph_id": 198,
+            "reference_id": 228
+        },
+        {
+            "id": 275,
+            "paragraph_id": 198,
+            "reference_id": 229
+        },
+        {
+            "id": 276,
+            "paragraph_id": 198,
+            "reference_id": 230
+        },
+        {
+            "id": 277,
+            "paragraph_id": 198,
+            "reference_id": 231
+        },
+        {
+            "id": 278,
+            "paragraph_id": 198,
+            "reference_id": 232
+        },
+        {
+            "id": 279,
+            "paragraph_id": 198,
+            "reference_id": 233
+        },
+        {
+            "id": 280,
+            "paragraph_id": 198,
+            "reference_id": 234
+        },
+        {
+            "id": 281,
+            "paragraph_id": 198,
+            "reference_id": 235
+        },
+        {
+            "id": 282,
+            "paragraph_id": 198,
+            "reference_id": 236
+        },
+        {
+            "id": 283,
+            "paragraph_id": 198,
+            "reference_id": 237
+        },
+        {
+            "id": 209,
+            "paragraph_id": 182,
+            "reference_id": 179
+        },
+        {
+            "id": 210,
+            "paragraph_id": 182,
+            "reference_id": 180
+        },
+        {
+            "id": 1262,
+            "paragraph_id": 182,
+            "reference_id": 221
+        },
+        {
+            "id": 1263,
+            "paragraph_id": 182,
+            "reference_id": 222
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "0af4387e-f7ad-4011-8a65-5121f9c081da",
+            "id": 760,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Adding Subdomain to a Letsencrypt Certificate",
+            "slug": "adding-subdomain-to-a-letsencrypt-certificate",
+            "standalone": true,
+            "subtitle": "Adding Subdomain to a Letsencrypt Certificate",
+            "text": "<p></p>When I accepted that in the real world you need to have a www subdomain, I was able to add it through AWS. I did not document that process, because AWS did a good job of explaining and it seemed to work perfectly. However, I later found out that it gave a security error in Safari. It said that my valid site may be spoofed. Therefore, I needed to add a www subdomain to my certificate.</p><p>Ran this from |beg_ref|technologytales_20190611_addingnewdomainsubdomain_ssl_certificate_certbot|end_ref|: <pre><code>>>>sudo certbot --expand -d existing.com,www.example.com</code></pre> It worked, but it broke the automatic redirect from www.domain.com to domain.com that worked before.  This is obviously an Apache problem, since www.domain.com brought up the default Apache page that lives on the server.</p><p>This error was fixed by using advice from |beg_ref|linuxize_20200101_redirecthttphttpsapache|end_ref|. I had to add their suggested code to two files (example.conf and example-le-ssl.conf). <p>Everything works, which is great, but someday, I would like to look at what I have with someone who understands Apache best practices.  Plus, I should test the fix again after the cron job renews the certificate.</p>"
+        },
+        {
+            "guid": "12e6aef2-4ddc-41dd-bf6f-05626ad0d1ea",
+            "id": 198,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Apache with Django",
+            "slug": "apache-with-django",
+            "standalone": true,
+            "subtitle": "Apache with Django",
+            "text": "<p>Tutorials by Corey Schafer provided an excellent explanation for the Apache configuration necessary for a Django site. However, I did not find these resources for my first step, which was deploying my site as http.  I used /etc/apache2/apache2.conf for configuration.  I set it up by trial and error, using various references seen below.</p><p>My end goal was to make it so a user could type in lizschley.com in the browser and automatically get the https version of the site.  |beg_ref|schafercory_20190124_youtube_enablehttps_free_tls_certificateletsencrypt|end_ref| showed exactly that. Corey showed the commands to use (also documented in |beg_ref|ubuntu2004manualfocal_a2ensite|end_ref|, |beg_ref|ubuntu2004manualfocal_apache2ctl|end_ref| and |beg_ref|letsencrypt_docs_on20210210|end_ref|) to automate much of the configuration. The video ended with Corey demonstrating a cron job that automatically renewed the certification.</p><p>In the end, HTTPS was easy to implement.  But the trial and errors helped me understand that virtual host files, as opposed to the apache2.conf file, were necessary for allowing users to get https without having to actually type it into the browser.</p>"
+        },
+        {
+            "guid": "ea026cc2-4ec5-4225-ac06-ab25dd068264",
+            "id": 182,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Apache for Web Server",
+            "slug": "decision-to-use-apache-instead-of-nginx-for-my-web-server",
+            "standalone": true,
+            "subtitle": "Decision to use Apache instead of Nginx for my Web server",
+            "text": "<p>In my years as a backend Web Developer, I have worked with both |beg_ref|apache_wiki_faq_whatisapache_on20210210|end_ref| and |beg_ref|nginx_wiki_on20210210|end_ref|, but am not an expert in either. My understanding was surface, remembering mostly that Nginx was event driven and faster and that Apache spawned lots of threads. I just assumed that I would use Nginx, until I read the article cited below (|beg_ref|rahmantahseen_20190528_mediumdeploydjangoapplicationsec2apache|end_ref|).  Assuming that my using Django will neutralize any speed issues and that my footprint will be small enough that memory won't be a problem, ease of use becomes paramount.  Since Apache has better documentation and I have a little more experience with it, it may be easier.</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "5": "study",
+            "7": "category-for-popups",
+            "category-for-popups": {
+                "dev_id": 7
+            },
+            "study": {
+                "dev_id": 5
+            }
+        },
+        "groups": {
+            "19": "web-applications",
+            "2": "tech-how-tos-personal-cheat-sheets",
+            "27": "searchable-modal-popups",
+            "searchable-modal-popups": {
+                "dev_id": 27
+            },
+            "tech-how-tos-personal-cheat-sheets": {
+                "dev_id": 2
+            },
+            "web-applications": {
+                "dev_id": 19
+            }
+        },
+        "paragraphs": {
+            "0af4387e-f7ad-4011-8a65-5121f9c081da": {
+                "dev_id": 760
+            },
+            "12e6aef2-4ddc-41dd-bf6f-05626ad0d1ea": {
+                "dev_id": 198
+            },
+            "182": "ea026cc2-4ec5-4225-ac06-ab25dd068264",
+            "198": "12e6aef2-4ddc-41dd-bf6f-05626ad0d1ea",
+            "760": "0af4387e-f7ad-4011-8a65-5121f9c081da",
+            "ea026cc2-4ec5-4225-ac06-ab25dd068264": {
+                "dev_id": 182
+            }
+        },
+        "references": {
+            "179": "rahmantahseen_20190528_mediumdeploydjangoapplicationsec2apache",
+            "180": "djangodeployment_20161115nginxfasterapacheneedntcare",
+            "219": "djangoproject_accessed_on20210210",
+            "221": "apache_wiki_faq_whatisapache_on20210210",
+            "222": "nginx_wiki_on20210210",
+            "224": "schafercory_20181213_youtube_deployingapplicationlinuxserver",
+            "225": "schafercory_20190124_youtube_enablehttps_free_tls_certificateletsencrypt",
+            "226": "schafercory_2019015_github_djangoprojectconf",
+            "227": "modwsgi_developerdocs_on20210210",
+            "228": "modwsgi_developeruserguide_virtualenvironments_on20210210",
+            "229": "ubuntu2004manualfocal_a2ensite",
+            "230": "ubuntu2004manualfocal_apache2ctl",
+            "231": "letsencrypt_docs_on20210210",
+            "232": "letsencrypt_about_on20210210",
+            "233": "hasanmehedi_ubuntupit_50amazinglinuxcrontabcommands_on20210210",
+            "234": "kerriskmichael_20201221_linuxmanual_crontab",
+            "235": "django_31_howtodeploymodwsgi_on20210210",
+            "236": "django_31_howtodeploychecklist_on20210210",
+            "237": "apachehttpserverproject_modsubstitute_on20210210",
+            "725": "technologytales_20190611_addingnewdomainsubdomain_ssl_certificate_certbot",
+            "726": "linuxize_20200101_redirecthttphttpsapache",
+            "apache_wiki_faq_whatisapache_on20210210": {
+                "dev_id": 221
+            },
+            "apachehttpserverproject_modsubstitute_on20210210": {
+                "dev_id": 237
+            },
+            "django_31_howtodeploychecklist_on20210210": {
+                "dev_id": 236
+            },
+            "django_31_howtodeploymodwsgi_on20210210": {
+                "dev_id": 235
+            },
+            "djangodeployment_20161115nginxfasterapacheneedntcare": {
+                "dev_id": 180
+            },
+            "djangoproject_accessed_on20210210": {
+                "dev_id": 219
+            },
+            "hasanmehedi_ubuntupit_50amazinglinuxcrontabcommands_on20210210": {
+                "dev_id": 233
+            },
+            "kerriskmichael_20201221_linuxmanual_crontab": {
+                "dev_id": 234
+            },
+            "letsencrypt_about_on20210210": {
+                "dev_id": 232
+            },
+            "letsencrypt_docs_on20210210": {
+                "dev_id": 231
+            },
+            "linuxize_20200101_redirecthttphttpsapache": {
+                "dev_id": 726
+            },
+            "modwsgi_developerdocs_on20210210": {
+                "dev_id": 227
+            },
+            "modwsgi_developeruserguide_virtualenvironments_on20210210": {
+                "dev_id": 228
+            },
+            "nginx_wiki_on20210210": {
+                "dev_id": 222
+            },
+            "rahmantahseen_20190528_mediumdeploydjangoapplicationsec2apache": {
+                "dev_id": 179
+            },
+            "schafercory_20181213_youtube_deployingapplicationlinuxserver": {
+                "dev_id": 224
+            },
+            "schafercory_20190124_youtube_enablehttps_free_tls_certificateletsencrypt": {
+                "dev_id": 225
+            },
+            "schafercory_2019015_github_djangoprojectconf": {
+                "dev_id": 226
+            },
+            "technologytales_20190611_addingnewdomainsubdomain_ssl_certificate_certbot": {
+                "dev_id": 725
+            },
+            "ubuntu2004manualfocal_a2ensite": {
+                "dev_id": 229
+            },
+            "ubuntu2004manualfocal_apache2ctl": {
+                "dev_id": 230
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 726,
+            "link_text": "Linuxize_20200101_RedirectHttpHttpsApache",
+            "short_text": "Linuxize 20200101",
+            "slug": "linuxize_20200101_redirecthttphttpsapache",
+            "url": "https://linuxize.com/post/redirect-http-to-https-in-apache/"
+        },
+        {
+            "id": 725,
+            "link_text": "Technologytales_20190611_AddingNewDomainSubdomain_SSL_Certificate_Certbot",
+            "short_text": "Technologytales 20190611",
+            "slug": "technologytales_20190611_addingnewdomainsubdomain_ssl_certificate_certbot",
+            "url": "https://technologytales.com/2019/06/11/adding-a-new-domain-or-subdomain-to-an-ssl-certificate-using-certbot/"
+        },
+        {
+            "id": 219,
+            "link_text": "DjangoProject_accessed_on20210210",
+            "short_text": "Django",
+            "slug": "djangoproject_accessed_on20210210",
+            "url": "https://www.djangoproject.com"
+        },
+        {
+            "id": 221,
+            "link_text": "Apache_Wiki_FAQ_WhatIsApache_on20210210",
+            "short_text": "Apache",
+            "slug": "apache_wiki_faq_whatisapache_on20210210",
+            "url": "https://cwiki.apache.org/confluence/display/httpd/FAQ#FAQ-WhatisApache?"
+        },
+        {
+            "id": 224,
+            "link_text": "SchaferCory_20181213_YouTube_DeployingApplicationLinuxServer",
+            "short_text": "Schafer 20181213",
+            "slug": "schafercory_20181213_youtube_deployingapplicationlinuxserver",
+            "url": "https://www.youtube.com/watch?v=Sa_kQheCnds"
+        },
+        {
+            "id": 225,
+            "link_text": "SchaferCory_20190124_YouTube_EnableHTTPS_Free_TLS_CertificateLetsEncrypt",
+            "short_text": "Schafer 20190124",
+            "slug": "schafercory_20190124_youtube_enablehttps_free_tls_certificateletsencrypt",
+            "url": "https://www.youtube.com/watch?v=NhidVhNHfeU"
+        },
+        {
+            "id": 226,
+            "link_text": "SchaferCory_2019015_Github_DjangoProjectConf",
+            "short_text": "Schafer 209015",
+            "slug": "schafercory_2019015_github_djangoprojectconf",
+            "url": "https://github.com/CoreyMSchafer/code_snippets/blob/master/Django_Blog/snippets/django_project.conf"
+        },
+        {
+            "id": 227,
+            "link_text": "ModWSGI_DeveloperDocs_on20210210",
+            "short_text": "ModWSGI Developer Docs",
+            "slug": "modwsgi_developerdocs_on20210210",
+            "url": "https://modwsgi.readthedocs.io/en/develop/"
+        },
+        {
+            "id": 228,
+            "link_text": "ModWSGI_DeveloperUserGuide_VirtualEnvironments_on20210210",
+            "short_text": "ModWSGI Virtual Environments",
+            "slug": "modwsgi_developeruserguide_virtualenvironments_on20210210",
+            "url": "https://modwsgi.readthedocs.io/en/develop/user-guides/virtual-environments.html"
+        },
+        {
+            "id": 229,
+            "link_text": "Ubuntu20.04ManualFocal_a2ensite",
+            "short_text": "Ubuntu 20.04 Manual apache2ctl",
+            "slug": "ubuntu2004manualfocal_a2ensite",
+            "url": "http://manpages.ubuntu.com/manpages/focal/man8/a2ensite.8.html"
+        },
+        {
+            "id": 230,
+            "link_text": "Ubuntu20.04ManualFocal_apache2ctl",
+            "short_text": "Ubuntu 20.04 Manual apache2ctl",
+            "slug": "ubuntu2004manualfocal_apache2ctl",
+            "url": "http://manpages.ubuntu.com/manpages/focal/man8/apache2ctl.8.html"
+        },
+        {
+            "id": 231,
+            "link_text": "LetsEncrypt_Docs_on20210210",
+            "short_text": "Lets Encrypt Docs",
+            "slug": "letsencrypt_docs_on20210210",
+            "url": "https://letsencrypt.org/docs/"
+        },
+        {
+            "id": 232,
+            "link_text": "LetsEncrypt_About_on20210210",
+            "short_text": "Lets Encrypt",
+            "slug": "letsencrypt_about_on20210210",
+            "url": "https://letsencrypt.org/about"
+        },
+        {
+            "id": 233,
+            "link_text": "HasanMehedi_UbuntuPit_50AmazingLinuxCrontabCommands_on20210210",
+            "short_text": "Mehdi Crontab Commands",
+            "slug": "hasanmehedi_ubuntupit_50amazinglinuxcrontabcommands_on20210210",
+            "url": "https://www.ubuntupit.com/amazing-linux-crontab-commands-for-the-sysadmins/"
+        },
+        {
+            "id": 234,
+            "link_text": "KerriskMichael_20201221_LinuxManual_Crontab",
+            "short_text": "Crontab",
+            "slug": "kerriskmichael_20201221_linuxmanual_crontab",
+            "url": "https://man7.org/linux/man-pages/man5/crontab.5.html"
+        },
+        {
+            "id": 235,
+            "link_text": "Django_3.1_HowToDeployModWSGI_on20210210",
+            "short_text": "Django 3.1 deploy modwsgi",
+            "slug": "django_31_howtodeploymodwsgi_on20210210",
+            "url": "https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/modwsgi/"
+        },
+        {
+            "id": 236,
+            "link_text": "Django_3.1_HowToDeployChecklist_on20210210",
+            "short_text": "Django 3.1 Deploy Checklist",
+            "slug": "django_31_howtodeploychecklist_on20210210",
+            "url": "https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/"
+        },
+        {
+            "id": 237,
+            "link_text": "ApacheHttpServerProject_ModSubstitute_on20210210",
+            "short_text": "mod_substitute",
+            "slug": "apachehttpserverproject_modsubstitute_on20210210",
+            "url": "https://httpd.apache.org/docs/trunk/mod/mod_substitute.html"
+        },
+        {
+            "id": 179,
+            "link_text": "RahmanTahseen_20190528_MediumDeployDjangoApplicationsEC2Apache",
+            "short_text": "Tahseen 20190528",
+            "slug": "rahmantahseen_20190528_mediumdeploydjangoapplicationsec2apache",
+            "url": "https://medium.com/saarthi-ai/ec2apachedjango-838e3f6014ab"
+        },
+        {
+            "id": 180,
+            "link_text": "DjangoDeployment_20161115NginxFasterApacheNeedntCare",
+            "short_text": "Django Deployment 20161115",
+            "slug": "djangodeployment_20161115nginxfasterapacheneedntcare",
+            "url": "https://djangodeployment.com/2016/11/15/why-nginx-is-faster-than-apache-and-why-you-neednt-necessarily-care/"
+        },
+        {
+            "id": 222,
+            "link_text": "NGINX_on20210429",
+            "short_text": "NGINX",
+            "slug": "nginx_wiki_on20210210",
+            "url": "https://www.nginx.com/"
+        }
+    ]
+}
