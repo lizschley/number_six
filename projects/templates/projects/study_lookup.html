@@ -6,16 +6,27 @@
 
 {% block content %}
   <h2>Information to Look Up</h2>
-  <div class="row study_lookup">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <form method="get">
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary">Look it Up</button>
-          </form>
+    <form method="get">
+      <div class="row">
+      <div class="study_lookup col-6">
+        <div class="card">
+          <div class="card-body">
+              {{ form.ordered|as_crispy_field }}
+              {{ form.standalone|as_crispy_field }}
+              {{ form.flashcard|as_crispy_field }}
+              <button id="btnLookup" type="submit" class="btn btn-primary">Look it Up</button>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="study_lookup col-6">
+        <div class="card">
+          <div class="card-body">
+              {{ form.search|as_crispy_field }}
+              <button id="btnSearch" type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </form>
   </div>
 {% endblock %}
