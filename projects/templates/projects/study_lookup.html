@@ -14,7 +14,6 @@
               {{ form.ordered|as_crispy_field }}
               {{ form.standalone|as_crispy_field }}
               {{ form.flashcard|as_crispy_field }}
-              <button id="btnLookup" type="submit" class="btn btn-primary">Look it Up</button>
           </div>
         </div>
       </div>
@@ -22,10 +21,12 @@
         <div class="card">
           <div class="card-body">
               {{ form.search|as_crispy_field }}
-              <button id="btnSearch" type="submit" class="btn btn-primary">Search</button>
           </div>
         </div>
       </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <button id="btnLookup" type="submit" class="btn btn-primary">Look it Up</button>
       </div>
     </form>
   </div>

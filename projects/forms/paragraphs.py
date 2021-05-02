@@ -15,4 +15,5 @@ class ParagraphLookupForm(forms.Form):
     flashcard = forms.ChoiceField(label='Flashcards:',
                                   choices=CHOICES['flashcard'], required=False,)
     search = forms.ChoiceField(label='Search:',
-                               widget=forms.TextInput(attrs={'placeholder': '> 2 characters'}))
+                               widget=forms.TextInput(attrs={'placeholder': '> 2 characters'}),
+                               required=False,)
