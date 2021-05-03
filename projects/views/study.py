@@ -1,11 +1,13 @@
 ''' Study View classes '''
+import json
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from projects.forms.paragraphs import ParagraphLookupForm
-import helpers.no_import_common_class.lookup_form_helpers as lookup
+import constants.common as common
 import helpers.import_common_class.paragraph_helpers as import_para_helper
+import helpers.no_import_common_class.lookup_form_helpers as lookup
 import utilities.random_methods as utils
 
 
@@ -42,20 +44,21 @@ class StudyLookupView(FormView):
     template_name = 'projects/study_lookup.html'
     form_class = ParagraphLookupForm
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         '''
-        get processes the get parameters
+        post processes the request body to get the parameters
+
+        https://www.edureka.co/community/80072/how-to-parse-request-body-from-post-in-django
 
         :param request: Request object containing the selected items from form
         :type request: WSGIRequest
         :return: Return data from form
         :rtype: dict
         '''
-        input_from_form = {}
-        input_from_form['ordered'] = request.GET.getlist('ordered')
-        input_from_form['standalone'] = request.GET.getlist('standalone')
-        input_from_form['flashcard'] = request.GET.getlist('flashcard')
-        in_data = lookup.extract_data_from_form(input_from_form)
+        body_unicode = request.body.decode('utf-8')
+        post_data = utils.extract_post_data_from_form(body_unicode.split('&'),
+                                                      common.EXPECTED_GET_VARIABLES)
+        in_data = lookup.process_form_data(post_data)
         if in_data:
             arg_dictionary = StudyLookupView.which_args(in_data)
             return HttpResponseRedirect(reverse(arg_dictionary['identifier'],
@@ -73,7 +76,10 @@ class StudyLookupView(FormView):
         :return: information necessary for correct url construction
         :rtype: dict
         '''
-        if utils.key_in_dictionary(in_data, 'category'):
+        if utils.key_in_dictionary(in_data, 'term'):
+            identifier = 'projects:study_paragraphs_from_search'
+            kwargs = {'search_term': in_data['term']}
+        elif utils.key_in_dictionary(in_data, 'category'):
             identifier = 'projects:study_paragraphs_with_category'
             kwargs = {'category_id': in_data['category']}
         else:

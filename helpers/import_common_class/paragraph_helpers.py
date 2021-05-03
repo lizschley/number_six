@@ -99,15 +99,22 @@ def retrieve_paragraphs_based_on_context(paras, context):
     group_id = context.pop('group_id', None)
     if group_id is not None:
         return paras.retrieve_paragraphs(group_id=group_id)
+
     group_slug = context.pop('group_slug', None)
     if group_slug is not None:
         return paras.retrieve_paragraphs(group_slug=group_slug)
+
     category_id = context.pop('category_id', None)
     if category_id is not None:
         return paras.retrieve_paragraphs(category_id=category_id)
+
     category_slug = context.pop('slug', None)
     if category_slug is not None:
         return paras.retrieve_paragraphs(category_slug=category_slug)
+
+    search_term = context.pop('search_term', None)
+    if search_term is not None:
+        return paras.retrieve_paragraphs(searchterm=search_term)
 
 
 def add_collapse_variables(paragraphs):

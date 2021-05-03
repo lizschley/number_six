@@ -35,24 +35,24 @@ $(document).ready(function() {
         id = $( "#id_ordered option:selected" ).text();
         $('#id_flashcard').val("0");
         $('#id_standalone').val("0");
-        $('#id_search').val('');
+        $('#id_search').val('> 2 characters');
     });
 
     $('#id_standalone').change(function(){
         id = $( "#id_standalone option:selected" ).text();
         $('#id_flashcard').val("0");
         $('#id_ordered').val("0");
-        $('#id_search').val('');
+        $('#id_search').val('> 2 characters');
     });
 
     $('#id_flashcard').change(function(){
         id = $( "#id_flashcard option:selected" ).text();
         $('#id_ordered').val("0");
         $('#id_standalone').val("0");
-        $('#id_search').val('');
+        $('#id_search').val('> 2 characters');
     });
 
-    $('#id_search').keydown(function(){
+    $('#id_search').change(function(){
         $('#id_ordered').val("0");
         $('#id_standalone').val("0");
         $('#id_flashcard').val("0");

@@ -4,6 +4,7 @@ from projects.views.projects import ProjectDetailView
 from projects.views.demo import DemoParagraphView
 from projects.views.study import StudyLookupView, StudyParagraphView, OneParagraphView, study_modal_para
 from projects.views.flashcard import FlashcardView
+from projects.views.search_paragraphs import SearchParagraphsView
 from projects.views import projects
 
 app_name = 'projects'
@@ -25,5 +26,6 @@ urlpatterns = [
     path('study/paragraphs/flashcards/<int:category_id>', FlashcardView.as_view(),
          name='study_paragraphs_with_category'),
     path('study/paragraphs/one/<slug:slug>', OneParagraphView.as_view(), name='study_para_by_slug'),
-
+    path('study/paragraphs/search/<str:search_term>', SearchParagraphsView.as_view(),
+         name='study_paragraphs_from_search'),
 ]

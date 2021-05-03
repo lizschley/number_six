@@ -1,12 +1,11 @@
 ''' These methods help display the form used in the study form '''
 from projects.models.paragraphs import Group, Category
+import constants.common as common
 
 STUDY_CATEGORIES = ['flashcard', 'study']
 INIT_STANDALONE = ('0', 'Choose Standalone Paras')
 INIT_ORDERED = ('0', 'Choose Ordered Paras')
 INIT_FLASHCARDS = ('0', 'Choose Flashcards')
-
-EXPECTED_GET_VARIABLES = ['standalone', 'flashcard', 'ordered']
 
 
 def study_dropdowns():
@@ -82,9 +81,9 @@ def format_category_id(category_id):
     return 'category_' + str(category_id)
 
 
-def extract_data_from_form(input_from_form):
+def process_form_data(input_from_form):
     '''
-    extract_data_from_form takes the user choices from the lookup form to do data lookup
+    process_form_data takes the user choices from the lookup form to do data lookup
 
     :param input_from_form: input from the form
     :type input_from_form: dict
@@ -92,12 +91,12 @@ def extract_data_from_form(input_from_form):
     :rtype: dict
     '''
     in_data = {}
-    for key in EXPECTED_GET_VARIABLES:
-        if not input_from_form[key]:
+    for key in common.EXPECTED_GET_VARIABLES:
+        if input_from_form[key] == '0':
             continue
-        if input_from_form[key][0] == '0':
+        if input_from_form[key] == '':
             continue
-        in_data = create_dictionary_from_form_input(input_from_form[key][0])
+        in_data = create_dictionary_from_form_input(input_from_form[key])
     return in_data
 
 
@@ -116,6 +115,8 @@ def create_dictionary_from_form_input(data_from_form):
     :rtype: dictionary
     '''
     temp = data_from_form.split('_')
+    if len(temp) == 1:
+        return {'term': temp[0]}
     if len(temp) != 2:
         return {}
     try:

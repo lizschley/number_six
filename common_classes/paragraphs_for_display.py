@@ -7,6 +7,7 @@ import utilities.random_methods as utils
 from common_classes.para_display_retriever_cat import ParaDisplayRetrieverCat
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
 from common_classes.para_display_retriever_json import ParaDisplayRetrieverJson
+from common_classes.para_display_retriever_search import ParaDisplayRetrieverSearch
 from common_classes.para_link_helper import ParaLinkHelper
 
 
@@ -85,6 +86,8 @@ class ParagraphsForDisplay:
             return ParaDisplayRetrieverDb()
         if key in constants.VALID_CAT_RETRIEVER_ARGS:
             return ParaDisplayRetrieverCat()
+        if key in constants.VALID_SEARCH_RETRIEVER_ARGS:
+            return ParaDisplayRetrieverSearch()
         return None
 
     # Todo: make sure this is already tested.  I think it is, through an integration test

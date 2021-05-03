@@ -6,7 +6,8 @@
 
 {% block content %}
   <h2>Information to Look Up</h2>
-    <form method="get">
+    <form method="post">
+      {% csrf_token %}
       <div class="row">
       <div class="study_lookup col-6">
         <div class="card">
