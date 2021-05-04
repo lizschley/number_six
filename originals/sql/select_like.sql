@@ -1,1 +1,0 @@
-select * from projects_reference where slug like '%schafer%';
