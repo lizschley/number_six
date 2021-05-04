@@ -221,4 +221,4 @@ class ParagraphsForDisplay:
 
     def output_error(self, message):
         ''' return error message with expected key '''
-        return {'study_error': message}
+        return {'error': message}

@@ -75,8 +75,8 @@ def appropriate_context(context, paragraphs):
     '''
     if utils.key_in_dictionary(paragraphs, 'groups'):
         context = cat_helper.add_paragraphs_by_group_to_context(context, paragraphs)
-    elif utils.key_in_dictionary(paragraphs, 'study_error'):
-        context = para_helper.add_error_to_context(context, paragraphs, 'study_error')
+    elif utils.key_in_dictionary(paragraphs, 'error'):
+        context = para_helper.add_error_to_context(context, paragraphs, 'error')
     else:
         if paragraphs['group_type'] == 'standalone':
             paragraphs = add_collapse_variables(paragraphs)
@@ -114,7 +114,7 @@ def retrieve_paragraphs_based_on_context(paras, context):
 
     search_term = context.pop('search_term', None)
     if search_term is not None:
-        return paras.retrieve_paragraphs(searchterm=search_term)
+        return paras.retrieve_paragraphs(search_term=search_term)
 
 
 def add_collapse_variables(paragraphs):

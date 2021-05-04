@@ -3,6 +3,7 @@ import constants.sql_substrings as sql_sub
 from projects.models.paragraphs import Group  # noqa: F401
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_display_retriever_db import ParaDisplayRetrieverDb
+from helpers.no_import_common_class.paragraph_dictionaries import ParagraphDictionaries
 
 
 class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
@@ -29,9 +30,10 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         # self.ref_ids = []
 
         # for processing
+        self.search_term = ''
         self.group_ids = []
         self.first_row = True
-        self.search_term = ''
+        self.counter = 0
 
     def data_retrieval(self, kwargs):
         '''
@@ -43,13 +45,15 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         :return: a dictionary in the format that works with the standard ParagraphsForDisplayCat
         :rtype: dict
         '''
-        self.search_term = kwargs['search_term']
-        query = self.build_search_sql()
-        breakpoint()
-        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group,)
+        like_term = kwargs['search_term'].strip()
+        self.search_term = like_term
+        like_term = '%' + like_term + '%'
+        query = self.build_search_sql(like_term)
+        raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, like_term,
+                                                                  like_term, like_term)
         return self.db_output_to_display_input(raw_queryset)
 
-    def build_search_sql(self):
+    def build_search_sql(self, like_term):
         '''
         build_search_sql builds sql that will pull in groups and their paragraphs and references
         for a given search
@@ -64,7 +68,8 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         query += ' ' + where + ' order by g.group_type, p.subtitle '
         return query
 
-    def search_where(self):
+    @staticmethod
+    def search_where():
         '''
         search_where constructs where statement
 
@@ -73,9 +78,11 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         :return: where statement with variable and its value
         :rtype: dict
         '''
-        where = "where c.search_type not in (archived', 'resume') and group_type <> 'no_search' " +\
-                "and (g.title like '%" + self.search_term + "%' or p.subtitle like '%" +\
-                self.search_term + "%' or p.text like '%" + self.search_term + "%'"
+        not_in = ('archived', 'resume')
+        no_search = 'no_search'
+
+        where = (f"where c.category_type not in {not_in} and group_type <> '{no_search}' and (g.title "
+                 f"like %s or p.subtitle like %s or p.text like %s) ")
         return where
 
     def basic_search_sql(self):
@@ -90,7 +97,8 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         sql_tables = self.get_search_tables()
         return beg_sql + sql_tables
 
-    def get_search_select(self):
+    @staticmethod
+    def get_search_select():
         '''
         get_search_select builds the select for the given sql type (depends on how paragraphs are used)
         Sql type is set based key word args
@@ -102,7 +110,8 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         '''
         return sql_sub.BEGIN_SELECT + ', ' + sql_sub.SELECT_SEARCH + ' '
 
-    def get_search_tables(self):
+    @staticmethod
+    def get_search_tables():
         '''
         get_tables builds the tables and joins search sql
 
@@ -134,8 +143,8 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         '''
         self.ordered = True
         self.group = {
-            'title': f'Search Results for Search Term: {self.search_term}',
-            'id': 999,
+            'group_title': f'Search Results for Search Term: {self.search_term}',
+            'group_note': '',
             'group_type': 'ordered',
         }
 
@@ -149,30 +158,22 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         '''
         beg_para_text = '<p>'
         end_para_text = '</p>'
+        para_text = ''
 
-        if row.paragraph_id not in self.para_ids:
-            self.para_ids.append(row.paragraph_id)
+        if ((row.para_id not in self.para_ids) and (len(row.para_slug) > 1) and row.standalone):
+            self.para_ids.append(row.para_id)
             self.para_slugs.append(row.para_slug)
-            new_para = beg_para_text + '<strong>Standalone:</strong> ' f'|beg|{row.para_slug}|end|;'
-            new_para += f'|beg_para|{row.para_slug}|end_para|' + end_para_text
-            self.paragraphs.append(new_para)
+            para_text += beg_para_text + f'|beg|{row.para_slug}|end|; '
+            para_text += f'|beg_para|{row.para_slug}|end_para|' + end_para_text
 
-        if row.group_id not in self.group_ids:
+        if row.group_id not in self.group_ids and row.group_type == 'ordered':
             self.group_ids.append(row.group_id)
             self.group_slugs.append(row.group_slug)
-            new_para = beg_para_text + '<strong>Ordered:</strong> '
-            new_para += f'|beg_group|{row.group_slug}|end_group|' + end_para_text
+            para_text += beg_para_text + '<strong>Ordered Paragraphs:</strong> '
+            para_text += f'|beg_group|{row.group_slug}|end_group|' + end_para_text
+
+        if para_text:
+            new_para = ParagraphDictionaries.paragraph_dictionary()
+            new_para['text'] = para_text
+            new_para['order'] = self.counter + 1
             self.paragraphs.append(new_para)
-
-    def output_data(self):
-        '''
-        output_data is different for categories because there are many groups and one search
-        The references are associated with the group, in the display
-        The groups are ordered and should not be displayed individually
-
-        :return: dictionary used to display groups and paragraphs associated with a given search
-        :rtype: dict
-        '''
-        return {'group': self.group,
-                'para_id_to_link_text': self.para_id_to_link_text,
-                'slug_to_lookup_link': self.slug_to_lookup_link, }

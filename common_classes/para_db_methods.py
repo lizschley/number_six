@@ -187,7 +187,7 @@ class ParaDbMethods:
             :return: result from query
             :rtype: rawsql queryset
         '''
-        return class_.objects.raw(sql, [args])
+        return class_.objects.raw(sql, args)
 
     @staticmethod
     def max_cat_sort_for_given_category(category_id):
