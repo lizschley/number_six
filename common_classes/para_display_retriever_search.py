@@ -48,12 +48,12 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         like_term = kwargs['search_term'].strip()
         self.search_term = like_term
         like_term = '%' + like_term + '%'
-        query = self.build_search_sql(like_term)
+        query = self.build_search_sql()
         raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, like_term,
                                                                   like_term, like_term)
         return self.db_output_to_display_input(raw_queryset)
 
-    def build_search_sql(self, like_term):
+    def build_search_sql(self):
         '''
         build_search_sql builds sql that will pull in groups and their paragraphs and references
         for a given search
@@ -93,32 +93,9 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         :return: sql with the necessary elements and without where statements
         :rtype: str
         '''
-        beg_sql = self.get_search_select()
-        sql_tables = self.get_search_tables()
+        beg_sql = sql_sub.BEGIN_SELECT + ', ' + sql_sub.SELECT_SEARCH + ' '
+        sql_tables = sql_sub.FROM_GROUP_JOIN_PARA + sql_sub.JOIN_CATEGORY_TO_GROUP
         return beg_sql + sql_tables
-
-    @staticmethod
-    def get_search_select():
-        '''
-        get_search_select builds the select for the given sql type (depends on how paragraphs are used)
-        Sql type is set based key word args
-
-        :param sql_type: Select part of query will be different based on value.
-        :type sql_type: str
-        :return: select part of the sql query
-        :rtype: str
-        '''
-        return sql_sub.BEGIN_SELECT + ', ' + sql_sub.SELECT_SEARCH + ' '
-
-    @staticmethod
-    def get_search_tables():
-        '''
-        get_tables builds the tables and joins search sql
-
-        :return: Partial query
-        :rtype: str
-        '''
-        return sql_sub.FROM_GROUP_JOIN_PARA + sql_sub.JOIN_CATEGORY_TO_GROUP
 
     def loop_through_queryset(self, query_set):
         '''
@@ -143,7 +120,7 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         '''
         self.ordered = True
         self.group = {
-            'group_title': f'Search Results for Search Term: {self.search_term}',
+            'group_title': f'Search results for term: {self.search_term}',
             'group_note': '',
             'group_type': 'ordered',
         }
