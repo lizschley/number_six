@@ -150,8 +150,10 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
 
     def append_unique_paragraph(self, row):
         '''
-        append_unique_paragraph ensures that even if a paragraph is in multiple rows, and even if it is
-        it used in multiple groups, it will be displayed once and only once for this group
+        append_unique_paragraph creates paragraph records for display that only have links to data
+        records. There are three types of links:  Two links are for paragraph records that are
+        standalone: to a popup and to a single paragraph page.  The third link is to a page that displays
+        ordered paragraphs that all belong to a given group
 
         :param row: queryset row, not normalized!
         :type row: one row of django.db.models.query.RawQuerySet
@@ -173,7 +175,8 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
             para_text += f'|beg_group|{row.group_slug}|end_group|' + end_para_text
 
         if para_text:
+            self.counter += 1
             new_para = ParagraphDictionaries.paragraph_dictionary()
             new_para['text'] = para_text
-            new_para['order'] = self.counter + 1
+            new_para['order'] = self.counter
             self.paragraphs.append(new_para)
