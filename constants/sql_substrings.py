@@ -9,6 +9,9 @@ SELECT_PARAGRAPHS = ('p.id as paragraph_id, subtitle, p.note as subtitle_note, i
                      'image_info_key, text, p.slug as para_slug, p.short_title ')
 SELECT_REFERENCES = 'r.id as reference_id, link_text, url, short_text, r.slug as ref_slug '
 
+SELECT_SEARCH = ('g.id as group_id, g.group_type, g.slug as group_slug, g.short_name as group_link_text,'
+                 ' p.id as para_id, p.standalone, p.slug as para_slug, p.short_title as para_link_text')
+
 FROM_CATEGORY_JOIN_GROUP_AND_PARA = ('from projects_category c '
                                      'join projects_group g on c.id = g.category_id '
                                      'join projects_groupparagraph gp on g.id = gp.group_id '

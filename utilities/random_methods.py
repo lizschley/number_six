@@ -309,3 +309,43 @@ def use_file(filename, ext):
     if temp[-1] == ext:
         return True
     return False
+
+
+def extract_post_data_from_form(params, expected_keys):
+    '''
+    extract_post_data_from_form does what it says
+
+    :param body: request body. WSGI server supplied wsgi.input file like environment variable
+    :type body: Bytes
+    :return: data in the format that we can easily use
+    :rtype: json
+    '''
+    post_dictionary = {}
+    for param in params:
+        if '=' not in param:
+            continue
+        temp = param.split('=')
+        if len(temp) != 2:
+            continue
+        if temp[0] in expected_keys:
+            post_dictionary[temp[0]] = temp[1]
+    return post_dictionary
+
+
+def find_correct_string_from_list(temp_list, search_for):
+    '''
+    find_correct_string_from_list [summary]
+
+    [extended_summary]
+
+    :param temp_list: [description]
+    :type temp_list: [type]
+    :param search_for: [description]
+    :type search_for: [type]
+    :return: [description]
+    :rtype: [type]
+    '''
+    for temp in temp_list:
+        if search_for in temp:
+            return temp
+    return ''

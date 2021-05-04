@@ -9,6 +9,11 @@
             <h1>{{title}}</h1>
             <p>{{title_note}}</p>
         </div>
+        {% if error %}
+            <div class="alert alert-primary alert-dismissible fade show">
+                <strong>Note: </strong>{{error}}
+            </div>
+        {% endif %}
         <div class="col-md-4">
             {% if para.references %}
                 <h1>References</h1>

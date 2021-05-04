@@ -203,7 +203,6 @@ class ParaDisplayRetrieverCat(ParaDisplayRetrieverDb):
             ref_lookup = {'link_text': refs[0]['short_text'], 'url': refs[0]['url']}
             self.slug_to_lookup_link['ref_slug_to_reference'][refs[0]['slug']] = ref_lookup
 
-
     def append_unique_paragraph(self, row):
         '''
         append_unique_paragraph ensures that even if a paragraph is in multiple rows, and even if it is
