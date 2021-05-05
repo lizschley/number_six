@@ -54,6 +54,7 @@ class ParagraphsForDisplay:
 
     def retrieve_input_data(self, kwargs):
         '''
+
         retrieve_input_data decides what class is needed to retrieve the data before formatting it
         in the way needed for the input to the paragraph display
 
@@ -99,9 +100,8 @@ class ParagraphsForDisplay:
         :return: dictionary to be added to the context & used in the paragraph display template
         :rtype: dict
         '''
-        if not self.input_data['group']:
-            message = ('Your selection produced no results, please select something else or try '
-                       'the same selection another day.')
+        message = self.check_for_errors()
+        if len(message) > 3:
             return self.output_error(message)
         self.assign_group_data()
         self.create_links_from_references()
@@ -219,6 +219,19 @@ class ParagraphsForDisplay:
                 'group_type': self.group_type,
                 'paragraphs': self.paragraphs}
 
-    def output_error(self, message):
+    def check_for_errors(self):
+        '''
+        check_for_errors makes it so a different message is displayed based on known error possibilites
+        '''
+        if not self.input_data['group']:
+            return ('Your selection produced no results, please select something else or try '
+                    'the same selection another day.')
+        if self.input_data['group']['group_type'] == 'error':
+            return self.input_data['group']['group_title']
+        return ''
+
+
+    @staticmethod
+    def output_error(message):
         ''' return error message with expected key '''
         return {'error': message}
