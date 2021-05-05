@@ -16,8 +16,6 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
     def __init__(self):
         '''
         __init__ different from the base class
-
-
         '''
         super().__init__()
         # have already
@@ -51,6 +49,9 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
         query = self.build_search_sql()
         raw_queryset = ParaDbMethods.class_based_rawsql_retrieval(query, Group, like_term,
                                                                   like_term, like_term)
+        if len(raw_queryset) == 0:
+            self.assign_no_results_group()
+            return self.output_data()
         return self.db_output_to_display_input(raw_queryset)
 
     def build_search_sql(self):
@@ -157,3 +158,11 @@ class ParaDisplayRetrieverSearch(ParaDisplayRetrieverDb):
             new_para['text'] = para_text
             new_para['order'] = self.counter
             self.paragraphs.append(new_para)
+
+    def assign_no_results_group(self):
+        ''' error group '''
+        self.group = {
+            'group_title': f'No search results for term: {self.search_term}',
+            'group_note': '',
+            'group_type': 'error',
+        }
