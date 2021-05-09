@@ -14,6 +14,7 @@
 
 :Output: Writes a json file to be edited or used to update production
 '''
+import copy
 import sys
 from decouple import config
 import constants.crud as crud
@@ -77,7 +78,7 @@ def run(*args):
     process_data = establish_directories(process_data)
     res = call_process(process_data)
     if res != 'ok':
-        print(f'Error! {res}')
+        print(res)
 
 
 def init_process_data(args):
@@ -145,12 +146,22 @@ def call_process(process_data):
     ''' Right now only works for Step 1, which always has same input and output directories '''
     files_processed = step_one_process(process_data)
     if files_processed == 0:
-        return f'Step 1, no results; 0 Python files in {process_data["input_directory"]}'
+        return correct_zero_message(process_data)
     return 'ok'
+
+
+def correct_zero_message(process_data):
+    ''' Message varies because Step 1, for_prod defaults to two days instead of creating error.'''
+    if process_data['for_prod'] and \
+       process_data["input_directory"] == constants.INPUT_TO_UPDATER_STEP_ONE:
+        return ('Step 1, results default to two days of changes. To override, add input files to '
+                f'{process_data["input_directory"]}')
+    return f'Error in Step 1, no results; 0 JSON files in {process_data["input_directory"]}'
 
 
 def step_one_process(process_data):
     ''' passes function with correct calls to common looping through json files function '''
+    step_one_input = copy.deepcopy(process_data)
     num = para_helper.loop_through_files_for_db_updates(import_helper.retrieve_paragraphs_step_one,
-                                                        process_data)
+                                                        step_one_input)
     return num

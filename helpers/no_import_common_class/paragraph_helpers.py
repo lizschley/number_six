@@ -115,6 +115,10 @@ def loop_through_files_for_db_updates(method, process_data):
     directory = process_data['input_directory']
     num_processed = 0
     file_list = sorted_files_in_dir(directory, True)
+    if process_data['for_prod'] and len(file_list) == 0:
+        process_data['file_data'] = assign_for_prod_default_input_to_step3()
+        method(process_data)
+        return 0
     for filename in file_list:
         if use_file(filename, str(method), process_data):
             file_path = os.path.join(directory, filename)
@@ -124,6 +128,18 @@ def loop_through_files_for_db_updates(method, process_data):
         else:
             continue
     return num_processed
+
+
+def assign_for_prod_default_input_to_step3():
+    ''' convenience method for getting last two days of updated data for production '''
+    return {
+        'updated_at': {
+            'oper': '-',
+            'units': {
+                'days': 2
+            }
+        }
+    }
 
 
 def sorted_files_in_dir(directory, descending=False):
