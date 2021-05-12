@@ -115,7 +115,7 @@ def loop_through_files_for_db_updates(method, process_data):
     directory = process_data['input_directory']
     num_processed = 0
     file_list = sorted_files_in_dir(directory, True)
-    if process_data['for_prod'] and len(file_list) == 0:
+    if use_default_input_file(process_data, file_list):
         process_data['file_data'] = assign_for_prod_default_input_to_step3()
         method(process_data)
         return 0
@@ -128,6 +128,15 @@ def loop_through_files_for_db_updates(method, process_data):
         else:
             continue
     return num_processed
+
+
+def use_default_input_file(process_data, file_list):
+    ''' True if we use default input (for_prod, updated within 2 days) '''
+    if utils.key_not_in_dictionary(process_data, 'for_prod'):
+        return False
+    if process_data['for_prod'] and len(file_list) == 0:
+        return True
+    return False
 
 
 def assign_for_prod_default_input_to_step3():

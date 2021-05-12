@@ -1,0 +1,608 @@
+{
+    "categories": [
+        {
+            "category_type": "exercise",
+            "id": 3,
+            "slug": "at-home-exercise",
+            "title": "At Home Exercise"
+        },
+        {
+            "category_type": "study",
+            "id": 5,
+            "slug": "study",
+            "title": "Study"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 56,
+            "id": 834,
+            "order": 1,
+            "paragraph_id": 769
+        },
+        {
+            "group_id": 57,
+            "id": 833,
+            "order": 1,
+            "paragraph_id": 768
+        },
+        {
+            "group_id": 13,
+            "id": 90,
+            "order": 1,
+            "paragraph_id": 100
+        },
+        {
+            "group_id": 13,
+            "id": 91,
+            "order": 2,
+            "paragraph_id": 101
+        },
+        {
+            "group_id": 13,
+            "id": 92,
+            "order": 3,
+            "paragraph_id": 102
+        },
+        {
+            "group_id": 13,
+            "id": 93,
+            "order": 4,
+            "paragraph_id": 103
+        },
+        {
+            "group_id": 12,
+            "id": 89,
+            "order": 1,
+            "paragraph_id": 99
+        },
+        {
+            "group_id": 58,
+            "id": 832,
+            "order": 1,
+            "paragraph_id": 767
+        },
+        {
+            "group_id": 11,
+            "id": 88,
+            "order": 1,
+            "paragraph_id": 98
+        },
+        {
+            "group_id": 55,
+            "id": 827,
+            "order": 0,
+            "paragraph_id": 762
+        },
+        {
+            "group_id": 55,
+            "id": 831,
+            "order": 0,
+            "paragraph_id": 766
+        },
+        {
+            "group_id": 55,
+            "id": 828,
+            "order": 0,
+            "paragraph_id": 763
+        },
+        {
+            "group_id": 55,
+            "id": 829,
+            "order": 0,
+            "paragraph_id": 764
+        },
+        {
+            "group_id": 55,
+            "id": 830,
+            "order": 0,
+            "paragraph_id": 765
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 1,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 56,
+            "note": "",
+            "short_name": "Overview",
+            "slug": "overview",
+            "title": "Overview"
+        },
+        {
+            "cat_sort": 2,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 57,
+            "note": "",
+            "short_name": "Core",
+            "slug": "core",
+            "title": "Core"
+        },
+        {
+            "cat_sort": 3,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 13,
+            "note": " ",
+            "short_name": "Warmup",
+            "slug": "warmup",
+            "title": "Warmup"
+        },
+        {
+            "cat_sort": 4,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 12,
+            "note": "",
+            "short_name": "Animalistic and Functional",
+            "slug": "animalistic-and-functional",
+            "title": "Animalistic and Functional"
+        },
+        {
+            "cat_sort": 5,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 58,
+            "note": "",
+            "short_name": "Balance",
+            "slug": "balance",
+            "title": "Balance"
+        },
+        {
+            "cat_sort": 6,
+            "category_id": 3,
+            "group_type": "ordered",
+            "id": 11,
+            "note": "",
+            "short_name": "Flexibility",
+            "slug": "flexibility",
+            "title": "Flexibility"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 5,
+            "group_type": "standalone",
+            "id": 55,
+            "note": "",
+            "short_name": "Exercise",
+            "slug": "exercise",
+            "title": "Exercise"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 74,
+            "paragraph_id": 100,
+            "reference_id": 62
+        },
+        {
+            "id": 78,
+            "paragraph_id": 101,
+            "reference_id": 63
+        },
+        {
+            "id": 79,
+            "paragraph_id": 101,
+            "reference_id": 64
+        },
+        {
+            "id": 75,
+            "paragraph_id": 101,
+            "reference_id": 62
+        },
+        {
+            "id": 76,
+            "paragraph_id": 102,
+            "reference_id": 62
+        },
+        {
+            "id": 77,
+            "paragraph_id": 103,
+            "reference_id": 62
+        },
+        {
+            "id": 1272,
+            "paragraph_id": 762,
+            "reference_id": 749
+        },
+        {
+            "id": 1273,
+            "paragraph_id": 762,
+            "reference_id": 730
+        },
+        {
+            "id": 1267,
+            "paragraph_id": 766,
+            "reference_id": 731
+        },
+        {
+            "id": 1266,
+            "paragraph_id": 766,
+            "reference_id": 735
+        },
+        {
+            "id": 1268,
+            "paragraph_id": 766,
+            "reference_id": 748
+        },
+        {
+            "id": 1269,
+            "paragraph_id": 762,
+            "reference_id": 735
+        },
+        {
+            "id": 1270,
+            "paragraph_id": 762,
+            "reference_id": 731
+        },
+        {
+            "id": 1271,
+            "paragraph_id": 762,
+            "reference_id": 748
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "261b8e5e-ec62-4542-b1df-ee54119c15d9",
+            "id": 769,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>This will be about my overall vision and attitudes about exercise.  The groups (left side menu) are what I have planned initially.  For now most of what I have are placeholders.</p><p><strong>Note:</strong> The only real content so far is in Warmup.</p>"
+        },
+        {
+            "guid": "711574ce-4249-4e67-81b0-2e6c9e92e6e8",
+            "id": 768,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Eventually will be about core exercise, this is planned, but not complete.  For now it's just a placeholder.<p>"
+        },
+        {
+            "guid": "f574259f-9202-4569-b495-637f17fe1893",
+            "id": 100,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>The first four minutes of the Tapp Brother Parkour Warmup video (|beg_ref|tappthomas_jonathon_20150218_youtube_parkourwarmup|end_ref|) is much like  the warm up routine I use before working out.  Actually, I see this as a warm up for life itself and sometimes do this warm up as a mini-work out before eating lunch.</p>"
+        },
+        {
+            "guid": "f8321a7f-3b82-4b59-9117-de27d662d414",
+            "id": 101,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Here are some differences in my warm up:</p><ol><li>Do not roll my head back, because of years of yoga instructors telling me not to.  Instead I add some extra neck exercises as illustrated in the Bob and Brad video below (Bob and Brad link below).</li><li>Do add lots of wrist and hand exercise variations, mostly because I have felt some arthritis in my fingers and have suffered from wrist pain in the past.  I open and close my hands while circling my wrists, move my wrist in all directions, touch my thumbs to the fingers in the same hand and anything else I can think of until my hand, wrist and forearms are tired.</li><li>Do a hip series, isolating the hips: side to side, front to back, circle right and circle left. Here is a link to circles done like I want to do.  After this, I do hip circles like Thomas Tapp does.</li><li>Do spend way more time on ankle mobility, in order to avoid foot and calf cramps.  I pretty much follow the GMB guide to ankle mobility (Jarlo Ilano link below).</li></ol>"
+        },
+        {
+            "guid": "3b0c590e-09f0-4c9c-8940-04af8d231374",
+            "id": 102,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>After the exercises as shown in the Parkour Warm up video, I do arm swings, both horizontally and vertically, twists at the waist, leg swings, hip rotations, easy squats (popup link here) and lunges (popup link here).  Then I add any exercises specific to the workout I am planning, such as modified push ups or front planks before pushups (popup link here).</p>"
+        },
+        {
+            "guid": "595523dc-7cf4-4d32-a024-6a41374a1655",
+            "id": 103,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Someday I plan do the whole Tapp Brothers warmup as an after lunch workout after to see how I like it.</p>"
+        },
+        {
+            "guid": "4934cf5a-3843-4c31-96fd-e1a8bc3b875b",
+            "id": 99,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Functional exercises are reality based. Animalistic may be also, but I see it as a path towards greater agility.</p><p>More to come... this is a placeholder</p>"
+        },
+        {
+            "guid": "2098b82a-542d-46b2-a181-f5aae5540638",
+            "id": 767,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Yet another placeholder.<p>"
+        },
+        {
+            "guid": "8d46b270-b499-41de-a9a7-67f1017d3b93",
+            "id": 98,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Stretching is vital as you get older, in order to maintain agility and range of motion.</p><p>This is a placeholder, for now</p>"
+        },
+        {
+            "guid": "57d2c1cd-cd2e-4ae9-b0d1-3bd4c121f1c0",
+            "id": 762,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Core",
+            "slug": "core",
+            "standalone": true,
+            "subtitle": "Core",
+            "text": "Place Holder"
+        },
+        {
+            "guid": "1d97be6e-3f45-4ebe-b212-e4bb8246f7b6",
+            "id": 766,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Handstand",
+            "slug": "handstand",
+            "standalone": true,
+            "subtitle": "Handstand",
+            "text": "Place Holder"
+        },
+        {
+            "guid": "137d5e86-0b39-4ecf-b8c1-ed170f371380",
+            "id": 763,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Animalistic",
+            "slug": "animalistic",
+            "standalone": true,
+            "subtitle": "Animalistic",
+            "text": "<p>Place Holder</p>"
+        },
+        {
+            "guid": "16be1d51-715d-4792-8c2f-0c4f24ba837b",
+            "id": 764,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Functional",
+            "slug": "functional",
+            "standalone": true,
+            "subtitle": "Functional",
+            "text": "Place Holder"
+        },
+        {
+            "guid": "042302b9-2eb3-4b53-a9fd-831505a56bc7",
+            "id": 765,
+            "image_info_key": "default",
+            "image_path": "projects/img/reference_images.jpg",
+            "note": "",
+            "short_title": "Everyday Exercises",
+            "slug": "2014-15-routine",
+            "standalone": true,
+            "subtitle": "2014-15 Routine",
+            "text": " <p>These |beg_ref|everydayexerciseroutine_2014-15|end_ref|, which I used to do regularly when I couldn't get the gym, once were a major part of my fitness approach. My workout is quite different now, but I still do many of these exercises a couple times a week or even, and for some of them, every day. For Pilates and Yoga, most of my knowledge was from classes and occasional individual instruction. Since I am not an an exercise expert, I am not offering any instruction from my own knowledge.</p> <p>The linked routine emphasizes core stability. A lot of my core information came from Pilates classes and books. Before Learning Pilates, I had been getting one shoulder injury after another. Learning how to stabilize my entire core fixed my problem, since the corset-like stabilization effect of the core extends to shoulder rotation as well.</p><p>The below book references are for this Google Docs document: |beg_ref|everydayexerciseroutine_2014-15|end_ref|.</p> <h3>Book References</h3> <p>Martins, P., & Kaplan, H. (1997). New York City Ballet workout fifty stretches and exercises anyone can do for a strong, graceful, and sculpted body. William Morrow and Co.</p> <p>Merrithew, L., & Merrithew, M. (2001). Comprehensive Matwork: Stott Pilates, a subsiary of Merrithew Publishing.</p>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "3": "at-home-exercise",
+            "5": "study",
+            "at-home-exercise": {
+                "dev_id": 3
+            },
+            "study": {
+                "dev_id": 5
+            }
+        },
+        "groups": {
+            "11": "flexibility",
+            "12": "animalistic-and-functional",
+            "13": "warmup",
+            "55": "exercise",
+            "56": "overview",
+            "57": "core",
+            "58": "balance",
+            "animalistic-and-functional": {
+                "dev_id": 12
+            },
+            "balance": {
+                "dev_id": 58
+            },
+            "core": {
+                "dev_id": 57
+            },
+            "exercise": {
+                "dev_id": 55
+            },
+            "flexibility": {
+                "dev_id": 11
+            },
+            "overview": {
+                "dev_id": 56
+            },
+            "warmup": {
+                "dev_id": 13
+            }
+        },
+        "paragraphs": {
+            "042302b9-2eb3-4b53-a9fd-831505a56bc7": {
+                "dev_id": 765
+            },
+            "100": "f574259f-9202-4569-b495-637f17fe1893",
+            "101": "f8321a7f-3b82-4b59-9117-de27d662d414",
+            "102": "3b0c590e-09f0-4c9c-8940-04af8d231374",
+            "103": "595523dc-7cf4-4d32-a024-6a41374a1655",
+            "137d5e86-0b39-4ecf-b8c1-ed170f371380": {
+                "dev_id": 763
+            },
+            "16be1d51-715d-4792-8c2f-0c4f24ba837b": {
+                "dev_id": 764
+            },
+            "1d97be6e-3f45-4ebe-b212-e4bb8246f7b6": {
+                "dev_id": 766
+            },
+            "2098b82a-542d-46b2-a181-f5aae5540638": {
+                "dev_id": 767
+            },
+            "261b8e5e-ec62-4542-b1df-ee54119c15d9": {
+                "dev_id": 769
+            },
+            "3b0c590e-09f0-4c9c-8940-04af8d231374": {
+                "dev_id": 102
+            },
+            "4934cf5a-3843-4c31-96fd-e1a8bc3b875b": {
+                "dev_id": 99
+            },
+            "57d2c1cd-cd2e-4ae9-b0d1-3bd4c121f1c0": {
+                "dev_id": 762
+            },
+            "595523dc-7cf4-4d32-a024-6a41374a1655": {
+                "dev_id": 103
+            },
+            "711574ce-4249-4e67-81b0-2e6c9e92e6e8": {
+                "dev_id": 768
+            },
+            "762": "57d2c1cd-cd2e-4ae9-b0d1-3bd4c121f1c0",
+            "763": "137d5e86-0b39-4ecf-b8c1-ed170f371380",
+            "764": "16be1d51-715d-4792-8c2f-0c4f24ba837b",
+            "765": "042302b9-2eb3-4b53-a9fd-831505a56bc7",
+            "766": "1d97be6e-3f45-4ebe-b212-e4bb8246f7b6",
+            "767": "2098b82a-542d-46b2-a181-f5aae5540638",
+            "768": "711574ce-4249-4e67-81b0-2e6c9e92e6e8",
+            "769": "261b8e5e-ec62-4542-b1df-ee54119c15d9",
+            "8d46b270-b499-41de-a9a7-67f1017d3b93": {
+                "dev_id": 98
+            },
+            "98": "8d46b270-b499-41de-a9a7-67f1017d3b93",
+            "99": "4934cf5a-3843-4c31-96fd-e1a8bc3b875b",
+            "f574259f-9202-4569-b495-637f17fe1893": {
+                "dev_id": 100
+            },
+            "f8321a7f-3b82-4b59-9117-de27d662d414": {
+                "dev_id": 101
+            }
+        },
+        "references": {
+            "62": "tappthomas_jonathon_20150218_youtube_parkourwarmup",
+            "63": "ilanojarlo_20190815_gmb_footexercises",
+            "64": "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises",
+            "730": "everydayexerciseroutine_2014-15",
+            "731": "foothillstherapy_20170816_topthreecore",
+            "735": "blivenanderson_20131105_sportshealth_corestabilitytraininginjuryprevention",
+            "748": "ilanojarlo_20180624_gmb_quitdoingcrunchesbettercorestrength",
+            "749": "tappthomas_jonathon_20170719_youtube_primalcoresequence",
+            "blivenanderson_20131105_sportshealth_corestabilitytraininginjuryprevention": {
+                "dev_id": 735
+            },
+            "everydayexerciseroutine_2014-15": {
+                "dev_id": 730
+            },
+            "foothillstherapy_20170816_topthreecore": {
+                "dev_id": 731
+            },
+            "ilanojarlo_20180624_gmb_quitdoingcrunchesbettercorestrength": {
+                "dev_id": 748
+            },
+            "ilanojarlo_20190815_gmb_footexercises": {
+                "dev_id": 63
+            },
+            "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises": {
+                "dev_id": 64
+            },
+            "tappthomas_jonathon_20150218_youtube_parkourwarmup": {
+                "dev_id": 62
+            },
+            "tappthomas_jonathon_20170719_youtube_primalcoresequence": {
+                "dev_id": 749
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 62,
+            "link_text": "TappThomas_Jonathon_20150218_youtube_ParkourWarmUp",
+            "short_text": "Tapp 20150218",
+            "slug": "tappthomas_jonathon_20150218_youtube_parkourwarmup",
+            "url": "https://www.youtube.com/watch?v=qGSc-EUlyrQ"
+        },
+        {
+            "id": 63,
+            "link_text": "IlanoJarlo_20190815_GMB_FootExercises",
+            "short_text": "IlanoJarlo 2019081",
+            "slug": "ilanojarlo_20190815_gmb_footexercises",
+            "url": " https://gmb.io/feet/"
+        },
+        {
+            "id": 64,
+            "link_text": "SchruppBob_HeineckBrad_20170619_youtube_10BestNeckExercises",
+            "short_text": "SchruppBob Et al. 20170619",
+            "slug": "schruppbob_heineckbrad_20170619_youtube_10bestneckexercises",
+            "url": "https://www.youtube.com/watch?v=cog4Dds__a0"
+        },
+        {
+            "id": 749,
+            "link_text": "TappThomas_Jonathon_20170719_YouTube_PrimalCoreSequence",
+            "short_text": "Tapp 20170719",
+            "slug": "tappthomas_jonathon_20170719_youtube_primalcoresequence",
+            "url": "https://www.youtube.com/watch?v=ZLOC1-3If2c"
+        },
+        {
+            "id": 730,
+            "link_text": "EveryDayExerciseRoutine_2014-15",
+            "short_text": "Every Day Exercises (2014-15)",
+            "slug": "everydayexerciseroutine_2014-15",
+            "url": "https://docs.google.com/document/d/1KVGsdUneMAG0z_yGF8Pw748HLzc4pwIgzcrinOEIORc/edit?usp=sharing"
+        },
+        {
+            "id": 731,
+            "link_text": "FootHillsTheraPy_20170816_TopThreeCore",
+            "short_text": "FootHillsTherapy 20170816",
+            "slug": "foothillstherapy_20170816_topthreecore",
+            "url": "https://www.foothillstherapy.com/2017/08/16/top-3-exercises-core-strengthening/"
+        },
+        {
+            "id": 735,
+            "link_text": "BlivenAnderson_20131105_SportsHealth_CoreStabilityTrainingInjuryPrevention",
+            "short_text": "Bliven Anderson 0131105",
+            "slug": "blivenanderson_20131105_sportshealth_corestabilitytraininginjuryprevention",
+            "url": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3806175/"
+        },
+        {
+            "id": 748,
+            "link_text": "IlanoJarlo_20180624_GMB_QuitDoingCrunchesBetterCoreStrength",
+            "short_text": "Ilano 20180624",
+            "slug": "ilanojarlo_20180624_gmb_quitdoingcrunchesbettercorestrength",
+            "url": "https://gmb.io/core-strength/"
+        }
+    ]
+}
