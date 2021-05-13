@@ -70,15 +70,9 @@
         },
         {
             "group_id": 55,
-            "id": 827,
+            "id": 830,
             "order": 0,
-            "paragraph_id": 762
-        },
-        {
-            "group_id": 55,
-            "id": 831,
-            "order": 0,
-            "paragraph_id": 766
+            "paragraph_id": 765
         },
         {
             "group_id": 55,
@@ -88,15 +82,21 @@
         },
         {
             "group_id": 55,
+            "id": 827,
+            "order": 0,
+            "paragraph_id": 762
+        },
+        {
+            "group_id": 55,
             "id": 829,
             "order": 0,
             "paragraph_id": 764
         },
         {
             "group_id": 55,
-            "id": 830,
+            "id": 831,
             "order": 0,
-            "paragraph_id": 765
+            "paragraph_id": 766
         }
     ],
     "groups": [
@@ -203,9 +203,9 @@
             "reference_id": 62
         },
         {
-            "id": 1272,
+            "id": 1270,
             "paragraph_id": 762,
-            "reference_id": 749
+            "reference_id": 731
         },
         {
             "id": 1273,
@@ -213,29 +213,14 @@
             "reference_id": 730
         },
         {
-            "id": 1267,
-            "paragraph_id": 766,
-            "reference_id": 731
-        },
-        {
-            "id": 1266,
-            "paragraph_id": 766,
-            "reference_id": 735
-        },
-        {
-            "id": 1268,
-            "paragraph_id": 766,
-            "reference_id": 748
+            "id": 1272,
+            "paragraph_id": 762,
+            "reference_id": 749
         },
         {
             "id": 1269,
             "paragraph_id": 762,
             "reference_id": 735
-        },
-        {
-            "id": 1270,
-            "paragraph_id": 762,
-            "reference_id": 731
         },
         {
             "id": 1271,
@@ -353,28 +338,16 @@
             "text": "<p>Stretching is vital as you get older, in order to maintain agility and range of motion.</p><p>This is a placeholder, for now</p>"
         },
         {
-            "guid": "57d2c1cd-cd2e-4ae9-b0d1-3bd4c121f1c0",
-            "id": 762,
+            "guid": "042302b9-2eb3-4b53-a9fd-831505a56bc7",
+            "id": 765,
             "image_info_key": "default",
-            "image_path": "",
+            "image_path": "projects/img/reference_images.jpg",
             "note": "",
-            "short_title": "Core",
-            "slug": "core",
+            "short_title": "Everyday Exercises",
+            "slug": "2014-15-routine",
             "standalone": true,
-            "subtitle": "Core",
-            "text": "Place Holder"
-        },
-        {
-            "guid": "1d97be6e-3f45-4ebe-b212-e4bb8246f7b6",
-            "id": 766,
-            "image_info_key": "default",
-            "image_path": "",
-            "note": "",
-            "short_title": "Handstand",
-            "slug": "handstand",
-            "standalone": true,
-            "subtitle": "Handstand",
-            "text": "Place Holder"
+            "subtitle": "2014-15 Routine",
+            "text": " <p>These |beg_ref|everydayexerciseroutine_2014-15|end_ref|, which I used to do regularly when I couldn't get the gym, once were a major part of my fitness approach. My workout is quite different now, but I still do many of these exercises a couple times a week or even, and for some of them, every day. For Pilates and Yoga, most of my knowledge was from classes and occasional individual instruction. Since I am not an an exercise expert, I am not offering any instruction from my own knowledge.</p> <p>The linked routine emphasizes core stability. A lot of my core information came from Pilates classes and books. Before Learning Pilates, I had been getting one shoulder injury after another. Learning how to stabilize my entire core fixed my problem, since the corset-like stabilization effect of the core extends to shoulder rotation as well.</p><p>The below book references are for this Google Docs document: |beg_ref|everydayexerciseroutine_2014-15|end_ref|.</p> <h3>Book References</h3> <p>Martins, P., & Kaplan, H. (1997). New York City Ballet workout fifty stretches and exercises anyone can do for a strong, graceful, and sculpted body. William Morrow and Co.</p> <p>Merrithew, L., & Merrithew, M. (2001). Comprehensive Matwork: Stott Pilates, a subsiary of Merrithew Publishing.</p>"
         },
         {
             "guid": "137d5e86-0b39-4ecf-b8c1-ed170f371380",
@@ -389,6 +362,18 @@
             "text": "<p>Place Holder</p>"
         },
         {
+            "guid": "57d2c1cd-cd2e-4ae9-b0d1-3bd4c121f1c0",
+            "id": 762,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "Core",
+            "slug": "core",
+            "standalone": true,
+            "subtitle": "Core",
+            "text": "Place Holder"
+        },
+        {
             "guid": "16be1d51-715d-4792-8c2f-0c4f24ba837b",
             "id": 764,
             "image_info_key": "default",
@@ -401,16 +386,16 @@
             "text": "Place Holder"
         },
         {
-            "guid": "042302b9-2eb3-4b53-a9fd-831505a56bc7",
-            "id": 765,
+            "guid": "1d97be6e-3f45-4ebe-b212-e4bb8246f7b6",
+            "id": 766,
             "image_info_key": "default",
-            "image_path": "projects/img/reference_images.jpg",
+            "image_path": "",
             "note": "",
-            "short_title": "Everyday Exercises",
-            "slug": "2014-15-routine",
+            "short_title": "Handstand",
+            "slug": "handstand",
             "standalone": true,
-            "subtitle": "2014-15 Routine",
-            "text": " <p>These |beg_ref|everydayexerciseroutine_2014-15|end_ref|, which I used to do regularly when I couldn't get the gym, once were a major part of my fitness approach. My workout is quite different now, but I still do many of these exercises a couple times a week or even, and for some of them, every day. For Pilates and Yoga, most of my knowledge was from classes and occasional individual instruction. Since I am not an an exercise expert, I am not offering any instruction from my own knowledge.</p> <p>The linked routine emphasizes core stability. A lot of my core information came from Pilates classes and books. Before Learning Pilates, I had been getting one shoulder injury after another. Learning how to stabilize my entire core fixed my problem, since the corset-like stabilization effect of the core extends to shoulder rotation as well.</p><p>The below book references are for this Google Docs document: |beg_ref|everydayexerciseroutine_2014-15|end_ref|.</p> <h3>Book References</h3> <p>Martins, P., & Kaplan, H. (1997). New York City Ballet workout fifty stretches and exercises anyone can do for a strong, graceful, and sculpted body. William Morrow and Co.</p> <p>Merrithew, L., & Merrithew, M. (2001). Comprehensive Matwork: Stott Pilates, a subsiary of Merrithew Publishing.</p>"
+            "subtitle": "Handstand",
+            "text": "Place Holder"
         }
     ],
     "record_lookups": {
@@ -570,11 +555,11 @@
             "url": "https://www.youtube.com/watch?v=cog4Dds__a0"
         },
         {
-            "id": 749,
-            "link_text": "TappThomas_Jonathon_20170719_YouTube_PrimalCoreSequence",
-            "short_text": "Tapp 20170719",
-            "slug": "tappthomas_jonathon_20170719_youtube_primalcoresequence",
-            "url": "https://www.youtube.com/watch?v=ZLOC1-3If2c"
+            "id": 731,
+            "link_text": "FootHillsTheraPy_20170816_TopThreeCore",
+            "short_text": "FootHillsTherapy 20170816",
+            "slug": "foothillstherapy_20170816_topthreecore",
+            "url": "https://www.foothillstherapy.com/2017/08/16/top-3-exercises-core-strengthening/"
         },
         {
             "id": 730,
@@ -584,11 +569,11 @@
             "url": "https://docs.google.com/document/d/1KVGsdUneMAG0z_yGF8Pw748HLzc4pwIgzcrinOEIORc/edit?usp=sharing"
         },
         {
-            "id": 731,
-            "link_text": "FootHillsTheraPy_20170816_TopThreeCore",
-            "short_text": "FootHillsTherapy 20170816",
-            "slug": "foothillstherapy_20170816_topthreecore",
-            "url": "https://www.foothillstherapy.com/2017/08/16/top-3-exercises-core-strengthening/"
+            "id": 749,
+            "link_text": "TappThomas_Jonathon_20170719_YouTube_PrimalCoreSequence",
+            "short_text": "Tapp 20170719",
+            "slug": "tappthomas_jonathon_20170719_youtube_primalcoresequence",
+            "url": "https://www.youtube.com/watch?v=ZLOC1-3If2c"
         },
         {
             "id": 735,
