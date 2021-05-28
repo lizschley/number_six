@@ -1,0 +1,221 @@
+{
+    "categories": [
+        {
+            "category_type": "resume",
+            "id": 1,
+            "slug": "resume",
+            "title": "Elizabeth A. Schley"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 36,
+            "id": 835,
+            "order": 1,
+            "paragraph_id": 770
+        },
+        {
+            "group_id": 36,
+            "id": 335,
+            "order": 2,
+            "paragraph_id": 210
+        },
+        {
+            "group_id": 36,
+            "id": 836,
+            "order": 3,
+            "paragraph_id": 771
+        },
+        {
+            "group_id": 36,
+            "id": 338,
+            "order": 4,
+            "paragraph_id": 224
+        },
+        {
+            "group_id": 36,
+            "id": 291,
+            "order": 5,
+            "paragraph_id": 218
+        },
+        {
+            "group_id": 36,
+            "id": 837,
+            "order": 6,
+            "paragraph_id": 772
+        },
+        {
+            "group_id": 36,
+            "id": 332,
+            "order": 7,
+            "paragraph_id": 207
+        },
+        {
+            "group_id": 36,
+            "id": 290,
+            "order": 8,
+            "paragraph_id": 215
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": 3,
+            "category_id": 1,
+            "group_type": "ordered",
+            "id": 36,
+            "note": "",
+            "short_name": "DevOps and Automation",
+            "slug": "dev-ops-and-automation",
+            "title": "DevOps and Automation"
+        }
+    ],
+    "paragraph_reference": [],
+    "paragraphs": [
+        {
+            "guid": "b13ab2d0-9569-4c7a-8a8f-8780fe99452f",
+            "id": 770,
+            "image_info_key": "default",
+            "image_path": "projects/img/dominoes.png",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Although I am primarily a backend web developer, I enjoy working with Linux, deployments writing batch processes. For example, after moving this application to |beg_group|initial-deploy-on-aws|end_group|, making a simple CSS change took too many manual steps, so I developed a |beg|s3-caching-strategy|end|.</p>"
+        },
+        {
+            "guid": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "id": 210,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Built cross-application monitoring for data syncs, using New Relic Insight custom fields, allowing us to measure the time from one in-house application to another through a third-party application for which we had no access. We created alerts and New Relic dashboards based on the resulting data. As a by-product, the information helped with bug analysis.<br><strong>Technologies:</strong> Ruby, Rails, New Relic<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "a0360d05-3784-48c3-8ab7-b7c85df742d3",
+            "id": 771,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Created both event driven and nightly cron bash processes that called rake jobs or SQL as needed.</li></ul>"
+        },
+        {
+            "guid": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "id": 224,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Initiated and led effort to fix problem caused by Windows Security Patch by upgrading MSXML. Implementation required research into IIS security and registry settings and negotiation for a new integration server and both technical and business resources.<br><strong>Technologies:</strong> Java, JavaScript, XML, XSLT, SQL, ASP, HTML<br><strong>Company:</strong> LexisNexis, Senior Software Engineer</li></ul>"
+        },
+        {
+            "guid": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "id": 218,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Instituted logging, log parsing and data analysis to systematically eliminate pre-existing inefficiencies and bugs in the site for which I was in charge.<br><strong>Technologies:</strong> Java, JavaScript, Excel</li></ul>"
+        },
+        {
+            "guid": "02eabee7-b14e-4fe8-a621-a52611da4ee9",
+            "id": 772,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Worked on demo environment creating or updating users, with various roles and certifications in an expected state.</li></ul>"
+        },
+        {
+            "guid": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "id": 207,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Implemented, as one of my first ruby projects, single sign-on according to complex requirements. As the requirements changed, played a major role in that implementation as well.<br><strong>Technologies:</strong> Ruby, Rails, JavaScript, HTML5, Web Server Authentication<br><strong>Company:</strong> Teachstone Training, Backend Web Developer</li></ul>"
+        },
+        {
+            "guid": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "id": 215,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<ul><li>Automated status reports that read MS Project and produced Excel Reports with four months rolling history, allowing the engineering department to accurately and consistently report progress to the management team.<br><strong>Technologies:</strong> VBA with MS Project and Excel<br><strong>Company:</strong> Medical Automation Systems (Abbott)</li></ul>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "1": "resume",
+            "resume": {
+                "dev_id": 1
+            }
+        },
+        "groups": {
+            "36": "dev-ops-and-automation",
+            "dev-ops-and-automation": {
+                "dev_id": 36
+            }
+        },
+        "paragraphs": {
+            "02eabee7-b14e-4fe8-a621-a52611da4ee9": {
+                "dev_id": 772
+            },
+            "207": "a7d03e7f-dc20-472f-9d23-1f0964f242a5",
+            "210": "c6e17ac1-e879-47ef-952e-6479a95e7b01",
+            "215": "9fd22b7d-482d-46d8-96cb-3a2d98b8b904",
+            "218": "9bee2e9b-e85d-468d-a25b-3eca38e1358f",
+            "224": "d83d14de-afe1-4b2f-a925-b450148358e0",
+            "770": "b13ab2d0-9569-4c7a-8a8f-8780fe99452f",
+            "771": "a0360d05-3784-48c3-8ab7-b7c85df742d3",
+            "772": "02eabee7-b14e-4fe8-a621-a52611da4ee9",
+            "9bee2e9b-e85d-468d-a25b-3eca38e1358f": {
+                "dev_id": 218
+            },
+            "9fd22b7d-482d-46d8-96cb-3a2d98b8b904": {
+                "dev_id": 215
+            },
+            "a0360d05-3784-48c3-8ab7-b7c85df742d3": {
+                "dev_id": 771
+            },
+            "a7d03e7f-dc20-472f-9d23-1f0964f242a5": {
+                "dev_id": 207
+            },
+            "b13ab2d0-9569-4c7a-8a8f-8780fe99452f": {
+                "dev_id": 770
+            },
+            "c6e17ac1-e879-47ef-952e-6479a95e7b01": {
+                "dev_id": 210
+            },
+            "d83d14de-afe1-4b2f-a925-b450148358e0": {
+                "dev_id": 224
+            }
+        },
+        "references": {}
+    },
+    "references": []
+}
