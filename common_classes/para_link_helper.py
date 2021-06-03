@@ -1,25 +1,34 @@
 '''class used in formatting various and consistant links within the paragraph text'''
 from django.urls import reverse
-from projects.models.paragraphs import Paragraph
 import constants.para_lookup as lookup
 
 
 class ParaLinkHelper:
     '''
-    ParaLinkHelper allows convvenient and flexible inline links in the paragraph records.  This does not
+    ParaLinkHelper allows convenient and flexible inline links in the paragraph records.  This does not
     include references, unless they are used within the paragraph text)
     '''
     def __init__(self, **kwargs):
-        self.replacing_text = kwargs.get('replacing_text', True)
-        self.create_modal_links = kwargs.get('create_modal_links', True)
-        self.para_link_slugs = kwargs.get('para_link_slugs', False)
-        self.para_slugs = kwargs.get('para_slugs')
-        self.group_slugs = kwargs.get('group_slugs')
-        self.slug_data = kwargs.get('slug_data')
-        self.return_data = {'text': '', 'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs}
-        self.link_data = {}
-        self.text = ''
-        self.do_update = False
+        input_key = kwargs.get('input_key')
+        if input_key is None or input_key not in ('db_retriever', 'para_display', 'slug_update'):
+            raise ValueError
+        self.input_data = {'input_key': input_key}
+        self.input_data['slug_data'] = kwargs.get('slug_data')
+        if input_key == 'para_display':
+            self.input_data['create_modal_links'] = kwargs.get('create_modal_links', True)
+        else:
+            self.input_data['create_modal_links'] = False
+
+        self.process_data = {}
+        self.process_data['para_slugs'] = kwargs.get('para_slugs')
+        self.process_data['group_slugs'] = kwargs.get('group_slugs')
+        self.process_data['link_data'] = {}
+        self.process_data['text'] = ''
+        self.process_data['do_update'] = False
+
+        self.return_data = {'text': self.process_data['text'],
+                            'para_slugs': self.process_data['para_slugs'],
+                            'group_slugs': self.process_data['group_slugs']}
 
     def links_from_indicators(self, text, link_data):
         '''
@@ -33,24 +42,12 @@ class ParaLinkHelper:
         :return: Either lists of slugs or paragraph text with html links instead of slugs & indicators
         :rtype: dict
         '''
-        self.text = text
-        self.link_data = link_data
+        self.process_data['text'] = text
+        self.process_data['link_data'] = link_data
         for indicator in lookup.INDICATOR_ARGS:
             self.loop_through_text(indicator['beg_link'], indicator['end_link'])
-        self.return_data['text'] = self.text
+        self.return_data['text'] = self.process_data['text']
         return self.return_data
-
-    def paragraph_slug_replacement(self, indicator):
-        paras_to_update = []
-        paras = Paragraph.objects.filter(text__contains=self.slug_data['existing_slug'])
-        for para in paras:
-            self.do_update = False
-            self.text = para.text
-            self.loop_through_text(indicator['beg_link'], indicator['end_link'])
-            if self.do_update:
-                para.text = self.text
-                paras_to_update.append(para)
-        return paras_to_update
 
     def loop_through_text(self, beg_link, end_link):
         '''
@@ -79,22 +76,22 @@ class ParaLinkHelper:
         :type str
         '''
         para_piece_list = []
-        pieces = self.text.split(beg_link)
+        pieces = self.process_data['text'].split(beg_link)
         for piece in pieces:
             if end_link not in piece:
-                if self.replacing_text:
+                if self.input_data['input_key'] != 'db_retriever':
                     para_piece_list.append(piece)
             else:
                 sub_pieces = piece.split(end_link)
                 slug = sub_pieces[0]
-                if not self.replacing_text:
+                if self.input_data['input_key'] == 'db_retriever':
                     self.append_slug(slug, beg_link)
                     continue
                 para_piece_list.append(self.lookup_link(slug, beg_link, end_link))
                 if len(sub_pieces) > 1:
                     para_piece_list.append(sub_pieces[1])
-        if self.replacing_text:
-            self.text = ''.join(para_piece_list)
+        if self.input_data['input_key'] != 'db_retriever':
+            self.process_data['text'] = ''.join(para_piece_list)
         else:
             self.make_slug_list_unique()
 
@@ -110,9 +107,9 @@ class ParaLinkHelper:
         :type beg_link: string
         '''
         if beg_link in lookup.PARA_BEGIN:
-            self.para_slugs.append(slug)
+            self.process_data['para_slugs'].append(slug)
         if beg_link == lookup.GROUP_ARGS['beg_link']:
-            self.group_slugs.append(slug)
+            self.process_data['group_slugs'].append(slug)
 
     def lookup_link(self, slug, beg_link, end_link):
         '''
@@ -125,9 +122,9 @@ class ParaLinkHelper:
         :return: link to the paragraph, group or reference
         :rtype: str
         '''
-        if self.para_link_slugs:
+        if self.input_data['input_key'] == 'slug_update':
             return self.replace_slugs(slug, beg_link, end_link)
-        if (beg_link == lookup.AJAX_ARGS['beg_link'] and self.create_modal_links):
+        if (beg_link == lookup.AJAX_ARGS['beg_link'] and self.input_data['create_modal_links']):
             return self.modal_link(slug)
         if beg_link in (lookup.AJAX_ARGS['beg_link'], lookup.PARA_ARGS['beg_link']):
             return self.para_link(slug)
@@ -148,7 +145,7 @@ class ParaLinkHelper:
         :return: paragraph with link indicators turned into modal link or has link indicators stripped
         :rtype: dict
         '''
-        link_text = self.link_data['para_slug_to_short_title'][slug]
+        link_text = self.process_data['link_data']['para_slug_to_short_title'][slug]
 
         beg_link = '<a href="#" data-slug="'
         mid_link = '" class="one_para_modal modal_popup_link">'
@@ -163,7 +160,7 @@ class ParaLinkHelper:
         :return: a link to the standalone para.
         :rtype: string
         '''
-        link_text = self.link_data['para_slug_to_short_title'][slug]
+        link_text = self.process_data['link_data']['para_slug_to_short_title'][slug]
         beg_link = '<a href="'
         end_link = f'">{link_text}</a>'
         url = reverse('projects:study_para_by_slug', kwargs={"slug":  slug})
@@ -178,8 +175,8 @@ class ParaLinkHelper:
         :return: html link within text
         :rtype: string
         '''
-        link_text = self.link_data['ref_slug_to_reference'][slug]['link_text']
-        url = self.link_data['ref_slug_to_reference'][slug]['url']
+        link_text = self.process_data['link_data']['ref_slug_to_reference'][slug]['link_text']
+        url = self.process_data['link_data']['ref_slug_to_reference'][slug]['url']
         return f'<a href="{url}" class="reference_link" target="_blank">{link_text}</a>'
 
     def group_link(self, slug):
@@ -189,7 +186,7 @@ class ParaLinkHelper:
         :return: a link to the paragraphs ordered within a group.
         :rtype: string
         '''
-        link_text = self.link_data['group_slug_to_short_name'][slug]
+        link_text = self.process_data['link_data']['group_slug_to_short_name'][slug]
         beg_link = '<a href="'
         end_link = f'">{link_text}</a>'
         url = reverse('projects:study_paragraphs_group_slug', kwargs={"group_slug":  slug})
@@ -199,14 +196,27 @@ class ParaLinkHelper:
         '''
         make_slug_list_unique ensures that records will not be retrieved multiple times
         '''
-        slug_dict = {'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs}
+        slug_dict = {'para_slugs': self.process_data['para_slugs'],
+                     'group_slugs': self.process_data['group_slugs']}
         for key in slug_dict:
             if len(slug_dict[key]) > 1:
                 slug_list = list(dict.fromkeys(slug_dict[key]))
                 self.return_data[key] = slug_list
 
     def replace_slugs(self, found_slug, beg_link, end_link):
-        if found_slug != self.slug_data['existing_slug']:
-            return beg_link + self.slug_data['existing_slug'] + end_link
-        self.do_update = True
-        return beg_link + self.slug_data['new_slug'] + end_link
+        '''
+        replace_slugs replaces the existing slug in a para with a new slug
+
+        :param found_slug: if found, will replace with new slug
+        :type found_slug: bool
+        :param beg_link: indicator right before slug
+        :type beg_link: str
+        :param end_link: indicator right after slug
+        :type end_link: str
+        :return: [desc
+        :rtype: [type]
+        '''
+        if found_slug != self.input_data['slug_data']['existing_slug']:
+            return beg_link + self.input_data['slug_data'] + end_link
+        self.process_data['do_update'] = True
+        return beg_link + self.input_data['slug_data']['new_slug'] + end_link

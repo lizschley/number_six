@@ -148,6 +148,7 @@ class ParagraphsForDisplay:
     def paragraphs_links_and_images(self, in_para_list):
         ''' assign_paragraphs - append the paragraph values needed with the keys that are expected '''
         kwargs = {'para_slugs': [], 'group_slugs': [],
+                  'input_key': 'para_display',
                   'create_modal_links': not self.is_modal}
         link_helper = ParaLinkHelper(**kwargs)
         out_para_list = []

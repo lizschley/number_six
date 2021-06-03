@@ -71,11 +71,13 @@ def update_slugs_field_and_links(class_, updating=False, **kwargs):
         1. Group and Reference slugs are used to find records for updating
         2. If people bookmark something with slugs changing the slug will break the bookmark link
 
+    * Note - this method calls other methods to update paragraphs that use the slugs to create links
+
     :param class_: class with one instance of a slug that equals old_slug
     :type class_: models.Model from django.db
     :param updating: [description], defaults to False - will you be updating the record slugs
     :type updating: bool, optional
-     '''
+    '''
     title_fieldname = kwargs['title_fieldname']
     title_new_value = kwargs['title_value']
     existing_slug = kwargs['existing_slug']
@@ -110,27 +112,69 @@ def which_indicators(record):
 def replace_slugs_in_paragraph_links(indicators, existing_slug, new_slug, updating=False):
     '''
     replace_slugs_in_paragraph_links is a convenience method that finds the paragraphs to update when
-    slugs are updated.  You would actually run the above method: update_slugs_field_and_links
+    slugs are updated.
+
+    The process starts by running the above method: update_slugs_field_and_links
+
     Read the update_slugs_field_and_links comments for some caveats
 
-    :param indicators: link indicators to know the type of links and records for the slugs (constants)
+    :param indicators: link indicators to know the type of links and records for the slugs
+                       (constants/para_lookup.py)
     :type indicators: dict
     :param existing_slug: slug value you will be replacing
     :type existing_slug: str
     :param new_slug: new slug value
     :type new_slug: str
-    :param updating: [description], defaults to False - will you be updating the paragraph links
+    :param updating: defaults to False - only does db update it True
     :type updating: bool, optional
     '''
-    kwargs = {'create_modal_links': False, 'para_link_slugs': True,
+    kwargs = {'input_key': 'slug_update',
               'slug_data': {'existing_slug': existing_slug, 'new_slug': new_slug}}
-    helper = ParaLinkHelper(**kwargs)
-    paragraphs_to_update = helper.paragraph_slug_replacement(indicators)
+    link_helper = ParaLinkHelper(**kwargs)
+    paragraphs_to_update = paragraph_slug_replacement(indicators, link_helper)
     updater = ParaDbMethods(updating)
     for para in paragraphs_to_update:
         find_dict = {'id': para.id}
         create_dict = {'id': para.id, 'text': para.text}
         updater.find_and_update_record(Paragraph, find_dict, create_dict)
+
+
+def paragraph_slug_replacement(indicators, link_helper):
+    '''
+    paragraph_slug_replacement is called by replace_slugs_in_paragraph_links (above).  It finds
+    all the paragraphs that use the original slug (for creating internal and external links).  The
+    original slug needs to be replaced by the new slug.
+
+    The link_helper, an instance of ParaLinkHelper, was initialized in replace_slugs_in_paragraph_links
+    (above) with the original (existing) and new slugs. The link_helper uses the slugs and indicator
+    data to parse the paragraph text in order to find the link_indicators that enclose the existing
+    slugs. The link_helper updates the text data with the new slug within the correct link indicators,
+    but it DOES NOT update the database.
+
+    The database updates are initiated in replace_slugs_in_paragraph_links (above) using ParaDbMethods.
+
+    * Note - This entire process is a convenience method. It starts with update_slugs_field_and_links.
+             This is the only method that needs to be called in order to update a title and its
+             associated slug. It is important to read the comments before beginning
+
+    :param indicators: Enclose the slug in the in-text link indicators. See constants/para_lookup.py
+                       for the various link indicators
+    :type indicators: dict
+    :param link_helper: used mostly to display paragraphs, although in this case we are using it to find
+                        and update the slugs used for creating links in the paragraph text field.
+    :type link_helper: an instance of ParaLinkHelper
+    :return: list of paragraphs with the new slug, enclosed within the appropriate link indicators
+    :rtype: list of dictionaries
+    '''
+    paras_to_update = []
+    paras = Paragraph.objects.filter(text__contains=link_helper.slug_data['existing_slug'])
+    for para in paras:
+        link_helper.process_data['text'] = para.text
+        link_helper.loop_through_text(indicators['beg_link'], indicators['end_link'])
+        if link_helper.process_data['do_update']:
+            para.text = link_helper.process_data['text']
+            paras_to_update.append(para)
+    return paras_to_update
 
 
 def one_time_get_content(out_dir):

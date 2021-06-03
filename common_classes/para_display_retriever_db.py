@@ -235,7 +235,7 @@ class ParaDisplayRetrieverDb(ParaDisplayRetrieverBase):
         :rtype: list of strings
         '''
         kwargs = {'para_slugs': self.para_slugs, 'group_slugs': self.group_slugs,
-                  'replacing_text': False}
+                  'input_key': 'db_retriever'}
         link_helper = ParaLinkHelper(**kwargs)
         data = link_helper.links_from_indicators(para_text, {})
         self.para_slugs = data['para_slugs']
