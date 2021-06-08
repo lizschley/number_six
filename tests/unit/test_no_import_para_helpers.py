@@ -45,12 +45,10 @@ def test_json_to_dict(orig_para_dict_data):
 
 
 def test_extract_data_from_form():
-    input_from_form = {'ordered': ['0'],
-                       'standalone': ['group_22'],
-                       'flashcard': ['0']}
-    output = lookup_helper.extract_data_from_form(input_from_form)
+    input_from_form = {'ordered': '0', 'standalone': 'group_21', 'flashcard': '0', 'search': ''}
+    output = lookup_helper.process_form_data(input_from_form)
     assert isinstance(output, dict)
-    assert output == {'group': 22}
+    assert output == {'group': 21}
 
 
 def test_add_paragraphs_to_context(add_para_to_context_input):

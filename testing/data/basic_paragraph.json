@@ -32,7 +32,9 @@
          "Fiction is my number one non-domestic animal love. ",
          "My favorite animal is Rick. ",
          "He shares my love of fiction."
-       ]
+       ],
+       "short_title": "",
+       "slug": ""
     },
     {
       "id": "second",
@@ -45,7 +47,9 @@
          "Jessica and Spencer can be annoying, but Kensley rarely is.",
          "But like the way I feel about my cats, ",
          "I like them all equally in spite of their natures."
-      ]
+      ],
+      "short_title": "",
+      "slug": ""
     }
   ],
   "ref_link_paragraph": [
