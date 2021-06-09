@@ -20,15 +20,13 @@ class ParaLinkHelper:
             self.input_data['create_modal_links'] = False
 
         self.process_data = {}
-        self.process_data['para_slugs'] = kwargs.get('para_slugs')
-        self.process_data['group_slugs'] = kwargs.get('group_slugs')
         self.process_data['link_data'] = {}
         self.process_data['text'] = ''
         self.process_data['do_update'] = False
 
         self.return_data = {'text': self.process_data['text'],
-                            'para_slugs': self.process_data['para_slugs'],
-                            'group_slugs': self.process_data['group_slugs']}
+                            'para_slugs': kwargs.get('para_slugs'),
+                            'group_slugs': kwargs.get('group_slugs')}
 
     def links_from_indicators(self, text, link_data):
         '''
@@ -107,9 +105,9 @@ class ParaLinkHelper:
         :type beg_link: string
         '''
         if beg_link in lookup.PARA_BEGIN:
-            self.process_data['para_slugs'].append(slug)
+            self.return_data['para_slugs'].append(slug)
         if beg_link == lookup.GROUP_ARGS['beg_link']:
-            self.process_data['group_slugs'].append(slug)
+            self.return_data['group_slugs'].append(slug)
 
     def lookup_link(self, slug, beg_link, end_link):
         '''
@@ -196,8 +194,8 @@ class ParaLinkHelper:
         '''
         make_slug_list_unique ensures that records will not be retrieved multiple times
         '''
-        slug_dict = {'para_slugs': self.process_data['para_slugs'],
-                     'group_slugs': self.process_data['group_slugs']}
+        slug_dict = {'para_slugs': self.return_data['para_slugs'],
+                     'group_slugs': self.return_data['group_slugs']}
         for key in slug_dict:
             if len(slug_dict[key]) > 1:
                 slug_list = list(dict.fromkeys(slug_dict[key]))
