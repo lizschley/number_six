@@ -68,6 +68,8 @@ def create_row(group_title, group_note, group_type, para):
                image_path='',
                image_info_key=para['image_info_key'],
                text=para['text'],
+               para_slug=para['para_slug'],
+               short_title=para['short_title'],
                reference_id=para['reference_id'],
                link_text=para['link_text'],
                url=para['url'],
