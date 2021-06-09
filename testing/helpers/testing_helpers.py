@@ -45,6 +45,12 @@ def assert_key_not_in_dictionary(test_dictionary, key):
     assert key not in test_dictionary
 
 
+def assert_link_helper_return_data(obj):
+    assert obj.return_data['text'] == ''
+    assert obj.return_data['para_slugs'] == []
+    assert obj.return_data['group_slugs'] == []
+
+
 def create_basic_para_raw_queryset_data():
     out_list = []
     start_data = data.PARA_DISPLAY_DB_INPUT_DATA_FOR_TESTING
