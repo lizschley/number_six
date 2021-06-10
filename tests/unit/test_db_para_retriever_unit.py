@@ -42,11 +42,11 @@ def test_data_retrieval(mocker, db_para_retriever):
                                        ('reference'),
                                        ('projects_paragraphreference')])
 def test_write_group_para_sql(db_para_retriever, substring):
-    fullstring = db_para_retriever.write_group_para_sql()
+    fullstring = db_para_retriever.write_group_para_sql('group_id')
     helper.assert_in_string(fullstring, substring)
 
 
-@pytest.mark.parametrize('substring', [('where lower(p.subtitle) ='),
+@pytest.mark.parametrize('substring', [('where p.slug ='),
                                        ('paragraph_id'),
                                        ('link_text'),
                                        ('projects_paragraph'),

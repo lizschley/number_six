@@ -5,6 +5,7 @@
 import pytest
 from common_classes.paragraphs_for_display_one import ParagraphsForDisplayOne
 from common_classes.paragraphs_for_display import ParagraphsForDisplay
+from common_classes.para_link_helper import reverse
 import testing.data.dict_constants as constants
 import testing.helpers.testing_helpers as helper
 
@@ -32,8 +33,13 @@ def test_create_links_from_references(paragraphs_for_display_one_object):
     assert 'https://docs.aws.amazon.com/AmazonCloudFront/latest' in ref_links['AWS_CloudFront_Latest_on20210111_UpdatingExistingObjects']
 
 
-def test_assign_paragraphs(paragraphs_for_display_one_object):
+def test_assign_paragraphs(mocker, paragraphs_for_display_one_object):
     '''this also tests add_links_to_paragraphs and paragraph_links'''
+    path = 'common_classes.para_link_helper.reverse'
+
+    mock_para = mocker.patch(path)
+    mock_para.return_value = '/projects/study/ordered_paragraphs/group_slug'
+
     paragraphs_for_display_one_object.create_links_from_references()
     paragraphs_for_display_one_object.assign_paragraphs()
     paras = paragraphs_for_display_one_object.paragraphs
@@ -42,6 +48,7 @@ def test_assign_paragraphs(paragraphs_for_display_one_object):
     assert 'href=' in paras[0]['references']
     assert paras[0]['id'] == 180
     assert paras[0]['subtitle'] == 'S3 Caching Strategy'
+    assert '/projects/study/ordered_paragraphs/group_slug' in paras[0]['text']
 
 
 def test_paragraph(paragraphs_for_display_one_object):

@@ -5,8 +5,6 @@ import pytest
 import helpers.no_import_common_class.paragraph_helpers as para_helper
 import helpers.no_import_common_class.lookup_form_helpers as lookup_helper
 import testing.data.list_constants as list_data
-import testing.helpers.testing_helpers as helper
-from common_classes.paragraphs_for_display import ParagraphsForDisplay
 
 
 @pytest.fixture()
@@ -45,12 +43,10 @@ def test_json_to_dict(orig_para_dict_data):
 
 
 def test_extract_data_from_form():
-    input_from_form = {'ordered': ['0'],
-                       'standalone': ['group_22'],
-                       'flashcard': ['0']}
-    output = lookup_helper.extract_data_from_form(input_from_form)
+    input_from_form = {'ordered': '0', 'standalone': 'group_21', 'flashcard': '0', 'search': ''}
+    output = lookup_helper.process_form_data(input_from_form)
     assert isinstance(output, dict)
-    assert output == {'group': 22}
+    assert output == {'group': 21}
 
 
 def test_add_paragraphs_to_context(add_para_to_context_input):
@@ -63,48 +59,3 @@ def test_add_paragraphs_to_context(add_para_to_context_input):
 
 def test_format_group_id(group_id):
     assert lookup_helper.format_group_id(group_id) == 'group_23'
-
-
-@pytest.mark.skip(reason='fix after production deploy')
-@pytest.mark.parametrize('from_ajax', [(True), (False)])
-def test_replace_ajax_link_indicators(para_with_indicators, from_ajax):
-    ajax_args = ParagraphsForDisplay.AJAX_ARGS
-    ajax_args['from_ajax'] = from_ajax
-    return_para = para_helper.replace_link_indicators(para_helper.ajax_link,
-                                                      para_with_indicators, **ajax_args)
-
-    assert return_para_correct(return_para, from_ajax)
-
-@pytest.mark.skip(reason='fix after production deploy')
-@pytest.mark.parametrize('substring', [('data-subtitle="testing text is actual subtitle not link_text"'),
-                                       ('>test link text</a>'),
-                                       ('data-subtitle="sub_2"'),
-                                       ('>sub_2</a>')])
-def test_substitute_real_subtitle_ajax_link(substring):
-    start_para = 'preceding |beg|test link text|end| inbetween text |beg|sub_2|end| following text'
-    ajax_args = ParagraphsForDisplay.AJAX_ARGS
-    ajax_args['from_ajax'] = False
-    fullstring = para_helper.replace_link_indicators(para_helper.ajax_link, start_para, **ajax_args)
-    helper.assert_in_string(fullstring, substring)
-
-
-def check_text_para_assertions(text, check_for='<p>', pos=0):
-    assert isinstance(text, str)
-    assert text.find(check_for) == pos
-
-
-def return_para_correct(ret_text, from_ajax):
-    print(f'return text == {ret_text}')
-    if from_ajax:
-        print(f'if from ajax return text == {ret_text}')
-        expected_text = 'preceding sub_1 inbetween text sub_2 sub_3 following text'
-    else:
-        print(f'else return text == {ret_text}')
-        expected_text = (
-            'preceding '
-            '<a href="#" data-subtitle="sub_1" class="para_by_subtitle modal_popup_link">sub_1</a> '
-            'inbetween text '
-            '<a href="#" data-subtitle="sub_2" class="para_by_subtitle modal_popup_link">sub_2</a> '
-            '<a href="#" data-subtitle="sub_3" class="para_by_subtitle modal_popup_link">sub_3</a> '
-            'following text')
-    return ret_text == expected_text
