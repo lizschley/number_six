@@ -20,9 +20,9 @@ class ProjectDetailView(TemplateView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        if context['slug'] == 'exercise':
+        if context['slug'] in ('exercise', 'amanda'):
             self.template_name = 'category.html'
-            context = self._add_to_exercise_context(context)
+            context = self._add_to_cat_context(context)
             return context
         slug = context['slug']
         context = {
@@ -34,7 +34,7 @@ class ProjectDetailView(TemplateView):
             self.template_name = 'projects/study.html'
         return context
 
-    def _add_to_exercise_context(self, context):
-        context['slug'] = 'at-home-exercise'
+    def _add_to_cat_context(self, context):
+        context['slug'] = 'at-home-exercise' if context['slug'] == 'exercise' else 'amanda-projects'
         context = para_helper.paragraph_view_input(context, False, ParagraphsForDisplayCat)
         return context
