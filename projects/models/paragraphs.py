@@ -8,6 +8,7 @@ from autoslug import AutoSlugField
 class Category(models.Model):
     ''' one to many with groups '''
     BLOG = 'blog'
+    AMANDA = 'amanda'
     RESUME = 'resume'
     FLASHCARD = 'flashcard'
     EXERCISE = 'exercise'
@@ -22,6 +23,7 @@ class Category(models.Model):
         (STUDY, 'Study'),
         (MODAL, 'Modal'),
         (ARCHIVED, 'Archived'),
+        (AMANDA, 'Amanda'),
     ]
     title = models.CharField(max_length=120, blank=False, unique=True)
     slug = AutoSlugField(max_length=150, unique=True, populate_from='title')

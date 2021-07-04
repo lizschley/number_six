@@ -1,0 +1,362 @@
+{
+    "categories": [
+        {
+            "category_type": "study",
+            "id": 5,
+            "slug": "study",
+            "title": "Study"
+        },
+        {
+            "category_type": "amanda",
+            "id": 10,
+            "slug": "amanda-projects",
+            "title": "Amanda Projects"
+        }
+    ],
+    "group_paragraph": [
+        {
+            "group_id": 25,
+            "id": 145,
+            "order": 3,
+            "paragraph_id": 157
+        },
+        {
+            "group_id": 60,
+            "id": 843,
+            "order": 1,
+            "paragraph_id": 778
+        },
+        {
+            "group_id": 59,
+            "id": 838,
+            "order": 1,
+            "paragraph_id": 773
+        },
+        {
+            "group_id": 59,
+            "id": 839,
+            "order": 2,
+            "paragraph_id": 774
+        },
+        {
+            "group_id": 59,
+            "id": 840,
+            "order": 3,
+            "paragraph_id": 775
+        },
+        {
+            "group_id": 59,
+            "id": 841,
+            "order": 4,
+            "paragraph_id": 776
+        }
+    ],
+    "groups": [
+        {
+            "cat_sort": null,
+            "category_id": 5,
+            "group_type": "ordered",
+            "id": 25,
+            "note": "",
+            "short_name": "Install Pyenv",
+            "slug": "install-pyenv-on-catalina",
+            "title": "Install Pyenv on Catalina"
+        },
+        {
+            "cat_sort": 1,
+            "category_id": 10,
+            "group_type": "ordered",
+            "id": 60,
+            "note": "",
+            "short_name": "Read What You Want",
+            "slug": "read-what-you-want",
+            "title": "Read What You Want"
+        },
+        {
+            "cat_sort": null,
+            "category_id": 10,
+            "group_type": "ordered",
+            "id": 59,
+            "note": "",
+            "short_name": "Pesto & Asparagus Penne Pasta",
+            "slug": "pesto-asparagus-penne-pasta",
+            "title": "Pesto & Asparagus Penne Pasta"
+        }
+    ],
+    "paragraph_reference": [
+        {
+            "id": 150,
+            "paragraph_id": 157,
+            "reference_id": 117
+        },
+        {
+            "id": 147,
+            "paragraph_id": 157,
+            "reference_id": 115
+        },
+        {
+            "id": 148,
+            "paragraph_id": 157,
+            "reference_id": 95
+        },
+        {
+            "id": 151,
+            "paragraph_id": 157,
+            "reference_id": 116
+        },
+        {
+            "id": 146,
+            "paragraph_id": 157,
+            "reference_id": 107
+        },
+        {
+            "id": 1276,
+            "paragraph_id": 778,
+            "reference_id": 759
+        },
+        {
+            "id": 1277,
+            "paragraph_id": 778,
+            "reference_id": 758
+        },
+        {
+            "id": 1275,
+            "paragraph_id": 776,
+            "reference_id": 756
+        },
+        {
+            "id": 1274,
+            "paragraph_id": 776,
+            "reference_id": 757
+        }
+    ],
+    "paragraphs": [
+        {
+            "guid": "f7cd9d12-8eba-451e-b8b1-c5815bd00de5",
+            "id": 157,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "actual-installation",
+            "standalone": false,
+            "subtitle": "Actual Installation",
+            "text": "<ol><li> <pre><code> >>> brew install pyenv</code></pre></li><li><pre><code> >>> brew install pyenv-virtualenv </code></pre></li> <li>Updated profile (.zshrc) <pre><code> >>> echo 'export PYENV_ROOT=\"$HOME/.pyenv\"' >> ~/.zshrc</pre></code> <pre><code> >>> echo 'export PATH=$PYENV_ROOT/bin:$PATH' >> ~/.zshrc</pre></code> </li> <li>Manually added this to my profile</li> <pre><code> if command -v pyenv 1>/dev/null 2>&1; then \n   eval '$(pyenv init -)'\n   eval '$(pyenv virtualenv-init -)'\n Fi</pre></code></li></ol>"
+        },
+        {
+            "guid": "4c186713-d293-43db-ace7-e82542b0ef2b",
+            "id": 778,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>Reading is one of the most wonderful activities and choosing what you want to read is part of the pleasure. In the summer, you have that opportunity.  Here is a <a href='https://lizschley.org/girl-power' target='_blank'>book list</a> to get you started, but they may be too easy or not to your taste. We can figure it at, once you see this list.</p><p>But what would be best is to go to the library and talk to the young adult librarian. There is one that is less than 1/2 a mile from your house. I will text you the details.</p><p>The other way is learn to search for good books on the Internet. Check the links below. Go for young adult books, not children books. Look for really good manga and graphic novels as well. Once you find some books that look interesting, try to get them through the library if possible, unless you feel pretty certain that the author writes well and to your tastes.</p><p>Check out the links below as an initial reference, but the best thing is learn how to search for good reviews on the Internet. Be choosy!</p>"
+        },
+        {
+            "guid": "7a8fe0c2-7f73-47bb-8dd0-2684c1eff525",
+            "id": 773,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "introduction",
+            "standalone": false,
+            "subtitle": "",
+            "text": "<p>[Add photo of the pasta that Amanda makes here.]</p><p> My advice is to follow the directions until you feel comfortable and then make changes to suit your personal taste.</p><p><strong>Note:</strong> - you may want to add a little less garlic, salt and pepper. Remember, you can always add more, but too much for your taste can ruin it.</p><p>This is two recipes combined. One is for |beg_ref|chefjohn_allrecipes_properpesto|end_ref| and the other is for |beg_ref|greenvalleykitchen_20140414_penneasparaguslemonpesto|end_ref|.</p>"
+        },
+        {
+            "guid": "b53ee2e0-6655-477d-9397-118e2036ecfa",
+            "id": 774,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "ingredients",
+            "standalone": false,
+            "subtitle": "Ingredients",
+            "text": "<ul>  <li>4 cloves garlic, peeled</li>  <li>1/4 teaspoon kosher salt</li>  <li>1 large bunch fresh basil</li>  <li>3 tablespoons pine nuts</li>  <li>2 ounces finely grated Parmigiano-Reggiano cheese</li>  <li>1/2 cup mild extra-virgin olive oil</li>  <li>2 cups uncooked penne pasta</li>  <li>1 veggie bouillon cube</li>  <li>1 bunch of asparagus</li>  <li> 1 juice of one lemon (optional)</li>  </ul>"
+        },
+        {
+            "guid": "70db88b4-2822-4ded-97a9-8eb68a731e66",
+            "id": 775,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "make-pesto",
+            "standalone": false,
+            "subtitle": "Make Pesto",
+            "text": "<ol> <li>Crush garlic and pinch of kosher salt in a mortar with the pestle until garlic is mashed and paste-like, 1 or 2 minutes. Add basil in 3 or 4 additions, crushing and pounding down the leaves until they form a fairly fine paste, about 8 minutes or more depending on size of leaves and thickness of stems. Add and pound in pine nuts.</li> <li>Transfer a handful of grated cheese to mortar and pound into the sauce. Add another handful of cheese and incorporate into the mixture. Continue adding cheese a handful at a time until completely incorporated, about 5 minutes.</li> <li>Drizzle in olive oil 1 tablespoon at a time, pounding it into the sauce. When all the olive oil has been added and emulsified into the mixture, transfer pesto to a bowl and drizzle surface with olive oil.</li> </ol>"
+        },
+        {
+            "guid": "6dad8670-e997-45cd-8fb5-feb4748d2c90",
+            "id": 776,
+            "image_info_key": "default",
+            "image_path": "",
+            "note": "",
+            "short_title": "",
+            "slug": "make-pasta-with-asparagus-and-pesto",
+            "standalone": false,
+            "subtitle": "Make Pasta with Asparagus and Pesto",
+            "text": "<ol> <li>Bring a large pot of water to a boil. Add penne and veggie bouillon cube. Cook according to package directions.</li> <li>Wash and snap off the tough ends of asparagus. Slice asparagus into 1 to 2 inch pieces.</li> <li>Heat a little olive oil in a saute pan. Add just washed asparagus (with a little water clinging to the asparagus) and 1 minced garlic clove, cover pan and cook over medium heat for 4 minutes. Give the pan a shake after 2 minutes.</li> <li>Drain penne and put it in a bowl.</li> <li>Add pasta, asparagus and pesto to bowl. (Add lemon juice if you want), mix and serve.</li> </ol>"
+        }
+    ],
+    "record_lookups": {
+        "categories": {
+            "10": "amanda-projects",
+            "5": "study",
+            "amanda-projects": {
+                "dev_id": 10
+            },
+            "study": {
+                "dev_id": 5
+            }
+        },
+        "groups": {
+            "25": "install-pyenv-on-catalina",
+            "59": "pesto-asparagus-penne-pasta",
+            "60": "read-what-you-want",
+            "install-pyenv-on-catalina": {
+                "dev_id": 25
+            },
+            "pesto-asparagus-penne-pasta": {
+                "dev_id": 59
+            },
+            "read-what-you-want": {
+                "dev_id": 60
+            }
+        },
+        "paragraphs": {
+            "157": "f7cd9d12-8eba-451e-b8b1-c5815bd00de5",
+            "4c186713-d293-43db-ace7-e82542b0ef2b": {
+                "dev_id": 778
+            },
+            "6dad8670-e997-45cd-8fb5-feb4748d2c90": {
+                "dev_id": 776
+            },
+            "70db88b4-2822-4ded-97a9-8eb68a731e66": {
+                "dev_id": 775
+            },
+            "773": "7a8fe0c2-7f73-47bb-8dd0-2684c1eff525",
+            "774": "b53ee2e0-6655-477d-9397-118e2036ecfa",
+            "775": "70db88b4-2822-4ded-97a9-8eb68a731e66",
+            "776": "6dad8670-e997-45cd-8fb5-feb4748d2c90",
+            "778": "4c186713-d293-43db-ace7-e82542b0ef2b",
+            "7a8fe0c2-7f73-47bb-8dd0-2684c1eff525": {
+                "dev_id": 773
+            },
+            "b53ee2e0-6655-477d-9397-118e2036ecfa": {
+                "dev_id": 774
+            },
+            "f7cd9d12-8eba-451e-b8b1-c5815bd00de5": {
+                "dev_id": 157
+            }
+        },
+        "references": {
+            "107": "github_pyenv_2020_readme",
+            "115": "github_pyenv_20200331_wiki",
+            "116": "masamichiueta_20190615_gitconnected_setuppythonenvironment_mac",
+            "117": "averydirk_20200306_medium_pyenvmultiversiondevelopmentmac",
+            "756": "chefjohn_allrecipes_properpesto",
+            "757": "greenvalleykitchen_20140414_penneasparaguslemonpesto",
+            "758": "goodreads_youngadults_referencedon20210704",
+            "759": "bookriot_10bestbookrecommendedsites_referencedon20210704",
+            "95": "joneslogan_2018_realpython_managingmultiplepythonversionspyenv",
+            "averydirk_20200306_medium_pyenvmultiversiondevelopmentmac": {
+                "dev_id": 117
+            },
+            "bookriot_10bestbookrecommendedsites_referencedon20210704": {
+                "dev_id": 759
+            },
+            "chefjohn_allrecipes_properpesto": {
+                "dev_id": 756
+            },
+            "github_pyenv_20200331_wiki": {
+                "dev_id": 115
+            },
+            "github_pyenv_2020_readme": {
+                "dev_id": 107
+            },
+            "goodreads_youngadults_referencedon20210704": {
+                "dev_id": 758
+            },
+            "greenvalleykitchen_20140414_penneasparaguslemonpesto": {
+                "dev_id": 757
+            },
+            "joneslogan_2018_realpython_managingmultiplepythonversionspyenv": {
+                "dev_id": 95
+            },
+            "masamichiueta_20190615_gitconnected_setuppythonenvironment_mac": {
+                "dev_id": 116
+            }
+        }
+    },
+    "references": [
+        {
+            "id": 117,
+            "link_text": "AveryDirk_20200306_Medium_PyenvMultiVersionDevelopmentMac",
+            "short_text": "Avery 20200306",
+            "slug": "averydirk_20200306_medium_pyenvmultiversiondevelopmentmac",
+            "url": "https://medium.com/faun/pyenv-multi-version-python-development-on-mac-578736fb91aa"
+        },
+        {
+            "id": 115,
+            "link_text": "Github_pyenv_20200331_Wiki",
+            "short_text": "Github Pyenv 20200331",
+            "slug": "github_pyenv_20200331_wiki",
+            "url": "https://github.com/pyenv/pyenv/wiki "
+        },
+        {
+            "id": 95,
+            "link_text": "JonesLogan_2018_RealPython_ManagingMultiplePythonVersionsPyenv",
+            "short_text": "Jones 2018",
+            "slug": "joneslogan_2018_realpython_managingmultiplepythonversionspyenv",
+            "url": "https://realpython.com/intro-to-pyenv/"
+        },
+        {
+            "id": 116,
+            "link_text": "MasamichiUeta_20190615_GitConnected_SetupPythonEnvironment_Mac",
+            "short_text": "Masamichi 20190615",
+            "slug": "masamichiueta_20190615_gitconnected_setuppythonenvironment_mac",
+            "url": "https://levelup.gitconnected.com/how-to-set-up-python-environment-on-your-mac-560ebf9324ed"
+        },
+        {
+            "id": 107,
+            "link_text": "Github_pyenv_2020_Readme",
+            "short_text": "Github pyenv readme",
+            "slug": "github_pyenv_2020_readme",
+            "url": "https://github.com/pyenv/pyenv"
+        },
+        {
+            "id": 759,
+            "link_text": "BookRiot_10BestBookRecommendedSites_referencedOn20210704",
+            "short_text": "Book Recommondation Sites",
+            "slug": "bookriot_10bestbookrecommendedsites_referencedon20210704",
+            "url": "https://bookriot.com/best-book-recommendation-sites/"
+        },
+        {
+            "id": 758,
+            "link_text": "GoodReads_YoungAdults_referencedOn20210704",
+            "short_text": "Good Reads YA",
+            "slug": "goodreads_youngadults_referencedon20210704",
+            "url": "https://www.goodreads.com/genres/young-adult"
+        },
+        {
+            "id": 756,
+            "link_text": "ChefJohn_AllRecipes_ProperPesto",
+            "short_text": "Proper Pesto",
+            "slug": "chefjohn_allrecipes_properpesto",
+            "url": "https://www.allrecipes.com/recipe/258213/proper-pesto/"
+        },
+        {
+            "id": 757,
+            "link_text": "GreenValleyKitchen_20140414_PenneAsparagusLemonPesto",
+            "short_text": "Penne Pesto Asparagus",
+            "slug": "greenvalleykitchen_20140414_penneasparaguslemonpesto",
+            "url": "https://greenvalleykitchen.com/penne-asparagus-lemon-pesto/"
+        }
+    ]
+}

@@ -8,7 +8,7 @@
 import constants.file_paths as file_paths
 
 RESUME = 'resume'
-NOT_RESUME = ('exercise', 'flashcard')
+NOT_RESUME = ('exercise', 'flashcard', 'amanda')
 
 
 def add_paragraphs_by_group_to_context(context, paragraphs):
