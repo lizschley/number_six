@@ -75,7 +75,7 @@ s3transfer==0.3.4
 selenium==3.141.0
 six==1.15.0
 soupsieve==2.2
-sqlparse==0.4.1
+sqlparse==0.4.2
 testresources==2.0.1
 toml==0.10.2
 traitlets==5.0.5
