@@ -59,7 +59,7 @@ class ScreenScrapePlantDb(ParagraphDbInputCreator):
 
     def process_row(self, cells):
         ''' loop through table columns for the given row. Process each one '''
-        self.process_data['new_para'] = copy.deepcopy(self.new_para_dictionary())
+        self.process_data['new_para'] = wq(self.new_para_dictionary())
         self.process_data['text_dictionary'] = copy.deepcopy(constants.TEXT_TEMPLATE)
         for idx, cell in enumerate(cells):
             col = constants.AC_NATIVE_PLANT_HEADERS[idx]
