@@ -86,6 +86,6 @@ urllib3==1.26.5
 virtualenv==20.4.0
 virtualenv-clone==0.5.4
 wcwidth==0.2.5
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 wrapt==1.12.1
 zipp==3.4.0
