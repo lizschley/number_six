@@ -20,7 +20,7 @@ django-compressor==2.4
 django-contrib-postgres==0.0.1
 django-crispy-forms==1.10.0
 django-extensions==3.1.0
-django-ses==1.0.3
+django-ses==3.5.0
 django-storages==1.11.1
 filelock==3.0.12
 flake8==3.8.4
