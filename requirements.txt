@@ -24,7 +24,7 @@ django-ses==3.5.0
 django-storages==1.11.1
 filelock==3.0.12
 flake8==3.8.4
-future==0.18.2
+future==0.18.3
 idna==2.10
 importlib-metadata==3.4.0
 inflect==5.0.2
