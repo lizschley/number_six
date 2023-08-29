@@ -1,7 +1,7 @@
 # portfolio
 Project created for learning Python and Django, fun, study and job search
 
-These links no longer works, because I stopped paying AWS: [website](https://lizschley.com/). There is some information about the site on [the demo page](https://lizschley.com/projects/demo).  To access the site you need to have access to my local environment.
+Although the site runs fine in my local environment, these links no longer work, because I stopped paying AWS: [website](https://lizschley.com/). There is some information about the site on [the demo page](https://lizschley.com/projects/demo).  
 
 The reference I use after being away for awhile is [here](https://github.com/lizschley/number_six/blob/develop/scripts/documentation/update_process.md).
 
