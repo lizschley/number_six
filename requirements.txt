@@ -89,4 +89,4 @@ virtualenv-clone==0.5.4
 wcwidth==0.2.5
 Werkzeug>=2.2.3
 wrapt==1.12.1
-zipp==3.4.0
+zipp==3.19.1
