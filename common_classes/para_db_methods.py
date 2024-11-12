@@ -1,8 +1,7 @@
 '''These will be static resusable methods to create &/or update records'''
 # pylint: pylint: disable=unused-import
 import sys
-from django.core.exceptions import ValidationError
-from django.db.models import Max
+
 from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
                                         GroupParagraph, ParagraphReference)  # noqa: F401
 import constants.crud as crud

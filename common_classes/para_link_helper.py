@@ -1,5 +1,4 @@
 '''class used in formatting various and consistant links within the paragraph text'''
-from django.urls import reverse
 import constants.para_lookup as lookup
 
 
