@@ -1,7 +1,5 @@
 ''' Script constants '''
 import os
-from portfolio.settings import BASE_DIR
-import constants.common as common
 
 # db script arguments
 FOR_PROD = 'for_prod'

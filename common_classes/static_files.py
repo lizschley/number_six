@@ -3,8 +3,6 @@
 import os
 import shutil
 import sys
-from decouple import config
-import sass
 from common_classes.aws_automater import AwsAutomater
 from common_classes.base_html_processer import BaseHtmlProcesser
 import constants.s3_data as lookup

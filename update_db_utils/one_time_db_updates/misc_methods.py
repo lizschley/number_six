@@ -1,6 +1,4 @@
 ''' Methods to use for batch updates or whatever is needed'''
-from django.utils.text import slugify
-from projects.models.paragraphs import Group, Paragraph, Reference
 from common_classes.para_db_methods import ParaDbMethods
 from common_classes.para_link_helper import ParaLinkHelper
 import constants.para_lookup as lookup

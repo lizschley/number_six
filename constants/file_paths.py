@@ -1,7 +1,6 @@
 '''File path constants used for non-test data, besides scripts (see constants/scripts)'''
 import os
-from decouple import config
-import portfolio.settings as settings
+
 
 
 if config('ENVIRONMENT') == 'development':
