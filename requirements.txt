@@ -1,5 +1,6 @@
 astroid==3.3.5
 asttokens==2.4.1
+beautifulsoup4==4.12.3
 boto3==1.35.58
 botocore==1.35.58
 decorator==5.1.1
@@ -25,6 +26,7 @@ pylint==3.3.1
 python-dateutil==2.9.0.post0
 s3transfer==0.10.3
 six==1.16.0
+soupsieve==2.6
 stack-data==0.6.3
 tomlkit==0.13.2
 traitlets==5.14.3

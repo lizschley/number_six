@@ -29,7 +29,7 @@ class StaticFiles(AwsAutomater):
         super().__init__()
         self.is_home = False
         self.is_css = False
-        self.is_image = False
+        self.is_image = True
         self.versions = {}
         self.file_data = {}
 
@@ -92,9 +92,10 @@ class StaticFiles(AwsAutomater):
         ''' For scss files that are updated, need to compress file before doing anything else
             The css file will be added to the originals directory and the versioning done as normal
             with the css file, not the scss file. '''
-        sass.compile(dirname=(self.file_data['scss_dir'],
-                              self.file_data['orig_dir']),
-                     output_style='expanded')
+        # This worked perfectly and if I want to I may resurrect it.  However not currently in scope
+        # sass.compile(dirname=(self.file_data['scss_dir'],
+        #                       self.file_data['orig_dir']),
+        #              output_style='expanded')
 
     def loop_through_images(self):
         ''' Loops through images in directory and processes each individually '''
@@ -140,6 +141,7 @@ class StaticFiles(AwsAutomater):
             versioned
         '''
         # Todo: assign this when automation makes it safe (don't want to delete prod versions)
+        # Not in scope for basic_site, but it worked perfectly in django site
         file_updater = BaseHtmlProcesser(self.file_data['s3_data_key'])
         base_html_ret = file_updater.update_base_html_s3_versions(self.versions['curr_version'])
         if utils.key_in_dictionary(base_html_ret, 'error'):
@@ -151,6 +153,7 @@ class StaticFiles(AwsAutomater):
             If the manual versions are set correctly (in update_base_html), this should work
             Although the images are not yet implemented
         '''
+        # Not in scope for basic_site, but it worked perfectly in django site
         if self.is_image:
             return
         self.versions['curr_version'] = str(dt.get_current_epoch_date())
@@ -174,6 +177,7 @@ class StaticFiles(AwsAutomater):
         :return: filename used in multiple places
         :rtype: str
         '''
+                # Not in scope for basic_site, but it worked perfectly in django site
         if self.is_image:
             return None
         base = self.file_data['base_filename']

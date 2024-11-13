@@ -2,9 +2,6 @@
 # pylint: pylint: disable=unused-import
 import sys
 
-from projects.models.paragraphs import (Category, Reference, Paragraph, Group,  # noqa: F401
-                                        GroupParagraph, ParagraphReference)  # noqa: F401
-import constants.crud as crud
 import utilities.date_time as dt
 import utilities.random_methods as utils
 from utilities.record_dictionary_utility import RecordDictionaryUtility

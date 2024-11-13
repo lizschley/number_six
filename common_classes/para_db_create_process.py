@@ -2,10 +2,8 @@
    to display the paragraph without creating a db record'''
 import sys
 from common_classes.para_db_methods import ParaDbMethods
-import constants.crud as crud
 import helpers.no_import_common_class.paragraph_helpers as helpers
 import utilities.random_methods as utils
-from projects.models.paragraphs import (Group, GroupParagraph, Paragraph, Reference)
 
 
 class ParaDbCreateProcess(ParaDbMethods):

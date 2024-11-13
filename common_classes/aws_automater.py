@@ -1,7 +1,22 @@
 '''class for any boto3 automation '''
 # pylint: disable-msg=C0103
+import os
+import sys
 import boto3
-import portfolio.settings as settings
+import settings
+
+current = os.path.dirname(os.path.realpath(__file__))
+
+# Getting the parent directory name
+# where the current directory is present.
+parent = os.path.dirname(current)
+
+# adding the parent directory to 
+# the sys.path.
+sys.path.append(parent)
+
+# now we can import the module in the parent
+# directory.
 
 
 class AwsAutomater:
