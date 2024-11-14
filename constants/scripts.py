@@ -1,6 +1,7 @@
 ''' Script constants '''
 import os
 import settings
+from constants import common
 
 # db script arguments
 FOR_PROD = 'for_prod'
@@ -23,9 +24,6 @@ SCRIPT_PARAM_SUBSTR = {'filename': '.json', 'process': 'process=', }
 
 # directories
 INPUT_CREATE_JSON = os.path.join(settings.BASE_DIR, 'data/data_for_creates')
-INPUT_TO_UPDATER_STEP_ONE = os.path.join(settings.BASE_DIR, 'data/data_for_updates/dev_input_step_one')
-INPUT_TO_UPDATER_STEP_THREE = os.path.join(settings.BASE_DIR, 'data/data_for_updates/dev_input_step_three')
-PROD_INPUT_JSON = os.path.join(settings.BASE_DIR, 'data/data_for_updates/prod_input_json')
 
 # screen scraping input html and any other one_off
 GENERAL_INPUT = os.path.join(settings.BASE_DIR, 'data/input')

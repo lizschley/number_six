@@ -2,7 +2,7 @@
 import os
 import constants.file_paths as file_path
 import constants.s3_data as s3
-import portfolio.settings as settings
+import settings
 
 
 BASE_FILE_DATA = {

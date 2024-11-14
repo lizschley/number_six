@@ -1,5 +1,7 @@
-"""Module variables that need to be available to use the app and particulary S3."""
-
+"""
+Module variables that need to be available to use the app and particulary S3.
+Note - there is some extra variables 
+"""
 import os
 import sys
 
@@ -15,11 +17,6 @@ sys.path.append(parent)
 SECRET_KEY = os.environ.get('HASH_KEY')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "originals", "scss"),
-]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

@@ -1,7 +1,7 @@
 ''' Use these constants for S3 processing '''
 import os
 import constants.file_paths as file_path
-import portfolio.settings as settings
+import settings
 
 
 S3_DATA = {
@@ -38,6 +38,11 @@ S3_DATA = {
         'content_type': 'text/javascript',
     },
     'image': {
+        'home_communities': 'static/plant_images/home_plant_communities',
+        'still_native': 'static/plant_images/native_va',
+        'vaguely_native': 'static/plant_images/native_east_north_america',
+        'non-native': 'static/plant_images/non-native',
+        # the keys and paths below are no longer used by an application
         'home_key': 'static/home/img/',
         'projects_key': 'static/projects/img/',
     },
