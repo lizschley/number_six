@@ -6,8 +6,16 @@ import settings
 
 S3_DATA = {
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
-    'originals_base': os.path.join(settings.BASE_DIR, 'originals'),
     'base_html': file_path.BASE_HTML,
+    'image': {
+        'home_communities': 'static/plant_images/home_plant_communities',
+        'still_native': 'static/plant_images/native_va',
+        'vaguely_native': 'static/plant_images/native_east_north_america',
+        'non-native': 'static/plant_images/non-native',
+        # the keys and paths below are no longer used by an application
+        'home_key': 'static/home/img/',
+        'projects_key': 'static/projects/img/',
+    },
     'css': {
         'scss_dir': os.path.join(settings.BASE_DIR, 'originals/css/uncompiled'),
         'base_filename': 'theme',
@@ -36,14 +44,5 @@ S3_DATA = {
         'extension': '.js',
         'original_dir': '/js/',
         'content_type': 'text/javascript',
-    },
-    'image': {
-        'home_communities': 'static/plant_images/home_plant_communities',
-        'still_native': 'static/plant_images/native_va',
-        'vaguely_native': 'static/plant_images/native_east_north_america',
-        'non-native': 'static/plant_images/non-native',
-        # the keys and paths below are no longer used by an application
-        'home_key': 'static/home/img/',
-        'projects_key': 'static/projects/img/',
     },
 }

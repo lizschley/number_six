@@ -1,7 +1,7 @@
 '''
-    Any file within the no_import_common_class folder is for methods that can be
-    imported safely (without circular dependencies) into the classes in
-    the common class folder.
+Any file within the no_import_common_class folder is for methods that can be
+imported safely (without circular dependencies) into the classes in
+the common class folder.
 '''
 
 import os
@@ -197,22 +197,7 @@ def use_file(filename, method, process_data):
         return False
     if 'step_three' not in method:
         return True
-    if treat_like_production(process_data):
-        return filename.startswith(constants.PROD_PROCESS_IND)
     return not filename.startswith(constants.PROD_PROCESS_IND)
-
-
-def treat_like_production(process_data):
-    '''
-    treat_like_production returns true if it is the production environment (for_prod is True) or
-    if we are running as prod
-
-    :param process_data: dictionary that contains is_prod and for_prod information
-    :type process_data: dict
-    :return: whether or not we should treat it like production
-    :rtype: bool
-    '''
-    return config('ENVIRONMENT') == 'production' or process_data['for_prod']
 
 
 def initiate_paragraph_associations(para, key_vars, association_list=None):

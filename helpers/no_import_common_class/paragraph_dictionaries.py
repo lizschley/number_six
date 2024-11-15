@@ -1,7 +1,6 @@
 '''These will be static resusable methods to use in the batch update process'''
 import sys
 import uuid
-from django.utils.text import slugify
 
 
 class ParagraphDictionaries:
@@ -37,7 +36,6 @@ class ParagraphDictionaries:
         return {
             'id': 0,
             'link_text': '',
-            'slug': '',
             'url': '',
             'short_text': '',
         }

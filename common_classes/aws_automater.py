@@ -1,4 +1,4 @@
-'''class for any boto3 automation '''
+''' class for any boto3 automation '''
 # pylint: disable-msg=C0103
 import os
 import sys
@@ -11,7 +11,7 @@ current = os.path.dirname(os.path.realpath(__file__))
 # where the current directory is present.
 parent = os.path.dirname(current)
 
-# adding the parent directory to 
+# adding the parent directory to
 # the sys.path.
 sys.path.append(parent)
 

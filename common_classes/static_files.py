@@ -1,5 +1,3 @@
-'''class for any boto3 automation '''
-# pylint: disable-msg=C0103
 import os
 import shutil
 import sys
@@ -177,7 +175,7 @@ class StaticFiles(AwsAutomater):
         :return: filename used in multiple places
         :rtype: str
         '''
-                # Not in scope for basic_site, but it worked perfectly in django site
+        # Not in scope for basic_site, but it worked perfectly in django site
         if self.is_image:
             return None
         base = self.file_data['base_filename']
