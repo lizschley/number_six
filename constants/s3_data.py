@@ -6,7 +6,6 @@ import settings
 
 S3_DATA = {
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
-    'base_html': file_path.BASE_HTML,
     'image': {
         'home_communities': 'static/plant_images/home_plant_communities',
         'still_native': 'static/plant_images/native_va',

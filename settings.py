@@ -49,7 +49,8 @@ AWS_S3_CUSTOM_DOMAIN = 'dirl4bhsg8ywj.cloudfront.net'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_LOCATION = 'static'
+AWS_LOCATION = 'basic_website'
+# https://lizschley-static.s3.us-east-1.amazonaws.com/basic_website/home_plant_images/home_plant_communities/blackhaw_viburnam_flowers.jpg
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 # Trouble-shooting
 AWS_QUERYSTRING_AUTH = False
