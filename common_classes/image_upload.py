@@ -48,9 +48,9 @@ class ImageUpload(AwsAutomater):
             # checking if it is a file
             if os.path.isfile(dir_path):
                 sys.exit(f'Error!  Expecting only directories, but got: {dir_path}')
-            self.loop_through_files(dir_path)
+            self.loop_through_files(dir_path, dir_name)
 
-    def loop_through_files(self, dir_path):
+    def loop_through_files(self, dir_path, dir_name):
         ''' Loops through images in directory and processes each individually '''
         for filename in os.listdir(dir_path):
 

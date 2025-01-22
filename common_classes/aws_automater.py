@@ -32,10 +32,15 @@ class AwsAutomater:
         self.s3 = self.session.resource('s3')
         self.bucket_name = settings.AWS_STORAGE_BUCKET_NAME
 
-    def test_credentials(self):
-        ''' testing '''
-        for bucket in self.s3.buckets.all():
-            print(bucket.name)
+    def test_credentials(self, bucket_name):
+        ''' testing 
+            arn:aws:s3:::lizschley-static/*
+            arn:aws:s3:::lizschley-static        
+        '''
+        test_bucket = self.s3.Bucket(bucket_name)
+
+        for s3_file in test_bucket.objects.all():
+            print(s3_file.key)
 
     def upload_file_to_s3(self, **kwargs):
         '''

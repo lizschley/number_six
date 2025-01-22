@@ -6,8 +6,6 @@ S3_CLOUDFRONT = 'https://dirl4bhsg8ywj.cloudfront.net/static/'
 
 INPUT_DIR = os.path.join(settings.BASE_DIR, 'data/input')
 
-DIRECTORY_LIST = ['community', 'east_us', 'virginia', 'non_native']
-
 IMAGE_PATHS = {
     'community': {}, 'east_us': {}, 'virginia': {}, 'non_native': {},
 

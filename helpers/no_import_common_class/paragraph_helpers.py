@@ -6,7 +6,6 @@ the common class folder.
 
 import os
 from operator import itemgetter
-from decouple import config
 import constants.para_lookup as lookup
 import constants.scripts as constants
 import utilities.json_methods as json_helper

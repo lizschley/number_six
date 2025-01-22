@@ -15,5 +15,11 @@ def images_to_s3():
     importer.image_uploader()
 
 
+def test_access():
+    importer = ImageUpload()
+    importer.test_credentials('lizschley-static')
+
+
 if __name__ == '__main__':
     SystemExit(images_to_s3())
+    # SystemExit(test_access())
