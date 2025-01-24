@@ -1,16 +1,16 @@
 ''' Use these constants for S3 processing '''
 import os
-import constants.file_paths as file_path
 import settings
 
 
 S3_DATA = {
+    'archive_dir': os.path.join(settings.HOME, 'Document', 'web_images'),
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
     'image': {
-        'home_communities': 'static/plant_images/home_plant_communities',
-        'still_native': 'static/plant_images/native_va',
-        'vaguely_native': 'static/plant_images/native_east_north_america',
-        'non-native': 'static/plant_images/non-native',
+        'community': 'basic_website/home_plant_images/communities',
+        'virginia': 'basic_website/home_plant_images/native_va',
+        'east_us': 'basic_website/home_plant_images/native_east_us',
+        'non_native': 'basic_website/home_plant_images/non_native',
         # the keys and paths below are no longer used by an application
         'home_key': 'static/home/img/',
         'projects_key': 'static/projects/img/',

@@ -3,12 +3,15 @@ Module variables that need to be available to use the app and particulary S3.
 Note - there is some extra variables 
 """
 import os
+from pathlib import Path
 import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT = parent = os.path.dirname(BASE_DIR)
 sys.path.append(parent)
+HOME = str(Path.home())
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -43,7 +46,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'lizschley-static'
+AWS_S3_BUCKET_NAME = 'lizschley-static'
 AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = 'dirl4bhsg8ywj.cloudfront.net'
 AWS_S3_OBJECT_PARAMETERS = {

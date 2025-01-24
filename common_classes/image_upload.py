@@ -46,25 +46,28 @@ class ImageUpload(AwsAutomater):
         for dir_name in os.listdir(self.file_data['upload_dir']):
             dir_path = os.path.join(self.file_data['upload_dir'], dir_name)
             # checking if it is a file
-            if os.path.isfile(dir_path):
+            if '.DS_Store' in dir_path:
+                continue
+            elif os.path.isfile(dir_path):
                 sys.exit(f'Error!  Expecting only directories, but got: {dir_path}')
             self.loop_through_files(dir_path, dir_name)
 
     def loop_through_files(self, dir_path, dir_name):
         ''' Loops through images in directory and processes each individually '''
         for filename in os.listdir(dir_path):
-
-            # content_type = self.image_content_type(filename)
-            # if not content_type:
-            #     continue
+            content_type = self.image_content_type(filename)
+            if not content_type:
+                continue
             file_path = os.path.join(dir_path, filename)
             if os.path.isdir(file_path):
                 sys.exit(f'Error!  Expecting only files, but got: {file_path}')
 
             # this will become content_type when we are dealing with actual images
-            params = self.upload_params(file_path, filename, 'fake... uncomment above code')
+            params = self.upload_params(file_path,
+                                        f'{lookup.S3_DATA['image'][dir_name]}/{filename}',
+                                        content_type)
             print(f"AWS Params: {params}")
-            # self.upload_file_to_s3(**params)
+            self.upload_file_to_s3(**params)
  
     @staticmethod
     def image_content_type(filename):

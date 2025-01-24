@@ -30,14 +30,14 @@ class AwsAutomater:
             region_name=settings.AWS_S3_REGION_NAME
         )
         self.s3 = self.session.resource('s3')
-        self.bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+        self.bucket_name = settings.AWS_S3_BUCKET_NAME
 
-    def test_credentials(self, bucket_name):
+    def test_credentials(self):
         ''' testing 
             arn:aws:s3:::lizschley-static/*
             arn:aws:s3:::lizschley-static        
         '''
-        test_bucket = self.s3.Bucket(bucket_name)
+        test_bucket = self.s3.Bucket(self.bucket_name)
 
         for s3_file in test_bucket.objects.all():
             print(s3_file.key)
@@ -56,6 +56,7 @@ class AwsAutomater:
         new_obj = self.s3.Object(self.bucket_name, kwargs['s3_name'])
         new_obj.upload_file(kwargs['path_to_file'], ExtraArgs={'ContentType': kwargs['content_type']})
 
+    # delete is not available
     def delete_file_on_s3(self, key):
         ''' Delete object with passed in key '''
         print(f'Deleting {key} from s3 bucket: {self.bucket_name}')
