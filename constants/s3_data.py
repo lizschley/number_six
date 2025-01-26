@@ -4,7 +4,7 @@ import settings
 
 
 S3_DATA = {
-    'archive_dir': os.path.join(settings.HOME, 'Document', 'web_images'),
+    'archive_dir': os.path.join(settings.HOME, 'Documents', 'web_images'),
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
     'image': {
         'community': 'basic_website/home_plant_images/communities',

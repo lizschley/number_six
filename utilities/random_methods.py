@@ -3,7 +3,6 @@ import csv
 import os
 import shutil
 import sys
-from decouple import config
 import constants.scripts as scripts
 
 
@@ -70,11 +69,16 @@ def loop_through_files_to_move(**kwargs):
     for filename in os.listdir(input_dir_path):
         if not delete_file(filename, extensions_to_delete):
             continue
-        output_path = os.path.join(output_dir_path, filename)
         input_path = os.path.join(input_dir_path, filename)
-        shutil.move(input_path, output_path)
+        output_path = os.path.join(output_dir_path, filename)
+        move_file(input_path, output_path)
         num_processed += 1
     return num_processed
+
+
+# path includes filename
+def move_file(input_path, output_path):
+    shutil.move(input_path, output_path)
 
 
 def delete_file(filename, extensions_to_delete):

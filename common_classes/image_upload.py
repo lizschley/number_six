@@ -31,7 +31,7 @@ class ImageUpload(AwsAutomater):
     def assign_variables(self):
         '''
             assign_variables based on what is passed in.  There should be only one s3 data key at a time
-            # These are the kwargs needed for  
+            # These are the kwargs needed for
             kwargs = {
                 'path_to_file': passed in file_path
                 's3_name': s3_object_name
@@ -40,35 +40,40 @@ class ImageUpload(AwsAutomater):
         '''
         self.file_data = lookup.S3_DATA['image']
         self.file_data['upload_dir'] = lookup.S3_DATA['upload_dir']
+        self.file_data['archive_dir'] = lookup.S3_DATA['archive_dir']
 
     def loop_through_directories(self):
         ''' Loops through directories to process file directory and files individually '''
         for dir_name in os.listdir(self.file_data['upload_dir']):
-            dir_path = os.path.join(self.file_data['upload_dir'], dir_name)
-            # checking if it is a file
-            if '.DS_Store' in dir_path:
+            # todo - need both in_dir_path and out_dir_path here (rest will be the same)
+            in_dirpath = os.path.join(self.file_data['upload_dir'], dir_name)
+            out_dirpath = os.path.join(self.file_data['archive_dir'], dir_name)
+            if '.DS_Store' in in_dirpath:
                 continue
-            elif os.path.isfile(dir_path):
-                sys.exit(f'Error!  Expecting only directories, but got: {dir_path}')
-            self.loop_through_files(dir_path, dir_name)
+            elif os.path.isfile(in_dirpath):
+                sys.exit(f'Error!  Expecting only directories, but got: {in_dirpath}')
+            self.loop_through_files(in_dirpath, out_dirpath, dir_name)
 
-    def loop_through_files(self, dir_path, dir_name):
+    def loop_through_files(self, in_dirpath, out_dirpath, dir_name):
         ''' Loops through images in directory and processes each individually '''
-        for filename in os.listdir(dir_path):
+        for filename in os.listdir(in_dirpath):
             content_type = self.image_content_type(filename)
             if not content_type:
                 continue
-            file_path = os.path.join(dir_path, filename)
-            if os.path.isdir(file_path):
-                sys.exit(f'Error!  Expecting only files, but got: {file_path}')
 
-            # this will become content_type when we are dealing with actual images
-            params = self.upload_params(file_path,
+            # this can be a random method called twice
+            in_filepath = os.path.join(in_dirpath, filename)
+            out_filepath = os.path.join(out_dirpath, filename)
+            if os.path.isdir(in_filepath):
+                sys.exit(f'Error!  Expecting only files, but got: {in_filepath}')
+
+            params = self.upload_params(in_filepath,
+                                        out_filepath,
                                         f'{lookup.S3_DATA['image'][dir_name]}/{filename}',
                                         content_type)
             print(f"AWS Params: {params}")
             self.upload_file_to_s3(**params)
- 
+
     @staticmethod
     def image_content_type(filename):
         '''
