@@ -1,7 +1,7 @@
 ''' Script constants '''
 import os
 import settings
-from constants import common
+from scratch.constants import common
 
 # db script arguments
 FOR_PROD = 'for_prod'

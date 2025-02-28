@@ -2,7 +2,7 @@
     this is a one time bug fix helper, may reuse later
 '''
 import sys
-import constants.common as constants
+import scratch.constants.common as constants
 import constants.file_paths as file_paths
 import utilities.json_methods as json_helper
 import utilities.random_methods as utils
