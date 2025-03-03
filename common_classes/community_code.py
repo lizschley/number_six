@@ -31,6 +31,7 @@ class CommunityCode(CsvProcessor):
     # place holder text for popup =
     def assign_name_variables(self, name):
         id = name.replace(" ", "-")
+        function_name = name.replace('.', '')
         return {
             '1_spc': ' ',
             '2_spc': '  ',
@@ -40,14 +41,17 @@ class CommunityCode(CsvProcessor):
             'link_to_popup': f'<a id="{id}", class="modal_popup_link modal_link_class" href="#">{name}</a>',
             'case_expression': id,
             'case_title': name,
-            'function_name': f'function {name.lower().replace(" ", "_")}() '
+            'function_name': f'function {function_name.lower().replace(" ", "_")}() ',
+            'left_curly_brace': '{',
+            'right_curly_brace': '}',
         }
 
     def assign_output_files(self):
         return [
             f'{self.base_output_path}/community_interim/table_rows.html',
-            f'{self.base_output_path}/community_interim/popup_paras.html',
-            f'{self.base_output_path}/community_interim/case_stmt.html'       ]
+            f'{self.base_output_path}/community_interim/popup_paras.js',
+            f'{self.base_output_path}/community_interim/case_stmt.js'
+        ]
 
     def delete_existing_output_files(self):
         # print(self.output_files)
@@ -78,8 +82,25 @@ class CommunityCode(CsvProcessor):
         print('writing case')
 
     def write_paras_row(self):
-        self.out_popup_js = ''
-        print('writing paras')
+        '''
+          <p><strong>Latin Name: Genus species</strong></p>
+          <p><strong>Common Name: blue idol</strong></p>
+          <p><strong>Community: Acidic Oak Hickory</strong></p>
+          <p><strong>Vegetation Type: shrub</strong></p>
+          <p>This is example text<p>
+        '''
+        filepath = self.output_files[self.OUT_PARA_IDX]
+        lines = []
+        lines.append(f'{self.curr_row['vars']['function_name']} {self.curr_row['vars']['left_curly_brace']}')
+        lines.append(f'{self.curr_row['vars']['2_spc']}return `<p><strong>Latin Name:</strong> {self.curr_row['Latin Name']}</p>')
+        lines.append(f'{self.curr_row['vars']['4_spc']}<p><strong>Common Name:</strong> {self.curr_row['Common Name']}</p>')
+        lines.append(f'{self.curr_row['vars']['4_spc']}<p><strong>Community:</strong> {self.curr_row['Community']}</p>')
+        lines.append(f'{self.curr_row['vars']['4_spc']}<p><strong>Vegetation Type:</strong> {self.curr_row['Vegetation Type']}</p>')
+        lines.append(f'{self.curr_row['vars']['4_spc']}<p>additional text, images, etc</p>`')
+        lines.append(f'{self.curr_row['vars']['right_curly_brace']}')
+        lines.append(' ')
+        print(f'writing row to {filepath}')
+        random.write_file_from_array(lines, filepath, 'a+')
 
 
 
