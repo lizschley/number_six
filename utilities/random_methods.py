@@ -353,3 +353,15 @@ def find_correct_string_from_list(temp_list, search_for):
         if search_for in temp:
             return temp
     return ''
+
+
+# untested
+def write_file_from_string(input, filepath, mode='w'):
+    with open(filepath, mode) as file:
+        file.write(input)
+
+
+def write_file_from_array(input, filepath, mode='a+'):
+    with open(filepath, mode) as file:
+        for line in input:
+            file.write(f"{line}\n")

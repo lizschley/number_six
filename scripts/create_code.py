@@ -3,4 +3,5 @@
 '''
 from common_classes.community_code import CommunityCode
 
-community_code = CommunityCode()
+community = CommunityCode()
+community.process_rows()
