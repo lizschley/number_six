@@ -30,13 +30,14 @@ class CommunityCode(CsvProcessor):
     # Link for popup == <a id="Chrysogonum-virginianum" class="modal_popup_link modal_link_class" href="#">Chrysogonum virginianum</a>
     # place holder text for popup =
     def assign_name_variables(self, name):
-        id = name.replace(" ", "-")
+        id = name.replace(" ", "-").replace('.', '')
         function_name = name.replace('.', '')
         return {
             '1_spc': ' ',
             '2_spc': '  ',
             '3_spc': '   ',
             '4_spc': '    ',
+            'case_function': f'{function_name.lower().replace(" ", "_")}()',
             'popup_title': name,
             'link_to_popup': f'<a id="{id}", class="modal_popup_link modal_link_class" href="#">{name}</a>',
             'case_expression': id,
@@ -74,12 +75,24 @@ class CommunityCode(CsvProcessor):
         rows.append(f'{self.curr_row['vars']['2_spc']}<td>{self.curr_row['Community']}</td>')
         rows.append(f'{self.curr_row['vars']['2_spc']}<td>{self.curr_row['Vegetation Type']}</td>')
         rows.append('<tr>')
-        print(f'writing row to {filepath}')
+        # print(f'writing row to {filepath}')
         random.write_file_from_array(rows, filepath, 'a+')
 
     def write_case_row(self):
-        self.out_case_js = ''
-        print('writing case')
+        '''
+        case "Chrysogonum-virginianum":
+            text = chrysogonum_virginianum()
+            title = 'Chrysogonum virginianum';
+            break;
+        '''
+        filepath = self.output_files[self.OUT_CASE_IDX]
+        rows = []
+        rows.append(f'case "{self.curr_row['vars']['case_expression']}":')
+        rows.append(f'{self.curr_row['vars']['2_spc']}text = {self.curr_row['vars']['case_function']};')
+        rows.append(f'{self.curr_row['vars']['2_spc']}title = "{self.curr_row['Latin Name']}";')
+        rows.append(f'{self.curr_row['vars']['2_spc']}break;')
+        # print(f'writing row to {filepath}')
+        random.write_file_from_array(rows, filepath, 'a+')
 
     def write_paras_row(self):
         '''
@@ -99,7 +112,7 @@ class CommunityCode(CsvProcessor):
         lines.append(f'{self.curr_row['vars']['4_spc']}<p>additional text, images, etc</p>`')
         lines.append(f'{self.curr_row['vars']['right_curly_brace']}')
         lines.append(' ')
-        print(f'writing row to {filepath}')
+        # print(f'writing row to {filepath}')
         random.write_file_from_array(lines, filepath, 'a+')
 
 
