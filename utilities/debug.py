@@ -2,17 +2,25 @@
     this is a one time bug fix helper, may reuse later
 '''
 import sys
-import constants.common as constants
 import constants.file_paths as file_paths
 import utilities.json_methods as json_helper
 import utilities.random_methods as utils
 
 
+'''
+This was used as temporary code to debug a problem that I once had. It is no longer necessary for that.
+
+Eventually I would like to rework this script to open every link to test for 404 errors.
+
+I would need to download or crate a qa automation driver
+'''
+
+
 def run_analysis():
     ''' driver '''
-    file_path = utils.file_path_with_extension(file_paths.INPUT_DIR, constants.JSON_EXT)
+    file_path = utils.file_path_with_extension(file_paths.INPUT_DIR, file_paths.JSON_EXT)
     if file_path is None:
-        sys.exit(f'No files with extension=={constants.JSON_EXT} in directory: {file_paths.INPUT_DIR}')
+        sys.exit(f'No files with extension=={file_paths.JSON_EXT} in directory: {file_paths.INPUT_DIR}')
     input_data = json_helper.json_to_dict(file_path)
     loop_through_paras(input_data)
     loop_through_gp(input_data)
