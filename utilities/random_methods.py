@@ -3,7 +3,7 @@ import csv
 import os
 import shutil
 import sys
-import constants.scripts as scripts
+import constants.utilities as utilities
 
 
 def valid_non_blank_string(str_to_check):
@@ -34,16 +34,17 @@ def archive_files_from_input_directories(**kwargs):
     :param include_done: whether to also move files that haven't been manually moved to done or loaded
     :type include_done: bool, optional
     '''
-    in_dirs = scripts.ALWAYS_ARCHIVE_INPUT_DIRECTORIES
+    in_dirs = utilities.ALWAYS_ARCHIVE_INPUT_DIRECTORIES
     num_processed = 0
     if key_not_in_dictionary(kwargs, 'exclude_not_done'):
-        in_dirs += scripts.NOT_DONE_INPUT_DIRECTORIES
+        in_dirs += utilities.NOT_DONE_INPUT_DIRECTORIES
     if key_not_in_dictionary(kwargs, 'exclude_prod'):
-        in_dirs.append(scripts.PROD_INPUT_DIRECTORY)
+        in_dirs.append(utilities.PROD_INPUT_DIRECTORY)
+    if key_not_in_dictionary(kwargs, 'target'):
+        sys.exit('Target directory does not exist. must be passed using the kwargs key "target"')
+    else:
+        target = kwargs['target']
 
-    target = config('USED_INPUT_FINAL_DIRECTORY', default='')
-    if len(target) < 10:
-        sys.exit('Target directory does not exist. Checks USED_INPUT_FINAL_DIRECTORY env variable')
     for dir_path in in_dirs:
         params = {'in_dir': dir_path,
                   'out_dir': target,
@@ -361,7 +362,7 @@ def write_file_from_string(input, filepath, mode='w'):
         file.write(input)
 
 
-def write_file_from_array(input, filepath, mode='a+'):
+def append_file_from_array(input, filepath, mode='a+'):
     with open(filepath, mode) as file:
         for line in input:
             file.write(f"{line}\n")
