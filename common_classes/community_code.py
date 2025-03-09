@@ -76,7 +76,7 @@ class CommunityCode(CsvProcessor):
         rows.append(f'{self.curr_row['vars']['2_spc']}<td>{self.curr_row['Vegetation Type']}</td>')
         rows.append('<tr>')
         # print(f'writing row to {filepath}')
-        random.write_file_from_array(rows, filepath, 'a+')
+        random.append_file_from_array(rows, filepath, 'a+')
 
     def write_case_row(self):
         '''
@@ -92,7 +92,7 @@ class CommunityCode(CsvProcessor):
         rows.append(f'{self.curr_row['vars']['2_spc']}title = "{self.curr_row['Latin Name']}";')
         rows.append(f'{self.curr_row['vars']['2_spc']}break;')
         # print(f'writing row to {filepath}')
-        random.write_file_from_array(rows, filepath, 'a+')
+        random.append_file_from_array(rows, filepath, 'a+')
 
     def write_paras_row(self):
         '''
@@ -113,7 +113,7 @@ class CommunityCode(CsvProcessor):
         lines.append(f'{self.curr_row['vars']['right_curly_brace']}')
         lines.append(' ')
         # print(f'writing row to {filepath}')
-        random.write_file_from_array(lines, filepath, 'a+')
+        random.append_file_from_array(lines, filepath, 'a+')
 
 
 
