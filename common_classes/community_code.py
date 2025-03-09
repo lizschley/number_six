@@ -114,20 +114,3 @@ class CommunityCode(CsvProcessor):
         lines.append(' ')
         # print(f'writing row to {filepath}')
         random.append_file_from_array(lines, filepath, 'a+')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
