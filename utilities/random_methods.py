@@ -362,7 +362,6 @@ def write_file_from_string(input, filepath, mode='w'):
         file.write(input)
 
 
-def append_file_from_array(input, filepath, mode='a+'):
+def append_file_from_array(line, filepath, mode='a+'):
     with open(filepath, mode) as file:
-        for line in input:
-            file.write(f"{line}\n")
+        file.write(f"{line}\n")
