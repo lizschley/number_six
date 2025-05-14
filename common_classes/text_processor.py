@@ -37,5 +37,3 @@ class TextProcessor:
         temp = temp[1].split(self.END_DELIM)
         outline = temp[0]
         utils.append_file_from_array(outline, self.outfile, mode='a+')
-
- 
