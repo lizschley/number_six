@@ -30,5 +30,5 @@ soupsieve==2.6
 stack-data==0.6.3
 tomlkit==0.13.2
 traitlets==5.14.3
-urllib3==2.2.3
+urllib3==2.5.0
 wcwidth==0.2.13
