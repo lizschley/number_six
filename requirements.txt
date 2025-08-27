@@ -16,7 +16,7 @@ matplotlib-inline==0.1.7
 mccabe==0.7.0
 parso==0.8.4
 pexpect==4.9.0
-pillow==11.2.1
+pillow==11.3.0
 platformdirs==4.3.6
 prompt_toolkit==3.0.48
 ptyprocess==0.7.0
