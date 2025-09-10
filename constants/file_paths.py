@@ -9,4 +9,3 @@ IMAGE_PATHS = {
 }
 
 JSON_EXT = 'json'
-
