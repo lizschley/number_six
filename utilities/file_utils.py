@@ -4,7 +4,7 @@ import os
 import shutil
 import sys
 import constants.utilities as utilities
-import random_methods as utils
+import utilities.random_methods as utils
 
 
 def archive_files_from_input_directories(**kwargs):
@@ -142,12 +142,12 @@ def use_file(filename, ext):
     return False
 
 
-# untested
 def write_file_from_string(input, filepath, mode='w'):
     with open(filepath, mode) as file:
         file.write(input)
 
 
-def append_file_from_array(line, filepath, mode='a+'):
-    with open(filepath, mode) as file:
-        file.write(f"{line}\n")
+def append_file_from_array(lines, filepath, mode='a+'):
+    for line in lines:
+        with open(filepath, mode) as file:
+            file.write(f"{line}\n")
