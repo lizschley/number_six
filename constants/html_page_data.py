@@ -9,7 +9,7 @@ FLAGS = {
 
 FILES = {
     'input_file': 'basic_site_html/begin_html.html',
-    'output_file': '/Users/eaffie/development/basic_website/liz/html/blog/test_using_blognbhn .html',
+    'output_file': '/Users/eaffie/development/basic_website/liz/html/misc/philosophical_gleanings.html',
 }
 
 END_HTML_VARIABLES = {
@@ -22,7 +22,11 @@ END_HTML_VARIABLES = {
     'default_text': 'Begin here',
 }
 
-# Pages with many modal options have separate data files
+# Pages with various options may need some extra imports
+NEEDED_FOR_ACCORDIAN = [
+    '<link href="../../css/accordian.css" id="site_css" media="screen" rel="stylesheet"/>',
+]
+
 NEEDED_FOR_MODALS = [
     '<script src="../../js/common_modal_new.js" defer type="text/javascript"></script>',
     '<script src="../../data/misc_modals_new.js" defer type="text/javascript"></script>',

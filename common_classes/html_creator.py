@@ -37,8 +37,10 @@ class HtmlCreator:
 
     def additional_imports(self):
         add_imports = []
+        if page_data.FLAGS['accordian']:
+            add_imports = add_imports + page_data.NEEDED_FOR_ACCORDIAN
         if page_data.FLAGS['modal']:
-            add_imports = page_data.NEEDED_FOR_MODALS
+            add_imports = add_imports + page_data.NEEDED_FOR_MODALS
         if page_data.FLAGS['table']:
             add_imports = add_imports + page_data.NEEDED_FOR_TABLE
         return add_imports
