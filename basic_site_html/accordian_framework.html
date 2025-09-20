@@ -1,0 +1,87 @@
+        <div id='tech_questions_and_answers' class='container-fluid px-5'>
+            <h6>The following answers were accurate in late 2020:</h6>
+            <div class="accordion" id="tech-q-and-a-id">
+                <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    How do you add a Subdomain to a Letsencrypt Certificate?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#tech-q-and-a-id">
+                    <div class="accordion-body">
+                    <p>
+                        When I accepted that in the real world you need to have a www subdomain, I was able to add it through AWS. I did not document that process, because AWS did a good job of explaining and it seemed to work perfectly. However, I later found out that it gave a security error in Safari. It said that my valid site may be spoofed. Therefore, I needed to add a www subdomain to my certificate.
+                    </p>
+                    <p>Ran this from <a href="https://technologytales.com/2019/06/11/adding-a-new-domain-or-subdomain-to-an-ssl-certificate-using-certbot/" class="reference_link" target="_blank">Technologytales 20190611</a>: </p>
+                    <pre><code>&gt;&gt;&gt;sudo certbot --expand -d existing.com,www.example.com</code></pre>
+                    It worked, but it broke the automatic redirect from www.domain.com to domain.com that worked before.  This is obviously an Apache problem, since www.domain.com brought up the default Apache page that lives on the server.
+                    <p></p>
+                    <p>This error was fixed by using advice from <a href="https://linuxize.com/post/redirect-http-to-https-in-apache/" class="reference_link" target="_blank">Linuxize 20200101</a>. I had to add their suggested code to two files (example.conf and example-le-ssl.conf). </p>
+                    <p>Everything works, which is great, but someday, I would like to look at what I have with someone who understands Apache best practices.  Plus, I should test the fix again after the cron job renews the certificate.</p>
+                    <h5>References</h5>
+                    <a href="https://technologytales.com/2019/06/11/adding-a-new-domain-or-subdomain-to-an-ssl-certificate-using-certbot/" class="reference_link" target="_blank">Technologytales_20190611_AddingNewDomainSubdomain_SSL_Certificate_Certbot</a><br><a href="https://linuxize.com/post/redirect-http-to-https-in-apache/" class="reference_link" target="_blank">Linuxize_20200101_RedirectHttpHttpsApache</a><br>
+                    </div>
+                </div>
+                </div>
+                <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    For both MySQL and Postgres, how do you get a list of valid database ids for given criteria?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#tech-q-and-a-id">
+                    <div class="accordion-body">
+                    <p><strong>* Note</strong> - MySQL was from my notes, references lost</p>
+                    <p style="text-decoration: underline;">MySQL</p>
+                    <pre>select group_concat(distinct ac.animal_id, SEPARATOR ',') as animal_ids </pre>
+                    <pre>from animal_caretaker ac </pre>
+                    <pre>where ac.caretaker_id = 15 </pre>
+                    <p style="text-decoration: underline;">Postgres</p>
+                    <pre>select string_agg(distinct cast (ac.animal_id as varchar), ',') as animal_ids</pre>
+                    <pre>from animal_caretaker ac</pre>
+                    <pre>where ac.caretaker_id = 15 </pre>
+                    <h5>References</h5>
+                    <a href="https://coderwall.com/p/eyknwa/postgres-group_concat" class="reference_link" target="_blank">RoodtGreg_20190730_Coderwall_Postgres_GROUP_CONCAT</a><br>              </div>
+                </div>
+                </div>
+                <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    How do you get the integrity value for a web-site?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#tech-q-and-a-id">
+                    <div class="accordion-body">
+                    <p>Taking off the slim from a Bootstrap 4 jquery link caused a bug.  I was able to fix  it, without losing the integrity, by putting the new url into the Hash generator.  </p>
+                        <p>Details: You use the Subresource Integrity feature by specifying a base64-encoded cryptographic hash of a  resource (file) you’re telling the browser to fetch, in the value of the integrity attribute of any  &lt;script&gt; or &lt;link&gt; element.</p>
+                        <p> Details are directly quoted from <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" class="reference_link" target="_blank">MDN 20200528</a></p>
+                        <h5>References</h5>
+                        <a href="https://stackoverflow.com/questions/51254596/how-to-get-the-integrity-value-for-a-jquery-version-for-script" class="reference_link" target="_blank">user2761895_20180709_stackoverflow_HowGetIntgrity</a><br><a href="https://www.srihash.org/" class="reference_link" target="_blank">SRI_HashGenerator</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity" class="reference_link" target="_blank">MDN_20200528_SubresourceIntegrity</a><br>
+                    </div>
+                </div>
+                </div>
+                <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    How do you kill a process from known port?
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#tech-q-and-a-id">
+                    <div class="accordion-body">
+                    <p>To kill the process with pid==40676, you do this:</p>
+                    <pre>&gt;&gt; kill -9 40676</pre>
+                    But if you know the port of a process, are not sure of the name and definitely don't know the id, then here's what to do:
+                    <pre>&gt;&gt; lsof -i :8000</pre>
+                    <p>Where lsof means list of open files.  The following is directly quoted from ss44: "An open file can be a regular file, a directory, a block special file, a character, special file, an executing text reference, a library, a stream or a network file (Internet socket, NFS file or UNIX domain socket.)"</p>
+                    <p>The -i is a way of specifying an internet address.  The colon says service or port.</p>
+                    <pre>&gt;&gt; sudo lsof -i :8000</pre>
+                    <p>The pid (40676 in this example) is displayed along with some other information</p>
+                    <pre>&gt;&gt; kill -9 40676</pre>
+                    <p>And it's done.</p>
+                    <h5>References</h5>
+                    <a href="https://stackoverflow.com/questions/3855127/find-and-kill-process-locking-port-3000-on-mac" class="reference_link" target="_blank">ghostdog74_20101004_stackoverflow_findKillProcess</a><br><a href="https://ss64.com/bash/lsof.html" class="reference_link" target="_blank">ss64_bash_lsof</a><br>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
