@@ -1,7 +1,7 @@
 '''
     random text processor when just trying to save work
 '''
-from common_classes.text_processor import TextProcessor
+from common_classes.html_processor import HtmlProcessor
 
-community = TextProcessor()
+community = HtmlProcessor()
 community.process_lines()
