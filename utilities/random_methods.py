@@ -19,6 +19,19 @@ def valid_non_blank_string(str_to_check):
     return not res
 
 
+def is_header(line):
+    for tag in ['<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>']:
+        if tag in line:
+            return True
+    return False
+
+
+def is_button(line):
+    if '<button>' in line:
+        return True
+    return False
+
+
 def find_dictionary_from_list_by_key_and_value(dictionary_list, key, value):
     '''
     find_dictionary_from_list_by_key_and_value given a list of dictionaries, and a key/value pair,

@@ -7,6 +7,9 @@ DELIM = '~'
 BEG_LINE = '<p>'
 END_LINE = '</p>'
 LOOK_FOR = 'end skip'
-NO_TAGS = ['<h5>', '<h3>']
+NO_TAGS = ['<h5>', '<h3>', '<p>']
 SKIP_LINE = True
-TITLE_CASE = '<button>~'
+
+
+
+

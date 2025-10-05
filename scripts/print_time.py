@@ -1,4 +1,4 @@
-# defining a function return the current time 
+# defining a function return the current time
 
 import time
 
