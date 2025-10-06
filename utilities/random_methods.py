@@ -20,7 +20,7 @@ def valid_non_blank_string(str_to_check):
 
 
 def is_header(line):
-    for tag in ['<h1>', '<h2>', '<h3>', '<h4>', '<h5>', '<h6>']:
+    for tag in ['<h1', '<h2', '<h3', '<h4', '<h5', '<h6']:
         if tag in line:
             return True
     return False

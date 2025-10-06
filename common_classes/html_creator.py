@@ -2,8 +2,11 @@ import os
 import sys
 import settings
 from constants import html_page_data as page_data
+from data.tasks import html_utilities as text
 from utilities import file_utils as utils
 from utilities import random_methods as helper
+
+LAST_LINE = '~~end~~'
 
 
 class HtmlCreator:
@@ -15,6 +18,8 @@ class HtmlCreator:
         self.infile = ''
         self.outfile = ''
         self.datafile = ''
+        self.accordion_html = {}
+        self.accordion_var = {}
 
     def create_html_process(self):
         self.assign_data()
@@ -59,17 +64,16 @@ class HtmlCreator:
 
     def process_additional_framework(self):
         if page_data.FLAGS['accordion']:
-            self.accordion_html = self.accordion_html()
-            utils.write_file_from_string(self.accordion_html['html_top'], self.outfile, 'a+')
-            self.accordion_html['variables']['rep_var']['index'] += 1
+            self.accordion_html = self.assign_accordion_html()
+            utils.write_file_from_string(self.accordion_html['top'], self.outfile, 'a+')
             self.process_accordion_repeatable_data()
+            utils.write_file_from_string(self.accordion_html['bottom'], self.outfile, 'a+')
 
-    def accordion_html(self):
+    def assign_accordion_html(self):
+        self.accordion_var = page_data.ACCORDION_HTML_VARIABLES
         return {
-            'variables': page_data.ACCORDION_HTML_VARIABLES,
-            'html_top': page_data.ACCORDION_HTML_TOP,
-            'end_repeatable': page_data.ACCORDIAN_END_REPEATABLE,
-            'end_accordion': page_data.ACCORDION_BOTTOM_HTML
+            'top': page_data.ACCORDION_HTML_TOP,
+            'bottom': page_data.ACCORDION_HTML_BOTTOM,
         }
 
     def process_accordion_repeatable_data(self):
@@ -90,33 +94,48 @@ class HtmlCreator:
     # This is coded for expected data, if data is different need different code.
     # See dr_brenner_gleanings in one of following directories: basic_site_html or scratch
     def process_line(self, line):
-        if helper.is_header(line) & self.accordion_html['variables']['rep_var']['end_prior_repeatable']:
-            self.end_accordion_item()
-            utils.write_file_from_string(line, self.outfile, 'a+')
-            return
+        input = self.accordion_var
+        if self.test_for_output_item(line, input):
+            self.accordion_var['index'] += 1
+            kwargs = self.accordion_var
+            utils.write_file_from_string(text.create_accordion_item(**kwargs), self.outfile, 'a+')
+            self.accordion_var['body_lines'] = []
+            self.accordion_var['button_text'] = ''
         if helper.is_header(line):
             utils.write_file_from_string(line, self.outfile, 'a+')
+            self.accordion_var['wrote_header'] = True
             return
         if helper.is_button(line):
-            if self.accordion_html['variables']['rep_var']['end_prior_repeatable']:
-                self.end_accordion_item()
-            self.accordion_html['variables']['rep_var']['button_text'] = self.strip_button_tags(line)
-            utils.write_file_from_string(page_data.ACCORDION_REPEATABLE_HTML, self.outfile, 'a+')
-            self.accordion_html['variables']['rep_var']['ready_for_item_lines'] = True
+            self.accordion_var['button_text'] = self.strip_button_tags(line)
             return
-        if not self.accordion_html['variables']['rep_var']['ready_for_item_lines']:
-            print('no lines without a button.')
-            print(f'variables" {self.accordion_html['variables']['rep_var']}')
-            print(f'line is: {line}')
-            sys.exit()
-        line = line if '<p>' in line else '<p>' + line
-        utils.write_file_from_string(line, self.outfile, 'a+')
-        self.accordion_html['variables']['rep_var']['end_prior_repeatable'] = True
+        self.accordion_var['body_lines'].append(line)
 
-    def end_accordion_item(self):
-        utils.write_file_from_string(self.accordion_html['end_repeatable'], self.outfile, 'a+')
-        self.accordion_html['variables']['rep_var']['end_prior_repeatable'] = False
-        self.accordion_html['variables']['rep_var']['ready_for_item_lines'] = False
+    def test_for_output_item(self, line, input):
+        if helper.valid_non_blank_string(input['button_text']) and len(input['body_lines']) > 0:
+            if line == LAST_LINE or helper.is_button(line) or helper.is_header(line):
+                return True
+            return False
+
+        if self.file_input_order_error(line, input):
+            print(f'len_ body_lines: {len(input['body_lines'])}')
+            print('button_text: ' + input['button_text'])
+            print('line: ' + line)
+            sys.exit('Need to output both button text and item text for this to work correctly')
+        return False
+
+    def file_input_order_error(self, line, input):
+        if (input['index'] == input['orig_index']):
+            return False
+        if input['wrote_header']:
+            self.accordion_var['wrote_header'] = False
+            return False
+        if line == LAST_LINE:
+            return True
+        if helper.is_button(line):
+            return True
+        if helper.is_header(line):
+            return True
+        return False
 
     # this is for known data, with no end_button tags. Flexible code....
     def strip_button_tags(self, line):

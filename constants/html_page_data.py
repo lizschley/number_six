@@ -52,70 +52,39 @@ END_TOP_HTML = textwrap.dedent(f'''\
             <div class='header_words'>
             <h1 id={END_HTML_VARIABLES['h1_id']}>{END_HTML_VARIABLES['h1_default_text']}</h1>
             </div>
-        </div>''')
+        </div>
+''')
 
 TOP_END_HTML = textwrap.dedent(f'''\
         <div id='{END_HTML_VARIABLES['main_container_id']}' class='container-fluid px-5'>
             <h3 id='{END_HTML_VARIABLES['h3_id']}'>{END_HTML_VARIABLES['h3_default_text']}</h3>
-            <p>{END_HTML_VARIABLES['begin_text']}</p>
-        </div>''')
+            {END_HTML_VARIABLES['begin_text']}''')
 
 END_HTML = textwrap.dedent('''\
     </body>
-</html>''')
+</html>
+''')
 
 
-# accordion_item_target_id needs numeral because it is repeatable and unique
+# item_target needs numeral because it is repeatable and unique
 # <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#philosophical_gleanings">
 # target id needs to be preceded by '#collapse9', for example
 # data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"
 ACCORDION_HTML_VARIABLES = {
     'parent_id': 'philosophical_gleanings',
-    'blockquote_class': 'accordion_indent',
-    'accordion_item_target_id': 'collapse',
-    'rep_var': {
-        'index': 5,
-        'button_text': '',
-        'ready_for_item_lines': False,
-        'end_prior_repeatable': False,
-    }
+    'index': 5,
+    'orig_index': 5,
+    'button_text': '',
+    'body_lines': [],
+    'wrote_header': False,
 }
 
 ACCORDION_HTML_TOP = textwrap.dedent(f'''\
-             <div class="accordion" id="{ACCORDION_HTML_VARIABLES['parent_id']}">''')
 
-# ACCORDION_BUTTON_TOP & ACCORDION_ITEM_DIV are used to create the ACCORDIAN_REPEATABLE_HTML
-# This is only possible if we can seed the last index and we know the button text
-ACCORDION_BUTTON_TOP = "<button class='accordion-button collapsed' type='button' data-bs-toggle='"
-ACCORDION_BUTTON_TOP += f"{ACCORDION_HTML_VARIABLES['accordion_item_target_id']}' data-bs-target='"
-ACCORDION_BUTTON_TOP += f"#{ACCORDION_HTML_VARIABLES['accordion_item_target_id']}'"
-ACCORDION_BUTTON_TOP += f"{ACCORDION_HTML_VARIABLES['rep_var']['index']} aria-expanded='false' "
-ACCORDION_BUTTON_TOP += "aria-controls='"
-ACCORDION_BUTTON_TOP += f"{ACCORDION_HTML_VARIABLES['accordion_item_target_id']}"
-ACCORDION_BUTTON_TOP += f"{ACCORDION_HTML_VARIABLES['rep_var']['index']}'>"
+            <div class="accordion" id="{ACCORDION_HTML_VARIABLES['parent_id']}">
+''')
 
-ACCORDION_ITEM_DIV = '<div id=' + f"{ACCORDION_HTML_VARIABLES['accordion_item_target_id']}"
-ACCORDION_ITEM_DIV += f"{ACCORDION_HTML_VARIABLES['rep_var']['index']}"
-ACCORDION_ITEM_DIV += "class='accordion-collapse collapse' "
-ACCORDION_ITEM_DIV += f"data-bs-parent='#{ACCORDION_HTML_VARIABLES['parent_id']}'>"
+ACCORDION_HTML_BOTTOM = textwrap.dedent('''\
 
-
-ACCORDION_REPEATABLE_HTML = textwrap.dedent(f'''\
-                <div class="accordion-item">
-                <h2 class="accordion-header">
-                    {ACCORDION_BUTTON_TOP}
-                    {ACCORDION_HTML_VARIABLES['rep_var']['button_text']}
-                    </button>
-                </h2>
-                {ACCORDION_ITEM_DIV}
-                    <div class="accordion-body">''')
-
-ACCORDIAN_END_REPEATABLE = textwrap.dedent('''\
-                    </div>
-                </div>
-                </div>''')
-
-
-ACCORDION_BOTTOM_HTML = textwrap.dedent('''\
             </div>
-        </div>''')
+''')
