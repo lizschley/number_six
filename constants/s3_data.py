@@ -11,6 +11,7 @@ S3_DATA = {
         'virginia': 'basic_website/home_plant_images/native_va',
         'east_us': 'basic_website/home_plant_images/native_east_us',
         'non_native': 'basic_website/home_plant_images/non_native',
+        'hawaii': 'basic_website/travel/hawaii',
         # the keys and paths below are no longer used by an application
         'home_key': 'static/home/img/',
         'projects_key': 'static/projects/img/',

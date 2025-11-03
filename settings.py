@@ -1,10 +1,14 @@
 """
 Module variables that need to be available to use the app and particulary S3.
-Note - there is some extra variables 
+Note - there is some extra variables
 """
+from dotenv import load_dotenv
+
 import os
 from pathlib import Path
 import sys
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -46,7 +50,9 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCOUNT_ID = os.environ.get('AWS_ACCOUNT_ID')
 AWS_S3_BUCKET_NAME = 'lizschley-static'
+AWS_DEFAULT_REGION = 'us-east-1'
 AWS_DEFAULT_ACL = None
 AWS_S3_CUSTOM_DOMAIN = 'dirl4bhsg8ywj.cloudfront.net'
 AWS_S3_OBJECT_PARAMETERS = {
@@ -54,6 +60,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 }
 AWS_LOCATION = 'basic_website'
 # https://lizschley-static.s3.us-east-1.amazonaws.com/basic_website/home_plant_images/home_plant_communities/blackhaw_viburnam_flowers.jpg
+# https://lizschley-static.s3.us-east-1.amazonaws.com/basic_website/travel/hawaii/blackhaw_viburnam_flowers.jpg
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 # Trouble-shooting
 AWS_QUERYSTRING_AUTH = False
