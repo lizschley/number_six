@@ -29,4 +29,3 @@ if __name__ == '__main__':
     # SystemExit(images_to_s3())
     # SystemExit(test_access(settings.AWS_S3_BUCKET_NAME, 'basic_website/'))
     SystemExit(list_objects())
-
