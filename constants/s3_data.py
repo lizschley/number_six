@@ -3,8 +3,10 @@ import os
 import settings
 
 
+# after_load is 'none', 'delete', 'archive'
 S3_DATA = {
-    'archive_dir': os.path.join(settings.HOME, 'Documents', 'web_images'),
+    'after_load': 'delete',
+    'archive_dir': os.path.join(settings.HOME, 'Documents', 'hawaii/photos'),
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
     'image': {
         'community': 'basic_website/home_plant_images/communities',

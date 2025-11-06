@@ -25,26 +25,23 @@ sys.path.append(parent)
 class AwsAutomater:
     ''' Use for all aws automation '''
 
-    def __init__(self):
+    def __init__(self, after_load='none'):
         ''' Establish credentials '''
-
         sts = boto3.client(
                         'sts',
                         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
                         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY
                     )
-
         # Request temporary credentials
         response = sts.get_session_token(DurationSeconds=3600)
-
         # Display the temporary credentials
         # print(response)
-
         self.s3_client = boto3.client('s3',
                                       aws_access_key_id=response['Credentials']['AccessKeyId'],
                                       aws_secret_access_key=response['Credentials']['SecretAccessKey'],
                                       aws_session_token=response['Credentials']['SessionToken'])
         self.bucket_name = settings.AWS_S3_BUCKET_NAME
+        self.after_load = 'after_load'
 
     def test_credentials(self):
         ''' testing
@@ -74,15 +71,21 @@ class AwsAutomater:
         print(f'Uploading file to S3: {kwargs}')
         self.s3_client.upload_file(kwargs['in_filepath'], self.bucket_name, kwargs['s3_name'],
                                    ExtraArgs={'ContentType': kwargs['content_type']})
-        self.archive(kwargs['s3_name'], kwargs['in_filepath'], kwargs['out_filepath'])
+        self.check_and_archive(kwargs['s3_name'], kwargs['in_filepath'], kwargs['out_filepath'])
 
-    def archive(self, key, input_path, output_path):
+    def check_and_archive(self, key, input_path, output_path):
         print(f'input path == {input_path}')
         print(f'begin output path == {output_path}')
-        if self.check_s3(key):
-            utils.move_file(input_path, output_path)
-        else:
+        if not self.check_s3(key):
             print(f'Error!  Check S3 for {key}')
+            return
+        # todo this has not been testing, because it didn't work. Fixed, but not tested
+        if self.after_load == 'none':
+            return
+        elif self.after_load == 'archive':
+            utils.move_file(input_path, output_path)
+        elif self.after_load == 'delete':
+            utils.simple_delete(input_path)
 
     def check_s3(self, key):
         try:

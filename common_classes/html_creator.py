@@ -20,6 +20,7 @@ class HtmlCreator:
         self.datafile = ''
         self.accordion_html = {}
         self.accordion_var = {}
+        self.carousel_html = ''
 
     def create_html_process(self):
         self.assign_data()
@@ -51,6 +52,13 @@ class HtmlCreator:
         input_data['top_end_html'] = page_data.TOP_END_HTML
         input_data['end_html'] = page_data.END_HTML
         return input_data
+
+    def create_carousel_html(self):
+        self.carousel_html = page_data.TOP_CAROUSEL_HTML
+        self.carousel_html += text.make_carousel_indicator_lines(page_data.CAROUSEL_DATA)
+        self.carousel_html += page_data.AFTER_CAROUSEL_INDICATORS
+        self.carousel_html += text.make_carousel_item_divs(page_data.CAROUSEL_DATA)
+        self.carousel_html += page_data.BOTTOM_CAROUSEL_HTML
 
     def additional_imports(self):
         add_imports = []

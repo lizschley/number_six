@@ -3,23 +3,23 @@ import textwrap
 FLAGS = {
     'modal': False,
     'table': False,
-    'accordion': True,
+    'accordion': False,
 }
 
 FILES = {
     'input_file': 'basic_site_html/begin_html.html',
-    'output_file': '/Users/eaffie/development/basic_website/liz/html/misc/accordion_testing.html',
+    'output_file': '/Users/eaffie/development/basic_website/liz/html/misc/carousel_testing.html',
     'data_file': 'basic_site_html/dr_brenner_gleanings.html',
 }
 
 END_HTML_VARIABLES = {
-    'body_page_id': 'accordion_testing_page_id',
-    'h1_id': 'accordion_testing_overview_h1',
-    'h1_default_text': 'Accordion Testing',
-    'main_container_id': 'accordion_testing_main_container',
-    'h3_id': 'blog_intro_h3',
-    'h3_default_text': "Dr Brenner's Gleanings",
-    'begin_text': '<p>Compiled by Dr William H Brenner with references indicated informally</p>',
+    'body_page_id': 'carousel_testing_page_id',
+    'h1_id': 'carousel_testing_overview_h1',
+    'h1_default_text': 'Carousel Testing',
+    'main_container_id': 'carousel_testing_main_container',
+    'h3_id': 'Hawaii',
+    'h3_default_text': "2025 end of Sept trip to Hawaii",
+    'begin_text': '',
 }
 
 # Pages with various options may need some extra imports
@@ -80,11 +80,46 @@ ACCORDION_HTML_VARIABLES = {
 }
 
 ACCORDION_HTML_TOP = textwrap.dedent(f'''\
-
             <div class="accordion" id="{ACCORDION_HTML_VARIABLES['parent_id']}">
 ''')
 
 ACCORDION_HTML_BOTTOM = textwrap.dedent('''\
-
             </div>
 ''')
+
+AWS_BEGIN_KEY = 'basic_website/travel/hawaii'
+
+AWS_BEGIN_URL = f'https://lizschley-static.s3.us-east-1.amazonaws.com/{AWS_BEGIN_KEY}'
+
+# these are the only variables needed (so far)
+CAROUSEL_URLS = [
+    f'{AWS_BEGIN_URL}/airplane_daytime.png',
+    f'{AWS_BEGIN_URL}/airplane_sunrise.png']
+
+CAROUSEL_DATA = {
+    'urls': CAROUSEL_URLS,
+    'carousel_id': 'airplane_carousel_id'
+}
+
+TOP_CAROUSEL_HTML = textwrap.dedent(f'''\
+        <div id="{CAROUSEL_DATA['carousel_id']}" class="carousel slide">
+            <div class="carousel-indicators">
+    ''')
+
+AFTER_CAROUSEL_INDICATORS = textwrap.dedent(f'''\
+            </div>
+            <div class="carousel-inner">
+    ''')
+
+BOTTOM_CAROUSEL_HTML = textwrap.dedent(f'''\
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#{CAROUSEL_DATA['carousel_id']}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#{CAROUSEL_DATA['carousel_id']}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    ''')

@@ -22,7 +22,7 @@ class ImageUpload(AwsAutomater):
         Called from scripts/s3_updater.py (see script documentation)
         '''
         print(f"Basedir: {settings.BASE_DIR}")
-        super().__init__()
+        super().__init__(after_load=lookup.S3_DATA['after_load'])
 
     def image_uploader(self):
         self.assign_variables()
