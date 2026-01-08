@@ -3,6 +3,8 @@ import textwrap
 
 TWENTY_SPACES = '                      '
 SIXTEEN_SPACES = '                '
+TWELVE_SPACES = '            '
+FOUR_SPACES = '    '
 
 
 def create_accordion_item(**kwargs):
@@ -39,26 +41,17 @@ def make_lines_text(lines):
     return text
 
 
-def make_carousel_indicator_lines(vars):
-    # need nums and carousel_id
-    lines = ''
-    for idx in range(len(vars['urls'])):
-        num = idx + 1
-        lines += SIXTEEN_SPACES + f'<button type="button" data-bs-target="#{vars['carousel_id']}" data-bs-slide-to="{num}" class="active" aria-current="true" aria-label="Image {num}"></button>\n'
-    return lines
-
-
 def make_carousel_item_divs(vars):
     # need urls and alt_text
     urls = vars['urls']
-    lines = f'{SIXTEEN_SPACES}<div class="carousel-item active"> \n'
+    lines = f'{FOUR_SPACES}<div class="carousel-item active"> \n'
     idx = 0
     for idx in range(len(urls)):
         alt_text = alt_text_from_url(urls[idx])
         if idx > 0:
             lines += f'{SIXTEEN_SPACES}<div class="carousel-item">\n'
-        lines += f'{TWENTY_SPACES}<img src="{urls[idx]}" class="d-block w-100" alt="{alt_text}">\n'
-        lines += f'{SIXTEEN_SPACES}</div>' + '\n'
+        lines += f'{TWELVE_SPACES}<img src="{urls[idx]}" class="d-block w-100" alt="{alt_text}">\n'
+        lines += f'{TWELVE_SPACES}</div>' + '\n'
         idx += 1
     return lines
 

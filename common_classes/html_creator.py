@@ -30,10 +30,12 @@ class HtmlCreator:
         base_dir = settings.BASE_DIR
         self.input_data = self.build_input_data()
         outfile = self.input_data['files']['output_file']
-        datafile = self.input_data['files']['data_file']
         self.outfile = outfile if '/Users/eaffie/' in outfile else os.path.join(base_dir, outfile)
-        self.datafile = datafile if '/Users/eaffie/' in datafile else os.path.join(base_dir, datafile)
         self.infile = os.path.join(base_dir, self.input_data['files']['input_file'])
+        if helper.key_in_dictionary(self.input_data['files'], 'data_file'):
+            datafile = self.input_data['files']['data_file']
+            self.datafile = datafile if '/Users/eaffie/' in datafile else os.path.join(base_dir, datafile)
+
         # print(f'Output file is {self.outfile}')
 
     def create_html_file(self):
@@ -55,8 +57,6 @@ class HtmlCreator:
 
     def create_carousel_html(self):
         self.carousel_html = page_data.TOP_CAROUSEL_HTML
-        self.carousel_html += text.make_carousel_indicator_lines(page_data.CAROUSEL_DATA)
-        self.carousel_html += page_data.AFTER_CAROUSEL_INDICATORS
         self.carousel_html += text.make_carousel_item_divs(page_data.CAROUSEL_DATA)
         self.carousel_html += page_data.BOTTOM_CAROUSEL_HTML
 
@@ -65,9 +65,13 @@ class HtmlCreator:
         if page_data.FLAGS['accordion']:
             add_imports = add_imports + page_data.NEEDED_FOR_ACCORDION
         if page_data.FLAGS['modal']:
-            add_imports = add_imports + page_data.NEEDED_FOR_MODALS
+            add_imports = add_imports + page_data.NEEDED_FOR_MODAL
         if page_data.FLAGS['table']:
             add_imports = add_imports + page_data.NEEDED_FOR_TABLE
+        if page_data.FLAGS['carousel']:
+            add_imports = add_imports + page_data.NEEDED_FOR_CAROUSEL
+        if page_data.FLAGS['modal']:
+            add_imports = add_imports + page_data.NEEDED_FOR_MODAL
         return add_imports
 
     def process_additional_framework(self):
@@ -76,6 +80,8 @@ class HtmlCreator:
             utils.write_file_from_string(self.accordion_html['top'], self.outfile, 'a+')
             self.process_accordion_repeatable_data()
             utils.write_file_from_string(self.accordion_html['bottom'], self.outfile, 'a+')
+        if page_data.FLAGS['modal']:
+            utils.write_file_from_string(page_data.MODAL_HTML_ANCHOR, self.outfile, 'a+')
 
     def assign_accordion_html(self):
         self.accordion_var = page_data.ACCORDION_HTML_VARIABLES
