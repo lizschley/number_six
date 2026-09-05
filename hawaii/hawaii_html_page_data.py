@@ -28,7 +28,7 @@ NEEDED_FOR_ACCORDION = [
 ]
 
 NEEDED_FOR_MODAL = [
-    '      <script src="../../js/common_modal_new.js" defer type="text/javascript"></script>',
+    '      <script src="../../js/common_modal.js" defer type="text/javascript"></script>',
     '      <script src="../../data/late_september.js" defer type="text/javascript"></script>',
 ]
 

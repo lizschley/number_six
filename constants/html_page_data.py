@@ -9,20 +9,19 @@ FLAGS = {
 
 FILES = {
     'input_file': 'basic_site_html/begin_html.html',
-    'output_file': '/Users/eaffie/development/basic_website/liz/html/blog/timeline_logic_philosophy.html',
+    'output_file': '/Users/eaffie/development/basic_website/liz/html/blog/timeline_logic_bill.html',
 }
 
 END_HTML_VARIABLES = {
-    'body_page_id': 'timeline_logic_philosophy_page_id',
-    'h1_id': 'philosophy_timeline_h1_id',
-    'h1_default_text': 'Study of Logic and Philosophy - timeline',
-    'main_container_id': 'philosophy_id',
-    'h3_id': 'philosophy_h3_id',
-    'h3_default_text': "Partial Western Philosophy Timeline",
-    'begin_text': 'Currently in progress: This Timeline will always be partial, but hopefully not ' +
-                  'always in progress [' +
-    '<a href=https://www.amazon.com/Logic-Philosophy-Introduction-William-Brenner/dp/0268013020 ' +
-    'target="_blank">Dr Brenner\'s Logic & Philosophy</a>]'
+    'body_page_id': 'bill_page_id',
+    'h1_id': 'bill_timeline_h1_id',
+    'h1_default_text': 'Study of bill - timeline',
+    'main_container_id': 'bill_id',
+    'h3_id': 'bill_h3_id',
+    'h3_default_text': "Partial bill Timeline",
+    'begin_text': 'Example for Bill' +
+    '<a href=https://www.amazon.com/Logic-bill-Introduction-William-Brenner/dp/0268013020 ' +
+    'target="_blank">Dr Brenner\'s Logic & bill</a>]'
 }
 
 # Pages with various options may need some extra imports
@@ -31,7 +30,7 @@ NEEDED_FOR_ACCORDION = [
 ]
 
 NEEDED_FOR_MODAL = [
-    '      <script src="../../js/common_modal_new.js" defer type="text/javascript"></script>',
+    '      <script src="../../js/common_modal.js" defer type="text/javascript"></script>',
     '      <script src="../../data/logic_and_phil.js" defer type="text/javascript"></script>',
 ]
 
@@ -86,7 +85,7 @@ END_HTML = textwrap.dedent('''\
 # target id needs to be preceded by '#collapse9', for example
 # data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"
 ACCORDION_HTML_VARIABLES = {
-    'parent_id': 'philosophical_gleanings',
+    'parent_id': 'bill',
     'index': 5,
     'orig_index': 5,
     'button_text': '',
