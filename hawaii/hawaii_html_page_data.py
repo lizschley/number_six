@@ -1,27 +1,25 @@
 import textwrap
 
 FLAGS = {
-    'modal': False,
+    'modal': True,
     'table': False,
     'accordion': False,
-    'carousel': False
+    'carousel': True
 }
 
 FILES = {
     'input_file': 'basic_site_html/begin_html.html',
-    'output_file': '/Users/eaffie/development/basic_website/liz/html/blog/timeline_logic_bill.html',
+    'output_file': '/Users/eaffie/development/basic_website/liz/html/blog/hawaii_late_september.html',
 }
 
 END_HTML_VARIABLES = {
-    'body_page_id': 'bill_page_id',
-    'h1_id': 'bill_timeline_h1_id',
-    'h1_default_text': 'Study of bill - timeline',
-    'main_container_id': 'bill_id',
-    'h3_id': 'bill_h3_id',
-    'h3_default_text': "Partial bill Timeline",
-    'begin_text': 'Example for Bill' +
-    '<a href=https://www.amazon.com/Logic-bill-Introduction-William-Brenner/dp/0268013020 ' +
-    'target="_blank">Dr Brenner\'s Logic & bill</a>]'
+    'body_page_id': 'hawaii_late_september_page_id',
+    'h1_id': 'hawaii_h1_id',
+    'h1_default_text': 'Hawaii Trip - Late September',
+    'main_container_id': 'from_airplane_id',
+    'h3_id': 'hawaii_h3_id',
+    'h3_default_text': "2025 end of September trip to Hawaii",
+    'begin_text': 'Do not forget the carousel code in html/misc/carousel_testing.',
 }
 
 # Pages with various options may need some extra imports
@@ -31,7 +29,7 @@ NEEDED_FOR_ACCORDION = [
 
 NEEDED_FOR_MODAL = [
     '      <script src="../../js/common_modal.js" defer type="text/javascript"></script>',
-    '      <script src="../../data/logic_and_phil.js" defer type="text/javascript"></script>',
+    '      <script src="../../data/late_september.js" defer type="text/javascript"></script>',
 ]
 
 NEEDED_FOR_TABLE = [
@@ -69,7 +67,7 @@ TOP_END_HTML = textwrap.dedent(f'''\
             <h3 id='{END_HTML_VARIABLES['h3_id']}'>{END_HTML_VARIABLES['h3_default_text']}</h3>
             {END_HTML_VARIABLES['begin_text']}''')
 
-MODAL_HTML_ANCHOR = textwrap.dedent('''\
+MODAL_HTML_ANCHOR = textwrap.dedent(f'''\
         <div id="modal_anchor_id"></div>
 ''')
 
@@ -85,7 +83,7 @@ END_HTML = textwrap.dedent('''\
 # target id needs to be preceded by '#collapse9', for example
 # data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1"
 ACCORDION_HTML_VARIABLES = {
-    'parent_id': 'bill',
+    'parent_id': 'philosophical_gleanings',
     'index': 5,
     'orig_index': 5,
     'button_text': '',

@@ -3,14 +3,17 @@ import os
 import settings
 
 
+# after_load is 'none', 'delete', 'archive'
 S3_DATA = {
-    'archive_dir': os.path.join(settings.HOME, 'Documents', 'web_images'),
+    'after_load': 'delete',
+    'archive_dir': os.path.join(settings.HOME, 'Documents', 'hawaii/photos'),
     'upload_dir': os.path.join(settings.BASE_DIR, 'upload_to_s3'),
     'image': {
         'community': 'basic_website/home_plant_images/communities',
         'virginia': 'basic_website/home_plant_images/native_va',
         'east_us': 'basic_website/home_plant_images/native_east_us',
         'non_native': 'basic_website/home_plant_images/non_native',
+        'hawaii': 'basic_website/travel/hawaii',
         # the keys and paths below are no longer used by an application
         'home_key': 'static/home/img/',
         'projects_key': 'static/projects/img/',

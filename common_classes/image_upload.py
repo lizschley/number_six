@@ -22,7 +22,7 @@ class ImageUpload(AwsAutomater):
         Called from scripts/s3_updater.py (see script documentation)
         '''
         print(f"Basedir: {settings.BASE_DIR}")
-        super().__init__()
+        super().__init__(after_load=lookup.S3_DATA['after_load'])
 
     def image_uploader(self):
         self.assign_variables()
@@ -73,6 +73,24 @@ class ImageUpload(AwsAutomater):
                                         content_type)
             print(f"AWS Params: {params}")
             self.upload_file_to_s3(**params)
+
+    def list_s3_objects(self, bucket_name=settings.AWS_S3_BUCKET_NAME, prefix='basic_website/travel/hawaii'):
+        try:
+            objects = []
+            kwargs = {'Bucket': bucket_name, 'Prefix': prefix}
+
+            while True:
+                response = self.s3_client.list_objects_v2(**kwargs)
+                if 'Contents' in response:
+                    objects.extend([obj['Key'] for obj in response['Contents']])
+                try:
+                    kwargs['ContinuationToken'] = response['NextContinuationToken']
+                except KeyError:
+                    break
+        except Exception as e:
+            print(f"Error listing objects: {str(e)}")
+        for obj in objects:
+            print(f'success! {obj}')
 
     @staticmethod
     def image_content_type(filename):

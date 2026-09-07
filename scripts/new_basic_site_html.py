@@ -8,3 +8,5 @@ from common_classes.html_creator import HtmlCreator
 if __name__ == '__main__':
     html_creator = HtmlCreator()
     html_creator.create_html_process()
+    html_creator.create_carousel_html()
+    print(html_creator.carousel_html)

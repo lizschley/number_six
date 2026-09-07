@@ -89,6 +89,10 @@ def delete_file(filename, extensions_to_delete):
     return do_delete
 
 
+def simple_delete(file_path):
+    os.remove(file_path)
+
+
 def copy_file_from_source_to_target(source, target):
     '''
     copy_file_from_source_to_target to target.  Both source and target should have
